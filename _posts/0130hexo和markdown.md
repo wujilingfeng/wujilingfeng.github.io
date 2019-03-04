@@ -49,6 +49,17 @@ markdown应为写博客的一种脚本语言，兼容html语言。markdown简便
 
 ---
 
+###### markdown表格
+
+```
+| 左对齐标题 | 右对齐标题 | 居中对齐标题 |
+| :------| ------: | :------: |
+| 短文本 | 中等文本 | 稍微长一点的文本 |
+| 稍微长一点的文本 | 短文本 | 中等文本 |
+```
+
+---
+
 如果要引用图片，建议在*_config.yml*将new_post_name设置为true,把源图片放到*source/_posts/生成的同名文件夹*下，引用时采用如下格式
 
 *\{  %  asset_img 图片名 标题 %\}*。
@@ -87,4 +98,5 @@ markdown自动转换网址为超链接，如果你想让网址以文本形式出
 
 ---
 
-见[这里](http://www.mohu.org/info/symbols/symbols.htm)
+见[这里](http://www.mohu.org/info/symbols/symbols.htm),如要将指标放在符号正上方，或者正下方，可以使用`\mathop{}_limits`格式
+
