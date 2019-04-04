@@ -23,8 +23,8 @@ categories: 计算机
 
 ```
 xz -d
-tar -xvf
-tar -cvf #压缩
+tar -cvf img.tar img1 img2#对img1 img2打包为img.tar
+tar -xvf filename.tar.gz#解压文件
 xz -z #压缩
 ```
 
@@ -40,6 +40,7 @@ xz -z #压缩
 ##### 常用命令
 
 ```
+apt_name restart #重启apt_name
 ar#打包，常用于.o文件打包为.a
 ar x#展开，提取模块(.o)
 ar r#打包一个库，最好用ar rs

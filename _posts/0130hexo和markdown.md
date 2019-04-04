@@ -37,6 +37,8 @@ hexo d
 hexo g
 hexo s
 hexo clean
+npm i hexo-cli -g#升级hexo
+npm install hexo-reference --save#安装注脚插件
 ```
 
 ---
@@ -67,6 +69,14 @@ markdown应为写博客的一种脚本语言，兼容html语言。markdown简便
 ---
 
 markdown自动转换网址为超链接，如果你想让网址以文本形式出现, \` ... \` 将网址替换...即可。
+
+##### 添加注脚
+
+``` bash
+这是一个注释[\^1]#去掉\
+[\^1]: 你好#去掉\
+```
+
 
 #### 关于公式问题
 

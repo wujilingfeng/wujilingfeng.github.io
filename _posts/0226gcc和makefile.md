@@ -1,6 +1,6 @@
 ---
 title: gcc和makefile
-tags: 数学
+tags: 计算机
 categories: 学习笔记
 date: 2019-02-26 19:50:53
 ---
