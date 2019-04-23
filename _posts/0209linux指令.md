@@ -26,6 +26,7 @@ xz -d
 tar -cvf img.tar img1 img2#对img1 img2打包为img.tar
 tar -xvf filename.tar.gz#解压文件
 xz -z #压缩
+unzip#解压zip文件
 ```
 
 ##### 多个命令
@@ -47,6 +48,11 @@ ar r#打包一个库，最好用ar rs
 useradd name -u yourid -d /home/name -s /bin/bash#create user account
 usermod name -g groupname #put name to groupname
 groupadd groupname#create group
+sudo fdisk -l#显示系统分区
+badblocks -v /dev/sdb1#对sdb1磁盘进行检查
+chmod 777 dir_name -R#改变目录dir_name三个用户的权限，-R表示对子目录递归改变
+rm -r ~/.cache/ibus/pinyin#解决拼音数字键问题
+cp -ri dir_name/* dir_name1/#将dir_name文件目录下的文件复制到dir_name1下
 ```
 
 ##### 常用脚本

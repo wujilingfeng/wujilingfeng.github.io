@@ -28,11 +28,17 @@ TEMP_DIR=\$(CUR_DIR)/../temp
 #vpath %.a \$(CUR_DIR)/lib
 vpath %.h \$(CUR_DIR)/../include
 #VPATH = \$(CUR_DIR):\$(CUR_DIR)/src
+cfiles=\$(wildcard *.c)
+cppfiles=\$(wildcard *.cpp)
+cppobjects=\$(patsubst %.cpp,%.o,\$(cppfiles))
 
-objects=\$(patsubst %.cpp,%.o,\$(wildcard *.cpp))
-all : \$(objects)
-\$(objects) : %.o:%.cpp
+cobjects=\$(patsubst %.c,%.o,\$(cfiles))
+all : \$(cppobjects) \$(cobjects)
+\$(cppobjects) : \$(cppfiles)
 	\$(cc) -c -I \$(INCLUDE_DIR) \$(ADD_INCLUDE) \$(CFLAGS) \$< -o \$(TEMP_DIR)/\$@
+\$(cobjects) : %.o:%.c
+	\$(cc) -c -I \$(INCLUDE_DIR) \$(ADD_INCLUDE) \$(CFLAGS) \$< -o \$(TEMP_DIR)/\$@
+
 #\$(objects): t1.cpp t2.cpp
 #echo \$^&& echo \$@
 #\$(objects) : \$(wildcard *.cpp)
@@ -42,10 +48,10 @@ cat>${myprj}/bin/Makefile<<EOF
 cc=g++
 CFLAGS=-g -Wall
 CUR_DIR=\$(shell pwd)
-vpath %.o \$(CUR_DIR)/temp
-vpath %.a \$(CUR_DIR)/lib
-VPATH = \$(CUR_DIR):\$(CUR_DIR)/src
-LIB_DIR = -L \$(CUR_DIR)/lib $3#须设置库目录
+vpath %.o \$(CUR_DIR)/../temp
+vpath %.a \$(CUR_DIR)/../lib
+VPATH = \$(CUR_DIR):\$(CUR_DIR)/../src
+LIB_DIR = -L \$(CUR_DIR)/../lib $3#须设置库目录
 LIB_NAME=-lm $4#须设置连接的库
 target=${myprj}
 \$(target): \$(wildcard ../temp/*.o)
