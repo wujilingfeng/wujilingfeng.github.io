@@ -53,6 +53,7 @@ badblocks -v /dev/sdb1#对sdb1磁盘进行检查
 chmod 777 dir_name -R#改变目录dir_name三个用户的权限，-R表示对子目录递归改变
 rm -r ~/.cache/ibus/pinyin#解决拼音数字键问题
 cp -ri dir_name/* dir_name1/#将dir_name文件目录下的文件复制到dir_name1下
+file file_name#file命令用来检测文件类型
 ```
 
 ##### 常用脚本
@@ -72,7 +73,7 @@ EOF
 #$1是特殊字符，表示第一个参数的位置，如需输入$,用转义\
 ```
 
-
+ubuntu 下的魔法建`Alt+Prtsc+R+E+I+S+U+B`
 
 #### Debian软件包
 
@@ -82,7 +83,9 @@ EOF
 dpkg -l #显示安装包信息,可以加上| grep显示关于某些的安装包信息
 ```
 
+#### 计算机
 
+一个字节是8位，对于16进制来说是2两位。字长是cpu处理一条命令的最大位数，比如32位cpu，64位cpu。
 
 
 

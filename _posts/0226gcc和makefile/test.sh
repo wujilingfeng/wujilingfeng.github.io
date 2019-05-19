@@ -34,7 +34,7 @@ cppobjects=\$(patsubst %.cpp,%.o,\$(cppfiles))
 
 cobjects=\$(patsubst %.c,%.o,\$(cfiles))
 all : \$(cppobjects) \$(cobjects)
-\$(cppobjects) : \$(cppfiles)
+\$(cppobjects) : %.o:%.cpp
 	\$(cc) -c -I \$(INCLUDE_DIR) \$(ADD_INCLUDE) \$(CFLAGS) \$< -o \$(TEMP_DIR)/\$@
 \$(cobjects) : %.o:%.c
 	\$(cc) -c -I \$(INCLUDE_DIR) \$(ADD_INCLUDE) \$(CFLAGS) \$< -o \$(TEMP_DIR)/\$@
