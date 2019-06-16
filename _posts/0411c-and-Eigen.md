@@ -55,11 +55,70 @@ int a=2,b=a++;
 int a=2,b=++a;
 ```
 
+delete 释放new分配的单个对象指针指向的内存
+delete[] 释放new分配的对象数组指针指向的内存
+
+模板函数的参数是不能赋予默认初值的，只能在声明时给default值
+
+#### CSTL
+
+在linux需要配置动态库cstl.so文件的环境变量，可以考虑修改ld.so.conf文件。
+
+cstl的类是靠申请永久内存存在的，所以返回指针，类似new和malloc.
+
+cstl 的迭代器不是const
+
+``` c
+#define pair_second(i) pair_second((pair_t*)iterator_get_pointer(i))
+#define pair_first(i) pair_first((pair_t*)iterator_get_pointer(i))
+vector_t* pv=create_vector(vector_t<void *>);
+vector_t*t=create_vector(void *);
+int *v=(int*)malloc(sizeof(int));
+*v=4;
+vector_init(pv);
+vector_init(t);
+vector_push_back(t,(void*)v);
+vector_push_back(pv,t);
+vector_destroy(t);
+iterator_t iter=vector_begin(pv);
+//printf("%lu  %lu\r\n",t,iterator_get_pointer(iter));
+iterator_t iter1=vector_begin((vector_t*)iterator_get_pointer(iter));
+printf("%d\r\n",(*(template_v**)vector_at(((vector_t*)vector_at(pv,0)),0))->id);
+printf("%d\r\n",(*(template_v**)iterator_get_pointer(iter1))->id);
+if(pm==NULL)
+{
+printf("shibai\r\n");
+}
+
+```
+
+``` c
+map_t *pm=create_map(vector_t<void *>,int);
+vector_t*t=create_vector(void *);
+int *v=(int*)malloc(sizeof(int));
+v->id=10;
+vector_push_back(t,(void*)v);
+map_init(pm);
+*(int*)map_at(pm,t)=3;
+vector_destroy(t);
+iterator_t iter=map_begin(pm);
+//iterator_t iter1=map_begin((vector_t*)pair_first((pair_t*)iterator_get_pointer(iter)));
+iterator_t iter1=vector_begin((vector_t*)pair_first((pair_t*)iterator_get_pointer(iter)));
+//printf("value %d\r\n",((template_v*)pair_first(iterator_get_pointer(iter)))->id);
+printf("%lu %lu\r\n",t,pair_first((pair_t*)iterator_get_pointer(iter)));
+
+printf("%d\r\n",(*(template_v**)iterator_get_pointer(iter1))->id);
+
+
+```
+
+但是cstl速度不如stl快，我想这也是它落寞的原因．
+
 ##### 继承
 
 子类的构造函数会默认调用父类无参构造函数
 
-#### const
+##### const
 
 类的函数后面加const,表示此函数不会修改成员变量。
 
@@ -67,7 +126,7 @@ int a=2,b=++a;
 
 const_cast了解一下。
 
-模板函数最好声明时就定义
+模板函数最好声明时就定义,或者#include<.cpp>
 
 ### C
 
@@ -75,8 +134,13 @@ const_cast了解一下。
 
 static修饰的函数表示此函数只在本文件可用。
 
-delete 释放new分配的单个对象指针指向的内存
-delete[] 释放new分配的对象数组指针指向的内存
+malloc 和free是一对的
+
+c语言只有_Bool类
+
+程序的内存有栈和堆的概念，变量在栈，new和malloc在堆．malloc中不能用new．
+
+写一个库最快的方法就是用最简单的想法，工具实现问题（尽量少依赖别的库）,一个函数做的事尽可能少（如果追求高效）
 
 #### Opengl
 
