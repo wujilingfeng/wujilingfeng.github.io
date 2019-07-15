@@ -59,4 +59,10 @@ target=${myprj}
 #.PHONY: all
 #all : obj_o tar_bin
 #obj_o :
+#\${str#*I}
+EOF
+str=${2}&&str1=${str//-I/}
+cat >${myprj}/cscope.sh<<EOF
+
+find ./ ${str1} -name '*.h' -o -name '*.c' -o -name '*.cpp' > ./cscope.files&&cscope -Rbq -P ${myprj}
 EOF

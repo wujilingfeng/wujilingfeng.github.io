@@ -127,7 +127,6 @@ printf("%d\r\n",(*(template_v**)iterator_get_pointer(iter1))->id);
 const_cast了解一下。
 
 模板函数最好声明时就定义,或者#include<.cpp>
-
 ### C
 
 #include相当于复制粘贴作用，（python的import或许也是如此）
@@ -141,6 +140,7 @@ c语言只有_Bool类
 程序的内存有栈和堆的概念，变量在栈，new和malloc在堆．malloc中不能用new．
 
 写一个库最快的方法就是用最简单的想法，工具实现问题（尽量少依赖别的库）,一个函数做的事尽可能少（如果追求高效）
+不同类型指针++移动不同步长
 
 #### Opengl
 
@@ -149,7 +149,7 @@ GLSL着色器语言
 gl是核心库，glu是实用库，glut是实用工具库
 
 [这里](<https://blog.csdn.net/z_dmsd/article/details/70949102>)有关于opengl有用的解释
-
+一个纹理单元其实可以同时绑定多个纹理对象，只要这些纹理对象的类型不同
 glext.h是各个厂家写的扩展库
 
 [这里](<https://www.jianshu.com/p/f34fea694300?utm_source=oschina-app>)介绍了opengl的安装
@@ -163,6 +163,9 @@ gl3w和glad的作用应该是一样的。
 * 首先做一些环境准备（glfwinit(),glad来辅助....）
 * 创建一些点的集合，这些点有一个名字(opengl管他叫VAO)，这个名字代表了这些点的集合，这个集合还附带了其他一些东西:这些点（位置）的数据储存在了GPU内存(glCreateBuffers,glBufferStorage),这些点后续关联一些操作（程序），opengl管它叫着色器(shader)
 * 如此以来，一个点集合的名字（VAO）就代表了以上东西。当我们需要用一个(VAO)画东西时，直接绑定一个VAO，然后调用glDrawElements即可。
+* 
+char是一个字节，byte也是一个字节，网上误人子弟，以讹传讹。有些图片三个字节表示一个像素值(RGB),或者4个字节表示一个像素值(什么狗屁一个像素值取值0-255，乱七八糟！)
+stdi_load函数返回的像素大小通过height*width*nchannel获得（这个函数的参数），这个函数最后一个参数应该是控制输出通道的个数(rgb或者rgba)
 
 ##### ubuntu安装glfw
 
@@ -179,6 +182,8 @@ glUseProgram(0)
 #### Eigen
 
 .rows()=.rows()赋值操作必须保证列数相等
+
+Eigen::MatrixXd a;a.data();//data函数返回数据内存的首地址，便于和其他数据交流
 
 #### png格式
 

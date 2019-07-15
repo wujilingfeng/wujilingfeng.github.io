@@ -40,7 +40,7 @@ unzip#解压zip文件
 
 ##### 常用命令
 
-```
+```bash
 apt_name restart #重启apt_name
 ar#打包，常用于.o文件打包为.a
 ar x#展开，提取模块(.o)
@@ -57,6 +57,7 @@ file file_name#file命令用来检测文件类型
 ```
 
 ##### 常用脚本
+linux下反引号括起来的命令优先执行（不是单引号）
 
 ```
 cat>文件名<<EOF#向某文件写入内容，内容以EOF结尾
@@ -72,7 +73,11 @@ DFADS
 EOF
 #$1是特殊字符，表示第一个参数的位置，如需输入$,用转义\
 ```
-
+linux字符串匹配
+```
+str="dsfs -I dfs"&&${str#*d}#删除满足匹配的字符串
+str="dsfs -I dfs"&&${str/d/lll}#替换字符串
+```
 ubuntu 下的魔法建`Alt+Prtsc+R+E+I+S+U+B`
 
 #### Debian软件包
