@@ -23,6 +23,7 @@ categories: 计算机
 
 ```
 xz -d
+gzip -d
 tar -cvf img.tar img1 img2#对img1 img2打包为img.tar
 tar -xvf filename.tar.gz#解压文件
 xz -z #压缩
@@ -40,7 +41,9 @@ unzip#解压zip文件
 
 ##### 常用命令
 
-```bash
+```
+apt-cache admision package_name#显示apt库package_name的版本信息,然后安装指定版本的包
+apt install package_name=version
 apt_name restart #重启apt_name
 ar#打包，常用于.o文件打包为.a
 ar x#展开，提取模块(.o)
@@ -54,6 +57,8 @@ chmod 777 dir_name -R#改变目录dir_name三个用户的权限，-R表示对子
 rm -r ~/.cache/ibus/pinyin#解决拼音数字键问题
 cp -ri dir_name/* dir_name1/#将dir_name文件目录下的文件复制到dir_name1下
 file file_name#file命令用来检测文件类型
+ps aux||grep aria2c#显示aria2c进程信息,然后杀死
+kill PID
 ```
 
 ##### 常用脚本

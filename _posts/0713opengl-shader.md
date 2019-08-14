@@ -111,8 +111,6 @@ vec3 getNormal(vec3 p, float eps) {
     float h2=water_wave_final(vec3(p.x,p.y+eps,p.z));
     vec3 n=vec3(h1-h,h2-h,eps*eps);
     return normalize(n);
-
-   
 }
 
 
@@ -120,13 +118,16 @@ vec3 getNormal(vec3 p, float eps) {
 
 {% asset_img water_wave.png picture1 %}
 
-关于法向量的推导，(x,y,f(x,y)),有(dx,0,fxdx),(0,dy,fydy),作叉乘，然后有dx=dy=eps的关系,
+关于法向量的推导，(x,y,f(x,y)),有$\left(dx,0,f_xdx\right)$,$\left(0,dy,f_ydy\right)$,作叉乘，然后有dx=dy=eps的关系,
 
-opengl先跟据vertex shader 画的element决定那些像素会绘制，再根据frag shader的描述绘制像素。
+opengl先跟据vertex shader 画的element决定那些像素会绘制，再根据frag shader的描述绘制像素。具体过程如下：
+* 顶点着色器的输出坐标是眼睛(相机画面)坐标位置(中间可能给一个三维世界坐标，通过Projection投影坐标转换到眼睛的位置)
+* 这些坐标又通过glviewpoint()放到（电视）视窗中，这样才轮到像素级别的操作，也就是片元着色器
+
 
 glfwSet*的回调函数应放在glfwMakeContexCurrent之后
 
-glfw鼠标移动的回调函数，应当是鼠标点击之后才触发。
+~~glfw鼠标移动的回调函数，应当是鼠标点击之后才触发~~(这句话不对)。
 
 opengl默认视角是在原点位置，望向z的负轴。
 

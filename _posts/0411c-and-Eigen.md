@@ -23,6 +23,8 @@ c++语言工程性极强，语言极不自然，就好像一个繁杂装满补�
 
 for循环，先执行初始化和判断（第一次)
 
+string类类似stl
+
 父类和子类有几乎相同的函数，那么子类实例点明调用父类函数1，而这个函数1内部会优先调用父类函数。
 
 ##### STL
@@ -33,8 +35,29 @@ for循环，先执行初始化和判断（第一次)
 | .find(key) | 返回等于key的迭代器 |set，map|
 | == | 逻辑判断操作符 |vector|
 | .erase(key\|\|iterator) |          |map|
-|      |          ||
-|      |          ||
+| string.substr(pos,len) | 对string类截取pos位置以后len个字符串(字符串有len个元素) |string类|
+| string.append(size,char) | 对string追加size个char ||
+| int (*a)[4]=new int[n] [4] | 括号不能少，第二个维度要确定 ||
+| string(size,char) | string的构造函数(size个char字符) ||
+|  | ||
+
+```c
+unsigned int l=0;
+double a=0;
+if(a<(l-1))
+{
+
+printf("shi");
+}
+```
+上面代码显示了一个奇怪的现象，输出竟让是 "shi",这是usigned值的比较问题。
+更隐蔽的是string,vector,list,等的size()函数返回的就是unsigned值所以编程时非常容易出错。
+```
+int a[3]={0};
+```
+上述代码不能保证a的每个值初始化为0;
+写程序应考虑特殊情况（尤其在笔试时候）
+
 
 stl中的set map 的iterator 是const的
 
@@ -128,7 +151,10 @@ const_cast了解一下。
 
 模板函数最好声明时就定义,或者#include<.cpp>
 ### C
-
+getchar() scanf("%c",)会读取' ' '\n'
+而scanf("%d",)会忽略空格和换行来读取数字
+`scanf("%d ",&N)`不但会读取一个整数，并吸收一个空格，还可以吸收 回车。
+函数参数的引用在c中不支持(如:void test(int &a)),这是c++的特性
 #include相当于复制粘贴作用，（python的import或许也是如此）
 
 static修饰的函数表示此函数只在本文件可用。
@@ -141,7 +167,64 @@ c语言只有_Bool类
 
 写一个库最快的方法就是用最简单的想法，工具实现问题（尽量少依赖别的库）,一个函数做的事尽可能少（如果追求高效）
 不同类型指针++移动不同步长
+c语言EOF在linux用`ctrl + d`
 
+c语言0是false,1是true.
+```c
+' '#空格符
+'\n'#换行符，也可用来判断空行
+```
+```c
+double a=14;
+    double tempn=a/10.0;
+    int tempi=tempn;
+    int re=((tempn-tempi)*10);
+    printf("%d\r\n",re);
+```
+上面代码展示了c语言精度问题
+
+```c
+char c='10'
+int a=c-'0';
+```
+上面展示了如何把字符转化为整数
+
+```c
+char c='A';
+char c1=c+4;
+```
+
+|常用函数|解释|
+| --- | --- |
+| getchar() | 从终端输入的键盘缓冲区读入一个字符(主要作用是等待键盘输入) |
+| putchar() | 在终端显示一个字符 |
+| fscanf() | 是从文本读取字符 |
+| scanf() | 从终端读取字符 |
+| printf() | 打印字符到终端 |
+| gets() | 读取一行(已经被弃用)（建议用fgets） |
+| sscanf() | 从字符串中格式化读取 |
+| fgets(char*,int n,stream) | 当stream是file*读取文件流，为stdin是终端 |
+| | |
+```c
+char c='1';
+int a[20];
+int i=0;
+while(c!='\n')
+{
+scanf("%d",&a[i]);
+i++;
+c=getchar();
+}
+
+```
+上面展示了实现读取一行整数的功能
+```c
+# include <malloc.h>
+# define MALLOC(NUM, TYPE) (TYPE *)malloc(NUM * sizeof(TYPE))  //宏在传参时是可以传入类型的
+ 
+int max = 0;
+max = Max(x, int, y, int);  //error 函数在传参时是不可以传入数据类型的
+```
 #### Opengl
 
 GLSL着色器语言
@@ -184,7 +267,14 @@ glUseProgram(0)
 .rows()=.rows()赋值操作必须保证列数相等
 
 Eigen::MatrixXd a;a.data();//data函数返回数据内存的首地址，便于和其他数据交流
+Eigen的data()是按每列遍历的
 
 #### png格式
 
 [这里](<https://blog.csdn.net/hherima/article/details/45848171>)
+
+竞赛注意事项
+
+格式错误注意观察题目格式，\r\n和\n也是不同的
+
+注意题目是否要任意输入，然后任意次输出
