@@ -45,7 +45,7 @@ pip3 install package -i url#url是你要用的镜像地址
 
 #### 函数
 
-python函数的变量大多是引用，除了链表等结构体
+python函数的变量都是是引用，但是对于数字改变时，地址也改变。效果等价于对于函数数字变量是传值。
 ```python
 while True:
     str=sys.stdin.readline()
@@ -63,6 +63,12 @@ b=list(a)
 ```
 上面显示了python读取一行整数(b代表这一行整数的列表)
 函数内部要引用外部变量，需要用global关键字
+
+```python3
+a=[0 for i in range(4)]#等价int a[4]
+```
+
+
 
 |函数名|解释|
 | ---| ---|
@@ -83,7 +89,9 @@ b=list(a)
 |sys.stdin.readline()|读取一行字符以"\n"结尾|
 |input()|读取一行字符串|
 |np.ones((2,3)),np.zeros((3,5)),np.eye(4,6)|np换成torch也可以|
-
+| ord() | 返回一个字符的ACSI码 |
+|nump_obj.size numpy_obj.shape | 头一个返回元素个数 |
+| np_obj.astype(int)| numpy转化为int形,例如image=image.astype(np.float32) |
 ##### 类
 
 [python的类](https://www.runoob.com/python3/python3-class.html)
@@ -344,10 +352,16 @@ sess.close()
 | torch.nn.Conv2d(m,n,(p,q)) | inchannel=m,outchannel=n,卷积是(p,q) |
 | tensor_name.grad_fn | 生成此张量的函数 |
 | tensor_name.grad | 某函数对此张量的梯度 |
+| tensor_name.view() |和numpy的reshape一样，（为什么函数名不用reshape?增加学习成本） |
+| tensor_name.float() |相当于astype,例如image=image.float() |
+|  | |
+|  | |
 *对于高维的Tensor（dim>2），定义其矩阵乘法仅在最后的两个维度上，要求前面的维度必须保持一致，就像矩阵的索引一样并且运算操只有torch.matmul()。*
 
 [pytorchtest1.py](./pytorchtest1.py)展示了卷积的操作
 
 [backward()参数含义](https://www.cnblogs.com/JeasonIsCoding/p/10164948.html)
+
+机器学习最重要的是反向传播和框架，机器学习神经元图从左到右违反矩阵乘法，导致torch.nn.Linear()与矩阵乘法向左
 
 *这样的定义真是啥都做不了（数学基础差，代码框架差!*
