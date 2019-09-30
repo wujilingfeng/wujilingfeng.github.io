@@ -132,3 +132,5 @@ glfwSet*的回调函数应放在glfwMakeContexCurrent之后
 opengl默认视角是在原点位置，望向z的负轴。
 
 投影透视阵的[推导](https://www.cnblogs.com/bluebean/p/5276111.html),但他的公式有错误
+
+纹理坐标关于y轴对称

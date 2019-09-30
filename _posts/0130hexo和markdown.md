@@ -110,3 +110,6 @@ markdown自动转换网址为超链接，如果你想让网址以文本形式出
 
 见[这里](http://www.mohu.org/info/symbols/symbols.htm),如要将指标放在符号正上方，或者正下方，可以使用`\mathop{}_limits`格式
 
+\include{}   \input{}指令相当与c语言的include,和python的import
+
+[这个项目](https://github.com/rl-cn/rl-cn/blob/master/src/rl-cn.tex)是个开源项目同时也是学习latex的好资源

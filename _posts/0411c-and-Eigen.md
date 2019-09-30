@@ -198,13 +198,23 @@ char c1=c+4;
 | --- | --- |
 | getchar() | 从终端输入的键盘缓冲区读入一个字符(主要作用是等待键盘输入) |
 | putchar() | 在终端显示一个字符 |
-| fscanf() | 是从文本读取字符 |
-| scanf() | 从终端读取字符 |
+| fscanf() | 是从文本读取字符(返回读取个数，-1代表eof) |
+| scanf() | 从终端读取字符(返回读取的个数，-1代表eof) |
 | printf() | 打印字符到终端 |
 | gets() | 读取一行(已经被弃用)（建议用fgets） |
 | sscanf() | 从字符串中格式化读取 |
 | fgets(char*,int n,stream) | 当stream是file*读取文件流，为stdin是终端 |
-| | |
+| sprintf(char*,char\* format,) | 产生一个字符串 |
+| fprintf(FILE*,"",) |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
 ```c
 char c='1';
 int a[20];
@@ -225,6 +235,7 @@ c=getchar();
 int max = 0;
 max = Max(x, int, y, int);  //error 函数在传参时是不可以传入数据类型的
 ```
+函数在传递二维数组要指明列数
 #### Opengl
 
 GLSL着色器语言
@@ -268,6 +279,14 @@ glUseProgram(0)
 
 Eigen::MatrixXd a;a.data();//data函数返回数据内存的首地址，便于和其他数据交流
 Eigen的data()是按每列遍历的
+
+| 函数       | 意义 |
+| ---------- | ---- |
+| .setOnes() |      |
+| .setZero() |      |
+|            |      |
+
+
 
 #### png格式
 

@@ -14,6 +14,7 @@ categories: 计算机
 本文介绍Linux指令
 
 <!--more-->
+linux查找命令从/usr/bin中查找
 
 ##### 文件的解压
 
@@ -59,6 +60,10 @@ cp -ri dir_name/* dir_name1/#将dir_name文件目录下的文件复制到dir_nam
 file file_name#file命令用来检测文件类型
 ps aux||grep aria2c#显示aria2c进程信息,然后杀死
 kill PID
+ln -s dir_1 name ##创建连接（快捷键）name,它连接dir_1
+find ./ -name qt#在当前目录(及其子目录下)查找qt
+
+
 ```
 
 ##### 常用脚本

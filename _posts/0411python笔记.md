@@ -17,19 +17,27 @@ date: 2019-04-11 22:01:36
 
 <!--more-->
 
+\__init\__.py使文件夹可被import，比如[这里](https://www.cnblogs.com/BlueSkyyj/p/9415087.html)
+
 python是脚本语言，所以支持一行一运行。
 
 python单双引号，三引号都可以使用，[具体区别](<https://blog.csdn.net/woainishifu/article/details/76105667>)
 
 .py文件可以用`python test.py`或者`python3 test.py`
 
-| 例子 | 解释     |
-| ---- | -------- |
-| a*b  | a乘b     |
-| a**b | a的b次方 |
-| a%b  | a取余b   |
-| a/b  | a除b     |
-| a//b | a整除b   |
+[这里](https://blog.csdn.net/gordennizaicunzai/article/details/87905618)介绍了python读取二进制文件的方法
+
+| 例子      | 解释                                  |
+| --------- | ------------------------------------- |
+| a*b       | a乘b                                  |
+| a**b      | a的b次方                              |
+| a%b       | a取余b                                |
+| a/b       | a除b                                  |
+| a//b      | a整除b                                |
+| ‘f'*3     | 结果是'fff'(字符串也可以做乘法和加法) |
+| "df"+"ab" | 结果是"dfab"                          |
+|           |                                       |
+|           |                                       |
 
 
 
@@ -43,9 +51,67 @@ pip3 install package -i url#url是你要用的镜像地址
 `python -m pip install matplotlib`在termux下，可能出现ft2build.h找不到的情况，它在/usr/include/freetype2文件夹下，将这个文件夹下的内容拷贝到/usr/include里
 [切片操作](https://www.jianshu.com/p/15715d6f4dad)
 
+实际上切片经常用于改变数组的形状，顺序
+
+#### numpy
+
+对数组进行for .. in .. 循环实际上对行遍历
+
+```python
+for i in np.random.randn(3,4):
+	print(i,end="libo")
+```
+
+对数组进行条件筛选
+
+```python
+a=np.random.randd(3,4)
+print(a>0)
+```
+
+这时输出的是`array([[True...],[False..],[],[]])`
+
+接着上面继续
+
+```python
+a[a>0]
+```
+
+这时候完成的筛选
+
+对于数组的拼接
+
+```python
+np.concatenate(a,b,axis=0)
+```
+
+按行(axis=0)拼接
+
 #### 函数
 
 python函数的变量都是是引用，但是对于数字改变时，地址也改变。效果等价于对于函数数字变量是传值。
+
+比如下面的程序展示了python从头到尾的引用
+
+```python
+class Student():
+    def __init__(self,name):
+        self.name=name;
+    def get_name(self):
+        print(self.name);
+def test(stu):
+    stu.get_name();
+    return stu;
+
+a=Student("libo")
+a.get_name()
+b=test(a)
+
+print("a:",id(a),id(b))
+```
+
+
+
 ```python
 while True:
     str=sys.stdin.readline()
@@ -56,7 +122,8 @@ while True:
         print(" kong")
 
 ```
-上面显示了python读取输入的模板
+上面显示了python读取输入的模板(如果是读取文件只需要前面换成`with open("") as f:`,`for l in f.readlines()`)
+
 ```python
 a=map(int,input().split());
 b=list(a)
@@ -66,6 +133,13 @@ b=list(a)
 
 ```python3
 a=[0 for i in range(4)]#等价int a[4]
+```
+
+python next()迭代器的使用
+
+```python
+for it in v_it:
+	
 ```
 
 
@@ -92,6 +166,11 @@ a=[0 for i in range(4)]#等价int a[4]
 | ord() | 返回一个字符的ACSI码 |
 |nump_obj.size numpy_obj.shape | 头一个返回元素个数 |
 | np_obj.astype(int)| numpy转化为int形,例如image=image.astype(np.float32) |
+| np.append(a,b,axis=0) | 张量的行拼接 |
+| |  |
+| |  |
+| |  |
+| |  |
 ##### 类
 
 [python的类](https://www.runoob.com/python3/python3-class.html)
@@ -128,6 +207,15 @@ plt.show()
 [给个链接](https://blog.csdn.net/cn_wk/article/details/76939870)
 
 #### c为python做模块
+
+以下几个连接
+
+https://www.cnblogs.com/pyse/p/8590829.html
+
+https://www.cnblogs.com/xudong-bupt/p/7025728.html
+
+https://www.cnblogs.com/yanzi-meng/p/8066944.html
+
 ##### 方法一
 `gcc -fPIC -shared fun_name.c -o libfunc_name.so`
 把c代码打包
@@ -339,29 +427,3 @@ sess.close()
 ```
 在终端执行`python3 py_name.py`,*tensorboard --logdir= \` pwd\`/logs*
 
-### Pytorch
-
-|函数|意义|
-| --- | ---|
-| torch.from_numpy() | 传入一个numpy对象，返回torch的tensor |
-| tensor_obj.numpy() | 将torch的tensor转化为numpy对象，并返回 |
-| tensor_obj.matmul(tensor_obj1) | tensor_obj和tensor_obj1的张量乘法（torch.mm只能是矩阵） |
-| torch.nn.Conv1d() | 返回1维卷积算子 |
-| tensor_obj.permute() | 类似numpy的transpose |
-| torch.nn.Conv1d(m,n,p) | inchannel=m,outchannel=n,卷积p个元素 |
-| torch.nn.Conv2d(m,n,(p,q)) | inchannel=m,outchannel=n,卷积是(p,q) |
-| tensor_name.grad_fn | 生成此张量的函数 |
-| tensor_name.grad | 某函数对此张量的梯度 |
-| tensor_name.view() |和numpy的reshape一样，（为什么函数名不用reshape?增加学习成本） |
-| tensor_name.float() |相当于astype,例如image=image.float() |
-|  | |
-|  | |
-*对于高维的Tensor（dim>2），定义其矩阵乘法仅在最后的两个维度上，要求前面的维度必须保持一致，就像矩阵的索引一样并且运算操只有torch.matmul()。*
-
-[pytorchtest1.py](./pytorchtest1.py)展示了卷积的操作
-
-[backward()参数含义](https://www.cnblogs.com/JeasonIsCoding/p/10164948.html)
-
-机器学习最重要的是反向传播和框架，机器学习神经元图从左到右违反矩阵乘法，导致torch.nn.Linear()与矩阵乘法向左
-
-*这样的定义真是啥都做不了（数学基础差，代码框架差!*
