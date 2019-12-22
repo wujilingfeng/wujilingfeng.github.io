@@ -73,5 +73,9 @@ makefile命令执行顺序，从上到下，从左到右
 
 不同的编译工具(eg.nmake GNU make..)，有不同的语法，他们的工作方式都是读取一个文本文件(makefile)。正因为不同的编译工具是应用不同的语法，我们在不同的平台上就要写不同的makefile.cmake的工作就是自动查找当前平台下的编译工具，生成对应的文本文件(makefile)。
 
+cmake权限不够
 
+* 改变安装目录 CMAKE_INSTALL_PREFIX
+* su进入root命令行
 
+[这里](https://blog.csdn.net/chengde6896383/article/details/86497016)介绍了cmake findpackage

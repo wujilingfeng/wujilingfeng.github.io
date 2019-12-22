@@ -46,8 +46,7 @@ unsigned int l=0;
 double a=0;
 if(a<(l-1))
 {
-
-printf("shi");
+	printf("shi");
 }
 ```
 上面代码显示了一个奇怪的现象，输出竟让是 "shi",这是usigned值的比较问题。
@@ -151,6 +150,15 @@ const_cast了解一下。
 
 模板函数最好声明时就定义,或者#include<.cpp>
 ### C
+
+```c
+int* a=(int*)malloc(sizeof(int)*0);//返回一个NULL或者无法访问的指针
+```
+
+
+
+c语言的二维数组其实内部是以一维数组存在的。函数在传递二维数组要指明列数
+
 getchar() scanf("%c",)会读取' ' '\n'
 而scanf("%d",)会忽略空格和换行来读取数字
 `scanf("%d ",&N)`不但会读取一个整数，并吸收一个空格，还可以吸收 回车。
@@ -171,11 +179,11 @@ c语言EOF在linux用`ctrl + d`
 
 c语言0是false,1是true.
 ```c
-' '#空格符
-'\n'#换行符，也可用来判断空行
+' ' #空格符
+'\n' #换行符，也可用来判断空行
 ```
 ```c
-double a=14;
+	double a=14;
     double tempn=a/10.0;
     int tempi=tempn;
     int re=((tempn-tempi)*10);
@@ -205,7 +213,7 @@ char c1=c+4;
 | sscanf() | 从字符串中格式化读取 |
 | fgets(char*,int n,stream) | 当stream是file*读取文件流，为stdin是终端 |
 | sprintf(char*,char\* format,) | 产生一个字符串 |
-| fprintf(FILE*,"",) |  |
+| fprintf(FILE*,"") |  |
 |  |  |
 |  |  |
 |  |  |
@@ -221,9 +229,9 @@ int a[20];
 int i=0;
 while(c!='\n')
 {
-scanf("%d",&a[i]);
-i++;
-c=getchar();
+	scanf("%d",&a[i]);
+	i++;
+	c=getchar();
 }
 
 ```
@@ -235,43 +243,9 @@ c=getchar();
 int max = 0;
 max = Max(x, int, y, int);  //error 函数在传参时是不可以传入数据类型的
 ```
-函数在传递二维数组要指明列数
-#### Opengl
+c函数指针引用的函数如果又调用了某个函数指针，那么应该注意这两个函数定义的顺序。
 
-GLSL着色器语言
 
-gl是核心库，glu是实用库，glut是实用工具库
-
-[这里](<https://blog.csdn.net/z_dmsd/article/details/70949102>)有关于opengl有用的解释
-一个纹理单元其实可以同时绑定多个纹理对象，只要这些纹理对象的类型不同
-glext.h是各个厂家写的扩展库
-
-[这里](<https://www.jianshu.com/p/f34fea694300?utm_source=oschina-app>)介绍了opengl的安装
-
-[上下文](<https://www.cnblogs.com/Liuwq/p/5444641.html>)
-
-gl3w和glad的作用应该是一样的。
-
-*opengl的流程应该分为以下几步：*
-
-* 首先做一些环境准备（glfwinit(),glad来辅助....）
-* 创建一些点的集合，这些点有一个名字(opengl管他叫VAO)，这个名字代表了这些点的集合，这个集合还附带了其他一些东西:这些点（位置）的数据储存在了GPU内存(glCreateBuffers,glBufferStorage),这些点后续关联一些操作（程序），opengl管它叫着色器(shader)
-* 如此以来，一个点集合的名字（VAO）就代表了以上东西。当我们需要用一个(VAO)画东西时，直接绑定一个VAO，然后调用glDrawElements即可。
-* 
-char是一个字节，byte也是一个字节，网上误人子弟，以讹传讹。有些图片三个字节表示一个像素值(RGB),或者4个字节表示一个像素值(什么狗屁一个像素值取值0-255，乱七八糟！)
-stdi_load函数返回的像素大小通过height*width*nchannel获得（这个函数的参数），这个函数最后一个参数应该是控制输出通道的个数(rgb或者rgba)
-
-##### ubuntu安装glfw
-
-```bash
-sudo apt-get install cmake xorg-dev libgl1-mesa-dev
-```
-
-glfw的作用相当与glut,glew作用可以使得代码不需在运行时确定函数。
-
-glDetachShader
-
-glUseProgram(0)
 
 #### Eigen
 
@@ -280,13 +254,19 @@ glUseProgram(0)
 Eigen::MatrixXd a;a.data();//data函数返回数据内存的首地址，便于和其他数据交流
 Eigen的data()是按每列遍历的
 
-| 函数       | 意义 |
-| ---------- | ---- |
-| .setOnes() |      |
-| .setZero() |      |
-|            |      |
+| 函数                                                         | 意义     |
+| ------------------------------------------------------------ | -------- |
+| .setOnes()                                                   |          |
+| .setZero()                                                   |          |
+| .transpose()                                                 |          |
+| .adjoint()                                                   | 伴随矩阵 |
+| .inverse()                                                   |          |
+|                                                              |          |
+| tripletlist.push_back(Eigen::Triplet<float>(i, j, A(i, j))); |          |
+|                                                              |          |
+|                                                              |          |
 
-
+[这里](https://blog.csdn.net/u012541187/article/details/53420432)
 
 #### png格式
 

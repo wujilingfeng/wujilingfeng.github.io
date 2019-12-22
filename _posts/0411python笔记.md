@@ -12,10 +12,19 @@ date: 2019-04-11 22:01:36
   src="https://wujilingfeng.top/MathJax/MathJax.js?config=TeX-AMS_CHTML">
 </script>
 
-
 本文记录python学习笔记
 
+python像人类语言一样自由(同样的功能可能有十几种写法)，所以真正的学习成本巨大(入门成本较低)，应该多做些笔记以防遗忘
+
 <!--more-->
+
+#### anaconda
+
+```pyhon
+source deactivate env_name#退出环境
+```
+
+
 
 \__init\__.py使文件夹可被import，比如[这里](https://www.cnblogs.com/BlueSkyyj/p/9415087.html)
 
@@ -87,6 +96,66 @@ np.concatenate(a,b,axis=0)
 
 按行(axis=0)拼接
 
+#### matplotlib
+
+https://blog.csdn.net/zjyklwg/article/details/79477261
+
+https://www.jianshu.com/p/92e1a4497505
+
+https://zhuanlan.zhihu.com/p/74923962
+
+```python
+from mpl_toolkits import mplot3d
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+#lena=mpimg.imread("img.jpg")
+#fig=plt.figure();
+#ax=fig.gca(projection='3d')
+#plt.imshow(lena)
+#plt.axis("off")
+#plt.show()
+
+lena=mpimg.imread("img.jpg")
+
+fig1=plt.figure(num="3*1 inches",figsize=(9,4))#激活当前fig(没有的话先创建)
+ax=plt.axes(projection='3d')#添加第三个轴,只有导入mplot3d才有效
+zline=np.linspace(0,25,1000)
+xline=np.sin(zline)
+yline=np.cos(zline)
+ax.plot3D(xline,yline,zline,"gray")
+zdata=15*np.random.random(100)
+xdata=np.sin(zdata)+0.1*np.random.randn(100)
+ydata=np.cos(zdata)+0.1*np.random.randn(100)
+ax.scatter3D(xdata,ydata,zdata,c=zdata,cmap="Greens")
+gravity=np.array([0.299,0.587,0.114])
+imag=np.tensordot(lena,gravity,axes=([2],[0]))#转成灰度图
+print(imag.shape)
+fig2=plt.figure(num="6*2 inches",figsize=(6,6))#num相当于此fig的id
+plt.imshow(imag,cmap="gray")
+fig3=plt.figure(num="3d image",figsize=(9,9))
+ax1=plt.axes(projection="3d")
+xl=np.linspace(0,imag.shape[0]-1,imag.shape[0])
+yl=np.linspace(0,imag.shape[1]-1,imag.shape[1])
+a,b=np.meshgrid(yl,xl)
+a=a.reshape(-1)
+b=b.reshape(-1)
+imag=imag.reshape(-1)
+tes=np.random.random(a.shape)
+tes=tes>0.92
+a=a[tes]
+b=b[tes]
+imag=imag[tes]
+
+ax1.scatter3D(a,b,imag,s=1,c=imag)
+#ax1.plot_surface(a,b,imag)
+print("sf",b.shape,a.shape,imag.shape,tes)
+plt.show()
+plt.close
+```
+
+
+
 #### 函数
 
 python函数的变量都是是引用，但是对于数字改变时，地址也改变。效果等价于对于函数数字变量是传值。
@@ -149,14 +218,14 @@ for it in v_it:
 |range()|返回数字序列列表(与numpy的arange相同)|
 |np.arange(1,11,1)|返回向量1到11,步长1|
 |np.array([1,2,3],dtype=complex)||
-|np.random.rand(2,100)|返回2*100随机矩阵|
+|np.random.rand(2,100)|返回2*100随机矩阵(np.random.random(100)100个0-1随机点)|
 |os.path.dirname()|返回去掉文件名的路径|
 |os.path.abspath()|返回绝对路径(文件名加当前路径)|
 |sys.argv[0]|向python脚本传递变量|
 |str()|转化为字符串|
 |np_obj.transepose(1,0)|将0数轴，1数轴转置|
 |np_obj.reshape()|重塑形状，包括(一维向量)转置功能|
-|np.tensordot(a,b,axes=([1,0],[0,1]))|a的第1轴元素，和b的第0轴作用，a的第0轴和b的第1轴作用|
+|np.tensordot(a,b,axes=([1,0],[0,1]))|a的第1轴元素，和b的第0轴作用，a的第0轴和b的第1轴作用（真正数学上的张量积）|
 |super(class,obj)|调用父类成员|
 |for i in rang(0,5)|等价for(int i=0;i<5;i++)（range也可以换成xrange）|
 |sys.stdin.read(1)|等价scanf("%c",)|
@@ -205,6 +274,15 @@ plt.show()
 | \_\_mul\_\_ | 乘法重载 |
 | | |
 [给个链接](https://blog.csdn.net/cn_wk/article/details/76939870)
+
+##### 访问类的属性
+
+```python
+getattr(obj,attr)
+setattr(obj,attr,val)
+```
+
+
 
 #### c为python做模块
 

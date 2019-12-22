@@ -16,24 +16,28 @@ categories: 计算机
 <!--more-->
 linux查找命令从/usr/bin中查找
 
+linux /etc/profile是配置环境变量的文件，~/.bashrc是shell运行时配置文件
+
 ##### 文件的解压
 
 ---
 
 没有注释的是为解压
 
-```
+```bash
 xz -d
 gzip -d
 tar -cvf img.tar img1 img2#对img1 img2打包为img.tar
 tar -xvf filename.tar.gz#解压文件
 xz -z #压缩
 unzip#解压zip文件
+tar zcvf filename.tar.gz filetarget#压缩命令
+
 ```
 
 ##### 多个命令
 
-```
+```bash
 &表示后台执行任务，如redshift &
 |表示前一个命令的输出作为后一个命令的参数，如cat test.txt|grep a
 &&表示前一个命令成功时执行后一个命令
@@ -42,7 +46,7 @@ unzip#解压zip文件
 
 ##### 常用命令
 
-```
+```bash
 apt-cache admision package_name#显示apt库package_name的版本信息,然后安装指定版本的包
 apt install package_name=version
 apt_name restart #重启apt_name
@@ -69,14 +73,14 @@ find ./ -name qt#在当前目录(及其子目录下)查找qt
 ##### 常用脚本
 linux下反引号括起来的命令优先执行（不是单引号）
 
-```
+```bash
 cat>文件名<<EOF#向某文件写入内容，内容以EOF结尾
 cat>>文件名<<EOF#向某文件追加内容
 ```
 
 比如
 
-```
+```bash
 cat>test<<EOF
 AFD$1
 DFADS
@@ -84,7 +88,7 @@ EOF
 #$1是特殊字符，表示第一个参数的位置，如需输入$,用转义\
 ```
 linux字符串匹配
-```
+```bash
 str="dsfs -I dfs"&&${str#*d}#删除满足匹配的字符串
 str="dsfs -I dfs"&&${str/d/lll}#替换字符串
 ```
@@ -94,7 +98,7 @@ ubuntu 下的魔法建`Alt+Prtsc+R+E+I+S+U+B`
 
 关于[Debian](https://baike.baidu.com/item/Debian/748667?fr=aladdin)的介绍
 
-```
+```bash
 dpkg -l #显示安装包信息,可以加上| grep显示关于某些的安装包信息
 ```
 

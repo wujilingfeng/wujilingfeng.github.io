@@ -16,6 +16,69 @@ date: 2019-07-13 20:22:54
 
 <!--more-->
 
+#### Opengl
+
+GLSL着色器语言
+
+gl是核心库，glu是实用库，glut是实用工具库
+
+[这里](<https://blog.csdn.net/z_dmsd/article/details/70949102>)有关于opengl有用的解释
+一个纹理单元其实可以同时绑定多个纹理对象，只要这些纹理对象的类型不同
+glext.h是各个厂家写的扩展库
+
+[这里](<https://www.jianshu.com/p/f34fea694300?utm_source=oschina-app>)介绍了opengl的安装
+
+[上下文](<https://www.cnblogs.com/Liuwq/p/5444641.html>)
+
+gl3w和glad的作用应该是一样的。
+
+
+
+*opengl的流程应该分为以下几步：*
+
+- 首先做一些环境准备（glfwinit(),glad来辅助....）
+- 创建一些点的集合，这些点有一个名字(opengl管他叫VAO)，这个名字代表了这些点的集合，这个集合还附带了其他一些东西:这些点（位置）的数据储存在了GPU内存(glCreateBuffers,glBufferStorage),这些点后续关联一些操作（程序），opengl管它叫着色器(shader)
+- 如此以来，一个点集合的名字（VAO）就代表了以上东西。当我们需要用一个(VAO)画东西时，直接绑定一个VAO，然后调用glDrawElements即可。
+- char是一个字节，byte也是一个字节，网上误人子弟，以讹传讹。有些图片三个字节表示一个像素值(RGB),或者4个字节表示一个像素值(什么狗屁一个像素值取值0-255，乱七八糟！)
+  stdi_load函数返回的像素大小通过height*width*nchannel获得（这个函数的参数），这个函数最后一个参数应该是控制输出通道的个数(rgb或者rgba)
+
+##### ubuntu安装glfw
+
+```bash
+sudo apt-get install cmake xorg-dev libgl1-mesa-dev
+```
+
+glfw的作用相当与glut,glew作用可以使得代码不需在运行时确定函数。
+
+gl_frontfacing是内置变量，会根据三角形顶点的顺序给出opengl自己的判断
+
+glDetachShader
+
+glUseProgram(0)
+
+##### mac安装glfw
+
+```bash
+mkdir build
+cd build
+cmake ../
+make
+
+```
+
+##### glad入门
+
+[这里](https://blog.csdn.net/zjz520yy/article/details/83000096),还描述了Opengl的绘制
+
+##### 向shader传数组
+
+uniform float v[10];
+
+可以这样设置
+GLfloat v[10] = {...};
+
+glUniform1fv(glGetUniformLocation(program, "v"), 10, v);
+
 ```c
 const int NUM_STEPS = 8;
 const float PI	 	= 3.1415;
@@ -129,8 +192,16 @@ glfwSet*的回调函数应放在glfwMakeContexCurrent之后
 
 ~~glfw鼠标移动的回调函数，应当是鼠标点击之后才触发~~(这句话不对)。
 
-opengl默认视角是在原点位置，望向z的负轴。
+opengl shader默认视角是在原点位置，望向z的正轴。
 
 投影透视阵的[推导](https://www.cnblogs.com/bluebean/p/5276111.html),但他的公式有错误
 
 纹理坐标关于y轴对称
+
+gl_vertexID
+
+DrawElementsOneInstance
+
+直接拿gl_position.z当深度不得了
+
+https://www.cnblogs.com/nmgxbc/p/3802547.html
