@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});    本文介绍Linux指令">
 <meta property="article:published_time" content="2019-02-09T04:34:58.000Z">
-<meta property="article:modified_time" content="2019-10-24T08:25:15.263Z">
+<meta property="article:modified_time" content="2019-12-26T01:08:56.190Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="工具">
@@ -123,7 +123,7 @@
 <p>比如</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cat&gt;<span class="built_in">test</span>&lt;&lt;EOF</span><br><span class="line">AFD<span class="variable">$1</span></span><br><span class="line">DFADS</span><br><span class="line">EOF</span><br><span class="line"><span class="comment">#$1是特殊字符，表示第一个参数的位置，如需输入$,用转义\</span></span><br></pre></td></tr></table></figure>
 <p>linux字符串匹配</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str=<span class="string">"dsfs -I dfs"</span>&amp;&amp;<span class="variable">$&#123;str#*d&#125;</span><span class="comment">#删除满足匹配的字符串</span></span><br><span class="line">str=<span class="string">"dsfs -I dfs"</span>&amp;&amp;<span class="variable">$&#123;str/d/lll&#125;</span><span class="comment">#替换字符串</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">str=<span class="string">"dsfs -I dfs"</span>&amp;&amp;<span class="built_in">echo</span> <span class="variable">$&#123;str#*d&#125;</span><span class="comment">#删除满足匹配的字符串</span></span><br><span class="line">str=<span class="string">"dsfs -I dfs"</span>&amp;&amp;<span class="variable">$echo</span> &#123;str/d/lll&#125;<span class="comment">#替换字符串</span></span><br></pre></td></tr></table></figure>
 <p>ubuntu 下的魔法建<code>Alt+Prtsc+R+E+I+S+U+B</code></p>
 <h4 id="Debian软件包"><a href="#Debian软件包" class="headerlink" title="Debian软件包"></a>Debian软件包</h4><p>关于<a href="https://baike.baidu.com/item/Debian/748667?fr=aladdin" target="_blank" rel="noopener">Debian</a>的介绍</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dpkg -l <span class="comment">#显示安装包信息,可以加上| grep显示关于某些的安装包信息</span></span><br></pre></td></tr></table></figure>
