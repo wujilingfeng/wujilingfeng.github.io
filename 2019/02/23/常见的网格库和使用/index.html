@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});    本文介绍网格处理库">
 <meta property="article:published_time" content="2019-02-23T09:38:19.000Z">
-<meta property="article:modified_time" content="2019-11-11T03:38:32.764Z">
+<meta property="article:modified_time" content="2020-02-06T10:08:35.189Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="工具">
 <meta name="twitter:card" content="summary">
@@ -136,10 +136,15 @@
 
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template_f* f;</span><br><span class="line">f-&gt;halfface[<span class="number">0</span>]-&gt;cell<span class="comment">//face访问halfface,再访问到cell，更多的用法完全仿照openmesh</span></span><br></pre></td></tr></table></figure>
 
-
 </li>
 </ul>
+<p>libcell </p>
+<h5 id="规定1"><a href="#规定1" class="headerlink" title="规定1"></a>规定1</h5><p>一个cell或者face,halfface的点顺序为$$p_0 p_1 .. p_n$$,那么对应的张量或者矩阵是$$d \left(p_1-p_0\right) \wedge d \left(p_2-p_0\right)…\wedge$$</p>
+<h5 id="规定2"><a href="#规定2" class="headerlink" title="规定2"></a>规定2</h5><p>张量运算向后添加.给一个单形$$p_0 p_1 …p_n$$，那么子流形$$p_1 …p_n$$的顺序是否交换一次，看$$\left(-1\right)^{n-0}$$的值.一般地，对于子流形的顺序$$p_0 …\hat{p_i}..p_n$$是否交换，看$$\left(-1\right)^{n-i}$$的值。这样给一个halfface的点顺序是$$p_0 p_1 ..p_n$$,再给一个点$$p_{n+1}$$,那么组成的cell的点顺序是$$p_0 …p_n p_{n+1}$$,符合张量向后添加</p>
+<h5 id="规定3"><a href="#规定3" class="headerlink" title="规定3"></a>规定3</h5><p>一个n维流形，他是n+m个点组成的凸包，那么它的张量[^1]方向是</p>
+<p>$d\left(p_1-p_0\right)\wedge d\left(p_2-p_0\right)\wedge .. d\left(p_{n+1}-p_0\right)$</p>
 <h4 id="离散网格理论"><a href="#离散网格理论" class="headerlink" title="离散网格理论"></a>离散网格理论</h4><h5 id="Definition-网格的重叠-overlap-（可以用来判断参数化的单射性）"><a href="#Definition-网格的重叠-overlap-（可以用来判断参数化的单射性）" class="headerlink" title="Definition :网格的重叠(overlap)（可以用来判断参数化的单射性）"></a>Definition :网格的重叠(overlap)（可以用来判断参数化的单射性）</h5><p>对于网格某个点p,跟它相邻点的坐标分量作为morse函数，临界点超过两个则重叠(overlap)</p>
+<p>[^1]: 张量方向定义在 数学思想笔记</p>
 
       
     </div><!-- .entry-content -->
