@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});">
 <meta property="article:published_time" content="2020-02-13T08:35:52.000Z">
-<meta property="article:modified_time" content="2020-02-13T08:35:52.817Z">
+<meta property="article:modified_time" content="2020-02-13T10:49:23.339Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
@@ -103,9 +103,15 @@
 
 
 
-
 <a id="more"></a>
 
+<h4 id="定理1-常微分方程组的解"><a href="#定理1-常微分方程组的解" class="headerlink" title="定理1 常微分方程组的解"></a>定理1 常微分方程组的解</h4><p>在闭区间$\Omega$上有常微分方程组$$dx _i=\sum a _{ij} x _j dt$$</p>
+<p>其中$a_{ij}$是$\Omega$上的连续函数，且有初始条件$x _{i}\left(0\right)=x^{0} _{i}$,方程组对于x有解</p>
+<p><em>证明</em>  构造法</p>
+<p>命$$x^{1}_{i}=x^{0} _{i}+\int \sum a _{ij}x^{0} _{j}dt$$</p>
+<p>$$x^{2} _{i}=x^{0} _{i}+\int \sum a _{ij}x^{1} _{j}dt$$</p>
+<p>$$….$$</p>
+<p>剩下的是证明$x^{n} _{i}$是收敛列且是解，参考陈维桓《微分几何初步》附录。需要补充且很关键的是:之所以能够黎曼积分（并不是所有函数黎曼可积），是因为闭区间的连续函数黎曼可积。</p>
 
       
     </div><!-- .entry-content -->
@@ -213,7 +219,7 @@
           </li>
         
           <li>
-            <a href="/2019/11/05/qt%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">qt使用笔记</a>
+            <a href="/2019/11/05/GUI%E7%AC%94%E8%AE%B0/">GUI笔记</a>
           </li>
         
           <li>
