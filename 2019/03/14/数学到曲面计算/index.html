@@ -27,7 +27,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});     本文介绍如何从数学到计算机离散化的表示">
 <meta property="article:published_time" content="2019-03-14T12:23:41.000Z">
-<meta property="article:modified_time" content="2020-02-15T07:46:05.997Z">
+<meta property="article:modified_time" content="2020-02-18T04:29:37.241Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="数学">
 <meta property="article:tag" content="计算机">
@@ -111,7 +111,8 @@
 <a id="more"></a>
 
 <p>傅立叶级数的收敛性也是完备性，且关乎全纯函数是解析函数的性质（柯西积分公式）<a href="https://proofwiki.org/wiki/Holomorphic_Function_is_Analytic" target="_blank" rel="noopener">这里</a>。</p>
-<h4 id="调和映射"><a href="#调和映射" class="headerlink" title="调和映射"></a>调和映射</h4><h4 id="调和函数"><a href="#调和函数" class="headerlink" title="调和函数"></a>调和函数</h4><p>是调和映射值域为R时的特殊情况</p>
+<h4 id="三维空间gauss曲率的几何意义"><a href="#三维空间gauss曲率的几何意义" class="headerlink" title="三维空间gauss曲率的几何意义"></a>三维空间gauss曲率的几何意义</h4><p>$\frac{|\left(-r _{\alpha} n _{\beta}\right)|}{|\left(r _{\alpha} r _{\beta}\right)|}=\frac{\sqrt{\left(n _{\alpha}n _{\beta}\right)}}{\sqrt{\left(r _{\alpha} r _{\beta}\right)}}=\frac{\int \sqrt{\left(n _{\alpha} n _{\beta}\right)}dudv }{\int \sqrt{\left(r _{\alpha} r _{\beta}\right)}}$,也就是gauss映射构造的流形面积与曲面面积比</p>
+<h4 id="离散laplace算子推导"><a href="#离散laplace算子推导" class="headerlink" title="离散laplace算子推导"></a>离散laplace算子推导</h4><h4 id="调和映射"><a href="#调和映射" class="headerlink" title="调和映射"></a>调和映射</h4><h4 id="调和函数"><a href="#调和函数" class="headerlink" title="调和函数"></a>调和函数</h4><p>是调和映射值域为R时的特殊情况</p>
 <h4 id="曲率"><a href="#曲率" class="headerlink" title="曲率"></a>曲率</h4><p>由<a href="https://wujilingfeng.top/2019/03/04/cauchy-s-theorem-and-sphere-geometry/" target="_blank" rel="noopener">这里</a>知，$A=\sum \theta-\left(n-2\right)\pi=\sum\left(\pi - \sigma\right) -\left(n-2\right)\pi$</p>
 <p>$\pi \sin$</p>
 <h4 id="Laplace算子"><a href="#Laplace算子" class="headerlink" title="Laplace算子"></a>Laplace算子</h4><p>$\Delta f\left(p\right)=\sum \left(\Delta_{e_i}\Delta_{e_i} f-\Delta_{e_i}e_i\left(f\right)\right)$<a href="见微分流形初步(陈维桓)">^1</a></p>
@@ -134,7 +135,7 @@
 <p>我的思考:如果用内蕴的高斯曲率来度量原网格和变换后的网格，然后加上$\alpha \sum\left(\tilde{x_i}-x_i\right)$项（表示移动点位移后之间的差距），$\alpha$表示弹性(越大网格表面弹性越大)</p>
 <p>限制条件是移动点的位置固定</p>
 <h4 id="fourier-变换"><a href="#fourier-变换" class="headerlink" title="fourier 变换"></a>fourier 变换</h4><p>fourier的一组基是laplace算子的特征向量</p>
-<h4 id="狄氏边值问题"><a href="#狄氏边值问题" class="headerlink" title="狄氏边值问题"></a>狄氏边值问题</h4><p>$\Delta \mu=g,\mu_{\partial \Omega}=0$,若$\mu_{\partial \Omega}=f$,则选取$g_1,st.g_1_{\partial \Omega}=f$,并作替换$\mu-g_1$</p>
+<h4 id="狄氏边值问题"><a href="#狄氏边值问题" class="headerlink" title="狄氏边值问题"></a>狄氏边值问题</h4><p>$\Delta \mu=g,\mu_{\partial \Omega}=0$,若$\mu_{\partial \Omega}=f$,则选取$g <em>1 ,st.g</em>{\partial \Omega}=f$,并作替换$\mu-g_1$</p>
 
       
     </div><!-- .entry-content -->
