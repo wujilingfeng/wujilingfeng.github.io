@@ -27,7 +27,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});     本文介绍如何从数学到计算机离散化的表示">
 <meta property="article:published_time" content="2019-03-14T12:23:41.000Z">
-<meta property="article:modified_time" content="2020-02-18T04:29:37.241Z">
+<meta property="article:modified_time" content="2020-02-20T09:47:14.178Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="数学">
 <meta property="article:tag" content="计算机">
@@ -112,7 +112,9 @@
 
 <p>傅立叶级数的收敛性也是完备性，且关乎全纯函数是解析函数的性质（柯西积分公式）<a href="https://proofwiki.org/wiki/Holomorphic_Function_is_Analytic" target="_blank" rel="noopener">这里</a>。</p>
 <h4 id="三维空间gauss曲率的几何意义"><a href="#三维空间gauss曲率的几何意义" class="headerlink" title="三维空间gauss曲率的几何意义"></a>三维空间gauss曲率的几何意义</h4><p>$\frac{|\left(-r _{\alpha} n _{\beta}\right)|}{|\left(r _{\alpha} r _{\beta}\right)|}=\frac{\sqrt{\left(n _{\alpha}n _{\beta}\right)}}{\sqrt{\left(r _{\alpha} r _{\beta}\right)}}=\frac{\int \sqrt{\left(n _{\alpha} n _{\beta}\right)}dudv }{\int \sqrt{\left(r _{\alpha} r _{\beta}\right)}}$,也就是gauss映射构造的流形面积与曲面面积比</p>
-<h4 id="离散laplace算子推导"><a href="#离散laplace算子推导" class="headerlink" title="离散laplace算子推导"></a>离散laplace算子推导</h4><h4 id="调和映射"><a href="#调和映射" class="headerlink" title="调和映射"></a>调和映射</h4><h4 id="调和函数"><a href="#调和函数" class="headerlink" title="调和函数"></a>调和函数</h4><p>是调和映射值域为R时的特殊情况</p>
+<h4 id="离散laplace算子推导"><a href="#离散laplace算子推导" class="headerlink" title="离散laplace算子推导"></a>离散laplace算子推导</h4><p>$\triangle f=div \nabla f$,存在$\triangle ABC$,其上函数f,那么$f =f _i+&lt;\left(a,b\right),\left(x-x _i\right)&gt;$</p>
+<p>$\nabla f=\left(a,b\right)=\frac{1}{A}\left(f _j-f _i\right)\left(x _i -x _j\right)^{\perp}+\frac{1}{A}\left(f _k -f _i\right)\left(x _k-x _i\right)^{\perp}$,A是三角形面积。由散度公式知道$\int _{\Omega}div \nabla Fds=\int _{\Omega}\nabla F*nds= $,在每个三角形计算此值然后相加，除以总面积就是散度值</p>
+<h4 id="调和映射"><a href="#调和映射" class="headerlink" title="调和映射"></a>调和映射</h4><h4 id="调和函数"><a href="#调和函数" class="headerlink" title="调和函数"></a>调和函数</h4><p>是调和映射值域为R时的特殊情况</p>
 <h4 id="曲率"><a href="#曲率" class="headerlink" title="曲率"></a>曲率</h4><p>由<a href="https://wujilingfeng.top/2019/03/04/cauchy-s-theorem-and-sphere-geometry/" target="_blank" rel="noopener">这里</a>知，$A=\sum \theta-\left(n-2\right)\pi=\sum\left(\pi - \sigma\right) -\left(n-2\right)\pi$</p>
 <p>$\pi \sin$</p>
 <h4 id="Laplace算子"><a href="#Laplace算子" class="headerlink" title="Laplace算子"></a>Laplace算子</h4><p>$\Delta f\left(p\right)=\sum \left(\Delta_{e_i}\Delta_{e_i} f-\Delta_{e_i}e_i\left(f\right)\right)$<a href="见微分流形初步(陈维桓)">^1</a></p>
@@ -136,6 +138,13 @@
 <p>限制条件是移动点的位置固定</p>
 <h4 id="fourier-变换"><a href="#fourier-变换" class="headerlink" title="fourier 变换"></a>fourier 变换</h4><p>fourier的一组基是laplace算子的特征向量</p>
 <h4 id="狄氏边值问题"><a href="#狄氏边值问题" class="headerlink" title="狄氏边值问题"></a>狄氏边值问题</h4><p>$\Delta \mu=g,\mu_{\partial \Omega}=0$,若$\mu_{\partial \Omega}=f$,则选取$g <em>1 ,st.g</em>{\partial \Omega}=f$,并作替换$\mu-g_1$</p>
+<h4 id="delauny剖分"><a href="#delauny剖分" class="headerlink" title="delauny剖分"></a>delauny剖分</h4><p>剖分的存在性可以等价与凸包的存在性，delauny网格调整必会停止，等价与网格调整不存在循环序列。其实delauny调整推广到高维并非二维描述那般复杂，也等价于凸包的生成。</p>
+<p>所谓delauny单形，是每个单形的外接圆不包含其他点。</p>
+<h5 id="凸包和delauny的等价性"><a href="#凸包和delauny的等价性" class="headerlink" title="凸包和delauny的等价性"></a>凸包和delauny的等价性</h5><p>对于n维单形的n+1个点$x _i,i\in\left(0,1,…n\right)$,还有单形$x _0 ,x _1 x _2 ..x _{n-1} \overline{x}$.(这里单形点的顺序也是严谨定义的，$x _0 \wedge x _1\wedge x _2 …\wedge x _n$在自然基下大于0。另一个单形的顺序也是如此)<br>映射$f\left(x\right)=\frac{x ^2}{2}$,设点$y _i=\left(x _i,f\left(x\right)\right)$,那么两个单形$y _0,…y _n$和$y _0,…y _{n-1} \overline{y}$组成的网格是凸的等价于下式</p>
+<p>$$\left(\begin{matrix}<br>1&amp;y _0\\<br>1&amp; y _1\\<br>.. &amp; .. \\<br>1 &amp; \overline{y}<br>\end{matrix}\right)=\left(\begin{matrix}1&amp;x _0&amp;f\left(x _0\right)\\<br>1&amp;x _1&amp;f\left(x _1\right)\\<br>…&amp; …&amp;… \\<br>1&amp; \overline{x}&amp;f\left(\overline{x}\right)<br>\end{matrix}\right)&gt;0$$</p>
+<p>可以证明$x _i$点的整体平移不影响上述行列式的值。<br>接下来的变形会证明凸包和delauny的等价形。</p>
+<p>$$\left(\begin{matrix}<br>1&amp;x _0&amp;\frac{x^2 _0}{2}\\<br>0&amp;x _1-x _0&amp;\frac{x^2 _1-x^2 _0}{2}\\<br>0&amp;..&amp;..\\<br>0&amp;x _i-x _0&amp;\frac{x^2 _i-x^2 _0}{2}\\<br>0&amp;..&amp;..\\<br>0&amp;\overline{x}-x _0&amp;\frac{\overline{x}^2-x^2 _0}{2}<br>\end{matrix}\right)=\left(\begin{matrix}<br>x _1-x _0&amp;\frac{x^2 _1-x^2 _0}{2}\\<br>..&amp;..\\<br>x _i-x _0&amp;\frac{x^2 _i-x^2 _0}{2}\\<br>..&amp;..\\<br>\overline{x}-x  _0&amp;\frac{\overline{x}^2-x^2 _0}{2}<br>\end{matrix}\right)=\left(\begin{matrix}<br>A&amp;b\\<br>\overline{x}-x _0&amp;\frac{\overline{x}^2-x^2 _0}{2}<br>\end{matrix}\right)=\left(\begin{matrix}<br>I&amp;A^{-1}b\\<br>\overline{x}-x _0&amp;\frac{\overline{x}^2-x^2 _0}{2}<br>\end{matrix}\right)$$</p>
+<p>$$\left(\begin{matrix}<br>I&amp;A^{-1}b\\<br>0&amp;\frac{\overline{x}^2-x^2 _0}{2}-\left(\overline{x}-x _0\right)A^{-1}b\end{matrix}\right)=\frac{\overline{x}^2-x^2 _0}{2}-\left(\overline{x}-x _0\right)A^{-1}b&gt;0$$,可以证明$A^{-1}b$是单形$x _0…x _n$外接圆的圆心O，那么$\left(\overline{x}-O\right)^2&gt;\left(x _0 -O\right)^2$也就是$\frac{\overline{x}^2-x^2 _0}{2}-\left(\overline{x}-x _0\right)A^{-1}b&gt;0$</p>
 
       
     </div><!-- .entry-content -->
