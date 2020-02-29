@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});    本文介绍网格处理库">
 <meta property="article:published_time" content="2019-02-23T09:38:19.000Z">
-<meta property="article:modified_time" content="2020-02-10T02:59:17.711Z">
+<meta property="article:modified_time" content="2020-02-26T11:47:35.145Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="工具">
 <meta name="twitter:card" content="summary">
@@ -112,19 +112,15 @@
 <h4 id="openmesh"><a href="#openmesh" class="headerlink" title="openmesh"></a>openmesh</h4><p>先给一份写的<a href="./openmesh.pdf">pdf</a>,以后有时间写博客版的。openmesh的用法（包含部分图像处理库libigl)</p>
 <h4 id="libcell"><a href="#libcell" class="headerlink" title="libcell"></a>libcell</h4><p>libcell可以表示n维流形，并且不仅可以表示单形，其他任何形式也可以。（其实它的要求非常宽松，甚至不是流形的图也可以表示）</p>
 <p>但是libcell只保存了三个层次的信息。vertex(0维子流形)，face(n-1维流形)，cell（n维流形）</p>
-<p>cell是你要表示的n维流形的开集，face是cell的边界。</p>
-<p>或许把n=2，再叙述一遍你能理解上面的话。</p>
-<p>n=2说明你要表示一张曲面，那么cell是多边形，face是边，vertex是点</p>
+<p>例如n=2。n=2说明你要表示一张曲面，那么cell是多边形，face是边，vertex是点</p>
 <p>n=3说明你要表示三维体结构，那么cell是一个多面体，face是面，vertex是点。</p>
-<p><em>当你表示的流形结构不是单形时，且不确定，那么理论上这个流形的结构你只能知道vertex,face,cell的信息。</em></p>
-<p><em>但当你要表示的流形结构时单形时，理论上你完全可以推导出它每层的信息。</em></p>
+<p>虽然这个库只储存了三个层次的结构信息，<em>但当你要表示的流形结构时单形时，理论上你完全可以推导出它每层的信息。</em></p>
 <ul>
-<li>为了提升速度，libcell内置高效的节点容器Node。了解它能让你接触并写出内部高效的函数</li>
+<li>libcell内置了节点容器Node。了解它是必须的</li>
 </ul>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Node* temp_node;</span><br><span class="line"><span class="keyword">for</span>(Node n_it=*temp_node;*n_it!=<span class="literal">NULL</span>;n_it++)</span><br><span class="line">&#123;&#125;</span><br><span class="line"><span class="comment">//以上是对Node* temp_node遍历</span></span><br><span class="line"><span class="comment">//以下直接对结构体Node遍历，两者一样</span></span><br><span class="line">Node temp_node1;</span><br><span class="line"><span class="keyword">for</span>(Node n_it=temp_ndoe1;*n_it!=<span class="literal">NULL</span>;n_it++)</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>想要了解更多Node接口，可以在tools_node.h中定义了Node常用的函数，lib_cell_iterator.h中对Node进行了++,*的运算符重载。</p>
-<p>当然为了不增加你的学习成本，你完全可以不用管它。(这个容器完全以外部依赖的方式存在，并且只有简单几个函数，并没有多少学习成本，而且你完全可以copy代码，用在别的地方)</p>
 <ul>
 <li><p>libcell还有仿openmesh的网格遍历接口</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> fit=mesh.faces.<span class="built_in">begin</span>();fit!=mesh.faces.<span class="built_in">end</span>();fit++)<span class="comment">//对面的遍历 </span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> fvit=mesh.fv_begin(&amp;mesh,*fit-&gt;second);fvit!=mesh.fv_begin(&amp;mesh,*fit-&gt;second);fvit++)<span class="comment">//面上点的遍历</span></span><br><span class="line">    &#123;</span><br><span class="line">        （*fvit）<span class="comment">//点(结构体实例，对他修改不会影响到真实的点)</span></span><br><span class="line">          quote(cvit)<span class="comment">//点(引用指针，直接修改的话会影响到实体)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -140,11 +136,11 @@
 </ul>
 <p>libcell </p>
 <h5 id="规定1"><a href="#规定1" class="headerlink" title="规定1"></a>规定1</h5><p>一个cell或者face,halfface的点顺序为$$p_0 p_1 .. p_n$$,那么对应的张量或者矩阵是$$d \left(p_1-p_0\right) \wedge d \left(p_2-p_0\right)…\wedge$$</p>
-<h5 id="规定2"><a href="#规定2" class="headerlink" title="规定2"></a>规定2</h5><p>张量运算向后添加.给一个单形$$p_0 p_1 …p_n$$，那么子流形$$p_1 …p_n$$的顺序是否交换一次，看$$\left(-1\right)^{n-0}$$的值.一般地，对于子流形的顺序$$p_0 …\hat{p_i}..p_n$$是否交换，看$$\left(-1\right)^{n-i}$$的值。这样给一个halfface的点顺序是$$p_0 p_1 ..p_n$$,再给一个点$$p_{n+1}$$,那么组成的cell的点顺序是$$p_0 …p_n p_{n+1}$$,符合张量向后添加</p>
-<h5 id="规定3"><a href="#规定3" class="headerlink" title="规定3"></a>规定3</h5><p>一个n维流形，他是n+m个点组成的凸包，那么它的张量[^1]方向是</p>
+<h5 id="规定2"><a href="#规定2" class="headerlink" title="规定2"></a>规定2</h5><p>张量运算向后添加.给一个单形$p_0 p_1 …p_n$,，对于子流形的顺序$p_0 …\hat{p_i}..p_n$是否交换，看$\left(-1\right)^{n-i}$的值。这样给一个halfface的点顺序是$p_0 p_1 ..p_n$,再给一个点$p_{n+1}$,那么组成的cell的点顺序是$p_0 …p_n p_{n+1}$,符合张量向后添加</p>
+<h5 id="规定3"><a href="#规定3" class="headerlink" title="规定3"></a>规定3</h5><p>一个n维流形，他是n+m个点组成的凸包，那么它的张量方向是[^1]</p>
 <p>$d\left(p_1-p_0\right)\wedge d\left(p_2-p_0\right)\wedge .. d\left(p_{n+1}-p_0\right)$</p>
-<h4 id="离散网格理论"><a href="#离散网格理论" class="headerlink" title="离散网格理论"></a>离散网格理论</h4><h5 id="Definition-网格的重叠-overlap-（可以用来判断参数化的单射性）"><a href="#Definition-网格的重叠-overlap-（可以用来判断参数化的单射性）" class="headerlink" title="Definition :网格的重叠(overlap)（可以用来判断参数化的单射性）"></a>Definition :网格的重叠(overlap)（可以用来判断参数化的单射性）</h5><p>对于网格某个点p,跟它相邻  点的坐标分量作为morse函数，临界点超过两个则重叠(overlap)</p>
-<p>[^1]: 张量方向定义在 数学思想笔记</p>
+<h4 id="离散网格"><a href="#离散网格" class="headerlink" title="离散网格"></a>离散网格</h4><h5 id="Definition-网格的重叠-overlap-（可以用来判断参数化的单射性）"><a href="#Definition-网格的重叠-overlap-（可以用来判断参数化的单射性）" class="headerlink" title="Definition :网格的重叠(overlap)（可以用来判断参数化的单射性）"></a>Definition :网格的重叠(overlap)（可以用来判断参数化的单射性）</h5><p>对于网格某个点p,跟它相邻  点的坐标分量作为morse函数，临界点超过两个则重叠(overlap)</p>
+<p>[^1]:  张量方向定义在 数学思想笔记</p>
 
       
     </div><!-- .entry-content -->

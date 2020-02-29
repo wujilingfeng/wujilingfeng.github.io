@@ -27,7 +27,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});     本文介绍如何从数学到计算机离散化的表示">
 <meta property="article:published_time" content="2019-03-14T12:23:41.000Z">
-<meta property="article:modified_time" content="2020-02-20T09:47:14.178Z">
+<meta property="article:modified_time" content="2020-02-22T02:21:21.456Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="数学">
 <meta property="article:tag" content="计算机">
@@ -137,7 +137,7 @@
 <p>我的思考:如果用内蕴的高斯曲率来度量原网格和变换后的网格，然后加上$\alpha \sum\left(\tilde{x_i}-x_i\right)$项（表示移动点位移后之间的差距），$\alpha$表示弹性(越大网格表面弹性越大)</p>
 <p>限制条件是移动点的位置固定</p>
 <h4 id="fourier-变换"><a href="#fourier-变换" class="headerlink" title="fourier 变换"></a>fourier 变换</h4><p>fourier的一组基是laplace算子的特征向量</p>
-<h4 id="狄氏边值问题"><a href="#狄氏边值问题" class="headerlink" title="狄氏边值问题"></a>狄氏边值问题</h4><p>$\Delta \mu=g,\mu_{\partial \Omega}=0$,若$\mu_{\partial \Omega}=f$,则选取$g <em>1 ,st.g</em>{\partial \Omega}=f$,并作替换$\mu-g_1$</p>
+<h4 id="狄氏边值问题"><a href="#狄氏边值问题" class="headerlink" title="狄氏边值问题"></a>狄氏边值问题</h4><p>$\Delta \mu=g,\mu_{\partial \Omega}=0$,若$\mu_{\partial \Omega}=f$,则选取$g _1 ,st.g _{1\partial \Omega}=f$,并作替换$\mu-g _1$</p>
 <h4 id="delauny剖分"><a href="#delauny剖分" class="headerlink" title="delauny剖分"></a>delauny剖分</h4><p>剖分的存在性可以等价与凸包的存在性，delauny网格调整必会停止，等价与网格调整不存在循环序列。其实delauny调整推广到高维并非二维描述那般复杂，也等价于凸包的生成。</p>
 <p>所谓delauny单形，是每个单形的外接圆不包含其他点。</p>
 <h5 id="凸包和delauny的等价性"><a href="#凸包和delauny的等价性" class="headerlink" title="凸包和delauny的等价性"></a>凸包和delauny的等价性</h5><p>对于n维单形的n+1个点$x _i,i\in\left(0,1,…n\right)$,还有单形$x _0 ,x _1 x _2 ..x _{n-1} \overline{x}$.(这里单形点的顺序也是严谨定义的，$x _0 \wedge x _1\wedge x _2 …\wedge x _n$在自然基下大于0。另一个单形的顺序也是如此)<br>映射$f\left(x\right)=\frac{x ^2}{2}$,设点$y _i=\left(x _i,f\left(x\right)\right)$,那么两个单形$y _0,…y _n$和$y _0,…y _{n-1} \overline{y}$组成的网格是凸的等价于下式</p>
