@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});      本文介绍Alexandrove 定理">
 <meta property="article:published_time" content="2019-03-20T09:45:45.000Z">
-<meta property="article:modified_time" content="2019-03-29T12:57:17.380Z">
+<meta property="article:modified_time" content="2020-03-25T00:25:51.406Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
@@ -111,12 +111,13 @@
 <p>本文介绍Alexandrove 定理</p>
 <a id="more"></a>
 
-<p>对于任意两个多边形，它们总有相同多个平行边，因为可以把的点视为退化边。</p>
-<p>对于两个凸多边形$P_1,P_2$，若其中一个通过平行移动，成为另一个多边形的真子集，则称其可以放置到另一个多边形中(两个多边形全等，也视为不能完全放置到对方当中。)</p>
+
+
 <h4 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h4><p>定义一个凸多面体P的“面“是，它的支撑面与P的交集。<a href="对于任意两个多面体，他们总有相同多个平行“面“，因为支撑面上的点，边也视为退化的面">^1</a></p>
 <hr>
-<h4 id="定理1"><a href="#定理1" class="headerlink" title="定理1"></a>定理1</h4><p>两个凸多面体$P_1,P_2$之间有同胚保距映射$\varphi$,对于$P_1$的面$f_1$,$\varphi\left(f_1\right)$在$P_2$中与多个平面相交，并由此$\varphi\left(f_1\right)$划分为多个平面。同理对于$P_2$的平面$f_2$，$\varphi^-\left(f_2\right)$也被划分为多个平面。则这些平面都是凸的，且这两个多面体的新面一一对应，且全等。</p>
+<h4 id="定理1"><a href="#定理1" class="headerlink" title="定理1"></a>定理1</h4><p>两个凸多面体$P_1,P_2$之间有同胚保距映射$\varphi$,对于$P_1$的面$f_1$,$\varphi\left(f_1\right)$在$P_2$中与多个平面相交，并由此$\varphi\left(f_1\right)$划分为多个平面。同理对于$P_2$的平面$f_2$，$\varphi^-\left(f_2\right)$也被划分为多个平面。则这些平面都是凸的，且这两个多面体的新面一一对应。</p>
 <p><em>Proof</em></p>
+<p>$m_i$是$P_1$的面,$n_i$是$P_2$的面,记$A=\varphi^- \left(n_i\right)\bigcap m_i, B=\varphi\left(m_i\right)\bigcap n_i$,我们要证明$\varphi\left(A\right)=B$,<br>由于$\varphi$是单射所以上式成立。这些新划分的平面一一对应且等矩同胚。</p>
 <h4 id="Lemma-1"><a href="#Lemma-1" class="headerlink" title="Lemma 1"></a>Lemma 1</h4><p>如果多边形$P_1$的边总比$P_2$平行对应的边长要短，则$P_1$可以放到$P_2$里。</p>
 <h4 id="Lemma-2"><a href="#Lemma-2" class="headerlink" title="Lemma 2"></a>Lemma 2</h4><p>对于凸多边形，若对其一边向其外法向量平移则此凸多边形周长变长</p>
 <h4 id="Proposition"><a href="#Proposition" class="headerlink" title="Proposition"></a>Proposition</h4><p>若凸多边形$P_1$可以放在$P_2$里，则$P_2$的周长大于$P_1$</p>
@@ -134,13 +135,30 @@
 <p>对于P的每个正常面$f_3$，其由$f_1\in P_1,f_2\in P_2$生成，这三个面由相同数个平行边，若$f_2$比$f_1$对应边长，则在$f_3$对应边上记+,短记-。</p>
 <p>若$f_1\neq f_2$，则由Lemma 4知其面周围至少发生4次符号变化。这样P上有一个被标记符号的网格，每个面周围至少发生4此变化，这与<a href="https://wujilingfeng.top/2019/03/04/cauchy-s-theorem-and-sphere-geometry/" target="_blank" rel="noopener">《cauchy theorem and sphere geometry》</a>,proposition 4矛盾。</p>
 <p>由Lemma 5可以得到下面的定理</p>
-<h4 id="Theorem-1"><a href="#Theorem-1" class="headerlink" title="Theorem 1"></a>Theorem 1</h4><p>对于这样的单调函数f,定义域为凸多边形Q，满足这样的性质，若$Q_1,Q_2\in Q$,$Q_1$能放在$Q_2$中，$f\left(Q_1\right)&lt;f\left(Q_2\right)$,上述函数空间记为F，则对于两个凸面体$P_1,P_2$他们有相同数量的平行面$Q_1^i,Q_2^i$,且$\exists f_i\in F$,使得$f_i\left(Q_1^i\right)=f_i\left(Q_2^i\right),\forall i$,则$P_1,P_2$全等</p>
+<h4 id="Theorem-1"><a href="#Theorem-1" class="headerlink" title="Theorem 1"></a>Theorem 1</h4><p>对于这样的单调函数f,定义域为凸多边形Q，满足这样的性质，若$Q_1,Q_2\in Q$,$Q_1$能放在$Q_2$中，$f\left(Q_1\right)&lt;f\left(Q_2\right)$</p>
+<p>,上述函数空间记为F，则对于两个凸面体$P_1,P_2$他们有相同数量的平行面$Q_1^i,Q_2^i$,且$\exists f_i\in F$,使得$f_i\left(Q_1^i\right)=f_i\left(Q_2^i\right),\forall i$,则$P_1,P_2$全等</p>
 <h4 id="Corallary-1-Minkowski-uniqueness-theorem"><a href="#Corallary-1-Minkowski-uniqueness-theorem" class="headerlink" title="Corallary 1(Minkowski uniqueness theorem)"></a>Corallary 1(Minkowski uniqueness theorem)</h4><p>在$R^n$空间，若有一个凸多面体P，保持其每个面的面积相等，法向量相等，对其变形得到$P’$,则$P=P’$</p>
-<h4 id="Alexandrov-Theorem"><a href="#Alexandrov-Theorem" class="headerlink" title="Alexandrov Theorem"></a>Alexandrov Theorem</h4><p>在$R^n$空间，若有一个曲面（无限延伸）Q，k个平面，他们围成一个闭或开的凸多面体。保持k个平面每个面的面积相等，法向量相等，对其变形得到$P’$,则$P=P’$</p>
+<h4 id="Alexandrov-Theorem"><a href="#Alexandrov-Theorem" class="headerlink" title="Alexandrov Theorem"></a>Alexandrov Theorem</h4><p>在$R^n$空间，若有一个曲面（可能无限延伸，可能有边界）Q，k个平面，他们围成一个闭或开的凸多面体。保持k个平面每个面的面积相等，法向量相等，对其变形得到$P’$,则$P=P’$</p>
 <p><em>Proof</em></p>
 <p>把Q抽象视为连通的面，则考虑$P_1=P\oplus P‘$,得到球面一个网格，这个网格每个面（除了Q）周围发生4次符号变化。这与<a href="https://wujilingfeng.top/2019/03/04/cauchy-s-theorem-and-sphere-geometry/" target="_blank" rel="noopener">《cauchy theorem and sphere geometry》</a>,proposition 4矛盾</p>
 <hr>
-<h3 id="Minkowski-存在性定理"><a href="#Minkowski-存在性定理" class="headerlink" title="Minkowski 存在性定理"></a>Minkowski 存在性定理</h3><h5 id="Lemma-6"><a href="#Lemma-6" class="headerlink" title="Lemma 6"></a>Lemma 6</h5>
+<h3 id="Minkowski-存在性定理"><a href="#Minkowski-存在性定理" class="headerlink" title="Minkowski 存在性定理"></a>Minkowski 存在性定理</h3><p>在Alexandrov的Convex Polyhedra一书的第四章不仅给出了3维凸包的存在性定理，还推广到任意维</p>
+<h4 id="域不变定理"><a href="#域不变定理" class="headerlink" title="域不变定理"></a>域不变定理</h4><p>U是$R^n$的开集，f是$U\to R^n$的连续单射（先确定U的拓扑和$f\left(U\right)$的拓扑），那么$f\left(U\right)$是$R^n$的开集。因为$f\left(U\right)$的拓扑是由$R^n$的拓扑诱导的(并不等于$R^n$的拓扑),所以可以推导f是同胚映射.[^3]</p>
+<p>他的推论是</p>
+<h5 id="Lemma-6"><a href="#Lemma-6" class="headerlink" title="Lemma 6"></a>Lemma 6</h5><p>n流形A和和m维流形B,$n\ge m$,有单射且连续的映射f:$A\to B$,那f是同胚映射.</p>
+<p>还有推论是</p>
+<p>不存在高维流形到低维流形的连续单射。</p>
+<h4 id="Lemma-7"><a href="#Lemma-7" class="headerlink" title="Lemma 7"></a>Lemma 7</h4><p>单连通的n维流形A和单连通m维流形B,$n\ge m$,有映射$f:A\to B$,满足</p>
+<ul>
+<li><p>f连续且单射</p>
+</li>
+<li><p>在$f\left(A\right)$集合有在B收敛的序列，且收敛点是$p_i$,那么存在$q_i \in A$使得$f\left(q_i\right)=p_i$(这个条件等价$f\left(A\right)$在B中是闭集)</p>
+</li>
+</ul>
+<p>且那么f是满射。</p>
+<p>拓扑X连通区域的即开又闭区域是空集和它本身</p>
+<p>[^3]: 它似乎和开映射定理有关系.开映射定理:U是$R^n$的开集，V是$R^m$的开集，连续映射$f:U\to V,f\left(U\right)=V$,那么f是开映射</p>
+
       
     </div><!-- .entry-content -->
 
