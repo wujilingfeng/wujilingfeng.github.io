@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});">
 <meta property="article:published_time" content="2019-06-19T00:35:30.000Z">
-<meta property="article:modified_time" content="2020-03-28T10:02:24.266Z">
+<meta property="article:modified_time" content="2020-03-28T10:49:23.770Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
@@ -140,6 +140,9 @@
 <p>对四元数$r=r _1i+r _2 j+r _3k$的旋转为</p>
 <p>$qrq^-1$</p>
 <p>那么一个单位四元数可以表示旋转。两个单位四元数$p _0,p _1$代表两个旋转，那么$p _0^{t}p _1^{1-t}$可以表示旋转的插值</p>
+<p>我们也可以用以下形式插值</p>
+<p>首先假设$e^{\overline{p _0}}=p _0,e^{\overline{p _1}}=p _1,e^{t\overline{p _0}+\left(1-t\right)e^{\overline{p _1}}}$</p>
+<p>需要指出四元数的指数形式并不满足$e^ae^b=e^{a+b}$</p>
 <h4 id="命题4-1"><a href="#命题4-1" class="headerlink" title="命题4"></a>命题4</h4><p>欧拉角可以表示任意旋转矩阵</p>
 <p><em>proof:</em>待证</p>
 <h4 id="奇异值分解"><a href="#奇异值分解" class="headerlink" title="奇异值分解"></a>奇异值分解</h4><h4 id="PCA（主成分分析）"><a href="#PCA（主成分分析）" class="headerlink" title="PCA（主成分分析）"></a>PCA（主成分分析）</h4><p>pca类似流形参数化，但绝对不是参数化，他只是去除那些几乎不变的变量</p>
