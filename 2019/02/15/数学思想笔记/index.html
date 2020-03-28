@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});     本文记录学习数学时关于数学思想的总结 方程问题应为逆算子问题求导，偏导应理解为特定空间下的算子（线性算子），比如在hilbert空间，给定一组正交基，求导算子是线性算子，并且可以由无穷矩阵表示。 解一元二次方程时，我们常用到$\sqrt{}">
 <meta property="article:published_time" content="2019-02-15T07:32:06.000Z">
-<meta property="article:modified_time" content="2020-02-26T13:02:56.385Z">
+<meta property="article:modified_time" content="2020-03-27T13:16:05.193Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
@@ -114,6 +114,11 @@
 <a id="more"></a>
 
 <h4 id="四元数表示旋转"><a href="#四元数表示旋转" class="headerlink" title="四元数表示旋转"></a>四元数表示旋转</h4><h4 id="叉乘作为算子其实是反对称变换（三维空间）"><a href="#叉乘作为算子其实是反对称变换（三维空间）" class="headerlink" title="叉乘作为算子其实是反对称变换（三维空间）"></a>叉乘作为算子其实是反对称变换（三维空间）</h4><p>比如对于三维空间向量x,那么$x\wedge$是线性变换,$\forall y,z,\left(x\wedge y,z\right)=-\left(x\wedge z,y\right)$<a href="准确的说$x\wedge$作为算子，是反对称变换">^1</a></p>
+<p>$$\left(\begin{matrix}</p>
+<p>0&amp;-x _3&amp;x _2\\</p>
+<p>x _3&amp;0&amp;-x _1\\</p>
+<p>-x _2&amp;x _1&amp;0</p>
+<p>\end{matrix}\right)$$</p>
 <h4 id="凸包（离散）"><a href="#凸包（离散）" class="headerlink" title="凸包（离散）"></a>凸包（离散）</h4><p>对于由m个点组成的n维流形，称它是凸的，当对于任意n个在同一支撑超平面的点$p_0…p_n$对任意点$p_i,p_j$(属于这个流形)，$d \left(p_1-p_0\right)\wedge d\left(p_2-p_0\right)…d \left(p_n-p_0\right)\wedge d \left(p_i-p_0\right)$和$d \left(p_1-p_0\right)\wedge d\left(p_2-p_0\right)…d \left(p_n-p_0\right)\wedge d \left(p_j-p_0\right)$同向</p>
 <p>我们假设有n维流形，它存在在n+1维背景空间。那么我们可以定义它的某种凸性，它和我们平常所说的函数局部凸性一样(证明略)。如下</p>
 <h4 id="多元函数的凸性（离散）"><a href="#多元函数的凸性（离散）" class="headerlink" title="多元函数的凸性（离散）"></a>多元函数的凸性（离散）</h4><p>首先选好一个超平面上n-1个正交基地$e_0,e_1..e_{n-1}$,和一个与正交补$e_n$.那么如果对任意n个超平面上点$p_0,…p_n$，满足$d\left(p_1-p_0\right)\wedge ..d\left(p_n-p_0\right)$和$de_0\wedge de_{n-1}$同向。对于任意$p_i$点(属于这个流形),$d\left(p_1-p_0\right)\wedge ..d\left(p_n-p_0\right)\wedge d\left(p_i-p_0\right)$与$de_0\wedge ..de_{n-1}\wedge de_n$同向，称为局部凸流形。</p>

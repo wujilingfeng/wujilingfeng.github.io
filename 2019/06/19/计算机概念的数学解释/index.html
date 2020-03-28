@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});">
 <meta property="article:published_time" content="2019-06-19T00:35:30.000Z">
-<meta property="article:modified_time" content="2020-03-27T10:28:38.959Z">
+<meta property="article:modified_time" content="2020-03-28T10:02:24.266Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
@@ -128,11 +128,24 @@
 <p>$$\left(\begin{matrix}<br>r_1&amp;0&amp;0&amp;..\\<br>0&amp;r_2&amp;0&amp;…\\<br>0&amp;0&amp;…&amp;..\\<br>0&amp;0&amp;..&amp;1<br>\end{matrix}\right)$$</p>
 <p>其中$r_i$,形如$\left(\begin{matrix}<br>\pm\cos{\theta}&amp;\pm\sin{\theta}\\<br>\pm\sin{\theta}&amp;\pm\cos{\theta}<br>\end{matrix}\right)$,</p>
 <p><em>proof:</em>待证</p>
-<h4 id="欧拉角"><a href="#欧拉角" class="headerlink" title="欧拉角"></a>欧拉角</h4><h4 id="Rodrigues旋转矩阵"><a href="#Rodrigues旋转矩阵" class="headerlink" title="Rodrigues旋转矩阵"></a>Rodrigues旋转矩阵</h4><h4 id="四元数表示旋转"><a href="#四元数表示旋转" class="headerlink" title="四元数表示旋转"></a>四元数表示旋转</h4><h4 id="命题4-1"><a href="#命题4-1" class="headerlink" title="命题4"></a>命题4</h4><p>欧拉角可以表示任意旋转矩阵</p>
+<h4 id="命题-5"><a href="#命题-5" class="headerlink" title="命题 5"></a>命题 5</h4><p>欧式空间的等矩变换等价$T=Ax+x_0$,其中A是正交矩阵，$x_0$是某个向量</p>
+<p><em>proof</em>  <a href="http://www.docin.com/p-1746418066.html?docfrom=rrela" target="_blank" rel="noopener">这里</a></p>
+<h4 id="欧拉旋转定理"><a href="#欧拉旋转定理" class="headerlink" title="欧拉旋转定理"></a>欧拉旋转定理</h4><p>在三维空间里，假设一个刚体在做一个位移的时候，刚体内部至少有一点固定不动，则此位移等价于一个绕着包含那固定点的固定轴的旋转</p>
+<p><em>proof</em>  固定点不动，相当于旋转矩阵有一个以1为特征值的特征向量。那么由命题4,知道这个矩阵的相似形，它是旋转矩阵得证。</p>
+<h4 id="各种形式的旋转映射"><a href="#各种形式的旋转映射" class="headerlink" title="各种形式的旋转映射"></a>各种形式的旋转映射</h4><p>目前来看旋转映射只在三维空间有定义(二维旋转其实属于3维).</p>
+<p>围绕单位向量$\vec{n}$旋转$\theta$角，用矩阵可以表示为</p>
+<p>$$\left(\begin{matrix}<br>\cos\theta+\left(1-\cos\theta\right)n _x^2&amp;\left(1-\cos\theta\right)n _x n _y-n _z\sin\theta&amp;\left(1-\cos\theta\right)n _xn _z+n _y\sin\theta\\<br>\left(1-\cos\theta\right)n _y n_x+n _z\sin\theta&amp;\cos\theta+\left(1-\cos\theta\right)n _y^2&amp;\left(1-\cos\theta\right)n _y n _z-n _x\sin \theta\\<br>\left(1-\cos\theta\right)n _zn _x-n _y \sin\theta&amp;\left(1-\cos\theta\right)n _zn _y+n _x\sin\theta&amp;\cos\theta+\left(1-\cos\theta\right)n _z^2<br>\end{matrix}\right)<br>$$</p>
+<h4 id="Rodrigues旋转矩阵"><a href="#Rodrigues旋转矩阵" class="headerlink" title="Rodrigues旋转矩阵"></a>Rodrigues旋转矩阵</h4><p>$\cos\theta+\sin\theta*n\wedge+nn^T\left(1-\cos\theta\right)$</p>
+<h4 id="四元数表示旋转"><a href="#四元数表示旋转" class="headerlink" title="四元数表示旋转"></a>四元数表示旋转</h4><p>$q=\cos\frac{\theta}{2}+\sin\theta\left(n _xi+n _y j+n _zk\right) $</p>
+<p>对四元数$r=r _1i+r _2 j+r _3k$的旋转为</p>
+<p>$qrq^-1$</p>
+<p>那么一个单位四元数可以表示旋转。两个单位四元数$p _0,p _1$代表两个旋转，那么$p _0^{t}p _1^{1-t}$可以表示旋转的插值</p>
+<h4 id="命题4-1"><a href="#命题4-1" class="headerlink" title="命题4"></a>命题4</h4><p>欧拉角可以表示任意旋转矩阵</p>
 <p><em>proof:</em>待证</p>
 <h4 id="奇异值分解"><a href="#奇异值分解" class="headerlink" title="奇异值分解"></a>奇异值分解</h4><h4 id="PCA（主成分分析）"><a href="#PCA（主成分分析）" class="headerlink" title="PCA（主成分分析）"></a>PCA（主成分分析）</h4><p>pca类似流形参数化，但绝对不是参数化，他只是去除那些几乎不变的变量</p>
 <h4 id="离散量到连续量的转化"><a href="#离散量到连续量的转化" class="headerlink" title="离散量到连续量的转化"></a>离散量到连续量的转化</h4><p>工程领域不但连续量到离散量的转化非常重要，离散到连续的转化技巧也相当重要。</p>
 <p>比如对于一张像素图，如何放大缩小而不会影响图片质量(放大无限大，不会出现锯齿)，离散到连续量的变化至关重要</p>
+<h4 id="样条理论和射影变换"><a href="#样条理论和射影变换" class="headerlink" title="样条理论和射影变换"></a>样条理论和射影变换</h4><p>贝塞尔函数和贝塞尔曲线不是一回事。</p>
 
       
     </div><!-- .entry-content -->
