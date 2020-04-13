@@ -28,7 +28,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});      本文介绍Alexandrove 定理">
 <meta property="article:published_time" content="2019-03-20T09:45:45.000Z">
-<meta property="article:modified_time" content="2020-03-25T00:25:51.406Z">
+<meta property="article:modified_time" content="2020-03-31T10:06:30.036Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
@@ -142,7 +142,12 @@
 <p><em>Proof</em></p>
 <p>把Q抽象视为连通的面，则考虑$P_1=P\oplus P‘$,得到球面一个网格，这个网格每个面（除了Q）周围发生4次符号变化。这与<a href="https://wujilingfeng.top/2019/03/04/cauchy-s-theorem-and-sphere-geometry/" target="_blank" rel="noopener">《cauchy theorem and sphere geometry》</a>,proposition 4矛盾</p>
 <hr>
-<h3 id="Minkowski-存在性定理"><a href="#Minkowski-存在性定理" class="headerlink" title="Minkowski 存在性定理"></a>Minkowski 存在性定理</h3><p>在Alexandrov的Convex Polyhedra一书的第四章不仅给出了3维凸包的存在性定理，还推广到任意维</p>
+<h3 id="Minkowski-存在性定理"><a href="#Minkowski-存在性定理" class="headerlink" title="Minkowski 存在性定理"></a>Minkowski 存在性定理</h3><p>首先介绍lagrange乘子法，它的作用是判断原函数在限制条件下的极值（不是最值）满足的一阶微分条件。<br>这句话首先注意两点。</p>
+<ul>
+<li>它首先要求原函数在定义域内一阶可导</li>
+<li>其次</li>
+</ul>
+<p>在Alexandrov的Convex Polyhedra一书的第七章不仅给出了3维凸包的存在性定理，还推广到任意维。先介绍Alexandrov的证明。</p>
 <h4 id="域不变定理"><a href="#域不变定理" class="headerlink" title="域不变定理"></a>域不变定理</h4><p>U是$R^n$的开集，f是$U\to R^n$的连续单射（先确定U的拓扑和$f\left(U\right)$的拓扑），那么$f\left(U\right)$是$R^n$的开集。因为$f\left(U\right)$的拓扑是由$R^n$的拓扑诱导的(并不等于$R^n$的拓扑),所以可以推导f是同胚映射.[^3]</p>
 <p>他的推论是</p>
 <h5 id="Lemma-6"><a href="#Lemma-6" class="headerlink" title="Lemma 6"></a>Lemma 6</h5><p>n流形A和和m维流形B,$n\ge m$,有单射且连续的映射f:$A\to B$,那f是同胚映射.</p>

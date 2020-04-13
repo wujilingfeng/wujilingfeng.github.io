@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});    本文记录gcc和makefile">
 <meta property="article:published_time" content="2019-02-26T11:50:53.000Z">
-<meta property="article:modified_time" content="2020-02-22T04:05:24.159Z">
+<meta property="article:modified_time" content="2020-04-06T12:15:11.252Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="计算机">
 <meta name="twitter:card" content="summary">
@@ -331,7 +331,7 @@
 </tr>
 <tr>
 <td>add_compile_options(-g -Wall -lstdc++)</td>
-<td>添加编译选项</td>
+<td>（对所有编译器）添加编译选项,SET(CMAKE_C_FLAGS)是只对C编译器</td>
 </tr>
 <tr>
 <td>aux_source_directory(dir var)</td>
@@ -375,6 +375,9 @@
 </tr>
 </tbody></table>
 <p>自己生成的库，且用target_link_libraries()添加依赖关系了，那么这个库cmake一定能找到，你不用为这个库添加库目录了</p>
+<p>库的链接顺序会导致编译错误，比如在CMake中<code>target_link_libraries(main viewer_matrix4x4 viewer_openglalg)</code> </p>
+<p>的链接顺序会导致符号函数找不到。</p>
+<p>可以使用target_link_libraries(main -Wl,–start-group viewer_matrix4x4 viewer_openglalg   -Wl,–end-group)(gcc也有相应的命令)</p>
 <h4 id="CMAKE"><a href="#CMAKE" class="headerlink" title="CMAKE"></a>CMAKE</h4><p><a href="./vimtxt">vim的配置</a></p>
 <p><a href="./test1.sh">脚本</a></p>
 <h4 id="C和c-混编"><a href="#C和c-混编" class="headerlink" title="C和c++混编"></a>C和c++混编</h4><p><a href="https://blog.csdn.net/shaosunrise/article/details/81176880" target="_blank" rel="noopener">这里</a></p>
