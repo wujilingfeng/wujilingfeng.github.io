@@ -4,7 +4,18 @@
   <meta charset="utf-8">
   
   
-  <meta name="description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});" />
+  <meta name="description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});
+
+
+
+
+
+haskell一种基于算子思想（functional）编程语言,以前我也设想过一种基于算子思想的编程语言，因为数学中所有空间集合的作用都可以理解为算子
+haskell语言并不难学，你需要有算子的概念，集合的概念，和一些抽象代数的知识。
+网上的很多教材他们为了理解这些概念自创很多名词，用类似c语言的工程概念进行解释和理解，是不正确的做法。
+学习haskell要避免工程繁杂概念的弊端，有时努力回想以前的数学概念代替工程概念是有好处的，首先工程概念名词繁杂不长久，而数学是所有学科(除了哲学)最长久的学科。(这种长久性是“知识成立”的时间)
+比如手机cpu的架构和勾股定理，勾股定理在欧式几何中成立，之后发现在其他几何中不成立，而手机cpu的架构只是工程架构，几个月后就发生改变或者优化。所以勾股定理比c语言，计算机，鸿霥，甚至牛顿力学还要长久，那么为什么不学习寿命更长久的知识而要学习繁杂短暂的知识?
+可以说未来属于算子类型语言cop,haskell，而不是工程类语言c,c++,java,python…" />
   
 
   
@@ -13,16 +24,16 @@
   
   
   
-  <title>抽象代数笔记 | 烂笔头</title>
+  <title>haskell | 烂笔头</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});">
+  <meta name="description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});      haskell一种基于算子思想（functional）编程语言,以前我也设想过一种基于算子思想的编程语言，因为数学中所有空间集合的作用都可以理解为算子 haskell语言并不难学，你需要有算子的概念，集合的概念，和一些抽象代数的知识。 网">
 <meta property="og:type" content="article">
-<meta property="og:title" content="抽象代数笔记">
-<meta property="og:url" content="http://yoursite.com/2019/07/24/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="haskell">
+<meta property="og:url" content="http://yoursite.com/2020/05/12/haskell/index.html">
 <meta property="og:site_name" content="烂笔头">
-<meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});">
-<meta property="article:published_time" content="2019-07-24T04:12:05.000Z">
-<meta property="article:modified_time" content="2020-03-28T10:01:07.770Z">
+<meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});      haskell一种基于算子思想（functional）编程语言,以前我也设想过一种基于算子思想的编程语言，因为数学中所有空间集合的作用都可以理解为算子 haskell语言并不难学，你需要有算子的概念，集合的概念，和一些抽象代数的知识。 网">
+<meta property="article:published_time" content="2020-05-12T09:13:48.000Z">
+<meta property="article:modified_time" content="2020-05-17T04:08:39.783Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
@@ -71,7 +82,7 @@
 </header>
 
       <div id="main" class="wrapper">
-        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-抽象代数笔记" class="post-抽象代数笔记 post type-post status-publish format-standard hentry">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-haskell" class="post-haskell post type-post status-publish format-standard hentry">
     <!---->
 
       <header class="entry-header">
@@ -79,16 +90,16 @@
         
   
     <h1 class="entry-title article-title">
-      抽象代数笔记
+      haskell
     </h1>
   
 
         
         <div class="comments-link">
             
-            <a href="/2019/07/24/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0%E7%AC%94%E8%AE%B0/#comments" class="leave-reply">Reply</a>
+            <a href="/2020/05/12/haskell/#comments" class="leave-reply">Reply</a>
             
-            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/07/24/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0%E7%AC%94%E8%AE%B0/" data-id="ck4hu7nz100284kxj9b3zhfwz" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2020/05/12/haskell/" data-id="ckaakhr9900005bxj19f8cf2k" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
         </div><!-- .comments-link -->
       </header><!-- .entry-header -->
 
@@ -102,31 +113,134 @@
 </script>
 
 
-
-
+<p>haskell一种基于算子思想（functional）编程语言,以前我也设想过一种基于算子思想的编程语言，因为数学中所有空间集合的作用都可以理解为算子</p>
+<p>haskell语言并不难学，你需要有算子的概念，集合的概念，和一些抽象代数的知识。</p>
+<p>网上的很多教材他们为了理解这些概念自创很多名词，用类似c语言的工程概念进行解释和理解，是不正确的做法。</p>
+<p>学习haskell要避免工程繁杂概念的弊端，有时努力回想以前的数学概念代替工程概念是有好处的，首先工程概念名词繁杂不长久，而数学是所有学科(除了哲学)最长久的学科。(这种长久性是“知识成立”的时间)</p>
+<p>比如手机cpu的架构和勾股定理，勾股定理在欧式几何中成立，之后发现在其他几何中不成立，而手机cpu的架构只是工程架构，几个月后就发生改变或者优化。所以勾股定理比c语言，计算机，鸿霥，甚至牛顿力学还要长久，那么为什么不学习寿命更长久的知识而要学习繁杂短暂的知识?</p>
+<p>可以说未来属于算子类型语言cop,haskell，而不是工程类语言c,c++,java,python…</p>
 <a id="more"></a>
 
-<p><a href="./group.pdf">这里</a>给出pdf</p>
-<h4 id="中国剩余定理"><a href="#中国剩余定理" class="headerlink" title="中国剩余定理"></a>中国剩余定理</h4><p>对于一个主理想整环M，其中的$m_i$元素互素（定义见pdf）.倘有一个数x,$b_i=x\  mod\  m_i $,则$x=\sum\limits_{i}{b_it_iM_i}$,其中$s_i*m_i+t_i\prod\limits_{j\neq i} m_j=1$</p>
-<p><em>proof:</em></p>
-<p>构造映射$m/M \to m/m_0 \times m/m_1 …\times m/m_n$,可以验证它是同态，且是单射(核为0)，所以也是同构。它的逆映射如上所构</p>
-<h4 id="四元数"><a href="#四元数" class="headerlink" title="四元数"></a>四元数</h4><p>$i^2=j^2=k^2=-1,ij=-ji=k,ik=-ki=-j,jk=-kj=i$</p>
-<p>欧拉公式</p>
-<p>$p=a+bi+cj+dk=a+\vec{u},e^p=e^a*\left(cos\left(|\vec{u}|\right)+\frac{\vec{u}}{|\vec{u}|}sin\left(|\vec{u}|\right)\right)$</p>
-<p>可以通过欧拉公式将四元数的指数形式转化为普通形式。</p>
-<p>反过来普通形式全部可以转化为指数形式。（有一个误区：并非指数形式的数字满足可交换，不一定指数形式的数字$e^a,e^b$,有$e^a*e^b=e^{a+b}$,这也是四元数牺牲掉的）</p>
-<ul>
-<li>$p=a-\vec{u}$,四元数的转置$p^*=a-\vec{u}$</li>
-<li>可以证明四元数的逆为$p^-=\frac{p^*}{|p|^2}$</li>
-</ul>
-<h4 id="旋转和李群"><a href="#旋转和李群" class="headerlink" title="旋转和李群"></a>旋转和李群</h4>
+<p>使用haskell不应关注效率，而是思想。</p>
+<p><em>万物皆算子</em>，这样就不用记什么高阶函数，数据结构，递归数据结构之类的概念。</p>
+<p>自带的算子</p>
+<table>
+<thead>
+<tr>
+<th>算子</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:t a</td>
+<td>a的类型</td>
+</tr>
+<tr>
+<td>==</td>
+<td>是否等于，返回True False</td>
+</tr>
+<tr>
+<td>/=</td>
+<td>是否不等于</td>
+</tr>
+<tr>
+<td>:l hello</td>
+<td>加载hello.hs文件</td>
+</tr>
+<tr>
+<td>a ^ b</td>
+<td>返回a的b次方</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td></td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td></td>
+</tr>
+<tr>
+<td>mod</td>
+<td>取余</td>
+</tr>
+<tr>
+<td>div</td>
+<td>整除</td>
+</tr>
+<tr>
+<td>even a</td>
+<td>a是否是偶数</td>
+</tr>
+<tr>
+<td>odd a</td>
+<td>a是否是奇数</td>
+</tr>
+<tr>
+<td>.和$</td>
+<td>用来表示复合函数,$用来分割算子，.用来分割连续的算子（相当与算子的复合）</td>
+</tr>
+<tr>
+<td>take n [1,2 ..10]</td>
+<td>取出列表的前n个元素</td>
+</tr>
+<tr>
+<td>map a [1,2..]</td>
+<td>一种经典用法 map (*) [1,2..]</td>
+</tr>
+<tr>
+<td>\</td>
+<td>lambda算子,比如(\xs -&gt; length xs &gt; 15),xs是参数，length xs &gt; 15是body</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>有些算子有歧义可以类似如下调用</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">read</span> <span class="string">"5"</span> :: <span class="type">Int</span></span><br><span class="line"><span class="title">read</span> <span class="string">"5"</span> :: <span class="type">Integer</span></span><br><span class="line"><span class="title">read</span> <span class="string">"3.01"</span> :: <span class="type">Float</span></span><br></pre></td></tr></table></figure>
+
+<p>由于-号也是算子,所以-1.0尽量加括号，变成(-1.0)</p>
+<p>haskell算子的重载也叫模式匹配</p>
+<h5 id="两个内建的类型"><a href="#两个内建的类型" class="headerlink" title="两个内建的类型"></a>两个内建的类型</h5><p>列表:</p>
+<p>元组:</p>
+<h5 id="两个简单的复合算子"><a href="#两个简单的复合算子" class="headerlink" title="两个简单的复合算子"></a>两个简单的复合算子</h5><p>foldr f a [a1,a2…]</p>
+<p>上面的算子f是某个算子，如果记这个算子为*,那么结果就是 <code>a1 * a2 *a3 .... *an * a</code></p>
+<p>有人翻译成右折叠，这增加了名词学习成本,比较恶心</p>
+<p>foldl f a [a1,a2 …]</p>
+<p>上面的算子f是某个算子，如果记这个算子为*,那么结果就是 <code>a * a1 * a2 *a3 .... *an</code></p>
+<p>有人翻译成左折叠，这增加了名词学习成本，比较恶心</p>
+<h4 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h4><p>import qualified Data.Map as M</p>
+<p>这是python是一样的</p>
+<h4 id="自定义算子类型"><a href="#自定义算子类型" class="headerlink" title="自定义算子类型"></a>自定义算子类型</h4><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">data</span> <span class="type">Mybool</span> = <span class="type">True</span> | <span class="type">False</span></span></span><br></pre></td></tr></table></figure>
+
+<p>True是算子的名字，False也是算子的名字，他们都是没有参数的，所以都是常量。</p>
+<p>Mybool是算子所属的类型名字</p>
+<p>带参数或者泛型的算子</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">data</span> <span class="type">Node</span> a =<span class="type">Cons</span> a (<span class="type">Node</span> <span class="title">a</span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>这个算子只有一种结构，那就是Cons a (Node a).</p>
+<p>Cons 表示这种算子的名字，a和 (Node a)是它的参数,Node a是这个算子属于的类型名字.</p>
+<p>比较疑惑的是Cons a (Node a)中的算子(也叫参数)有个(Node a)，这说明它引用了自身类型（有人叫递归数据类型，这也增加了学习成本）</p>
+
       
     </div><!-- .entry-content -->
 
     <footer class="entry-meta">
-    <a href="/2019/07/24/%E6%8A%BD%E8%B1%A1%E4%BB%A3%E6%95%B0%E7%AC%94%E8%AE%B0/">
-    <time datetime="2019-07-24T04:12:05.000Z" class="entry-date">
-        2019-07-24
+    <a href="/2020/05/12/haskell/">
+    <time datetime="2020-05-12T09:13:48.000Z" class="entry-date">
+        2020-05-12
     </time>
 </a>
     
@@ -147,10 +261,8 @@
 <nav class="nav-single">
     <h3 class="assistive-text">文章导航</h3>
     
-        <span class="nav-previous"><a href="/2019/07/27/%E9%A1%BE%E8%80%81%E5%B8%88%E5%8D%9A%E5%AE%A2%E9%93%BE%E6%8E%A5/" rel="prev"><span class="meta-nav">←</span> 顾老师博客链接</a></span>
     
-    
-        <span class="nav-next"><a href="/2019/07/13/opengl-shader/" rel="next">opengl_shader <span class="meta-nav">→</span></a></span>
+        <span class="nav-next"><a href="/2020/02/13/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B0-PDE/" rel="next">偏微分方程笔记(PDE) <span class="meta-nav">→</span></a></span>
     
 </nav><!-- .nav-single -->
 
@@ -170,7 +282,7 @@
             clientSecret: '9ba26389f1bb6e896001f95b0c0482df62f2b9f6',
             repo: 'wujilingfeng.github.io',
             owner: 'wujilingfeng',
-            id: '抽象代数笔记',
+            id: 'haskell',
             admin: 'wujilingfeng'
         })
  
