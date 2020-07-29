@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});">
 <meta property="article:published_time" content="2020-07-15T00:37:24.000Z">
-<meta property="article:modified_time" content="2020-07-15T00:57:22.692Z">
+<meta property="article:modified_time" content="2020-07-29T12:10:28.492Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
@@ -106,6 +106,10 @@
 
 <a id="more"></a>
 
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cabal run :mesh</span><br><span class="line">cabal configure</span><br><span class="line">cabal build</span><br><span class="line">cabal install</span><br></pre></td></tr></table></figure>
+
+
+
 <figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">diff</span> :: (<span class="type">Float</span>-&gt;<span class="type">Float</span>)-&gt;(<span class="type">Float</span>-&gt;<span class="type">Float</span>)</span><br><span class="line"><span class="title">diff</span> f=f'</span><br><span class="line">	<span class="keyword">where</span> f' x=(f (f+h)- f x)/h</span><br><span class="line">		h=<span class="number">0.0001</span></span><br></pre></td></tr></table></figure>
 
 <p><a href="http://www.voidcn.com/article/p-zoszxlmy-bsw.html" target="_blank" rel="noopener">寻找不同模块的文件</a></p>
@@ -113,6 +117,52 @@
 
 <p><a href="https://cabal.readthedocs.io/en/stable/developing-packages.html" target="_blank" rel="noopener">cabal资料</a></p>
 <p><a href="http://cnhaskell.com/chp/7.html" target="_blank" rel="noopener">haskell资料</a></p>
+<p>如果等式的左右两端含有相同算子，那么haskell会采用纽结的技巧进行链接:</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">data</span> <span class="type">DList</span> a = <span class="type">DLNode</span> (<span class="type">DList</span> <span class="title">a</span>) a (<span class="type">DList</span> <span class="title">a</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="title">mkDList</span> :: [a] -&gt; <span class="type">DList</span> a</span><br><span class="line"></span><br><span class="line"><span class="title">mkDList</span> [] = error <span class="string">"must have at least one element"</span></span><br><span class="line"><span class="title">mkDList</span> xs = <span class="keyword">let</span> (first,last) = go last xs first</span><br><span class="line">             <span class="keyword">in</span>  first</span><br><span class="line"></span><br><span class="line">  <span class="keyword">where</span> go :: <span class="type">DList</span> a -&gt; [a] -&gt; <span class="type">DList</span> a -&gt; (<span class="type">DList</span> a, <span class="type">DList</span> a)</span><br><span class="line">        go prev []     next = (next,prev)</span><br><span class="line">        go prev (x:xs) next = <span class="keyword">let</span> this        = <span class="type">DLNode</span> prev x rest</span><br><span class="line">                                  (rest,last) = go this xs next</span><br><span class="line">                              <span class="keyword">in</span>  (this,last)</span><br><span class="line"></span><br><span class="line"><span class="title">takeF</span> :: <span class="type">Integer</span> -&gt; <span class="type">DList</span> a -&gt; [a]</span><br><span class="line"><span class="title">takeF</span> <span class="number">0</span>     _                 = []</span><br><span class="line"><span class="title">takeF</span> n (<span class="type">DLNode</span> _ x next)     = x : (takeF (n<span class="number">-1</span>) next)</span><br><span class="line"></span><br><span class="line"><span class="title">takeR</span> :: <span class="type">Show</span> a =&gt; <span class="type">Integer</span> -&gt; <span class="type">DList</span> a -&gt; [a]</span><br><span class="line"><span class="title">takeR</span> <span class="number">0</span>     _                 = []</span><br><span class="line"><span class="title">takeR</span> n (<span class="type">DLNode</span> prev x _)     = x : (takeR (n<span class="number">-1</span>) prev)</span><br></pre></td></tr></table></figure>
+
+<p>这些例子可以<a href="https://wiki.haskell.org/Tying_the_Knot#Migrated_from_the_old_wiki" target="_blank" rel="noopener">参考</a></p>
+<h4 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h4><p><a href="https://www.cnblogs.com/livewithnorest/archive/2012/08/02/2620718.html" target="_blank" rel="noopener">这里</a></p>
+<h4 id="ghc-flags"><a href="#ghc-flags" class="headerlink" title="ghc flags"></a>ghc flags</h4><p><a href="https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/flags.html" target="_blank" rel="noopener">这里</a></p>
+<table>
+<thead>
+<tr>
+<th>flags</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
 
       
     </div><!-- .entry-content -->
