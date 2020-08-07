@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});">
 <meta property="article:published_time" content="2020-07-15T00:37:24.000Z">
-<meta property="article:modified_time" content="2020-07-30T04:57:22.066Z">
+<meta property="article:modified_time" content="2020-08-02T08:14:44.900Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
@@ -190,9 +190,60 @@
 <td></td>
 </tr>
 </tbody></table>
-<h5 id="记录语法"><a href="#记录语法" class="headerlink" title="记录语法"></a>记录语法</h5><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">data</span> <span class="type">Person</span> = <span class="type">Person</span> &#123; <span class="title">firstName</span> :: <span class="type">String</span>  </span></span><br><span class="line"><span class="class">                     , <span class="title">lastName</span> :: <span class="type">String</span>  </span></span><br><span class="line"><span class="class">                     , <span class="title">age</span> :: <span class="type">Int</span>  </span></span><br><span class="line"><span class="class">                     , <span class="title">height</span> :: <span class="type">Float</span>  </span></span><br><span class="line"><span class="class">                     , <span class="title">phoneNumber</span> :: <span class="type">String</span>  </span></span><br><span class="line"><span class="class">                     , <span class="title">flavor</span> :: <span class="type">String</span>  </span></span><br><span class="line"><span class="class">                     &#125; <span class="keyword">deriving</span> (<span class="type">Show</span>)</span></span><br><span class="line"><span class="comment">--注意firsName等都是首字母小写，否则会出错</span></span><br></pre></td></tr></table></figure>
+<h5 id="记录语法"><a href="#记录语法" class="headerlink" title="记录语法"></a>记录语法</h5><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">data</span> <span class="type">Person</span> = <span class="type">Person</span> &#123; <span class="title">firstName</span> :: <span class="type">String</span>  </span></span><br><span class="line"><span class="class">                     , <span class="title">lastName</span> :: <span class="type">String</span>  </span></span><br><span class="line"><span class="class">                     , <span class="title">age</span> :: <span class="type">Int</span>  </span></span><br><span class="line"><span class="class">                     , <span class="title">height</span> :: <span class="type">Float</span>  </span></span><br><span class="line"><span class="class">                     , <span class="title">phoneNumber</span> :: <span class="type">String</span>  </span></span><br><span class="line"><span class="class">                     , <span class="title">flavor</span> :: <span class="type">String</span>  </span></span><br><span class="line"><span class="class">                     &#125; | <span class="type">Noper</span> </span></span><br><span class="line">                     <span class="keyword">deriving</span> (<span class="type">Show</span>)</span><br><span class="line"><span class="comment">--注意firsName等都是首字母小写，否则会出错</span></span><br></pre></td></tr></table></figure>
 
-<p>记录语法的详细[解释](</p>
+<p><a href="https://www.cnblogs.com/zwvista/p/7679450.html" target="_blank" rel="noopener">Data.Map</a></p>
+<table>
+<thead>
+<tr>
+<th>常用Map算子</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>member Map a b</td>
+<td></td>
+</tr>
+<tr>
+<td>size Map a b</td>
+<td></td>
+</tr>
+<tr>
+<td>!</td>
+<td></td>
+</tr>
+<tr>
+<td>lookup</td>
+<td></td>
+</tr>
+<tr>
+<td>delete k Map k b</td>
+<td></td>
+</tr>
+<tr>
+<td>insert k v Map k v</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><a href="http://learnyouahaskell.com/input-and-output" target="_blank" rel="noopener">IO</a></p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">main</span> = <span class="keyword">do</span>   </span><br><span class="line">   <span class="keyword">let</span> var = <span class="number">26</span> </span><br><span class="line"></span><br><span class="line">   <span class="keyword">if</span> var == <span class="number">0</span> </span><br><span class="line">      <span class="keyword">then</span> putStrLn <span class="string">"hei"</span> </span><br><span class="line">   <span class="keyword">else</span> <span class="keyword">if</span> var `rem` <span class="number">2</span> == <span class="number">0</span> </span><br><span class="line">      <span class="keyword">then</span> putStrLn <span class="string">"Number is Even"</span> </span><br><span class="line">   <span class="keyword">else</span> putStrLn <span class="string">"Number is Odd"</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">main</span> = <span class="keyword">do</span>   </span><br><span class="line">    line &lt;- getLine  </span><br><span class="line">    <span class="keyword">if</span> null line  </span><br><span class="line">        <span class="keyword">then</span> return ()  </span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">do</span>  </span><br><span class="line">            putStrLn $ reverseWords line  </span><br><span class="line">            main  </span><br><span class="line">  </span><br><span class="line"><span class="title">reverseWords</span> :: <span class="type">String</span> -&gt; <span class="type">String</span>  </span><br><span class="line"><span class="title">reverseWords</span> = unwords . map reverse . words</span><br></pre></td></tr></table></figure>
+
+<h4 id="其他一些"><a href="#其他一些" class="headerlink" title="其他一些"></a>其他一些</h4><p>.和$都是算子，.的算子运算级为9最高，$的运算级为0最低。两个算子都是中缀。</p>
+<p> ($) :: (a -&gt; b) -&gt; a -&gt; b </p>
+<p>(.) :: (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c</p>
+<p>从效果上看，$用来加括号，.用来分块链接算子，</p>
+<p>比如<code>unwords . map reverse .words</code>等价<code>unwords.(map reverse).words</code></p>
+<p>这是如果这样调用函数<code>unwords . map reverse .words a</code>是错误的，因为它等价与</p>
+<p>``unwords . (map reverse) .(words a)<code>,正确的调用应该是</code>(unwords . map reverse .words) a`</p>
+<p>函数运算级<a href="https://www.jianshu.com/p/10f0f509f2ea" target="_blank" rel="noopener">这里</a>,<a href="https://www.zhihu.com/question/353542558" target="_blank" rel="noopener">这里</a></p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">a</span>=<span class="string">"dsfd 798"</span></span><br><span class="line"><span class="title">filter</span> (\te-&gt;(te&gt;='<span class="number">0</span>')&amp;&amp;(te&lt;='<span class="number">9</span>')) a</span><br></pre></td></tr></table></figure>
+
 
       
     </div><!-- .entry-content -->
