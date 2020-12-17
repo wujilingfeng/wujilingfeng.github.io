@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});">
 <meta property="article:published_time" content="2020-07-15T00:37:24.000Z">
-<meta property="article:modified_time" content="2020-09-01T05:03:24.463Z">
+<meta property="article:modified_time" content="2020-11-23T08:20:21.167Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
@@ -64,6 +64,8 @@
                     <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
                 
                     <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://github.com/wujilingfeng/" target="_blank" rel="noopener">Github</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="https://gitee.com/" target="_blank" rel="noopener">Gitee</a></li>
                 
                 </ul>
             </div>
@@ -120,7 +122,7 @@
 <p>如果等式的左右两端含有相同算子，那么haskell会采用纽结的技巧进行链接:</p>
 <figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">data</span> <span class="type">DList</span> a = <span class="type">DLNode</span> (<span class="type">DList</span> <span class="title">a</span>) a (<span class="type">DList</span> <span class="title">a</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="title">mkDList</span> :: [a] -&gt; <span class="type">DList</span> a</span><br><span class="line"></span><br><span class="line"><span class="title">mkDList</span> [] = error <span class="string">"must have at least one element"</span></span><br><span class="line"><span class="title">mkDList</span> xs = <span class="keyword">let</span> (first,last) = go last xs first</span><br><span class="line">             <span class="keyword">in</span>  first</span><br><span class="line"></span><br><span class="line">  <span class="keyword">where</span> go :: <span class="type">DList</span> a -&gt; [a] -&gt; <span class="type">DList</span> a -&gt; (<span class="type">DList</span> a, <span class="type">DList</span> a)</span><br><span class="line">        go prev []     next = (next,prev)</span><br><span class="line">        go prev (x:xs) next = <span class="keyword">let</span> this        = <span class="type">DLNode</span> prev x rest</span><br><span class="line">                                  (rest,last) = go this xs next</span><br><span class="line">                              <span class="keyword">in</span>  (this,last)</span><br><span class="line"></span><br><span class="line"><span class="title">takeF</span> :: <span class="type">Integer</span> -&gt; <span class="type">DList</span> a -&gt; [a]</span><br><span class="line"><span class="title">takeF</span> <span class="number">0</span>     _                 = []</span><br><span class="line"><span class="title">takeF</span> n (<span class="type">DLNode</span> _ x next)     = x : (takeF (n<span class="number">-1</span>) next)</span><br><span class="line"></span><br><span class="line"><span class="title">takeR</span> :: <span class="type">Show</span> a =&gt; <span class="type">Integer</span> -&gt; <span class="type">DList</span> a -&gt; [a]</span><br><span class="line"><span class="title">takeR</span> <span class="number">0</span>     _                 = []</span><br><span class="line"><span class="title">takeR</span> n (<span class="type">DLNode</span> prev x _)     = x : (takeR (n<span class="number">-1</span>) prev)</span><br></pre></td></tr></table></figure>
 
-<p>这些例子可以<a href="https://wiki.haskell.org/Tying_the_Knot#Migrated_from_the_old_wiki" target="_blank" rel="noopener">参考</a></p>
+<p>这些例子可以<a href="https://wiki.haskell.org/Tying_the_Knot#Migrated_from_the_old_wiki" target="_blank" rel="noopener">参考</a>, </p>
 <h4 id="IO"><a href="#IO" class="headerlink" title="IO"></a>IO</h4><p><a href="https://www.cnblogs.com/livewithnorest/archive/2012/08/02/2620718.html" target="_blank" rel="noopener">这里</a></p>
 <h4 id="ghc-flags"><a href="#ghc-flags" class="headerlink" title="ghc flags"></a>ghc flags</h4><p><a href="https://downloads.haskell.org/~ghc/latest/docs/html/users_guide/flags.html" target="_blank" rel="noopener">这里</a></p>
 <table>
@@ -237,6 +239,46 @@
 <p><code>getArgs</code> <code>getProgName</code></p>
 <p>putStr :: String -&gt; IO ()</p>
 <p>putStrLn :: String -&gt; IO ()</p>
+<h4 id="String-操作"><a href="#String-操作" class="headerlink" title="String 操作"></a>String 操作</h4><table>
+<thead>
+<tr>
+<th>算子</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>words::String-&gt; [String]</td>
+<td>以空格和换行符\n分割字符串</td>
+</tr>
+<tr>
+<td>lines:: String-&gt; [String]</td>
+<td>以换行符分割字符串</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
 <h4 id="其他一些"><a href="#其他一些" class="headerlink" title="其他一些"></a>其他一些</h4><p>.和$都是算子，.的算子运算级为9最高，$的运算级为0最低。两个算子都是中缀。</p>
 <p> ($) :: (a -&gt; b) -&gt; a -&gt; b </p>
 <p>(.) :: (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c</p>
@@ -246,6 +288,11 @@
 <p>``unwords . (map reverse) .(words a)<code>,正确的调用应该是</code>(unwords . map reverse .words) a`</p>
 <p>函数运算级<a href="https://www.jianshu.com/p/10f0f509f2ea" target="_blank" rel="noopener">这里</a>,<a href="https://www.zhihu.com/question/353542558" target="_blank" rel="noopener">这里</a></p>
 <figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">a</span>=<span class="string">"dsfd 798"</span></span><br><span class="line"><span class="title">filter</span> (\te-&gt;(te&gt;='<span class="number">0</span>')&amp;&amp;(te&lt;='<span class="number">9</span>')) a</span><br></pre></td></tr></table></figure>
+
+<p>有理数值</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:m <span class="type">Data</span>.<span class="type">Ratio</span></span><br><span class="line"><span class="number">12</span> % <span class="number">4</span></span><br></pre></td></tr></table></figure>
+
+
 
 <h4 id="Haskell-引用"><a href="#Haskell-引用" class="headerlink" title="Haskell 引用"></a>Haskell 引用</h4><p><a href="http://hackage.haskell.org/package/base-4.14.0.0/docs/Foreign-StablePtr.html" target="_blank" rel="noopener">这里</a></p>
 <h4 id="FFI"><a href="#FFI" class="headerlink" title="FFI"></a>FFI</h4><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">new</span> :: <span class="type">Storable</span> a =&gt; a-&gt;<span class="type">IO</span> (<span class="type">Ptr</span> a)</span><br><span class="line"><span class="comment">---用后记得free掉，如果不用的话</span></span><br><span class="line"><span class="title">free</span> :: <span class="type">Ptr</span> a -&gt; <span class="type">IO</span> ()</span><br><span class="line"><span class="title">newArray</span> :: <span class="type">Storable</span> a=&gt; [a] -&gt; <span class="type">IO</span> (<span class="type">Ptr</span> a)</span><br><span class="line"><span class="title">peekArray</span>:: <span class="type">Storable</span> a=&gt; <span class="type">Int</span> -&gt; <span class="type">Ptr</span> a-&gt; <span class="type">IO</span> [a]</span><br><span class="line"><span class="title">pokeArray</span>:: <span class="type">Storable</span> a=&gt; <span class="type">Ptr</span> a-&gt;[a]-&gt;<span class="type">IO</span> ()</span><br><span class="line"><span class="title">with</span> :: <span class="type">Storable</span> a=&gt; a -&gt;(<span class="type">Ptr</span> a-&gt; <span class="type">IO</span> b)-&gt;<span class="type">IO</span> b</span><br><span class="line"><span class="title">withArray</span> ::</span><br><span class="line"><span class="title">castPtr</span> :: <span class="type">Ptr</span> a-&gt;<span class="type">Ptr</span> b</span><br></pre></td></tr></table></figure>
@@ -289,6 +336,42 @@
 <td>高维网格库</td>
 </tr>
 <tr>
+<td>HDBC</td>
+<td>数据库</td>
+</tr>
+<tr>
+<td>hip</td>
+<td>图像处理库</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
 <td></td>
 <td></td>
 </tr>
@@ -297,7 +380,7 @@
 
 <p>上面共声明了这几种类型<code>Node a</code> <code>Node Int</code>…..<code>Node String</code>…</p>
 <p>其中NULL属于<code>Node a</code> <code>Node Int</code> …所有类型，</p>
-<p>haskell的类型系统非常”工程”。</p>
+<p>haskell的类型系统非常”工程”。<a href="zhels">^le</a></p>
 <p><a href="https://stackoverflow.com/questions/60650929/cabal-cannot-find-locally-sourced-yet-correctly-installed-packages" target="_blank" rel="noopener">haskell配置问题</a></p>
 
       
