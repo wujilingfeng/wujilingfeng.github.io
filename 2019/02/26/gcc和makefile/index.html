@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});    本文记录gcc和makefile">
 <meta property="article:published_time" content="2019-02-26T11:50:53.000Z">
-<meta property="article:modified_time" content="2020-12-16T02:36:45.759Z">
+<meta property="article:modified_time" content="2020-12-23T08:04:35.465Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="计算机">
 <meta name="twitter:card" content="summary">
@@ -203,7 +203,7 @@
 </tr>
 </tbody></table>
 <p>第一个（伪）目标总是默认目标，总是被执行。而且每个makefile只有一个总目标，如果你实质上要生成多个目标，你需要先用个总目标，否则它默认取一个目标，从而达不到你要的结果。</p>
-<h4 id="一个简易的IDE"><a href="#一个简易的IDE" class="headerlink" title="一个简易的IDE"></a>一个简易的IDE</h4><p><a href="./test.sh">脚本</a>文件和<a href="./README">README.md</a></p>
+<h4 id="一个简易的IDE"><a href="#一个简易的IDE" class="headerlink" title="一个简易的IDE"></a>一个简易的IDE</h4><p><a href="./test1.sh">脚本</a>文件和<a href="./README">README.md</a></p>
 <p>配合vim，按<F5>执行。vim的<a href="../../../01/31/vim使用和配置/index.html">配置</a></p>
 <h4 id="CMake"><a href="#CMake" class="headerlink" title="CMake"></a>CMake</h4><p>不同的编译工具(eg.nmake GNU make..)，有不同的语法，他们的工作方式都是读取一个文本文件(makefile)。正因为不同的编译工具是应用不同的语法，我们在不同的平台上就要写不同的makefile.cmake的工作就是自动查找当前平台下的编译工具，生成对应的文本文件(makefile)。</p>
 <p>cmake权限不够</p>
@@ -460,20 +460,20 @@
 </tr>
 </thead>
 <tbody><tr>
-<td>Glob(str)</td>
+<td>Glob(pattern=””,strings=””)</td>
 <td>str是代表路径的字符串,返回的是某种参数变量</td>
 </tr>
 <tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
+<td>Install(target=”/usr/“,source=[“foo”])</td>
 <td></td>
 </tr>
 <tr>
-<td></td>
-<td></td>
+<td>MSVSProject(target=””,srcs=””,incs=””,buildtarget=exe,variant-“Release”)</td>
+<td>创建项目</td>
+</tr>
+<tr>
+<td>MSVSSolution</td>
+<td>创建解决方案</td>
 </tr>
 <tr>
 <td></td>
@@ -498,6 +498,8 @@
 </tbody></table>
 <p>python如何查找子目录和文件</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">file_name</span><span class="params">(file_dir)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(file_dir):</span><br><span class="line">        print(<span class="string">'root_dir:'</span>, root)  <span class="comment"># 当前目录路径</span></span><br><span class="line">        print(<span class="string">'sub_dirs:'</span>, dirs)  <span class="comment"># 当前路径下所有子目录</span></span><br><span class="line">        print(<span class="string">'files:'</span>, files)  <span class="comment"># 当前路径下所有非目录子文件</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">env=Environment(tools=[<span class="string">"msvc"</span>,<span class="string">"mslink"</span>,<span class="string">"mslib"</span>,<span class="string">"mingw"</span>],toolpath=[<span class="string">"c://"</span>],platform=<span class="string">'win32'</span>)</span><br><span class="line">env.Program(target=<span class="string">"main"</span>,source=[<span class="string">"main.cpp"</span>],LIBS=[<span class="string">"glfw"</span>],LIBPATH=<span class="string">"."</span>)</span><br><span class="line">env.Install(<span class="string">"usr/bin"</span>,hello)</span><br><span class="line">source=<span class="string">"mysouce.c"</span></span><br><span class="line">Export(<span class="string">"env"</span>,<span class="string">"source"</span>)<span class="comment">#共享变量</span></span><br><span class="line">env.Program(target=<span class="string">"main"</span>,source=<span class="string">"./"</span>,CPPPATH=<span class="string">""</span>,LIBPATH=<span class="string">""</span>,LIBS=<span class="string">""</span>,CCFLAGS=<span class="string">""</span>)</span><br><span class="line">env[<span class="string">"MSVS_VERSION"</span>]=</span><br></pre></td></tr></table></figure>
 
 
       
