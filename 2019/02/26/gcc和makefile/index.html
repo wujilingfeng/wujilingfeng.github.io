@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});    本文记录gcc和makefile">
 <meta property="article:published_time" content="2019-02-26T11:50:53.000Z">
-<meta property="article:modified_time" content="2020-12-23T08:04:35.465Z">
+<meta property="article:modified_time" content="2021-01-05T10:04:28.617Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="计算机">
 <meta name="twitter:card" content="summary">
@@ -501,6 +501,9 @@
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">env=Environment(tools=[<span class="string">"msvc"</span>,<span class="string">"mslink"</span>,<span class="string">"mslib"</span>,<span class="string">"mingw"</span>],toolpath=[<span class="string">"c://"</span>],platform=<span class="string">'win32'</span>)</span><br><span class="line">env.Program(target=<span class="string">"main"</span>,source=[<span class="string">"main.cpp"</span>],LIBS=[<span class="string">"glfw"</span>],LIBPATH=<span class="string">"."</span>)</span><br><span class="line">env.Install(<span class="string">"usr/bin"</span>,hello)</span><br><span class="line">source=<span class="string">"mysouce.c"</span></span><br><span class="line">Export(<span class="string">"env"</span>,<span class="string">"source"</span>)<span class="comment">#共享变量</span></span><br><span class="line">env.Program(target=<span class="string">"main"</span>,source=<span class="string">"./"</span>,CPPPATH=<span class="string">""</span>,LIBPATH=<span class="string">""</span>,LIBS=<span class="string">""</span>,CCFLAGS=<span class="string">""</span>)</span><br><span class="line">env[<span class="string">"MSVS_VERSION"</span>]=</span><br></pre></td></tr></table></figure>
 
+<p>以下代码可以获得SConscript文件路径</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">filepath1 = (<span class="keyword">lambda</span> x:x).__code__.co_filename</span><br><span class="line">filepath=os.path.realpath(filepath1)</span><br><span class="line">prjpath=os.path.split(filepath)[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
 
       
     </div><!-- .entry-content -->
@@ -647,7 +650,7 @@
 </div>
       </div>
       <footer id="colophon" role="contentinfo">
-    <p>&copy; 2020 李博
+    <p>&copy; 2021 李博
     All rights reserved.</p>
     <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
 </footer>
