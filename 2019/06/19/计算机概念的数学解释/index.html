@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});">
 <meta property="article:published_time" content="2019-06-19T00:35:30.000Z">
-<meta property="article:modified_time" content="2021-01-04T09:57:24.653Z">
+<meta property="article:modified_time" content="2021-01-14T05:07:13.349Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
@@ -165,14 +165,16 @@ r_1&0&0&..\\\\
 <li>$r\left(A^T A\right)=r\left(AA^T\right)$,$A^T Ax=0$和$Ax=0$的解空间相同</li>
 <li>$A^TA$和$AA^T$有相同的特征值</li>
 <li>$A^TA$和$AA^T$的特征值必为正数</li>
-<li>对称矩阵的每个特征值的index=1,$r\left(\left(A-\lambda I\right)\right)^2)=r\left(A-\lambda I\right)-dim\left(N\left(A-\lambda I\right)\bigcap R\left(A-\lambda I\right)\right)$</li>
-<li></li>
+<li>对称矩阵的每个特征值的index=1,$r\left(\left(A-\lambda I\right)\right)^2)=r\left(A-\lambda I\right)-dim\left(N\left(A-\lambda I\right)\bigcap R\left(A-\lambda I\right)\right)$,可以用反正法得到对称矩阵的核和像的交为空，故此命题成立。推导出对称矩阵可对角化</li>
 </ul>
 <h4 id="奇异值分解-也应理解为奇异值算子"><a href="#奇异值分解-也应理解为奇异值算子" class="headerlink" title="奇异值分解(也应理解为奇异值算子)"></a>奇异值分解(也应理解为奇异值算子)</h4><p>对任意矩阵$A\in m\times n$,有$A=U\Sigma V^T$,其中的$U \Sigma V$由以下算子计算。</p>
-<p>其中$V\Delta V^T=A^T A$,V是酉矩阵，$\Delta$是$A^TA$的由大到小排列的对角阵。记算子$\lambda_V$是求$A^T A$的正交特征向量。那么$V=\lambda\left(A\right)$,记$U=AV$。</p>
-<p>那么存在$m\times n$的对角矩阵$\Sigma$满足$\Sigma \Sigma^T=\Delta$。則求得上述矩阵$\Sigma$。</p>
+<p>其中$V\Delta V^T=A^T A$,V是酉矩阵，$\Delta$是$A^TA$的由大到小排列的对角阵。记算子$\lambda_V$是求$A^T A$的正交特征向量。那么$V=\lambda_V\left(A\right)$,记$U=AV\overline{\Sigma}$。</p>
+<p>那么存在$m\times n$的对角矩阵$\Sigma$满足$\Sigma^T \Sigma=\Delta$。則求得上述矩阵$\Sigma$。</p>
 <p>那么$U=AV\Sigma$。</p>
-<h4 id="PCA（主成分分析）"><a href="#PCA（主成分分析）" class="headerlink" title="PCA（主成分分析）"></a>PCA（主成分分析）</h4><p>pca类似流形参数化，但绝对不是参数化，他只是去除那些几乎不变的变量</p>
+<p>可以分析得到$\Sigma$的秩（非零对角元素）小于等于min(m,n),不能保证等号成立(这应该是显然的)。</p>
+<p>就等式来看U除非A慢秩否则并不唯一。</p>
+<h4 id="PCA（主成分分析）"><a href="#PCA（主成分分析）" class="headerlink" title="PCA（主成分分析）"></a>PCA（主成分分析）</h4><p>在<a href="https://wujilingfeng.top/2019/07/03/%E7%8E%8B%E5%87%A4%E9%9B%A8%E6%B5%8B%E5%BA%A6%E8%AE%BA%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/" target="_blank" rel="noopener">王风雨测度论笔记</a>中有关于协方差的定义，现在讨论如下的协方差问题:</p>
+<p>pca类似流形参数化，但绝对不是参数化，他只是去除那些几乎不变的变量</p>
 <h4 id="离散量到连续量的转化"><a href="#离散量到连续量的转化" class="headerlink" title="离散量到连续量的转化"></a>离散量到连续量的转化</h4><p>工程领域不但连续量到离散量的转化非常重要，离散到连续的转化技巧也相当重要。</p>
 <p>比如对于一张像素图，如何放大缩小而不会影响图片质量(放大无限大，不会出现锯齿)，离散到连续量的变化至关重要</p>
 <blockquote id="fn_2">
