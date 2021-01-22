@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});    本文记录gcc和makefile">
 <meta property="article:published_time" content="2019-02-26T11:50:53.000Z">
-<meta property="article:modified_time" content="2021-01-05T10:04:28.617Z">
+<meta property="article:modified_time" content="2021-01-22T02:44:09.779Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="计算机">
 <meta name="twitter:card" content="summary">
@@ -382,7 +382,7 @@
 <p>可以使用target_link_libraries(main -Wl,–start-group viewer_matrix4x4 viewer_openglalg   -Wl,–end-group)(gcc也有相应的命令)</p>
 <h4 id="CMAKE"><a href="#CMAKE" class="headerlink" title="CMAKE"></a>CMAKE</h4><p><a href="./vimtxt">vim的配置</a></p>
 <p><a href="./test1.sh">脚本</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmake -G&quot;MinGW Makfiles&quot; ..</span><br><span class="line">cmake -G &quot;Visual Studio 16 2019&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cmake -G&quot;MinGW Makefiles&quot; ..</span><br><span class="line">mingw32-make</span><br><span class="line">cmake -G &quot;Visual Studio 16 2019&quot;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -451,11 +451,55 @@
 <p>ambrosetti-rabinowitz山路定理</p>
 <p>Schrodinger方程组</p>
 <p>dirac方程</p>
-<h4 id="scons"><a href="#scons" class="headerlink" title="scons"></a>scons</h4><p>scons可以代替cmake跨平台，它基于python脚本并和python略有差异</p>
+<h4 id="scons"><a href="#scons" class="headerlink" title="scons"></a>scons</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>scons</td>
+<td>执行本地SConscript</td>
+</tr>
+<tr>
+<td>scons -f ./src/SConscript</td>
+<td>执行某个SConscript文件</td>
+</tr>
+<tr>
+<td>scons -c</td>
+<td>清除文件</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>scons可以代替cmake跨平台，它基于python脚本并和python略有差异</p>
 <table>
 <thead>
 <tr>
-<th>用法</th>
+<th>语法</th>
 <th>意义</th>
 </tr>
 </thead>
