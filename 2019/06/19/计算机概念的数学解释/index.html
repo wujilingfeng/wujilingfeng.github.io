@@ -22,7 +22,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});">
 <meta property="article:published_time" content="2019-06-19T00:35:30.000Z">
-<meta property="article:modified_time" content="2021-01-14T05:07:13.349Z">
+<meta property="article:modified_time" content="2021-02-14T09:25:54.043Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
@@ -107,39 +107,28 @@
 
 
 <a id="more"></a>
+
 <h4 id="共轭梯度法"><a href="#共轭梯度法" class="headerlink" title="共轭梯度法"></a>共轭梯度法</h4><p>共轭梯度法是正定矩阵的对角化。</p>
 <h4 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a>卷积</h4><p>卷积是二维矩阵（图片）的线性变换，或者测度的变换。</p>
-<p>具体是将二维图片展成一维向量，然后卷积核同理，那么卷积相当于向量乘以矩阵 <sup><a href="#fn_1" id="reffn_1">1</a></sup><br>不难看出多维卷积的等价性。</p>
-<blockquote id="fn_1">
-<sup>1</sup>. 既然卷积就是向量乘以矩阵，为什么还要造这么多概念?<a href="#reffn_1" title="Jump back to footnote [1] in the text."> &#8617;</a>
-</blockquote>
-<h4 id="线性规划"><a href="#线性规划" class="headerlink" title="线性规划"></a>线性规划</h4><p>对于连续可微多元函数$f\left(x<em>1..x_r,y_1…y_k\right)$，考察$\mathop{min}\limits</em>{x}\mathop{max}\limits_{y}f$</p>
-<h4 id="命题-1"><a href="#命题-1" class="headerlink" title="命题 1"></a>命题 1</h4><p>若$g\left(x\right)=\mathop{max}\limits<em>{y}f$关于x连续可微，且$f</em>{xy}=0$,则$\mathop{min}\limits<em>{x}\mathop{max}\limits</em>{y}f$的结果p为内点 ，那么这个必定是马鞍点<br> <em>proof </em><br> 固定x，考察$\mathop{max}\limits<em>{y}f$,由条件知，y满足$f\left(y_i\right)=0$,且$\frac{\partial f}{\partial y_i y_j}$是负定，<br> 对于$g\left(x\right)=\mathop{max}\limits</em>{y}f$，他是由方程$f\left(y<em>i\right)=0$确定的隐函数，那么对于$\mathop{min}g$,他满足$g</em>{x<em>i}=0$,且$\frac{\partial g}{\partial x_i x_j}$正定，<br> 上式化简得到$f</em>{x_i}=0$，$\frac{\partial f}{\partial x_i x_j}$正定，<br> 所以在p点的heissen矩阵是</p>
-<script type="math/tex; mode=display">
-\left(\begin{matrix}
- \frac{\partial f}{\partial x_i x_j}&0\\\\
- 0&\frac{\partial f}{\partial y_i y_j}
- \end{matrix}\right)</script><p>这是一个负定阵</p>
+<p>具体是将二维图片展成一维向量，然后卷积核同理，那么卷积相当于向量乘以矩阵 <a href="既然卷积就是向量乘以矩阵，为什么还要造这么多概念?">^1</a><br>不难看出多维卷积的等价性。</p>
+<h4 id="线性规划"><a href="#线性规划" class="headerlink" title="线性规划"></a>线性规划</h4><p>对于连续可微多元函数$f\left(x_1..x_r,y_1…y_k\right)$，考察$\mathop{min}\limits_{x}\mathop{max}\limits_{y}f$</p>
+<h4 id="命题-1"><a href="#命题-1" class="headerlink" title="命题 1"></a>命题 1</h4><p>若$g\left(x\right)=\mathop{max}\limits_{y}f$关于x连续可微，且$f_{xy}=0$,则$\mathop{min}\limits_{x}\mathop{max}\limits_{y}f$的结果p为内点 ，那么这个必定是马鞍点<br> *proof *<br> 固定x，考察$\mathop{max}\limits_{y}f$,由条件知，y满足$f\left(y_i\right)=0$,且$\frac{\partial f}{\partial y_i y_j}$是负定，<br> 对于$g\left(x\right)=\mathop{max}\limits_{y}f$，他是由方程$f\left(y_i\right)=0$确定的隐函数，那么对于$\mathop{min}g$,他满足$g_{x_i}=0$,且$\frac{\partial g}{\partial x_i x_j}$正定，<br> 上式化简得到$f_{x_i}=0$，$\frac{\partial f}{\partial x_i x_j}$正定，<br> 所以在p点的heissen矩阵是<br>$$<br>\left(\begin{matrix}<br> \frac{\partial f}{\partial x_i x_j}&amp;0\\<br> 0&amp;\frac{\partial f}{\partial y_i y_j}<br> \end{matrix}\right)<br>$$<br>这是一个负定阵</p>
 <h4 id="命题2"><a href="#命题2" class="headerlink" title="命题2"></a>命题2</h4><p>上述问题的一个马鞍点存在一个邻域内，在该邻域马鞍点必是问题的解</p>
-<h4 id="lemma1"><a href="#lemma1" class="headerlink" title="lemma1"></a>lemma1</h4><p>酉矩阵(幺正矩阵)的特征向量模长一定是1（包括虚根）<sup><a href="#fn_2" id="reffn_2">2</a></sup>，属于实特征值和非共轭特征值的特征向量正交</p>
+<h4 id="lemma1"><a href="#lemma1" class="headerlink" title="lemma1"></a>lemma1</h4><p>酉矩阵(幺正矩阵)的特征向量模长一定是1（包括虚根）<a href="转置矩阵的特征向量不一定相等，特征值一定相等。逆矩阵的特征向量不变，特征值是$\frac{1}{\lambda}$">^2</a>，属于实特征值和非共轭特征值的特征向量正交</p>
 <p><em>proof:</em> $Ax=\lambda x,\overline{Ax}=\overline{\lambda x},\left(\overline{Ax},Ax\right)=\lambda^2\left(x,\overline{x}\right)$，$\overline{A^T}A=I$,代入上式左侧</p>
 <p>得证结论1</p>
 <p>$Ax=\lambda_x x,Ay=\lambda_y y$,那么$\overline{y^T}Ax=\lambda_x\left(x,y\right)$,$\overline{x^T}A^{-1}y=\overline{\lambda_x}\left(y,x\right)=\frac{1}{\lambda_y}\left(y,x\right)$</p>
 <p>结论2得证</p>
-<h4 id="命题"><a href="#命题" class="headerlink" title="命题"></a>命题</h4><p>二维旋转矩阵可交换<sup><a href="#fn_3" id="reffn_3">3</a></sup></p>
+<h4 id="命题"><a href="#命题" class="headerlink" title="命题"></a>命题</h4><p>二维旋转矩阵可交换<a href="可以验证与Jordan矩阵块可交换的矩阵必是上三角矩阵">^3</a></p>
 <p><em>proof:</em> 用复数代数可以验证</p>
 <p>但是更进一步，可交换矩阵的充要条件是啥？n维矩阵的换位子群是什么？</p>
 <p><a href="https://ccjou.wordpress.com/2013/04/23/交換子與可交換矩陣/" target="_blank" rel="noopener">https://ccjou.wordpress.com/2013/04/23/%E4%BA%A4%E6%8F%9B%E5%AD%90%E8%88%87%E5%8F%AF%E4%BA%A4%E6%8F%9B%E7%9F%A9%E9%99%A3/</a></p>
 <p><a href="http://www.twinklingstar.cn/2013/534/intro-to-quaternion/" target="_blank" rel="noopener">http://www.twinklingstar.cn/2013/534/intro-to-quaternion/</a></p>
-<h4 id="命题3"><a href="#命题3" class="headerlink" title="命题3"></a>命题3</h4><p>三维正交矩阵，若$|A|=1$,则其是旋转矩阵<sup><a href="#fn_4" id="reffn_4">4</a></sup></p>
+<h4 id="命题3"><a href="#命题3" class="headerlink" title="命题3"></a>命题3</h4><p>三维正交矩阵，若$|A|=1$,则其是旋转矩阵<a href="命题由黄继随修正">^4</a></p>
 <p><em>proof:</em>,因为$|A|=1$,且矩阵是3*3,所以必存在特征值1。由lemma1,其存在一个不变特征向量，剩下两个特征向量组成一个子空间，且和不变特征向量正交，等价于A相似与准对角阵$diag\left(B,0\right)$,其中B是二维矩阵且是正交阵，且$|B|=1$,可以验证他是旋转阵。其实我们有更一般的结论</p>
 <h4 id="命题4"><a href="#命题4" class="headerlink" title="命题4"></a>命题4</h4><p>任何正交矩阵相似与如下矩阵</p>
-<script type="math/tex; mode=display">\left(\begin{matrix}
-r_1&0&0&..\\\\
-0&r_2&0&...\\\\
-0&0&...&..\\\\
-0&0&..&1
-\end{matrix}\right)</script><p>其中$r_i$,形如$\left(\begin{matrix}<br>\pm\cos{\theta}&amp;\pm\sin{\theta}\\<br>\pm\sin{\theta}&amp;\pm\cos{\theta}<br>\end{matrix}\right)$,</p>
+<p>$$\left(\begin{matrix}<br>r_1&amp;0&amp;0&amp;..\\<br>0&amp;r_2&amp;0&amp;…\\<br>0&amp;0&amp;…&amp;..\\<br>0&amp;0&amp;..&amp;1<br>\end{matrix}\right)$$</p>
+<p>其中$r_i$,形如$\left(\begin{matrix}<br>\pm\cos{\theta}&amp;\pm\sin{\theta}\\<br>\pm\sin{\theta}&amp;\pm\cos{\theta}<br>\end{matrix}\right)$,</p>
 <p><em>proof:</em>待证</p>
 <h4 id="命题-5"><a href="#命题-5" class="headerlink" title="命题 5"></a>命题 5</h4><p>欧式空间的等矩变换等价$T=Ax+x_0$,其中A是正交矩阵，$x_0$是某个向量</p>
 <p><em>proof</em>  <a href="http://www.docin.com/p-1746418066.html?docfrom=rrela" target="_blank" rel="noopener">这里</a></p>
@@ -147,11 +136,8 @@ r_1&0&0&..\\\\
 <p><em>proof</em>  固定点不动，相当于旋转矩阵有一个以1为特征值的特征向量。那么由命题4,知道这个矩阵的相似形，它是旋转矩阵得证。</p>
 <h4 id="各种形式的旋转映射"><a href="#各种形式的旋转映射" class="headerlink" title="各种形式的旋转映射"></a>各种形式的旋转映射</h4><p>目前来看旋转映射只在三维空间有定义(二维旋转其实属于3维).</p>
 <p>围绕单位向量$\vec{n}$旋转$\theta$角，用矩阵可以表示为</p>
-<script type="math/tex; mode=display">\left(\begin{matrix}\
-\cos\theta+\left(1-\cos\theta\right)n _x^2&\left(1-\cos\theta\right)n _x n _y-n _z\sin\theta&\left(1-\cos\theta\right)n _xn _z+n _y\sin\theta\\\\
-\left(1-\cos\theta\right)n _y n_x+n _z\sin\theta&\cos\theta+\left(1-\cos\theta\right)n _y^2&\left(1-\cos\theta\right)n _y n _z-n _x\sin \theta\\\\
-\left(1-\cos\theta\right)n _zn _x-n _y \sin\theta&\left(1-\cos\theta\right)n _zn _y+n _x\sin\theta&\cos\theta+\left(1-\cos\theta\right)n _z^2
-\end{matrix}\right)</script><h4 id="Rodrigues旋转矩阵"><a href="#Rodrigues旋转矩阵" class="headerlink" title="Rodrigues旋转矩阵"></a>Rodrigues旋转矩阵</h4><p>$\cos\theta+\sin\theta*n\wedge+nn^T\left(1-\cos\theta\right)$</p>
+<p>$$\left(\begin{matrix}<br>\cos\theta+\left(1-\cos\theta\right)n _x^2&amp;\left(1-\cos\theta\right)n _x n _y-n _z\sin\theta&amp;\left(1-\cos\theta\right)n _xn _z+n _y\sin\theta\\<br>\left(1-\cos\theta\right)n _y n_x+n _z\sin\theta&amp;\cos\theta+\left(1-\cos\theta\right)n _y^2&amp;\left(1-\cos\theta\right)n _y n _z-n _x\sin \theta\\<br>\left(1-\cos\theta\right)n _zn _x-n _y \sin\theta&amp;\left(1-\cos\theta\right)n _zn _y+n _x\sin\theta&amp;\cos\theta+\left(1-\cos\theta\right)n _z^2<br>\end{matrix}\right)<br>$$</p>
+<h4 id="Rodrigues旋转矩阵"><a href="#Rodrigues旋转矩阵" class="headerlink" title="Rodrigues旋转矩阵"></a>Rodrigues旋转矩阵</h4><p>$\cos\theta+\sin\theta*n\wedge+nn^T\left(1-\cos\theta\right)$</p>
 <h4 id="四元数表示旋转"><a href="#四元数表示旋转" class="headerlink" title="四元数表示旋转"></a>四元数表示旋转</h4><p>$q=\cos\frac{\theta}{2}+\sin\theta\left(n _xi+n _y j+n _zk\right) $</p>
 <p>对四元数$r=r _1i+r _2 j+r _3k$的旋转为</p>
 <p>$qrq^-1$</p>
@@ -175,17 +161,9 @@ r_1&0&0&..\\\\
 <p>就等式来看U除非A慢秩否则并不唯一。</p>
 <h4 id="PCA（主成分分析）"><a href="#PCA（主成分分析）" class="headerlink" title="PCA（主成分分析）"></a>PCA（主成分分析）</h4><p>在<a href="https://wujilingfeng.top/2019/07/03/%E7%8E%8B%E5%87%A4%E9%9B%A8%E6%B5%8B%E5%BA%A6%E8%AE%BA%E5%9F%BA%E7%A1%80%E7%AC%94%E8%AE%B0/" target="_blank" rel="noopener">王风雨测度论笔记</a>中有关于协方差的定义，现在讨论如下的协方差问题:</p>
 <p>pca类似流形参数化，但绝对不是参数化，他只是去除那些几乎不变的变量</p>
+<h4 id="满二叉树的定义"><a href="#满二叉树的定义" class="headerlink" title="满二叉树的定义"></a>满二叉树的定义</h4><p>该二叉树以每个节点作为根节点的二叉树都满足：左右子树个数(两颗子树都要算上根节点)相差不超过两倍。</p>
 <h4 id="离散量到连续量的转化"><a href="#离散量到连续量的转化" class="headerlink" title="离散量到连续量的转化"></a>离散量到连续量的转化</h4><p>工程领域不但连续量到离散量的转化非常重要，离散到连续的转化技巧也相当重要。</p>
 <p>比如对于一张像素图，如何放大缩小而不会影响图片质量(放大无限大，不会出现锯齿)，离散到连续量的变化至关重要</p>
-<blockquote id="fn_2">
-<sup>2</sup>. 转置矩阵的特征向量不一定相等，特征值一定相等。逆矩阵的特征向量不变，特征值是$\frac{1}{\lambda}$<a href="#reffn_2" title="Jump back to footnote [2] in the text."> &#8617;</a>
-</blockquote>
-<blockquote id="fn_3">
-<sup>3</sup>. 可以验证与Jordan矩阵块可交换的矩阵必是上三角矩阵<a href="#reffn_3" title="Jump back to footnote [3] in the text."> &#8617;</a>
-</blockquote>
-<blockquote id="fn_4">
-<sup>4</sup>. 命题由黄继随修正<a href="#reffn_4" title="Jump back to footnote [4] in the text."> &#8617;</a>
-</blockquote>
 <h4 id="样条理论和射影变换"><a href="#样条理论和射影变换" class="headerlink" title="样条理论和射影变换"></a>样条理论和射影变换</h4><p>贝塞尔函数和贝塞尔曲线不是一回事。</p>
 <h4 id="贝塞尔曲线"><a href="#贝塞尔曲线" class="headerlink" title="贝塞尔曲线"></a>贝塞尔曲线</h4><p>$p_i$点组成的贝塞尔曲线</p>
 <p>$\sumc _n^i p_i\left(1-t\right)^{n-i}t^i$</p>
@@ -283,7 +261,7 @@ r_1&0&0&..\\\\
   <aside class="widget">
     <h3 class="widget-title">Categories</h3>
     <div class="widget-content">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">30</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><span class="category-list-count">5</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">31</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><span class="category-list-count">5</span></li></ul>
     </div>
   </aside>
 
@@ -293,6 +271,10 @@ r_1&0&0&..\\\\
     <h3 class="widget-title">Recents</h3>
     <div class="widget-content">
       <ul>
+        
+          <li>
+            <a href="/2021/02/08/Assembley%E5%92%8CwebGL/">Assembley和webGL</a>
+          </li>
         
           <li>
             <a href="/2020/09/03/%E4%B8%AD%E7%A7%91%E8%88%AA%E5%AE%87%E7%9A%84%E5%87%A0%E4%B8%AA%E9%97%AE%E9%A2%98/">中科航宇的几个问题</a>
@@ -310,10 +292,6 @@ r_1&0&0&..\\\\
             <a href="/2020/05/12/haskell/">haskell</a>
           </li>
         
-          <li>
-            <a href="/2020/02/13/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B0-PDE/">偏微分方程笔记(PDE)</a>
-          </li>
-        
       </ul>
     </div>
   </aside>
@@ -323,7 +301,7 @@ r_1&0&0&..\\\\
   <aside class="widget">
     <h3 class="widget-title">Tags</h3>
     <div class="widget-content">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81/" rel="tag">代码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a><span class="tag-list-count">27</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">数学，计算机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%B3%E5%8D%97/" rel="tag">河南</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">4</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81/" rel="tag">代码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a><span class="tag-list-count">28</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">数学，计算机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%B3%E5%8D%97/" rel="tag">河南</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">4</span></li></ul>
     </div>
   </aside>
 
