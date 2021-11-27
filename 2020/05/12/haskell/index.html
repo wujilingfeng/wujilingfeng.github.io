@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});
+
+
+
+  
+haskell一种基于算子思想（functional）编程语言,以前我也设想过一种基于算子思想的编程语言，因为数学中所有空间集合的作用都可以理解为算子
+学习haskell要避免工程繁杂概念的弊端，有时努力回想以前的数学概念代替工程概念是有好处的，首先工程概念名词繁杂不长久，而数学是所有学科(除了哲学)最长久的学科。(这种长久性是“知识成立”的时间)
+比如手机cpu的架构和勾股定理，勾股定理在欧式几何中成立，之后发现在其他几何中不成立，而手机cpu的架构只是工程架构，几个月后就发生改变或者优化。所以勾股定理比c语言，计算机，鸿霥，甚至牛顿力学还要长久，那么为什么不学习寿命更长久的知识而要学习繁杂短暂的知识?
+可以说未来属于算子类型语言cop,haskell，而不是工程类语言c,c++,java,python…" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>haskell | 烂笔头</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});       haskell一种基于算子思想（functional）编程语言,以前我也设想过一种基于算子思想的编程语言，因为数学中所有空间集合的作用都可以理解为算子 学习haskell要避免工程繁杂概念的弊端，有时努力回想以前的数学概念代替工程概念是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="haskell">
+<meta property="og:url" content="http://yoursite.com/2020/05/12/haskell/index.html">
+<meta property="og:site_name" content="烂笔头">
+<meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});       haskell一种基于算子思想（functional）编程语言,以前我也设想过一种基于算子思想的编程语言，因为数学中所有空间集合的作用都可以理解为算子 学习haskell要避免工程繁杂概念的弊端，有时努力回想以前的数学概念代替工程概念是">
+<meta property="og:locale">
+<meta property="og:image" content="https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg">
+<meta property="og:image" content="http://yoursite.com/2020/05/12/haskell/cate.png">
+<meta property="og:image" content="http://yoursite.com/2020/05/12/haskell/functor.png">
+<meta property="article:published_time" content="2020-05-12T09:13:48.000Z">
+<meta property="article:modified_time" content="2021-07-16T02:19:31.793Z">
+<meta property="article:author" content="李博">
+<meta property="article:tag" content="数学">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="烂笔头" rel="home">烂笔头</a>
+      </h1>
+      
+        <h2 class="site-description hitokoto"></h2>
+        <script type="text/javascript" src="https://v1.hitokoto.cn/?encode=js"></script>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a target="_blank" rel="noopener" href="https://github.com/wujilingfeng/">Github</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a target="_blank" rel="noopener" href="https://gitee.com/">Gitee</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-haskell" class="post-haskell post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      haskell
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2020/05/12/haskell/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2020/05/12/haskell/" data-id="ckwh75u84001q9wxjcsp6fk66" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://wujilingfeng.top/MathJax/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+<p> <a target="_blank" rel="noopener" href="https://gitter.im/autumnai/leaf?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"><img src="https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg" alt="Join the chat at https://gitter.im/autumnai/leaf"></a> </p>
+<p>haskell一种基于算子思想（functional）编程语言,以前我也设想过一种基于算子思想的编程语言，因为数学中所有空间集合的作用都可以理解为算子</p>
+<p>学习haskell要避免工程繁杂概念的弊端，有时努力回想以前的数学概念代替工程概念是有好处的，首先工程概念名词繁杂不长久，而数学是所有学科(除了哲学)最长久的学科。(这种长久性是“知识成立”的时间)</p>
+<p>比如手机cpu的架构和勾股定理，勾股定理在欧式几何中成立，之后发现在其他几何中不成立，而手机cpu的架构只是工程架构，几个月后就发生改变或者优化。所以勾股定理比c语言，计算机，鸿霥，甚至牛顿力学还要长久，那么为什么不学习寿命更长久的知识而要学习繁杂短暂的知识?</p>
+<p>可以说未来属于算子类型语言cop,haskell，而不是工程类语言c,c++,java,python…</p>
+<span id="more"></span>
+
+<p>使用haskell不应关注效率，而是思想。计算机专业大量人士进入haskell语言领域，它们给haskell语言带来了实践能力的同时也给haskell语言带来了计算机工程行业的弊端:行业术语的工程化，繁杂化，不严谨化。本文是用数学的概念统一解释haskell的概念，希望给数学专业的人免去繁杂和不严谨的工程概念。</p>
+<p><em>万物皆算子</em>，这样就不用记什么高阶函数，数据结构，递归数据结构，柯里化之类的概念。</p>
+<p>自带的算子</p>
+<table>
+<thead>
+<tr>
+<th>算子</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:t a</td>
+<td>a的类型</td>
+</tr>
+<tr>
+<td>==</td>
+<td>是否等于，返回True False</td>
+</tr>
+<tr>
+<td>/=</td>
+<td>是否不等于</td>
+</tr>
+<tr>
+<td>:l hello</td>
+<td>加载hello.hs文件</td>
+</tr>
+<tr>
+<td>a ^ b</td>
+<td>返回a的b次方</td>
+</tr>
+<tr>
+<td>&lt;=</td>
+<td></td>
+</tr>
+<tr>
+<td>&gt;=</td>
+<td></td>
+</tr>
+<tr>
+<td>mod</td>
+<td>取余</td>
+</tr>
+<tr>
+<td>div</td>
+<td>整除</td>
+</tr>
+<tr>
+<td>even a</td>
+<td>a是否是偶数</td>
+</tr>
+<tr>
+<td>odd a</td>
+<td>a是否是奇数</td>
+</tr>
+<tr>
+<td>.和$</td>
+<td>($) :: (a -&gt; b) -&gt; a -&gt; b 和(.) :: (b -&gt; c) -&gt; (a -&gt; b) -&gt; a -&gt; c，详细解释见下</td>
+</tr>
+<tr>
+<td></td>
+<td>取出列表的前n个元素</td>
+</tr>
+<tr>
+<td>map a [1,2..]</td>
+<td>一种经典用法 map (*) [1,2..]</td>
+</tr>
+<tr>
+<td>\</td>
+<td>lambda算子,比如(\xs -&gt; length xs &gt; 15),xs是参数，length xs &gt; 15是body</td>
+</tr>
+<tr>
+<td>3</td>
+<td>数字3也是算子，它是常量算子</td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td></td>
+</tr>
+<tr>
+<td>||</td>
+<td></td>
+</tr>
+<tr>
+<td>not</td>
+<td></td>
+</tr>
+<tr>
+<td>cos</td>
+<td></td>
+</tr>
+<tr>
+<td>sin</td>
+<td></td>
+</tr>
+<tr>
+<td>acos</td>
+<td></td>
+</tr>
+<tr>
+<td>asin</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>有些算子有歧义可以类似如下调用</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">read</span> <span class="string">&quot;5&quot;</span> :: <span class="type">Int</span></span><br><span class="line"><span class="title">read</span> <span class="string">&quot;5&quot;</span> :: <span class="type">Integer</span></span><br><span class="line"><span class="title">read</span> <span class="string">&quot;3.01&quot;</span> :: <span class="type">Float</span></span><br></pre></td></tr></table></figure>
+
+<p>由于-号也是算子,所以-1.0尽量加括号，变成(-1.0)</p>
+<p>函数本身也是算子</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">map</span> f []=[]</span><br><span class="line"><span class="title">map</span> f (x:_)=f x:map f _</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>上面的map函数也叫“高阶函数”，但是从万物皆算子的角度看，并不要这种多余概念。</p>
+<p>lambda算子举例<code>\(a,b,c)-&gt; a+b-c</code></p>
+<h5 id="两个内建的类型"><a href="#两个内建的类型" class="headerlink" title="两个内建的类型"></a>两个内建的类型</h5><p>列表:</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"><span class="comment">--还有更简单的表示形式</span></span><br><span class="line">[<span class="number">1.</span><span class="number">.4</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">head</span> [<span class="number">1.</span><span class="number">.4</span>]</span><br><span class="line"><span class="title">last</span> [<span class="number">1.</span><span class="number">.4</span>]</span><br><span class="line"><span class="title">length</span> [<span class="number">1.</span><span class="number">.4</span>]</span><br><span class="line"><span class="title">maxmum</span> [<span class="number">1.</span><span class="number">.4</span>]</span><br><span class="line"><span class="title">minmum</span> [<span class="number">1.</span><span class="number">.4</span>]</span><br><span class="line"><span class="title">tail</span> [<span class="number">1.</span><span class="number">.4</span>]</span><br><span class="line">[<span class="number">1.</span><span class="number">.4</span>]!!<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>元组:</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(a,b,c) | a&lt;-[<span class="number">1.</span><span class="number">.100</span>],b&lt;-[<span class="number">1.</span>.a],c&lt;[<span class="number">1.</span>.b],c^<span class="number">2</span>+b^<span class="number">2</span>==a^<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="逻辑"><a href="#逻辑" class="headerlink" title="逻辑"></a>逻辑</h4><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">if</span> var <span class="number">2</span>==<span class="number">2</span> <span class="keyword">then</span></span><br><span class="line">	putStrLn <span class="string">&quot;oK&quot;</span></span><br><span class="line"><span class="title">else</span></span><br><span class="line">	putStrLn <span class="string">&quot;not&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="模式匹配"><a href="#模式匹配" class="headerlink" title="模式匹配"></a>模式匹配</h4><p>模式匹配用来泛化算子的表示能力</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">addVectors</span> ::(<span class="type">Num</span> a)=&gt; (a,a)-&gt;(a,a)-&gt;(a,a)</span><br><span class="line"><span class="title">addVectors</span> (x1,y1) (x2,y2)=(x1+x2,y1+y2)</span><br><span class="line"></span><br><span class="line"><span class="comment">---作用在列表的算子</span></span><br><span class="line"><span class="title">head&#x27;</span> :: [a]-&gt;a</span><br><span class="line"><span class="title">head&#x27;</span> [] =error <span class="string">&quot;cant &quot;</span></span><br><span class="line"><span class="title">head&#x27;</span> (x:x_)=x</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--String也属于列表,其实代码是 type String=[Char],type类似c语言的typedef</span></span><br><span class="line"><span class="title">capital</span> :: <span class="type">String</span> -&gt; <span class="type">String</span></span><br><span class="line"><span class="title">capital</span> <span class="string">&quot;&quot;</span> = <span class="string">&quot;empty string&quot;</span></span><br><span class="line"><span class="title">capital</span> (x:xs) = <span class="string">&quot;the first letter of &quot;</span> ++ x:xs ++ <span class="string">&quot; is &quot;</span> ++ [x]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在上面的head’算子定义你肯定觉得haskell是有“潜规则”的，否则它是如何匹配返回列表头部算子的？所以你只能默认并记住这种列表匹配的规则。(也就是在模式匹配中(x:_)表示列表)。</p>
+<p>以下算子表示也比较隐蔽</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--x算子表示：x为常量1</span></span><br><span class="line"><span class="title">x</span>=<span class="number">1</span></span><br><span class="line"><span class="comment">--- 分别定义了x,y,z:算子，他们是常量</span></span><br><span class="line">(x,y,z)=(<span class="number">0.1</span>,<span class="number">2</span>,<span class="number">-0.9</span>)</span><br></pre></td></tr></table></figure>
+
+<p>上面看到Haskell的模式匹配条件相当松散。当算子定义合适时，如果输入类型不同的参数，它还是能正常运作。</p>
+<p>但是当参数的类型差异较大时，模式匹配不能分辨参数的类型，也自然无法使得算子定义可以接受不同类型的参数。这时我们需要针对不同的类型写不同的算子。这样的坏处是算子名不能统一。</p>
+<p>针对这种问题，haskell提出类型类的概念（见下）。</p>
+<p>haskell的分段函数（类似c语言的case switch）</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">bmiTell</span> weight height </span><br><span class="line">	| bmi &lt;= <span class="number">18.5</span> = <span class="string">&quot;you&quot;</span></span><br><span class="line">	| bim &lt;= <span class="number">25.0</span> = <span class="string">&quot;my&quot;</span></span><br><span class="line">	| otherwise = <span class="string">&quot;d&quot;</span></span><br><span class="line">	<span class="keyword">where</span> bim = weight/height^<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>如果把条件语句放到后面就更像数学分段函数的表示</p>
+<p>分段函数还可以直接用在算子的表达式中</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">fn</span> a= <span class="keyword">let</span> b |a==<span class="number">1</span> =<span class="number">0</span></span><br><span class="line">			| otherwise =<span class="number">1</span></span><br><span class="line">		<span class="keyword">in</span> b</span><br></pre></td></tr></table></figure>
+
+<h4 id="let-in-其中-等于"><a href="#let-in-其中-等于" class="headerlink" title="let .. in ..(其中..等于..)"></a>let .. in ..(其中..等于..)</h4><p>数学中常用的语句 “其中..等于..”。它的表示用来解释in单词后面的式子</p>
+<h4 id="…-Where-…-其中-等于"><a href="#…-Where-…-其中-等于" class="headerlink" title="… Where …(其中..等于..)"></a>… Where …(其中..等于..)</h4><p>数学中常用的语句 “其中..等于..”。它的表示用来解释单词where前的式子。</p>
+<p>where必须换行并回车，并且where之前的式子必须要是等式</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">let</span> sq x=x*x <span class="keyword">in</span> (sq <span class="number">3</span>,sq <span class="number">4</span>,sq <span class="number">5</span>)]</span><br><span class="line"><span class="comment">--返回(9,16,25)</span></span><br><span class="line"><span class="title">let</span> sq x=x*x <span class="keyword">in</span> [sq <span class="number">1</span>,sq <span class="number">2</span>,sq <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">a</span>=[sq <span class="number">3</span>,sq <span class="number">4</span>,sq <span class="number">5</span>]</span><br><span class="line">	<span class="keyword">where</span> sq x=x*</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>where的多个定义使用分号</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">let</span> &#123;a x=g</span><br><span class="line">	<span class="keyword">where</span> </span><br><span class="line">		g= p x x;</span><br><span class="line">		p a b =a+b</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果换a x=g为g,那么编译失败。</p>
+<h5 id="两个简单的复合算子"><a href="#两个简单的复合算子" class="headerlink" title="两个简单的复合算子"></a>两个简单的复合算子</h5><p>foldr f a [a1,a2…]</p>
+<p>上面的算子f是某个算子，如果记这个算子为*,那么结果就是 <code>a1 * a2 *a3 .... *an * a</code></p>
+<p>有人翻译成右折叠，这增加了名词学习成本,比较恶心</p>
+<p>foldl f a [a1,a2 …]</p>
+<p>上面的算子f是某个算子，如果记这个算子为*,那么结果就是 <code>a * a1 * a2 *a3 .... *an </code></p>
+<p>有人翻译成左折叠，这增加了名词学习成本，比较恶心</p>
+<h4 id="类型类–算子类"><a href="#类型类–算子类" class="headerlink" title="类型类–算子类"></a>类型类–算子类</h4><p>如果你需要一些算子，它能接受的参数是多种类型的。那么你需要定义一个”类型类“（建议改名”函数类”或者“算子类”，因为它的主要作用就是扩展函数或算子的表达力）。</p>
+<p>比如我需要==算子，他需要能接受Float,Interger,Char等类型(或者输出为多种类型)。我那么我可以定义Myeq的类型类。</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">data</span> <span class="type">Node</span> a= <span class="type">Cons</span> a (<span class="type">Node</span> <span class="title">a</span>) | <span class="type">NULL</span> </span></span><br><span class="line">    <span class="keyword">deriving</span> (<span class="type">Show</span>)</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="type">Myeq</span> a <span class="keyword">where</span></span></span><br><span class="line">    iseq :: a-&gt;a-&gt;<span class="type">Bool</span></span><br><span class="line"><span class="class"><span class="keyword">instance</span> (<span class="type">Eq</span> <span class="title">a</span>)=&gt;<span class="type">Myeq</span> (<span class="type">Node</span> <span class="title">a</span>) <span class="keyword">where</span></span></span><br><span class="line"><span class="comment">--iseq :: (Eq x)=&gt; (Cons x _)-&gt;(Cons x _)-&gt;Bool</span></span><br><span class="line">    iseq (<span class="type">Cons</span> x _) (<span class="type">Cons</span> y _)=(x==y)</span><br><span class="line"><span class="class"><span class="keyword">data</span> <span class="type">Shape</span>= <span class="type">Circle</span> | <span class="type">Rectangle</span></span></span><br><span class="line"><span class="class"><span class="keyword">instance</span> <span class="type">Myeq</span> <span class="type">Shape</span> <span class="keyword">where</span></span></span><br><span class="line">	iseq <span class="type">Circle</span> <span class="type">Rectangle</span>=<span class="type">False</span></span><br><span class="line">	iseq <span class="type">Rectangle</span> <span class="type">Circle</span> =<span class="type">False</span></span><br><span class="line">	iseq <span class="type">Circle</span> <span class="type">Circle</span>=<span class="type">True</span></span><br><span class="line">	iseq <span class="type">Rectangle</span> <span class="type">Rectangle</span>=<span class="type">True</span></span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>故而类型类是为了拓展函数（算子）的泛化能力而存在的。它的核心含义是其下声明的函数(算子)。</p>
+<h4 id="Module"><a href="#Module" class="headerlink" title="Module"></a>Module</h4><p>import qualified Data.Map as M</p>
+<p>这是python是一样的</p>
+<h4 id="自定义算子类型"><a href="#自定义算子类型" class="headerlink" title="自定义算子类型"></a>自定义算子类型</h4><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">data</span> <span class="type">Mybool</span> = <span class="type">True</span> | <span class="type">False</span></span></span><br></pre></td></tr></table></figure>
+
+<p>True是算子，False也是算子，他们都是没有参数的，所以都是常量。Mybool是这两个算子所属的类型。</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">data</span> <span class="type">Shape</span>=<span class="type">Circle</span> <span class="type">Float</span> <span class="type">Float</span> | <span class="type">Rectangel</span> <span class="type">Float</span> <span class="type">Float</span> <span class="type">Float</span> <span class="type">Float</span></span></span><br></pre></td></tr></table></figure>
+
+<p>上面的Circle和Rectangel是两个算子，Circle作用两个参数,且这两个参数分属Float 类型。Shape则是两个算子所属的类型。</p>
+<p>上面虽然讲Haskell秉承万物皆算子，但是上面的Shape和Mybool却不是算子，实际上类型都不是算子，比如Integer（haskell没有把它看作算子，但是却看成函子，详细见下）。</p>
+<p>带参数的类型,这个参数表示的是类型。</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">data</span> <span class="type">Node</span> a =<span class="type">Cons</span> a (<span class="type">Node</span> <span class="title">a</span>)</span></span><br></pre></td></tr></table></figure>
+
+<p>这只有一个算子，那就是Cons 。它作用于两个参数,这两个参数属于类型 a和 (Node a)。系统找不到类型a的定义，自然表明它是任何类型，Node a则是引用了自身的定义。</p>
+<p>Node a是Cons算子属于的类型.</p>
+<p>上面讲Haskell没有把Shape等视为算子，但是Haskell却把Shape 和Node a等视为函子。因为它是类型到类型的映射，比如Shape 是常量 ,而Node  则是把类型a映射为 Node,即a-&gt;Node a。Node a也是函子，只不过它是常量。</p>
+<p>所有类型都视为函子。</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/livewithnorest/archive/2012/08/02/2620718.html">https://www.cnblogs.com/livewithnorest/archive/2012/08/02/2620718.html</a>)</p>
+<h4 id="范畴和函子"><a href="#范畴和函子" class="headerlink" title="范畴和函子"></a>范畴和函子</h4><p>这里是<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Functor">范畴和函子定义</a></p>
+<h5 id="范畴"><a href="#范畴" class="headerlink" title="范畴"></a>范畴</h5><ul>
+<li>范畴C包含”物件”，记为obj(C)(比如拓扑空间的开集就是Hausdoff空间的物件)</li>
+<li>范畴C包含态射或者箭头，改态射将物件a映射为物件b,记为$Hom_C \left(a,b\right)$</li>
+<li>范畴C,态射之间存在”作用”或者二元运算，称作态射的复合，这样的态射构成”幺半群（满足结合律和单位元）”。[^1]</li>
+</ul>
+<h5 id="函子"><a href="#函子" class="headerlink" title="函子"></a>函子</h5><p>设C和D为范畴，函子F是C到D的映射，满足</p>
+<ul>
+<li>将C的每个物件$X\in C$映射至$F\left(X\right)\in D$上</li>
+<li>将C的每个态射$f\in Hom_C\left(a,b\right)$映射至$F\left(f\right)\in Hom_D\left(F\left(a\right),F\left(b\right)\right)$</li>
+<li>将C的态射的单位元映射到D的态射单位元</li>
+<li>对”态射构成的幺半群“是“同态”。<a href="%E5%8A%A0%E5%BC%95%E5%8F%B7%E6%98%AF%E5%9B%A0%E4%B8%BA%E5%A4%8D%E5%90%88%E8%BF%99%E4%B8%AA%E4%BD%9C%E7%94%A8%E5%B9%B6%E4%B8%8D%E8%83%BD%E4%BD%9C%E7%94%A8%E5%9C%A8%E6%89%80%E6%9C%89%E6%80%81%E5%B0%84%E4%B8%8A%EF%BC%8C%E8%80%8C%E7%BE%A4%E6%98%AF%E8%A6%81%E6%B1%82%E6%89%80%E6%9C%89%E5%85%83%E7%B4%A0%E9%83%BD%E5%8F%AF%E4%BD%9C%E7%94%A8%E3%80%82">^2</a></li>
+</ul>
+<p>按照定义范畴有一堆集合，和箭头。</p>
+<img src="/2020/05/12/haskell/cate.png" class="" title="范畴">
+
+<p>函子是范畴和范畴之间集合的箭头</p>
+<img src="/2020/05/12/haskell/functor.png" class="" title="函子">
+
+<p>如上图，假设A,B是范畴1的集合，C,D是范畴2的集合，A到C的箭头是函子，B到D的箭头是函子，那么从A到B的箭头可以诱导C到D的箭头。</p>
+<p>注意上面讲：类型类主要用来让函数（算子）接受不同类型的参数。</p>
+<p>数学上函子不但联系了两个范畴的对象，还将两个范畴的箭头进行联系。而Haskell的类型系统只是完成了两个范畴对象的对应(没有给出映射)。</p>
+<p>比如<code>[Int]</code>联系了集合Int 和 [Int],并没有映射，它们之间也没有映射。</p>
+<p>haskell有个类型类Functor,这里的Functor主要解决两个对应类型之间的诱导映射。每一个类型都联系了两个类型（比如Int类型联系了Int到自身），这里的Functor（它的核心是算子fmap）主要解决类型诱导的映射问题。</p>
+<p>你已经注意到这里我说的函子都是数学上严格定义的函子，haskell的Functor虽然名字叫函子，它并非严格意义的函子，上面也说了：它是主要是解决类型诱导的映射。</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="type">Functor</span> f <span class="keyword">where</span></span></span><br><span class="line">	fmap:: (a-&gt;a)-&gt;f a-&gt;f a</span><br><span class="line"><span class="class"><span class="keyword">instance</span> <span class="type">Functor</span> [] <span class="keyword">where</span></span></span><br><span class="line">    fmap = map</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="单子"><a href="#单子" class="headerlink" title="单子"></a>单子</h4><p>设有范畴C,T是$C\to C$的函子，u是$c\to TC$的函子，v是$TTC\to TC$的函子，如果u，v满足$vTu=vuT=id$和$uTu=uuT:T^3C\to TC$,那么称$\left(T,u,v\right)$是C的单子。</p>
+<p>haskell语言单子与数学上单子不同，主要体现在不严谨性，比如现在的haskell 的Monad的return函数在$TC$上没有定义,整个函数也没有定义在$TTC$…,而且函数式编程语言的定义:自函子上的幺半群并非数学上的定义，应该是编程语言自己加的结构。</p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>总结来说，haskell的重要概念都是围绕两个元素服务的1:算子，2:函子。</p>
+<p>其中函子(数学上的严格定义)在haskell表现为:</p>
+<ul>
+<li>定义新的类型 — 将范畴映射为另一范畴。（函子）</li>
+<li>“算子类”—函子诱导的映射（不论是haskell的Functor,Manod都属于这一概念）。</li>
+</ul>
+<p>本文也有弊端，一方面本文试图从数学角度统一解释，但是文章叙述确实参杂各种工程术语，并且文章也叙述了很细小的工程细节，希望以后能够修改本文。</p>
+<p>像haskell这一类语言简直是数学专业的神器，懊悔发现这门语言太晚！</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2020/05/12/haskell/">
+    <time datetime="2020-05-12T09:13:48.000Z" class="entry-date">
+        2020-05-12
+    </time>
+</a>
+    
+  <span class="article-delim">&#8226;</span>
+  <div class="article-category">
+  <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </div>
+
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
+
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2020/07/03/%E9%BB%8E%E6%9B%BC%E6%9B%B2%E9%9D%A2%E7%AC%94%E8%AE%B0/" rel="prev"><span class="meta-nav">←</span> 黎曼曲面笔记</a></span>
+    
+    
+        <span class="nav-next"><a href="/2020/02/13/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B0-PDE/" rel="next">偏微分方程笔记(PDE) <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div id="gitalk-container" style="margin: 30px;"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '3227fda9287cfd4d5cab',
+            clientSecret: '9ba26389f1bb6e896001f95b0c0482df62f2b9f6',
+            repo: 'wujilingfeng.github.io',
+            owner: 'wujilingfeng',
+            id: 'haskell',
+            admin: 'wujilingfeng'
+        })
+ 
+        gitalk.render('gitalk-container')
+    </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Music</h3>
+    <div class="widget-content">
+      <audio src="/music.mp3" controls="controls" loop="loop" autoplay=true
+             style="width:100%">
+        您的浏览器不支持 audio 标签。
+      </audio>
+    </div>
+  </aside>
+
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-content">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><span class="category-list-count">5</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/01/rust%E7%AC%94%E8%AE%B0/">rust笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/15/haskell%E5%AE%9E%E6%88%98%E5%92%8C%E4%BE%8B%E5%AD%90/">haskell实战和例子</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/03/%E9%BB%8E%E6%9B%BC%E6%9B%B2%E9%9D%A2%E7%AC%94%E8%AE%B0/">黎曼曲面笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/12/haskell/">haskell</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B0-PDE/">偏微分方程笔记(PDE)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81/" rel="tag">代码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">数学，计算机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%B3%E5%8D%97/" rel="tag">河南</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">4</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/linux/" style="font-size: 12.5px;">linux</a> <a href="/tags/%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">代码</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 15px;">博客</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 17.5px;">工具</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a> <a href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 10px;">数学，计算机</a> <a href="/tags/%E6%B2%B3%E5%8D%97/" style="font-size: 12.5px;">河南</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">算法</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">编程</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 17.5px;">计算机</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2021 李博
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

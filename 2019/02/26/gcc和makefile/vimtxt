@@ -1,0 +1,90 @@
+set clipboard=unnamedplus
+set backspace=2
+set nu
+set encoding=utf-8
+syntax enable
+syntax on
+filetype on
+filetype plugin on
+set autoindent
+set cindent
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set cursorline
+set expandtab
+"colorscheme desert
+func! Loadcsf()
+    if filereadable("cscope.out")
+        cs add cscope.out
+"let g:ycm_global_ycm_extra_conf="../ycm_extra_conf.py"
+" else add database pointed to by environment
+"targetpath就是-p选项传递的路径，用来查找cscope.out文件
+    else
+        let targetfile=findfile("cscope.out",".;")
+        let targetpath=matchstr(targetfile,".*/")
+        if !empty(targetfile)&&filereadable(targetfile)
+            exe "cs add" targetfile targetpath
+        endif
+    endif
+
+endfunc
+if has("cscope")
+    "set csprg=/usr/local/bin/cscope
+    set csto=0
+    set cst
+    set nocsverb
+    exec "call Loadcsf()"
+" add any database in current directory
+    set csverb
+endif
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap { {}<ESC>i
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+inoremap $ $$<ESC>i
+nmap <leader>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <leader>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+nmap <leader>i :cs find i <C-R>=expand("<cfile>")<CR><CR>
+nmap <leader>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+func! Reset_screen()
+    exec "vertical res 140"
+endfunc 
+
+nmap <C-h> <C-w>h<C-w>=
+nmap <C-l> <C-w>l<C-w>=
+""nmap <C-.> :vertical res 130<CR>
+"nmap <C-w>, :vertical res 60<CR>
+map <F4> <C-w><S-h> :call Reset_screen()<CR>
+map <F5> :call CompileCode()<CR>
+vmap <F5> :call CompileCode()<CR>
+func! Compilelatex()
+    exec "!xelatex %"
+    exec "!evince %<.pdf "
+endfunc
+func! Compilegpp()
+    exec "cs kill 0"
+    exec "!cd ../&&bash cscope.sh&&cd build&&cmake ..&&make"
+    exec "!cd ../&&str=`find ./bin -type f -name \\*`&&${str}"
+    exec "call Loadcsf()"
+endfunc
+func! Compilepy()
+    exec "!python3  %"
+endfunc
+func! CompileCode()
+        exec "w"
+	if &filetype == "tex"
+	      exec "call Compilelatex()"
+	elseif &filetype == "cpp"
+	      exec "call Compilegpp()"
+	elseif &filetype == "c"
+	      exec "call Compilegpp()"
+	elseif &filetype == "python"
+	      exec "call Compilepy()"
+	endif
+endfunc

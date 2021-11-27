@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});
+
+
+
+
+pytorch学习笔记" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>pytorch教程 | 烂笔头</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});     pytorch学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pytorch教程">
+<meta property="og:url" content="http://yoursite.com/2019/09/10/pytorch%E6%95%99%E7%A8%8B/index.html">
+<meta property="og:site_name" content="烂笔头">
+<meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});     pytorch学习笔记">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-09-10T05:47:55.000Z">
+<meta property="article:modified_time" content="2019-10-20T02:25:51.454Z">
+<meta property="article:author" content="李博">
+<meta property="article:tag" content="数学">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="烂笔头" rel="home">烂笔头</a>
+      </h1>
+      
+        <h2 class="site-description hitokoto"></h2>
+        <script type="text/javascript" src="https://v1.hitokoto.cn/?encode=js"></script>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a target="_blank" rel="noopener" href="https://github.com/wujilingfeng/">Github</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a target="_blank" rel="noopener" href="https://gitee.com/">Gitee</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-pytorch教程" class="post-pytorch教程 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      pytorch教程
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2019/09/10/pytorch%E6%95%99%E7%A8%8B/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/09/10/pytorch%E6%95%99%E7%A8%8B/" data-id="ckwh75u8o00339wxj2z246u1t" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://wujilingfeng.top/MathJax/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+<p>pytorch学习笔记</p>
+<span id="more"></span>
+
+<p>因为反向传播或者自动求导需要引用函数，所以每个函数不能重复作用，所以最好使用如下方式</p>
+<p><code>nn.Relu()(a)</code>,这样可以保证函数最多使用一次,尤其是Function类</p>
+<h3 id="Pytorch"><a href="#Pytorch" class="headerlink" title="Pytorch"></a>Pytorch</h3><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>torch.from_numpy()</td>
+<td>传入一个numpy对象，返回torch的tensor</td>
+</tr>
+<tr>
+<td>tensor_obj.numpy()</td>
+<td>将torch的tensor转化为numpy对象，并返回</td>
+</tr>
+<tr>
+<td>tensor_obj.matmul(tensor_obj1)</td>
+<td>tensor_obj和tensor_obj1的张量乘法（torch.mm只能是矩阵）(最后两个维度)</td>
+</tr>
+<tr>
+<td>torch.nn.Conv1d()</td>
+<td>返回1维卷积算子</td>
+</tr>
+<tr>
+<td>tensor_obj.permute()</td>
+<td>类似numpy的transpose</td>
+</tr>
+<tr>
+<td>torch.nn.Conv1d(m,n,p)</td>
+<td>inchannel=m,outchannel=n,卷积p个元素</td>
+</tr>
+<tr>
+<td>torch.nn.Conv2d(m,n,(p,q))</td>
+<td>inchannel=m,outchannel=n,卷积是(p,q)</td>
+</tr>
+<tr>
+<td>tensor_name.grad_fn</td>
+<td>生成此张量的函数(引用此函数)</td>
+</tr>
+<tr>
+<td>tensor_name.grad</td>
+<td>某函数对此张量的梯度</td>
+</tr>
+<tr>
+<td>tensor_name.view()</td>
+<td>和numpy的reshape一样，（为什么函数名不用reshape?增加学习成本）</td>
+</tr>
+<tr>
+<td>tensor_name.float()</td>
+<td>相当于astype,例如image=image.float()</td>
+</tr>
+<tr>
+<td>tensor_name.grad.data.zero_()</td>
+<td>梯度清零</td>
+</tr>
+<tr>
+<td>.register_buffer</td>
+<td>被设置的量不会被trained(修改)</td>
+</tr>
+<tr>
+<td>torch.zeros(3,3),torch.ones(3,4,5)</td>
+<td>构造3*3的0矩阵,1张量。torch也可以换成numpy</td>
+</tr>
+<tr>
+<td>tensor_name.norm()</td>
+<td>返回模长</td>
+</tr>
+<tr>
+<td>tensor_name**2</td>
+<td>元素的平方</td>
+</tr>
+<tr>
+<td>tensor.name.sum()</td>
+<td>元素求和</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><em>支持对于高维的Tensor（dim&gt;2），定义其矩阵乘法仅在最后的两个维度上，要求前面的维度必须保持一致，就像矩阵的索引一样并且运算操只有torch.matmul()。</em></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><a href="./pytorchtest1.py">pytorchtest1.py</a>展示了卷积的操作，通过查看卷积的参数可以知道：卷积有bias项</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/JeasonIsCoding/p/10164948.html">backward()参数含义</a></p>
+<p>机器学习最重要的是反向传播和框架，机器学习神经元图从左到右违反矩阵乘法，导致torch.nn.Linear()与矩阵乘法向左</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/tmk_01/article/details/80839810">nn.CrossEntropyLoss</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/hao5335156/article/details/81029791">nn.MSELoss</a></p>
+<p>参数的<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36338754/article/details/97756378">初始化</a></p>
+<h4 id="opencl安装"><a href="#opencl安装" class="headerlink" title="opencl安装"></a>opencl安装</h4><ul>
+<li>安装nvidia驱动，cuda</li>
+<li>安装opencl</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq805934132/article/details/82909759">禁用nouveau</a></p>
+<p>在命令行(init 3)安装nvidia驱动（为了禁用x-window）</p>
+<p>sudo ubuntu-drivers autoinstall</p>
+<p>接下来安装cuda</p>
+<p>官网下载.run文件</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/jsjason1/article/details/88087414">https://blog.csdn.net/jsjason1/article/details/88087414</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/vactor/p/9286425.html">https://www.cnblogs.com/vactor/p/9286425.html</a></p>
+<p>openCL.so 和CL.h都在cuda里，</p>
+<p>gcc opencl_hello.c -L /usr/local/cuda-10.1/lib64/ -lOpenCL</p>
+<p>配置好cuda后pytorch就可以使用gpu了</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/09/10/pytorch%E6%95%99%E7%A8%8B/">
+    <time datetime="2019-09-10T05:47:55.000Z" class="entry-date">
+        2019-09-10
+    </time>
+</a>
+    
+  <span class="article-delim">&#8226;</span>
+  <div class="article-category">
+  <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </div>
+
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a></li></ul>
+
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2019/09/18/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/" rel="prev"><span class="meta-nav">←</span> 微分几何</a></span>
+    
+    
+        <span class="nav-next"><a href="/2019/07/27/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0/" rel="next">图像处理笔记 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div id="gitalk-container" style="margin: 30px;"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '3227fda9287cfd4d5cab',
+            clientSecret: '9ba26389f1bb6e896001f95b0c0482df62f2b9f6',
+            repo: 'wujilingfeng.github.io',
+            owner: 'wujilingfeng',
+            id: 'pytorch教程',
+            admin: 'wujilingfeng'
+        })
+ 
+        gitalk.render('gitalk-container')
+    </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Music</h3>
+    <div class="widget-content">
+      <audio src="/music.mp3" controls="controls" loop="loop" autoplay=true
+             style="width:100%">
+        您的浏览器不支持 audio 标签。
+      </audio>
+    </div>
+  </aside>
+
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-content">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><span class="category-list-count">5</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/01/rust%E7%AC%94%E8%AE%B0/">rust笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/15/haskell%E5%AE%9E%E6%88%98%E5%92%8C%E4%BE%8B%E5%AD%90/">haskell实战和例子</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/03/%E9%BB%8E%E6%9B%BC%E6%9B%B2%E9%9D%A2%E7%AC%94%E8%AE%B0/">黎曼曲面笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/12/haskell/">haskell</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B0-PDE/">偏微分方程笔记(PDE)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81/" rel="tag">代码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">数学，计算机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%B3%E5%8D%97/" rel="tag">河南</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">4</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/linux/" style="font-size: 12.5px;">linux</a> <a href="/tags/%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">代码</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 15px;">博客</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 17.5px;">工具</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a> <a href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 10px;">数学，计算机</a> <a href="/tags/%E6%B2%B3%E5%8D%97/" style="font-size: 12.5px;">河南</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">算法</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">编程</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 17.5px;">计算机</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2021 李博
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

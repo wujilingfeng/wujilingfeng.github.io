@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="本文介绍hexo及其配置和意义" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>hexo和markdown学习 | 烂笔头</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="本文介绍hexo及其配置和意义">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo和markdown学习">
+<meta property="og:url" content="http://yoursite.com/2019/01/30/hexo%E5%92%8Cmarkdown/index.html">
+<meta property="og:site_name" content="烂笔头">
+<meta property="og:description" content="本文介绍hexo及其配置和意义">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-01-30T11:32:56.000Z">
+<meta property="article:modified_time" content="2021-04-09T03:12:18.450Z">
+<meta property="article:author" content="李博">
+<meta property="article:tag" content="代码">
+<meta property="article:tag" content="博客">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="烂笔头" rel="home">烂笔头</a>
+      </h1>
+      
+        <h2 class="site-description hitokoto"></h2>
+        <script type="text/javascript" src="https://v1.hitokoto.cn/?encode=js"></script>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a target="_blank" rel="noopener" href="https://github.com/wujilingfeng/">Github</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a target="_blank" rel="noopener" href="https://gitee.com/">Gitee</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-hexo和markdown" class="post-hexo和markdown post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      hexo和markdown学习
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2019/01/30/hexo%E5%92%8Cmarkdown/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/01/30/hexo%E5%92%8Cmarkdown/" data-id="ckwh75u7b00019wxj0dpp7lrk" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <p>本文介绍hexo及其配置和意义</p>
+<span id="more"></span>
+
+<p>不管是hexo和markdown语法，在关键词（语法词）后都要有个空格，以免出错。</p>
+<h4 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h4><hr>
+<p>hexo是一个博客框架，具体的我没有足够的知识介绍。</p>
+<hr>
+<h4 id="hexo的配置"><a href="#hexo的配置" class="headerlink" title="hexo的配置"></a>hexo的配置</h4><hr>
+<p>关于hexo文件夹下_config.yml的配置<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/configuration.html">官网</a>有非常好的解释（其他博客均无创新之处，拾人牙慧）。</p>
+<hr>
+<h4 id="hexo命令"><a href="#hexo命令" class="headerlink" title="hexo命令"></a>hexo命令</h4><hr>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hexo init<span class="comment">#如同git init，将某文件夹搭建好框架</span></span><br><span class="line">hexo d</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br><span class="line">hexo clean</span><br><span class="line">npm i hexo-cli -g<span class="comment">#升级hexo</span></span><br><span class="line">npm install hexo-reference --save<span class="comment">#安装注脚插件</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="markdown"><a href="#markdown" class="headerlink" title="markdown"></a>markdown</h4><hr>
+<p>markdown应为写博客的一种脚本语言，兼容html语言。markdown简便功能并不完整，html功能完善却不易书写文章，具体语法见<a target="_blank" rel="noopener" href="http://www.markdown.cn/">这里</a>，因为语言简便，并无难处。</p>
+<hr>
+<h6 id="markdown表格"><a href="#markdown表格" class="headerlink" title="markdown表格"></a>markdown表格</h6><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">| 左对齐标题 | 右对齐标题 | 居中对齐标题 |</span><br><span class="line">| :------| ------: | :------: |</span><br><span class="line">| 短文本 | 中等文本 | 稍微长一点的文本 |</span><br><span class="line">| 稍微长一点的文本 | 短文本 | 中等文本 |</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>如果要引用图片，建议在*_config.yml<em>将new_post_name设置为true,把源图片放到</em>source/_posts/生成的同名文件夹*下，引用时采用如下格式</p>
+<p>*{  %  asset_img 图片名 标题 %}*。</p>
+<p>引用图片另一种方式<code>![标题](url)</code></p>
+<hr>
+<p>markdown自动转换网址为超链接，如果你想让网址以文本形式出现, ` … ` 将网址替换…即可。</p>
+<h5 id="添加注脚"><a href="#添加注脚" class="headerlink" title="添加注脚"></a>添加注脚</h5><p>现在默认的hexo渲染器不支持脚注，可以卸载hexo渲染插件<code>npm uninstall marked</code>,然后安装<code>hexo-reference</code>,并在主题配置文件<code>_config.yml</code>添加</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plugins:</span><br><span class="line"> - hexo-reference</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这是一个注释[\^1]<span class="comment">#去掉\</span></span><br><span class="line">[\^1]: 你好<span class="comment">#去掉\</span></span><br></pre></td></tr></table></figure>
+
+
+<h4 id="关于公式问题"><a href="#关于公式问题" class="headerlink" title="关于公式问题"></a>关于公式问题</h4><hr>
+<p>可以使用mathjax引擎渲染公式，只需要在网页加入一句(参考<a target="_blank" rel="noopener" href="https://docs.mathjax.org/en/latest/start.html">官网</a>)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;</span><br><span class="line">  MathJax.Hub.Config(&#123;tex2jax: &#123;inlineMath: [[&#x27;$&#x27;,&#x27;$&#x27;], [&#x27;\\(&#x27;,&#x27;\\)&#x27;]]&#125;&#125;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; async</span><br><span class="line">  src=&quot;https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_CHTML&quot;&gt;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>便可以时的网页支持latex公式。但是这样网页需要访问cdn.amthjax.org服务器，会有缓慢情况，建议将mathjax下载到服务器，再将<code>cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js</code> 替换为<code>服务器/MathJax/MathJax.js</code></p>
+<p>行内公式默认时<code>\\( ...\\)</code> …换成你的latex。</p>
+<p>此时网页还会访问google获取ajax库,网页加载缓慢(被墙)。</p>
+<p>你需要修改主题目录下source/css/_bass/variables.styl,注释掉@import url(“//fonts.googleapis.com/css?family=Open+Sans:400,700”);</p>
+<p>再修改主题目录下<code>layout\ _partial\after_footer.ejs</code> ,将<code>&lt;script src=&quot;//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js&quot;&gt;&lt;/script&gt;</code>替换为</p>
+<p><code>&lt;script src=&quot;//lib.sinaapp.com/js/jquery/1.8.3/jquery.min.js&quot;&gt;&lt;/script&gt;</code></p>
+<h4 id="latex语法"><a href="#latex语法" class="headerlink" title="latex语法"></a>latex语法</h4><hr>
+<p>见<a target="_blank" rel="noopener" href="http://www.mohu.org/info/symbols/symbols.htm">这里</a>,如要将指标放在符号正上方，或者正下方，可以使用<code>\mathop&#123;&#125;_limits</code>格式</p>
+<p>\include{}   \input{}指令相当与c语言的include,和python的import</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/rl-cn/rl-cn/blob/master/src/rl-cn.tex">这个项目</a>是个开源项目同时也是学习latex的好资源</p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/01/30/hexo%E5%92%8Cmarkdown/">
+    <time datetime="2019-01-30T11:32:56.000Z" class="entry-date">
+        2019-01-30
+    </time>
+</a>
+    
+  <span class="article-delim">&#8226;</span>
+  <div class="article-category">
+  <a class="article-category-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a>
+  </div>
+
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81/" rel="tag">代码</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a></li></ul>
+
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2019/01/31/vim%E7%AD%89%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91%E5%99%A8/" rel="prev"><span class="meta-nav">←</span> vim使用和配置</a></span>
+    
+    
+        <span class="nav-next"><a href="/2019/01/30/git%E7%9A%84%E4%BD%BF%E7%94%A8/" rel="next">git的使用 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div id="gitalk-container" style="margin: 30px;"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '3227fda9287cfd4d5cab',
+            clientSecret: '9ba26389f1bb6e896001f95b0c0482df62f2b9f6',
+            repo: 'wujilingfeng.github.io',
+            owner: 'wujilingfeng',
+            id: 'hexo和markdown学习',
+            admin: 'wujilingfeng'
+        })
+ 
+        gitalk.render('gitalk-container')
+    </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Music</h3>
+    <div class="widget-content">
+      <audio src="/music.mp3" controls="controls" loop="loop" autoplay=true
+             style="width:100%">
+        您的浏览器不支持 audio 标签。
+      </audio>
+    </div>
+  </aside>
+
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-content">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><span class="category-list-count">5</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/01/rust%E7%AC%94%E8%AE%B0/">rust笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/15/haskell%E5%AE%9E%E6%88%98%E5%92%8C%E4%BE%8B%E5%AD%90/">haskell实战和例子</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/03/%E9%BB%8E%E6%9B%BC%E6%9B%B2%E9%9D%A2%E7%AC%94%E8%AE%B0/">黎曼曲面笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/12/haskell/">haskell</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B0-PDE/">偏微分方程笔记(PDE)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81/" rel="tag">代码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">数学，计算机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%B3%E5%8D%97/" rel="tag">河南</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">4</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/linux/" style="font-size: 12.5px;">linux</a> <a href="/tags/%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">代码</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 15px;">博客</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 17.5px;">工具</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a> <a href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 10px;">数学，计算机</a> <a href="/tags/%E6%B2%B3%E5%8D%97/" style="font-size: 12.5px;">河南</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">算法</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">编程</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 17.5px;">计算机</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2021 李博
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

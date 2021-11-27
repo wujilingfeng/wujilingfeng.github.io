@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});
+
+
+
+本文介绍网格处理库" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>常见的网格库和使用 | 烂笔头</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});    本文介绍网格处理库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见的网格库和使用">
+<meta property="og:url" content="http://yoursite.com/2019/02/23/%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BD%91%E6%A0%BC%E5%BA%93%E5%92%8C%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="烂笔头">
+<meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});    本文介绍网格处理库">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-02-23T09:38:19.000Z">
+<meta property="article:modified_time" content="2021-04-29T00:33:03.822Z">
+<meta property="article:author" content="李博">
+<meta property="article:tag" content="工具">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="烂笔头" rel="home">烂笔头</a>
+      </h1>
+      
+        <h2 class="site-description hitokoto"></h2>
+        <script type="text/javascript" src="https://v1.hitokoto.cn/?encode=js"></script>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a target="_blank" rel="noopener" href="https://github.com/wujilingfeng/">Github</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a target="_blank" rel="noopener" href="https://gitee.com/">Gitee</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-常见的网格库和使用" class="post-常见的网格库和使用 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      常见的网格库和使用
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2019/02/23/%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BD%91%E6%A0%BC%E5%BA%93%E5%92%8C%E4%BD%BF%E7%94%A8/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/02/23/%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BD%91%E6%A0%BC%E5%BA%93%E5%92%8C%E4%BD%BF%E7%94%A8/" data-id="ckwh75u7u000u9wxj3vpag30w" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://wujilingfeng.top/MathJax/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+<p>本文介绍网格处理库</p>
+<span id="more"></span>
+
+
+
+<h4 id="openmesh"><a href="#openmesh" class="headerlink" title="openmesh"></a>openmesh</h4><p>先给一份写的<a href="./openmesh.pdf">pdf</a>,以后有时间写博客版的。openmesh的用法（包含部分图像处理库libigl)</p>
+<h4 id="libcell"><a href="#libcell" class="headerlink" title="libcell"></a>libcell</h4><p>libcell可以表示n维流形，并且不仅可以表示单形，其他任何形式也可以。（其实它的要求非常宽松，甚至不是流形的图也可以表示）</p>
+<p>但是libcell只保存了三个层次的信息。vertex(0维子流形)，face(n-1维流形)，cell（n维流形）</p>
+<p>例如n=2。n=2说明你要表示一张曲面，那么cell是多边形，face是边，vertex是点</p>
+<p>n=3说明你要表示三维体结构，那么cell是一个多面体，face是面，vertex是点。</p>
+<p>虽然这个库只储存了三个层次的结构信息，<em>但当你要表示的流形结构时单形时，理论上你完全可以推导出它每层的信息。</em></p>
+<ul>
+<li>libcell内置了节点容器Node。了解它是必须的</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Node* temp_node;</span><br><span class="line"><span class="keyword">for</span>(Node n_it=*temp_node;*n_it!=<span class="literal">NULL</span>;n_it++)</span><br><span class="line">&#123;&#125;</span><br><span class="line"><span class="comment">//以上是对Node* temp_node遍历</span></span><br><span class="line"><span class="comment">//以下直接对结构体Node遍历，两者一样</span></span><br><span class="line">Node temp_node1;</span><br><span class="line"><span class="keyword">for</span>(Node n_it=temp_ndoe1;*n_it!=<span class="literal">NULL</span>;n_it++)</span><br><span class="line">&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>想要了解更多Node接口，可以在tools_node.h中定义了Node常用的函数，lib_cell_iterator.h中对Node进行了++,*的运算符重载。</p>
+<ul>
+<li><p>libcell还有仿openmesh的网格遍历接口</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> fit=mesh.faces.<span class="built_in">begin</span>();fit!=mesh.faces.<span class="built_in">end</span>();fit++)<span class="comment">//对面的遍历 </span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> fvit=mesh.<span class="built_in">fv_begin</span>(&amp;mesh,*fit-&gt;second);fvit!=mesh.<span class="built_in">fv_begin</span>(&amp;mesh,*fit-&gt;second);fvit++)<span class="comment">//面上点的遍历</span></span><br><span class="line">    &#123;</span><br><span class="line">        （*fvit）<span class="comment">//点(结构体实例，对他修改不会影响到真实的点)</span></span><br><span class="line">          <span class="built_in">quote</span>(cvit)<span class="comment">//点(引用指针，直接修改的话会影响到实体)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还可以用下面的遍历方式</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> fit=mesh.faces.<span class="built_in">begin</span>();fit!=mesh.faces.<span class="built_in">end</span>();fit++)<span class="comment">//对面的遍历 </span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;fit-&gt;second-&gt;vertices_size;i++)<span class="comment">//面上点的遍历</span></span><br><span class="line">    &#123;</span><br><span class="line">        (template_v*)fit-&gt;second-&gt;vertices[i]<span class="comment">//点</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> cit=mesh.cells.<span class="built_in">begin</span>();cit!=mesh.cells.<span class="built_in">end</span>();cit++)<span class="comment">//对cell的遍历 </span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> cvit=mesh.<span class="built_in">cv_begin</span>(&amp;mesh,*cit-&gt;second);cvit!=mesh.<span class="built_in">fv_begin</span>(&amp;mesh,*cit-&gt;second);fvit++)<span class="comment">//cell对点的遍历</span></span><br><span class="line">    &#123;</span><br><span class="line">        (*cvit)<span class="comment">//点(结构体)</span></span><br><span class="line">        <span class="built_in">quote</span>(cvit)<span class="comment">//点(引用指针，直接修改的话会影响到实体)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//还可以用以下方法</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> cit=mesh.cells.<span class="built_in">begin</span>();cit!=mesh.cells.<span class="built_in">end</span>();cit++)<span class="comment">//对cell的遍历 </span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;cit-&gt;second-&gt;vertices_size;i++)<span class="comment">//cell对点的遍历</span></span><br><span class="line">    &#123;</span><br><span class="line">        (template_v*)cit-&gt;second-&gt;vertices[i]<span class="comment">//点</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> cit=mesh.cells.<span class="built_in">begin</span>();cit!=mesh.cells.<span class="built_in">end</span>();cit++)<span class="comment">//对cell的遍历 </span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> cfit=mesh.<span class="built_in">cf_begin</span>(&amp;mesh,*cit-&gt;second);cfit!=mesh.<span class="built_in">cf_begin</span>(&amp;mesh,*cit-&gt;second);cfit++)<span class="comment">//cell对face的遍历</span></span><br><span class="line">    &#123;</span><br><span class="line">        (*cfit)<span class="comment">//face(结构体实例)</span></span><br><span class="line">        <span class="built_in">quote</span>(cfit)<span class="comment">//face指针(引用指针，直接修改的话会影响到实体)</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> vit=mesh.vertices.<span class="built_in">begin</span>();vit!=mesh.vertices.<span class="built_in">end</span>();vit++)<span class="comment">//对点的遍历</span></span><br><span class="line">&#123;<span class="comment">//点对cell的遍历</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> vcit=mesh.<span class="built_in">vc_begin</span>(&amp;mesh,*vit);vcit!=mesh.<span class="built_in">vc_end</span>(&amp;mesh,*vit);vcit++)</span><br><span class="line">    &#123;</span><br><span class="line">   		(*vcit)<span class="comment">//</span></span><br><span class="line">        <span class="built_in">quote</span>(vcit);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">auto</span> vit=mesh.vertices.<span class="built_in">begin</span>();vit!=mesh.vertices.<span class="built_in">end</span>();vit++)<span class="comment">//点的遍历</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//点对face的遍历</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">auto</span> vfit=mesh.<span class="built_in">vf_begin</span>(&amp;mesh,*vit);vfit!=mesh.<span class="built_in">vf_end</span>(&amp;mesh,*vit);vfit++)</span><br><span class="line">    &#123;</span><br><span class="line">   		(*vfit)<span class="comment">//</span></span><br><span class="line">        <span class="built_in">quote</span>(vfit);<span class="comment">//</span></span><br><span class="line">    &#125;</span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">template_f* f;</span><br><span class="line">f-&gt;halfface[<span class="number">0</span>]-&gt;cell<span class="comment">//face访问halfface,再访问到cell，更多的用法完全仿照openmesh</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>libcell </p>
+<h5 id="规定1"><a href="#规定1" class="headerlink" title="规定1"></a>规定1</h5><p>一个cell或者face,halfface的点顺序为$$p_0 p_1 .. p_n$$,那么对应的张量或者矩阵是$$d \left(p_1-p_0\right) \wedge d \left(p_2-p_0\right)…\wedge$$</p>
+<h5 id="规定2"><a href="#规定2" class="headerlink" title="规定2"></a>规定2</h5><p>张量运算向后添加.给一个单形$p_0 p_1 …p_n$,，对于子流形的顺序$p_0 …\hat{p_i}..p_n$是否交换，看$\left(-1\right)^{n-i}$的值。这样给一个halfface的点顺序是$p_0 p_1 ..p_n$,再给一个点$p_{n+1}$,那么组成的cell的点顺序是$p_0 …p_n p_{n+1}$,符合张量向后添加</p>
+<h5 id="规定3"><a href="#规定3" class="headerlink" title="规定3"></a>规定3</h5><p>一个n维流形，他是n+1个点组成的凸包，那么它的张量方向是[^1]</p>
+<p>$d\left(p_1-p_0\right)\wedge d\left(p_2-p_0\right)\wedge .. d\left(p_{n+1}-p_0\right)$</p>
+<h5 id="规定4"><a href="#规定4" class="headerlink" title="规定4"></a>规定4</h5><p>cell是n维流形，它的边界halfface的点是$p_0,p_1,…p_l,l&lt; n$,那么这个halfface的反对称张量是$\left(p_1-p_0\right)\wedge \left(p_2-p_0\right)\wedge …\left(p_{n-1}-p_0\right)$,也就是由前n-1个点确定。</p>
+<h4 id="离散网格"><a href="#离散网格" class="headerlink" title="离散网格"></a>离散网格</h4><h5 id="Definition-网格的重叠-overlap-（可以用来判断参数化的单射性）"><a href="#Definition-网格的重叠-overlap-（可以用来判断参数化的单射性）" class="headerlink" title="Definition :网格的重叠(overlap)（可以用来判断参数化的单射性）"></a>Definition :网格的重叠(overlap)（可以用来判断参数化的单射性）</h5><p>对于网格某个点p,跟它相邻  点的坐标分量作为morse函数，临界点超过两个则重叠(overlap)</p>
+<p>[^1]:  张量方向定义在 数学思想笔记</p>
+<h4 id="张量库的编写"><a href="#张量库的编写" class="headerlink" title="张量库的编写"></a>张量库的编写</h4><p>高精度库gmp</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./configure --prefix=安装目录 --build=x86_64-linux --enable-cxx <span class="comment">//x86_64-linux由uname -a查看</span></span><br><span class="line">make </span><br><span class="line">make check</span><br><span class="line">sudo make install </span><br></pre></td></tr></table></figure>
+
+<p>接触gmp让我大失所望，本以为它是个偏数学的高精度库，谁知道它的框架更偏向工程，这意味着很大的学习成本和繁杂的名词概念（头疼加恶心）。</p>
+<p><a target="_blank" rel="noopener" href="https://max.book118.com/html/2017/0701/119540326.shtm">中文教程</a></p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="如何给网格定向"><a href="#如何给网格定向" class="headerlink" title="如何给网格定向"></a>如何给网格定向</h4><h4 id="网格的差与并"><a href="#网格的差与并" class="headerlink" title="网格的差与并"></a>网格的差与并</h4>
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/02/23/%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BD%91%E6%A0%BC%E5%BA%93%E5%92%8C%E4%BD%BF%E7%94%A8/">
+    <time datetime="2019-02-23T09:38:19.000Z" class="entry-date">
+        2019-02-23
+    </time>
+</a>
+    
+  <span class="article-delim">&#8226;</span>
+  <div class="article-category">
+  <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </div>
+
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a></li></ul>
+
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2019/02/24/%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E4%B8%8D%E7%AD%89%E5%BC%8F/" rel="prev"><span class="meta-nav">←</span> 几个重要不等式</a></span>
+    
+    
+        <span class="nav-next"><a href="/2019/02/19/%E8%8A%82%E5%90%8E%E5%88%B0%E4%BA%AC/" rel="next">节后到京 <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div id="gitalk-container" style="margin: 30px;"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '3227fda9287cfd4d5cab',
+            clientSecret: '9ba26389f1bb6e896001f95b0c0482df62f2b9f6',
+            repo: 'wujilingfeng.github.io',
+            owner: 'wujilingfeng',
+            id: '常见的网格库和使用',
+            admin: 'wujilingfeng'
+        })
+ 
+        gitalk.render('gitalk-container')
+    </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Music</h3>
+    <div class="widget-content">
+      <audio src="/music.mp3" controls="controls" loop="loop" autoplay=true
+             style="width:100%">
+        您的浏览器不支持 audio 标签。
+      </audio>
+    </div>
+  </aside>
+
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-content">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><span class="category-list-count">5</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/01/rust%E7%AC%94%E8%AE%B0/">rust笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/15/haskell%E5%AE%9E%E6%88%98%E5%92%8C%E4%BE%8B%E5%AD%90/">haskell实战和例子</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/03/%E9%BB%8E%E6%9B%BC%E6%9B%B2%E9%9D%A2%E7%AC%94%E8%AE%B0/">黎曼曲面笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/12/haskell/">haskell</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B0-PDE/">偏微分方程笔记(PDE)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81/" rel="tag">代码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">数学，计算机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%B3%E5%8D%97/" rel="tag">河南</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">4</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/linux/" style="font-size: 12.5px;">linux</a> <a href="/tags/%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">代码</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 15px;">博客</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 17.5px;">工具</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a> <a href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 10px;">数学，计算机</a> <a href="/tags/%E6%B2%B3%E5%8D%97/" style="font-size: 12.5px;">河南</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">算法</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">编程</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 17.5px;">计算机</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2021 李博
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>

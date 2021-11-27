@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <meta name="description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});
+
+
+
+
+本文记录python学习笔记
+python像人类语言一样自由(同样的功能可能有十几种写法)，所以真正的学习成本巨大(入门成本较低)，应该多做些笔记以防遗忘" />
+  
+
+  
+  
+  
+  
+  
+  
+  <title>python笔记 | 烂笔头</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});     本文记录python学习笔记 python像人类语言一样自由(同样的功能可能有十几种写法)，所以真正的学习成本巨大(入门成本较低)，应该多做些笔记以防遗忘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python笔记">
+<meta property="og:url" content="http://yoursite.com/2019/04/11/python%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="烂笔头">
+<meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});     本文记录python学习笔记 python像人类语言一样自由(同样的功能可能有十几种写法)，所以真正的学习成本巨大(入门成本较低)，应该多做些笔记以防遗忘">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-04-11T14:01:36.000Z">
+<meta property="article:modified_time" content="2020-04-24T12:27:30.212Z">
+<meta property="article:author" content="李博">
+<meta property="article:tag" content="计算机">
+<meta name="twitter:card" content="summary">
+  
+  
+    <link rel="icon" href="/css/images/favicon.ico">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  
+  <!-- baidu webmaster push -->
+  <script src='//push.zhanzhang.baidu.com/push.js'></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body class="home blog custom-background custom-font-enabled single-author">
+  <div id="page" class="hfeed site">
+      <header id="masthead" class="site-header" role="banner">
+    <hgroup>
+      <h1 class="site-title">
+        <a href="/" title="烂笔头" rel="home">烂笔头</a>
+      </h1>
+      
+        <h2 class="site-description hitokoto"></h2>
+        <script type="text/javascript" src="https://v1.hitokoto.cn/?encode=js"></script>
+      
+    </hgroup>
+
+    <nav id="site-navigation" class="main-navigation" role="navigation">
+            <button class="menu-toggle">菜单</button>
+            <a class="assistive-text" href="/#content" title="跳至内容">跳至内容</a><!--TODO-->
+            <div class="menu-main-container">
+                <ul id="menu-main" class="nav-menu">
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/">Home</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/archives">Archives</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a target="_blank" rel="noopener" href="https://github.com/wujilingfeng/">Github</a></li>
+                
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a target="_blank" rel="noopener" href="https://gitee.com/">Gitee</a></li>
+                
+                </ul>
+            </div>
+    </nav>
+</header>
+
+      <div id="main" class="wrapper">
+        <div id="primary" class="site-content"><div id="content" role="main"><article id="post-python笔记" class="post-python笔记 post type-post status-publish format-standard hentry">
+    <!---->
+
+      <header class="entry-header">
+        
+        
+  
+    <h1 class="entry-title article-title">
+      python笔记
+    </h1>
+  
+
+        
+        <div class="comments-link">
+            
+            <a href="/2019/04/11/python%E7%AC%94%E8%AE%B0/#comments" class="leave-reply">Reply</a>
+            
+            <a href="javascript:void(0);" data-url="http://yoursite.com/2019/04/11/python%E7%AC%94%E8%AE%B0/" data-id="ckwh75u82001k9wxj61nj7rd2" class="leave-reply bdsharebuttonbox" data-cmd="more">Share</a>
+        </div><!-- .comments-link -->
+      </header><!-- .entry-header -->
+
+    <div class="entry-content">
+      
+        <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://wujilingfeng.top/MathJax/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+<p>本文记录python学习笔记</p>
+<p>python像人类语言一样自由(同样的功能可能有十几种写法)，所以真正的学习成本巨大(入门成本较低)，应该多做些笔记以防遗忘</p>
+<span id="more"></span>
+
+<h4 id="anaconda"><a href="#anaconda" class="headerlink" title="anaconda"></a>anaconda</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source deactivate env_name#退出环境</span><br></pre></td></tr></table></figure>
+
+
+
+<p>_<em>init_</em>.py使文件夹可被import，比如<a target="_blank" rel="noopener" href="https://www.cnblogs.com/BlueSkyyj/p/9415087.html">这里</a></p>
+<p>python是脚本语言，所以支持一行一运行。</p>
+<p>python单双引号，三引号都可以使用，<a target="_blank" rel="noopener" href="https://blog.csdn.net/woainishifu/article/details/76105667">具体区别</a></p>
+<p>.py文件可以用<code>python test.py</code>或者<code>python3 test.py</code></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/gordennizaicunzai/article/details/87905618">这里</a>介绍了python读取二进制文件的方法</p>
+<table>
+<thead>
+<tr>
+<th>例子</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>a*b</td>
+<td>a乘b</td>
+</tr>
+<tr>
+<td>a**b</td>
+<td>a的b次方</td>
+</tr>
+<tr>
+<td>a%b</td>
+<td>a取余b</td>
+</tr>
+<tr>
+<td>a/b</td>
+<td>a除b</td>
+</tr>
+<tr>
+<td>a//b</td>
+<td>a整除b</td>
+</tr>
+<tr>
+<td>‘f’*3</td>
+<td>结果是’fff’(字符串也可以做乘法和加法)</td>
+</tr>
+<tr>
+<td>“df”+”ab”</td>
+<td>结果是”dfab”</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<hr>
+<p><a target="_blank" rel="noopener" href="http://www.runoob.com/python3/python3-data-type.html">python教程</a></p>
+<p><code>python -m pip install numpy</code>安装numpy<br>pip3 install package -i url#url是你要用的镜像地址</p>
+<p><code>python -m pip install matplotlib</code>在termux下，可能出现ft2build.h找不到的情况，它在/usr/include/freetype2文件夹下，将这个文件夹下的内容拷贝到/usr/include里<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/15715d6f4dad">切片操作</a></p>
+<p>实际上切片经常用于改变数组的形状，顺序</p>
+<h4 id="numpy"><a href="#numpy" class="headerlink" title="numpy"></a>numpy</h4><p>对数组进行for .. in .. 循环实际上对行遍历</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> np.random.randn(<span class="number">3</span>,<span class="number">4</span>):</span><br><span class="line">	<span class="built_in">print</span>(i,end=<span class="string">&quot;libo&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>对数组进行条件筛选</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a=np.random.randd(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(a&gt;<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这时输出的是<code>array([[True...],[False..],[],[]])</code></p>
+<p>接着上面继续</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[a&gt;<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<p>这时候完成的筛选</p>
+<p>对于数组的拼接</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.concatenate(a,b,axis=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>按行(axis=0)拼接</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">np.dot()矩阵乘法</span><br><span class="line">*或者.multiply()</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="matplotlib"><a href="#matplotlib" class="headerlink" title="matplotlib"></a>matplotlib</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zjyklwg/article/details/79477261">https://blog.csdn.net/zjyklwg/article/details/79477261</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/92e1a4497505">https://www.jianshu.com/p/92e1a4497505</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/74923962">https://zhuanlan.zhihu.com/p/74923962</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mpl_toolkits <span class="keyword">import</span> mplot3d</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.image <span class="keyword">as</span> mpimg</span><br><span class="line"><span class="comment">#lena=mpimg.imread(&quot;img.jpg&quot;)</span></span><br><span class="line"><span class="comment">#fig=plt.figure();</span></span><br><span class="line"><span class="comment">#ax=fig.gca(projection=&#x27;3d&#x27;)</span></span><br><span class="line"><span class="comment">#plt.imshow(lena)</span></span><br><span class="line"><span class="comment">#plt.axis(&quot;off&quot;)</span></span><br><span class="line"><span class="comment">#plt.show()</span></span><br><span class="line"></span><br><span class="line">lena=mpimg.imread(<span class="string">&quot;img.jpg&quot;</span>)</span><br><span class="line"></span><br><span class="line">fig1=plt.figure(num=<span class="string">&quot;3*1 inches&quot;</span>,figsize=(<span class="number">9</span>,<span class="number">4</span>))<span class="comment">#激活当前fig(没有的话先创建)</span></span><br><span class="line">ax=plt.axes(projection=<span class="string">&#x27;3d&#x27;</span>)<span class="comment">#添加第三个轴,只有导入mplot3d才有效</span></span><br><span class="line">zline=np.linspace(<span class="number">0</span>,<span class="number">25</span>,<span class="number">1000</span>)</span><br><span class="line">xline=np.sin(zline)</span><br><span class="line">yline=np.cos(zline)</span><br><span class="line">ax.plot3D(xline,yline,zline,<span class="string">&quot;gray&quot;</span>)</span><br><span class="line">zdata=<span class="number">15</span>*np.random.random(<span class="number">100</span>)</span><br><span class="line">xdata=np.sin(zdata)+<span class="number">0.1</span>*np.random.randn(<span class="number">100</span>)</span><br><span class="line">ydata=np.cos(zdata)+<span class="number">0.1</span>*np.random.randn(<span class="number">100</span>)</span><br><span class="line">ax.scatter3D(xdata,ydata,zdata,c=zdata,cmap=<span class="string">&quot;Greens&quot;</span>)</span><br><span class="line">gravity=np.array([<span class="number">0.299</span>,<span class="number">0.587</span>,<span class="number">0.114</span>])</span><br><span class="line">imag=np.tensordot(lena,gravity,axes=([<span class="number">2</span>],[<span class="number">0</span>]))<span class="comment">#转成灰度图</span></span><br><span class="line"><span class="built_in">print</span>(imag.shape)</span><br><span class="line">fig2=plt.figure(num=<span class="string">&quot;6*2 inches&quot;</span>,figsize=(<span class="number">6</span>,<span class="number">6</span>))<span class="comment">#num相当于此fig的id</span></span><br><span class="line">plt.imshow(imag,cmap=<span class="string">&quot;gray&quot;</span>)</span><br><span class="line">fig3=plt.figure(num=<span class="string">&quot;3d image&quot;</span>,figsize=(<span class="number">9</span>,<span class="number">9</span>))</span><br><span class="line">ax1=plt.axes(projection=<span class="string">&quot;3d&quot;</span>)</span><br><span class="line">xl=np.linspace(<span class="number">0</span>,imag.shape[<span class="number">0</span>]-<span class="number">1</span>,imag.shape[<span class="number">0</span>])</span><br><span class="line">yl=np.linspace(<span class="number">0</span>,imag.shape[<span class="number">1</span>]-<span class="number">1</span>,imag.shape[<span class="number">1</span>])</span><br><span class="line">a,b=np.meshgrid(yl,xl)</span><br><span class="line">a=a.reshape(-<span class="number">1</span>)</span><br><span class="line">b=b.reshape(-<span class="number">1</span>)</span><br><span class="line">imag=imag.reshape(-<span class="number">1</span>)</span><br><span class="line">tes=np.random.random(a.shape)</span><br><span class="line">tes=tes&gt;<span class="number">0.92</span></span><br><span class="line">a=a[tes]</span><br><span class="line">b=b[tes]</span><br><span class="line">imag=imag[tes]</span><br><span class="line"></span><br><span class="line">ax1.scatter3D(a,b,imag,s=<span class="number">1</span>,c=imag)</span><br><span class="line"><span class="comment">#ax1.plot_surface(a,b,imag)</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;sf&quot;</span>,b.shape,a.shape,imag.shape,tes)</span><br><span class="line">plt.show()</span><br><span class="line">plt.close</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>python函数的变量都是是引用，但是对于数字改变时，地址也改变。效果等价于对于函数数字变量是传值。</p>
+<p>比如下面的程序展示了python从头到尾的引用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>():</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,name</span>):</span></span><br><span class="line">        self.name=name;</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_name</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">print</span>(self.name);</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span>(<span class="params">stu</span>):</span></span><br><span class="line">    stu.get_name();</span><br><span class="line">    <span class="keyword">return</span> stu;</span><br><span class="line"></span><br><span class="line">a=Student(<span class="string">&quot;libo&quot;</span>)</span><br><span class="line">a.get_name()</span><br><span class="line">b=test(a)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;a:&quot;</span>,<span class="built_in">id</span>(a),<span class="built_in">id</span>(b))</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="built_in">str</span>=sys.stdin.readline()</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> <span class="built_in">str</span>:<span class="comment">#判断eof</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;not line&quot;</span>)</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">str</span>==<span class="string">&#x27;\n&#x27;</span>:<span class="comment">#判断换行</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot; kong&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>上面显示了python读取输入的模板(如果是读取文件只需要前面换成<code>with open(&quot;&quot;) as f:</code>,<code>for l in f.readlines()</code>)</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a=<span class="built_in">map</span>(<span class="built_in">int</span>,<span class="built_in">input</span>().split());</span><br><span class="line">b=<span class="built_in">list</span>(a)</span><br></pre></td></tr></table></figure>
+<p>上面显示了python读取一行整数(b代表这一行整数的列表)<br>函数内部要引用外部变量，需要用global关键字</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a=[0 for i in range(4)]#等价int a[4]</span><br></pre></td></tr></table></figure>
+
+<p>python next()迭代器的使用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> it <span class="keyword">in</span> v_it:</span><br><span class="line">	</span><br></pre></td></tr></table></figure>
+
+<p>python的itertools是实现排列组合的标准库</p>
+<table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>range()</td>
+<td>返回数字序列列表(与numpy的arange相同)</td>
+</tr>
+<tr>
+<td>np.arange(1,11,1)</td>
+<td>返回向量1到11,步长1</td>
+</tr>
+<tr>
+<td>np.array([1,2,3],dtype=complex)</td>
+<td></td>
+</tr>
+<tr>
+<td>np.random.rand(2,100)</td>
+<td>返回2*100随机矩阵(np.random.random(100)100个0-1随机点)</td>
+</tr>
+<tr>
+<td>os.path.dirname()</td>
+<td>返回去掉文件名的路径</td>
+</tr>
+<tr>
+<td>os.path.abspath()</td>
+<td>返回绝对路径(文件名加当前路径)</td>
+</tr>
+<tr>
+<td>sys.argv[0]</td>
+<td>向python脚本传递变量</td>
+</tr>
+<tr>
+<td>str()</td>
+<td>转化为字符串</td>
+</tr>
+<tr>
+<td>np_obj.transpose(1,0)</td>
+<td>将0数轴，1数轴转置</td>
+</tr>
+<tr>
+<td>np_obj.reshape()</td>
+<td>重塑形状，包括(一维向量)转置功能</td>
+</tr>
+<tr>
+<td>np.tensordot(a,b,axes=([1,0],[0,1]))</td>
+<td>a的第1轴元素，和b的第0轴作用，a的第0轴和b的第1轴作用（名称不对，这应该叫张量的缩并，而非张量积）</td>
+</tr>
+<tr>
+<td>super(class,obj)</td>
+<td>调用父类成员</td>
+</tr>
+<tr>
+<td>for i in rang(0,5)</td>
+<td>等价for(int i=0;i&lt;5;i++)（range也可以换成xrange）</td>
+</tr>
+<tr>
+<td>sys.stdin.read(1)</td>
+<td>等价scanf(“%c”,)</td>
+</tr>
+<tr>
+<td>sys.stdin.readline()</td>
+<td>读取一行字符以”\n”结尾</td>
+</tr>
+<tr>
+<td>input()</td>
+<td>读取一行字符串</td>
+</tr>
+<tr>
+<td>np.ones((2,3)),np.zeros((3,5)),np.eye(4,6)</td>
+<td>np换成torch也可以</td>
+</tr>
+<tr>
+<td>ord()</td>
+<td>返回一个字符的ACSI码</td>
+</tr>
+<tr>
+<td>nump_obj.size numpy_obj.shape</td>
+<td>头一个返回元素个数</td>
+</tr>
+<tr>
+<td>np_obj.astype(int)</td>
+<td>numpy转化为int形,例如image=image.astype(np.float32)</td>
+</tr>
+<tr>
+<td>np.append(a,b,axis=0)</td>
+<td>张量的行拼接</td>
+</tr>
+<tr>
+<td>chr()</td>
+<td>和ord()是互逆运算</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h5 id="类"><a href="#类" class="headerlink" title="类"></a>类</h5><p><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python3-class.html">python的类</a></p>
+<p><code>if __name__==&quot;__main__&quot;:</code></p>
+<p>语句是文件当作脚本和模块运行的区别,python脚本文件的<code>__file__</code>代表该文件命</p>
+<p>三种信息标记形式:xml,json,yaml</p>
+<p>id()用来获取对象的内存,is比较的内存地址（id()函数返回的值），==比较的是值</p>
+<p>三种信息标记形式:xml,json,yaml</p>
+<p>如下代码展示读取一张图片并显示</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.image <span class="keyword">as</span> mpimg</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">lena=mpimg.imread(<span class="string">&#x27;lena.png&#x27;</span>)</span><br><span class="line">lena.shape</span><br><span class="line">plt.imshow(lena)</span><br><span class="line">plt.axis(<span class="string">&#x27;off&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>method</th>
+<th>meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>__init__</td>
+<td>构造函数</td>
+</tr>
+<tr>
+<td>__del__</td>
+<td>析构函数</td>
+</tr>
+<tr>
+<td>__sub__</td>
+<td>减法重载</td>
+</tr>
+<tr>
+<td>__add__</td>
+<td>加法重载</td>
+</tr>
+<tr>
+<td>__mul__</td>
+<td>乘法重载</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://blog.csdn.net/cn_wk/article/details/76939870">给个链接</a></td>
+<td></td>
+</tr>
+</tbody></table>
+<h5 id="访问类的属性"><a href="#访问类的属性" class="headerlink" title="访问类的属性"></a>访问类的属性</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">getattr</span>(obj,attr)</span><br><span class="line"><span class="built_in">setattr</span>(obj,attr,val)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="c为python做模块"><a href="#c为python做模块" class="headerlink" title="c为python做模块"></a>c为python做模块</h4><p>以下几个连接</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/pyse/p/8590829.html">https://www.cnblogs.com/pyse/p/8590829.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xudong-bupt/p/7025728.html">https://www.cnblogs.com/xudong-bupt/p/7025728.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/yanzi-meng/p/8066944.html">https://www.cnblogs.com/yanzi-meng/p/8066944.html</a></p>
+<h5 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h5><p><code>gcc -fPIC -shared fun_name.c -o libfunc_name.so</code><br>把c代码打包<br>然后在.py文件中import ctypes</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> cdll</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line">p = os.getcwd() + <span class="string">&#x27;/libfunc.so&#x27;</span></span><br><span class="line">f = cdll.LoadLibrary(p)</span><br><span class="line"><span class="built_in">print</span> f.func(<span class="number">99</span>)</span><br></pre></td></tr></table></figure>
+<h5 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h5><p>如下方法只需要把源文件(.c或者.cpp)文件包裹，但是需要在setup.py中给出头文件的include_dir变量<br><a href="./py_test1.h">py_test1.h</a>,<a href="./py_test1.c">py_test1.c</a><br>py_test1wrapper.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PY_SSIZE_T_CLEAN</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Python.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;py_test1.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="keyword">static</span> PyObject *<span class="title">py_test1_fac</span><span class="params">(PyObject *self,PyObject* args)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n;</span><br><span class="line"><span class="keyword">if</span>(!PyArg_ParseTuple(args,<span class="string">&quot;i&quot;</span>,&amp;n))</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> (PyObject*)Py_BuildValue(<span class="string">&quot;i&quot;</span>,fac(n));</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">static</span> PyMethodDef py_test1Methods[]=</span><br><span class="line">&#123;</span><br><span class="line">    &#123;<span class="string">&quot;fac&quot;</span>,py_test1_fac,METH_VARARGS&#125;,</span><br><span class="line">        &#123;<span class="literal">NULL</span>,<span class="literal">NULL</span>&#125;,</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span>  PyModuleDef exmodule=&#123;</span><br><span class="line">PyModuleDef_HEAD_INIT,</span><br><span class="line"><span class="string">&quot;py_test1&quot;</span>,</span><br><span class="line"><span class="literal">NULL</span>,</span><br><span class="line"><span class="number">-1</span>,</span><br><span class="line">py_test1Methods</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">PyMODINIT_FUNC <span class="title">PyInit_py_test1</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">return</span> PyModule_Create(&amp;exmodule);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*void initpy_test1(void)</span></span><br><span class="line"><span class="comment">&#123;</span></span><br><span class="line"><span class="comment">Py_InitModule(&quot;py_test1&quot;,py_test1Methods);</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">&#125;*/</span></span><br></pre></td></tr></table></figure>
+<p>setup.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> distutils.core <span class="keyword">import</span> setup,Extension</span><br><span class="line">MOD=<span class="string">&quot;py_test1&quot;</span></span><br><span class="line">source=[<span class="string">&quot;py_test1.c&quot;</span>,<span class="string">&quot;py_test1wrapper.c&quot;</span>]</span><br><span class="line">setup(name=MOD,ext_modules=[Extension(MOD,sources=source,include_dirs=[<span class="string">&quot;/usr/include/python3.6&quot;</span>])])</span><br></pre></td></tr></table></figure>
+
+<h4 id="c中调用python"><a href="#c中调用python" class="headerlink" title="c中调用python"></a>c中调用python</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;Python.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mytest</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Py_Initialize</span>();</span><br><span class="line"><span class="built_in">PyRun_SimpleString</span>(<span class="string">&quot;import sys&quot;</span>);</span><br><span class="line"><span class="built_in">PyRun_SimpleString</span>(<span class="string">&quot;sys.path.append(&#x27;./&#x27;)&quot;</span>);</span><br><span class="line"><span class="built_in">PyRun_SimpleString</span>(<span class="string">&quot;print(&#x27;first hello world &#x27;)&quot;</span>);</span><br><span class="line"><span class="comment">//PyObject* pname=PyLong_FromString(&quot;hello&quot;);</span></span><br><span class="line">PyObject *pmodule=<span class="built_in">PyImport_ImportModule</span>(<span class="string">&quot;hello1&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(!pmodule)</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;cuowu\r\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">PyObject *pfunc=<span class="built_in">PyObject_GetAttrString</span>(pmodule,<span class="string">&quot;xxprint&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(!pfunc)</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;cuowu2&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//PyObject_CallFunction(pfunc,NULL);</span></span><br><span class="line"><span class="built_in">PyEval_CallObject</span>(pfunc,<span class="literal">NULL</span>);</span><br><span class="line">PyObject *pdic=<span class="built_in">PyModule_GetDict</span>(pmodule);</span><br><span class="line"><span class="keyword">if</span>(!pdic)</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;cuowu\r\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">pfunc=<span class="built_in">PyDict_GetItemString</span>(pdic,<span class="string">&quot;yprint&quot;</span>);</span><br><span class="line">PyObject* pArg=<span class="built_in">Py_BuildValue</span>(<span class="string">&quot;(i,i)&quot;</span>,<span class="number">7</span>,<span class="number">8</span>);</span><br><span class="line">PyObject* result=<span class="built_in">PyEval_CallObject</span>(pfunc,pArg);</span><br><span class="line"><span class="keyword">int</span> c=<span class="number">0</span>;</span><br><span class="line"><span class="built_in">PyArg_Parse</span>(result,<span class="string">&quot;i&quot;</span>,&amp;c);</span><br><span class="line">PyObject* pclass=<span class="built_in">PyDict_GetItemString</span>(pdic,<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(!pclass)</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;cuowu\r\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">PyObject* pinstance=<span class="built_in">PyInstanceMethod_New</span>(pclass);</span><br><span class="line">pArg=<span class="built_in">Py_BuildValue</span>(<span class="string">&quot;(s)&quot;</span>,<span class="string">&quot;libo&quot;</span>);</span><br><span class="line">result=<span class="built_in">PyObject_CallMethod</span>(pinstance,<span class="string">&quot;sayhello&quot;</span>,<span class="string">&quot;(s,s)&quot;</span>,<span class="string">&quot;charity&quot;</span>,<span class="string">&quot;charity&quot;</span>);</span><br><span class="line"><span class="comment">//char* name;</span></span><br><span class="line"><span class="comment">//PyArg_Parse(result,&quot;s&quot;,&amp;name);</span></span><br><span class="line"><span class="comment">//printf(&quot;%s&quot;,name);</span></span><br><span class="line"><span class="comment">//PyObject *pclass=PyObject_GetAttrString(pmodule,&quot;Hello&quot;);</span></span><br><span class="line"><span class="comment">//PyObject *arg=Py_BuildValue(&quot;(i)&quot;,5);</span></span><br><span class="line"><span class="comment">//PyObject *pinstance=PyObject_Call(pclass,arg,NULL);</span></span><br><span class="line"><span class="comment">//PyObject_CallMethod(pinstance,&quot;print&quot;,&quot;i&quot;,6);</span></span><br><span class="line"><span class="built_in">Py_Finalize</span>();</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mytest</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">int</span> a=<span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Hello</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,x</span>):</span></span><br><span class="line">        self.a=x</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">hprint</span>(<span class="params">self,x=<span class="literal">None</span></span>):</span></span><br><span class="line">        <span class="built_in">print</span>(x)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">sayhello</span>(<span class="params">self,name</span>):</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;hello,nihao &quot;</span>+name)</span><br><span class="line">        <span class="keyword">return</span> name</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">xxprint</span></span></span><br><span class="line"><span class="function">    <span class="title">print</span>(<span class="params"><span class="string">&quot;111hello world&quot;</span></span>)</span></span><br><span class="line"><span class="function"><span class="title">def</span> <span class="title">yprint</span>(<span class="params">a,b</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(a+b)</span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    xxprint()</span><br><span class="line">    h=Hello(<span class="number">5</span>)</span><br><span class="line">    h.<span class="built_in">print</span>(<span class="string">&quot;dafds&quot;</span>)</span><br><span class="line">    yprint(<span class="number">5</span>,<span class="number">9</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Tensorflow"><a href="#Tensorflow" class="headerlink" title="Tensorflow"></a>Tensorflow</h3><table>
+<thead>
+<tr>
+<th>functon</th>
+<th>meaning</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>tf.assign(variable.name,value)</td>
+<td>tf.assign(x,[1,2])给变量赋值</td>
+</tr>
+<tr>
+<td>tf.squared_difference(x,y)</td>
+<td>返回张量x-y各元素平方</td>
+</tr>
+<tr>
+<td>tf.multiply(a,b)</td>
+<td>标量相乘</td>
+</tr>
+<tr>
+<td>tf.matmul(a,b)</td>
+<td>矩阵相乘</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>如下展示使用tensorboard</td>
+<td></td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">######################################</span></span><br><span class="line"><span class="comment">######### Necessary Flags ############</span></span><br><span class="line"><span class="comment"># ####################################</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># The default path for saving event files is the same folder of this python file.</span></span><br><span class="line">tf.app.flags.DEFINE_string(</span><br><span class="line">    <span class="string">&#x27;log_dir&#x27;</span>, os.path.dirname(os.path.abspath(__file__)) + <span class="string">&#x27;/logs&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Directory where event logs are written to.&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Store all elemnts in FLAG structure!</span></span><br><span class="line">FLAGS = tf.app.flags.FLAGS</span><br><span class="line"></span><br><span class="line"><span class="comment">################################################</span></span><br><span class="line"><span class="comment">################# handling errors!##############</span></span><br><span class="line"><span class="comment">################################################</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># The user is prompted to input an absolute path.</span></span><br><span class="line"><span class="comment"># os.path.expanduser is leveraged to transform &#x27;~&#x27; sign to the corresponding path indicator.</span></span><br><span class="line"><span class="comment">#       Example: &#x27;~/logs&#x27; equals to &#x27;/home/username/logs&#x27;</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">not</span> os.path.isabs(os.path.expanduser(FLAGS.log_dir)):</span><br><span class="line">    <span class="keyword">raise</span> ValueError(<span class="string">&#x27;You must assign absolute path for --log_dir&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Defining some constant values</span></span><br><span class="line">a = tf.constant(<span class="number">5.0</span>, name=<span class="string">&quot;a&quot;</span>)</span><br><span class="line">b = tf.constant(<span class="number">10.0</span>, name=<span class="string">&quot;b&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Some basic operations</span></span><br><span class="line">x = tf.add(a, b, name=<span class="string">&quot;add&quot;</span>)</span><br><span class="line">y = tf.div(a, b, name=<span class="string">&quot;divide&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Run the session</span></span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    writer = tf.summary.FileWriter(os.path.expanduser(FLAGS.log_dir), sess.graph)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;a =&quot;</span>, sess.run(a))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;b =&quot;</span>, sess.run(b))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;a + b =&quot;</span>, sess.run(x))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;a/b =&quot;</span>, sess.run(y))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Closing the writer.</span></span><br><span class="line">writer.close()</span><br><span class="line">sess.close()</span><br></pre></td></tr></table></figure>
+<p>在终端执行<code>python3 py_name.py</code>,<em>tensorboard –logdir= ` pwd`/logs</em></p>
+
+      
+    </div><!-- .entry-content -->
+
+    <footer class="entry-meta">
+    <a href="/2019/04/11/python%E7%AC%94%E8%AE%B0/">
+    <time datetime="2019-04-11T14:01:36.000Z" class="entry-date">
+        2019-04-11
+    </time>
+</a>
+    
+  <span class="article-delim">&#8226;</span>
+  <div class="article-category">
+  <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+  </div>
+
+    
+  <span class="article-delim">&#8226;</span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a></li></ul>
+
+    </footer>
+</article>
+
+
+    
+<nav class="nav-single">
+    <h3 class="assistive-text">文章导航</h3>
+    
+        <span class="nav-previous"><a href="/2019/05/04/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev"><span class="meta-nav">←</span> 机器学习笔记</a></span>
+    
+    
+        <span class="nav-next"><a href="/2019/04/11/c-and-Eigen/" rel="next">c++and Eigen <span class="meta-nav">→</span></a></span>
+    
+</nav><!-- .nav-single -->
+
+
+
+
+
+
+<section id="comments">
+  <!-- 多说评论框 start -->
+  <div id="gitalk-container" style="margin: 30px;"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+        var gitalk = new Gitalk({
+            clientID: '3227fda9287cfd4d5cab',
+            clientSecret: '9ba26389f1bb6e896001f95b0c0482df62f2b9f6',
+            repo: 'wujilingfeng.github.io',
+            owner: 'wujilingfeng',
+            id: 'python笔记',
+            admin: 'wujilingfeng'
+        })
+ 
+        gitalk.render('gitalk-container')
+    </script>
+  <!-- 多说公共JS代码 end -->
+</section>
+
+
+
+</div></div>
+        <div id="secondary" class="widget-area" role="complementary">
+  
+    <aside id="search" class="widget widget_search"><form role="search" method="get" accept-charset="utf-8" id="searchform" class="searchform" action="//google.com/search">
+    <div>
+        <input type="text" value="" name="s" id="s" />
+        <input type="submit" id="searchsubmit" value="搜索" />
+    </div>
+</form></aside>
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Music</h3>
+    <div class="widget-content">
+      <audio src="/music.mp3" controls="controls" loop="loop" autoplay=true
+             style="width:100%">
+        您的浏览器不支持 audio 标签。
+      </audio>
+    </div>
+  </aside>
+
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-content">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a><span class="category-list-count">29</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E6%B4%BB/">生活</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95/">算法</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/">计算机</a><span class="category-list-count">5</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-content">
+      <ul>
+        
+          <li>
+            <a href="/2021/07/01/rust%E7%AC%94%E8%AE%B0/">rust笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/15/haskell%E5%AE%9E%E6%88%98%E5%92%8C%E4%BE%8B%E5%AD%90/">haskell实战和例子</a>
+          </li>
+        
+          <li>
+            <a href="/2020/07/03/%E9%BB%8E%E6%9B%BC%E6%9B%B2%E9%9D%A2%E7%AC%94%E8%AE%B0/">黎曼曲面笔记</a>
+          </li>
+        
+          <li>
+            <a href="/2020/05/12/haskell/">haskell</a>
+          </li>
+        
+          <li>
+            <a href="/2020/02/13/%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%AC%94%E8%AE%B0-PDE/">偏微分方程笔记(PDE)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-content">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%A0%81/" rel="tag">代码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag">博客</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%B7%A5%E5%85%B7/" rel="tag">工具</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag">数学</a><span class="tag-list-count">26</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">数学，计算机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B2%B3%E5%8D%97/" rel="tag">河南</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B/" rel="tag">编程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C/" rel="tag">网络</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" rel="tag">计算机</a><span class="tag-list-count">4</span></li></ul>
+    </div>
+  </aside>
+
+  
+    
+  <aside class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-content tagcloud">
+      <a href="/tags/linux/" style="font-size: 12.5px;">linux</a> <a href="/tags/%E4%BB%A3%E7%A0%81/" style="font-size: 10px;">代码</a> <a href="/tags/%E5%8D%9A%E5%AE%A2/" style="font-size: 15px;">博客</a> <a href="/tags/%E5%B7%A5%E5%85%B7/" style="font-size: 17.5px;">工具</a> <a href="/tags/%E6%95%B0%E5%AD%A6/" style="font-size: 20px;">数学</a> <a href="/tags/%E6%95%B0%E5%AD%A6%EF%BC%8C%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 10px;">数学，计算机</a> <a href="/tags/%E6%B2%B3%E5%8D%97/" style="font-size: 12.5px;">河南</a> <a href="/tags/%E7%AE%97%E6%B3%95/" style="font-size: 12.5px;">算法</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 10px;">编程</a> <a href="/tags/%E7%BD%91%E7%BB%9C/" style="font-size: 10px;">网络</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="font-size: 17.5px;">计算机</a>
+    </div>
+  </aside>
+
+  
+</div>
+      </div>
+      <footer id="colophon" role="contentinfo">
+    <p>&copy; 2021 李博
+    All rights reserved.</p>
+    <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
+</footer>
+    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"2","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='/js/share.js'];</script>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+<script src="/js/navigation.js"></script>
+
+<div id="bg"></div>
+
+  </div>
+</body>
+</html>
