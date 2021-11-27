@@ -22,11 +22,13 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});">
 <meta property="og:locale">
+<meta property="og:image" content="http://yoursite.com/2019/06/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E5%BF%B5%E7%9A%84%E6%95%B0%E5%AD%A6%E8%A7%A3%E9%87%8A/lizi.png">
 <meta property="article:published_time" content="2019-06-19T00:35:30.000Z">
-<meta property="article:modified_time" content="2021-11-27T01:44:03.026Z">
+<meta property="article:modified_time" content="2021-11-27T08:56:16.614Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E5%BF%B5%E7%9A%84%E6%95%B0%E5%AD%A6%E8%A7%A3%E9%87%8A/lizi.png">
   
   
     <link rel="icon" href="/css/images/favicon.ico">
@@ -96,7 +98,7 @@
 
     <div class="entry-content">
       
-        <script type="text/x-mathjax-config">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><script type="text/x-mathjax-config">
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 </script>
 <script type="text/javascript" async
@@ -110,21 +112,22 @@
 
 <h4 id="共轭梯度法"><a href="#共轭梯度法" class="headerlink" title="共轭梯度法"></a>共轭梯度法</h4><p>共轭梯度法是正定矩阵的对角化。</p>
 <h4 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a>卷积</h4><p>卷积是二维矩阵（图片）的线性变换，或者测度的变换。</p>
-<p>具体是将二维图片展成一维向量，然后卷积核同理，那么卷积相当于向量乘以矩阵 <a href="%E6%97%A2%E7%84%B6%E5%8D%B7%E7%A7%AF%E5%B0%B1%E6%98%AF%E5%90%91%E9%87%8F%E4%B9%98%E4%BB%A5%E7%9F%A9%E9%98%B5%EF%BC%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E8%A6%81%E9%80%A0%E8%BF%99%E4%B9%88%E5%A4%9A%E6%A6%82%E5%BF%B5?">^1</a><br>不难看出多维卷积的等价性。</p>
+<p>具体是将二维图片展成一维向量，然后卷积核同理，那么卷积相当于向量乘以矩阵 <sup id="fnref:1"><a href="#fn:1" rel="footnote">&lt;span class=”hint–top hint–error hint–medium hint–rounded hint–bounce” aria-label=”既然卷积就是向量乘以矩阵，为什么还要造这么多概念?</p>
 <h4 id="线性规划"><a href="#线性规划" class="headerlink" title="线性规划"></a>线性规划</h4><p>对于连续可微多元函数$f\left(x_1..x_r,y_1…y_k\right)$，考察$\mathop{min}\limits_{x}\mathop{max}\limits_{y}f$</p>
-<h4 id="命题-1"><a href="#命题-1" class="headerlink" title="命题 1"></a>命题 1</h4><p>若$g\left(x\right)=\mathop{max}\limits_{y}f$关于x连续可微，且$f_{xy}=0$,则$\mathop{min}\limits_{x}\mathop{max}\limits_{y}f$的结果p为内点 ，那么这个必定是马鞍点<br> *proof *<br> 固定x，考察$\mathop{max}\limits_{y}f$,由条件知，y满足$f\left(y_i\right)=0$,且$\frac{\partial f}{\partial y_i y_j}$是负定，<br> 对于$g\left(x\right)=\mathop{max}\limits_{y}f$，他是由方程$f\left(y_i\right)=0$确定的隐函数，那么对于$\mathop{min}g$,他满足$g_{x_i}=0$,且$\frac{\partial g}{\partial x_i x_j}$正定，<br> 上式化简得到$f_{x_i}=0$，$\frac{\partial f}{\partial x_i x_j}$正定，<br> 所以在p点的heissen矩阵是<br>$$<br>\left(\begin{matrix}<br> \frac{\partial f}{\partial x_i x_j}&amp;0\\<br> 0&amp;\frac{\partial f}{\partial y_i y_j}<br> \end{matrix}\right)<br>$$<br>这是一个负定阵</p>
+<h4 id="命题-1"><a href="#命题-1" class="headerlink" title="命题 1"></a>命题 1</h4><p>若$g\left(x\right)=\mathop{max}\limits_{y}f$关于x连续可微，且$f_{xy}=0$,则$\mathop{min}\limits_{x}\mathop{max}\limits_{y}f$的结果p为内点 ，那么这个必定是马鞍点<br> *proof *<br> 固定x，考察$\mathop{max}\limits_{y}f$,由条件知，y满足$f\left(y_i\right)=0$,且$\frac{\partial f}{\partial y_i y_j}$是负定，<br> 对于$g\left(x\right)=\mathop{max}\limits_{y}f$，他是由方程$f\left(y_i\right)=0$确定的隐函数，那么对于$\mathop{min}g$,他满足$g_{x_i}=0$,且$\frac{\partial g}{\partial x_i x_j}$正定，<br> 上式化简得到$f_{x_i}=0$，$\frac{\partial f}{\partial x_i x_j}$正定，<br> 所以在p点的heissen矩阵是<br>$$<br>\left(\begin{matrix}<br> \frac{\partial f}{\partial x_i x_j}&amp;0\\<br> 0&amp;\frac{\partial f}{\partial y_i y_j}<br> \end{matrix}\right)<br>$$<br>这是一个负定阵”&gt;[1]</span></a></sup><br>不难看出多维卷积的等价性。</p>
 <h4 id="命题2"><a href="#命题2" class="headerlink" title="命题2"></a>命题2</h4><p>上述问题的一个马鞍点存在一个邻域内，在该邻域马鞍点必是问题的解</p>
-<h4 id="lemma1"><a href="#lemma1" class="headerlink" title="lemma1"></a>lemma1</h4><p>酉矩阵(幺正矩阵)的特征向量模长一定是1（包括虚根）<a href="%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5%E7%9A%84%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F%E4%B8%8D%E4%B8%80%E5%AE%9A%E7%9B%B8%E7%AD%89%EF%BC%8C%E7%89%B9%E5%BE%81%E5%80%BC%E4%B8%80%E5%AE%9A%E7%9B%B8%E7%AD%89%E3%80%82%E9%80%86%E7%9F%A9%E9%98%B5%E7%9A%84%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F%E4%B8%8D%E5%8F%98%EF%BC%8C%E7%89%B9%E5%BE%81%E5%80%BC%E6%98%AF$%5Cfrac%7B1%7D%7B%5Clambda%7D$">^2</a>，属于实特征值和非共轭特征值的特征向量正交</p>
+<h4 id="lemma1"><a href="#lemma1" class="headerlink" title="lemma1"></a>lemma1</h4><p>酉矩阵(幺正矩阵)的特征向量模长一定是1（包括虚根）<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="转置矩阵的特征向量不一定相等，特征值一定相等。逆矩阵的特征向量不变，特征值是$\frac{1}{\lambda}$">[2]</span></a></sup>，属于实特征值和非共轭特征值的特征向量正交</p>
 <p><em>proof:</em> $Ax=\lambda x,\overline{Ax}=\overline{\lambda x},\left(\overline{Ax},Ax\right)=\lambda^2\left(x,\overline{x}\right)$，$\overline{A^T}A=I$,代入上式左侧</p>
 <p>得证结论1</p>
 <p>$Ax=\lambda_x x,Ay=\lambda_y y$,那么$\overline{y^T}Ax=\lambda_x\left(x,y\right)$,$\overline{x^T}A^{-1}y=\overline{\lambda_x}\left(y,x\right)=\frac{1}{\lambda_y}\left(y,x\right)$</p>
 <p>结论2得证</p>
-<h4 id="命题"><a href="#命题" class="headerlink" title="命题"></a>命题</h4><p>二维旋转矩阵可交换<a href="%E5%8F%AF%E4%BB%A5%E9%AA%8C%E8%AF%81%E4%B8%8EJordan%E7%9F%A9%E9%98%B5%E5%9D%97%E5%8F%AF%E4%BA%A4%E6%8D%A2%E7%9A%84%E7%9F%A9%E9%98%B5%E5%BF%85%E6%98%AF%E4%B8%8A%E4%B8%89%E8%A7%92%E7%9F%A9%E9%98%B5">^3</a></p>
+<h4 id="命题"><a href="#命题" class="headerlink" title="命题"></a>命题</h4><p>二维旋转矩阵可交换<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="可以验证与Jordan矩阵块可交换的矩阵必是上三角矩阵
+">[3]</span></a></sup></p>
 <p><em>proof:</em> 用复数代数可以验证</p>
 <p>但是更进一步，可交换矩阵的充要条件是啥？n维矩阵的换位子群是什么？</p>
 <p><a target="_blank" rel="noopener" href="https://ccjou.wordpress.com/2013/04/23/%E4%BA%A4%E6%8F%9B%E5%AD%90%E8%88%87%E5%8F%AF%E4%BA%A4%E6%8F%9B%E7%9F%A9%E9%99%A3/">https://ccjou.wordpress.com/2013/04/23/%E4%BA%A4%E6%8F%9B%E5%AD%90%E8%88%87%E5%8F%AF%E4%BA%A4%E6%8F%9B%E7%9F%A9%E9%99%A3/</a></p>
 <p><a target="_blank" rel="noopener" href="http://www.twinklingstar.cn/2013/534/intro-to-quaternion/">http://www.twinklingstar.cn/2013/534/intro-to-quaternion/</a></p>
-<h4 id="命题3"><a href="#命题3" class="headerlink" title="命题3"></a>命题3</h4><p>三维正交矩阵，若$|A|=1$,则其是旋转矩阵<a href="%E5%91%BD%E9%A2%98%E7%94%B1%E9%BB%84%E7%BB%A7%E9%9A%8F%E4%BF%AE%E6%AD%A3">^4</a></p>
+<h4 id="命题3"><a href="#命题3" class="headerlink" title="命题3"></a>命题3</h4><p>三维正交矩阵，若$|A|=1$,则其是旋转矩阵<sup id="fnref:4"><a href="#fn:4" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="命题由黄继随修正">[4]</span></a></sup></p>
 <p><em>proof:</em>,因为$|A|=1$,且矩阵是3*3,所以必存在特征值1。由lemma1,其存在一个不变特征向量，剩下两个特征向量组成一个子空间，且和不变特征向量正交，等价于A相似与准对角阵$diag\left(B,0\right)$,其中B是二维矩阵且是正交阵，且$|B|=1$,可以验证他是旋转阵。其实我们有更一般的结论</p>
 <h4 id="命题4"><a href="#命题4" class="headerlink" title="命题4"></a>命题4</h4><p>任何正交矩阵相似与如下矩阵</p>
 <p>$$\left(\begin{matrix}<br>r_1&amp;0&amp;0&amp;..\\<br>0&amp;r_2&amp;0&amp;…\\<br>0&amp;0&amp;…&amp;..\\<br>0&amp;0&amp;..&amp;1<br>\end{matrix}\right)$$</p>
@@ -153,6 +156,7 @@
 <li>$A^TA$和$AA^T$的特征值必为正数</li>
 <li>对称矩阵的每个特征值的index=1,$r\left(\left(A-\lambda I\right)\right)^2)=r\left(A-\lambda I\right)-dim\left(N\left(A-\lambda I\right)\bigcap R\left(A-\lambda I\right)\right)$,可以用反正法得到对称矩阵的核和像的交为空，故此命题成立。推导出对称矩阵可对角化</li>
 </ul>
+<h4 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h4><p>最小二乘不等价于PCA ,可以看这个<img src="/2019/06/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E5%BF%B5%E7%9A%84%E6%95%B0%E5%AD%A6%E8%A7%A3%E9%87%8A/lizi.png" class="" title="pic1"></p>
 <h4 id="奇异值分解-也应理解为奇异值算子"><a href="#奇异值分解-也应理解为奇异值算子" class="headerlink" title="奇异值分解(也应理解为奇异值算子)"></a>奇异值分解(也应理解为奇异值算子)</h4><p>对任意矩阵$A\in m\times n$,有$A=U\Sigma V^T$,其中的$U \Sigma V$由以下算子计算。</p>
 <p>其中$V\Delta V^T=A^T A$,V是酉矩阵，$\Delta$是$A^TA$的由大到小排列的对角阵。记算子$\lambda_V$是求$A^T A$的正交特征向量。那么$V=\lambda_V\left(A\right)$,记$U=AV\overline{\Sigma}$。</p>
 <p>那么存在$m\times n$的对角矩阵$\Sigma$满足$\Sigma^T \Sigma=\Delta$。則求得上述矩阵$\Sigma$。</p>
@@ -171,7 +175,9 @@
 <p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/49aff913104c">b-样条曲线</a></p>
 <p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/B-spline">b-样条</a></p>
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/shenziheng1/article/details/54411098">原理</a></p>
-<p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/89d3ceda302b3169a45177232f60ddccda38e6da.html">de boor</a></p>
+<p><a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/89d3ceda302b3169a45177232f60ddccda38e6da.html">de boor</a><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">既然卷积就是向量乘以矩阵，为什么还要造这么多概念?</p>
+<h4 id="线性规划-1"><a href="#线性规划-1" class="headerlink" title="线性规划"></a>线性规划</h4><p>对于连续可微多元函数$f\left(x_1..x_r,y_1…y_k\right)$，考察$\mathop{min}\limits_{x}\mathop{max}\limits_{y}f$</p>
+<h4 id="命题-1-1"><a href="#命题-1-1" class="headerlink" title="命题 1"></a>命题 1</h4><p>若$g\left(x\right)=\mathop{max}\limits_{y}f$关于x连续可微，且$f_{xy}=0$,则$\mathop{min}\limits_{x}\mathop{max}\limits_{y}f$的结果p为内点 ，那么这个必定是马鞍点<br>*proof *<br>固定x，考察$\mathop{max}\limits_{y}f$,由条件知，y满足$f\left(y_i\right)=0$,且$\frac{\partial f}{\partial y_i y_j}$是负定，<br>对于$g\left(x\right)=\mathop{max}\limits_{y}f$，他是由方程$f\left(y_i\right)=0$确定的隐函数，那么对于$\mathop{min}g$,他满足$g_{x_i}=0$,且$\frac{\partial g}{\partial x_i x_j}$正定，<br>上式化简得到$f_{x_i}=0$，$\frac{\partial f}{\partial x_i x_j}$正定，<br>所以在p点的heissen矩阵是<br>$$<br>\left(\begin{matrix}<br>\frac{\partial f}{\partial x_i x_j}&amp;0\<br>0&amp;\frac{\partial f}{\partial y_i y_j}<br>\end{matrix}\right)<br>$$<br>这是一个负定阵<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">转置矩阵的特征向量不一定相等，特征值一定相等。逆矩阵的特征向量不变，特征值是$\frac{1}{\lambda}$<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">可以验证与Jordan矩阵块可交换的矩阵必是上三角矩阵<a href="#fnref:3" rev="footnote"> ↩</a></span></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">4.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">命题由黄继随修正<a href="#fnref:4" rev="footnote"> ↩</a></span></li></ol></div></div></p>
 
       
     </div><!-- .entry-content -->
