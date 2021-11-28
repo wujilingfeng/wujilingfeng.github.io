@@ -24,7 +24,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="http://yoursite.com/2019/06/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E5%BF%B5%E7%9A%84%E6%95%B0%E5%AD%A6%E8%A7%A3%E9%87%8A/lizi.png">
 <meta property="article:published_time" content="2019-06-19T00:35:30.000Z">
-<meta property="article:modified_time" content="2021-11-27T08:56:16.614Z">
+<meta property="article:modified_time" content="2021-11-28T06:52:44.181Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="数学">
 <meta name="twitter:card" content="summary">
@@ -156,8 +156,10 @@
 <li>$A^TA$和$AA^T$的特征值必为正数</li>
 <li>对称矩阵的每个特征值的index=1,$r\left(\left(A-\lambda I\right)\right)^2)=r\left(A-\lambda I\right)-dim\left(N\left(A-\lambda I\right)\bigcap R\left(A-\lambda I\right)\right)$,可以用反正法得到对称矩阵的核和像的交为空，故此命题成立。推导出对称矩阵可对角化</li>
 </ul>
-<h4 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h4><p>最小二乘不等价于PCA ,可以看这个<img src="/2019/06/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E5%BF%B5%E7%9A%84%E6%95%B0%E5%AD%A6%E8%A7%A3%E9%87%8A/lizi.png" class="" title="pic1"></p>
-<h4 id="奇异值分解-也应理解为奇异值算子"><a href="#奇异值分解-也应理解为奇异值算子" class="headerlink" title="奇异值分解(也应理解为奇异值算子)"></a>奇异值分解(也应理解为奇异值算子)</h4><p>对任意矩阵$A\in m\times n$,有$A=U\Sigma V^T$,其中的$U \Sigma V$由以下算子计算。</p>
+<h4 id="最小二乘法"><a href="#最小二乘法" class="headerlink" title="最小二乘法"></a>最小二乘法</h4><p>假设数据为$\left(x_i,y_I\right)$,设<br>$$A=\left(\begin{matrix}<br>x_0 &amp; y_0\\<br>x_1 &amp; y_1\\<br>.. &amp; .. \\<br>x_{n-1} &amp;y_{n-1}<br>\end{matrix}\right)$$</p>
+<p>那么最小二乘优化的问题是<br>$$<br>\min\limits_{\alpha}| \left(\begin{matrix}<br>1&amp; A \\<br>\end{matrix}\right)<br>\left(\begin{matrix}<br>\alpha_0\\<br>\alpha_1\\<br>..\\<br>\alpha_{n-1}\\<br>-1<br>\end{matrix}\right)|$$，即求使该向量模长最小的$\alpha$。</p>
+<p>最小二乘不等价于PCA ,可以看这个<img src="/2019/06/19/%E8%AE%A1%E7%AE%97%E6%9C%BA%E6%A6%82%E5%BF%B5%E7%9A%84%E6%95%B0%E5%AD%A6%E8%A7%A3%E9%87%8A/lizi.png" class="" title="引自网络"></p>
+<h4 id="奇异值分解"><a href="#奇异值分解" class="headerlink" title="奇异值分解"></a>奇异值分解</h4><p>对任意矩阵$A\in m\times n$,有$A=U\Sigma V^T$,其中的$U \Sigma V$由以下算子计算。</p>
 <p>其中$V\Delta V^T=A^T A$,V是酉矩阵，$\Delta$是$A^TA$的由大到小排列的对角阵。记算子$\lambda_V$是求$A^T A$的正交特征向量。那么$V=\lambda_V\left(A\right)$,记$U=AV\overline{\Sigma}$。</p>
 <p>那么存在$m\times n$的对角矩阵$\Sigma$满足$\Sigma^T \Sigma=\Delta$。則求得上述矩阵$\Sigma$。</p>
 <p>那么$U=AV\Sigma^T$。</p>
