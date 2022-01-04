@@ -28,7 +28,7 @@
 <meta property="og:description" content="MathJax.Hub.Config({tex2jax: {inlineMath: [[&#39;$&#39;,&#39;$&#39;], [&#39;\\(&#39;,&#39;\\)&#39;]]}});     本文介绍如何从数学到计算机离散化的表示">
 <meta property="og:locale">
 <meta property="article:published_time" content="2019-03-14T12:23:41.000Z">
-<meta property="article:modified_time" content="2021-01-04T06:40:08.722Z">
+<meta property="article:modified_time" content="2022-01-04T02:52:19.372Z">
 <meta property="article:author" content="李博">
 <meta property="article:tag" content="数学">
 <meta property="article:tag" content="计算机">
@@ -102,7 +102,7 @@
 
     <div class="entry-content">
       
-        <script type="text/x-mathjax-config">
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><script type="text/x-mathjax-config">
   MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
 </script>
 <script type="text/javascript" async
@@ -147,6 +147,8 @@
 <p>可以证明$x _i$点的整体平移不影响上述行列式的值。<br>接下来的变形会证明凸包和delauny的等价形。</p>
 <p>$$\left(\begin{matrix}<br>1&amp;x _0&amp;\frac{x^2 _0}{2}\\<br>0&amp;x _1-x _0&amp;\frac{x^2 _1-x^2 _0}{2}\\<br>0&amp;..&amp;..\\<br>0&amp;x _i-x _0&amp;\frac{x^2 _i-x^2 _0}{2}\\<br>0&amp;..&amp;..\\<br>0&amp;\overline{x}-x _0&amp;\frac{\overline{x}^2-x^2 _0}{2}<br>\end{matrix}\right)=\left(\begin{matrix}<br>x _1-x _0&amp;\frac{x^2 _1-x^2 _0}{2}\\<br>..&amp;..\\<br>x _i-x _0&amp;\frac{x^2 _i-x^2 _0}{2}\\<br>..&amp;..\\<br>\overline{x}-x  _0&amp;\frac{\overline{x}^2-x^2 _0}{2}<br>\end{matrix}\right)=\left(\begin{matrix}<br>A&amp;b\\<br>\overline{x}-x _0&amp;\frac{\overline{x}^2-x^2 _0}{2}<br>\end{matrix}\right)=\left(\begin{matrix}<br>I&amp;A^{-1}b\\<br>\overline{x}-x _0&amp;\frac{\overline{x}^2-x^2 _0}{2}<br>\end{matrix}\right)$$</p>
 <p>$$\left(\begin{matrix}<br>I&amp;A^{-1}b\\<br>0&amp;\frac{\overline{x}^2-x^2 _0}{2}-\left(\overline{x}-x _0\right)A^{-1}b\end{matrix}\right)=\frac{\overline{x}^2-x^2 _0}{2}-\left(\overline{x}-x _0\right)A^{-1}b&gt;0$$,可以证明$A^{-1}b$是单形$x _0…x _n$外接圆的圆心O，那么$\left(\overline{x}-O\right)^2&gt;\left(x _0 -O\right)^2$也就是$\frac{\overline{x}^2-x^2 _0}{2}-\left(\overline{x}-x _0\right)A^{-1}b&gt;0$</p>
+<h4 id="Power-diagram"><a href="#Power-diagram" class="headerlink" title="Power diagram"></a>Power diagram</h4><p>一组点集$P_i$(共有n个点)， 并附上一个正数$r_i$， 那么空间会被分割为n个区域$C_i$，设有$v\in R^n$，且$ \min\limits_{i\in[1..n]} |v-P_i|^2-r_i^2= |v-P_j|^2-r_j^2$，那么$v$属于区域$C_j$</p>
+<p>voronoi diagram等价于在每个点周围，选择一组点，那么这组点是符合定义的一组点,稍后再详写。</p>
 
       
     </div><!-- .entry-content -->
@@ -293,7 +295,7 @@
 </div>
       </div>
       <footer id="colophon" role="contentinfo">
-    <p>&copy; 2021 李博
+    <p>&copy; 2022 李博
     All rights reserved.</p>
     <p>Powered by <a href="http://hexo.io/" target="_blank">Hexo</a></p>
 </footer>
