@@ -13,7 +13,8 @@
         <pubDate>Mon, 28 Apr 2025 14:07:52 +0800</pubDate>
         
         <guid>https://wujilingfeng.github.io/p/zig%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
-        <description></description>
+        <description>&lt;img src="https://wujilingfeng.github.io/fanchuan.png" alt="Featured image of post Zig学习笔记" /&gt;&lt;p&gt;zig语言 的”元组“，.{&amp;ldquo;nihao&amp;rdquo;,3}其实是个value, 它的类型是匿名结构体，&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>Chinese Test</title>
