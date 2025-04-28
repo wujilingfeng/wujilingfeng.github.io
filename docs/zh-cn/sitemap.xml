@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://wujilingfeng.github.io/</loc>
-    <lastmod>2025-04-27T13:06:57+08:00</lastmod>
+    <lastmod>2025-04-28T14:07:52+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -20,11 +20,8 @@
                 href="https://wujilingfeng.github.io/"
                 />
   </url><url>
-    <loc>https://wujilingfeng.github.io/p/mytest/</loc>
-    <lastmod>2025-04-27T13:06:57+08:00</lastmod>
-  </url><url>
     <loc>https://wujilingfeng.github.io/post/</loc>
-    <lastmod>2025-04-27T13:06:57+08:00</lastmod>
+    <lastmod>2025-04-28T14:07:52+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
@@ -35,6 +32,9 @@
                 hreflang="zh-cn"
                 href="https://wujilingfeng.github.io/post/"
                 />
+  </url><url>
+    <loc>https://wujilingfeng.github.io/p/zig%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</loc>
+    <lastmod>2025-04-28T14:07:52+08:00</lastmod>
   </url><url>
     <loc>https://wujilingfeng.github.io/categories/</loc>
     <lastmod>2020-09-09T00:00:00+00:00</lastmod>
