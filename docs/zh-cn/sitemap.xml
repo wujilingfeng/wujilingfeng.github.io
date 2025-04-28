@@ -24,6 +24,11 @@
     <lastmod>2025-04-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
+                hreflang="en"
+                href="https://wujilingfeng.github.io/en/post/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="ar"
                 href="https://wujilingfeng.github.io/ar/post/"
                 />
@@ -59,6 +64,16 @@
   </url><url>
     <loc>https://wujilingfeng.github.io/categories/test/</loc>
     <lastmod>2020-09-09T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://wujilingfeng.github.io/en/categories/test/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://wujilingfeng.github.io/categories/test/"
+                />
   </url><url>
     <loc>https://wujilingfeng.github.io/categories/%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2020-09-09T00:00:00+00:00</lastmod>
@@ -155,9 +170,29 @@
   </url><url>
     <loc>https://wujilingfeng.github.io/tags/emoji/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://wujilingfeng.github.io/en/tags/emoji/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://wujilingfeng.github.io/tags/emoji/"
+                />
   </url><url>
     <loc>https://wujilingfeng.github.io/p/emoji-support/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://wujilingfeng.github.io/en/p/emoji-support/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://wujilingfeng.github.io/p/emoji-support/"
+                />
   </url><url>
     <loc>https://wujilingfeng.github.io/%E5%85%B3%E4%BA%8E/</loc>
     <xhtml:link

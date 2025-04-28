@@ -29,6 +29,11 @@
                 />
     <xhtml:link
                 rel="alternate"
+                hreflang="en"
+                href="https://wujilingfeng.github.io/en/post/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="ar"
                 href="https://wujilingfeng.github.io/ar/post/"
                 />
