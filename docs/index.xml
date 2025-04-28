@@ -7,13 +7,13 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>LI BO</copyright>
-        <lastBuildDate>Mon, 28 Apr 2025 14:07:52 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Zig学习笔记</title>
-        <link>https://wujilingfeng.github.io/p/zig%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
-        <pubDate>Mon, 28 Apr 2025 14:07:52 +0800</pubDate>
+        <lastBuildDate>Mon, 28 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://wujilingfeng.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>学习zig</title>
+        <link>https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/</link>
+        <pubDate>Mon, 28 Apr 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/zig%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/fanchuan.png" alt="Featured image of post Zig学习笔记" /&gt;&lt;p&gt;zig语言 的”元组“，.{&amp;ldquo;nihao&amp;rdquo;,3}其实是个value, 它的类型是匿名结构体，&lt;/p&gt;
+        <guid>https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png" alt="Featured image of post 学习zig" /&gt;&lt;p&gt;zig语言 的”元组“，.{&amp;ldquo;nihao&amp;rdquo;,3}其实是个value, 它的类型是匿名结构体，&lt;/p&gt;
 </description>
         </item>
         <item>
