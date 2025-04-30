@@ -7,7 +7,29 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>LI BO</copyright>
-        <lastBuildDate>Mon, 28 Apr 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://wujilingfeng.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 29 Apr 2025 10:58:01 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Haskell学习</title>
+        <link>https://wujilingfeng.github.io/p/haskell%E5%AD%A6%E4%B9%A0/</link>
+        <pubDate>Tue, 29 Apr 2025 10:58:01 +0800</pubDate>
+        
+        <guid>https://wujilingfeng.github.io/p/haskell%E5%AD%A6%E4%B9%A0/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/haskell%E5%AD%A6%E4%B9%A0/img.png" alt="Featured image of post Haskell学习" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.oreilly.com/library/view/parallel-and-concurrent/9781449335939/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Parallel and Concurrent Programming in Haskell[Book]&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Hugo&#43;github搭建博客</title>
+        <link>https://wujilingfeng.github.io/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link>
+        <pubDate>Tue, 29 Apr 2025 08:57:27 +0800</pubDate>
+        
+        <guid>https://wujilingfeng.github.io/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/shumu.png" alt="Featured image of post Hugo&#43;github搭建博客" /&gt;&lt;p&gt;hugo 似乎的确存在很多bug。&lt;/p&gt;
+&lt;p&gt;stack主题对于baseurl的路径处理有bug，例如当baseurl = &lt;a class=&#34;link&#34; href=&#34;https://wujilingfeng.github.io/myblog/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://wujilingfeng.github.io/myblog/&lt;/a&gt;时，生成的网页内容路径会自动添加myblog。&lt;/p&gt;
+&lt;p&gt;stack主题对于文章的语言分类是以md的文件名中缀&lt;code&gt;zh-cn&lt;/code&gt;,&lt;code&gt;en&lt;/code&gt;,&lt;code&gt;ar&lt;/code&gt;来进行区分的。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>学习zig</title>
         <link>https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/</link>
         <pubDate>Mon, 28 Apr 2025 00:00:00 +0000</pubDate>
