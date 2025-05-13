@@ -36,6 +36,8 @@ std.debug.print("Offset of color: {}\n", .{@offsetOf(RB_Node, "color")});
 
 zig语言的anytype只用于函数的参数声明。
 
+zig 的test的函数必须是字符串，否则必须是标识符，一般和某个函数名的标识符相同，这样会作为该函数的文档测试说明。
+
 
 
 [这个网页说明了一些用法](https://www.cnblogs.com/violeshnv/p/18200280)
@@ -156,6 +158,35 @@ zig语言的切片和数组（array）的区别似乎只是固定长度和动态
 
 ```zig
 const all_zero = [_]u16{0} ** 10;
+const Point = struct {
+    x: i32,
+    y: i32,
+};
+
+test "compile-time array initialization" {
+    try expect(fancy_array[4].x == 4);
+    try expect(fancy_array[4].y == 8);
+}
+
+// call a function to initialize an array
+var more_points = [_]Point{makePoint(3)} ** 10;
+fn makePoint(x: i32) Point {
+    return Point{
+        .x = x,
+        .y = x * 2,
+    };
+}
+```
+
+zig语言数组的初始化用法
+
+```zig
+const all_zero = [_]u16{0} ** 10;
+
+comptime {
+    assert(all_zero.len == 10);
+    assert(all_zero[5] == 0);
+}
 const Point = struct {
     x: i32,
     y: i32,

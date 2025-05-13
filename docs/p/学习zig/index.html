@@ -438,6 +438,7 @@ zig语言会自动对结构体的内存进行布局优化，下面的例子:</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>zig语言的anytype只用于函数的参数声明。</p>
+<p>zig 的test的函数必须是字符串，否则必须是标识符，一般和某个函数名的标识符相同，这样会作为该函数的文档测试说明。</p>
 <p><a class="link" href="https://www.cnblogs.com/violeshnv/p/18200280"  target="_blank" rel="noopener"
     >这个网页说明了一些用法</a></p>
 <p>zig语言的error类型会自动赋一个整数值</p>
@@ -635,6 +636,61 @@ zig语言会自动对结构体的内存进行布局优化，下面的例子:</p>
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">all_zero</span> <span style="color:#56b6c2">=</span> [<span style="color:#e06c75">_</span>]<span style="color:#e5c07b">u16</span>{<span style="color:#d19a66">0</span>} <span style="color:#56b6c2">**</span> <span style="color:#d19a66">10</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">Point</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">x</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">y</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span>,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;compile-time array initialization&#34;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">fancy_array</span>[<span style="color:#d19a66">4</span>].<span style="color:#e06c75">x</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">4</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">fancy_array</span>[<span style="color:#d19a66">4</span>].<span style="color:#e06c75">y</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">8</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">// call a function to initialize an array
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">var</span> <span style="color:#e06c75">more_points</span> <span style="color:#56b6c2">=</span> [<span style="color:#e06c75">_</span>]<span style="color:#e06c75">Point</span>{<span style="color:#e06c75">makePoint</span>(<span style="color:#d19a66">3</span>)} <span style="color:#56b6c2">**</span> <span style="color:#d19a66">10</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#e06c75">makePoint</span>(<span style="color:#e06c75">x</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span>) <span style="color:#e06c75">Point</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">Point</span>{
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">x</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">x</span>,
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">y</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">x</span> <span style="color:#56b6c2">*</span> <span style="color:#d19a66">2</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>zig语言数组的初始化用法</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">24
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">all_zero</span> <span style="color:#56b6c2">=</span> [<span style="color:#e06c75">_</span>]<span style="color:#e5c07b">u16</span>{<span style="color:#d19a66">0</span>} <span style="color:#56b6c2">**</span> <span style="color:#d19a66">10</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">comptime</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">assert</span>(<span style="color:#e06c75">all_zero</span>.<span style="color:#e06c75">len</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">10</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">assert</span>(<span style="color:#e06c75">all_zero</span>[<span style="color:#d19a66">5</span>] <span style="color:#56b6c2">==</span> <span style="color:#d19a66">0</span>);
+</span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">Point</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#e06c75">x</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#e06c75">y</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span>,
