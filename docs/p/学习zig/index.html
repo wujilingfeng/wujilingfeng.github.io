@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="zig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体，\nzig语言的error类型会自动赋一个整数值\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 const FileOpenError = error{ AccessDenied, OutOfMemory, FileNotFound, }; const AllocationError = error{ OutOfMemory, }; pub fn main() !void { const errort = FileOpenError.OutOfMemory; const err_int = @intFromError(errort); const err_int1 = @intFromError(AllocationError.OutOfMemory); dprint(&#34;value errot:{},{}\\n&#34;, .{ err_int, err_int1 }); } ">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。\nzig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体， sdsa zig语言会自动对结构体的内存进行布局优化，下面的例子:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 const RB_Node = struct { key: i32, left: ?*RB_Node, right: ?*RB_Node, parent: ?*RB_Node, color: bool, }; dprint(&#34;rb node size:{}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Size of RB_Node: {}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Offset of key: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;key&#34;)}); std.debug.print(&#34;Offset of left: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;left&#34;)}); std.debug.print(&#34;Offset of right: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;right&#34;)}); std.debug.print(&#34;Offset of parent: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;parent&#34;)}); std.debug.print(&#34;Offset of color: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;color&#34;)}); zig语言的anytype只用于函数的参数声明。\n">
 <title>学习zig</title>
 
 <link rel='canonical' href='https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/'>
 
 <link rel="stylesheet" href="../../scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="学习zig">
-<meta property='og:description' content="zig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体，\nzig语言的error类型会自动赋一个整数值\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 const FileOpenError = error{ AccessDenied, OutOfMemory, FileNotFound, }; const AllocationError = error{ OutOfMemory, }; pub fn main() !void { const errort = FileOpenError.OutOfMemory; const err_int = @intFromError(errort); const err_int1 = @intFromError(AllocationError.OutOfMemory); dprint(&#34;value errot:{},{}\\n&#34;, .{ err_int, err_int1 }); } ">
+<meta property='og:description' content="zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。\nzig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体， sdsa zig语言会自动对结构体的内存进行布局优化，下面的例子:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 const RB_Node = struct { key: i32, left: ?*RB_Node, right: ?*RB_Node, parent: ?*RB_Node, color: bool, }; dprint(&#34;rb node size:{}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Size of RB_Node: {}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Offset of key: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;key&#34;)}); std.debug.print(&#34;Offset of left: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;left&#34;)}); std.debug.print(&#34;Offset of right: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;right&#34;)}); std.debug.print(&#34;Offset of parent: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;parent&#34;)}); std.debug.print(&#34;Offset of color: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;color&#34;)}); zig语言的anytype只用于函数的参数声明。\n">
 <meta property='og:url' content='https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/'>
 <meta property='og:site_name' content='五级灵风'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-28T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-28T00:00:00&#43;00:00'/><meta property='og:image' content='https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png' />
 <meta name="twitter:title" content="学习zig">
-<meta name="twitter:description" content="zig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体，\nzig语言的error类型会自动赋一个整数值\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 const FileOpenError = error{ AccessDenied, OutOfMemory, FileNotFound, }; const AllocationError = error{ OutOfMemory, }; pub fn main() !void { const errort = FileOpenError.OutOfMemory; const err_int = @intFromError(errort); const err_int1 = @intFromError(AllocationError.OutOfMemory); dprint(&#34;value errot:{},{}\\n&#34;, .{ err_int, err_int1 }); } "><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。\nzig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体， sdsa zig语言会自动对结构体的内存进行布局优化，下面的例子:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 const RB_Node = struct { key: i32, left: ?*RB_Node, right: ?*RB_Node, parent: ?*RB_Node, color: bool, }; dprint(&#34;rb node size:{}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Size of RB_Node: {}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Offset of key: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;key&#34;)}); std.debug.print(&#34;Offset of left: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;left&#34;)}); std.debug.print(&#34;Offset of right: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;right&#34;)}); std.debug.print(&#34;Offset of parent: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;parent&#34;)}); std.debug.print(&#34;Offset of color: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;color&#34;)}); zig语言的anytype只用于函数的参数声明。\n"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png' />
     <link rel="shortcut icon" href="../../favicon.ico" />
 
@@ -383,7 +383,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 2 分钟
                 </time>
             </div>
         
@@ -398,7 +398,47 @@
     <section class="article-content">
     
     
-    <p>zig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体，</p>
+    <p>zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。</p>
+<p>zig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体，
+sdsa
+zig语言会自动对结构体的内存进行布局优化，下面的例子:</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">RB_Node</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">key</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">left</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?*</span><span style="color:#e06c75">RB_Node</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">right</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?*</span><span style="color:#e06c75">RB_Node</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">parent</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?*</span><span style="color:#e06c75">RB_Node</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">color</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">dprint</span>(<span style="color:#98c379">&#34;rb node size:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@sizeOf</span>(<span style="color:#e06c75">RB_Node</span>)});
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;Size of RB_Node: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@sizeOf</span>(<span style="color:#e06c75">RB_Node</span>)});
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;Offset of key: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@offsetOf</span>(<span style="color:#e06c75">RB_Node</span>, <span style="color:#98c379">&#34;key&#34;</span>)});
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;Offset of left: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@offsetOf</span>(<span style="color:#e06c75">RB_Node</span>, <span style="color:#98c379">&#34;left&#34;</span>)});
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;Offset of right: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@offsetOf</span>(<span style="color:#e06c75">RB_Node</span>, <span style="color:#98c379">&#34;right&#34;</span>)});
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;Offset of parent: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@offsetOf</span>(<span style="color:#e06c75">RB_Node</span>, <span style="color:#98c379">&#34;parent&#34;</span>)});
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;Offset of color: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@offsetOf</span>(<span style="color:#e06c75">RB_Node</span>, <span style="color:#98c379">&#34;color&#34;</span>)});
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>zig语言的anytype只用于函数的参数声明。</p>
+<p><a class="link" href="https://www.cnblogs.com/violeshnv/p/18200280"  target="_blank" rel="noopener"
+    >这个网页说明了一些用法</a></p>
 <p>zig语言的error类型会自动赋一个整数值</p>
 <div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -438,6 +478,137 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#e06c75">dprint</span>(<span style="color:#98c379">&#34;value errot:{},{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{ <span style="color:#e06c75">err_int</span>, <span style="color:#e06c75">err_int1</span> });
 </span></span><span style="display:flex;"><span> }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>下面展示了枚举变量的简洁写法，</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">Color</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">enum</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">red</span>,
+</span></span><span style="display:flex;"><span>    @<span style="color:#98c379">&#34;really red&#34;</span>,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">color</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Color</span> <span style="color:#56b6c2">=</span> .@<span style="color:#98c379">&#34;really red&#34;</span>;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>容器级别变量具有静态生命周期，且顺序无关，并且是惰性分析的。容器级别变量的初始化值隐式为编译时。如果容器级别变量是const，则其值在编译时已知，否则是在运行时已知。</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">var</span> <span style="color:#e06c75">y</span><span style="color:#56b6c2">:</span><span style="color:#e5c07b">i32</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">add</span>(<span style="color:#d19a66">10</span>,<span style="color:#e06c75">x</span>);
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">x</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">add</span>(<span style="color:#d19a66">12</span>,<span style="color:#d19a66">34</span>);
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;container level variables&#34;</span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">x</span><span style="color:#56b6c2">==</span><span style="color:#d19a66">46</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">y</span><span style="color:#56b6c2">==</span><span style="color:#d19a66">56</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#e06c75">add</span>(<span style="color:#e06c75">a</span><span style="color:#56b6c2">:</span><span style="color:#e5c07b">i32</span>,<span style="color:#e06c75">b</span><span style="color:#56b6c2">:</span><span style="color:#e5c07b">i32</span>) <span style="color:#e5c07b">i32</span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">return</span> <span style="color:#e06c75">a</span><span style="color:#56b6c2">+</span><span style="color:#e06c75">b</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">std</span><span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@import</span>(<span style="color:#98c379">&#34;std&#34;</span>)
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">expect</span><span style="color:#56b6c2">=</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">testing</span>.<span style="color:#e06c75">expect</span>;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>zig语言的const变量尽量会在编译器赋值或者初始化，尤其是在容器内的const变量只会在编译时赋值。</p>
+<p>如果想让var变量的初始化也在编译时进行，可以</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">16
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;comptime vars&#34;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">var</span> <span style="color:#e06c75">x</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">comptime</span> <span style="color:#c678dd">var</span> <span style="color:#e06c75">y</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">x</span> <span style="color:#56b6c2">+=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">y</span> <span style="color:#56b6c2">+=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">x</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">2</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">y</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> (<span style="color:#e06c75">y</span> <span style="color:#56b6c2">!=</span> <span style="color:#d19a66">2</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">// This compile error never triggers because y is a comptime variable,
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">// and so `y != 2` is a comptime value, and this if is statically evaluated.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#e5c07b">@compileError</span>(<span style="color:#98c379">&#34;wrong y value&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>zig语言的切片和数组（array）的区别似乎只是固定长度和动态长度的区别。</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">all_zero</span> <span style="color:#56b6c2">=</span> [<span style="color:#e06c75">_</span>]<span style="color:#e5c07b">u16</span>{<span style="color:#d19a66">0</span>} <span style="color:#56b6c2">**</span> <span style="color:#d19a66">10</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">Point</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">x</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">y</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span>,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;compile-time array initialization&#34;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">fancy_array</span>[<span style="color:#d19a66">4</span>].<span style="color:#e06c75">x</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">4</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">fancy_array</span>[<span style="color:#d19a66">4</span>].<span style="color:#e06c75">y</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">8</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">// call a function to initialize an array
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">var</span> <span style="color:#e06c75">more_points</span> <span style="color:#56b6c2">=</span> [<span style="color:#e06c75">_</span>]<span style="color:#e06c75">Point</span>{<span style="color:#e06c75">makePoint</span>(<span style="color:#d19a66">3</span>)} <span style="color:#56b6c2">**</span> <span style="color:#d19a66">10</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#e06c75">makePoint</span>(<span style="color:#e06c75">x</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span>) <span style="color:#e06c75">Point</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">Point</span>{
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">x</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">x</span>,
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">y</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">x</span> <span style="color:#56b6c2">*</span> <span style="color:#d19a66">2</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
 </div>

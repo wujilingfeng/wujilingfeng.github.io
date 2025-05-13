@@ -43,7 +43,47 @@
         <pubDate>Mon, 28 Apr 2025 00:00:00 +0000</pubDate>
         
         <guid>https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png" alt="Featured image of post 学习zig" /&gt;&lt;p&gt;zig语言 的”元组“，.{&amp;ldquo;nihao&amp;rdquo;,3}其实是个value, 它的类型是匿名结构体，&lt;/p&gt;
+        <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png" alt="Featured image of post 学习zig" /&gt;&lt;p&gt;zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。&lt;/p&gt;
+&lt;p&gt;zig语言 的”元组“，.{&amp;ldquo;nihao&amp;rdquo;,3}其实是个value, 它的类型是匿名结构体，
+sdsa
+zig语言会自动对结构体的内存进行布局优化，下面的例子:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;12
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;13
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;RB_Node&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;struct&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;i32&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;left&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;?*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;RB_Node&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;right&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;?*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;RB_Node&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;parent&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;?*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;RB_Node&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;color&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;bool&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;dprint&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;rb node size:{}&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;, .{&lt;span style=&#34;color:#e5c07b&#34;&gt;@sizeOf&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;RB_Node&lt;/span&gt;)});
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;debug&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Size of RB_Node: {}&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;, .{&lt;span style=&#34;color:#e5c07b&#34;&gt;@sizeOf&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;RB_Node&lt;/span&gt;)});
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;debug&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Offset of key: {}&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;, .{&lt;span style=&#34;color:#e5c07b&#34;&gt;@offsetOf&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;RB_Node&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;key&amp;#34;&lt;/span&gt;)});
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;debug&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Offset of left: {}&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;, .{&lt;span style=&#34;color:#e5c07b&#34;&gt;@offsetOf&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;RB_Node&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;left&amp;#34;&lt;/span&gt;)});
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;debug&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Offset of right: {}&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;, .{&lt;span style=&#34;color:#e5c07b&#34;&gt;@offsetOf&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;RB_Node&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;right&amp;#34;&lt;/span&gt;)});
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;debug&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Offset of parent: {}&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;, .{&lt;span style=&#34;color:#e5c07b&#34;&gt;@offsetOf&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;RB_Node&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;parent&amp;#34;&lt;/span&gt;)});
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;debug&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Offset of color: {}&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;, .{&lt;span style=&#34;color:#e5c07b&#34;&gt;@offsetOf&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;RB_Node&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;color&amp;#34;&lt;/span&gt;)});
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;zig语言的anytype只用于函数的参数声明。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/violeshnv/p/18200280&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;这个网页说明了一些用法&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;zig语言的error类型会自动赋一个整数值&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
@@ -83,6 +123,137 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;dprint&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;value errot:{},{}&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;, .{ &lt;span style=&#34;color:#e06c75&#34;&gt;err_int&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;err_int1&lt;/span&gt; });
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;下面展示了枚举变量的简洁写法，&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Color&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;enum&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;red&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    @&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;really red&amp;#34;&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;color&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Color&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; .@&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;really red&amp;#34;&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;容器级别变量具有静态生命周期，且顺序无关，并且是惰性分析的。容器级别变量的初始化值隐式为编译时。如果容器级别变量是const，则其值在编译时已知，否则是在运行时已知。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;i32&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;add&lt;/span&gt;(&lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;i32&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;add&lt;/span&gt;(&lt;span style=&#34;color:#d19a66&#34;&gt;12&lt;/span&gt;,&lt;span style=&#34;color:#d19a66&#34;&gt;34&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;test&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;container level variables&amp;#34;&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;46&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;56&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;add&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;i32&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;i32&lt;/span&gt;) &lt;span style=&#34;color:#e5c07b&#34;&gt;i32&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;@import&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;std&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;testing&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;zig语言的const变量尽量会在编译器赋值或者初始化，尤其是在容器内的const变量只会在编译时赋值。&lt;/p&gt;
+&lt;p&gt;如果想让var变量的初始化也在编译时进行，可以&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;12
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;13
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;14
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;15
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;test&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;comptime vars&amp;#34;&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;i32&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;comptime&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;i32&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#7f848e&#34;&gt;// This compile error never triggers because y is a comptime variable,
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#7f848e&#34;&gt;// and so `y != 2` is a comptime value, and this if is statically evaluated.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#e5c07b&#34;&gt;@compileError&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;wrong y value&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;zig语言的切片和数组（array）的区别似乎只是固定长度和动态长度的区别。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;12
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;13
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;14
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;15
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;16
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;17
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;18
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;all_zero&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e06c75&#34;&gt;_&lt;/span&gt;]&lt;span style=&#34;color:#e5c07b&#34;&gt;u16&lt;/span&gt;{&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;} &lt;span style=&#34;color:#56b6c2&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Point&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;struct&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;i32&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;i32&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;test&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;compile-time array initialization&amp;#34;&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;fancy_array&lt;/span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;].&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;fancy_array&lt;/span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;].&lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;8&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;// call a function to initialize an array
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;more_points&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e06c75&#34;&gt;_&lt;/span&gt;]&lt;span style=&#34;color:#e06c75&#34;&gt;Point&lt;/span&gt;{&lt;span style=&#34;color:#e06c75&#34;&gt;makePoint&lt;/span&gt;(&lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;)} &lt;span style=&#34;color:#56b6c2&#34;&gt;**&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;makePoint&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;i32&lt;/span&gt;) &lt;span style=&#34;color:#e06c75&#34;&gt;Point&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Point&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        .&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        .&lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    };
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
@@ -481,7 +652,7 @@
 &lt;p&gt;Block math:
 &lt;/p&gt;
 $$
- \varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } } 
+\varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } }
 $$</description>
         </item>
         <item>
