@@ -7,7 +7,15 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>LI BO</copyright>
-        <lastBuildDate>Wed, 30 Apr 2025 16:52:46 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 13 May 2025 17:46:40 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Minkowski</title>
+        <link>https://wujilingfeng.github.io/p/minkowski/</link>
+        <pubDate>Tue, 13 May 2025 17:46:40 +0800</pubDate>
+        
+        <guid>https://wujilingfeng.github.io/p/minkowski/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/minkowski/rain.png" alt="Featured image of post Minkowski" /&gt;</description>
+        </item>
+        <item>
         <title>Futhark学习</title>
         <link>https://wujilingfeng.github.io/p/futhark%E5%AD%A6%E4%B9%A0/</link>
         <pubDate>Wed, 30 Apr 2025 16:52:46 +0800</pubDate>
