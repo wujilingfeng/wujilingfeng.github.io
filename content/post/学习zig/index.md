@@ -8,7 +8,7 @@ image = "fanchuan.png"
 
 zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。
 
-
+zig语言的void和c语言的void不同，c语言的void对应anyopaque,anyopaque是一个类型，而anytype是一个关键词，类似struct ,enum,fn,if, else等。void也是一个类型，它的值通常为`{}`。anyerror 是一个类型，不是关键字。
 
 zig语言 的”元组“，.{"nihao",3}其实是个value, 它的类型是匿名结构体，
 sdsa
@@ -64,7 +64,44 @@ pub fn main() !void {
  }
 ```
 
+zig语言的catch是个二元运算符,`value = expression catch default_value;`，含义：
+- 如果 `expression` 成功（返回 `T` 类型的值），则 `value` 被赋值为该值。
+- 如果 `expression` 返回错误（`error` 类型），则 `value` 被赋值为 `default_value`。
+
+如:
+
+```zig
+const number = parseU64(str, 10) catch 13;
+```
+
+
+
+在 Zig 中，`catch` 还支持一种扩展形式，允许你在捕获错误时执行自定义逻辑。这种用法的语法是：
+
+```zig
+value = expression catch |err| { /* handle error */ };
+
+```
+
+
+
+zig语言的return,break虽然属于noreturn类型的值，但是用法和c一样，return用于全局退出，break用于局部退出。所以标签块要用break退出.
+
+下面是标签块的使用，
+
+```zig
+var y: i32 = 123;
+
+    const x = blk: {
+        y += 1;
+        break :blk y;
+    };
+```
+
+
+
 下面展示了枚举变量的简洁写法，
+
 ```zig
 const Color = enum {
     red,
