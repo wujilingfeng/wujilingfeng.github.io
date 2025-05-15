@@ -26,3 +26,4 @@ amdgpu-install -y --usecase=graphics,rocm
 
 
 
+[这个网址](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/install/install-methods/package-manager/package-manager-ubuntu.html)告诉如何在ubuntu的仓库安装rocm
