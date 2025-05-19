@@ -7,7 +7,19 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>LI BO</copyright>
-        <lastBuildDate>Tue, 13 May 2025 17:46:40 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 19 May 2025 18:05:13 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Gltf格式</title>
+        <link>https://wujilingfeng.github.io/p/gltf%E6%A0%BC%E5%BC%8F/</link>
+        <pubDate>Mon, 19 May 2025 18:05:13 +0800</pubDate>
+        
+        <guid>https://wujilingfeng.github.io/p/gltf%E6%A0%BC%E5%BC%8F/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/gltf%E6%A0%BC%E5%BC%8F/jiari.png" alt="Featured image of post Gltf格式" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/905671909b25&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;gltf文件格式介绍&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/qq_22642239/article/details/129752911&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;gltf文件格式&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Minkowski框架学习</title>
         <link>https://wujilingfeng.github.io/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</link>
         <pubDate>Tue, 13 May 2025 17:46:40 +0800</pubDate>
@@ -390,7 +402,10 @@ zig语言会自动对结构体的内存进行布局优化，下面的例子:&lt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description>
+&lt;/div&gt;&lt;p&gt;虽然数组和切片更相似，但是切片和数组指针存在默认转换,数组的指针可以默认转化为切片，反之亦然。&lt;/p&gt;
+&lt;p&gt;在 &lt;code&gt;switch&lt;/code&gt; 中，范围使用了三个点，即 &lt;code&gt;3...6&lt;/code&gt;，而这个示例中，范围使用了两个点，即 &lt;code&gt;0..10&lt;/code&gt;。这是因为在 switch 中，范围的两端都是闭区间，而 for 则是左闭右开。&lt;/p&gt;
+&lt;p&gt;zig语言的函数参数默认是const，即不能修改参数的值。&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>Chinese Test</title>

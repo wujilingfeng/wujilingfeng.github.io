@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://wujilingfeng.github.io/</loc>
-    <lastmod>2025-05-13T17:46:40+08:00</lastmod>
+    <lastmod>2025-05-19T18:05:13+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -20,11 +20,11 @@
                 href="https://wujilingfeng.github.io/"
                 />
   </url><url>
-    <loc>https://wujilingfeng.github.io/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2025-05-13T17:46:40+08:00</lastmod>
+    <loc>https://wujilingfeng.github.io/p/gltf%E6%A0%BC%E5%BC%8F/</loc>
+    <lastmod>2025-05-19T18:05:13+08:00</lastmod>
   </url><url>
     <loc>https://wujilingfeng.github.io/post/</loc>
-    <lastmod>2025-05-13T17:46:40+08:00</lastmod>
+    <lastmod>2025-05-19T18:05:13+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -40,6 +40,9 @@
                 hreflang="zh-cn"
                 href="https://wujilingfeng.github.io/post/"
                 />
+  </url><url>
+    <loc>https://wujilingfeng.github.io/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</loc>
+    <lastmod>2025-05-13T17:46:40+08:00</lastmod>
   </url><url>
     <loc>https://wujilingfeng.github.io/p/futhark%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2025-04-30T16:52:46+08:00</lastmod>

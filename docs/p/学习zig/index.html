@@ -711,7 +711,10 @@ zig语言会自动对结构体的内存进行布局优化，下面的例子:</p>
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
-</div>
+</div><p>虽然数组和切片更相似，但是切片和数组指针存在默认转换,数组的指针可以默认转化为切片，反之亦然。</p>
+<p>在 <code>switch</code> 中，范围使用了三个点，即 <code>3...6</code>，而这个示例中，范围使用了两个点，即 <code>0..10</code>。这是因为在 switch 中，范围的两端都是闭区间，而 for 则是左闭右开。</p>
+<p>zig语言的函数参数默认是const，即不能修改参数的值。</p>
+
 </section>
 
 
