@@ -87,6 +87,10 @@ value = expression catch |err| { /* handle error */ };
 
 
 
+zig语言的orelse也是二元运算符，用来解包可选类型，左右两边两个表达式为执行代码。也可以用`.?`可访问非null的值（如果是null会引发panic）,`if(optional_value)|value|`是最安全的用法。
+
+
+
 zig语言的return,break虽然属于noreturn类型的值，但是用法和c一样，return用于全局退出，break用于局部退出。所以标签块要用break退出.
 
 下面是标签块的使用，
