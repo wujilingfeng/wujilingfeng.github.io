@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。\nzig语言的void和c语言的void不同，c语言的void对应anyopaque,anyopaque是一个类型，而anytype是一个关键词，类似struct ,enum,fn,if, else等。void也是一个类型，它的值通常为{}。anyerror 是一个类型，不是关键字。\nzig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体， sdsa zig语言会自动对结构体的内存进行布局优化，下面的例子:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 const RB_Node = struct { key: i32, left: ?*RB_Node, right: ?*RB_Node, parent: ?*RB_Node, color: bool, }; dprint(&#34;rb node size:{}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Size of RB_Node: {}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Offset of key: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;key&#34;)}); std.debug.print(&#34;Offset of left: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;left&#34;)}); std.debug.print(&#34;Offset of right: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;right&#34;)}); std.debug.print(&#34;Offset of parent: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;parent&#34;)}); std.debug.print(&#34;Offset of color: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;color&#34;)}); zig语言的anytype只用于函数的参数声明。\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。\nzig语言的void和c语言的void不同，c语言的void对应anyopaque,anyopaque是一个类型，而anytype是一个关键词，类似struct ,enum,fn,if, else等。void也是一个类型，它的值通常为{}。anyerror 是一个类型，不是关键字。\nzig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体， sdsa zig语言会自动对结构体的内存进行布局优化，下面的例子:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 const RB_Node = struct { key: i32, left: ?*RB_Node, right: ?*RB_Node, parent: ?*RB_Node, color: bool, }; dprint(&#34;rb node size:{}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Size of RB_Node: {}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Offset of key: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;key&#34;)}); std.debug.print(&#34;Offset of left: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;left&#34;)}); std.debug.print(&#34;Offset of right: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;right&#34;)}); std.debug.print(&#34;Offset of parent: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;parent&#34;)}); std.debug.print(&#34;Offset of color: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;color&#34;)}); zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype）。\n">
 <title>学习zig</title>
 
 <link rel='canonical' href='https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/'>
 
 <link rel="stylesheet" href="../../scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="学习zig">
-<meta property='og:description' content="zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。\nzig语言的void和c语言的void不同，c语言的void对应anyopaque,anyopaque是一个类型，而anytype是一个关键词，类似struct ,enum,fn,if, else等。void也是一个类型，它的值通常为{}。anyerror 是一个类型，不是关键字。\nzig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体， sdsa zig语言会自动对结构体的内存进行布局优化，下面的例子:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 const RB_Node = struct { key: i32, left: ?*RB_Node, right: ?*RB_Node, parent: ?*RB_Node, color: bool, }; dprint(&#34;rb node size:{}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Size of RB_Node: {}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Offset of key: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;key&#34;)}); std.debug.print(&#34;Offset of left: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;left&#34;)}); std.debug.print(&#34;Offset of right: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;right&#34;)}); std.debug.print(&#34;Offset of parent: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;parent&#34;)}); std.debug.print(&#34;Offset of color: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;color&#34;)}); zig语言的anytype只用于函数的参数声明。\n">
+<meta property='og:description' content="zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。\nzig语言的void和c语言的void不同，c语言的void对应anyopaque,anyopaque是一个类型，而anytype是一个关键词，类似struct ,enum,fn,if, else等。void也是一个类型，它的值通常为{}。anyerror 是一个类型，不是关键字。\nzig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体， sdsa zig语言会自动对结构体的内存进行布局优化，下面的例子:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 const RB_Node = struct { key: i32, left: ?*RB_Node, right: ?*RB_Node, parent: ?*RB_Node, color: bool, }; dprint(&#34;rb node size:{}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Size of RB_Node: {}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Offset of key: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;key&#34;)}); std.debug.print(&#34;Offset of left: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;left&#34;)}); std.debug.print(&#34;Offset of right: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;right&#34;)}); std.debug.print(&#34;Offset of parent: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;parent&#34;)}); std.debug.print(&#34;Offset of color: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;color&#34;)}); zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype）。\n">
 <meta property='og:url' content='https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/'>
 <meta property='og:site_name' content='五级灵风'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-28T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-28T00:00:00&#43;00:00'/><meta property='og:image' content='https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png' />
 <meta name="twitter:title" content="学习zig">
-<meta name="twitter:description" content="zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。\nzig语言的void和c语言的void不同，c语言的void对应anyopaque,anyopaque是一个类型，而anytype是一个关键词，类似struct ,enum,fn,if, else等。void也是一个类型，它的值通常为{}。anyerror 是一个类型，不是关键字。\nzig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体， sdsa zig语言会自动对结构体的内存进行布局优化，下面的例子:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 const RB_Node = struct { key: i32, left: ?*RB_Node, right: ?*RB_Node, parent: ?*RB_Node, color: bool, }; dprint(&#34;rb node size:{}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Size of RB_Node: {}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Offset of key: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;key&#34;)}); std.debug.print(&#34;Offset of left: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;left&#34;)}); std.debug.print(&#34;Offset of right: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;right&#34;)}); std.debug.print(&#34;Offset of parent: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;parent&#34;)}); std.debug.print(&#34;Offset of color: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;color&#34;)}); zig语言的anytype只用于函数的参数声明。\n"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。\nzig语言的void和c语言的void不同，c语言的void对应anyopaque,anyopaque是一个类型，而anytype是一个关键词，类似struct ,enum,fn,if, else等。void也是一个类型，它的值通常为{}。anyerror 是一个类型，不是关键字。\nzig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体， sdsa zig语言会自动对结构体的内存进行布局优化，下面的例子:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 const RB_Node = struct { key: i32, left: ?*RB_Node, right: ?*RB_Node, parent: ?*RB_Node, color: bool, }; dprint(&#34;rb node size:{}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Size of RB_Node: {}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Offset of key: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;key&#34;)}); std.debug.print(&#34;Offset of left: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;left&#34;)}); std.debug.print(&#34;Offset of right: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;right&#34;)}); std.debug.print(&#34;Offset of parent: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;parent&#34;)}); std.debug.print(&#34;Offset of color: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;color&#34;)}); zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype）。\n"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png' />
     <link rel="shortcut icon" href="../../favicon.ico" />
 
@@ -383,7 +383,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 3 分钟
+                    阅读时长: 4 分钟
                 </time>
             </div>
         
@@ -437,7 +437,7 @@ zig语言会自动对结构体的内存进行布局优化，下面的例子:</p>
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;Offset of color: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@offsetOf</span>(<span style="color:#e06c75">RB_Node</span>, <span style="color:#98c379">&#34;color&#34;</span>)});
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>zig语言的anytype只用于函数的参数声明。</p>
+</div><p>zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype）。</p>
 <p>zig 的test的函数必须是字符串，否则必须是标识符，一般和某个函数名的标识符相同，这样会作为该函数的文档测试说明。</p>
 <p><a class="link" href="https://www.cnblogs.com/violeshnv/p/18200280"  target="_blank" rel="noopener"
     >这个网页说明了一些用法</a></p>
@@ -505,7 +505,8 @@ zig语言会自动对结构体的内存进行布局优化，下面的例子:</p>
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#e06c75">value</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">expression</span> <span style="color:#c678dd">catch</span> <span style="color:#56b6c2">|</span><span style="color:#e06c75">err</span><span style="color:#56b6c2">|</span> { <span style="color:#56b6c2">/*</span> <span style="color:#e06c75">handle</span> <span style="color:#c678dd">error</span> <span style="color:#56b6c2">*/</span> };
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>zig语言的orelse也是二元运算符，用来解包可选类型，左右两边两个表达式为执行代码。也可以用<code>.?</code>可访问非null的值（如果是null会引发panic）,<code>if(optional_value)|value|</code>是最安全的用法。</p>
+</div><p>错误联合类型也可以用if语句解包。</p>
+<p>zig语言的orelse也是二元运算符，用来解包可选类型，左右两边两个表达式为执行代码。也可以用<code>.?</code>可访问非null的值（如果是null会引发panic）,<code>if(optional_value)|value|</code>是最安全的用法。</p>
 <p>zig语言的return,break虽然属于noreturn类型的值，但是用法和c一样，return用于全局退出，break用于局部退出。所以标签块要用break退出.</p>
 <p>下面是标签块的使用，</p>
 <div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
@@ -715,7 +716,87 @@ zig语言会自动对结构体的内存进行布局优化，下面的例子:</p>
 </div><p>虽然数组和切片更相似，但是切片和数组指针存在默认转换,数组的指针可以默认转化为切片，反之亦然。</p>
 <p>在 <code>switch</code> 中，范围使用了三个点，即 <code>3...6</code>，而这个示例中，范围使用了两个点，即 <code>0..10</code>。这是因为在 switch 中，范围的两端都是闭区间，而 for 则是左闭右开。</p>
 <p>zig语言的函数参数默认是const，即不能修改参数的值。</p>
-
+<p>下面是while的用法，支持一个额外的每次运行的表达式。</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;while loop continue expression, more complicated&#34;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">var</span> <span style="color:#e06c75">i</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">usize</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">var</span> <span style="color:#e06c75">j</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">usize</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">while</span> (<span style="color:#e06c75">i</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">j</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#d19a66">2000</span>) <span style="color:#56b6c2">:</span> ({
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">i</span> <span style="color:#56b6c2">*=</span> <span style="color:#d19a66">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">j</span> <span style="color:#56b6c2">*=</span> <span style="color:#d19a66">3</span>;
+</span></span><span style="display:flex;"><span>    }) {
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">const</span> <span style="color:#e06c75">my_ij</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">j</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">my_ij</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#d19a66">2000</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其实while也是个表达式，它的值既可以是while循环里break value返回的value，也可以是else表达式返回的值.</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#e06c75">rangeHasNumber</span>(<span style="color:#e06c75">begin</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">usize</span>, <span style="color:#e06c75">end</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">usize</span>, <span style="color:#e06c75">number</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">usize</span>) <span style="color:#e5c07b">bool</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">var</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">begin</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#c678dd">while</span> (<span style="color:#e06c75">i</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#e06c75">end</span>) <span style="color:#56b6c2">:</span> (<span style="color:#e06c75">i</span> <span style="color:#56b6c2">+=</span> <span style="color:#d19a66">1</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> (<span style="color:#e06c75">i</span> <span style="color:#56b6c2">==</span> <span style="color:#e06c75">number</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">break</span> <span style="color:#e5c07b">true</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    } <span style="color:#c678dd">else</span> <span style="color:#e5c07b">false</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#e06c75">myfun</span>()<span style="color:#56b6c2">!</span><span style="color:#e5c07b">void</span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">var</span> <span style="color:#e06c75">buf</span><span style="color:#56b6c2">:</span> [<span style="color:#d19a66">30</span>]<span style="color:#e5c07b">u8</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">undefined</span>;
+</span></span><span style="display:flex;"><span>		
+</span></span><span style="display:flex;"><span>	<span style="color:#7f848e">//在这里try语句遇到错误会从终止函数并返回错误结果，因为stdin.readUntilDelimiterOrEof(&amp;buf, &#39;\n&#39;)的返回值类型为`!?[]u8`，所以
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>	<span style="color:#7f848e">//if语句解包的是可选类型，得到|line|
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>	<span style="color:#c678dd">if</span> (<span style="color:#c678dd">try</span> <span style="color:#e06c75">stdin</span>.<span style="color:#e06c75">readUntilDelimiterOrEof</span>(<span style="color:#56b6c2">&amp;</span><span style="color:#e06c75">buf</span>, <span style="color:#98c379">&#39;\n&#39;</span>)) <span style="color:#56b6c2">|</span><span style="color:#e06c75">line</span><span style="color:#56b6c2">|</span> {
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>		
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 

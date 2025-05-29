@@ -34,7 +34,7 @@ std.debug.print("Offset of color: {}\n", .{@offsetOf(RB_Node, "color")});
 
 
 
-zig语言的anytype只用于函数的参数声明。
+zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype）。
 
 zig 的test的函数必须是字符串，否则必须是标识符，一般和某个函数名的标识符相同，这样会作为该函数的文档测试说明。
 
@@ -84,6 +84,8 @@ const number = parseU64(str, 10) catch 13;
 value = expression catch |err| { /* handle error */ };
 
 ```
+
+错误联合类型也可以用if语句解包。
 
 
 
@@ -218,4 +220,53 @@ fn makePoint(x: i32) Point {
 在 `switch` 中，范围使用了三个点，即 `3...6`，而这个示例中，范围使用了两个点，即 `0..10`。这是因为在 switch 中，范围的两端都是闭区间，而 for 则是左闭右开。
 
 zig语言的函数参数默认是const，即不能修改参数的值。
+
+下面是while的用法，支持一个额外的每次运行的表达式。
+
+```zig
+test "while loop continue expression, more complicated" {
+    var i: usize = 1;
+    var j: usize = 1;
+    while (i * j < 2000) : ({
+        i *= 2;
+        j *= 3;
+    }) {
+        const my_ij = i * j;
+        try expect(my_ij < 2000);
+    }
+}
+```
+
+其实while也是个表达式，它的值既可以是while循环里break value返回的value，也可以是else表达式返回的值.
+
+```zig
+fn rangeHasNumber(begin: usize, end: usize, number: usize) bool {
+    var i = begin;
+    return while (i < end) : (i += 1) {
+        if (i == number) {
+            break true;
+        }
+    } else false;
+}
+```
+
+
+
+
+
+```zig
+
+fn myfun()!void{
+	var buf: [30]u8 = undefined;
+		
+	//在这里try语句遇到错误会从终止函数并返回错误结果，因为stdin.readUntilDelimiterOrEof(&buf, '\n')的返回值类型为`!?[]u8`，所以
+	//if语句解包的是可选类型，得到|line|
+	if (try stdin.readUntilDelimiterOrEof(&buf, '\n')) |line| {
+	}
+
+}
+		
+
+
+```
 
