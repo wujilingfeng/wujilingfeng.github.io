@@ -270,3 +270,6 @@ fn myfun()!void{
 
 ```
 
+
+
+在函数的泛型参数中anytype和comptime T:type，我没有看到本质区别。
