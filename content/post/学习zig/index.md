@@ -280,7 +280,7 @@ fn myfun()!void{
 
 ## zig语言的构建系统
 
-zig语言的build.zig中，每个module或者execute的root_source_file只能指向一个.zig文件。
+zig语言的build.zig中，每个module或者test的root_source_file只能指向一个.zig文件。
 
 
 

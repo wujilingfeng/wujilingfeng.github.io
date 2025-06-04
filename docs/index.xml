@@ -489,7 +489,7 @@ zig语言会自动对结构体的内存进行布局优化，下面的例子:&lt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;在函数的泛型参数中anytype和comptime T:type，我没有看到本质区别。&lt;/p&gt;
 &lt;h2 id=&#34;zig语言的构建系统&#34;&gt;zig语言的构建系统
-&lt;/h2&gt;&lt;p&gt;zig语言的build.zig中，每个module或者execute的root_source_file只能指向一个.zig文件。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;zig语言的build.zig中，每个module或者test的root_source_file只能指向一个.zig文件。&lt;/p&gt;
 &lt;h3 id=&#34;1-addmodule&#34;&gt;1. &lt;code&gt;addModule&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;
