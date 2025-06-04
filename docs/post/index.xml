@@ -488,6 +488,79 @@ zig语言会自动对结构体的内存进行布局优化，下面的例子:&lt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;在函数的泛型参数中anytype和comptime T:type，我没有看到本质区别。&lt;/p&gt;
+&lt;h2 id=&#34;zig语言的构建系统&#34;&gt;zig语言的构建系统
+&lt;/h2&gt;&lt;p&gt;zig语言的build.zig中，每个module或者execute的root_source_file只能指向一个.zig文件。&lt;/p&gt;
+&lt;h3 id=&#34;1-addmodule&#34;&gt;1. &lt;code&gt;addModule&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;：创建一个模块，并将其&lt;strong&gt;添加到当前包的模块集合&lt;/strong&gt;（&lt;code&gt;b.modules&lt;/code&gt;）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;可见性&lt;/strong&gt;：&lt;strong&gt;公开（public）&lt;/strong&gt;。这个模块会被暴露给依赖当前包的其他包（即作为 package 的“导出模块”）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;典型用途&lt;/strong&gt;：当你希望你的库/包对外暴露一个或多个模块时，使用 &lt;code&gt;addModule&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;调用方式&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;my_mod&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;.&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;addModule&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;my_mod&amp;#34;&lt;/span&gt;, .{ .&lt;span style=&#34;color:#e06c75&#34;&gt;root_source_file&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; ... });
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;效果&lt;/strong&gt;：其他包可以通过 &lt;code&gt;@import(&amp;quot;my_mod&amp;quot;)&lt;/code&gt; 访问这个模块。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-createmodule&#34;&gt;2. &lt;code&gt;createModule&lt;/code&gt;
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;作用&lt;/strong&gt;：创建一个模块，但&lt;strong&gt;不添加到包的模块集合&lt;/strong&gt;，仅供当前包内部使用。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;可见性&lt;/strong&gt;：&lt;strong&gt;私有（private）&lt;/strong&gt;。这个模块不会被暴露给依赖当前包的其他包。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;典型用途&lt;/strong&gt;：当你只需要在当前包内部组织代码、复用代码，但不希望对外暴露时，使用 &lt;code&gt;createModule&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;调用方式&lt;/strong&gt;：
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;my_private_mod&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;.&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;createModule&lt;/span&gt;(.{ .&lt;span style=&#34;color:#e06c75&#34;&gt;root_source_file&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; ... });
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：只能在当前包的 build 脚本中通过 &lt;code&gt;addImport&lt;/code&gt; 等方式引用，外部包无法通过 &lt;code&gt;@import&lt;/code&gt; 访问。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;总结对比表&#34;&gt;总结对比表
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;函数名&lt;/th&gt;
+          &lt;th&gt;是否加入 b.modules&lt;/th&gt;
+          &lt;th&gt;是否对外暴露&lt;/th&gt;
+          &lt;th&gt;用途&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;addModule&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;是&lt;/td&gt;
+          &lt;td&gt;是&lt;/td&gt;
+          &lt;td&gt;对外暴露的模块&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;code&gt;createModule&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;否&lt;/td&gt;
+          &lt;td&gt;否&lt;/td&gt;
+          &lt;td&gt;仅包内私有的模块&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
 </description>
         </item>
         <item>

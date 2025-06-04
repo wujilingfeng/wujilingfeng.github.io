@@ -323,7 +323,44 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#zig语言的构建系统">zig语言的构建系统</a>
+      <ol>
+        <li><a href="#1-addmodule">1. <code>addModule</code></a></li>
+        <li><a href="#2-createmodule">2. <code>createModule</code></a></li>
+        <li><a href="#总结对比表">总结对比表</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="has-image main-article">
@@ -797,6 +834,79 @@ zig语言会自动对结构体的内存进行布局优化，下面的例子:</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>在函数的泛型参数中anytype和comptime T:type，我没有看到本质区别。</p>
+<h2 id="zig语言的构建系统">zig语言的构建系统
+</h2><p>zig语言的build.zig中，每个module或者execute的root_source_file只能指向一个.zig文件。</p>
+<h3 id="1-addmodule">1. <code>addModule</code>
+</h3><ul>
+<li>
+<p><strong>作用</strong>：创建一个模块，并将其<strong>添加到当前包的模块集合</strong>（<code>b.modules</code>）。</p>
+</li>
+<li>
+<p><strong>可见性</strong>：<strong>公开（public）</strong>。这个模块会被暴露给依赖当前包的其他包（即作为 package 的“导出模块”）。</p>
+</li>
+<li>
+<p><strong>典型用途</strong>：当你希望你的库/包对外暴露一个或多个模块时，使用 <code>addModule</code>。</p>
+</li>
+<li>
+<p><strong>调用方式</strong>：</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">my_mod</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">addModule</span>(<span style="color:#98c379">&#34;my_mod&#34;</span>, .{ .<span style="color:#e06c75">root_source_file</span> <span style="color:#56b6c2">=</span> ... });
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p><strong>效果</strong>：其他包可以通过 <code>@import(&quot;my_mod&quot;)</code> 访问这个模块。</p>
+</li>
+</ul>
+<hr>
+<h3 id="2-createmodule">2. <code>createModule</code>
+</h3><ul>
+<li><strong>作用</strong>：创建一个模块，但<strong>不添加到包的模块集合</strong>，仅供当前包内部使用。</li>
+<li><strong>可见性</strong>：<strong>私有（private）</strong>。这个模块不会被暴露给依赖当前包的其他包。</li>
+<li><strong>典型用途</strong>：当你只需要在当前包内部组织代码、复用代码，但不希望对外暴露时，使用 <code>createModule</code>。</li>
+<li><strong>调用方式</strong>：
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">my_private_mod</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">createModule</span>(.{ .<span style="color:#e06c75">root_source_file</span> <span style="color:#56b6c2">=</span> ... });
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li><strong>效果</strong>：只能在当前包的 build 脚本中通过 <code>addImport</code> 等方式引用，外部包无法通过 <code>@import</code> 访问。</li>
+</ul>
+<hr>
+<h3 id="总结对比表">总结对比表
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>函数名</th>
+          <th>是否加入 b.modules</th>
+          <th>是否对外暴露</th>
+          <th>用途</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>addModule</code></td>
+          <td>是</td>
+          <td>是</td>
+          <td>对外暴露的模块</td>
+      </tr>
+      <tr>
+          <td><code>createModule</code></td>
+          <td>否</td>
+          <td>否</td>
+          <td>仅包内私有的模块</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
 
 </section>
 

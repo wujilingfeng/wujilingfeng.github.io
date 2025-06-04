@@ -273,3 +273,49 @@ fn myfun()!void{
 
 
 在函数的泛型参数中anytype和comptime T:type，我没有看到本质区别。
+
+
+
+
+
+## zig语言的构建系统
+
+zig语言的build.zig中，每个module或者execute的root_source_file只能指向一个.zig文件。
+
+
+
+### 1. `addModule`
+
+- **作用**：创建一个模块，并将其**添加到当前包的模块集合**（`b.modules`）。
+- **可见性**：**公开（public）**。这个模块会被暴露给依赖当前包的其他包（即作为 package 的“导出模块”）。
+- **典型用途**：当你希望你的库/包对外暴露一个或多个模块时，使用 `addModule`。
+- **调用方式**：  
+  
+  ```zig
+  const my_mod = b.addModule("my_mod", .{ .root_source_file = ... });
+  ```
+- **效果**：其他包可以通过 `@import("my_mod")` 访问这个模块。
+
+---
+
+### 2. `createModule`
+
+- **作用**：创建一个模块，但**不添加到包的模块集合**，仅供当前包内部使用。
+- **可见性**：**私有（private）**。这个模块不会被暴露给依赖当前包的其他包。
+- **典型用途**：当你只需要在当前包内部组织代码、复用代码，但不希望对外暴露时，使用 `createModule`。
+- **调用方式**：  
+  ```zig
+  const my_private_mod = b.createModule(.{ .root_source_file = ... });
+  ```
+- **效果**：只能在当前包的 build 脚本中通过 `addImport` 等方式引用，外部包无法通过 `@import` 访问。
+
+---
+
+### 总结对比表
+
+| 函数名         | 是否加入 b.modules | 是否对外暴露 | 用途             |
+| -------------- | ------------------ | ------------ | ---------------- |
+| `addModule`    | 是                 | 是           | 对外暴露的模块   |
+| `createModule` | 否                 | 否           | 仅包内私有的模块 |
+
+---
