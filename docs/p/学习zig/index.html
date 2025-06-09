@@ -420,7 +420,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 4 分钟
+                    阅读时长: 5 分钟
                 </time>
             </div>
         
@@ -650,7 +650,7 @@ zig语言会自动对结构体的内存进行布局优化，下面的例子:</p>
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>zig语言的切片和数组（array）的区别似乎只是固定长度和动态长度的区别。</p>
+</div><p>zig语言的切片和数组（array）的区别似乎只是固定长度和动态长度的区别。而且数组不能转化为指针和切片，只有数组的指针才能转化为切片和指向多个元素的指针。</p>
 <div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
@@ -750,7 +750,36 @@ zig语言会自动对结构体的内存进行布局优化，下面的例子:</p>
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>虽然数组和切片更相似，但是切片和数组指针存在默认转换,数组的指针可以默认转化为切片，反之亦然。</p>
+</div><p>虽然数组和切片更相似，但是切片和数组指针存在默认转换,数组的指针可以默认转化为切片，反之不行(除非在编译阶段能确定切片长度，这样就可以把切片默认转化为数组指针)。</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">bytes</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> [<span style="color:#d19a66">5</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>]<span style="color:#e5c07b">u8</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;hello&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">dprint</span>(<span style="color:#98c379">&#34;bytes type:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">bytes</span>)});
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// const slice: []const u8 = &#34;slice&#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">const</span> <span style="color:#e06c75">slice</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">bytes</span>;<span style="color:#98c379">\\数组的指针转化为切片</span>
+</span></span><span style="display:flex;"><span> <span style="color:#61afef;font-weight:bold">dprint</span>(<span style="color:#98c379">&#34;slice type:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">slice</span>)});
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>   <span style="color:#c678dd">const</span> <span style="color:#e06c75">array</span><span style="color:#56b6c2">:</span> [<span style="color:#d19a66">5</span>]<span style="color:#e5c07b">u8</span> <span style="color:#56b6c2">=</span> [<span style="color:#d19a66">5</span>]<span style="color:#e5c07b">u8</span>{ <span style="color:#d19a66">1</span>, <span style="color:#d19a66">2</span>, <span style="color:#d19a66">3</span>, <span style="color:#d19a66">4</span>, <span style="color:#d19a66">5</span> };
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">array_ptr</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">&amp;</span><span style="color:#e06c75">array</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">dprint</span>(<span style="color:#98c379">&#34;array type:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">array_ptr</span>)});
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">array_ptr1</span><span style="color:#56b6c2">:</span> [<span style="color:#56b6c2">*</span>]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">&amp;</span><span style="color:#e06c75">array</span>;<span style="color:#98c379">\\数组的指针转化为指向多个元素的指针。</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">dprint</span>(<span style="color:#98c379">&#34;array type1:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">array_ptr1</span>)});
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>单个的指针ptr可以通过ptr[0..1]转化为切片（但是会在编译阶段优化为数组的指针）。</p>
 <p>在 <code>switch</code> 中，范围使用了三个点，即 <code>3...6</code>，而这个示例中，范围使用了两个点，即 <code>0..10</code>。这是因为在 switch 中，范围的两端都是闭区间，而 for 则是左闭右开。</p>
 <p>zig语言的函数参数默认是const，即不能修改参数的值。</p>
 <p>下面是while的用法，支持一个额外的每次运行的表达式。</p>
@@ -834,7 +863,59 @@ zig语言会自动对结构体的内存进行布局优化，下面的例子:</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>在函数的泛型参数中anytype和comptime T:type，我没有看到本质区别。</p>
-<h2 id="zig语言的构建系统">zig语言的构建系统
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">23
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">std</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@import</span>(<span style="color:#98c379">&#34;std&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">expect</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">testing</span>.<span style="color:#e06c75">expect</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">ComplexTypeTag</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">enum</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ok</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">not_ok</span>,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">ComplexType</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">union</span>(<span style="color:#e06c75">ComplexTypeTag</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">ok</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">u8</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">not_ok</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">void</span>,
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;modify tagged union in switch&#34;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">var</span> <span style="color:#e06c75">c</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">ComplexType</span>{ .<span style="color:#e06c75">ok</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">42</span> };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">switch</span> (<span style="color:#e06c75">c</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">ComplexTypeTag</span>.<span style="color:#e06c75">ok</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#56b6c2">|*</span><span style="color:#e06c75">value</span><span style="color:#56b6c2">|</span> <span style="color:#e06c75">value</span>.<span style="color:#56b6c2">*</span> <span style="color:#56b6c2">+=</span> <span style="color:#d19a66">1</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">ComplexTypeTag</span>.<span style="color:#e06c75">not_ok</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#c678dd">unreachable</span>,
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">c</span>.<span style="color:#e06c75">ok</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">43</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="zig语言的构建系统">zig语言的构建系统
 </h2><p>zig语言的build.zig中，每个module或者test的root_source_file只能指向一个.zig文件。</p>
 <h3 id="1-addmodule">1. <code>addModule</code>
 </h3><ul>

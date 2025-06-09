@@ -160,7 +160,7 @@ test "comptime vars" {
 
 
 
-zig语言的切片和数组（array）的区别似乎只是固定长度和动态长度的区别。
+zig语言的切片和数组（array）的区别似乎只是固定长度和动态长度的区别。而且数组不能转化为指针和切片，只有数组的指针才能转化为切片和指向多个元素的指针。
 
 ```zig
 const all_zero = [_]u16{0} ** 10;
@@ -213,7 +213,26 @@ fn makePoint(x: i32) Point {
 }
 ```
 
-虽然数组和切片更相似，但是切片和数组指针存在默认转换,数组的指针可以默认转化为切片，反之亦然。
+虽然数组和切片更相似，但是切片和数组指针存在默认转换,数组的指针可以默认转化为切片，反之不行(除非在编译阶段能确定切片长度，这样就可以把切片默认转化为数组指针)。
+
+```zig
+const bytes: *const [5:0]u8 = "hello";
+dprint("bytes type:{}\n", .{@TypeOf(bytes)});
+    // const slice: []const u8 = "slice";
+const slice: []const u8 = bytes;\\数组的指针转化为切片
+ dprint("slice type:{}\n", .{@TypeOf(slice)});
+ 
+   const array: [5]u8 = [5]u8{ 1, 2, 3, 4, 5 };
+    const array_ptr = &array;
+    dprint("array type:{}\n", .{@TypeOf(array_ptr)});
+    const array_ptr1: [*]const u8 = &array;\\数组的指针转化为指向多个元素的指针。
+    dprint("array type1:{}\n", .{@TypeOf(array_ptr1)});
+
+```
+
+
+
+单个的指针ptr可以通过ptr[0..1]转化为切片（但是会在编译阶段优化为数组的指针）。
 
 
 
@@ -273,6 +292,32 @@ fn myfun()!void{
 
 
 在函数的泛型参数中anytype和comptime T:type，我没有看到本质区别。
+
+```zig
+const std = @import("std");
+const expect = std.testing.expect;
+
+
+const ComplexTypeTag = enum {
+    ok,
+    not_ok,
+};
+const ComplexType = union(ComplexTypeTag) {
+    ok: u8,
+    not_ok: void,
+};
+
+test "modify tagged union in switch" {
+    var c = ComplexType{ .ok = 42 };
+
+    switch (c) {
+        ComplexTypeTag.ok => |*value| value.* += 1,
+        ComplexTypeTag.not_ok => unreachable,
+    }
+
+    try expect(c.ok == 43);
+}
+```
 
 
 
