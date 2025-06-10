@@ -345,6 +345,15 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
+    <li>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#额外说明">额外说明</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
     <li><a href="#zig语言的构建系统">zig语言的构建系统</a>
       <ol>
         <li><a href="#1-addmodule">1. <code>addModule</code></a></li>
@@ -916,7 +925,10 @@
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="zig语言的构建系统">zig语言的构建系统
+</div><h4 id="额外说明">额外说明
+</h4><p>经过测试，结构体内部的函数和成员变量不能重名，block的标签名可以重名（除了嵌套）。</p>
+<p>zig的import导入模块的话，如果是直接@import 文件名的话，相对路径是相对于该导入文件的路径。</p>
+<h2 id="zig语言的构建系统">zig语言的构建系统
 </h2><p>zig语言的build.zig中，每个module或者test的root_source_file只能指向一个.zig文件。</p>
 <h3 id="1-addmodule">1. <code>addModule</code>
 </h3><ul>

@@ -323,6 +323,14 @@ test "modify tagged union in switch" {
 
 
 
+#### 额外说明
+
+经过测试，结构体内部的函数和成员变量不能重名，block的标签名可以重名（除了嵌套）。
+
+zig的import导入模块的话，如果是直接@import 文件名的话，相对路径是相对于该导入文件的路径。
+
+
+
 ## zig语言的构建系统
 
 zig语言的build.zig中，每个module或者test的root_source_file只能指向一个.zig文件。
