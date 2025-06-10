@@ -11,7 +11,7 @@ zig语言对函数声明和定义启用延迟检查分析，也就是如果定�
 zig语言的void和c语言的void不同，c语言的void对应anyopaque,anyopaque是一个类型，而anytype是一个关键词，类似struct ,enum,fn,if, else等。void也是一个类型，它的值通常为`{}`。anyerror 是一个类型，不是关键字。
 
 zig语言 的”元组“，.{"nihao",3}其实是个value, 它的类型是匿名结构体，
-sdsa
+
 zig语言会自动对结构体的内存进行布局优化，下面的例子:
 
 ```zig
@@ -36,7 +36,7 @@ std.debug.print("Offset of color: {}\n", .{@offsetOf(RB_Node, "color")});
 
 zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype）。
 
-zig 的test的函数必须是字符串，否则必须是标识符，一般和某个函数名的标识符相同，这样会作为该函数的文档测试说明。
+zig 的test的函数必须是字符串，否则必须是标识符，一般和某个函数名的标识符相同，这样会作为该函数的文档测试说明。test函数的默认返回类型是错误联合类型，也就是`!void` 
 
 
 
@@ -82,7 +82,7 @@ const number = parseU64(str, 10) catch 13;
 
 ```zig
 value = expression catch |err| { /* handle error */ };
-
+expression catch |err| return err;这个语句完全等价try。
 ```
 
 错误联合类型也可以用if语句解包。
