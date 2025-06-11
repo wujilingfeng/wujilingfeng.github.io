@@ -573,6 +573,8 @@
 &lt;/div&gt;&lt;h4 id=&#34;额外说明&#34;&gt;额外说明
 &lt;/h4&gt;&lt;p&gt;经过测试，结构体内部的函数和成员变量不能重名，block的标签名可以重名（除了嵌套）。&lt;/p&gt;
 &lt;p&gt;zig的import导入模块的话，如果是直接@import 文件名的话，相对路径是相对于该导入文件的路径。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://course.ziglang.cc/engineering/style_guide&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;风格指南&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;zig语言的构建系统&#34;&gt;zig语言的构建系统
 &lt;/h2&gt;&lt;p&gt;zig语言的build.zig中，每个module或者test的root_source_file只能指向一个.zig文件。&lt;/p&gt;
 &lt;h3 id=&#34;1-addmodule&#34;&gt;1. &lt;code&gt;addModule&lt;/code&gt;
