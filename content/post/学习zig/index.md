@@ -329,6 +329,12 @@ test "modify tagged union in switch" {
 
 zig的import导入模块的话，如果是直接@import 文件名的话，相对路径是相对于该导入文件的路径。
 
+[风格指南](https://course.ziglang.cc/engineering/style_guide)
+
+
+
+
+
 
 
 ## zig语言的构建系统
@@ -372,3 +378,21 @@ zig语言的build.zig中，每个module或者test的root_source_file只能指向
 | `createModule` | 否                 | 否           | 仅包内私有的模块 |
 
 ---
+
+## 和C交互
+
+```zig
+const cstdio = @cImport({
+    // See https://github.com/ziglang/zig/issues/515
+    @cDefine("_NO_CRT_STDIO_INLINE", "1");
+    @cInclude("stdio.h");
+});
+pub fn main() void{
+
+	_ = cstdio.printf("hello\n");
+
+}
+```
+
+上面展示了引入c头文件的功能，需要在编译文件`build.zig`中添加`exe.linkLibC();`
+
