@@ -575,7 +575,18 @@
 &lt;p&gt;zig的import导入模块的话，如果是直接@import 文件名的话，相对路径是相对于该导入文件的路径。&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://course.ziglang.cc/engineering/style_guide&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;风格指南&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;zig语言的构建系统&#34;&gt;zig语言的构建系统
+&lt;p&gt;请注意，下面的代码中a不是二维数组，它是一维数组，每个分量是切片。同理window_name是一维数组，由于切片，数组指针，指向多项的指针三者存在默认转换关系，所以window_name的每个分量是个指向多项的数组。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#e06c75&#34;&gt;_&lt;/span&gt;][]&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;u8&lt;/span&gt;{ &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;src&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;test&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;example&amp;#34;&lt;/span&gt; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;window_name&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;][&lt;span style=&#34;color:#56b6c2&#34;&gt;*:&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;]&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;u8&lt;/span&gt;{&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;window name&amp;#34;&lt;/span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;zig语言的构建系统&#34;&gt;zig语言的构建系统
 &lt;/h2&gt;&lt;p&gt;zig语言的build.zig中，每个module或者test的root_source_file只能指向一个.zig文件。&lt;/p&gt;
 &lt;h3 id=&#34;1-addmodule&#34;&gt;1. &lt;code&gt;addModule&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;

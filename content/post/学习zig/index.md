@@ -331,6 +331,13 @@ zig的import导入模块的话，如果是直接@import 文件名的话，相对
 
 [风格指南](https://course.ziglang.cc/engineering/style_guide)
 
+请注意，下面的代码中a不是二维数组，它是一维数组，每个分量是切片。同理window_name是一维数组，由于切片，数组指针，指向多项的指针三者存在默认转换关系，所以window_name的每个分量是个指向多项的数组。
+
+```zig
+const a=[_][]const u8{ "src", "test", "example" }
+const window_name = [1][*:0]const u8{"window name"};
+```
+
 
 
 

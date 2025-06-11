@@ -931,7 +931,18 @@
 <p>zig的import导入模块的话，如果是直接@import 文件名的话，相对路径是相对于该导入文件的路径。</p>
 <p><a class="link" href="https://course.ziglang.cc/engineering/style_guide"  target="_blank" rel="noopener"
     >风格指南</a></p>
-<h2 id="zig语言的构建系统">zig语言的构建系统
+<p>请注意，下面的代码中a不是二维数组，它是一维数组，每个分量是切片。同理window_name是一维数组，由于切片，数组指针，指向多项的指针三者存在默认转换关系，所以window_name的每个分量是个指向多项的数组。</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">a</span><span style="color:#56b6c2">=</span>[<span style="color:#e06c75">_</span>][]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>{ <span style="color:#98c379">&#34;src&#34;</span>, <span style="color:#98c379">&#34;test&#34;</span>, <span style="color:#98c379">&#34;example&#34;</span> }
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">window_name</span> <span style="color:#56b6c2">=</span> [<span style="color:#d19a66">1</span>][<span style="color:#56b6c2">*:</span><span style="color:#d19a66">0</span>]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>{<span style="color:#98c379">&#34;window name&#34;</span>};
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="zig语言的构建系统">zig语言的构建系统
 </h2><p>zig语言的build.zig中，每个module或者test的root_source_file只能指向一个.zig文件。</p>
 <h3 id="1-addmodule">1. <code>addModule</code>
 </h3><ul>
