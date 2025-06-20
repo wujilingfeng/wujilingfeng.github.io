@@ -358,7 +358,11 @@
       <ol>
         <li><a href="#1-addmodule">1. <code>addModule</code></a></li>
         <li><a href="#2-createmodule">2. <code>createModule</code></a></li>
-        <li><a href="#总结对比表">总结对比表</a></li>
+        <li><a href="#总结对比表">总结对比表</a>
+          <ol>
+            <li><a href="#zig-fetch">zig fetch</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
     <li><a href="#和c交互">和C交互</a></li>
@@ -1015,6 +1019,19 @@
   </tbody>
 </table></div>
 <hr>
+<h4 id="zig-fetch">zig fetch
+</h4><p><code>zig fetch --save &quot;git+https://github.com/用户/仓库.git#&lt;commit_hash或者tag&gt;&quot;</code></p>
+<p>如果省掉<code>#&lt;commit_hash或者tag&gt;</code>就会拉取最新的提交</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#e06c75">zig</span> <span style="color:#e06c75">fetch</span> <span style="color:#56b6c2">--</span><span style="color:#e06c75">save</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">glfw</span> <span style="color:#98c379">&#34;git+https://github.com/glfw/glfw.git&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果自己手动填写url时，格式为</p>
+<p><code>https://github.com/&lt;用户名&gt;/&lt;仓库名&gt;/archive/&lt;commit或tag&gt;.tar.gz</code></p>
 <h2 id="和c交互">和C交互
 </h2><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">

@@ -386,6 +386,27 @@ zig语言的build.zig中，每个module或者test的root_source_file只能指向
 
 ---
 
+#### zig fetch
+
+`zig fetch --save "git+https://github.com/用户/仓库.git#<commit_hash或者tag>"`
+
+如果省掉`#<commit_hash或者tag>`就会拉取最新的提交
+
+```zig
+zig fetch --save=glfw "git+https://github.com/glfw/glfw.git"
+
+```
+
+如果自己手动填写url时，格式为
+
+`https://github.com/<用户名>/<仓库名>/archive/<commit或tag>.tar.gz`
+
+
+
+
+
+
+
 ## 和C交互
 
 ```zig
