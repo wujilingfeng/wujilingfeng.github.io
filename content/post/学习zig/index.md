@@ -404,12 +404,21 @@ const bar = @import("my_module/bar.zig");
 
 `zig fetch --save "git+https://github.com/用户/仓库.git#<commit_hash或者tag>"`
 
-如果省掉`#<commit_hash或者tag>`就会拉取最新的提交
+如果省掉`#<commit_hash或者tag>`就会拉取默认分支的最新的提交
 
-```zig
+```bash
 zig fetch --save=glfw "git+https://github.com/glfw/glfw.git"
 
 ```
+
+下面测试也是可以的，但是不稳定，因为分支会变动
+
+```bash
+zig fetch --save https://github.com/webui-dev/zig-webui/archive/main.tar.gz
+
+```
+
+
 
 如果自己手动填写url时，格式为
 
