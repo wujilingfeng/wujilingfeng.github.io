@@ -32,7 +32,7 @@ std.debug.print("Offset of color: {}\n", .{@offsetOf(RB_Node, "color")});
 
 ```
 
-
+如果zig语言想要实现类型类，只需要写个满足类型类约束的comptime函数，也就是在编译期进行类型检查是否有某些方法的判断，然后在需要添加类型类约束的函数上添加这个编译期函数判断即可
 
 zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype）。
 

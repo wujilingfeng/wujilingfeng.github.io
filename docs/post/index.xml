@@ -2,18 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Posts on 五级灵风</title>
-        <link>https://wujilingfeng.github.io/post/</link>
+        <link>http://localhost:1313/post/</link>
         <description>Recent content in Posts on 五级灵风</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>LI BO</copyright>
-        <lastBuildDate>Mon, 19 May 2025 18:05:13 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 20 Jun 2025 10:36:14 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Zig实战</title>
+        <link>http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/</link>
+        <pubDate>Fri, 20 Jun 2025 10:36:14 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/</guid>
+        <description>&lt;img src="http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/nature.png" alt="Featured image of post Zig实战" /&gt;&lt;p&gt;如果zig语言想要实现类型类，只需要写个满足类型类约束的comptime函数，也就是在编译期进行类型检查是否有某些方法的判断，然后在需要添加类型类约束的函数上添加这个编译期函数判断即可&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Gltf格式</title>
-        <link>https://wujilingfeng.github.io/p/gltf%E6%A0%BC%E5%BC%8F/</link>
+        <link>http://localhost:1313/p/gltf%E6%A0%BC%E5%BC%8F/</link>
         <pubDate>Mon, 19 May 2025 18:05:13 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/gltf%E6%A0%BC%E5%BC%8F/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/gltf%E6%A0%BC%E5%BC%8F/jiari.png" alt="Featured image of post Gltf格式" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/905671909b25&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>http://localhost:1313/p/gltf%E6%A0%BC%E5%BC%8F/</guid>
+        <description>&lt;img src="http://localhost:1313/p/gltf%E6%A0%BC%E5%BC%8F/jiari.png" alt="Featured image of post Gltf格式" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/905671909b25&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;gltf文件格式介绍&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/qq_22642239/article/details/129752911&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;gltf文件格式&lt;/a&gt;&lt;/p&gt;
@@ -21,11 +30,11 @@
         </item>
         <item>
         <title>Minkowski框架学习</title>
-        <link>https://wujilingfeng.github.io/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</link>
+        <link>http://localhost:1313/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</link>
         <pubDate>Tue, 13 May 2025 17:46:40 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/rain.png" alt="Featured image of post Minkowski框架学习" /&gt;&lt;p&gt;按照&lt;a class=&#34;link&#34; href=&#34;https://rocm.docs.amd.com/projects/radeon/en/latest/docs/install/native_linux/install-radeon.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>http://localhost:1313/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</guid>
+        <description>&lt;img src="http://localhost:1313/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/rain.png" alt="Featured image of post Minkowski框架学习" /&gt;&lt;p&gt;按照&lt;a class=&#34;link&#34; href=&#34;https://rocm.docs.amd.com/projects/radeon/en/latest/docs/install/native_linux/install-radeon.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;网址&lt;/a&gt;进行配置.&lt;/p&gt;
 &lt;p&gt;对于zorin os等基于ubuntu的发行版本，需要修改&lt;code&gt;sudo vim /etc/os-release&lt;/code&gt; , 把ID设置为ubuntu。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -55,29 +64,29 @@
         </item>
         <item>
         <title>Futhark学习</title>
-        <link>https://wujilingfeng.github.io/p/futhark%E5%AD%A6%E4%B9%A0/</link>
+        <link>http://localhost:1313/p/futhark%E5%AD%A6%E4%B9%A0/</link>
         <pubDate>Wed, 30 Apr 2025 16:52:46 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/futhark%E5%AD%A6%E4%B9%A0/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/futhark%E5%AD%A6%E4%B9%A0/jinshan.png" alt="Featured image of post Futhark学习" /&gt;</description>
+        <guid>http://localhost:1313/p/futhark%E5%AD%A6%E4%B9%A0/</guid>
+        <description>&lt;img src="http://localhost:1313/p/futhark%E5%AD%A6%E4%B9%A0/jinshan.png" alt="Featured image of post Futhark学习" /&gt;</description>
         </item>
         <item>
         <title>Haskell学习</title>
-        <link>https://wujilingfeng.github.io/p/haskell%E5%AD%A6%E4%B9%A0/</link>
+        <link>http://localhost:1313/p/haskell%E5%AD%A6%E4%B9%A0/</link>
         <pubDate>Tue, 29 Apr 2025 10:58:01 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/haskell%E5%AD%A6%E4%B9%A0/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/haskell%E5%AD%A6%E4%B9%A0/img.png" alt="Featured image of post Haskell学习" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.oreilly.com/library/view/parallel-and-concurrent/9781449335939/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>http://localhost:1313/p/haskell%E5%AD%A6%E4%B9%A0/</guid>
+        <description>&lt;img src="http://localhost:1313/p/haskell%E5%AD%A6%E4%B9%A0/img.png" alt="Featured image of post Haskell学习" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.oreilly.com/library/view/parallel-and-concurrent/9781449335939/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Parallel and Concurrent Programming in Haskell[Book]&lt;/a&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
         <title>Hugo&#43;github搭建博客</title>
-        <link>https://wujilingfeng.github.io/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link>
+        <link>http://localhost:1313/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link>
         <pubDate>Tue, 29 Apr 2025 08:57:27 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/shumu.png" alt="Featured image of post Hugo&#43;github搭建博客" /&gt;&lt;p&gt;hugo 似乎的确存在很多bug。&lt;/p&gt;
+        <guid>http://localhost:1313/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid>
+        <description>&lt;img src="http://localhost:1313/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/shumu.png" alt="Featured image of post Hugo&#43;github搭建博客" /&gt;&lt;p&gt;hugo 似乎的确存在很多bug。&lt;/p&gt;
 &lt;p&gt;stack主题对于baseurl的路径处理有bug，例如当baseurl = &lt;a class=&#34;link&#34; href=&#34;https://wujilingfeng.github.io/myblog/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://wujilingfeng.github.io/myblog/&lt;/a&gt;时，生成的网页内容路径会自动添加myblog。&lt;/p&gt;
 &lt;p&gt;stack主题对于文章的语言分类是以md的文件名中缀&lt;code&gt;zh-cn&lt;/code&gt;,&lt;code&gt;en&lt;/code&gt;,&lt;code&gt;ar&lt;/code&gt;来进行区分的。&lt;/p&gt;
@@ -85,11 +94,11 @@
         </item>
         <item>
         <title>学习zig</title>
-        <link>https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/</link>
+        <link>http://localhost:1313/p/%E5%AD%A6%E4%B9%A0zig/</link>
         <pubDate>Mon, 28 Apr 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png" alt="Featured image of post 学习zig" /&gt;&lt;p&gt;zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。&lt;/p&gt;
+        <guid>http://localhost:1313/p/%E5%AD%A6%E4%B9%A0zig/</guid>
+        <description>&lt;img src="http://localhost:1313/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png" alt="Featured image of post 学习zig" /&gt;&lt;p&gt;zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。&lt;/p&gt;
 &lt;p&gt;zig语言的void和c语言的void不同，c语言的void对应anyopaque,anyopaque是一个类型，而anytype是一个关键词，类似struct ,enum,fn,if, else等。void也是一个类型，它的值通常为&lt;code&gt;{}&lt;/code&gt;。anyerror 是一个类型，不是关键字。&lt;/p&gt;
 &lt;p&gt;zig语言 的”元组“，.{&amp;ldquo;nihao&amp;rdquo;,3}其实是个value, 它的类型是匿名结构体，&lt;/p&gt;
 &lt;p&gt;zig语言会自动对结构体的内存进行布局优化，下面的例子:&lt;/p&gt;
@@ -127,7 +136,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;debug&lt;/span&gt;.&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Offset of color: {}&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;, .{&lt;span style=&#34;color:#e5c07b&#34;&gt;@offsetOf&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;RB_Node&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;color&amp;#34;&lt;/span&gt;)});
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype）。&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;如果zig语言想要实现类型类，只需要写个满足类型类约束的comptime函数，也就是在编译期进行类型检查是否有某些方法的判断，然后在需要添加类型类约束的函数上添加这个编译期函数判断即可&lt;/p&gt;
+&lt;p&gt;zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype）。&lt;/p&gt;
 &lt;p&gt;zig 的test的函数必须是字符串，否则必须是标识符，一般和某个函数名的标识符相同，这样会作为该函数的文档测试说明。test函数的默认返回类型是错误联合类型，也就是&lt;code&gt;!void&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/violeshnv/p/18200280&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;这个网页说明了一些用法&lt;/a&gt;&lt;/p&gt;
@@ -704,11 +714,11 @@
         </item>
         <item>
         <title>Chinese Test</title>
-        <link>https://wujilingfeng.github.io/p/test-chinese/</link>
+        <link>http://localhost:1313/p/test-chinese/</link>
         <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/test-chinese/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.zh-cn.jpg" alt="Featured image of post Chinese Test" /&gt;&lt;h2 id=&#34;正文测试&#34;&gt;正文测试
+        <guid>http://localhost:1313/p/test-chinese/</guid>
+        <description>&lt;img src="http://localhost:1313/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.zh-cn.jpg" alt="Featured image of post Chinese Test" /&gt;&lt;h2 id=&#34;正文测试&#34;&gt;正文测试
 &lt;/h2&gt;&lt;p&gt;而这些并不是完全重要，更加重要的问题是， 带着这些问题，我们来审视一下学生会退会。 既然如何， 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 我们不得不面对一个非常尴尬的事实，那就是， 可是，即使是这样，学生会退会的出现仍然代表了一定的意义。 学生会退会，发生了会如何，不发生又会如何。 经过上述讨论， 生活中，若学生会退会出现了，我们就不得不考虑它出现了的事实。 学生会退会，到底应该如何实现。 这样看来， 在这种困难的抉择下，本人思来想去，寝食难安。 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 就我个人来说，学生会退会对我的意义，不能不说非常重大。 莎士比亚曾经提到过，人的一生是短的，但如果卑劣地过这一生，就太长了。这似乎解答了我的疑惑。 莫扎特说过一句富有哲理的话，谁和我一样用功，谁就会和我一样成功。这启发了我， 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 学生会退会，到底应该如何实现。 一般来说， 从这个角度来看， 这种事实对本人来说意义重大，相信对这个世界也是有一定意义的。 在这种困难的抉择下，本人思来想去，寝食难安。 了解清楚学生会退会到底是一种怎么样的存在，是解决一切问题的关键。 一般来说， 生活中，若学生会退会出现了，我们就不得不考虑它出现了的事实。 问题的关键究竟为何？ 而这些并不是完全重要，更加重要的问题是。&lt;/p&gt;
 &lt;p&gt;奥斯特洛夫斯基曾经说过，共同的事业，共同的斗争，可以使人们产生忍受一切的力量。　带着这句话，我们还要更加慎重的审视这个问题： 一般来讲，我们都必须务必慎重的考虑考虑。 既然如此， 这种事实对本人来说意义重大，相信对这个世界也是有一定意义的。 带着这些问题，我们来审视一下学生会退会。 我认为， 我认为， 在这种困难的抉择下，本人思来想去，寝食难安。 问题的关键究竟为何？ 每个人都不得不面对这些问题。 在面对这种问题时， 要想清楚，学生会退会，到底是一种怎么样的存在。 我认为， 既然如此， 每个人都不得不面对这些问题。 在面对这种问题时， 那么， 我认为， 学生会退会因何而发生。&lt;/p&gt;
 &lt;h2 id=&#34;引用&#34;&gt;引用
@@ -792,11 +802,11 @@
         </item>
         <item>
         <title>Markdown Syntax Guide</title>
-        <link>https://wujilingfeng.github.io/p/markdown-syntax-guide/</link>
+        <link>http://localhost:1313/p/markdown-syntax-guide/</link>
         <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/markdown-syntax-guide/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" /&gt;&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;
+        <guid>http://localhost:1313/p/markdown-syntax-guide/</guid>
+        <description>&lt;img src="http://localhost:1313/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" /&gt;&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;
 &lt;h2 id=&#34;headings&#34;&gt;Headings
 &lt;/h2&gt;&lt;p&gt;The following HTML &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;—&lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt; elements represent six levels of section headings. &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt; is the highest section level while &lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt; is the lowest.&lt;/p&gt;
 &lt;h1 id=&#34;h1&#34;&gt;H1
@@ -1020,11 +1030,11 @@
         </item>
         <item>
         <title>Placeholder Text</title>
-        <link>https://wujilingfeng.github.io/p/placeholder-text/</link>
+        <link>http://localhost:1313/p/placeholder-text/</link>
         <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/placeholder-text/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/placeholder-text/matt-le-SJSpo9hQf7s-unsplash.jpg" alt="Featured image of post Placeholder Text" /&gt;&lt;p&gt;Lorem est tota propiore conpellat pectoribus de pectora summo.&lt;/p&gt;
+        <guid>http://localhost:1313/p/placeholder-text/</guid>
+        <description>&lt;img src="http://localhost:1313/p/placeholder-text/matt-le-SJSpo9hQf7s-unsplash.jpg" alt="Featured image of post Placeholder Text" /&gt;&lt;p&gt;Lorem est tota propiore conpellat pectoribus de pectora summo.&lt;/p&gt;
 &lt;p&gt;Redit teque digerit hominumque toris verebor lumina non cervice subde tollit usus habet Arctonque, furores quas nec ferunt. Quoque montibus nunc caluere tempus inhospita parcite confusaque translucet patri vestro qui optatis lumine cognoscere flos nubis! Fronde ipsamque patulos Dryopen deorum.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Exierant elisi ambit vivere dedere&lt;/li&gt;
@@ -1051,10 +1061,10 @@
         </item>
         <item>
         <title>Math Typesetting</title>
-        <link>https://wujilingfeng.github.io/p/math-typesetting/</link>
+        <link>http://localhost:1313/p/math-typesetting/</link>
         <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/math-typesetting/</guid>
+        <guid>http://localhost:1313/p/math-typesetting/</guid>
         <description>&lt;p&gt;Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p&gt;
 &lt;p&gt;In this example we will be using &lt;a class=&#34;link&#34; href=&#34;https://katex.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;KaTeX&lt;/a&gt;&lt;/p&gt;
@@ -1093,11 +1103,11 @@ $$</description>
         </item>
         <item>
         <title>Emoji Support</title>
-        <link>https://wujilingfeng.github.io/p/emoji-support/</link>
+        <link>http://localhost:1313/p/emoji-support/</link>
         <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/emoji-support/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/emoji-support/the-creative-exchange-d2zvqp3fpro-unsplash.jpg" alt="Featured image of post Emoji Support" /&gt;&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;
+        <guid>http://localhost:1313/p/emoji-support/</guid>
+        <description>&lt;img src="http://localhost:1313/p/emoji-support/the-creative-exchange-d2zvqp3fpro-unsplash.jpg" alt="Featured image of post Emoji Support" /&gt;&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;
 &lt;p&gt;The &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/functions/emojify/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;&lt;code&gt;emojify&lt;/code&gt;&lt;/a&gt; function can be called directly in templates or &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/templates/shortcode-templates/#inline-shortcodes&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Inline Shortcodes&lt;/a&gt;.&lt;/p&gt;
