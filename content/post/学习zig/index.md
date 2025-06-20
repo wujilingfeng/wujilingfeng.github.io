@@ -32,8 +32,6 @@ std.debug.print("Offset of color: {}\n", .{@offsetOf(RB_Node, "color")});
 
 ```
 
-如果zig语言想要实现类型类，只需要写个满足类型类约束的comptime函数，也就是在编译期进行类型检查是否有某些方法的判断，然后在需要添加类型类约束的函数上添加这个编译期函数判断即可
-
 zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype）。
 
 zig 的test的函数必须是字符串，否则必须是标识符，一般和某个函数名的标识符相同，这样会作为该函数的文档测试说明。test函数的默认返回类型是错误联合类型，也就是`!void` 
@@ -346,9 +344,25 @@ const window_name = [1][*:0]const u8{"window name"};
 
 ## zig语言的构建系统
 
-zig语言的build.zig中，每个module或者test的root_source_file只能指向一个.zig文件。
+zig语言的build.zig中，每个module或者test的root_source_file只能指向一个.zig文件，或者一个目录。
 
+- 你可以指定一个**目录**，而不是单个文件。
+- 如果你指定的是目录，Zig 会把这个目录当作模块的根目录，里面的多个 `.zig` 文件都可以通过 `@import("xxx.zig")` 的方式被引用。
 
+**示例：**
+
+```zig
+exe.addModule("my_module", .{
+    .root_source_file = .{ .path = "src/my_module" }, // 这里是目录
+});
+```
+
+然后在你的代码里可以这样用：
+
+```zig
+const foo = @import("my_module/foo.zig");
+const bar = @import("my_module/bar.zig");
+```
 
 ### 1. `addModule`
 
