@@ -13,7 +13,9 @@
         <pubDate>Fri, 20 Jun 2025 10:36:14 +0800</pubDate>
         
         <guid>https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/nature.png" alt="Featured image of post Zig实战" /&gt;&lt;p&gt;如果zig语言想要实现类型类，只需要写个满足类型类约束的comptime函数，也就是在编译期进行类型检查是否有某些方法的判断，然后在需要添加类型类约束的函数上添加这个编译期函数判断即可。&lt;/p&gt;
+        <description>&lt;img src="https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/nature.png" alt="Featured image of post Zig实战" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://ziglang.cc/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;zig语言中文社区&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果zig语言想要实现类型类，只需要写个满足类型类约束的comptime函数，也就是在编译期进行类型检查是否有某些方法的判断，然后在需要添加类型类约束的函数上添加这个编译期函数判断即可。&lt;/p&gt;
 </description>
         </item>
         <item>

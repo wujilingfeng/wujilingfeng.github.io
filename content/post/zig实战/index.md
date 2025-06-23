@@ -10,7 +10,7 @@ image = "nature.png"
 
 
 
-
+[zig语言中文社区](https://ziglang.cc/)
 
 
 
