@@ -87,7 +87,7 @@ expression catch |err| return err;这个语句完全等价try。
 
 
 
-zig语言的orelse也是二元运算符，用来解包可选类型，左右两边两个表达式为执行代码。也可以用`.?`可访问非null的值（如果是null会引发panic）,`if(optional_value)|value|`是最安全的用法。
+zig语言的orelse也是二元运算符，用来解包可选类型，左右两边两个表达式为执行代码，`const b= a orelse value`其中a是可选类型，b的值是当a不为null时，b为a的解包值，否则b为value。也可以用`.?`可访问非null的值（如果是null会引发panic）,`if(optional_value)|value|`是最安全的用法。
 
 
 
@@ -211,7 +211,7 @@ fn makePoint(x: i32) Point {
 }
 ```
 
-虽然数组和切片更相似，但是切片和数组指针存在默认转换,数组的指针可以默认转化为切片，反之不行(除非在编译阶段能确定切片长度，这样就可以把切片默认转化为数组指针)。
+虽然数组和切片更相似，但是切片和数组指针存在默认转换,数组的指针可以默认转化为切片，反之不行(除非在编译阶段能确定切片长度，这样就可以把切片默认转化为数组指针)。数组指针也可以转化为多项指针。
 
 ```zig
 const bytes: *const [5:0]u8 = "hello";
@@ -316,6 +316,35 @@ test "modify tagged union in switch" {
     try expect(c.ok == 43);
 }
 ```
+
+defer是在作用域退出时执行表达式，表达式当然可以是块（block）。defer , if , while,for ,switch关键字都是控制语句，后面如果是单个语句要加`;`, 如果是`{}`不加分号。
+
+```zig
+onst std = @import("std");
+const expect = std.testing.expect;
+const print = std.debug.print;
+
+fn deferExample() !usize {
+    var a: usize = 1;
+
+    {
+        defer a = 2;
+        a = 1;
+    }
+    try expect(a == 2);
+
+    a = 5;
+    return a;
+}
+
+test "defer basics" {
+    try expect((try deferExample()) == 5);
+}
+```
+
+
+
+
 
 
 

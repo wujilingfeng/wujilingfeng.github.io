@@ -434,7 +434,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 5 分钟
+                    阅读时长: 6 分钟
                 </time>
             </div>
         
@@ -558,7 +558,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>错误联合类型也可以用if语句解包。</p>
-<p>zig语言的orelse也是二元运算符，用来解包可选类型，左右两边两个表达式为执行代码。也可以用<code>.?</code>可访问非null的值（如果是null会引发panic）,<code>if(optional_value)|value|</code>是最安全的用法。</p>
+<p>zig语言的orelse也是二元运算符，用来解包可选类型，左右两边两个表达式为执行代码，<code>const b= a orelse value</code>其中a是可选类型，b的值是当a不为null时，b为a的解包值，否则b为value。也可以用<code>.?</code>可访问非null的值（如果是null会引发panic）,<code>if(optional_value)|value|</code>是最安全的用法。</p>
 <p>zig语言的return,break虽然属于noreturn类型的值，但是用法和c一样，return用于全局退出，break用于局部退出。所以标签块要用break退出.</p>
 <p>下面是标签块的使用，</p>
 <div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
@@ -765,7 +765,7 @@
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>虽然数组和切片更相似，但是切片和数组指针存在默认转换,数组的指针可以默认转化为切片，反之不行(除非在编译阶段能确定切片长度，这样就可以把切片默认转化为数组指针)。</p>
+</div><p>虽然数组和切片更相似，但是切片和数组指针存在默认转换,数组的指针可以默认转化为切片，反之不行(除非在编译阶段能确定切片长度，这样就可以把切片默认转化为数组指针)。数组指针也可以转化为多项指针。</p>
 <div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
@@ -927,6 +927,53 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">c</span>.<span style="color:#e06c75">ok</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">43</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>defer是在作用域退出时执行表达式，表达式当然可以是块（block）。defer , if , while,for ,switch关键字都是控制语句，后面如果是单个语句要加<code>;</code>, 如果是<code>{}</code>不加分号。</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">20
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#e06c75">onst</span> <span style="color:#e06c75">std</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@import</span>(<span style="color:#98c379">&#34;std&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">expect</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">testing</span>.<span style="color:#e06c75">expect</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">print</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">deferExample</span>() <span style="color:#56b6c2">!</span><span style="color:#e5c07b">usize</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">var</span> <span style="color:#e06c75">a</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">usize</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">defer</span> <span style="color:#e06c75">a</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">a</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">a</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">a</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">5</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">a</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;defer basics&#34;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>((<span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">deferExample</span>()) <span style="color:#56b6c2">==</span> <span style="color:#d19a66">5</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
