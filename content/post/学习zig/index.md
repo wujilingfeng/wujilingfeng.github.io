@@ -83,7 +83,36 @@ value = expression catch |err| { /* handle error */ };
 expression catch |err| return err;这个语句完全等价try。
 ```
 
-错误联合类型不可以用if语句解包，也不可以用while解包。
+错误联合类型可以用if语句解包，但必须包含else分支，否则报错，也可以用while解包，但也需要包含else分支，否则报错。
+
+```zig
+const a: anyerror!u32 = error.AlwaysError;
+    if (a) |value| {
+        std.debug.print("type a{}\n", .{value});
+        // 处理正常值
+    } else |err| {
+      std.debug.print("type a{}\n", .{err});
+       // 处理错误（必须显式捕获err）
+    }
+fn fetchData() anyerror!u32 {
+    // 模拟可能失败的操作
+    return if (std.crypto.random.int(u32) % 2 == 0) 42 else error.FetchFailed;
+}
+
+pub fn main() void {
+    var retry: u32 = 0;
+    while (fetchData()) |data| {
+        std.debug.print("Data: {}\n", .{data});
+        retry += 1;
+        if (retry >= 3) break; // 防止无限循环
+    } else |err| {
+        std.debug.print("Error: {}\n", .{err});
+    }
+}
+上面的||捕获可以是|_|，即忽略捕获值。
+```
+
+
 
 
 
