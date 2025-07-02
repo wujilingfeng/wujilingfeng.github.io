@@ -488,6 +488,30 @@ zig fetch --save https://github.com/webui-dev/zig-webui/archive/main.tar.gz
 
 
 
+可以在build.zig中添加传递参数
+
+```zig
+const exe = b.addExecutable(...);
+if (b.args) |args| {
+    exe.addArgs(args); // 将构建参数传递给可执行文件
+}
+```
+
+然后在程序中使用参数
+
+```zig
+
+pub fn main() !void {
+    const args = try std.process.argsAlloc(std.heap.page_allocator);
+    defer std.process.argsFree(std.heap.page_allocator, args);
+    
+    // args[0]是程序名，args[1..]才是实际参数
+    for (args[1..]) |arg| {
+        std.debug.print("参数: {s}\n", .{arg});
+    }
+}
+```
+
 
 
 

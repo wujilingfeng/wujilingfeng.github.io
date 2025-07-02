@@ -1172,7 +1172,49 @@
 </div>
 </div><p>如果自己手动填写url时，格式为</p>
 <p><code>https://github.com/&lt;用户名&gt;/&lt;仓库名&gt;/archive/&lt;commit或tag&gt;.tar.gz</code></p>
-<h2 id="和c交互">和C交互
+<p>可以在build.zig中添加传递参数</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">4
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">exe</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">addExecutable</span>(...);
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">if</span> (<span style="color:#e06c75">b</span>.<span style="color:#e06c75">args</span>) <span style="color:#56b6c2">|</span><span style="color:#e06c75">args</span><span style="color:#56b6c2">|</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">exe</span>.<span style="color:#61afef;font-weight:bold">addArgs</span>(<span style="color:#e06c75">args</span>); <span style="color:#7f848e">// 将构建参数传递给可执行文件
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后在程序中使用参数</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">main</span>() <span style="color:#56b6c2">!</span><span style="color:#e5c07b">void</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">args</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">try</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">process</span>.<span style="color:#61afef;font-weight:bold">argsAlloc</span>(<span style="color:#e06c75">std</span>.<span style="color:#e06c75">heap</span>.<span style="color:#e06c75">page_allocator</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">defer</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">process</span>.<span style="color:#61afef;font-weight:bold">argsFree</span>(<span style="color:#e06c75">std</span>.<span style="color:#e06c75">heap</span>.<span style="color:#e06c75">page_allocator</span>, <span style="color:#e06c75">args</span>);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// args[0]是程序名，args[1..]才是实际参数
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">for</span> (<span style="color:#e06c75">args</span>[<span style="color:#d19a66">1</span>..]) <span style="color:#56b6c2">|</span><span style="color:#e06c75">arg</span><span style="color:#56b6c2">|</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;参数: {s}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">arg</span>});
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="和c交互">和C交互
 </h2><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
