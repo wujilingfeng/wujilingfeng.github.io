@@ -557,9 +557,10 @@
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">expression</span> <span style="color:#c678dd">catch</span> <span style="color:#56b6c2">|</span><span style="color:#e06c75">err</span><span style="color:#56b6c2">|</span> <span style="color:#c678dd">return</span> <span style="color:#e06c75">err</span>;这个语句完全等价<span style="color:#c678dd">try</span>。
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>错误联合类型也可以用if语句解包。</p>
+</div><p>错误联合类型不可以用if语句解包，也不可以用while解包。</p>
 <p>zig语言的orelse也是二元运算符，用来解包可选类型，左右两边两个表达式为执行代码，<code>const b= a orelse value</code>其中a是可选类型，b的值是当a不为null时，b为a的解包值，否则b为value。也可以用<code>.?</code>可访问非null的值（如果是null会引发panic）,<code>if(optional_value)|value|</code>是最安全的用法。</p>
-<p>zig语言的return,break虽然属于noreturn类型的值，但是用法和c一样，return用于全局退出，break用于局部退出。所以标签块要用break退出.</p>
+<p>zig语言的return,break,continue,unreachable，<code>while(true){}</code>属于noreturn类型的值，用法基本和c一样，return用于全局退出，break用于局部退出。所以标签块要用break退出.</p>
+<p>zig语言的noreturn 可以和任何类型兼容，所以任何表达式都可以使用noreturn赋值，但因为是noreturn 类型，赋值操作不会执行，只会影响控制。</p>
 <p>下面是标签块的使用，</p>
 <div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">

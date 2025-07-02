@@ -208,9 +208,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;expression&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;catch&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;err&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;err&lt;/span&gt;;这个语句完全等价&lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt;。
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;错误联合类型也可以用if语句解包。&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;错误联合类型不可以用if语句解包，也不可以用while解包。&lt;/p&gt;
 &lt;p&gt;zig语言的orelse也是二元运算符，用来解包可选类型，左右两边两个表达式为执行代码，&lt;code&gt;const b= a orelse value&lt;/code&gt;其中a是可选类型，b的值是当a不为null时，b为a的解包值，否则b为value。也可以用&lt;code&gt;.?&lt;/code&gt;可访问非null的值（如果是null会引发panic）,&lt;code&gt;if(optional_value)|value|&lt;/code&gt;是最安全的用法。&lt;/p&gt;
-&lt;p&gt;zig语言的return,break虽然属于noreturn类型的值，但是用法和c一样，return用于全局退出，break用于局部退出。所以标签块要用break退出.&lt;/p&gt;
+&lt;p&gt;zig语言的return,break,continue,unreachable，&lt;code&gt;while(true){}&lt;/code&gt;属于noreturn类型的值，用法基本和c一样，return用于全局退出，break用于局部退出。所以标签块要用break退出.&lt;/p&gt;
+&lt;p&gt;zig语言的noreturn 可以和任何类型兼容，所以任何表达式都可以使用noreturn赋值，但因为是noreturn 类型，赋值操作不会执行，只会影响控制。&lt;/p&gt;
 &lt;p&gt;下面是标签块的使用，&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
