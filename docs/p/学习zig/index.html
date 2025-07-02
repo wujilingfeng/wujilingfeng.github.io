@@ -612,7 +612,7 @@
 </span></span><span style="display:flex;"><span>上面的<span style="color:#56b6c2">||</span>捕获可以是<span style="color:#56b6c2">|</span><span style="color:#e06c75">_</span><span style="color:#56b6c2">|</span>，即忽略捕获值。
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>zig语言的orelse也是二元运算符，用来解包可选类型，左右两边两个表达式为执行代码，<code>const b= a orelse value</code>其中a是可选类型，b的值是当a不为null时，b为a的解包值，否则b为value。也可以用<code>.?</code>可访问非null的值（如果是null会引发panic）,<code>if(optional_value)|value|</code>是最安全的用法。</p>
+</div><p>zig语言的orelse也是二元运算符，用来解包可选类型，左右两边两个表达式为执行代码，<code>const b= a orelse value</code>其中a是可选类型，b的值是当a不为null时，b为a的解包值，否则b为value。也可以用<code>.?</code>可访问非null的值（如果是null会引发panic）,<code>if(optional_value)|value|</code>是最安全的用法，while也可以解包可选类型。</p>
 <p>zig语言的return,break,continue,unreachable，<code>while(true){}</code>属于noreturn类型的值，用法基本和c一样，return用于全局退出，break用于局部退出。所以标签块要用break退出.</p>
 <p>zig语言的noreturn 可以和任何类型兼容，所以任何表达式都可以使用noreturn赋值，但因为是noreturn 类型，赋值操作不会执行，只会影响控制。</p>
 <p>下面是标签块的使用，</p>

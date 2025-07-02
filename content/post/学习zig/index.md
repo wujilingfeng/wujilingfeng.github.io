@@ -116,7 +116,7 @@ pub fn main() void {
 
 
 
-zig语言的orelse也是二元运算符，用来解包可选类型，左右两边两个表达式为执行代码，`const b= a orelse value`其中a是可选类型，b的值是当a不为null时，b为a的解包值，否则b为value。也可以用`.?`可访问非null的值（如果是null会引发panic）,`if(optional_value)|value|`是最安全的用法。
+zig语言的orelse也是二元运算符，用来解包可选类型，左右两边两个表达式为执行代码，`const b= a orelse value`其中a是可选类型，b的值是当a不为null时，b为a的解包值，否则b为value。也可以用`.?`可访问非null的值（如果是null会引发panic）,`if(optional_value)|value|`是最安全的用法，while也可以解包可选类型。
 
 
 
