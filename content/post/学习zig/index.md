@@ -6,6 +6,10 @@ date = "2025-04-28"
 image = "fanchuan.png"
 +++
 
+
+
+zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。
+
 zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。
 
 zig语言的void和c语言的void不同，c语言的void对应anyopaque,anyopaque是一个类型，而anytype是一个关键词，类似struct ,enum,fn,if, else等。void也是一个类型，它的值通常为`{}`。anyerror 是一个类型，不是关键字。
@@ -406,7 +410,7 @@ const window_name = [1][*:0]const u8{"window name"};
 
 ## zig语言的构建系统
 
-zig语言的build.zig中，每个module或者test的root_source_file只能指向一个.zig文件，或者一个目录。
+zig语言的build.zig中，每个module或者test的root_source_file只能指向一个.zig文件（必须是相对目录），或者一个目录。
 
 - 你可以指定一个**目录**，而不是单个文件。
 - 如果你指定的是目录，Zig 会把这个目录当作模块的根目录，里面的多个 `.zig` 文件都可以通过 `@import("xxx.zig")` 的方式被引用。

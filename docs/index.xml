@@ -100,7 +100,8 @@
         <pubDate>Mon, 28 Apr 2025 00:00:00 +0000</pubDate>
         
         <guid>https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png" alt="Featured image of post 学习zig" /&gt;&lt;p&gt;zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。&lt;/p&gt;
+        <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png" alt="Featured image of post 学习zig" /&gt;&lt;p&gt;zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。&lt;/p&gt;
+&lt;p&gt;zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。&lt;/p&gt;
 &lt;p&gt;zig语言的void和c语言的void不同，c语言的void对应anyopaque,anyopaque是一个类型，而anytype是一个关键词，类似struct ,enum,fn,if, else等。void也是一个类型，它的值通常为&lt;code&gt;{}&lt;/code&gt;。anyerror 是一个类型，不是关键字。&lt;/p&gt;
 &lt;p&gt;zig语言 的”元组“，.{&amp;ldquo;nihao&amp;rdquo;,3}其实是个value, 它的类型是匿名结构体，&lt;/p&gt;
 &lt;p&gt;zig语言会自动对结构体的内存进行布局优化，下面的例子:&lt;/p&gt;
@@ -701,7 +702,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;h2 id=&#34;zig语言的构建系统&#34;&gt;zig语言的构建系统
-&lt;/h2&gt;&lt;p&gt;zig语言的build.zig中，每个module或者test的root_source_file只能指向一个.zig文件，或者一个目录。&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;zig语言的build.zig中，每个module或者test的root_source_file只能指向一个.zig文件（必须是相对目录），或者一个目录。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;你可以指定一个&lt;strong&gt;目录&lt;/strong&gt;，而不是单个文件。&lt;/li&gt;
 &lt;li&gt;如果你指定的是目录，Zig 会把这个目录当作模块的根目录，里面的多个 &lt;code&gt;.zig&lt;/code&gt; 文件都可以通过 &lt;code&gt;@import(&amp;quot;xxx.zig&amp;quot;)&lt;/code&gt; 的方式被引用。&lt;/li&gt;
