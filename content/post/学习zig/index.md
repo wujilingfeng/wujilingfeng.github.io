@@ -410,7 +410,7 @@ const window_name = [1][*:0]const u8{"window name"};
 
 ## zig语言的构建系统
 
-zig语言的build.zig中，每个module或者test的root_source_file只能指向一个.zig文件（必须是相对目录），或者一个目录。
+zig语言的build.zig中，每个module或者test的root_source_file只能指向一个.zig文件（必须是相对路径），或者一个目录。
 
 - 你可以指定一个**目录**，而不是单个文件。
 - 如果你指定的是目录，Zig 会把这个目录当作模块的根目录，里面的多个 `.zig` 文件都可以通过 `@import("xxx.zig")` 的方式被引用。
