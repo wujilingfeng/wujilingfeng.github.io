@@ -50,3 +50,24 @@ const cstructures_mod = b.addModule("cstructures_mod", .{
     cstructures.linkLibC();
 ```
 
+### 导出为webassembly
+
+```zig
+const std = @import("std");
+pub fn build(b: *std.Build) void {
+    const target = b.resolveTargetQuery(std.Target.Query.parse(
+        .{ .arch_os_abi = "wasm32-wasi" },
+    ) catch unreachable);
+    const exe = b.addExecutable(.{
+        .name = "main",
+        .root_source_file = b.path("src/main.zig"),
+        .target = target,
+        .optimize = b.standardOptimizeOption(.{}),
+    });
+    //注意这个选项
+    exe.rdynamic = true; //导出该可执行对象中标记了export的项目
+    // 此项默认为false，如果你需要在js环境中调用导出的方法，需要设置为true
+    b.installArtifact(exe); //保存生成的结果
+}
+```
+

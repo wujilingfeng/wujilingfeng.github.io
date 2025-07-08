@@ -1051,11 +1051,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="zig语言的构建系统">zig语言的构建系统
-</h2><p>zig语言的build.zig中，每个module或者test的root_source_file只能指向一个.zig文件（必须是相对路径），或者一个目录。</p>
-<ul>
-<li>你可以指定一个<strong>目录</strong>，而不是单个文件。</li>
-<li>如果你指定的是目录，Zig 会把这个目录当作模块的根目录，里面的多个 <code>.zig</code> 文件都可以通过 <code>@import(&quot;xxx.zig&quot;)</code> 的方式被引用。</li>
-</ul>
+</h2><p>zig语言的build.zig中，每个module或者test的root_source_file只能指向一个.zig文件（必须是相对路径），不可以是路径。</p>
 <p><strong>示例：</strong></p>
 <div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -1243,6 +1239,7 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>上面展示了引入c头文件的功能，需要在编译文件<code>build.zig</code>中添加<code>exe.linkLibC();</code></p>
+<p>extern关键字表示在链接时才确定的符号，一般用在zig调用外部符号</p>
 
 </section>
 
