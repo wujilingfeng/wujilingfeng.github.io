@@ -535,3 +535,15 @@ pub fn main() void{
 上面展示了引入c头文件的功能，需要在编译文件`build.zig`中添加`exe.linkLibC();`
 
 extern关键字表示在链接时才确定的符号，一般用在zig调用外部符号
+
+```zig
+// The extern specifier is used to declare a function that will be resolved
+// at link time, when linking statically, or at runtime, when linking
+// dynamically. The quoted identifier after the extern keyword specifies
+// the library that has the function. (e.g. "c" -> libc.so)
+// The callconv specifier changes the calling convention of the function.
+const WINAPI: std.builtin.CallingConvention = if (native_arch == .x86) .Stdcall else .C;
+extern "kernel32" fn ExitProcess(exit_code: u32) callconv(WINAPI) noreturn;
+extern "c" fn atan2(a: f64, b: f64) f64;
+```
+
