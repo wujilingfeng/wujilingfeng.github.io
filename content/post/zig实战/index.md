@@ -16,6 +16,21 @@ image = "nature.png"
 
 
 
+下面的代码报错是因为没有确定类型导致类型推断冲突，因为x没有给类型，而-1是comptime_int,故而x是comptime_int类型，这和var冲突。
+
+```zig
+
+test safe_sqrt {
+    var x= -1;\\这里需改为var x:f32=-1;即可修复错误
+    x = x - 1;
+    try std.testing.expect(safe_sqrt(x) >= 0);
+}
+```
+
+
+
+
+
 一般来说zig语言的绑定库只需要@cImport()该库的暴露的.h文件即可，但是有些时候会再在上面裹上一层zig的wrapper， 比如这个[mach-glfw](https://gitee.com/wujilingfeng/mach-glfw) 里面的main分支，就是@cImport()之后又裹了一层zig。
 
 
