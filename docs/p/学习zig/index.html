@@ -365,7 +365,7 @@
         </li>
       </ol>
     </li>
-    <li><a href="#和c交互">和C交互</a></li>
+    <li><a href="#和外部比如c交互">和外部（比如C）交互</a></li>
   </ol>
 </nav>
         </div>
@@ -434,7 +434,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 7 分钟
+                    阅读时长: 6 分钟
                 </time>
             </div>
         
@@ -1211,7 +1211,7 @@
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="和c交互">和C交互
+</div><h2 id="和外部比如c交互">和外部（比如C）交互
 </h2><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
@@ -1248,15 +1248,11 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">4
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">5
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#7f848e">// The extern specifier is used to declare a function that will be resolved
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">// at link time, when linking statically, or at runtime, when linking
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">// dynamically. The quoted identifier after the extern keyword specifies
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">// the library that has the function. (e.g. &#34;c&#34; -&gt; libc.so)
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">// The callconv specifier changes the calling convention of the function.
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#7f848e">// extern声明用于声明将在链接时、静态链接时或运行时动态链接的函数。
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">// extern 关键字后的引号标识符指定具有该函数的库。（例如，“c”-&gt;libc.so）
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">// callconv 标记更改了函数的调用约定。
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">const</span> <span style="color:#e06c75">WINAPI</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">builtin</span>.<span style="color:#e06c75">CallingConvention</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">if</span> (<span style="color:#e06c75">native_arch</span> <span style="color:#56b6c2">==</span> .<span style="color:#e06c75">x86</span>) .<span style="color:#e06c75">Stdcall</span> <span style="color:#c678dd">else</span> .<span style="color:#e06c75">C</span>;
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">extern</span> <span style="color:#98c379">&#34;kernel32&#34;</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">ExitProcess</span>(<span style="color:#e06c75">exit_code</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">u32</span>) <span style="color:#61afef;font-weight:bold">callconv</span>(<span style="color:#e06c75">WINAPI</span>) <span style="color:#e5c07b">noreturn</span>;
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">extern</span> <span style="color:#98c379">&#34;c&#34;</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">atan2</span>(<span style="color:#e06c75">a</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">f64</span>, <span style="color:#e06c75">b</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">f64</span>) <span style="color:#e5c07b">f64</span>;

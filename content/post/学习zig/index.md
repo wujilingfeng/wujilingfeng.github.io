@@ -517,7 +517,7 @@ pub fn main() !void {
 
 
 
-## 和C交互
+## 和外部（比如C）交互
 
 ```zig
 const cstdio = @cImport({
@@ -537,11 +537,9 @@ pub fn main() void{
 extern关键字表示在链接时才确定的符号，一般用在zig调用外部符号
 
 ```zig
-// The extern specifier is used to declare a function that will be resolved
-// at link time, when linking statically, or at runtime, when linking
-// dynamically. The quoted identifier after the extern keyword specifies
-// the library that has the function. (e.g. "c" -> libc.so)
-// The callconv specifier changes the calling convention of the function.
+// extern声明用于声明将在链接时、静态链接时或运行时动态链接的函数。
+// extern 关键字后的引号标识符指定具有该函数的库。（例如，“c”->libc.so）
+// callconv 标记更改了函数的调用约定。
 const WINAPI: std.builtin.CallingConvention = if (native_arch == .x86) .Stdcall else .C;
 extern "kernel32" fn ExitProcess(exit_code: u32) callconv(WINAPI) noreturn;
 extern "c" fn atan2(a: f64, b: f64) f64;
