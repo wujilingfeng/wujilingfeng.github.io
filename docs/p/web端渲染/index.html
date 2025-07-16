@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="将使用 Dawn 库编写的渲染程序导出到 Web 端和本地端，需要采取不同的编译和部署策略，但核心思想是：你的 C++ 渲染逻辑（使用 WebGPU API）大部分可以保持不变，而平台特定的部分（如窗口创建、文件IO、事件处理）则需要抽象或有条件编译。\nDawn 本身是一个 C++ 库，实现了 WebGPU API 规范，并且是 Chromium 浏览器中 WebGPU 的底层实现。\n核心思想：平台无关的 WebGPU 逻辑 你的渲染程序主体应该使用 WebGPU API（通过 wgpu::Device, wgpu::Queue, wgpu::RenderPassEncoder 等）来定义渲染管线、加载资源、绘制等。这部分代码在概念上是平台无关的。\n然而，创建窗口/画布、获取 WebGPU 设备、处理用户输入等部分是与平台紧密相关的。\n1. 导出到 Web 端 (浏览器) 在 Web 端，你的 C++ 代码需要被编译成 WebAssembly (WASM)，并在浏览器环境中运行。浏览器本身提供了原生的 WebGPU API 实现（在 Chromium 中，这个实现就是基于 Dawn 的）。这意味着你不需要将 Dawn 库本身编译进你的 WASM 包，你的 WASM 直接调用浏览器提供的 WebGPU API。\n主要工具：Emscripten\n编写 C++ 渲染程序：\n你的渲染代码会调用标准的 WebGPU API（封装在 Dawn 的 C++ 头文件中，如 dawn/webgpu.h 或直接使用 wgpu 名称空间）。\n">
+<title>Web端渲染</title>
+
+<link rel='canonical' href='https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/'>
+
+<link rel="stylesheet" href="../../scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Web端渲染">
+<meta property='og:description' content="将使用 Dawn 库编写的渲染程序导出到 Web 端和本地端，需要采取不同的编译和部署策略，但核心思想是：你的 C++ 渲染逻辑（使用 WebGPU API）大部分可以保持不变，而平台特定的部分（如窗口创建、文件IO、事件处理）则需要抽象或有条件编译。\nDawn 本身是一个 C++ 库，实现了 WebGPU API 规范，并且是 Chromium 浏览器中 WebGPU 的底层实现。\n核心思想：平台无关的 WebGPU 逻辑 你的渲染程序主体应该使用 WebGPU API（通过 wgpu::Device, wgpu::Queue, wgpu::RenderPassEncoder 等）来定义渲染管线、加载资源、绘制等。这部分代码在概念上是平台无关的。\n然而，创建窗口/画布、获取 WebGPU 设备、处理用户输入等部分是与平台紧密相关的。\n1. 导出到 Web 端 (浏览器) 在 Web 端，你的 C++ 代码需要被编译成 WebAssembly (WASM)，并在浏览器环境中运行。浏览器本身提供了原生的 WebGPU API 实现（在 Chromium 中，这个实现就是基于 Dawn 的）。这意味着你不需要将 Dawn 库本身编译进你的 WASM 包，你的 WASM 直接调用浏览器提供的 WebGPU API。\n主要工具：Emscripten\n编写 C++ 渲染程序：\n你的渲染代码会调用标准的 WebGPU API（封装在 Dawn 的 C++ 头文件中，如 dawn/webgpu.h 或直接使用 wgpu 名称空间）。\n">
+<meta property='og:url' content='https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/'>
+<meta property='og:site_name' content='五级灵风'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-07-16T10:22:34&#43;08:00'/><meta property='article:modified_time' content='2025-07-16T10:22:34&#43;08:00'/><meta property='og:image' content='https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/img.png' />
+<meta name="twitter:title" content="Web端渲染">
+<meta name="twitter:description" content="将使用 Dawn 库编写的渲染程序导出到 Web 端和本地端，需要采取不同的编译和部署策略，但核心思想是：你的 C++ 渲染逻辑（使用 WebGPU API）大部分可以保持不变，而平台特定的部分（如窗口创建、文件IO、事件处理）则需要抽象或有条件编译。\nDawn 本身是一个 C++ 库，实现了 WebGPU API 规范，并且是 Chromium 浏览器中 WebGPU 的底层实现。\n核心思想：平台无关的 WebGPU 逻辑 你的渲染程序主体应该使用 WebGPU API（通过 wgpu::Device, wgpu::Queue, wgpu::RenderPassEncoder 等）来定义渲染管线、加载资源、绘制等。这部分代码在概念上是平台无关的。\n然而，创建窗口/画布、获取 WebGPU 设备、处理用户输入等部分是与平台紧密相关的。\n1. 导出到 Web 端 (浏览器) 在 Web 端，你的 C++ 代码需要被编译成 WebAssembly (WASM)，并在浏览器环境中运行。浏览器本身提供了原生的 WebGPU API 实现（在 Chromium 中，这个实现就是基于 Dawn 的）。这意味着你不需要将 Dawn 库本身编译进你的 WASM 包，你的 WASM 直接调用浏览器提供的 WebGPU API。\n主要工具：Emscripten\n编写 C++ 渲染程序：\n你的渲染代码会调用标准的 WebGPU API（封装在 Dawn 的 C++ 头文件中，如 dawn/webgpu.h 或直接使用 wgpu 名称空间）。\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/img.png' />
+    <link rel="shortcut icon" href="../../favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="../../">
+                
+                    
+                    
+                    
+                        
+                        <img src="../../img/lixiaoyao_hu_dfce66ea35f8d737.jpg" width="300"
+                            height="188" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="../../">五级灵风</a></h1>
+            <h2 class="site-description">颍川之才</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://mail.163.com/'
+                        target="_blank"
+                        title="email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg t="1673752602122" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1414" width="24" height="24" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M970.56 267.52a85.76 85.76 0 0 0 0-10.24v-2.88l-17.92 1.6 15.68-3.84v-3.52A141.44 141.44 0 0 0 960 227.2a128 128 0 0 0-11.2-20.48 123.84 123.84 0 0 0-103.04-54.72H176.96a123.84 123.84 0 0 0-102.72 55.36 128 128 0 0 0-11.84 22.72 124.8 124.8 0 0 0-6.72 22.72l16 3.2h-16.64a81.92 81.92 0 0 0-1.6 11.84v512a124.48 124.48 0 0 0 124.16 124.16h668.8a124.48 124.48 0 0 0 124.16-124.16v-512zM883.2 304v448a64 64 0 0 1-64 64H205.12a64 64 0 0 1-64-64v-448a64 64 0 0 1 1.92-16l334.4 267.84 2.56 3.2a48.96 48.96 0 0 0 26.88 11.84h6.08a42.24 42.24 0 0 0 31.04-11.84L880.96 288a62.08 62.08 0 0 1 2.24 16zM512 472.96l-290.88-233.6h581.76z" p-id="1415" fill="currentColor"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://gitee.com/'
+                        target="_blank"
+                        title="gitee"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg t="1745738407777" class="icon" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"  p-id="2379" ne="0.057698892254675394" xmlns:xlink="http://www.w3.org/1999/xlink"  width="24" height="24">
+  <path d="M11.88235294 24.84941176C4.90423529 24.84941176 -0.79529412 19.08741176 -0.79529412 11.88235294S4.90423529 -0.79529412 11.88235294 -0.79529412s12.79066667 5.74190588 12.79066667 12.79066667 -5.74190588 12.79066667 -12.79066667 12.79066667z m6.45917647 -14.22941176l-7.24576471 0.00035294c-0.34905882 0 -0.63465882 0.28366588 -0.63465882 0.63465882l-0.00069882 1.58405882c0 0.34905882 0.28366588 0.63465882 0.63465882 0.63465882H15.62400000c0.34905882 0 0.63465882 0.28366588 0.63465882 0.63465882v0.31625882a1.89925882 1.89925882 0 0 1 -1.89925882 1.89925882H8.39065882a0.63465882 0.63465882 0 0 1 -0.63465882 -0.63465882v-6.00505882a1.89925882 1.89925882 0 0 1 1.89925882 -1.89915882l8.84745882 -0.00037647c0.34905882 0 0.63465882 -0.28366588 0.63465882 -0.63465882l0.00178235 -1.58312941c0 -0.34905882 -0.28366588 -0.63465882 -0.63465882 -0.63465882l-8.84920000 0.00035294c-2.62235294 -0.00035294 -4.74745882 2.12212941 -4.74745882 4.74745882v8.84729412c0 0.34905882 0.28366588 0.63465882 0.63465882 0.63465882h9.30952941c2.36658824 0 4.27138824 -1.91758824 4.27138824 -4.27138824v-3.63938824c0 -0.34899882 -0.28366588 -0.63465882 -0.63465882 -0.63465882z" p-id="2380"></path>
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://hackage.haskell.org/'
+                        target="_blank"
+                        title="hackage"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg t="1745738845243" class="icon" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"  p-id="3381" ne="0.20057012347491743" xmlns:xlink="http://www.w3.org/1999/xlink"  width="24" height="24">
+    <path d="M0.006 20.436L5.648 12 0.006 3.54h4.236l5.672 8.444-5.672 8.442z m5.643 0L11.282 12 5.648 3.54h4.277l11.253 16.944h-4.222l-3.547-5.34-3.51 5.34zM19.373 15.56l-1.877-2.826h6.608v2.824z m-2.824-4.236l-1.877-2.826h9.384v2.826z" p-id="3382"></path>
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://ziglang.org/zh-CN/'
+                        target="_blank"
+                        title="zig"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg t="1745737950265" class="icon" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"  p-id="4216" ne="0.7933489989951811" xmlns:xlink="http://www.w3.org/1999/xlink"  width="24" height="24">
+  <path d="M1.8225 6.57123333v10.82946667h2.57868333l0.81263333 -1.35661333 1.62526667 -1.35732h-0.91144v-6.9904h2.03834667V6.5712z m5.4208 0v2.7092h8.42755333V6.5712z m12.32717333 0l-0.81263333 1.35732 -1.62526667 1.35732h2.3068v5.4208h-2.03918667v2.70862667h4.74496V6.57123333z m-11.29918667 8.11743999v2.7092h8.42701333v-2.70862667z" fill="hsla(37,60%,56%,1)" p-id="4217"></path>
+  <path d="M6.8479 14.73674667l-2.43232 2.70862667V15.4912zM17.23534667 9.25413333l2.43232 -2.7092v2.03834666zM14.97216 6.61195999l4.91312 -1.41106667L9.05723999 17.31162667 4.09356 18.75093333z" fill="hsla(37,60%,56%,1)" p-id="4218"></path>
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='../../' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='../../%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='../../archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='../../search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='../../%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://wujilingfeng.github.io/" selected>中文</option>
+                                
+                                    <option value="https://wujilingfeng.github.io/en/" >English</option>
+                                
+                                    <option value="https://wujilingfeng.github.io/ar/" >عربي</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#核心思想平台无关的-webgpu-逻辑">核心思想：平台无关的 WebGPU 逻辑</a></li>
+        <li><a href="#1-导出到-web-端-浏览器">1. 导出到 Web 端 (浏览器)</a></li>
+        <li><a href="#2-导出到本地端-桌面应用">2. 导出到本地端 (桌面应用)</a></li>
+        <li><a href="#总结与注意事项">总结与注意事项：</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="../../p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/">
+                <img src="../../p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/img_hu_ca7cec0d67842c9.png"
+                        srcset="../../p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/img_hu_ca7cec0d67842c9.png 800w, ../../p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/img_hu_65a681d45440a31.png 1600w"
+                        width="800" 
+                        height="450" 
+                        loading="lazy"
+                        alt="Featured image of post Web端渲染" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="../../p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/">Web端渲染</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jul 16, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>将使用 Dawn 库编写的渲染程序导出到 Web 端和本地端，需要采取不同的编译和部署策略，但核心思想是：<strong>你的 C++ 渲染逻辑（使用 WebGPU API）大部分可以保持不变，而平台特定的部分（如窗口创建、文件IO、事件处理）则需要抽象或有条件编译。</strong></p>
+<p>Dawn 本身是一个 C++ 库，实现了 WebGPU API 规范，并且是 Chromium 浏览器中 WebGPU 的底层实现。</p>
+<h3 id="核心思想平台无关的-webgpu-逻辑">核心思想：平台无关的 WebGPU 逻辑
+</h3><p>你的渲染程序主体应该使用 WebGPU API（通过 <code>wgpu::Device</code>, <code>wgpu::Queue</code>, <code>wgpu::RenderPassEncoder</code> 等）来定义渲染管线、加载资源、绘制等。这部分代码在概念上是平台无关的。</p>
+<p>然而，创建窗口/画布、获取 WebGPU 设备、处理用户输入等部分是与平台紧密相关的。</p>
+<h3 id="1-导出到-web-端-浏览器">1. 导出到 Web 端 (浏览器)
+</h3><p>在 Web 端，你的 C++ 代码需要被编译成 WebAssembly (WASM)，并在浏览器环境中运行。浏览器本身提供了原生的 WebGPU API 实现（在 Chromium 中，这个实现就是基于 Dawn 的）。这意味着你<strong>不需要</strong>将 Dawn 库本身编译进你的 WASM 包，你的 WASM 直接调用浏览器提供的 WebGPU API。</p>
+<p><strong>主要工具：Emscripten</strong></p>
+<ol>
+<li>
+<p><strong>编写 C++ 渲染程序：</strong></p>
+<ul>
+<li>
+<p>你的渲染代码会调用标准的 WebGPU API（封装在 Dawn 的 C++ 头文件中，如 <code>dawn/webgpu.h</code> 或直接使用 <code>wgpu</code> 名称空间）。</p>
+</li>
+<li>
+<p>对于画布的创建和获取 WebGPU 设备，你需要使用 Emscripten 提供的接口来与 JavaScript 环境交互。例如，获取 <code>navigator.gpu</code> 和请求设备。</p>
+</li>
+<li>
+<p>示例（概念性）：</p>
+<pre tabindex="0"><code>#include &lt;webgpu/webgpu.h&gt; // 使用 WebGPU API
+
+// Emscripten 提供的用于与 JS 交互的宏
+#include &lt;emscripten/emscripten.h&gt;
+#include &lt;emscripten/html5.h&gt;
+
+WGPUAdapter g_adapter = nullptr;
+WGPUDevice g_device = nullptr;
+WGPUQueue g_queue = nullptr;
+
+// C++ 函数，通过 Emscripten 暴露给 JS
+extern &#34;C&#34; EMSCRIPTEN_KEEPALIVE void init_webgpu(WGPUSurface surface_ptr) {
+    // ... (请求 adapter, device, queue, config shader module, pipeline etc.)
+    // 通常这一步需要异步回调，与 JS 交互
+    // Emscripten 提供了异步回调机制，如 emscripten_async_call 或 Promise 桥接
+}
+
+// 渲染循环（通过 JS requestAnimationFrame 调用）
+extern &#34;C&#34; EMSCRIPTEN_KEEPALIVE void draw_frame() {
+    if (!g_device) return;
+    // ... (创建 command encoder, render pass, draw calls, submit commands)
+}
+
+int main() {
+    // Emscripten_main_loop_set_timing(EM_HTML5_LOOP_RAF, 1); // 绑定到 requestAnimationFrame
+    // 这是通常的 Emscripten 主循环设置，而不是无限循环
+    return 0; // Emscripten 的 main 函数返回后不会退出程序
+}
+</code></pre></li>
+<li>
+<p>你需要处理异步操作（如 <code>requestAdapter</code> 和 <code>requestDevice</code>）以及如何将 WASM 渲染循环与 <code>requestAnimationFrame</code> 绑定。Emscripten 提供了相应的机制。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>使用 Emscripten 编译：</strong></p>
+<ul>
+<li>
+<p>Emscripten 编译命令会有点复杂，因为它需要知道你的 WebGPU 定义，但不会链接 Dawn 库本身：</p>
+<pre tabindex="0"><code>emcc your_renderer.cpp -o your_renderer.html \
+       -s USE_WEBGPU=1 \
+       -s ASYNCIFY \
+       -s EXPORTED_FUNCTIONS=&#34;[&#39;_init_webgpu&#39;, &#39;_draw_frame&#39;]&#34; \
+       -s NO_EXIT_RUNTIME=1 \
+       -s FORCE_FILESYSTEM=1 # 如果有文件加载
+       # ... 其他 Emscripten 参数
+</code></pre></li>
+<li>
+<p><code>-s USE_WEBGPU=1</code>：告诉 Emscripten，你的 C++ 代码将使用 WebGPU API，它会引入必要的 JS 胶水代码，并期望浏览器提供 WebGPU API。</p>
+</li>
+<li>
+<p><code>-s ASYNCIFY</code>：如果你的 WebGPU 初始化过程包含异步操作（如 <code>requestAdapter</code>），你需要它来暂停 C++ 执行直到异步操作完成。</p>
+</li>
+<li>
+<p><code>-s EXPORTED_FUNCTIONS</code>：暴露 C++ 函数给 JavaScript 调用。</p>
+</li>
+<li>
+<p><code>NO_EXIT_RUNTIME=1</code>：防止 WASM 模块在 <code>main()</code> 函数结束后立即退出。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Web 页面 (HTML/JavaScript)：</strong></p>
+<ul>
+<li>
+<p>Emscripten 会生成一个 <code>.html</code> 文件和一个 <code>.js</code> 胶水文件，以及 <code>.wasm</code> 文件。</p>
+</li>
+<li>
+<p>JavaScript 会负责加载 WASM 模块，创建一个 <code>&lt;canvas&gt;</code> 元素，然后通过 Emscripten 暴露的 C++ 函数来初始化 WebGPU，并设置 <code>requestAnimationFrame</code> 循环来调用 WASM 中的 <code>draw_frame</code> 函数。</p>
+</li>
+<li>
+<p>示例 (your_renderer.js / your_renderer.html 内部的 JS):</p>
+<pre tabindex="0"><code>var Module = {
+    preRun: [],
+    postRun: [],
+    print: (function() { /* ... */ })(),
+    printErr: (function() { /* ... */ })(),
+    canvas: (function() {
+        var canvas = document.getElementById(&#39;canvas&#39;);
+        // Emscripten 会自动将其绑定到渲染上下文
+        return canvas;
+    })(),
+    setStatus: (function() { /* ... */ })(),
+    totalDependencies: 0,
+    monitorRunDependencies: function(left) { /* ... */ }
+};
+
+// 异步加载 WASM 模块
+Module.onRuntimeInitialized = async () =&gt; {
+    const canvas = Module.canvas; // Emscripten already binds the canvas
+    const context = canvas.getContext(&#39;webgpu&#39;); // Get WebGPU context
+
+    // Important: Get a WGPUSurface from the canvas context
+    const surface = Module.WebGPUMakeSurfaceFromCanvasContext(context);
+
+    // Call C++ init function, passing the surface pointer
+    Module._init_webgpu(surface); // Assuming _init_webgpu expects a surface pointer
+
+    // Setup render loop
+    function frame() {
+        Module._draw_frame();
+        requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+};
+</code></pre></li>
+<li>
+<p>请注意 <code>WebGPUMakeSurfaceFromCanvasContext</code> 是 Emscripten 在使用 <code>USE_WEBGPU=1</code> 时提供的一个辅助函数。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-导出到本地端-桌面应用">2. 导出到本地端 (桌面应用)
+</h3><p>在本地端，你的 C++ 程序将直接链接到 Dawn 库，并使用操作系统特定的接口（如 GLFW, SDL2, Native Windowing API）来创建窗口和管理事件。</p>
+<p><strong>主要工具：C++ 编译器 (Clang, GCC, MSVC) + Dawn 库 + 窗口库</strong></p>
+<ol>
+<li>
+<p><strong>构建 Dawn 库：</strong></p>
+<ul>
+<li>你需要从 Dawn 的 GitHub 仓库 (<a class="link" href="https://dawn.googlesource.com/dawn"  target="_blank" rel="noopener"
+    >https://dawn.googlesource.com/dawn</a> 或 GitHub mirror) 克隆代码。</li>
+<li>Dawn 使用 GN 和 Ninja 作为其构建系统。你需要按照 Dawn 仓库中的说明来构建它。这通常涉及：
+<ul>
+<li>安装 depot_tools (Google 的工具链管理)。</li>
+<li><code>gclient sync</code> 下载依赖。</li>
+<li><code>gn gen out/Default</code> 或 <code>gn gen out/Debug</code> 生成构建文件。</li>
+<li><code>ninja -C out/Default</code> 编译 Dawn。</li>
+</ul>
+</li>
+<li>这会生成 Dawn 的库文件（<code>.lib</code>, <code>.a</code>, <code>.so</code>, <code>.dll</code> 等取决于你的操作系统）。</li>
+</ul>
+</li>
+<li>
+<p><strong>编写 C++ 渲染程序：</strong></p>
+<ul>
+<li>你的渲染代码会直接使用 Dawn 的 <code>wgpu::Instance</code>, <code>wgpu::Adapter</code>, <code>wgpu::Device</code> 等本地 Dawn 对象。</li>
+<li>创建窗口：使用如 GLFW 或 SDL2 这样的库来创建 OS 窗口，并获取其 <code>HWND</code> (Windows), <code>xcb_connection_t</code>/<code>Window</code> (Linux X11), <code>NSWindow</code> (macOS) 等句柄。</li>
+<li>通过 Dawn 的 <code>wgpu::Instance::CreateSurface</code> 方法，利用窗口句柄创建 <code>wgpu::Surface</code>。</li>
+</ul>
+<p><strong>示例（概念性）：</strong></p>
+<pre tabindex="0"><code>#include &lt;GLFW/glfw3.h&gt; // 用于窗口管理
+#include &lt;dawn/webgpu_cpp.h&gt; // 使用 Dawn 的 C++ 绑定
+#include &lt;dawn/native/DawnNative.h&gt; // 用于 WGPUNativeInstance
+
+// 全局实例、Adapter、Device等
+std::unique_ptr&lt;dawn::native::Instance&gt; g_instance;
+wgpu::Adapter g_adapter;
+wgpu::Device g_device;
+wgpu::Queue g_queue;
+wgpu::TextureFormat g_surfaceFormat;
+wgpu::Surface g_surface;
+
+void init_dawn_native(GLFWwindow* window) {
+    g_instance = std::make_unique&lt;dawn::native::Instance&gt;();
+    g_instance-&gt;DiscoverDefaultAdapters(); // 或手动选择
+
+    // 获取 SurfaceDescriptor 适配平台
+    #if defined(_WIN32)
+        WGPUSurfaceDescriptorWindowsHWND surfaceDesc;
+        surfaceDesc.chain.next = nullptr;
+        surfaceDesc.chain.sType = WGPUSType_SurfaceDescriptorWindowsHWND;
+        surfaceDesc.hinstance = GetModuleHandle(nullptr);
+        surfaceDesc.hwnd = glfwGetWin32Window(window);
+        WGPUSurfaceDescriptor sDesc;
+        sDesc.nextInChain = reinterpret_cast&lt;WGPUChainedStruct*&gt;(&amp;surfaceDesc);
+        g_surface = g_instance-&gt;CreateSurface(&amp;sDesc);
+    #elif defined(__APPLE__)
+        // ... macOS specific surface creation
+    #elif defined(__linux__)
+        // ... Linux specific surface creation
+    #endif
+
+    // 请求 adapter 和 device
+    // 这一步在本地通常是同步的，但在某些复杂配置下也可以异步
+    std::vector&lt;wgpu::Adapter&gt; adapters = g_instance-&gt;Get   Adapters();
+    if (adapters.empty()) return; The adapters here are wgpu::Adapter which are not exposed from the instance.
+    adapters[0].RequestDevice(nullptr, [](WGPURequestDeviceStatus status, WGPUDevice cDevice, const char* message, void* userdata) {
+        if (status == WGPURequestDeviceStatus_Success) {
+            g_device = wgpu::Device::Acquire(cDevice);
+            g_queue = g_device.GetDefaultQueue();
+        } else {
+            // Error handling
+        }
+    }, nullptr);
+
+    // ... (配置渲染管线等)
+}
+
+void draw_frame_native() {
+    if (!g_device) return;
+    // ... (创建 command encoder, render pass, draw calls, submit commands)
+}
+
+int main() {
+    glfwInit();
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API); // 禁用 OpenGL 上下文
+    GLFWwindow* window = glfwCreateWindow(800, 600, &#34;Dawn Native&#34;, nullptr, nullptr);
+
+    init_dawn_native(window); // 初始化 Dawn
+
+    while (!glfwWindowShouldClose(window)) {
+        glfwPollEvents();
+        draw_frame_native(); // 渲染帧
+    }
+
+    glfwDestroyWindow(window);
+    glfwTerminate();
+    return 0;
+}
+</code></pre></li>
+<li>
+<p><strong>编译与链接：</strong></p>
+<ul>
+<li>使用你的 C++ 编译器编译你的应用程序代码。</li>
+<li>链接到你之前构建的 Dawn 库文件以及窗口库（如 GLFW）。确保编译器能找到头文件（<code>-I</code>）和库文件（<code>-L</code>）。</li>
+<li>还需要链接到驱动程序 API（如 Vulkan, D3D12, Metal）的库，具体取决于 Dawn 的后端配置和你的目标平台。</li>
+</ul>
+</li>
+</ol>
+<h3 id="总结与注意事项">总结与注意事项：
+</h3><ul>
+<li><strong>代码共享：</strong> 努力将核心的 WebGPU 渲染逻辑（管线创建、资源管理、绘制调用）放在一个平台无关的模块中。只有窗口创建、设备获取和主循环部分需要平台特化。</li>
+<li><strong>平台抽象：</strong> 可以引入一个抽象层，例如 <code>IPlatform</code> 接口，来处理窗口创建、事件监听和异步回调，然后针对 Web 和 Native 分别实现这个接口。</li>
+<li><strong>异步性：</strong> WebGPU API 本身就包含许多异步操作（<code>requestAdapter</code>, <code>requestDevice</code>, <code>mapAsync</code>），在 Web 端这天然是异步的，但在本地端，某些操作可能是同步或通过回调模拟异步。你需要兼容这种行为差异。</li>
+<li><strong>文件 I/O：</strong> 在 Web 端，直接文件 I/O 是受限的，通常需要通过 <code>fetch</code> API 或打包到 WASM 中；在本地端则可以自由访问文件系统。</li>
+<li><strong>调试：</strong> WebGPU 在浏览器中有强大的调试工具（例如 Chrome DevTools 中的 GPU 面板）。本地 Dawn 也有自己的调试层。</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 LI BO
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="../../ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

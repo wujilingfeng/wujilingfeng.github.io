@@ -134,3 +134,150 @@ pub fn build(b: *std.Build) void {
 }
 ```
 
+
+
+下面是ai生成测试用例
+
+## 编写 Zig 代码举例
+
+以最小 Hello World 为例：
+
+```
+// main.zig
+const std = @import("std");
+
+export fn add(a: i32, b: i32) i32 {
+    return a + b;
+}
+```
+
+**说明**:
+
+- `export` 标记表明该函数将被导出到 WASM 模块，从 JS 里可调用。
+
+------
+
+## 编写 build.zig
+
+build.zig 是使用 Zig 提供构建脚本功能的新式方法。下面以导出 WASM 的例子说明：
+
+```
+const std = @import("std");
+
+pub fn build(b: *std.Build) void {
+    const target = b.standardTargetOptions(.{
+        .default_target = .{ .arch = .wasm32, .os_tag = .freestanding }
+    });
+    const optimize = b.standardOptimizeOption(.{});
+
+    const exe = b.addExecutable(.{
+        .name = "zighello",
+        .root_source_file = .{ .path = "main.zig" },
+        .target = target,
+        .optimize = optimize,
+    });
+
+    // 控制输出为 WebAssembly (wasm)
+    exe.setOutputFile("zighello.wasm");
+
+    // 一般来说，Web 上不需要标准库
+    exe.stack_size = 64 * 1024; // 可选: 设置栈大小
+    exe.disable_stack_protector = true; // 可选: 关闭栈保护
+
+    b.default_step.dependOn(&exe.step);
+}
+```
+
+**参数说明**:
+
+- `target` 选用了 `.wasm32` 和 `.freestanding` (面向浏览器用freestanding。若需要标准库，如文件io，则用 `.wasm32-wasi`)
+- `addExecutable` 制作出可执行 WASM, 并命名和指向源代码
+- `.setOutputFile` 明确指定输出文件名
+- `default_step.dependOn` 确保执行默认构建流程
+
+### 编译命令
+
+在含有 build.zig 的目录下运行：
+
+```
+sh
+zig build
+```
+
+正常情况下会输出 `zighello.wasm` 文件。
+
+------
+
+## 用 JavaScript 加载 WASM
+
+最基础的 JS 加载代码如下：
+
+```
+jsfetch('zighello.wasm')
+  .then(response => response.arrayBuffer())
+  .then(bytes => WebAssembly.instantiate(bytes))
+  .then(results => {
+      // zighello.wasm 里由 zig export 的函数
+      const add = results.instance.exports.add;
+      console.log('zig add:', add(33, 44)); // 输出 77
+  });
+```
+
+**注意事项**
+
+- 用 `wasm32-freestanding` 方式 Zig 标准库很多功能不可用（如I/O）
+- 若常用 Zig 标准库（如console打印、文件IO），应将目标置为 `wasm32-wasi`，并在 Node/服务器侧WASI环境执行
+
+------
+
+## 进阶提示
+
+1. 与 JS 更复杂的数据交互
+   - WASM 只支持数字（int、float...），字符串等需传递内存指针。
+2. 编译到 `wasm32-wasi`
+   - 可在 `build.zig` 里改为 `.os_tag = .wasi`，能用 [std.io](http://std.io/)、环境变量等
+3. 自动产出 JS 绑定代码
+   - 可用 Zig 社区 wasm-bindings 或仅用 JS Fetch 加载
+4. WebAssembly 与 Zig 版本
+   - 推荐使用最新 Zig 版本（如0.12.0及以上）以获得更好的 WASM 支持
+
+------
+
+## 参考更复杂的实际 build.zig 示例
+
+适配多种目标，暴露参数给命令行：
+
+```
+const std = @import("std");
+
+pub fn build(b: *std.Build) void {
+    const target = b.standardTargetOptions(.{});
+    const optimize = b.standardOptimizeOption(.{});
+
+    const exe = b.addExecutable(.{
+        .name = "demo",
+        .root_source_file = .{ .path = "src/main.zig" },
+        .target = target,
+        .optimize = optimize,
+    });
+
+    exe.setOutputDir("dist"); // 输出到dist文件夹
+    exe.setOutputFile("demo.wasm");
+
+    b.installArtifact(exe);
+
+    // 默认步骤
+    b.default_step.dependOn(&exe.step);
+}
+```
+
+------
+
+## 常见问题
+
+- **Q: 为什么JS调用WASM时找不到导出函数？**
+  A: 需用 `export fn ...`，如果没用export明示导出，WASM模块不会暴露该函数。
+- **Q: Zig标准库不能用/编译时报错？**
+  A: wasmf32-freestanding下禁用 std，换用`wasm32-wasi`作为target 或手工实现基础IO。
+- **Q: 如何编译为Emscripten兼容的WASM？**
+  A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue code。

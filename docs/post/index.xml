@@ -7,7 +7,262 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>LI BO</copyright>
-        <lastBuildDate>Fri, 20 Jun 2025 10:36:14 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 16 Jul 2025 10:22:34 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Web端渲染</title>
+        <link>https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/</link>
+        <pubDate>Wed, 16 Jul 2025 10:22:34 +0800</pubDate>
+        
+        <guid>https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/img.png" alt="Featured image of post Web端渲染" /&gt;&lt;p&gt;将使用 Dawn 库编写的渲染程序导出到 Web 端和本地端，需要采取不同的编译和部署策略，但核心思想是：&lt;strong&gt;你的 C++ 渲染逻辑（使用 WebGPU API）大部分可以保持不变，而平台特定的部分（如窗口创建、文件IO、事件处理）则需要抽象或有条件编译。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Dawn 本身是一个 C++ 库，实现了 WebGPU API 规范，并且是 Chromium 浏览器中 WebGPU 的底层实现。&lt;/p&gt;
+&lt;h3 id=&#34;核心思想平台无关的-webgpu-逻辑&#34;&gt;核心思想：平台无关的 WebGPU 逻辑
+&lt;/h3&gt;&lt;p&gt;你的渲染程序主体应该使用 WebGPU API（通过 &lt;code&gt;wgpu::Device&lt;/code&gt;, &lt;code&gt;wgpu::Queue&lt;/code&gt;, &lt;code&gt;wgpu::RenderPassEncoder&lt;/code&gt; 等）来定义渲染管线、加载资源、绘制等。这部分代码在概念上是平台无关的。&lt;/p&gt;
+&lt;p&gt;然而，创建窗口/画布、获取 WebGPU 设备、处理用户输入等部分是与平台紧密相关的。&lt;/p&gt;
+&lt;h3 id=&#34;1-导出到-web-端-浏览器&#34;&gt;1. 导出到 Web 端 (浏览器)
+&lt;/h3&gt;&lt;p&gt;在 Web 端，你的 C++ 代码需要被编译成 WebAssembly (WASM)，并在浏览器环境中运行。浏览器本身提供了原生的 WebGPU API 实现（在 Chromium 中，这个实现就是基于 Dawn 的）。这意味着你&lt;strong&gt;不需要&lt;/strong&gt;将 Dawn 库本身编译进你的 WASM 包，你的 WASM 直接调用浏览器提供的 WebGPU API。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;主要工具：Emscripten&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;编写 C++ 渲染程序：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;你的渲染代码会调用标准的 WebGPU API（封装在 Dawn 的 C++ 头文件中，如 &lt;code&gt;dawn/webgpu.h&lt;/code&gt; 或直接使用 &lt;code&gt;wgpu&lt;/code&gt; 名称空间）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;对于画布的创建和获取 WebGPU 设备，你需要使用 Emscripten 提供的接口来与 JavaScript 环境交互。例如，获取 &lt;code&gt;navigator.gpu&lt;/code&gt; 和请求设备。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;示例（概念性）：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;webgpu/webgpu.h&amp;gt; // 使用 WebGPU API
+
+// Emscripten 提供的用于与 JS 交互的宏
+#include &amp;lt;emscripten/emscripten.h&amp;gt;
+#include &amp;lt;emscripten/html5.h&amp;gt;
+
+WGPUAdapter g_adapter = nullptr;
+WGPUDevice g_device = nullptr;
+WGPUQueue g_queue = nullptr;
+
+// C++ 函数，通过 Emscripten 暴露给 JS
+extern &amp;#34;C&amp;#34; EMSCRIPTEN_KEEPALIVE void init_webgpu(WGPUSurface surface_ptr) {
+    // ... (请求 adapter, device, queue, config shader module, pipeline etc.)
+    // 通常这一步需要异步回调，与 JS 交互
+    // Emscripten 提供了异步回调机制，如 emscripten_async_call 或 Promise 桥接
+}
+
+// 渲染循环（通过 JS requestAnimationFrame 调用）
+extern &amp;#34;C&amp;#34; EMSCRIPTEN_KEEPALIVE void draw_frame() {
+    if (!g_device) return;
+    // ... (创建 command encoder, render pass, draw calls, submit commands)
+}
+
+int main() {
+    // Emscripten_main_loop_set_timing(EM_HTML5_LOOP_RAF, 1); // 绑定到 requestAnimationFrame
+    // 这是通常的 Emscripten 主循环设置，而不是无限循环
+    return 0; // Emscripten 的 main 函数返回后不会退出程序
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;你需要处理异步操作（如 &lt;code&gt;requestAdapter&lt;/code&gt; 和 &lt;code&gt;requestDevice&lt;/code&gt;）以及如何将 WASM 渲染循环与 &lt;code&gt;requestAnimationFrame&lt;/code&gt; 绑定。Emscripten 提供了相应的机制。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;使用 Emscripten 编译：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Emscripten 编译命令会有点复杂，因为它需要知道你的 WebGPU 定义，但不会链接 Dawn 库本身：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;emcc your_renderer.cpp -o your_renderer.html \
+       -s USE_WEBGPU=1 \
+       -s ASYNCIFY \
+       -s EXPORTED_FUNCTIONS=&amp;#34;[&amp;#39;_init_webgpu&amp;#39;, &amp;#39;_draw_frame&amp;#39;]&amp;#34; \
+       -s NO_EXIT_RUNTIME=1 \
+       -s FORCE_FILESYSTEM=1 # 如果有文件加载
+       # ... 其他 Emscripten 参数
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-s USE_WEBGPU=1&lt;/code&gt;：告诉 Emscripten，你的 C++ 代码将使用 WebGPU API，它会引入必要的 JS 胶水代码，并期望浏览器提供 WebGPU API。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-s ASYNCIFY&lt;/code&gt;：如果你的 WebGPU 初始化过程包含异步操作（如 &lt;code&gt;requestAdapter&lt;/code&gt;），你需要它来暂停 C++ 执行直到异步操作完成。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;-s EXPORTED_FUNCTIONS&lt;/code&gt;：暴露 C++ 函数给 JavaScript 调用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;NO_EXIT_RUNTIME=1&lt;/code&gt;：防止 WASM 模块在 &lt;code&gt;main()&lt;/code&gt; 函数结束后立即退出。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Web 页面 (HTML/JavaScript)：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Emscripten 会生成一个 &lt;code&gt;.html&lt;/code&gt; 文件和一个 &lt;code&gt;.js&lt;/code&gt; 胶水文件，以及 &lt;code&gt;.wasm&lt;/code&gt; 文件。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;JavaScript 会负责加载 WASM 模块，创建一个 &lt;code&gt;&amp;lt;canvas&amp;gt;&lt;/code&gt; 元素，然后通过 Emscripten 暴露的 C++ 函数来初始化 WebGPU，并设置 &lt;code&gt;requestAnimationFrame&lt;/code&gt; 循环来调用 WASM 中的 &lt;code&gt;draw_frame&lt;/code&gt; 函数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;示例 (your_renderer.js / your_renderer.html 内部的 JS):&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;var Module = {
+    preRun: [],
+    postRun: [],
+    print: (function() { /* ... */ })(),
+    printErr: (function() { /* ... */ })(),
+    canvas: (function() {
+        var canvas = document.getElementById(&amp;#39;canvas&amp;#39;);
+        // Emscripten 会自动将其绑定到渲染上下文
+        return canvas;
+    })(),
+    setStatus: (function() { /* ... */ })(),
+    totalDependencies: 0,
+    monitorRunDependencies: function(left) { /* ... */ }
+};
+
+// 异步加载 WASM 模块
+Module.onRuntimeInitialized = async () =&amp;gt; {
+    const canvas = Module.canvas; // Emscripten already binds the canvas
+    const context = canvas.getContext(&amp;#39;webgpu&amp;#39;); // Get WebGPU context
+
+    // Important: Get a WGPUSurface from the canvas context
+    const surface = Module.WebGPUMakeSurfaceFromCanvasContext(context);
+
+    // Call C++ init function, passing the surface pointer
+    Module._init_webgpu(surface); // Assuming _init_webgpu expects a surface pointer
+
+    // Setup render loop
+    function frame() {
+        Module._draw_frame();
+        requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;请注意 &lt;code&gt;WebGPUMakeSurfaceFromCanvasContext&lt;/code&gt; 是 Emscripten 在使用 &lt;code&gt;USE_WEBGPU=1&lt;/code&gt; 时提供的一个辅助函数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;2-导出到本地端-桌面应用&#34;&gt;2. 导出到本地端 (桌面应用)
+&lt;/h3&gt;&lt;p&gt;在本地端，你的 C++ 程序将直接链接到 Dawn 库，并使用操作系统特定的接口（如 GLFW, SDL2, Native Windowing API）来创建窗口和管理事件。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;主要工具：C++ 编译器 (Clang, GCC, MSVC) + Dawn 库 + 窗口库&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;构建 Dawn 库：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;你需要从 Dawn 的 GitHub 仓库 (&lt;a class=&#34;link&#34; href=&#34;https://dawn.googlesource.com/dawn&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://dawn.googlesource.com/dawn&lt;/a&gt; 或 GitHub mirror) 克隆代码。&lt;/li&gt;
+&lt;li&gt;Dawn 使用 GN 和 Ninja 作为其构建系统。你需要按照 Dawn 仓库中的说明来构建它。这通常涉及：
+&lt;ul&gt;
+&lt;li&gt;安装 depot_tools (Google 的工具链管理)。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gclient sync&lt;/code&gt; 下载依赖。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gn gen out/Default&lt;/code&gt; 或 &lt;code&gt;gn gen out/Debug&lt;/code&gt; 生成构建文件。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ninja -C out/Default&lt;/code&gt; 编译 Dawn。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;这会生成 Dawn 的库文件（&lt;code&gt;.lib&lt;/code&gt;, &lt;code&gt;.a&lt;/code&gt;, &lt;code&gt;.so&lt;/code&gt;, &lt;code&gt;.dll&lt;/code&gt; 等取决于你的操作系统）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;编写 C++ 渲染程序：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;你的渲染代码会直接使用 Dawn 的 &lt;code&gt;wgpu::Instance&lt;/code&gt;, &lt;code&gt;wgpu::Adapter&lt;/code&gt;, &lt;code&gt;wgpu::Device&lt;/code&gt; 等本地 Dawn 对象。&lt;/li&gt;
+&lt;li&gt;创建窗口：使用如 GLFW 或 SDL2 这样的库来创建 OS 窗口，并获取其 &lt;code&gt;HWND&lt;/code&gt; (Windows), &lt;code&gt;xcb_connection_t&lt;/code&gt;/&lt;code&gt;Window&lt;/code&gt; (Linux X11), &lt;code&gt;NSWindow&lt;/code&gt; (macOS) 等句柄。&lt;/li&gt;
+&lt;li&gt;通过 Dawn 的 &lt;code&gt;wgpu::Instance::CreateSurface&lt;/code&gt; 方法，利用窗口句柄创建 &lt;code&gt;wgpu::Surface&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;示例（概念性）：&lt;/strong&gt;&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#include &amp;lt;GLFW/glfw3.h&amp;gt; // 用于窗口管理
+#include &amp;lt;dawn/webgpu_cpp.h&amp;gt; // 使用 Dawn 的 C++ 绑定
+#include &amp;lt;dawn/native/DawnNative.h&amp;gt; // 用于 WGPUNativeInstance
+
+// 全局实例、Adapter、Device等
+std::unique_ptr&amp;lt;dawn::native::Instance&amp;gt; g_instance;
+wgpu::Adapter g_adapter;
+wgpu::Device g_device;
+wgpu::Queue g_queue;
+wgpu::TextureFormat g_surfaceFormat;
+wgpu::Surface g_surface;
+
+void init_dawn_native(GLFWwindow* window) {
+    g_instance = std::make_unique&amp;lt;dawn::native::Instance&amp;gt;();
+    g_instance-&amp;gt;DiscoverDefaultAdapters(); // 或手动选择
+
+    // 获取 SurfaceDescriptor 适配平台
+    #if defined(_WIN32)
+        WGPUSurfaceDescriptorWindowsHWND surfaceDesc;
+        surfaceDesc.chain.next = nullptr;
+        surfaceDesc.chain.sType = WGPUSType_SurfaceDescriptorWindowsHWND;
+        surfaceDesc.hinstance = GetModuleHandle(nullptr);
+        surfaceDesc.hwnd = glfwGetWin32Window(window);
+        WGPUSurfaceDescriptor sDesc;
+        sDesc.nextInChain = reinterpret_cast&amp;lt;WGPUChainedStruct*&amp;gt;(&amp;amp;surfaceDesc);
+        g_surface = g_instance-&amp;gt;CreateSurface(&amp;amp;sDesc);
+    #elif defined(__APPLE__)
+        // ... macOS specific surface creation
+    #elif defined(__linux__)
+        // ... Linux specific surface creation
+    #endif
+
+    // 请求 adapter 和 device
+    // 这一步在本地通常是同步的，但在某些复杂配置下也可以异步
+    std::vector&amp;lt;wgpu::Adapter&amp;gt; adapters = g_instance-&amp;gt;Get   Adapters();
+    if (adapters.empty()) return; The adapters here are wgpu::Adapter which are not exposed from the instance.
+    adapters[0].RequestDevice(nullptr, [](WGPURequestDeviceStatus status, WGPUDevice cDevice, const char* message, void* userdata) {
+        if (status == WGPURequestDeviceStatus_Success) {
+            g_device = wgpu::Device::Acquire(cDevice);
+            g_queue = g_device.GetDefaultQueue();
+        } else {
+            // Error handling
+        }
+    }, nullptr);
+
+    // ... (配置渲染管线等)
+}
+
+void draw_frame_native() {
+    if (!g_device) return;
+    // ... (创建 command encoder, render pass, draw calls, submit commands)
+}
+
+int main() {
+    glfwInit();
+    glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API); // 禁用 OpenGL 上下文
+    GLFWwindow* window = glfwCreateWindow(800, 600, &amp;#34;Dawn Native&amp;#34;, nullptr, nullptr);
+
+    init_dawn_native(window); // 初始化 Dawn
+
+    while (!glfwWindowShouldClose(window)) {
+        glfwPollEvents();
+        draw_frame_native(); // 渲染帧
+    }
+
+    glfwDestroyWindow(window);
+    glfwTerminate();
+    return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;编译与链接：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用你的 C++ 编译器编译你的应用程序代码。&lt;/li&gt;
+&lt;li&gt;链接到你之前构建的 Dawn 库文件以及窗口库（如 GLFW）。确保编译器能找到头文件（&lt;code&gt;-I&lt;/code&gt;）和库文件（&lt;code&gt;-L&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;还需要链接到驱动程序 API（如 Vulkan, D3D12, Metal）的库，具体取决于 Dawn 的后端配置和你的目标平台。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;总结与注意事项&#34;&gt;总结与注意事项：
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;代码共享：&lt;/strong&gt; 努力将核心的 WebGPU 渲染逻辑（管线创建、资源管理、绘制调用）放在一个平台无关的模块中。只有窗口创建、设备获取和主循环部分需要平台特化。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;平台抽象：&lt;/strong&gt; 可以引入一个抽象层，例如 &lt;code&gt;IPlatform&lt;/code&gt; 接口，来处理窗口创建、事件监听和异步回调，然后针对 Web 和 Native 分别实现这个接口。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;异步性：&lt;/strong&gt; WebGPU API 本身就包含许多异步操作（&lt;code&gt;requestAdapter&lt;/code&gt;, &lt;code&gt;requestDevice&lt;/code&gt;, &lt;code&gt;mapAsync&lt;/code&gt;），在 Web 端这天然是异步的，但在本地端，某些操作可能是同步或通过回调模拟异步。你需要兼容这种行为差异。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文件 I/O：&lt;/strong&gt; 在 Web 端，直接文件 I/O 是受限的，通常需要通过 &lt;code&gt;fetch&lt;/code&gt; API 或打包到 WASM 中；在本地端则可以自由访问文件系统。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;调试：&lt;/strong&gt; WebGPU 在浏览器中有强大的调试工具（例如 Chrome DevTools 中的 GPU 面板）。本地 Dawn 也有自己的调试层。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>Zig实战</title>
         <link>https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/</link>
         <pubDate>Fri, 20 Jun 2025 10:36:14 +0800</pubDate>
@@ -188,7 +443,134 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description>
+&lt;/div&gt;&lt;p&gt;下面是ai生成测试用例&lt;/p&gt;
+&lt;h2 id=&#34;编写-zig-代码举例&#34;&gt;编写 Zig 代码举例
+&lt;/h2&gt;&lt;p&gt;以最小 Hello World 为例：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;// main.zig
+const std = @import(&amp;#34;std&amp;#34;);
+
+export fn add(a: i32, b: i32) i32 {
+    return a + b;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;export&lt;/code&gt; 标记表明该函数将被导出到 WASM 模块，从 JS 里可调用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;编写-buildzig&#34;&gt;编写 build.zig
+&lt;/h2&gt;&lt;p&gt;build.zig 是使用 Zig 提供构建脚本功能的新式方法。下面以导出 WASM 的例子说明：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;const std = @import(&amp;#34;std&amp;#34;);
+
+pub fn build(b: *std.Build) void {
+    const target = b.standardTargetOptions(.{
+        .default_target = .{ .arch = .wasm32, .os_tag = .freestanding }
+    });
+    const optimize = b.standardOptimizeOption(.{});
+
+    const exe = b.addExecutable(.{
+        .name = &amp;#34;zighello&amp;#34;,
+        .root_source_file = .{ .path = &amp;#34;main.zig&amp;#34; },
+        .target = target,
+        .optimize = optimize,
+    });
+
+    // 控制输出为 WebAssembly (wasm)
+    exe.setOutputFile(&amp;#34;zighello.wasm&amp;#34;);
+
+    // 一般来说，Web 上不需要标准库
+    exe.stack_size = 64 * 1024; // 可选: 设置栈大小
+    exe.disable_stack_protector = true; // 可选: 关闭栈保护
+
+    b.default_step.dependOn(&amp;amp;exe.step);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;参数说明&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;target&lt;/code&gt; 选用了 &lt;code&gt;.wasm32&lt;/code&gt; 和 &lt;code&gt;.freestanding&lt;/code&gt; (面向浏览器用freestanding。若需要标准库，如文件io，则用 &lt;code&gt;.wasm32-wasi&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;addExecutable&lt;/code&gt; 制作出可执行 WASM, 并命名和指向源代码&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;.setOutputFile&lt;/code&gt; 明确指定输出文件名&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;default_step.dependOn&lt;/code&gt; 确保执行默认构建流程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;编译命令&#34;&gt;编译命令
+&lt;/h3&gt;&lt;p&gt;在含有 build.zig 的目录下运行：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sh
+zig build
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;正常情况下会输出 &lt;code&gt;zighello.wasm&lt;/code&gt; 文件。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;用-javascript-加载-wasm&#34;&gt;用 JavaScript 加载 WASM
+&lt;/h2&gt;&lt;p&gt;最基础的 JS 加载代码如下：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;jsfetch(&amp;#39;zighello.wasm&amp;#39;)
+  .then(response =&amp;gt; response.arrayBuffer())
+  .then(bytes =&amp;gt; WebAssembly.instantiate(bytes))
+  .then(results =&amp;gt; {
+      // zighello.wasm 里由 zig export 的函数
+      const add = results.instance.exports.add;
+      console.log(&amp;#39;zig add:&amp;#39;, add(33, 44)); // 输出 77
+  });
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;注意事项&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用 &lt;code&gt;wasm32-freestanding&lt;/code&gt; 方式 Zig 标准库很多功能不可用（如I/O）&lt;/li&gt;
+&lt;li&gt;若常用 Zig 标准库（如console打印、文件IO），应将目标置为 &lt;code&gt;wasm32-wasi&lt;/code&gt;，并在 Node/服务器侧WASI环境执行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;进阶提示&#34;&gt;进阶提示
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;与 JS 更复杂的数据交互
+&lt;ul&gt;
+&lt;li&gt;WASM 只支持数字（int、float&amp;hellip;），字符串等需传递内存指针。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;编译到 &lt;code&gt;wasm32-wasi&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;可在 &lt;code&gt;build.zig&lt;/code&gt; 里改为 &lt;code&gt;.os_tag = .wasi&lt;/code&gt;，能用 &lt;a class=&#34;link&#34; href=&#34;http://std.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;std.io&lt;/a&gt;、环境变量等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;自动产出 JS 绑定代码
+&lt;ul&gt;
+&lt;li&gt;可用 Zig 社区 wasm-bindings 或仅用 JS Fetch 加载&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;WebAssembly 与 Zig 版本
+&lt;ul&gt;
+&lt;li&gt;推荐使用最新 Zig 版本（如0.12.0及以上）以获得更好的 WASM 支持&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;参考更复杂的实际-buildzig-示例&#34;&gt;参考更复杂的实际 build.zig 示例
+&lt;/h2&gt;&lt;p&gt;适配多种目标，暴露参数给命令行：&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;const std = @import(&amp;#34;std&amp;#34;);
+
+pub fn build(b: *std.Build) void {
+    const target = b.standardTargetOptions(.{});
+    const optimize = b.standardOptimizeOption(.{});
+
+    const exe = b.addExecutable(.{
+        .name = &amp;#34;demo&amp;#34;,
+        .root_source_file = .{ .path = &amp;#34;src/main.zig&amp;#34; },
+        .target = target,
+        .optimize = optimize,
+    });
+
+    exe.setOutputDir(&amp;#34;dist&amp;#34;); // 输出到dist文件夹
+    exe.setOutputFile(&amp;#34;demo.wasm&amp;#34;);
+
+    b.installArtifact(exe);
+
+    // 默认步骤
+    b.default_step.dependOn(&amp;amp;exe.step);
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h2 id=&#34;常见问题&#34;&gt;常见问题
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Q: 为什么JS调用WASM时找不到导出函数？&lt;/strong&gt;
+A: 需用 &lt;code&gt;export fn ...&lt;/code&gt;，如果没用export明示导出，WASM模块不会暴露该函数。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Q: Zig标准库不能用/编译时报错？&lt;/strong&gt;
+A: wasmf32-freestanding下禁用 std，换用&lt;code&gt;wasm32-wasi&lt;/code&gt;作为target 或手工实现基础IO。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Q: 如何编译为Emscripten兼容的WASM？&lt;/strong&gt;
+A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue code。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
         </item>
         <item>
         <title>Gltf格式</title>
