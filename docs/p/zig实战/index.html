@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="zig语言中文社区\nzig编译为webassembly\n下面的代码报错是因为没有确定类型导致类型推断冲突，因为x没有给类型，而-1是comptime_int,故而x是comptime_int类型，这和var冲突。\n1 2 3 4 5 6 test safe_sqrt { var x= -1;\\\\这里需改为var x:f32=-1;即可修复错误 x = x - 1; try std.testing.expect(safe_sqrt(x) &gt;= 0); } 一般来说zig语言的绑定库只需要@cImport()该库的暴露的.h文件即可，但是有些时候会再在上面裹上一层zig的wrapper， 比如这个mach-glfw 里面的main分支，就是@cImport()之后又裹了一层zig。\n如果zig语言想要实现类型类，只需要写个满足类型类约束的comptime函数，也就是在编译期进行类型检查是否有某些方法的判断，然后在需要添加类型类约束的函数上添加这个编译期函数判断即可。\n编译系统 下面是编译c语言项目的构建代码，有冗余，这里的注释部分也能添加源文件，到底是cstructures_mod还是cstructures添加源文件呢？写法不统一。\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 const cstructures_mod = b.addModule(&#34;cstructures_mod&#34;, .{ .target = target, .optimize = optimize, .root_source_file = null, }); // cstructures_mod.addIncludePath(b.path(&#34;cstructures/include&#34;)); // cstructures_mod.addCSourceFiles(.{ // .files = &amp;.{&#34;cstructures/src/tools_node.c&#34;}, // .flags = &amp;.{ &#34;-Wall&#34;, &#34;-O2&#34; }, // }); const cstructures = b.addLibrary(.{ .linkage = .static, .name = &#34;cstructures&#34;, .root_module = cstructures_mod, }); cstructures.addIncludePath(b.path(&#34;cstructures/include&#34;)); cstructures.addCSourceFiles(.{ .files = &amp;.{&#34;cstructures/src/tools_node.c&#34;}, .flags = &amp;.{ &#34;-Wall&#34;, &#34;-O2&#34; }, }); cstructures.linkLibC(); 导出为webassembly 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 const std = @import(&#34;std&#34;); pub fn build(b: *std.Build) void { const target = b.resolveTargetQuery(std.Target.Query.parse( .{ .arch_os_abi = &#34;wasm32-wasi&#34; }, ) catch unreachable); const exe = b.addExecutable(.{ .name = &#34;main&#34;, .root_source_file = b.path(&#34;src/main.zig&#34;), .target = target, .optimize = b.standardOptimizeOption(.{}), }); //注意这个选项 exe.rdynamic = true; //导出该可执行对象中标记了export的项目 // 此项默认为false，如果你需要在js环境中调用导出的方法，需要设置为true b.installArtifact(exe); //保存生成的结果 } ">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="zig语言中文社区\nzig编译为webassembly\ncomptime实战 1 2 3 4 5 6 7 8 9 10 11 12 13 14 test &#34;inline while loop&#34; { comptime var i = 0; // i 是一个编译期常量 var sum: usize = 0; // sum 是一个运行时变量 inline while (i &lt; 3) : (i += 1) { const T = switch (i) { 0 =&gt; f32, 1 =&gt; i8, 2 =&gt; bool, else =&gt; unreachable, }; sum += typeNameLength(T); // typeNameLength 可能是一个编译期函数，用于获取类型名称的长度 } try expect(sum == 9); } 上面的例子中，如果i是不是comptime变量，就不能用inline while。\n">
 <title>Zig实战</title>
 
 <link rel='canonical' href='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/'>
 
-<link rel="stylesheet" href="../../scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="Zig实战">
-<meta property='og:description' content="zig语言中文社区\nzig编译为webassembly\n下面的代码报错是因为没有确定类型导致类型推断冲突，因为x没有给类型，而-1是comptime_int,故而x是comptime_int类型，这和var冲突。\n1 2 3 4 5 6 test safe_sqrt { var x= -1;\\\\这里需改为var x:f32=-1;即可修复错误 x = x - 1; try std.testing.expect(safe_sqrt(x) &gt;= 0); } 一般来说zig语言的绑定库只需要@cImport()该库的暴露的.h文件即可，但是有些时候会再在上面裹上一层zig的wrapper， 比如这个mach-glfw 里面的main分支，就是@cImport()之后又裹了一层zig。\n如果zig语言想要实现类型类，只需要写个满足类型类约束的comptime函数，也就是在编译期进行类型检查是否有某些方法的判断，然后在需要添加类型类约束的函数上添加这个编译期函数判断即可。\n编译系统 下面是编译c语言项目的构建代码，有冗余，这里的注释部分也能添加源文件，到底是cstructures_mod还是cstructures添加源文件呢？写法不统一。\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 const cstructures_mod = b.addModule(&#34;cstructures_mod&#34;, .{ .target = target, .optimize = optimize, .root_source_file = null, }); // cstructures_mod.addIncludePath(b.path(&#34;cstructures/include&#34;)); // cstructures_mod.addCSourceFiles(.{ // .files = &amp;.{&#34;cstructures/src/tools_node.c&#34;}, // .flags = &amp;.{ &#34;-Wall&#34;, &#34;-O2&#34; }, // }); const cstructures = b.addLibrary(.{ .linkage = .static, .name = &#34;cstructures&#34;, .root_module = cstructures_mod, }); cstructures.addIncludePath(b.path(&#34;cstructures/include&#34;)); cstructures.addCSourceFiles(.{ .files = &amp;.{&#34;cstructures/src/tools_node.c&#34;}, .flags = &amp;.{ &#34;-Wall&#34;, &#34;-O2&#34; }, }); cstructures.linkLibC(); 导出为webassembly 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 const std = @import(&#34;std&#34;); pub fn build(b: *std.Build) void { const target = b.resolveTargetQuery(std.Target.Query.parse( .{ .arch_os_abi = &#34;wasm32-wasi&#34; }, ) catch unreachable); const exe = b.addExecutable(.{ .name = &#34;main&#34;, .root_source_file = b.path(&#34;src/main.zig&#34;), .target = target, .optimize = b.standardOptimizeOption(.{}), }); //注意这个选项 exe.rdynamic = true; //导出该可执行对象中标记了export的项目 // 此项默认为false，如果你需要在js环境中调用导出的方法，需要设置为true b.installArtifact(exe); //保存生成的结果 } ">
+<link rel="stylesheet" href="../../scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Zig实战">
+<meta property='og:description' content="zig语言中文社区\nzig编译为webassembly\ncomptime实战 1 2 3 4 5 6 7 8 9 10 11 12 13 14 test &#34;inline while loop&#34; { comptime var i = 0; // i 是一个编译期常量 var sum: usize = 0; // sum 是一个运行时变量 inline while (i &lt; 3) : (i += 1) { const T = switch (i) { 0 =&gt; f32, 1 =&gt; i8, 2 =&gt; bool, else =&gt; unreachable, }; sum += typeNameLength(T); // typeNameLength 可能是一个编译期函数，用于获取类型名称的长度 } try expect(sum == 9); } 上面的例子中，如果i是不是comptime变量，就不能用inline while。\n">
 <meta property='og:url' content='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/'>
 <meta property='og:site_name' content='五级灵风'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-06-20T10:36:14&#43;08:00'/><meta property='article:modified_time' content='2025-06-20T10:36:14&#43;08:00'/><meta property='og:image' content='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/nature.png' />
 <meta name="twitter:title" content="Zig实战">
-<meta name="twitter:description" content="zig语言中文社区\nzig编译为webassembly\n下面的代码报错是因为没有确定类型导致类型推断冲突，因为x没有给类型，而-1是comptime_int,故而x是comptime_int类型，这和var冲突。\n1 2 3 4 5 6 test safe_sqrt { var x= -1;\\\\这里需改为var x:f32=-1;即可修复错误 x = x - 1; try std.testing.expect(safe_sqrt(x) &gt;= 0); } 一般来说zig语言的绑定库只需要@cImport()该库的暴露的.h文件即可，但是有些时候会再在上面裹上一层zig的wrapper， 比如这个mach-glfw 里面的main分支，就是@cImport()之后又裹了一层zig。\n如果zig语言想要实现类型类，只需要写个满足类型类约束的comptime函数，也就是在编译期进行类型检查是否有某些方法的判断，然后在需要添加类型类约束的函数上添加这个编译期函数判断即可。\n编译系统 下面是编译c语言项目的构建代码，有冗余，这里的注释部分也能添加源文件，到底是cstructures_mod还是cstructures添加源文件呢？写法不统一。\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 const cstructures_mod = b.addModule(&#34;cstructures_mod&#34;, .{ .target = target, .optimize = optimize, .root_source_file = null, }); // cstructures_mod.addIncludePath(b.path(&#34;cstructures/include&#34;)); // cstructures_mod.addCSourceFiles(.{ // .files = &amp;.{&#34;cstructures/src/tools_node.c&#34;}, // .flags = &amp;.{ &#34;-Wall&#34;, &#34;-O2&#34; }, // }); const cstructures = b.addLibrary(.{ .linkage = .static, .name = &#34;cstructures&#34;, .root_module = cstructures_mod, }); cstructures.addIncludePath(b.path(&#34;cstructures/include&#34;)); cstructures.addCSourceFiles(.{ .files = &amp;.{&#34;cstructures/src/tools_node.c&#34;}, .flags = &amp;.{ &#34;-Wall&#34;, &#34;-O2&#34; }, }); cstructures.linkLibC(); 导出为webassembly 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 const std = @import(&#34;std&#34;); pub fn build(b: *std.Build) void { const target = b.resolveTargetQuery(std.Target.Query.parse( .{ .arch_os_abi = &#34;wasm32-wasi&#34; }, ) catch unreachable); const exe = b.addExecutable(.{ .name = &#34;main&#34;, .root_source_file = b.path(&#34;src/main.zig&#34;), .target = target, .optimize = b.standardOptimizeOption(.{}), }); //注意这个选项 exe.rdynamic = true; //导出该可执行对象中标记了export的项目 // 此项默认为false，如果你需要在js环境中调用导出的方法，需要设置为true b.installArtifact(exe); //保存生成的结果 } "><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="zig语言中文社区\nzig编译为webassembly\ncomptime实战 1 2 3 4 5 6 7 8 9 10 11 12 13 14 test &#34;inline while loop&#34; { comptime var i = 0; // i 是一个编译期常量 var sum: usize = 0; // sum 是一个运行时变量 inline while (i &lt; 3) : (i += 1) { const T = switch (i) { 0 =&gt; f32, 1 =&gt; i8, 2 =&gt; bool, else =&gt; unreachable, }; sum += typeNameLength(T); // typeNameLength 可能是一个编译期函数，用于获取类型名称的长度 } try expect(sum == 9); } 上面的例子中，如果i是不是comptime变量，就不能用inline while。\n"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/nature.png' />
     <link rel="shortcut icon" href="../../favicon.ico" />
 
@@ -347,6 +347,7 @@
   <ol>
     <li>
       <ol>
+        <li><a href="#comptime实战">comptime实战</a></li>
         <li><a href="#编译系统">编译系统</a></li>
         <li><a href="#导出为webassembly">导出为webassembly</a></li>
       </ol>
@@ -419,7 +420,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 2 分钟
                 </time>
             </div>
         
@@ -438,6 +439,66 @@
     >zig语言中文社区</a></p>
 <p><a class="link" href="https://luojia.me/9940/"  target="_blank" rel="noopener"
     >zig编译为webassembly</a></p>
+<h3 id="comptime实战">comptime实战
+</h3><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">14
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;inline while loop&#34;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">comptime</span> <span style="color:#c678dd">var</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>; <span style="color:#7f848e">// i 是一个编译期常量
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">var</span> <span style="color:#e06c75">sum</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">usize</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>; <span style="color:#7f848e">// sum 是一个运行时变量
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">inline</span> <span style="color:#c678dd">while</span> (<span style="color:#e06c75">i</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#d19a66">3</span>) <span style="color:#56b6c2">:</span> (<span style="color:#e06c75">i</span> <span style="color:#56b6c2">+=</span> <span style="color:#d19a66">1</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">const</span> <span style="color:#e06c75">T</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">switch</span> (<span style="color:#e06c75">i</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#d19a66">0</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#e5c07b">f32</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#d19a66">1</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#e06c75">i8</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#d19a66">2</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">else</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#c678dd">unreachable</span>,
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">sum</span> <span style="color:#56b6c2">+=</span> <span style="color:#61afef;font-weight:bold">typeNameLength</span>(<span style="color:#e06c75">T</span>); <span style="color:#7f848e">// typeNameLength 可能是一个编译期函数，用于获取类型名称的长度
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">sum</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">9</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面的例子中，如果i是不是comptime变量，就不能用inline while。</p>
+<p>deepseek说只能写<code>try comptime</code> 而非comptime try ，可是下面的例子</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;peer type resolution: ?T and T&#34;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#61afef;font-weight:bold">peerTypeTAndOptionalT</span>(<span style="color:#e5c07b">true</span>, <span style="color:#e5c07b">false</span>).<span style="color:#56b6c2">?</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#61afef;font-weight:bold">peerTypeTAndOptionalT</span>(<span style="color:#e5c07b">false</span>, <span style="color:#e5c07b">false</span>).<span style="color:#56b6c2">?</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">3</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">comptime</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#61afef;font-weight:bold">peerTypeTAndOptionalT</span>(<span style="color:#e5c07b">true</span>, <span style="color:#e5c07b">false</span>).<span style="color:#56b6c2">?</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#61afef;font-weight:bold">peerTypeTAndOptionalT</span>(<span style="color:#e5c07b">false</span>, <span style="color:#e5c07b">false</span>).<span style="color:#56b6c2">?</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">3</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>zig语言的切片<code>[]T</code>可以安全地转向<code>[]const T</code> ，不需要显式转换。</p>
 <p>下面的代码报错是因为没有确定类型导致类型推断冲突，因为x没有给类型，而-1是comptime_int,故而x是comptime_int类型，这和var冲突。</p>
 <div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">

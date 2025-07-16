@@ -17,6 +17,66 @@
     &gt;zig语言中文社区&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://luojia.me/9940/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;zig编译为webassembly&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;comptime实战&#34;&gt;comptime实战
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;12
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;13
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;test&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;inline while loop&amp;#34;&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;comptime&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;; &lt;span style=&#34;color:#7f848e&#34;&gt;// i 是一个编译期常量
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;sum&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;usize&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;; &lt;span style=&#34;color:#7f848e&#34;&gt;// sum 是一个运行时变量
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;inline&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;while&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;T&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;switch&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;f32&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;i8&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;bool&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#c678dd&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;unreachable&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        };
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;sum&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;typeNameLength&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;T&lt;/span&gt;); &lt;span style=&#34;color:#7f848e&#34;&gt;// typeNameLength 可能是一个编译期函数，用于获取类型名称的长度
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;sum&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;9&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;上面的例子中，如果i是不是comptime变量，就不能用inline while。&lt;/p&gt;
+&lt;p&gt;deepseek说只能写&lt;code&gt;try comptime&lt;/code&gt; 而非comptime try ，可是下面的例子&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;test&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;peer type resolution: ?T and T&amp;#34;&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;peerTypeTAndOptionalT&lt;/span&gt;(&lt;span style=&#34;color:#e5c07b&#34;&gt;true&lt;/span&gt;, &lt;span style=&#34;color:#e5c07b&#34;&gt;false&lt;/span&gt;).&lt;span style=&#34;color:#56b6c2&#34;&gt;?&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;peerTypeTAndOptionalT&lt;/span&gt;(&lt;span style=&#34;color:#e5c07b&#34;&gt;false&lt;/span&gt;, &lt;span style=&#34;color:#e5c07b&#34;&gt;false&lt;/span&gt;).&lt;span style=&#34;color:#56b6c2&#34;&gt;?&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;comptime&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;peerTypeTAndOptionalT&lt;/span&gt;(&lt;span style=&#34;color:#e5c07b&#34;&gt;true&lt;/span&gt;, &lt;span style=&#34;color:#e5c07b&#34;&gt;false&lt;/span&gt;).&lt;span style=&#34;color:#56b6c2&#34;&gt;?&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;peerTypeTAndOptionalT&lt;/span&gt;(&lt;span style=&#34;color:#e5c07b&#34;&gt;false&lt;/span&gt;, &lt;span style=&#34;color:#e5c07b&#34;&gt;false&lt;/span&gt;).&lt;span style=&#34;color:#56b6c2&#34;&gt;?&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;zig语言的切片&lt;code&gt;[]T&lt;/code&gt;可以安全地转向&lt;code&gt;[]const T&lt;/code&gt; ，不需要显式转换。&lt;/p&gt;
 &lt;p&gt;下面的代码报错是因为没有确定类型导致类型推断冲突，因为x没有给类型，而-1是comptime_int,故而x是comptime_int类型，这和var冲突。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
@@ -894,7 +954,32 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;额外说明&#34;&gt;额外说明
+&lt;/div&gt;&lt;h4 id=&#34;内存分配器&#34;&gt;内存分配器
+&lt;/h4&gt;&lt;p&gt;std.testing.allocator是建议且只建议在test函数中使用的内存分配器。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;test&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;detect leak&amp;#34;&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;list&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;ArrayList&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;u21&lt;/span&gt;).&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;init&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;testing&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;allocator&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#7f848e&#34;&gt;// missing `defer list.deinit();`
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;list&lt;/span&gt;.&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;append&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;☔&amp;#39;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;testing&lt;/span&gt;.&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;list&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;items&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;len&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;数值&#34;&gt;数值
+&lt;/h4&gt;&lt;p&gt;在 Zig 语言中，‌&lt;strong&gt;低精度数值向高精度变量赋值时不需要显式转换，编译器会自动完成安全的隐式提升&lt;/strong&gt;‌。&lt;/p&gt;
+&lt;p&gt;在Zig语言中，‌&lt;strong&gt;高精度数值赋给低精度变量需要显式转换&lt;/strong&gt;‌，否则会触发编译错误。@intCast&lt;code&gt;、&lt;/code&gt;@truncate&lt;code&gt;、&lt;/code&gt;@floatCast&lt;/p&gt;
+&lt;h4 id=&#34;额外说明&#34;&gt;额外说明
 &lt;/h4&gt;&lt;p&gt;经过测试，结构体内部的函数和成员变量不能重名，block的标签名可以重名（除了嵌套）。&lt;/p&gt;
 &lt;p&gt;zig的import导入模块的话，如果是直接@import 文件名的话，相对路径是相对于该导入文件的路径。&lt;/p&gt;
 &lt;p&gt;zig的defer后面语句只能是void,也就是函数或者块不能返回值。&lt;/p&gt;

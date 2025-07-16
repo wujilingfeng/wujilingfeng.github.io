@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/'>
 
-<link rel="stylesheet" href="../../scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="学习zig">
+<link rel="stylesheet" href="../../scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="学习zig">
 <meta property='og:description' content="zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。\nzig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。\nzig语言的void和c语言的void不同，c语言的void对应anyopaque,anyopaque是一个类型，而anytype是一个关键词，类似struct ,enum,fn,if, else等。void也是一个类型，它的值通常为{}。anyerror 是一个类型，不是关键字。\nzig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体，\nzig语言会自动对结构体的内存进行布局优化，下面的例子:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 const RB_Node = struct { key: i32, left: ?*RB_Node, right: ?*RB_Node, parent: ?*RB_Node, color: bool, }; dprint(&#34;rb node size:{}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Size of RB_Node: {}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Offset of key: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;key&#34;)}); std.debug.print(&#34;Offset of left: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;left&#34;)}); std.debug.print(&#34;Offset of right: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;right&#34;)}); std.debug.print(&#34;Offset of parent: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;parent&#34;)}); std.debug.print(&#34;Offset of color: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;color&#34;)}); zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype）。\n">
 <meta property='og:url' content='https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/'>
 <meta property='og:site_name' content='五级灵风'>
@@ -349,6 +349,8 @@
       <ol>
         <li>
           <ol>
+            <li><a href="#内存分配器">内存分配器</a></li>
+            <li><a href="#数值">数值</a></li>
             <li><a href="#额外说明">额外说明</a></li>
           </ol>
         </li>
@@ -1131,7 +1133,32 @@
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="额外说明">额外说明
+</div><h4 id="内存分配器">内存分配器
+</h4><p>std.testing.allocator是建议且只建议在test函数中使用的内存分配器。</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;detect leak&#34;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">var</span> <span style="color:#e06c75">list</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">std</span>.<span style="color:#61afef;font-weight:bold">ArrayList</span>(<span style="color:#e06c75">u21</span>).<span style="color:#61afef;font-weight:bold">init</span>(<span style="color:#e06c75">std</span>.<span style="color:#e06c75">testing</span>.<span style="color:#e06c75">allocator</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// missing `defer list.deinit();`
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">list</span>.<span style="color:#61afef;font-weight:bold">append</span>(<span style="color:#98c379">&#39;☔&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">testing</span>.<span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">list</span>.<span style="color:#e06c75">items</span>.<span style="color:#e06c75">len</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="数值">数值
+</h4><p>在 Zig 语言中，‌<strong>低精度数值向高精度变量赋值时不需要显式转换，编译器会自动完成安全的隐式提升</strong>‌。</p>
+<p>在Zig语言中，‌<strong>高精度数值赋给低精度变量需要显式转换</strong>‌，否则会触发编译错误。@intCast<code>、</code>@truncate<code>、</code>@floatCast</p>
+<h4 id="额外说明">额外说明
 </h4><p>经过测试，结构体内部的函数和成员变量不能重名，block的标签名可以重名（除了嵌套）。</p>
 <p>zig的import导入模块的话，如果是直接@import 文件名的话，相对路径是相对于该导入文件的路径。</p>
 <p>zig的defer后面语句只能是void,也就是函数或者块不能返回值。</p>
