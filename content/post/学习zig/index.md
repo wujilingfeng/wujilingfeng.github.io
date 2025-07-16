@@ -429,7 +429,28 @@ test "defer basics" {
 
 
 
+#### 内存分配器
 
+std.testing.allocator是建议且只建议在test函数中使用的内存分配器。
+
+```zig
+test "detect leak" {
+    var list = std.ArrayList(u21).init(std.testing.allocator);
+    // missing `defer list.deinit();`
+    try list.append('☔');
+
+    try std.testing.expect(list.items.len == 1);
+}
+
+```
+
+
+
+#### 数值
+
+在 Zig 语言中，‌**低精度数值向高精度变量赋值时不需要显式转换，编译器会自动完成安全的隐式提升**‌。
+
+在Zig语言中，‌**高精度数值赋给低精度变量需要显式转换**‌，否则会触发编译错误。@intCast`、`@truncate`、`@floatCast
 
 
 

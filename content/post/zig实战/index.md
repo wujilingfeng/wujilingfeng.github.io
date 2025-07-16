@@ -16,6 +16,50 @@ image = "nature.png"
 
 
 
+### comptime实战
+
+```zig
+test "inline while loop" {
+    comptime var i = 0; // i 是一个编译期常量
+    var sum: usize = 0; // sum 是一个运行时变量
+    inline while (i < 3) : (i += 1) {
+        const T = switch (i) {
+            0 => f32,
+            1 => i8,
+            2 => bool,
+            else => unreachable,
+        };
+        sum += typeNameLength(T); // typeNameLength 可能是一个编译期函数，用于获取类型名称的长度
+    }
+    try expect(sum == 9);
+}
+```
+
+上面的例子中，如果i是不是comptime变量，就不能用inline while。
+
+
+
+deepseek说只能写`try comptime` 而非comptime try ，可是下面的例子
+
+```zig
+test "peer type resolution: ?T and T" {
+    try expect(peerTypeTAndOptionalT(true, false).? == 0);
+    try expect(peerTypeTAndOptionalT(false, false).? == 3);
+    comptime {
+        try expect(peerTypeTAndOptionalT(true, false).? == 0);
+        try expect(peerTypeTAndOptionalT(false, false).? == 3);
+    }
+}
+```
+
+
+
+
+
+
+
+zig语言的切片`[]T`可以安全地转向`[]const T` ，不需要显式转换。
+
 下面的代码报错是因为没有确定类型导致类型推断冲突，因为x没有给类型，而-1是comptime_int,故而x是comptime_int类型，这和var冲突。
 
 ```zig
