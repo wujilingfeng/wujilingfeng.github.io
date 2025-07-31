@@ -14,7 +14,7 @@ image = "nature.png"
 
 [zig编译为webassembly](https://luojia.me/9940/)
 
-
+https://dev.to/sleibrock/webassembly-with-zig-part-1-4onm
 
 ### comptime实战
 
@@ -281,3 +281,10 @@ pub fn build(b: *std.Build) void {
   A: wasmf32-freestanding下禁用 std，换用`wasm32-wasi`作为target 或手工实现基础IO。
 - **Q: 如何编译为Emscripten兼容的WASM？**
   A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue code。
+
+
+
+#### 生成文档
+
+zig生成的文档，首先安装bun，然后在文档目录下执行命令`bunx serve .`。这是因为main.js里面需要借助http获取wasm，所以直接打开index.html没用。
+

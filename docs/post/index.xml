@@ -272,6 +272,8 @@ int main() {
     &gt;zig语言中文社区&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://luojia.me/9940/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;zig编译为webassembly&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://dev.to/sleibrock/webassembly-with-zig-part-1-4onm&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://dev.to/sleibrock/webassembly-with-zig-part-1-4onm&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;comptime实战&#34;&gt;comptime实战
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
@@ -570,6 +572,8 @@ A: wasmf32-freestanding下禁用 std，换用&lt;code&gt;wasm32-wasi&lt;/code&gt
 &lt;li&gt;&lt;strong&gt;Q: 如何编译为Emscripten兼容的WASM？&lt;/strong&gt;
 A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue code。&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h4 id=&#34;生成文档&#34;&gt;生成文档
+&lt;/h4&gt;&lt;p&gt;zig生成的文档，首先安装bun，然后在文档目录下执行命令&lt;code&gt;bunx serve .&lt;/code&gt;。这是因为main.js里面需要借助http获取wasm，所以直接打开index.html没用。&lt;/p&gt;
 </description>
         </item>
         <item>

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="zig语言中文社区\nzig编译为webassembly\ncomptime实战 1 2 3 4 5 6 7 8 9 10 11 12 13 14 test &#34;inline while loop&#34; { comptime var i = 0; // i 是一个编译期常量 var sum: usize = 0; // sum 是一个运行时变量 inline while (i &lt; 3) : (i += 1) { const T = switch (i) { 0 =&gt; f32, 1 =&gt; i8, 2 =&gt; bool, else =&gt; unreachable, }; sum += typeNameLength(T); // typeNameLength 可能是一个编译期函数，用于获取类型名称的长度 } try expect(sum == 9); } 上面的例子中，如果i是不是comptime变量，就不能用inline while。\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\ncomptime实战 1 2 3 4 5 6 7 8 9 10 11 12 13 14 test &#34;inline while loop&#34; { comptime var i = 0; // i 是一个编译期常量 var sum: usize = 0; // sum 是一个运行时变量 inline while (i &lt; 3) : (i += 1) { const T = switch (i) { 0 =&gt; f32, 1 =&gt; i8, 2 =&gt; bool, else =&gt; unreachable, }; sum += typeNameLength(T); // typeNameLength 可能是一个编译期函数，用于获取类型名称的长度 } try expect(sum == 9); } 上面的例子中，如果i是不是comptime变量，就不能用inline while。\n">
 <title>Zig实战</title>
 
 <link rel='canonical' href='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/'>
 
 <link rel="stylesheet" href="../../scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Zig实战">
-<meta property='og:description' content="zig语言中文社区\nzig编译为webassembly\ncomptime实战 1 2 3 4 5 6 7 8 9 10 11 12 13 14 test &#34;inline while loop&#34; { comptime var i = 0; // i 是一个编译期常量 var sum: usize = 0; // sum 是一个运行时变量 inline while (i &lt; 3) : (i += 1) { const T = switch (i) { 0 =&gt; f32, 1 =&gt; i8, 2 =&gt; bool, else =&gt; unreachable, }; sum += typeNameLength(T); // typeNameLength 可能是一个编译期函数，用于获取类型名称的长度 } try expect(sum == 9); } 上面的例子中，如果i是不是comptime变量，就不能用inline while。\n">
+<meta property='og:description' content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\ncomptime实战 1 2 3 4 5 6 7 8 9 10 11 12 13 14 test &#34;inline while loop&#34; { comptime var i = 0; // i 是一个编译期常量 var sum: usize = 0; // sum 是一个运行时变量 inline while (i &lt; 3) : (i += 1) { const T = switch (i) { 0 =&gt; f32, 1 =&gt; i8, 2 =&gt; bool, else =&gt; unreachable, }; sum += typeNameLength(T); // typeNameLength 可能是一个编译期函数，用于获取类型名称的长度 } try expect(sum == 9); } 上面的例子中，如果i是不是comptime变量，就不能用inline while。\n">
 <meta property='og:url' content='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/'>
 <meta property='og:site_name' content='五级灵风'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-06-20T10:36:14&#43;08:00'/><meta property='article:modified_time' content='2025-06-20T10:36:14&#43;08:00'/><meta property='og:image' content='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/nature.png' />
 <meta name="twitter:title" content="Zig实战">
-<meta name="twitter:description" content="zig语言中文社区\nzig编译为webassembly\ncomptime实战 1 2 3 4 5 6 7 8 9 10 11 12 13 14 test &#34;inline while loop&#34; { comptime var i = 0; // i 是一个编译期常量 var sum: usize = 0; // sum 是一个运行时变量 inline while (i &lt; 3) : (i += 1) { const T = switch (i) { 0 =&gt; f32, 1 =&gt; i8, 2 =&gt; bool, else =&gt; unreachable, }; sum += typeNameLength(T); // typeNameLength 可能是一个编译期函数，用于获取类型名称的长度 } try expect(sum == 9); } 上面的例子中，如果i是不是comptime变量，就不能用inline while。\n"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\ncomptime实战 1 2 3 4 5 6 7 8 9 10 11 12 13 14 test &#34;inline while loop&#34; { comptime var i = 0; // i 是一个编译期常量 var sum: usize = 0; // sum 是一个运行时变量 inline while (i &lt; 3) : (i += 1) { const T = switch (i) { 0 =&gt; f32, 1 =&gt; i8, 2 =&gt; bool, else =&gt; unreachable, }; sum += typeNameLength(T); // typeNameLength 可能是一个编译期函数，用于获取类型名称的长度 } try expect(sum == 9); } 上面的例子中，如果i是不是comptime变量，就不能用inline while。\n"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/nature.png' />
     <link rel="shortcut icon" href="../../favicon.ico" />
 
@@ -361,7 +361,15 @@
     <li><a href="#用-javascript-加载-wasm">用 JavaScript 加载 WASM</a></li>
     <li><a href="#进阶提示">进阶提示</a></li>
     <li><a href="#参考更复杂的实际-buildzig-示例">参考更复杂的实际 build.zig 示例</a></li>
-    <li><a href="#常见问题">常见问题</a></li>
+    <li><a href="#常见问题">常见问题</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#生成文档">生成文档</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -449,6 +457,8 @@
     >zig语言中文社区</a></p>
 <p><a class="link" href="https://luojia.me/9940/"  target="_blank" rel="noopener"
     >zig编译为webassembly</a></p>
+<p><a class="link" href="https://dev.to/sleibrock/webassembly-with-zig-part-1-4onm"  target="_blank" rel="noopener"
+    >https://dev.to/sleibrock/webassembly-with-zig-part-1-4onm</a></p>
 <h3 id="comptime实战">comptime实战
 </h3><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -747,6 +757,8 @@ A: wasmf32-freestanding下禁用 std，换用<code>wasm32-wasi</code>作为targe
 <li><strong>Q: 如何编译为Emscripten兼容的WASM？</strong>
 A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue code。</li>
 </ul>
+<h4 id="生成文档">生成文档
+</h4><p>zig生成的文档，首先安装bun，然后在文档目录下执行命令<code>bunx serve .</code>。这是因为main.js里面需要借助http获取wasm，所以直接打开index.html没用。</p>
 
 </section>
 
