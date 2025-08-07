@@ -660,7 +660,7 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         <guid>https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/</guid>
         <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png" alt="Featured image of post 学习zig" /&gt;&lt;p&gt;zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。&lt;/p&gt;
 &lt;p&gt;zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。&lt;/p&gt;
-&lt;p&gt;zig语言的void和c语言的void不同，c语言的void对应anyopaque,anyopaque是一个类型，而anytype是一个关键词，类似struct ,enum,fn,if, else等。void也是一个类型，它的值通常为&lt;code&gt;{}&lt;/code&gt;。anyerror 是一个类型，不是关键字。&lt;/p&gt;
+&lt;p&gt;zig语言的void和c语言的void不同，c语言的void对应anyopaque，是对opaque的泛化，就像anytype是对type的泛化，anyerror对error的泛化。void也是一个类型，它的值通常为&lt;code&gt;{}&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;zig语言 的”元组“，.{&amp;ldquo;nihao&amp;rdquo;,3}其实是个value, 它的类型是匿名结构体，&lt;/p&gt;
 &lt;p&gt;zig语言会自动对结构体的内存进行布局优化，下面的例子:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -697,11 +697,12 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;debug&lt;/span&gt;.&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Offset of color: {}&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;, .{&lt;span style=&#34;color:#e5c07b&#34;&gt;@offsetOf&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;RB_Node&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;color&amp;#34;&lt;/span&gt;)});
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype）。&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype,似乎zig内置函数可以）。&lt;/p&gt;
 &lt;p&gt;zig 的test的函数必须是字符串，否则必须是标识符，一般和某个函数名的标识符相同，这样会作为该函数的文档测试说明。test函数的默认返回类型是错误联合类型，也就是&lt;code&gt;!void&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/violeshnv/p/18200280&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;这个网页说明了一些用法&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;zig语言的error类型会自动赋一个整数值&lt;/p&gt;
+&lt;h4 id=&#34;错误处理&#34;&gt;错误处理
+&lt;/h4&gt;&lt;p&gt;zig语言的error类型会自动赋一个整数值&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 1
@@ -822,7 +823,8 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;上面的&lt;span style=&#34;color:#56b6c2&#34;&gt;||&lt;/span&gt;捕获可以是&lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;_&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt;，即忽略捕获值。
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;zig语言的orelse也是二元运算符，用来解包可选类型，左右两边两个表达式为执行代码，&lt;code&gt;const b= a orelse value&lt;/code&gt;其中a是可选类型，b的值是当a不为null时，b为a的解包值，否则b为value。也可以用&lt;code&gt;.?&lt;/code&gt;可访问非null的值（如果是null会引发panic）,&lt;code&gt;if(optional_value)|value|&lt;/code&gt;是最安全的用法，while也可以解包可选类型。&lt;/p&gt;
+&lt;/div&gt;&lt;h4 id=&#34;可选联合类型&#34;&gt;可选联合类型
+&lt;/h4&gt;&lt;p&gt;zig语言的orelse也是二元运算符，用来解包可选类型，左右两边两个表达式为执行代码，&lt;code&gt;const b= a orelse value&lt;/code&gt;其中a是可选类型，b的值是当a不为null时，b为a的解包值，否则b为value。也可以用&lt;code&gt;.?&lt;/code&gt;可访问非null的值（如果是null会引发panic）,&lt;code&gt;if(optional_value)|value|&lt;/code&gt;是最安全的用法，while也可以解包可选类型。&lt;/p&gt;
 &lt;p&gt;zig语言的return,break,continue,unreachable，&lt;code&gt;while(true){}&lt;/code&gt;属于noreturn类型的值，用法基本和c一样，return用于全局退出，break用于局部退出。所以标签块要用break退出.&lt;/p&gt;
 &lt;p&gt;zig语言的noreturn 可以和任何类型兼容，所以任何表达式都可以使用noreturn赋值，但因为是noreturn 类型，赋值操作不会执行，只会影响控制。&lt;/p&gt;
 &lt;p&gt;下面是标签块的使用，&lt;/p&gt;
@@ -1160,7 +1162,8 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;在 &lt;code&gt;switch&lt;/code&gt; 中，范围使用了三个点，即 &lt;code&gt;3...6&lt;/code&gt;，而这个示例中，范围使用了两个点，即 &lt;code&gt;0..10&lt;/code&gt;。这是因为在 switch 中，范围的两端都是闭区间，而 for 则是左闭右开。&lt;/p&gt;
 &lt;p&gt;zig语言的函数参数默认是const，即不能修改参数的值。&lt;/p&gt;
-&lt;p&gt;下面是while的用法，支持一个额外的每次运行的表达式。&lt;/p&gt;
+&lt;h4 id=&#34;逻辑流程控制&#34;&gt;逻辑流程控制
+&lt;/h4&gt;&lt;p&gt;下面是while的用法，支持一个额外的每次运行的表达式。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 1
@@ -1238,6 +1241,35 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;if else语句也可以当作表达式，如下:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;pub&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;addpolynomials&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;Self&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;p1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; []&lt;span style=&#34;color:#e06c75&#34;&gt;T&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;p2&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; []&lt;span style=&#34;color:#e06c75&#34;&gt;T&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;result&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;?&lt;/span&gt;[]&lt;span style=&#34;color:#e06c75&#34;&gt;T&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;?&lt;/span&gt;[]&lt;span style=&#34;color:#e06c75&#34;&gt;T&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;maxDegree&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;p1&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;len&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;p2&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;len&lt;/span&gt;) &lt;span style=&#34;color:#e06c75&#34;&gt;p1&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;len&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;p2&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;len&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;re&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;result&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;re1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;re1&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;len&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;maxDegree&lt;/span&gt;) &lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;null&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;re1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#c678dd&#34;&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#e06c75&#34;&gt;self&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;allocator&lt;/span&gt;.&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;alloc&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;T&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;maxDegree&lt;/span&gt;) &lt;span style=&#34;color:#c678dd&#34;&gt;catch&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;null&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#c678dd&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;..&lt;span style=&#34;color:#e06c75&#34;&gt;maxDegree&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                &lt;span style=&#34;color:#e06c75&#34;&gt;re&lt;/span&gt;[&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;] &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;p1&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;len&lt;/span&gt;) &lt;span style=&#34;color:#e06c75&#34;&gt;p1&lt;/span&gt;[&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;] &lt;span style=&#34;color:#c678dd&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt; (&lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;p2&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;len&lt;/span&gt;) &lt;span style=&#34;color:#e06c75&#34;&gt;p2&lt;/span&gt;[&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;] &lt;span style=&#34;color:#c678dd&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;            &lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;re&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;在函数的泛型参数中anytype和comptime T:type，我没有看到本质区别。&lt;/p&gt;
