@@ -16,6 +16,58 @@ image = "nature.png"
 
 https://dev.to/sleibrock/webassembly-with-zig-part-1-4onm
 
+
+
+zig语言的type类型可以直接比较判断
+
+```zig
+pub fn normalize(p: anytype) Math_Compute_Abandon!void {
+    comptime {
+        const T=@TypeOf(p[0]);
+        if(@TypeOf(p)!=[]T)
+        {
+            @compileError("normalize error\n"++@typeName(@TypeOf(p))++"fdsf");
+        }
+    }
+    const norm = lb_norm(p);
+    if (approxEqAbs(@TypeOf(p[0]), norm, 0, null)) {
+        return error.Math_Compute_Abandon;
+    }
+    for (p) |*pv| {
+        pv.* /= norm;
+    }
+}
+```
+
+下面是zig语言类型反射用法，包括访问struct类型，访问字段类型
+
+```zig
+fn myget_Array_rows(comptime TT: type) usize {
+            return @typeInfo(TT).array.len;
+        }
+//下面有typeinfo的用法
+pub fn mult(self: *const Self, mat: anytype) LBMatrix(T, rows, myget_Array_rows(@typeInfo(@TypeOf(mat)).@"struct".fields[0].type))
+
+
+
+```
+
+mat的类型如下:
+
+```zig
+struct {
+        const Self = @This();
+
+        data: [rows][cols]T,
+}
+```
+
+
+
+
+
+似乎zig中的@import不能导入上层目录，也就是不能出现`..` 。那也就意味着每个子文件夹里面的zig源文件都要独立成为一个自摸块，除了依赖子文件夹，不会依赖其他文件夹的zig源文件
+
 ### comptime实战
 
 ```zig

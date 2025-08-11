@@ -139,6 +139,25 @@ var y: i32 = 123;
     };
 ```
 
+#### 标记联合体
+
+下面的@typeInfo返回的Type类型就是个union(enum)
+
+```zig
+
+/// Checks if a `Ptr` is a pointer to `Item`.
+/// Note that the pointer is allowed to have the `const`, `volatile` or `allowzero` keyword.
+pub fn isSizeOnePoiner(
+    comptime Item: type,
+    comptime Ptr: type,
+) bool {
+    return switch (@typeInfo(Ptr)) {
+        .pointer => |p| p.size == .one and p.child == Item,
+        else => false,
+    };
+}
+```
+
 
 
 下面展示了枚举变量的简洁写法，
@@ -400,7 +419,7 @@ if else语句也可以当作表达式，如下:
 
 
 
-在函数的泛型参数中anytype和comptime T:type，我没有看到本质区别。
+在函数的泛型参数中anytype和comptime T:type，在效率上似乎是一样的，comptime T更清晰但是接口更复杂，anytype接口简洁但是需要推导类型（@TypeOf）。
 
 ```zig
 const std = @import("std");
@@ -477,6 +496,18 @@ test "detect leak" {
 在 Zig 语言中，‌**低精度数值向高精度变量赋值时不需要显式转换，编译器会自动完成安全的隐式提升**‌。
 
 在Zig语言中，‌**高精度数值赋给低精度变量需要显式转换**‌，否则会触发编译错误。@intCast`、`@truncate`、`@floatCast
+
+
+
+
+### Zig 模块导入核心规则
+
+1. **路径导入继承依赖**：使用 `@import("./file.zig")` 导入文件时，该文件会自动继承**父模块**（即调用 `@import` 的模块）通过 `addImport` 添加的所有命名模块。这意味着，只要在 `exe.root_module` 中添加了依赖（如 `addImport("tracy", tracy_mod)`），所有通过路径导入的 `.zig` 文件都能直接使用 `@import("tracy")`。
+
+2. **命名导入不传递依赖**：通过 `A.addImport("B", B_mod)` 仅允许模块 A 访问 B。模块 B **不会自动继承** A 的其他依赖，依赖关系是单向的。若 B 也需要使用其他模块，必须显式为其添加 `addImport`。
+
+✅ 实践建议：在 `build.zig` 中，只需为 `exe.root_module` 添加一次 `addImport`，项目内所有通过相对路径导入的 `.zig` 文件即可共享这些依赖，无需为每个文件单独创建模块。这是构建大型项目的关键模式。
+
 
 
 
@@ -559,6 +590,10 @@ const bar = @import("my_module/bar.zig");
 | `createModule` | 否                 | 否           | 仅包内私有的模块 |
 
 ---
+
+zig的编译系统中每个addTest和addExecutable都独立存在，哪怕它们指向同一个root_source_file，也就是有时多个文件内容test函数会多次运行。
+
+
 
 #### zig fetch
 

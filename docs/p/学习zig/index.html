@@ -351,9 +351,14 @@
           <ol>
             <li><a href="#错误处理">错误处理</a></li>
             <li><a href="#可选联合类型">可选联合类型</a></li>
+            <li><a href="#标记联合体">标记联合体</a></li>
             <li><a href="#逻辑流程控制">逻辑流程控制</a></li>
             <li><a href="#内存分配器">内存分配器</a></li>
             <li><a href="#数值">数值</a></li>
+          </ol>
+        </li>
+        <li><a href="#zig-模块导入核心规则">Zig 模块导入核心规则</a>
+          <ol>
             <li><a href="#额外说明">额外说明</a></li>
           </ol>
         </li>
@@ -439,7 +444,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 8 分钟
+                    阅读时长: 9 分钟
                 </time>
             </div>
         
@@ -640,6 +645,38 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#e06c75">y</span> <span style="color:#56b6c2">+=</span> <span style="color:#d19a66">1</span>;
 </span></span><span style="display:flex;"><span>        <span style="color:#c678dd">break</span> <span style="color:#56b6c2">:</span><span style="color:#e06c75">blk</span> <span style="color:#e06c75">y</span>;
 </span></span><span style="display:flex;"><span>    };
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="标记联合体">标记联合体
+</h4><p>下面的@typeInfo返回的Type类型就是个union(enum)</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">/// Checks if a `Ptr` is a pointer to `Item`.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e">/// Note that the pointer is allowed to have the `const`, `volatile` or `allowzero` keyword.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">isSizeOnePoiner</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">comptime</span> <span style="color:#e06c75">Item</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">comptime</span> <span style="color:#e06c75">Ptr</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>) <span style="color:#e5c07b">bool</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#c678dd">switch</span> (<span style="color:#e5c07b">@typeInfo</span>(<span style="color:#e06c75">Ptr</span>)) {
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">pointer</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#56b6c2">|</span><span style="color:#e06c75">p</span><span style="color:#56b6c2">|</span> <span style="color:#e06c75">p</span>.<span style="color:#e06c75">size</span> <span style="color:#56b6c2">==</span> .<span style="color:#e06c75">one</span> <span style="color:#c678dd">and</span> <span style="color:#e06c75">p</span>.<span style="color:#e06c75">child</span> <span style="color:#56b6c2">==</span> <span style="color:#e06c75">Item</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">else</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#e5c07b">false</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>下面展示了枚举变量的简洁写法，</p>
@@ -1068,7 +1105,7 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>在函数的泛型参数中anytype和comptime T:type，我没有看到本质区别。</p>
+</div><p>在函数的泛型参数中anytype和comptime T:type，在效率上似乎是一样的，comptime T更清晰但是接口更复杂，anytype接口简洁但是需要推导类型（@TypeOf）。</p>
 <div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
@@ -1193,6 +1230,16 @@
 </div><h4 id="数值">数值
 </h4><p>在 Zig 语言中，‌<strong>低精度数值向高精度变量赋值时不需要显式转换，编译器会自动完成安全的隐式提升</strong>‌。</p>
 <p>在Zig语言中，‌<strong>高精度数值赋给低精度变量需要显式转换</strong>‌，否则会触发编译错误。@intCast<code>、</code>@truncate<code>、</code>@floatCast</p>
+<h3 id="zig-模块导入核心规则">Zig 模块导入核心规则
+</h3><ol>
+<li>
+<p><strong>路径导入继承依赖</strong>：使用 <code>@import(&quot;./file.zig&quot;)</code> 导入文件时，该文件会自动继承<strong>父模块</strong>（即调用 <code>@import</code> 的模块）通过 <code>addImport</code> 添加的所有命名模块。这意味着，只要在 <code>exe.root_module</code> 中添加了依赖（如 <code>addImport(&quot;tracy&quot;, tracy_mod)</code>），所有通过路径导入的 <code>.zig</code> 文件都能直接使用 <code>@import(&quot;tracy&quot;)</code>。</p>
+</li>
+<li>
+<p><strong>命名导入不传递依赖</strong>：通过 <code>A.addImport(&quot;B&quot;, B_mod)</code> 仅允许模块 A 访问 B。模块 B <strong>不会自动继承</strong> A 的其他依赖，依赖关系是单向的。若 B 也需要使用其他模块，必须显式为其添加 <code>addImport</code>。</p>
+</li>
+</ol>
+<p>✅ 实践建议：在 <code>build.zig</code> 中，只需为 <code>exe.root_module</code> 添加一次 <code>addImport</code>，项目内所有通过相对路径导入的 <code>.zig</code> 文件即可共享这些依赖，无需为每个文件单独创建模块。这是构建大型项目的关键模式。</p>
 <h4 id="额外说明">额外说明
 </h4><p>经过测试，结构体内部的函数和成员变量不能重名，block的标签名可以重名（除了嵌套）。</p>
 <p>zig的import导入模块的话，如果是直接@import 文件名的话，相对路径是相对于该导入文件的路径。</p>
@@ -1307,6 +1354,7 @@
   </tbody>
 </table></div>
 <hr>
+<p>zig的编译系统中每个addTest和addExecutable都独立存在，哪怕它们指向同一个root_source_file，也就是有时多个文件内容test函数会多次运行。</p>
 <h4 id="zig-fetch">zig fetch
 </h4><p><code>zig fetch --save &quot;git+https://github.com/用户/仓库.git#&lt;commit_hash或者tag&gt;&quot;</code></p>
 <p>如果省掉<code>#&lt;commit_hash或者tag&gt;</code>就会拉取默认分支的最新的提交</p>
