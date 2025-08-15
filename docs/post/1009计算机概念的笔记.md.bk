@@ -1,0 +1,39 @@
+---
+title: 计算机概念的笔记
+tags: 计算机
+categories: 学习笔记
+date: 2019-10-09 22:14:51
+---
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<script type="text/javascript" async
+  src="https://wujilingfeng.top/MathJax/MathJax.js?config=TeX-AMS_CHTML">
+</script>
+
+我非常不喜欢这些工程概念，但是为了找工作不得不如此。脑容量有限，必须要取舍！
+
+
+<!--more-->
+
+[完全二叉树](https://baike.baidu.com/item/完全二叉树/7773232?fr=aladdin)
+
+前序(根左右)，中序(左根右)，后序(左右根)
+
+二叉树的度(后续节点的个数)，所以度只能是0,1,2。度为0称为叶子节点
+
+满二叉树，除最后一层是叶子节点，其他全是度为2
+
+[连通无向图]([https://baike.baidu.com/item/%E8%BF%9E%E9%80%9A%E6%97%A0%E5%90%91%E5%9B%BE/3638067?fr=aladdin](https://baike.baidu.com/item/连通无向图/3638067?fr=aladdin))
+
+[最小堆](https://www.jianshu.com/p/bf74163e5ac5)
+
+真正例：这个是真的正例 等价 假反例，这是机器学习中的术语(从这个例子中淋漓尽致地表现了计算机工程领域造词的本事，增加学习成本的本事。)
+
+[召回率，准确率，精确率](https://www.jianshu.com/p/982f47e35b65)（比例都要造词！）
+
+SVM(也叫支持向量机)：很高大上吧，其实就是个凸集分离！
+
+
+
