@@ -3,6 +3,7 @@ author = 'libo'
 date = '2025-08-15T17:29:37+08:00'
 math= true
 draft = false
+image = "image.png"
 title = '测度论'
 +++
 

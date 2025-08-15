@@ -13,7 +13,7 @@
         <pubDate>Fri, 15 Aug 2025 17:29:37 +0800</pubDate>
         
         <guid>https://wujilingfeng.github.io/p/%E6%B5%8B%E5%BA%A6%E8%AE%BA/</guid>
-        <description>&lt;p&gt;这是&lt;a class=&#34;link&#34; href=&#34;./probability.pdf&#34; &gt;pdf&lt;/a&gt;&lt;/p&gt;
+        <description>&lt;img src="https://wujilingfeng.github.io/p/%E6%B5%8B%E5%BA%A6%E8%AE%BA/image.png" alt="Featured image of post 测度论" /&gt;&lt;p&gt;这是&lt;a class=&#34;link&#34; href=&#34;./probability.pdf&#34; &gt;pdf&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;以下空间均假设为概率空间，也就是总测度为1。&lt;/p&gt;
 &lt;p&gt;pdf中定义了随机变量，那么随机变量x期望的定义是$E\left(x\right)=\int_{-\infty}^{+\infty} xd\mu\left(x\right)$。&lt;/p&gt;
 &lt;p&gt;由期望的定义知道如下结论&lt;/p&gt;
