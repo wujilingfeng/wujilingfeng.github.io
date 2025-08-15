@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="">
+<title>微分几何</title>
+
+<link rel='canonical' href='http://localhost:1313/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/'>
+
+<link rel="stylesheet" href="../../scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="微分几何">
+<meta property='og:description' content="">
+<meta property='og:url' content='http://localhost:1313/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/'>
+<meta property='og:site_name' content='五级灵风'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-08-15T16:16:51&#43;08:00'/><meta property='article:modified_time' content='2025-08-15T16:16:51&#43;08:00'/><meta property='og:image' content='http://localhost:1313/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/image.png' />
+<meta name="twitter:title" content="微分几何">
+<meta name="twitter:description" content=""><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://localhost:1313/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/image.png' />
+    <link rel="shortcut icon" href="../../favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="../../">
+                
+                    
+                    
+                    
+                        
+                        <img src="../../img/lixiaoyao_hu_dfce66ea35f8d737.jpg" width="300"
+                            height="188" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="../../">五级灵风</a></h1>
+            <h2 class="site-description">颍川之才</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://mail.163.com/'
+                        target="_blank"
+                        title="email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg t="1673752602122" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1414" width="24" height="24" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M970.56 267.52a85.76 85.76 0 0 0 0-10.24v-2.88l-17.92 1.6 15.68-3.84v-3.52A141.44 141.44 0 0 0 960 227.2a128 128 0 0 0-11.2-20.48 123.84 123.84 0 0 0-103.04-54.72H176.96a123.84 123.84 0 0 0-102.72 55.36 128 128 0 0 0-11.84 22.72 124.8 124.8 0 0 0-6.72 22.72l16 3.2h-16.64a81.92 81.92 0 0 0-1.6 11.84v512a124.48 124.48 0 0 0 124.16 124.16h668.8a124.48 124.48 0 0 0 124.16-124.16v-512zM883.2 304v448a64 64 0 0 1-64 64H205.12a64 64 0 0 1-64-64v-448a64 64 0 0 1 1.92-16l334.4 267.84 2.56 3.2a48.96 48.96 0 0 0 26.88 11.84h6.08a42.24 42.24 0 0 0 31.04-11.84L880.96 288a62.08 62.08 0 0 1 2.24 16zM512 472.96l-290.88-233.6h581.76z" p-id="1415" fill="currentColor"></path></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://gitee.com/'
+                        target="_blank"
+                        title="gitee"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg t="1745738407777" class="icon" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"  p-id="2379" ne="0.057698892254675394" xmlns:xlink="http://www.w3.org/1999/xlink"  width="24" height="24">
+  <path d="M11.88235294 24.84941176C4.90423529 24.84941176 -0.79529412 19.08741176 -0.79529412 11.88235294S4.90423529 -0.79529412 11.88235294 -0.79529412s12.79066667 5.74190588 12.79066667 12.79066667 -5.74190588 12.79066667 -12.79066667 12.79066667z m6.45917647 -14.22941176l-7.24576471 0.00035294c-0.34905882 0 -0.63465882 0.28366588 -0.63465882 0.63465882l-0.00069882 1.58405882c0 0.34905882 0.28366588 0.63465882 0.63465882 0.63465882H15.62400000c0.34905882 0 0.63465882 0.28366588 0.63465882 0.63465882v0.31625882a1.89925882 1.89925882 0 0 1 -1.89925882 1.89925882H8.39065882a0.63465882 0.63465882 0 0 1 -0.63465882 -0.63465882v-6.00505882a1.89925882 1.89925882 0 0 1 1.89925882 -1.89915882l8.84745882 -0.00037647c0.34905882 0 0.63465882 -0.28366588 0.63465882 -0.63465882l0.00178235 -1.58312941c0 -0.34905882 -0.28366588 -0.63465882 -0.63465882 -0.63465882l-8.84920000 0.00035294c-2.62235294 -0.00035294 -4.74745882 2.12212941 -4.74745882 4.74745882v8.84729412c0 0.34905882 0.28366588 0.63465882 0.63465882 0.63465882h9.30952941c2.36658824 0 4.27138824 -1.91758824 4.27138824 -4.27138824v-3.63938824c0 -0.34899882 -0.28366588 -0.63465882 -0.63465882 -0.63465882z" p-id="2380"></path>
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://hackage.haskell.org/'
+                        target="_blank"
+                        title="hackage"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg t="1745738845243" class="icon" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"  p-id="3381" ne="0.20057012347491743" xmlns:xlink="http://www.w3.org/1999/xlink"  width="24" height="24">
+    <path d="M0.006 20.436L5.648 12 0.006 3.54h4.236l5.672 8.444-5.672 8.442z m5.643 0L11.282 12 5.648 3.54h4.277l11.253 16.944h-4.222l-3.547-5.34-3.51 5.34zM19.373 15.56l-1.877-2.826h6.608v2.824z m-2.824-4.236l-1.877-2.826h9.384v2.826z" p-id="3382"></path>
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://ziglang.org/zh-CN/'
+                        target="_blank"
+                        title="zig"
+                        rel="me"
+                    >
+                        
+                        
+                            <?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg t="1745737950265" class="icon" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"  p-id="4216" ne="0.7933489989951811" xmlns:xlink="http://www.w3.org/1999/xlink"  width="24" height="24">
+  <path d="M1.8225 6.57123333v10.82946667h2.57868333l0.81263333 -1.35661333 1.62526667 -1.35732h-0.91144v-6.9904h2.03834667V6.5712z m5.4208 0v2.7092h8.42755333V6.5712z m12.32717333 0l-0.81263333 1.35732 -1.62526667 1.35732h2.3068v5.4208h-2.03918667v2.70862667h4.74496V6.57123333z m-11.29918667 8.11743999v2.7092h8.42701333v-2.70862667z" fill="hsla(37,60%,56%,1)" p-id="4217"></path>
+  <path d="M6.8479 14.73674667l-2.43232 2.70862667V15.4912zM17.23534667 9.25413333l2.43232 -2.7092v2.03834666zM14.97216 6.61195999l4.91312 -1.41106667L9.05723999 17.31162667 4.09356 18.75093333z" fill="hsla(37,60%,56%,1)" p-id="4218"></path>
+</svg>
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='../../' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='../../%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='../../archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='../../search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='../../%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="http://localhost:1313/" selected>中文</option>
+                                
+                                    <option value="http://localhost:1313/en/" >English</option>
+                                
+                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#经典微分几何">经典微分几何</a>
+          <ol>
+            <li><a href="#定理1">定理1</a></li>
+            <li><a href="#有向正则曲线">有向正则曲线</a></li>
+            <li><a href="#曲线的主法向量">曲线的主法向量</a></li>
+            <li><a href="#frenet标架场和挠率">frenet标架场和挠率</a></li>
+            <li><a href="#frenet矩阵">frenet矩阵</a></li>
+            <li><a href="#曲线基本定理">曲线基本定理</a></li>
+            <li><a href="#隐函数定理">隐函数定理</a></li>
+            <li><a href="#正则曲面">正则曲面</a></li>
+            <li><a href="#曲面的第一基本形式">曲面的第一基本形式</a></li>
+            <li><a href="#曲面上正交参数的存在性不是等温坐标系">曲面上正交参数的存在性（不是等温坐标系）</a></li>
+            <li><a href="#曲面的第二基本形式">曲面的第二基本形式</a></li>
+            <li><a href="#曲面上曲线的法曲率">曲面上曲线的法曲率</a></li>
+            <li><a href="#主曲率和主方向">主曲率和主方向</a></li>
+            <li><a href="#平均曲率和gauss曲率">平均曲率和gauss曲率</a></li>
+            <li><a href="#曲面上自然标架场和微分">曲面上自然标架场和微分</a></li>
+            <li><a href="#曲面唯一性定理">曲面唯一性定理</a></li>
+            <li><a href="#gauss-codazzi方程">Gauss-Codazzi方程</a></li>
+            <li><a href="#gauss-theorem">gauss theorem</a></li>
+            <li><a href="#测地曲率测地挠率">测地曲率，测地挠率</a></li>
+            <li><a href="#测地线">测地线</a></li>
+            <li><a href="#曲面上向量场的平行移动">曲面上向量场的平行移动</a></li>
+            <li><a href="#gauss-bonnet公式">Gauss-Bonnet公式</a></li>
+            <li><a href="#stokes-公式">Stokes 公式</a></li>
+            <li><a href="#poincare-lemma">Poincare Lemma</a></li>
+          </ol>
+        </li>
+        <li><a href="#现代微分几何">现代微分几何</a>
+          <ol>
+            <li><a href="#definition流形的凸性">Definition（流形的凸性）</a></li>
+            <li><a href="#梯度算子">梯度算子</a></li>
+            <li><a href="#ricci-flow">Ricci flow</a></li>
+            <li><a href="#黎曼流形上的散度算子">黎曼流形上的散度算子</a></li>
+            <li><a href="#stokes公式">Stokes公式</a></li>
+            <li><a href="#poincare引理">Poincare引理</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="../../p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/">
+                <img src="../../p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/image_hu_282d7d4da2834b4b.png"
+                        srcset="../../p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/image_hu_282d7d4da2834b4b.png 800w, ../../p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/image_hu_88a33e3a6d72a7c8.png 1600w"
+                        width="800" 
+                        height="450" 
+                        loading="lazy"
+                        alt="Featured image of post 微分几何" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="../../p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/">微分几何</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Aug 15, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="经典微分几何">经典微分几何
+</h3><h4 id="定理1">定理1
+</h4><p>参数t是弧长参数s，的充分必要条件是$|r^{&rsquo;} \left(t\right)|=1$</p>
+<p>proof: $|r^{&rsquo;} \left(t\right)|dt=ds$
+本文以下未加说明，参数全部是弧长参数</p>
+<h4 id="有向正则曲线">有向正则曲线
+</h4><ul>
+<li>
+<p>$t\left(u\right)$三次可微</p>
+</li>
+<li>
+<p>$t^{‘}$不为0</p>
+</li>
+</ul>
+<h4 id="曲线的主法向量">曲线的主法向量
+</h4><p>$r^{``}\left(s\right)$是曲线的主法向量，模长为曲率k(s是弧长)</p>
+<h4 id="frenet标架场和挠率">frenet标架场和挠率
+</h4><p>记$r^{‘}=\alpha,r^{“}=k\beta,\gamma=\alpha\times\beta$,则$\alpha,\beta,\gamma$是frenet标架场，$|\gamma^{‘}|=\tau$为挠率</p>
+<h4 id="frenet矩阵">frenet矩阵
+</h4>$$\left(\begin{matrix}\
+\alpha^{'}\\\\
+\beta^{'}\\\\
+\gamma^{‘}
+\end{matrix}\right)=\left(\begin{matrix}
+0&k&0\\\\
+-k&0&\tau\\\\
+0&-\tau&0
+\end{matrix}\right)\left(\begin{matrix}
+\alpha\\\\
+\beta\\\\
+\gamma
+\end{matrix}\right)$$<p>
+其实对于正交坐标架他的微分矩阵都是反对称的</p>
+<p>有如下命题:</p>
+<p>$A^TA=I,dA^TA+A^TdA=0,A=I,dA+dA^T=0$ **</p>
+<h4 id="曲线基本定理">曲线基本定理
+</h4><p>在3维空间中给定矩阵F，坐标架$\alpha,\beta,\gamma$（不一定正交，不一定单位模长）
+</p>
+$$d\left(\begin{matrix}
+\alpha\\\\
+\beta\\\\
+\gamma
+\end{matrix}\right)=F\left(\begin{matrix}
+\alpha\\\\
+\beta\\\\
+\gamma
+\end{matrix}\right)ds$$<p>
+这是线性常微分方程，给定初始$\alpha^0,\beta^0 \gamma^0$.则曲线唯一确定（相差一个刚体变换）。</p>
+<h4 id="隐函数定理">隐函数定理
+</h4><p>对于方程组$0=y_i\left(x_j&hellip;\right),n \le i&gt;0 ,m \le j&gt;0,m&gt;n$,若有,$\frac{\partial \left(y_1,y_2..y_n\right)}{\partial \left(x_1,..x_n\right)}$满秩，那么$x_1,..x_n$可以表示成$x_{n+1}&hellip;x_m$的函数</p>
+<p>*proof *:</p>
+<p>$\frac{\partial y}{\partial x}dx=0$,得到$\frac{\partial \left(y_1,y_2..y_n\right)}{\partial \left(x_1,..x_n\right)}\left(dx_1..\right)=-\frac{\partial \left(y_1,y_2..y_n\right)}{\partial \left(x_{n+1},..x_m\right)}\left(dx_{n+1}&hellip;\right)$,</p>
+<p>左边存在逆矩阵，乘到右边，再积分即得证。</p>
+<h4 id="正则曲面">正则曲面
+</h4><p>曲面$r\left(u,v\right)$的$r_{u}$和$r_{v}$线性无关<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<h4 id="曲面的第一基本形式">曲面的第一基本形式
+</h4><p>曲面的度量张量称为第一基本形式</p>
+$$\left(\begin{matrix}
+E&F\\\\
+F&G
+\end{matrix}\right)$$<p>或者$ds^2=Edu^2+2Fdudv+Gdv^2$
+度量g还有重要的写法是
+</p>
+$$A=\left(\begin{matrix}
+\sqrt{E}&\frac{F}{\sqrt{E}}\\\\
+0&\sqrt{G-\frac{F^2}{E}}
+\end{matrix}\right),g=A^TA$$<p>
+用来求平均曲率和gauss曲率。</p>
+<h4 id="曲面上正交参数的存在性不是等温坐标系">曲面上正交参数的存在性（不是等温坐标系）<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>
+</h4><h4 id="曲面的第二基本形式">曲面的第二基本形式
+</h4><p>设n为曲面点p处的法向量($du\wedge dv$),那么$&lt;d^2 r,n&gt;$为第二基本形式，因为$&lt;dr,n&gt;=0$,所以$&lt;d^2 r,n&gt;=-&lt;dr, dn &gt;$</p>
+<h4 id="曲面上曲线的法曲率">曲面上曲线的法曲率
+</h4><p>$&lt;d^2 r\left(s\right),n&gt;$称为曲线的法曲率，s为弧长参数.</p>
+<p>经过化简的到</p>
+$$\frac{Ldu^2+2Mdudv+Ndv^2}{ds^2}=\frac{Ldu^2+2Mdudv+Ndv^2}{Edu^2+2Fdudv+Gdv^2}$$<p>由式子知道法曲率只跟切向量(du,dv)相关，所以我们可以考虑由法截面截取的曲线的法曲率。</p>
+<h4 id="主曲率和主方向">主曲率和主方向
+</h4><p>每点的法曲率的最大值和最小值称为该点的两个主曲率，两个方向称为该点的主方向。</p>
+<h4 id="平均曲率和gauss曲率">平均曲率和gauss曲率
+</h4><p>两个主曲率之和是平均曲率，两个主曲率之积是gauss曲率。gauss曲率在黎曼流形上的推广是截面曲率。</p>
+<h4 id="曲面上自然标架场和微分">曲面上自然标架场和微分
+</h4><p>曲面上的自然标架場是${ r_1,r_2,n  }$,记第一基本形式的张量为$g_{\alpha \beta}$，它的逆是$g^{\alpha \beta}$,第二基本形式张量为$b_{\alpha \beta}$,它的逆是$b^{\alpha \beta}$,</p>
+<p>如果命$b_{\alpha}^{\gamma}=b_{\alpha t}g^{t \gamma}$为指标的上升,以后指标的上升与下降都是这样的关系。</p>
+<p>那么自然标架的微分
+</p>
+$$\frac{\partial r_{\alpha}}{\partial u^{\beta}}= b_{\alpha \beta}n+r_{\gamma}\Gamma^{\gamma}_{\alpha \beta}$$<p>和</p>
+$$\frac{\partial n}{\partial u^{\beta}}=-b_{\beta}^{\gamma}r_{\gamma}$$<p>计</p>
+$$\Gamma^{\gamma}_{\alpha \beta}=g^{\gamma i}\Gamma _{i\alpha \beta}$$<p>（指标的上升）,</p>
+$$\Gamma _{\gamma \alpha \beta}=\frac{1}{2}\left(\frac{\partial g _{\alpha \gamma}}{\partial u^{\beta}}+\frac{\partial g _{ \gamma \beta}}{\partial u^{\alpha}}-\frac{\partial g _{\alpha \beta}}{\partial u^{\gamma}}\right)$$$$\Gamma^{\gamma}_{\alpha \beta}=g^{\gamma i}\Gamma _{i\alpha \beta}=\frac{1}{2}g^{\gamma i}\left(\frac{\partial g _{\alpha \gamma}}{\partial u^{\beta}}+\frac{\partial g _{ \gamma \beta}}{\partial u^{\alpha}}-\frac{\partial g _{\alpha \beta}}{\partial u^{\gamma}}\right)$$<p>
+由上知自然标架的christoffel符号是內蕴的
+证明见微分几何初步(陈维桓)P.128</p>
+<h4 id="曲面唯一性定理">曲面唯一性定理
+</h4><p>（在刚体变换意义下）在$E^3$中，第一基本形式和第二基本形式决定了唯一一个曲面</p>
+<p>自然标架场的微分方程组是</p>
+$$d\left(\begin{matrix}
+r _{1}\\\\
+r _{2}\\\\
+n
+\end{matrix}\right)=\left(\begin{matrix}\left(\Gamma^{\gamma} _{1 \beta}r _{\gamma}+b _{1 \beta}n\right)d\beta\\\\
+\left(\Gamma^{\gamma} _{2 \beta}r _{\gamma}+b _{2 \beta}n\right)d\beta\\\\
+\left(-b^{\gamma} _{\beta}r _{\gamma}\right)d\beta
+\end{matrix}\right)$$<p>
+这是个偏微分方程组，如果给定第一基本量，和第二基本量，再给定初始条件，和</p>
+$$dd\left(\begin{matrix}
+r _{1}\\\\
+r _{2}\\\\
+n
+\end{matrix}\right)=0$$<p>,(dd是二次外微分，化简得到Gauss-Codazzi方程)，那么存在唯一的自然标架場是方程的解。</p>
+<h4 id="gauss-codazzi方程">Gauss-Codazzi方程
+</h4><p>记$R^{\delta} _{\alpha\beta\gamma}=\frac{\partial \Gamma^{\delta} _{\alpha\gamma}}{\partial u^{\beta}}-\frac{\partial \Gamma^{\delta} _{\alpha\gamma}}{\partial u^{\beta}}+\Gamma^{\eta} _{\alpha\beta}\Gamma^{\delta} _{\eta\beta}-\Gamma^{\eta} _{\alpha\gamma}\Gamma^{\delta} _{\eta\beta}$,同理$R _{\delta\alpha\beta\gamma}=g _{\delta\eta}R^{\eta} _{\alpha\beta\gamma}$
+那么$R^{\delta} _{\alpha\beta\gamma}=b _{\alpha\beta}b _{\gamma}^{\delta}-b _{\alpha\gamma}b _{\beta}^{\delta}$或者$R _{\delta\alpha\beta\gamma}=-\left(b _{\delta\beta}b _{\alpha\gamma}-b _{\delta\gamma}b _{\alpha\beta}\right)$称为gauss方程，
+$\frac{\partial b _{\alpha\beta}}{\partial u^{\gamma}}-\frac{\partial b _{\alpha\gamma}}{\partial u^{\beta}}=b _{\beta\delta}\Gamma^{\delta} _{\alpha\gamma}-b _{\gamma\delta}\Gamma^{\delta} _{\alpha\beta}$称为Codazzi方程.曲面方程的存在的充分必要条件是满足Gauss-codazzi方程。</p>
+<h4 id="gauss-theorem">gauss theorem
+</h4><p>求$\frac{Ldu^2+2Mdudv+Ndv^2}{Edu^2+2Fdudv+Gdv^2}$,的最大值和最小值之积是$\frac{|b|}{|g|}=|b||g^{-1}|$,因为$R _{\delta\alpha\beta\gamma}=g _{\delta\eta}R^{\eta} _{\alpha\beta\gamma}$，可以看出gauss曲率的值是等矩不变量。<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup></p>
+<h4 id="测地曲率测地挠率">测地曲率，测地挠率
+</h4><p>在曲面S上有曲线$u^{\alpha}\left(s\right)$,在曲线上取正交正规坐标架</p>
+<p>$e _{i}$,其中$e _{1}=\frac{dr\left(s\right)}{ds}$,$e _{2}=n\times e _{1}$,$e _{3}=n$,</p>
+<p>对坐标架微分得到</p>
+$$d\left(\begin{matrix}\
+e _{1}\left(s\right)\\\\
+e _{2}\left(s\right)\\\\
+e _{3}\left(s\right)
+\end{matrix}\right)=M\left(\begin{matrix}\
+e _{1}\left(s\right)\\\\
+e _{2}\left(s\right)\\\\
+e _{3}\left(s\right)
+\end{matrix}\right)ds$$<p>,由上知M是反对称矩阵，那么$M _{12}$称为测地曲率，$M _{23}$称为测地挠率，$M _{13}$是曲线的法曲率.</p>
+<p>$M _{12}=\left(n\times e _1\right)*e^{`} _1=\left(n,e _1,e^{&rsquo;} _1\right)$,其中三个量都是保长不变量，所以测地曲率是保长不变量。</p>
+<h4 id="测地线">测地线
+</h4><p>曲面上测地曲率等于0的曲线</p>
+<h4 id="曲面上向量场的平行移动">曲面上向量场的平行移动
+</h4><h4 id="gauss-bonnet公式">Gauss-Bonnet公式
+</h4><p>在黎曼流形上当度量张量不变时，外微分的积分可以按正常积分计算，但外积符号$\wedge$不可丢。</p>
+<h4 id="stokes-公式">Stokes 公式
+</h4><h4 id="poincare-lemma">Poincare Lemma
+</h4><p>闭形式但不是恰当形式的例子:</p>
+<p>定义在$R^2-0$上的1-form   $\eta=\frac{xdy-ydx}{x^2+y^2}$沿不同闭曲线的积分</p>
+<p>定义在$R^3-0$上的2-form   $\eta=\frac{xdy\wedge dz+ydz\wedge dx+zdx\wedge dy}{\left(x^2+y^2+z^2\right)^{\frac{3}{2}}}$</p>
+<h3 id="现代微分几何">现代微分几何
+</h3><h4 id="definition流形的凸性">Definition（流形的凸性）
+</h4><p>可定向流形流形的方向是单射。（准确的说可定向流形有一个类似gauss映射的推广函数，它是单射）</p>
+<h4 id="梯度算子">梯度算子
+</h4><p>梯度算子并不是微分算子，它是$C^{\infty}\left(M\right)\to TM$即光滑函数到切空间的映射。</p>
+<p>他有两个作用，第一个就是定义所说的可以通过度量张量来表示$X\left(f\right)$,</p>
+<p>第二个作用是梯度算子的结果是所有$|X|_g=1,X\in TM$,使得$X\left(f\right)$最大的切方向。</p>
+<h4 id="ricci-flow">Ricci flow
+</h4><p>给一个黎曼流形M,配有黎曼度量$g _{0}$.</p>
+<p>假设度量矩阵g是关于t的函数，且这个函数由常微分方程组$\frac{dg _{ij}}{dt}=-2 R _{ij}$，初始条件$g\left(0\right)=g _0$确定。$R _{ij}$是Ricci tensor.那么$g\left(t\right)$是Ricci flow</p>
+<h4 id="黎曼流形上的散度算子">黎曼流形上的散度算子
+</h4><p><a class="link" href="https://zhuanlan.zhihu.com/p/105097175?utm_source=qq"  target="_blank" rel="noopener"
+    >这里</a></p>
+<p><a class="link" href="https://blog.csdn.net/weixin_30415801/article/details/96829679"  target="_blank" rel="noopener"
+    >这里</a></p>
+<p>laplace算子在流形上的推广为拉普拉斯-贝尔特拉米算子,在微分形式上的推广是拉普拉斯–德拉姆算子。</p>
+<p><a class="link" href="[https://baike.baidu.com/item/%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF-%E8%B4%9D%E5%B0%94%E7%89%B9%E6%8B%89%E7%B1%B3%E7%AE%97%E5%AD%90/19136598?fr=aladdin]%28https://baike.baidu.com/item/%e6%8b%89%e6%99%ae%e6%8b%89%e6%96%af-%e8%b4%9d%e5%b0%94%e7%89%b9%e6%8b%89%e7%b1%b3%e7%ae%97%e5%ad%90/19136598?fr=aladdin%29" >拉普拉斯-贝尔特拉米算子</a></p>
+<h4 id="stokes公式">Stokes公式
+</h4><p>在Rudin的一书中有Stokes公式的<a class="link" href="https://zhuanlan.zhihu.com/p/23870023"  target="_blank" rel="noopener"
+    >证明</a></p>
+<h4 id="poincare引理">Poincare引理
+</h4><div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>概括而言正则流形是每点切空间和流形维数相同&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>维数大于等于3的黎曼流形不一定存在正交参数系。正交坐标系要求第一基本形式F=0，等温坐标系要求F=0,E=G(保角).&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p>內蕴几何是研究等矩变换不变量的几何，但是等矩变换不是保持度量g一直不变&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div class="disqus-container">
+    <div id="disqus_thread"></div>
+<script>
+    window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "hugo-theme-stack" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+
+<style>
+    .disqus-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+    }
+</style>
+
+<script>
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (typeof DISQUS == 'object') {
+            DISQUS.reset({
+                reload: true
+            });
+        }
+    })
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 LI BO
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="../../ts/main.6ba7a7ecd89a92a9da42c8cae11ee91ffa7884016ed75a4e001568498e737fdc.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

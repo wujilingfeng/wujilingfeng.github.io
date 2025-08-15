@@ -2,18 +2,197 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Posts on 五级灵风</title>
-        <link>https://wujilingfeng.github.io/post/</link>
+        <link>http://localhost:1313/post/</link>
         <description>Recent content in Posts on 五级灵风</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>LI BO</copyright>
-        <lastBuildDate>Wed, 16 Jul 2025 10:22:34 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 15 Aug 2025 16:16:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>微分几何</title>
+        <link>http://localhost:1313/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/</link>
+        <pubDate>Fri, 15 Aug 2025 16:16:51 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/</guid>
+        <description>&lt;img src="http://localhost:1313/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/image.png" alt="Featured image of post 微分几何" /&gt;&lt;h3 id=&#34;经典微分几何&#34;&gt;经典微分几何
+&lt;/h3&gt;&lt;h4 id=&#34;定理1&#34;&gt;定理1
+&lt;/h4&gt;&lt;p&gt;参数t是弧长参数s，的充分必要条件是$|r^{&amp;rsquo;} \left(t\right)|=1$&lt;/p&gt;
+&lt;p&gt;proof: $|r^{&amp;rsquo;} \left(t\right)|dt=ds$
+本文以下未加说明，参数全部是弧长参数&lt;/p&gt;
+&lt;h4 id=&#34;有向正则曲线&#34;&gt;有向正则曲线
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;$t\left(u\right)$三次可微&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;$t^{‘}$不为0&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;曲线的主法向量&#34;&gt;曲线的主法向量
+&lt;/h4&gt;&lt;p&gt;$r^{``}\left(s\right)$是曲线的主法向量，模长为曲率k(s是弧长)&lt;/p&gt;
+&lt;h4 id=&#34;frenet标架场和挠率&#34;&gt;frenet标架场和挠率
+&lt;/h4&gt;&lt;p&gt;记$r^{‘}=\alpha,r^{“}=k\beta,\gamma=\alpha\times\beta$,则$\alpha,\beta,\gamma$是frenet标架场，$|\gamma^{‘}|=\tau$为挠率&lt;/p&gt;
+&lt;h4 id=&#34;frenet矩阵&#34;&gt;frenet矩阵
+&lt;/h4&gt;$$\left(\begin{matrix}\
+\alpha^{&#39;}\\\\
+\beta^{&#39;}\\\\
+\gamma^{‘}
+\end{matrix}\right)=\left(\begin{matrix}
+0&amp;k&amp;0\\\\
+-k&amp;0&amp;\tau\\\\
+0&amp;-\tau&amp;0
+\end{matrix}\right)\left(\begin{matrix}
+\alpha\\\\
+\beta\\\\
+\gamma
+\end{matrix}\right)$$&lt;p&gt;
+其实对于正交坐标架他的微分矩阵都是反对称的&lt;/p&gt;
+&lt;p&gt;有如下命题:&lt;/p&gt;
+&lt;p&gt;$A^TA=I,dA^TA+A^TdA=0,A=I,dA+dA^T=0$ **&lt;/p&gt;
+&lt;h4 id=&#34;曲线基本定理&#34;&gt;曲线基本定理
+&lt;/h4&gt;&lt;p&gt;在3维空间中给定矩阵F，坐标架$\alpha,\beta,\gamma$（不一定正交，不一定单位模长）
+&lt;/p&gt;
+$$d\left(\begin{matrix}
+\alpha\\\\
+\beta\\\\
+\gamma
+\end{matrix}\right)=F\left(\begin{matrix}
+\alpha\\\\
+\beta\\\\
+\gamma
+\end{matrix}\right)ds$$&lt;p&gt;
+这是线性常微分方程，给定初始$\alpha^0,\beta^0 \gamma^0$.则曲线唯一确定（相差一个刚体变换）。&lt;/p&gt;
+&lt;h4 id=&#34;隐函数定理&#34;&gt;隐函数定理
+&lt;/h4&gt;&lt;p&gt;对于方程组$0=y_i\left(x_j&amp;hellip;\right),n \le i&amp;gt;0 ,m \le j&amp;gt;0,m&amp;gt;n$,若有,$\frac{\partial \left(y_1,y_2..y_n\right)}{\partial \left(x_1,..x_n\right)}$满秩，那么$x_1,..x_n$可以表示成$x_{n+1}&amp;hellip;x_m$的函数&lt;/p&gt;
+&lt;p&gt;*proof *:&lt;/p&gt;
+&lt;p&gt;$\frac{\partial y}{\partial x}dx=0$,得到$\frac{\partial \left(y_1,y_2..y_n\right)}{\partial \left(x_1,..x_n\right)}\left(dx_1..\right)=-\frac{\partial \left(y_1,y_2..y_n\right)}{\partial \left(x_{n+1},..x_m\right)}\left(dx_{n+1}&amp;hellip;\right)$,&lt;/p&gt;
+&lt;p&gt;左边存在逆矩阵，乘到右边，再积分即得证。&lt;/p&gt;
+&lt;h4 id=&#34;正则曲面&#34;&gt;正则曲面
+&lt;/h4&gt;&lt;p&gt;曲面$r\left(u,v\right)$的$r_{u}$和$r_{v}$线性无关&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;h4 id=&#34;曲面的第一基本形式&#34;&gt;曲面的第一基本形式
+&lt;/h4&gt;&lt;p&gt;曲面的度量张量称为第一基本形式&lt;/p&gt;
+$$\left(\begin{matrix}
+E&amp;F\\\\
+F&amp;G
+\end{matrix}\right)$$&lt;p&gt;或者$ds^2=Edu^2+2Fdudv+Gdv^2$
+度量g还有重要的写法是
+&lt;/p&gt;
+$$A=\left(\begin{matrix}
+\sqrt{E}&amp;\frac{F}{\sqrt{E}}\\\\
+0&amp;\sqrt{G-\frac{F^2}{E}}
+\end{matrix}\right),g=A^TA$$&lt;p&gt;
+用来求平均曲率和gauss曲率。&lt;/p&gt;
+&lt;h4 id=&#34;曲面上正交参数的存在性不是等温坐标系&#34;&gt;曲面上正交参数的存在性（不是等温坐标系）&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;
+&lt;/h4&gt;&lt;h4 id=&#34;曲面的第二基本形式&#34;&gt;曲面的第二基本形式
+&lt;/h4&gt;&lt;p&gt;设n为曲面点p处的法向量($du\wedge dv$),那么$&amp;lt;d^2 r,n&amp;gt;$为第二基本形式，因为$&amp;lt;dr,n&amp;gt;=0$,所以$&amp;lt;d^2 r,n&amp;gt;=-&amp;lt;dr, dn &amp;gt;$&lt;/p&gt;
+&lt;h4 id=&#34;曲面上曲线的法曲率&#34;&gt;曲面上曲线的法曲率
+&lt;/h4&gt;&lt;p&gt;$&amp;lt;d^2 r\left(s\right),n&amp;gt;$称为曲线的法曲率，s为弧长参数.&lt;/p&gt;
+&lt;p&gt;经过化简的到&lt;/p&gt;
+$$\frac{Ldu^2+2Mdudv+Ndv^2}{ds^2}=\frac{Ldu^2+2Mdudv+Ndv^2}{Edu^2+2Fdudv+Gdv^2}$$&lt;p&gt;由式子知道法曲率只跟切向量(du,dv)相关，所以我们可以考虑由法截面截取的曲线的法曲率。&lt;/p&gt;
+&lt;h4 id=&#34;主曲率和主方向&#34;&gt;主曲率和主方向
+&lt;/h4&gt;&lt;p&gt;每点的法曲率的最大值和最小值称为该点的两个主曲率，两个方向称为该点的主方向。&lt;/p&gt;
+&lt;h4 id=&#34;平均曲率和gauss曲率&#34;&gt;平均曲率和gauss曲率
+&lt;/h4&gt;&lt;p&gt;两个主曲率之和是平均曲率，两个主曲率之积是gauss曲率。gauss曲率在黎曼流形上的推广是截面曲率。&lt;/p&gt;
+&lt;h4 id=&#34;曲面上自然标架场和微分&#34;&gt;曲面上自然标架场和微分
+&lt;/h4&gt;&lt;p&gt;曲面上的自然标架場是${ r_1,r_2,n  }$,记第一基本形式的张量为$g_{\alpha \beta}$，它的逆是$g^{\alpha \beta}$,第二基本形式张量为$b_{\alpha \beta}$,它的逆是$b^{\alpha \beta}$,&lt;/p&gt;
+&lt;p&gt;如果命$b_{\alpha}^{\gamma}=b_{\alpha t}g^{t \gamma}$为指标的上升,以后指标的上升与下降都是这样的关系。&lt;/p&gt;
+&lt;p&gt;那么自然标架的微分
+&lt;/p&gt;
+$$\frac{\partial r_{\alpha}}{\partial u^{\beta}}= b_{\alpha \beta}n+r_{\gamma}\Gamma^{\gamma}_{\alpha \beta}$$&lt;p&gt;和&lt;/p&gt;
+$$\frac{\partial n}{\partial u^{\beta}}=-b_{\beta}^{\gamma}r_{\gamma}$$&lt;p&gt;计&lt;/p&gt;
+$$\Gamma^{\gamma}_{\alpha \beta}=g^{\gamma i}\Gamma _{i\alpha \beta}$$&lt;p&gt;（指标的上升）,&lt;/p&gt;
+$$\Gamma _{\gamma \alpha \beta}=\frac{1}{2}\left(\frac{\partial g _{\alpha \gamma}}{\partial u^{\beta}}+\frac{\partial g _{ \gamma \beta}}{\partial u^{\alpha}}-\frac{\partial g _{\alpha \beta}}{\partial u^{\gamma}}\right)$$$$\Gamma^{\gamma}_{\alpha \beta}=g^{\gamma i}\Gamma _{i\alpha \beta}=\frac{1}{2}g^{\gamma i}\left(\frac{\partial g _{\alpha \gamma}}{\partial u^{\beta}}+\frac{\partial g _{ \gamma \beta}}{\partial u^{\alpha}}-\frac{\partial g _{\alpha \beta}}{\partial u^{\gamma}}\right)$$&lt;p&gt;
+由上知自然标架的christoffel符号是內蕴的
+证明见微分几何初步(陈维桓)P.128&lt;/p&gt;
+&lt;h4 id=&#34;曲面唯一性定理&#34;&gt;曲面唯一性定理
+&lt;/h4&gt;&lt;p&gt;（在刚体变换意义下）在$E^3$中，第一基本形式和第二基本形式决定了唯一一个曲面&lt;/p&gt;
+&lt;p&gt;自然标架场的微分方程组是&lt;/p&gt;
+$$d\left(\begin{matrix}
+r _{1}\\\\
+r _{2}\\\\
+n
+\end{matrix}\right)=\left(\begin{matrix}\left(\Gamma^{\gamma} _{1 \beta}r _{\gamma}+b _{1 \beta}n\right)d\beta\\\\
+\left(\Gamma^{\gamma} _{2 \beta}r _{\gamma}+b _{2 \beta}n\right)d\beta\\\\
+\left(-b^{\gamma} _{\beta}r _{\gamma}\right)d\beta
+\end{matrix}\right)$$&lt;p&gt;
+这是个偏微分方程组，如果给定第一基本量，和第二基本量，再给定初始条件，和&lt;/p&gt;
+$$dd\left(\begin{matrix}
+r _{1}\\\\
+r _{2}\\\\
+n
+\end{matrix}\right)=0$$&lt;p&gt;,(dd是二次外微分，化简得到Gauss-Codazzi方程)，那么存在唯一的自然标架場是方程的解。&lt;/p&gt;
+&lt;h4 id=&#34;gauss-codazzi方程&#34;&gt;Gauss-Codazzi方程
+&lt;/h4&gt;&lt;p&gt;记$R^{\delta} _{\alpha\beta\gamma}=\frac{\partial \Gamma^{\delta} _{\alpha\gamma}}{\partial u^{\beta}}-\frac{\partial \Gamma^{\delta} _{\alpha\gamma}}{\partial u^{\beta}}+\Gamma^{\eta} _{\alpha\beta}\Gamma^{\delta} _{\eta\beta}-\Gamma^{\eta} _{\alpha\gamma}\Gamma^{\delta} _{\eta\beta}$,同理$R _{\delta\alpha\beta\gamma}=g _{\delta\eta}R^{\eta} _{\alpha\beta\gamma}$
+那么$R^{\delta} _{\alpha\beta\gamma}=b _{\alpha\beta}b _{\gamma}^{\delta}-b _{\alpha\gamma}b _{\beta}^{\delta}$或者$R _{\delta\alpha\beta\gamma}=-\left(b _{\delta\beta}b _{\alpha\gamma}-b _{\delta\gamma}b _{\alpha\beta}\right)$称为gauss方程，
+$\frac{\partial b _{\alpha\beta}}{\partial u^{\gamma}}-\frac{\partial b _{\alpha\gamma}}{\partial u^{\beta}}=b _{\beta\delta}\Gamma^{\delta} _{\alpha\gamma}-b _{\gamma\delta}\Gamma^{\delta} _{\alpha\beta}$称为Codazzi方程.曲面方程的存在的充分必要条件是满足Gauss-codazzi方程。&lt;/p&gt;
+&lt;h4 id=&#34;gauss-theorem&#34;&gt;gauss theorem
+&lt;/h4&gt;&lt;p&gt;求$\frac{Ldu^2+2Mdudv+Ndv^2}{Edu^2+2Fdudv+Gdv^2}$,的最大值和最小值之积是$\frac{|b|}{|g|}=|b||g^{-1}|$,因为$R _{\delta\alpha\beta\gamma}=g _{\delta\eta}R^{\eta} _{\alpha\beta\gamma}$，可以看出gauss曲率的值是等矩不变量。&lt;sup id=&#34;fnref:3&#34;&gt;&lt;a href=&#34;#fn:3&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;3&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;h4 id=&#34;测地曲率测地挠率&#34;&gt;测地曲率，测地挠率
+&lt;/h4&gt;&lt;p&gt;在曲面S上有曲线$u^{\alpha}\left(s\right)$,在曲线上取正交正规坐标架&lt;/p&gt;
+&lt;p&gt;$e _{i}$,其中$e _{1}=\frac{dr\left(s\right)}{ds}$,$e _{2}=n\times e _{1}$,$e _{3}=n$,&lt;/p&gt;
+&lt;p&gt;对坐标架微分得到&lt;/p&gt;
+$$d\left(\begin{matrix}\
+e _{1}\left(s\right)\\\\
+e _{2}\left(s\right)\\\\
+e _{3}\left(s\right)
+\end{matrix}\right)=M\left(\begin{matrix}\
+e _{1}\left(s\right)\\\\
+e _{2}\left(s\right)\\\\
+e _{3}\left(s\right)
+\end{matrix}\right)ds$$&lt;p&gt;,由上知M是反对称矩阵，那么$M _{12}$称为测地曲率，$M _{23}$称为测地挠率，$M _{13}$是曲线的法曲率.&lt;/p&gt;
+&lt;p&gt;$M _{12}=\left(n\times e _1\right)*e^{`} _1=\left(n,e _1,e^{&amp;rsquo;} _1\right)$,其中三个量都是保长不变量，所以测地曲率是保长不变量。&lt;/p&gt;
+&lt;h4 id=&#34;测地线&#34;&gt;测地线
+&lt;/h4&gt;&lt;p&gt;曲面上测地曲率等于0的曲线&lt;/p&gt;
+&lt;h4 id=&#34;曲面上向量场的平行移动&#34;&gt;曲面上向量场的平行移动
+&lt;/h4&gt;&lt;h4 id=&#34;gauss-bonnet公式&#34;&gt;Gauss-Bonnet公式
+&lt;/h4&gt;&lt;p&gt;在黎曼流形上当度量张量不变时，外微分的积分可以按正常积分计算，但外积符号$\wedge$不可丢。&lt;/p&gt;
+&lt;h4 id=&#34;stokes-公式&#34;&gt;Stokes 公式
+&lt;/h4&gt;&lt;h4 id=&#34;poincare-lemma&#34;&gt;Poincare Lemma
+&lt;/h4&gt;&lt;p&gt;闭形式但不是恰当形式的例子:&lt;/p&gt;
+&lt;p&gt;定义在$R^2-0$上的1-form   $\eta=\frac{xdy-ydx}{x^2+y^2}$沿不同闭曲线的积分&lt;/p&gt;
+&lt;p&gt;定义在$R^3-0$上的2-form   $\eta=\frac{xdy\wedge dz+ydz\wedge dx+zdx\wedge dy}{\left(x^2+y^2+z^2\right)^{\frac{3}{2}}}$&lt;/p&gt;
+&lt;h3 id=&#34;现代微分几何&#34;&gt;现代微分几何
+&lt;/h3&gt;&lt;h4 id=&#34;definition流形的凸性&#34;&gt;Definition（流形的凸性）
+&lt;/h4&gt;&lt;p&gt;可定向流形流形的方向是单射。（准确的说可定向流形有一个类似gauss映射的推广函数，它是单射）&lt;/p&gt;
+&lt;h4 id=&#34;梯度算子&#34;&gt;梯度算子
+&lt;/h4&gt;&lt;p&gt;梯度算子并不是微分算子，它是$C^{\infty}\left(M\right)\to TM$即光滑函数到切空间的映射。&lt;/p&gt;
+&lt;p&gt;他有两个作用，第一个就是定义所说的可以通过度量张量来表示$X\left(f\right)$,&lt;/p&gt;
+&lt;p&gt;第二个作用是梯度算子的结果是所有$|X|_g=1,X\in TM$,使得$X\left(f\right)$最大的切方向。&lt;/p&gt;
+&lt;h4 id=&#34;ricci-flow&#34;&gt;Ricci flow
+&lt;/h4&gt;&lt;p&gt;给一个黎曼流形M,配有黎曼度量$g _{0}$.&lt;/p&gt;
+&lt;p&gt;假设度量矩阵g是关于t的函数，且这个函数由常微分方程组$\frac{dg _{ij}}{dt}=-2 R _{ij}$，初始条件$g\left(0\right)=g _0$确定。$R _{ij}$是Ricci tensor.那么$g\left(t\right)$是Ricci flow&lt;/p&gt;
+&lt;h4 id=&#34;黎曼流形上的散度算子&#34;&gt;黎曼流形上的散度算子
+&lt;/h4&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/105097175?utm_source=qq&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;这里&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/weixin_30415801/article/details/96829679&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;这里&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;laplace算子在流形上的推广为拉普拉斯-贝尔特拉米算子,在微分形式上的推广是拉普拉斯–德拉姆算子。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;[https://baike.baidu.com/item/%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF-%E8%B4%9D%E5%B0%94%E7%89%B9%E6%8B%89%E7%B1%B3%E7%AE%97%E5%AD%90/19136598?fr=aladdin]%28https://baike.baidu.com/item/%e6%8b%89%e6%99%ae%e6%8b%89%e6%96%af-%e8%b4%9d%e5%b0%94%e7%89%b9%e6%8b%89%e7%b1%b3%e7%ae%97%e5%ad%90/19136598?fr=aladdin%29&#34; &gt;拉普拉斯-贝尔特拉米算子&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;stokes公式&#34;&gt;Stokes公式
+&lt;/h4&gt;&lt;p&gt;在Rudin的一书中有Stokes公式的&lt;a class=&#34;link&#34; href=&#34;https://zhuanlan.zhihu.com/p/23870023&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;证明&lt;/a&gt;&lt;/p&gt;
+&lt;h4 id=&#34;poincare引理&#34;&gt;Poincare引理
+&lt;/h4&gt;&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;概括而言正则流形是每点切空间和流形维数相同&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;
+&lt;p&gt;维数大于等于3的黎曼流形不一定存在正交参数系。正交坐标系要求第一基本形式F=0，等温坐标系要求F=0,E=G(保角).&amp;#160;&lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:3&#34;&gt;
+&lt;p&gt;內蕴几何是研究等矩变换不变量的几何，但是等矩变换不是保持度量g一直不变&amp;#160;&lt;a href=&#34;#fnref:3&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
         <title>Web端渲染</title>
-        <link>https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/</link>
+        <link>http://localhost:1313/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/</link>
         <pubDate>Wed, 16 Jul 2025 10:22:34 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/img.png" alt="Featured image of post Web端渲染" /&gt;&lt;p&gt;将使用 Dawn 库编写的渲染程序导出到 Web 端和本地端，需要采取不同的编译和部署策略，但核心思想是：&lt;strong&gt;你的 C++ 渲染逻辑（使用 WebGPU API）大部分可以保持不变，而平台特定的部分（如窗口创建、文件IO、事件处理）则需要抽象或有条件编译。&lt;/strong&gt;&lt;/p&gt;
+        <guid>http://localhost:1313/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/</guid>
+        <description>&lt;img src="http://localhost:1313/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/img.png" alt="Featured image of post Web端渲染" /&gt;&lt;p&gt;将使用 Dawn 库编写的渲染程序导出到 Web 端和本地端，需要采取不同的编译和部署策略，但核心思想是：&lt;strong&gt;你的 C++ 渲染逻辑（使用 WebGPU API）大部分可以保持不变，而平台特定的部分（如窗口创建、文件IO、事件处理）则需要抽象或有条件编译。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Dawn 本身是一个 C++ 库，实现了 WebGPU API 规范，并且是 Chromium 浏览器中 WebGPU 的底层实现。&lt;/p&gt;
 &lt;h3 id=&#34;核心思想平台无关的-webgpu-逻辑&#34;&gt;核心思想：平台无关的 WebGPU 逻辑
 &lt;/h3&gt;&lt;p&gt;你的渲染程序主体应该使用 WebGPU API（通过 &lt;code&gt;wgpu::Device&lt;/code&gt;, &lt;code&gt;wgpu::Queue&lt;/code&gt;, &lt;code&gt;wgpu::RenderPassEncoder&lt;/code&gt; 等）来定义渲染管线、加载资源、绘制等。这部分代码在概念上是平台无关的。&lt;/p&gt;
@@ -264,11 +443,11 @@ int main() {
         </item>
         <item>
         <title>Zig实战</title>
-        <link>https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/</link>
+        <link>http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/</link>
         <pubDate>Fri, 20 Jun 2025 10:36:14 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/nature.png" alt="Featured image of post Zig实战" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://ziglang.cc/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/</guid>
+        <description>&lt;img src="http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/nature.png" alt="Featured image of post Zig实战" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://ziglang.cc/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;zig语言中文社区&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://luojia.me/9940/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;zig编译为webassembly&lt;/a&gt;&lt;/p&gt;
@@ -652,11 +831,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Gltf格式</title>
-        <link>https://wujilingfeng.github.io/p/gltf%E6%A0%BC%E5%BC%8F/</link>
+        <link>http://localhost:1313/p/gltf%E6%A0%BC%E5%BC%8F/</link>
         <pubDate>Mon, 19 May 2025 18:05:13 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/gltf%E6%A0%BC%E5%BC%8F/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/gltf%E6%A0%BC%E5%BC%8F/jiari.png" alt="Featured image of post Gltf格式" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/905671909b25&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>http://localhost:1313/p/gltf%E6%A0%BC%E5%BC%8F/</guid>
+        <description>&lt;img src="http://localhost:1313/p/gltf%E6%A0%BC%E5%BC%8F/jiari.png" alt="Featured image of post Gltf格式" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/905671909b25&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;gltf文件格式介绍&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/qq_22642239/article/details/129752911&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;gltf文件格式&lt;/a&gt;&lt;/p&gt;
@@ -664,11 +843,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Minkowski框架学习</title>
-        <link>https://wujilingfeng.github.io/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</link>
+        <link>http://localhost:1313/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</link>
         <pubDate>Tue, 13 May 2025 17:46:40 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/rain.png" alt="Featured image of post Minkowski框架学习" /&gt;&lt;p&gt;按照&lt;a class=&#34;link&#34; href=&#34;https://rocm.docs.amd.com/projects/radeon/en/latest/docs/install/native_linux/install-radeon.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>http://localhost:1313/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</guid>
+        <description>&lt;img src="http://localhost:1313/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/rain.png" alt="Featured image of post Minkowski框架学习" /&gt;&lt;p&gt;按照&lt;a class=&#34;link&#34; href=&#34;https://rocm.docs.amd.com/projects/radeon/en/latest/docs/install/native_linux/install-radeon.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;网址&lt;/a&gt;进行配置.&lt;/p&gt;
 &lt;p&gt;对于zorin os等基于ubuntu的发行版本，需要修改&lt;code&gt;sudo vim /etc/os-release&lt;/code&gt; , 把ID设置为ubuntu。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -698,29 +877,532 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Futhark学习</title>
-        <link>https://wujilingfeng.github.io/p/futhark%E5%AD%A6%E4%B9%A0/</link>
+        <link>http://localhost:1313/p/futhark%E5%AD%A6%E4%B9%A0/</link>
         <pubDate>Wed, 30 Apr 2025 16:52:46 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/futhark%E5%AD%A6%E4%B9%A0/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/futhark%E5%AD%A6%E4%B9%A0/jinshan.png" alt="Featured image of post Futhark学习" /&gt;</description>
+        <guid>http://localhost:1313/p/futhark%E5%AD%A6%E4%B9%A0/</guid>
+        <description>&lt;img src="http://localhost:1313/p/futhark%E5%AD%A6%E4%B9%A0/jinshan.png" alt="Featured image of post Futhark学习" /&gt;</description>
         </item>
         <item>
         <title>Haskell学习</title>
-        <link>https://wujilingfeng.github.io/p/haskell%E5%AD%A6%E4%B9%A0/</link>
+        <link>http://localhost:1313/p/haskell%E5%AD%A6%E4%B9%A0/</link>
         <pubDate>Tue, 29 Apr 2025 10:58:01 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/haskell%E5%AD%A6%E4%B9%A0/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/haskell%E5%AD%A6%E4%B9%A0/img.png" alt="Featured image of post Haskell学习" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.oreilly.com/library/view/parallel-and-concurrent/9781449335939/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>http://localhost:1313/p/haskell%E5%AD%A6%E4%B9%A0/</guid>
+        <description>&lt;img src="http://localhost:1313/p/haskell%E5%AD%A6%E4%B9%A0/img.png" alt="Featured image of post Haskell学习" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gitter.im/autumnai/leaf?utm_source=badge&amp;amp;utm_medium=badge&amp;amp;utm_campaign=pr-badge&amp;amp;utm_content=badge&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;img src=&#34;https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Join the chat at https://gitter.im/autumnai/leaf&#34;
+	
+	
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;haskell一种基于算子思想（functional）编程语言,以前我也设想过一种基于算子思想的编程语言，因为数学中所有空间集合的作用都可以理解为算子&lt;/p&gt;
+&lt;p&gt;学习haskell要避免工程繁杂概念的弊端，有时努力回想以前的数学概念代替工程概念是有好处的，首先工程概念名词繁杂不长久，而数学是所有学科(除了哲学)最长久的学科。(这种长久性是“知识成立”的时间)&lt;/p&gt;
+&lt;p&gt;比如手机cpu的架构和勾股定理，勾股定理在欧式几何中成立，之后发现在其他几何中不成立，而手机cpu的架构只是工程架构，几个月后就发生改变或者优化。所以勾股定理比c语言，计算机，鸿霥，甚至牛顿力学还要长久，那么为什么不学习寿命更长久的知识而要学习繁杂短暂的知识?&lt;/p&gt;
+&lt;p&gt;可以说未来属于算子类型语言cop,haskell，而不是工程类语言c,c++,java,python&amp;hellip;&lt;/p&gt;
+&lt;p&gt;使用haskell不应关注效率，而是思想。计算机专业大量人士进入haskell语言领域，它们给haskell语言带来了实践能力的同时也给haskell语言带来了计算机工程行业的弊端:行业术语的工程化，繁杂化，不严谨化。本文是用数学的概念统一解释haskell的概念，希望给数学专业的人免去繁杂和不严谨的工程概念。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;万物皆算子&lt;/em&gt;，这样就不用记什么高阶函数，数据结构，递归数据结构，柯里化之类的概念。&lt;/p&gt;
+&lt;p&gt;自带的算子&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;算子&lt;/th&gt;
+          &lt;th&gt;含义&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;:t a&lt;/td&gt;
+          &lt;td&gt;a的类型&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;==&lt;/td&gt;
+          &lt;td&gt;是否等于，返回True False&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;/=&lt;/td&gt;
+          &lt;td&gt;是否不等于&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;:l hello&lt;/td&gt;
+          &lt;td&gt;加载hello.hs文件&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;a ^ b&lt;/td&gt;
+          &lt;td&gt;返回a的b次方&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&amp;lt;=&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&amp;gt;=&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;mod&lt;/td&gt;
+          &lt;td&gt;取余&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;div&lt;/td&gt;
+          &lt;td&gt;整除&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;even a&lt;/td&gt;
+          &lt;td&gt;a是否是偶数&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;odd a&lt;/td&gt;
+          &lt;td&gt;a是否是奇数&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;.和$&lt;/td&gt;
+          &lt;td&gt;($) :: (a -&amp;gt; b) -&amp;gt; a -&amp;gt; b 和(.) :: (b -&amp;gt; c) -&amp;gt; (a -&amp;gt; b) -&amp;gt; a -&amp;gt; c，详细解释见下&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;取出列表的前n个元素&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;map a [1,2..]&lt;/td&gt;
+          &lt;td&gt;一种经典用法 map (*) [1,2..]&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;\&lt;/td&gt;
+          &lt;td&gt;lambda算子,比如(\xs -&amp;gt; length xs &amp;gt; 15),xs是参数，length xs &amp;gt; 15是body&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;数字3也是算子，它是常量算子&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&amp;amp;&amp;amp;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;||&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;not&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;cos&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;sin&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;acos&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;asin&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;有些算子有歧义可以类似如下调用&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;read&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;5&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;::&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Int&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;read&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;5&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;::&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Integer&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;read&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;3.01&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;::&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Float&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;由于-号也是算子,所以-1.0尽量加括号，变成(-1.0)&lt;/p&gt;
+&lt;p&gt;函数本身也是算子&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;map&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;f&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;[]&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;[]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;map&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;f&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;_&lt;/span&gt;)&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;f&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;map&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;f&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;_&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;上面的map函数也叫“高阶函数”，但是从万物皆算子的角度看，并不要这种多余概念。&lt;/p&gt;
+&lt;p&gt;lambda算子举例&lt;code&gt;\(a,b,c)-&amp;gt; a+b-c&lt;/code&gt;&lt;/p&gt;
+&lt;h5 id=&#34;两个内建的类型&#34;&gt;两个内建的类型
+&lt;/h5&gt;&lt;p&gt;列表:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;--还有更简单的表示形式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;..&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;head&lt;/span&gt; [&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;..&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;last&lt;/span&gt; [&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;..&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;length&lt;/span&gt; [&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;..&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;maxmum&lt;/span&gt; [&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;..&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;minmum&lt;/span&gt; [&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;..&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;tail&lt;/span&gt; [&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;..&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;..&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;]&lt;span style=&#34;color:#56b6c2&#34;&gt;!!&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;元组:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[(&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;c&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;-&lt;/span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;..&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;100&lt;/span&gt;],&lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;-&lt;/span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;..&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;],&lt;span style=&#34;color:#e06c75&#34;&gt;c&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;&lt;/span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;..&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;],&lt;span style=&#34;color:#e06c75&#34;&gt;c&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;^&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;^&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;^&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;逻辑&#34;&gt;逻辑
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#e06c75&#34;&gt;putStrLn&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;oK&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;else&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#e06c75&#34;&gt;putStrLn&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;not&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;模式匹配&#34;&gt;模式匹配
+&lt;/h4&gt;&lt;p&gt;模式匹配用来泛化算子的表示能力&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;addVectors&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;::&lt;/span&gt;(&lt;span style=&#34;color:#e5c07b&#34;&gt;Num&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;)&lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;)&lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;)&lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;addVectors&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;x1&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;y1&lt;/span&gt;) (&lt;span style=&#34;color:#e06c75&#34;&gt;x2&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;y2&lt;/span&gt;)&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;x1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;x2&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;y1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;y2&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;---作用在列表的算子&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;head&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;::&lt;/span&gt; [&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;]&lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;head&amp;#39;&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;[]&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;error&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;cant &amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;head&amp;#39;&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;x_&lt;/span&gt;)&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;--String也属于列表,其实代码是 type String=[Char],type类似c语言的typedef&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;capital&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;::&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;String&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;String&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;capital&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;empty string&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;capital&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;xs&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;the first letter of &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;++&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;xs&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;++&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34; is &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;++&lt;/span&gt; [&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在上面的head&amp;rsquo;算子定义你肯定觉得haskell是有“潜规则”的，否则它是如何匹配返回列表头部算子的？所以你只能默认并记住这种列表匹配的规则。(也就是在模式匹配中(x:_)表示列表)。&lt;/p&gt;
+&lt;p&gt;以下算子表示也比较隐蔽&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;--x算子表示：x为常量1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;--- 分别定义了x,y,z:算子，他们是常量&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;z&lt;/span&gt;)&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#d19a66&#34;&gt;0.1&lt;/span&gt;,&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0.9&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;上面看到Haskell的模式匹配条件相当松散。当算子定义合适时，如果输入类型不同的参数，它还是能正常运作。&lt;/p&gt;
+&lt;p&gt;但是当参数的类型差异较大时，模式匹配不能分辨参数的类型，也自然无法使得算子定义可以接受不同类型的参数。这时我们需要针对不同的类型写不同的算子。这样的坏处是算子名不能统一。&lt;/p&gt;
+&lt;p&gt;针对这种问题，haskell提出类型类的概念（见下）。&lt;/p&gt;
+&lt;p&gt;haskell的分段函数（类似c语言的case switch）&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;bmiTell&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;weight&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;height&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;bmi&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;18.5&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;you&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;bim&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;25.0&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;my&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;otherwise&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;d&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;bim&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;weight&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;height&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;^&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果把条件语句放到后面就更像数学分段函数的表示&lt;/p&gt;
+&lt;p&gt;分段函数还可以直接用在算子的表达式中&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			&lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;otherwise&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#c678dd&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;let--in-其中等于&#34;&gt;let .. in ..(其中..等于..)
+&lt;/h4&gt;&lt;p&gt;数学中常用的语句 “其中..等于..”。它的表示用来解释in单词后面的式子&lt;/p&gt;
+&lt;h4 id=&#34;-where-其中等于&#34;&gt;&amp;hellip; Where &amp;hellip;(其中..等于..)
+&lt;/h4&gt;&lt;p&gt;数学中常用的语句 “其中..等于..”。它的表示用来解释单词where前的式子。&lt;/p&gt;
+&lt;p&gt;where必须换行并回车，并且where之前的式子必须要是等式&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;[&lt;span style=&#34;color:#c678dd&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;sq&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;in&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;sq&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;sq&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;sq&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;)]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;--返回(9,16,25)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;let&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;sq&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;in&lt;/span&gt; [&lt;span style=&#34;color:#e06c75&#34;&gt;sq&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;sq&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;sq&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;[&lt;span style=&#34;color:#e06c75&#34;&gt;sq&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;sq&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;sq&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;]
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;sq&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;where的多个定义使用分号&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;let&lt;/span&gt; {&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;g&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#e06c75&#34;&gt;g&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;p&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#e06c75&#34;&gt;p&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果换a x=g为g,那么编译失败。&lt;/p&gt;
+&lt;h5 id=&#34;两个简单的复合算子&#34;&gt;两个简单的复合算子
+&lt;/h5&gt;&lt;p&gt;foldr f a [a1,a2&amp;hellip;]&lt;/p&gt;
+&lt;p&gt;上面的算子f是某个算子，如果记这个算子为*,那么结果就是 &lt;code&gt;a1 * a2 *a3 .... *an * a&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;有人翻译成右折叠，这增加了名词学习成本,比较恶心&lt;/p&gt;
+&lt;p&gt;foldl f a [a1,a2 &amp;hellip;]&lt;/p&gt;
+&lt;p&gt;上面的算子f是某个算子，如果记这个算子为*,那么结果就是 &lt;code&gt;a * a1 * a2 *a3 .... *an &lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;有人翻译成左折叠，这增加了名词学习成本，比较恶心&lt;/p&gt;
+&lt;h4 id=&#34;类型类算子类&#34;&gt;类型类&amp;ndash;算子类
+&lt;/h4&gt;&lt;p&gt;如果你需要一些算子，它能接受的参数是多种类型的。那么你需要定义一个”类型类“（建议改名&amp;quot;函数类&amp;quot;或者“算子类”，因为它的主要作用就是扩展函数或算子的表达力）。&lt;/p&gt;
+&lt;p&gt;比如我需要==算子，他需要能接受Float,Interger,Char等类型(或者输出为多种类型)。我那么我可以定义Myeq的类型类。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;12
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;data&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Node&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Cons&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt; (&lt;span style=&#34;color:#e5c07b&#34;&gt;Node&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;NULL&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;deriving&lt;/span&gt; (&lt;span style=&#34;color:#e5c07b&#34;&gt;Show&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Myeq&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;iseq&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;::&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;Bool&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;instance&lt;/span&gt; (&lt;span style=&#34;color:#e5c07b&#34;&gt;Eq&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;)&lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;Myeq&lt;/span&gt; (&lt;span style=&#34;color:#e5c07b&#34;&gt;Node&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;) &lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;--iseq :: (Eq x)=&amp;gt; (Cons x _)-&amp;gt;(Cons x _)-&amp;gt;Bool&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;iseq&lt;/span&gt; (&lt;span style=&#34;color:#e5c07b&#34;&gt;Cons&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;_&lt;/span&gt;) (&lt;span style=&#34;color:#e5c07b&#34;&gt;Cons&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;_&lt;/span&gt;)&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;data&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Shape&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Circle&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Rectangle&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;instance&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Myeq&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Shape&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#e06c75&#34;&gt;iseq&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Circle&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Rectangle&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;False&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#e06c75&#34;&gt;iseq&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Rectangle&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Circle&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;False&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#e06c75&#34;&gt;iseq&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Circle&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Circle&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;True&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#e06c75&#34;&gt;iseq&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Rectangle&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Rectangle&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;True&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;故而类型类是为了拓展函数（算子）的泛化能力而存在的。它的核心含义是其下声明的函数(算子)。&lt;/p&gt;
+&lt;h4 id=&#34;module&#34;&gt;Module
+&lt;/h4&gt;&lt;p&gt;import qualified Data.Map as M&lt;/p&gt;
+&lt;p&gt;这是python是一样的&lt;/p&gt;
+&lt;h4 id=&#34;自定义算子类型&#34;&gt;自定义算子类型
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;data&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Mybool&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;True&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;False&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;True是算子，False也是算子，他们都是没有参数的，所以都是常量。Mybool是这两个算子所属的类型。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;data&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Shape&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;Circle&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Float&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Float&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Rectangel&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Float&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Float&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Float&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Float&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;上面的Circle和Rectangel是两个算子，Circle作用两个参数,且这两个参数分属Float 类型。Shape则是两个算子所属的类型。&lt;/p&gt;
+&lt;p&gt;上面虽然讲Haskell秉承万物皆算子，但是上面的Shape和Mybool却不是算子，实际上类型都不是算子，比如Integer（haskell没有把它看作算子，但是却看成函子，详细见下）。&lt;/p&gt;
+&lt;p&gt;带参数的类型,这个参数表示的是类型。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;data&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Node&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;Cons&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt; (&lt;span style=&#34;color:#e5c07b&#34;&gt;Node&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这只有一个算子，那就是Cons 。它作用于两个参数,这两个参数属于类型 a和 (Node a)。系统找不到类型a的定义，自然表明它是任何类型，Node a则是引用了自身的定义。&lt;/p&gt;
+&lt;p&gt;Node a是Cons算子属于的类型.&lt;/p&gt;
+&lt;p&gt;上面讲Haskell没有把Shape等视为算子，但是Haskell却把Shape 和Node a等视为函子。因为它是类型到类型的映射，比如Shape 是常量 ,而Node  则是把类型a映射为 Node,即a-&amp;gt;Node a。Node a也是函子，只不过它是常量。&lt;/p&gt;
+&lt;p&gt;所有类型都视为函子。&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/livewithnorest/archive/2012/08/02/2620718.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.cnblogs.com/livewithnorest/archive/2012/08/02/2620718.html&lt;/a&gt;)&lt;/p&gt;
+&lt;h4 id=&#34;范畴和函子&#34;&gt;范畴和函子
+&lt;/h4&gt;&lt;p&gt;这里是&lt;a class=&#34;link&#34; href=&#34;https://en.wikipedia.org/wiki/Functor&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;范畴和函子定义&lt;/a&gt;&lt;/p&gt;
+&lt;h5 id=&#34;范畴&#34;&gt;范畴
+&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;范畴C包含&amp;quot;物件&amp;quot;，记为obj(C)(比如拓扑空间的开集就是Hausdoff空间的物件)&lt;/li&gt;
+&lt;li&gt;范畴C包含态射或者箭头，改态射将物件a映射为物件b,记为$Hom_C \left(a,b\right)$&lt;/li&gt;
+&lt;li&gt;范畴C,态射之间存在&amp;quot;作用&amp;quot;或者二元运算，称作态射的复合，这样的态射构成&amp;quot;幺半群（满足结合律和单位元）&amp;quot;。[^1]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h5 id=&#34;函子&#34;&gt;函子
+&lt;/h5&gt;&lt;p&gt;设C和D为范畴，函子F是C到D的映射，满足&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将C的每个物件$X\in C$映射至$F\left(X\right)\in D$上&lt;/li&gt;
+&lt;li&gt;将C的每个态射$f\in Hom_C\left(a,b\right)$映射至$F\left(f\right)\in Hom_D\left(F\left(a\right),F\left(b\right)\right)$&lt;/li&gt;
+&lt;li&gt;将C的态射的单位元映射到D的态射单位元&lt;/li&gt;
+&lt;li&gt;对”态射构成的幺半群“是“同态”。&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;按照定义范畴有一堆集合，和箭头。&lt;/p&gt;
+&lt;p&gt;{% asset_img cate.png 范畴 %}&lt;/p&gt;
+&lt;p&gt;函子是范畴和范畴之间集合的箭头&lt;/p&gt;
+&lt;p&gt;{% asset_img functor.png 函子 %}&lt;/p&gt;
+&lt;p&gt;如上图，假设A,B是范畴1的集合，C,D是范畴2的集合，A到C的箭头是函子，B到D的箭头是函子，那么从A到B的箭头可以诱导C到D的箭头。&lt;/p&gt;
+&lt;p&gt;注意上面讲：类型类主要用来让函数（算子）接受不同类型的参数。&lt;/p&gt;
+&lt;p&gt;数学上函子不但联系了两个范畴的对象，还将两个范畴的箭头进行联系。而Haskell的类型系统只是完成了两个范畴对象的对应(没有给出映射)。&lt;/p&gt;
+&lt;p&gt;比如&lt;code&gt;[Int]&lt;/code&gt;联系了集合Int 和 [Int],并没有映射，它们之间也没有映射。&lt;/p&gt;
+&lt;p&gt;haskell有个类型类Functor,这里的Functor主要解决两个对应类型之间的诱导映射。每一个类型都联系了两个类型（比如Int类型联系了Int到自身），这里的Functor（它的核心是算子fmap）主要解决类型诱导的映射问题。&lt;/p&gt;
+&lt;p&gt;你已经注意到这里我说的函子都是数学上严格定义的函子，haskell的Functor虽然名字叫函子，它并非严格意义的函子，上面也说了：它是主要是解决类型诱导的映射。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-haskell&#34; data-lang=&#34;haskell&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Functor&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;f&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#e06c75&#34;&gt;fmap&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;::&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;)&lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;f&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;f&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;instance&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;Functor&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;[]&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;where&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;fmap&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;map&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;单子&#34;&gt;单子
+&lt;/h4&gt;&lt;p&gt;设有范畴C,T是$C\to C$的函子，u是$c\to TC$的函子，v是$TTC\to TC$的函子，如果u，v满足$vTu=vuT=id$和$uTu=uuT:T^3C\to TC$,那么称$\left(T,u,v\right)$是C的单子。&lt;/p&gt;
+&lt;p&gt;haskell语言单子与数学上单子不同，主要体现在不严谨性，比如现在的haskell 的Monad的return函数在$TC$上没有定义,整个函数也没有定义在$TTC$&amp;hellip;,而且函数式编程语言的定义:自函子上的幺半群并非数学上的定义，应该是编程语言自己加的结构。&lt;/p&gt;
+&lt;h4 id=&#34;总结&#34;&gt;总结
+&lt;/h4&gt;&lt;p&gt;总结来说，haskell的重要概念都是围绕两个元素服务的1:算子，2:函子。&lt;/p&gt;
+&lt;p&gt;其中函子(数学上的严格定义)在haskell表现为:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定义新的类型 &amp;mdash; 将范畴映射为另一范畴。（函子）&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;算子类&amp;rdquo;&amp;mdash;函子诱导的映射（不论是haskell的Functor,Manod都属于这一概念）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;本文也有弊端，一方面本文试图从数学角度统一解释，但是文章叙述确实参杂各种工程术语，并且文章也叙述了很细小的工程细节，希望以后能够修改本文。&lt;/p&gt;
+&lt;p&gt;像haskell这一类语言简直是数学专业的神器，懊悔发现这门语言太晚！&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.oreilly.com/library/view/parallel-and-concurrent/9781449335939/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Parallel and Concurrent Programming in Haskell[Book]&lt;/a&gt;&lt;/p&gt;
-</description>
+&lt;div class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;
+&lt;p&gt;加引号是因为复合这个作用并不能作用在所有态射上，而群是要求所有元素都可作用。&amp;#160;&lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;</description>
         </item>
         <item>
         <title>Hugo&#43;github搭建博客</title>
-        <link>https://wujilingfeng.github.io/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link>
+        <link>http://localhost:1313/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link>
         <pubDate>Tue, 29 Apr 2025 08:57:27 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/shumu.png" alt="Featured image of post Hugo&#43;github搭建博客" /&gt;&lt;p&gt;hugo 似乎的确存在很多bug。&lt;/p&gt;
+        <guid>http://localhost:1313/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid>
+        <description>&lt;img src="http://localhost:1313/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/shumu.png" alt="Featured image of post Hugo&#43;github搭建博客" /&gt;&lt;p&gt;hugo 似乎的确存在很多bug。&lt;/p&gt;
 &lt;p&gt;stack主题对于baseurl的路径处理有bug，例如当baseurl = &lt;a class=&#34;link&#34; href=&#34;https://wujilingfeng.github.io/myblog/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://wujilingfeng.github.io/myblog/&lt;/a&gt;时，生成的网页内容路径会自动添加myblog。&lt;/p&gt;
 &lt;p&gt;stack主题对于文章的语言分类是以md的文件名中缀&lt;code&gt;zh-cn&lt;/code&gt;,&lt;code&gt;en&lt;/code&gt;,&lt;code&gt;ar&lt;/code&gt;来进行区分的。&lt;/p&gt;
@@ -728,11 +1410,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>学习zig</title>
-        <link>https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/</link>
+        <link>http://localhost:1313/p/%E5%AD%A6%E4%B9%A0zig/</link>
         <pubDate>Mon, 28 Apr 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png" alt="Featured image of post 学习zig" /&gt;&lt;p&gt;zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。&lt;/p&gt;
+        <guid>http://localhost:1313/p/%E5%AD%A6%E4%B9%A0zig/</guid>
+        <description>&lt;img src="http://localhost:1313/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png" alt="Featured image of post 学习zig" /&gt;&lt;p&gt;zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。&lt;/p&gt;
 &lt;p&gt;zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。&lt;/p&gt;
 &lt;p&gt;zig语言的void和c语言的void不同，c语言的void对应anyopaque，是对opaque的泛化，就像anytype是对type的泛化，anyerror对error的泛化。void也是一个类型，它的值通常为&lt;code&gt;{}&lt;/code&gt;。&lt;/p&gt;
 &lt;p&gt;zig语言 的”元组“，.{&amp;ldquo;nihao&amp;rdquo;,3}其实是个value, 它的类型是匿名结构体，&lt;/p&gt;
@@ -1743,11 +2425,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Chinese Test</title>
-        <link>https://wujilingfeng.github.io/p/test-chinese/</link>
+        <link>http://localhost:1313/p/test-chinese/</link>
         <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/test-chinese/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.zh-cn.jpg" alt="Featured image of post Chinese Test" /&gt;&lt;h2 id=&#34;正文测试&#34;&gt;正文测试
+        <guid>http://localhost:1313/p/test-chinese/</guid>
+        <description>&lt;img src="http://localhost:1313/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.zh-cn.jpg" alt="Featured image of post Chinese Test" /&gt;&lt;h2 id=&#34;正文测试&#34;&gt;正文测试
 &lt;/h2&gt;&lt;p&gt;而这些并不是完全重要，更加重要的问题是， 带着这些问题，我们来审视一下学生会退会。 既然如何， 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 我们不得不面对一个非常尴尬的事实，那就是， 可是，即使是这样，学生会退会的出现仍然代表了一定的意义。 学生会退会，发生了会如何，不发生又会如何。 经过上述讨论， 生活中，若学生会退会出现了，我们就不得不考虑它出现了的事实。 学生会退会，到底应该如何实现。 这样看来， 在这种困难的抉择下，本人思来想去，寝食难安。 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 就我个人来说，学生会退会对我的意义，不能不说非常重大。 莎士比亚曾经提到过，人的一生是短的，但如果卑劣地过这一生，就太长了。这似乎解答了我的疑惑。 莫扎特说过一句富有哲理的话，谁和我一样用功，谁就会和我一样成功。这启发了我， 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 学生会退会，到底应该如何实现。 一般来说， 从这个角度来看， 这种事实对本人来说意义重大，相信对这个世界也是有一定意义的。 在这种困难的抉择下，本人思来想去，寝食难安。 了解清楚学生会退会到底是一种怎么样的存在，是解决一切问题的关键。 一般来说， 生活中，若学生会退会出现了，我们就不得不考虑它出现了的事实。 问题的关键究竟为何？ 而这些并不是完全重要，更加重要的问题是。&lt;/p&gt;
 &lt;p&gt;奥斯特洛夫斯基曾经说过，共同的事业，共同的斗争，可以使人们产生忍受一切的力量。　带着这句话，我们还要更加慎重的审视这个问题： 一般来讲，我们都必须务必慎重的考虑考虑。 既然如此， 这种事实对本人来说意义重大，相信对这个世界也是有一定意义的。 带着这些问题，我们来审视一下学生会退会。 我认为， 我认为， 在这种困难的抉择下，本人思来想去，寝食难安。 问题的关键究竟为何？ 每个人都不得不面对这些问题。 在面对这种问题时， 要想清楚，学生会退会，到底是一种怎么样的存在。 我认为， 既然如此， 每个人都不得不面对这些问题。 在面对这种问题时， 那么， 我认为， 学生会退会因何而发生。&lt;/p&gt;
 &lt;h2 id=&#34;引用&#34;&gt;引用
@@ -1831,11 +2513,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Markdown Syntax Guide</title>
-        <link>https://wujilingfeng.github.io/p/markdown-syntax-guide/</link>
+        <link>http://localhost:1313/p/markdown-syntax-guide/</link>
         <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/markdown-syntax-guide/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" /&gt;&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;
+        <guid>http://localhost:1313/p/markdown-syntax-guide/</guid>
+        <description>&lt;img src="http://localhost:1313/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" /&gt;&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;
 &lt;h2 id=&#34;headings&#34;&gt;Headings
 &lt;/h2&gt;&lt;p&gt;The following HTML &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;—&lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt; elements represent six levels of section headings. &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt; is the highest section level while &lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt; is the lowest.&lt;/p&gt;
 &lt;h1 id=&#34;h1&#34;&gt;H1
@@ -2059,11 +2741,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Placeholder Text</title>
-        <link>https://wujilingfeng.github.io/p/placeholder-text/</link>
+        <link>http://localhost:1313/p/placeholder-text/</link>
         <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/placeholder-text/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/placeholder-text/matt-le-SJSpo9hQf7s-unsplash.jpg" alt="Featured image of post Placeholder Text" /&gt;&lt;p&gt;Lorem est tota propiore conpellat pectoribus de pectora summo.&lt;/p&gt;
+        <guid>http://localhost:1313/p/placeholder-text/</guid>
+        <description>&lt;img src="http://localhost:1313/p/placeholder-text/matt-le-SJSpo9hQf7s-unsplash.jpg" alt="Featured image of post Placeholder Text" /&gt;&lt;p&gt;Lorem est tota propiore conpellat pectoribus de pectora summo.&lt;/p&gt;
 &lt;p&gt;Redit teque digerit hominumque toris verebor lumina non cervice subde tollit usus habet Arctonque, furores quas nec ferunt. Quoque montibus nunc caluere tempus inhospita parcite confusaque translucet patri vestro qui optatis lumine cognoscere flos nubis! Fronde ipsamque patulos Dryopen deorum.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Exierant elisi ambit vivere dedere&lt;/li&gt;
@@ -2090,10 +2772,10 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Math Typesetting</title>
-        <link>https://wujilingfeng.github.io/p/math-typesetting/</link>
+        <link>http://localhost:1313/p/math-typesetting/</link>
         <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/math-typesetting/</guid>
+        <guid>http://localhost:1313/p/math-typesetting/</guid>
         <description>&lt;p&gt;Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p&gt;
 &lt;p&gt;In this example we will be using &lt;a class=&#34;link&#34; href=&#34;https://katex.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;KaTeX&lt;/a&gt;&lt;/p&gt;
@@ -2132,11 +2814,11 @@ $$</description>
         </item>
         <item>
         <title>Emoji Support</title>
-        <link>https://wujilingfeng.github.io/p/emoji-support/</link>
+        <link>http://localhost:1313/p/emoji-support/</link>
         <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/emoji-support/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/emoji-support/the-creative-exchange-d2zvqp3fpro-unsplash.jpg" alt="Featured image of post Emoji Support" /&gt;&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;
+        <guid>http://localhost:1313/p/emoji-support/</guid>
+        <description>&lt;img src="http://localhost:1313/p/emoji-support/the-creative-exchange-d2zvqp3fpro-unsplash.jpg" alt="Featured image of post Emoji Support" /&gt;&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;
 &lt;p&gt;The &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/functions/emojify/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;&lt;code&gt;emojify&lt;/code&gt;&lt;/a&gt; function can be called directly in templates or &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/templates/shortcode-templates/#inline-shortcodes&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Inline Shortcodes&lt;/a&gt;.&lt;/p&gt;
