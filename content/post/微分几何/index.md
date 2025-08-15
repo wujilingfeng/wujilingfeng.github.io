@@ -1,13 +1,12 @@
 +++
 author = 'libo'
-date = '2025-08-15T16:16:51+08:00'
+date = '2025-08-15T17:15:58+08:00'
+math= true
 draft = false
-image =  "image.png"
+image = "image.png"
 title = '微分几何'
 
 +++
-
-
 
 <!--more-->
 
