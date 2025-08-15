@@ -3,21 +3,21 @@
     lang="zh-cn"
     dir="ltr"
 >
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <head>
         <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="将使用 Dawn 库编写的渲染程序导出到 Web 端和本地端，需要采取不同的编译和部署策略，但核心思想是：你的 C++ 渲染逻辑（使用 WebGPU API）大部分可以保持不变，而平台特定的部分（如窗口创建、文件IO、事件处理）则需要抽象或有条件编译。\nDawn 本身是一个 C++ 库，实现了 WebGPU API 规范，并且是 Chromium 浏览器中 WebGPU 的底层实现。\n核心思想：平台无关的 WebGPU 逻辑 你的渲染程序主体应该使用 WebGPU API（通过 wgpu::Device, wgpu::Queue, wgpu::RenderPassEncoder 等）来定义渲染管线、加载资源、绘制等。这部分代码在概念上是平台无关的。\n然而，创建窗口/画布、获取 WebGPU 设备、处理用户输入等部分是与平台紧密相关的。\n1. 导出到 Web 端 (浏览器) 在 Web 端，你的 C++ 代码需要被编译成 WebAssembly (WASM)，并在浏览器环境中运行。浏览器本身提供了原生的 WebGPU API 实现（在 Chromium 中，这个实现就是基于 Dawn 的）。这意味着你不需要将 Dawn 库本身编译进你的 WASM 包，你的 WASM 直接调用浏览器提供的 WebGPU API。\n主要工具：Emscripten\n编写 C++ 渲染程序：\n你的渲染代码会调用标准的 WebGPU API（封装在 Dawn 的 C++ 头文件中，如 dawn/webgpu.h 或直接使用 wgpu 名称空间）。\n">
 <title>Web端渲染</title>
 
-<link rel='canonical' href='http://localhost:1313/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/'>
+<link rel='canonical' href='https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/'>
 
 <link rel="stylesheet" href="../../scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Web端渲染">
 <meta property='og:description' content="将使用 Dawn 库编写的渲染程序导出到 Web 端和本地端，需要采取不同的编译和部署策略，但核心思想是：你的 C++ 渲染逻辑（使用 WebGPU API）大部分可以保持不变，而平台特定的部分（如窗口创建、文件IO、事件处理）则需要抽象或有条件编译。\nDawn 本身是一个 C++ 库，实现了 WebGPU API 规范，并且是 Chromium 浏览器中 WebGPU 的底层实现。\n核心思想：平台无关的 WebGPU 逻辑 你的渲染程序主体应该使用 WebGPU API（通过 wgpu::Device, wgpu::Queue, wgpu::RenderPassEncoder 等）来定义渲染管线、加载资源、绘制等。这部分代码在概念上是平台无关的。\n然而，创建窗口/画布、获取 WebGPU 设备、处理用户输入等部分是与平台紧密相关的。\n1. 导出到 Web 端 (浏览器) 在 Web 端，你的 C++ 代码需要被编译成 WebAssembly (WASM)，并在浏览器环境中运行。浏览器本身提供了原生的 WebGPU API 实现（在 Chromium 中，这个实现就是基于 Dawn 的）。这意味着你不需要将 Dawn 库本身编译进你的 WASM 包，你的 WASM 直接调用浏览器提供的 WebGPU API。\n主要工具：Emscripten\n编写 C++ 渲染程序：\n你的渲染代码会调用标准的 WebGPU API（封装在 Dawn 的 C++ 头文件中，如 dawn/webgpu.h 或直接使用 wgpu 名称空间）。\n">
-<meta property='og:url' content='http://localhost:1313/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/'>
+<meta property='og:url' content='https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/'>
 <meta property='og:site_name' content='五级灵风'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-07-16T10:22:34&#43;08:00'/><meta property='article:modified_time' content='2025-07-16T10:22:34&#43;08:00'/><meta property='og:image' content='http://localhost:1313/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/img.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-07-16T10:22:34&#43;08:00'/><meta property='article:modified_time' content='2025-07-16T10:22:34&#43;08:00'/><meta property='og:image' content='https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/img.png' />
 <meta name="twitter:title" content="Web端渲染">
 <meta name="twitter:description" content="将使用 Dawn 库编写的渲染程序导出到 Web 端和本地端，需要采取不同的编译和部署策略，但核心思想是：你的 C++ 渲染逻辑（使用 WebGPU API）大部分可以保持不变，而平台特定的部分（如窗口创建、文件IO、事件处理）则需要抽象或有条件编译。\nDawn 本身是一个 C++ 库，实现了 WebGPU API 规范，并且是 Chromium 浏览器中 WebGPU 的底层实现。\n核心思想：平台无关的 WebGPU 逻辑 你的渲染程序主体应该使用 WebGPU API（通过 wgpu::Device, wgpu::Queue, wgpu::RenderPassEncoder 等）来定义渲染管线、加载资源、绘制等。这部分代码在概念上是平台无关的。\n然而，创建窗口/画布、获取 WebGPU 设备、处理用户输入等部分是与平台紧密相关的。\n1. 导出到 Web 端 (浏览器) 在 Web 端，你的 C++ 代码需要被编译成 WebAssembly (WASM)，并在浏览器环境中运行。浏览器本身提供了原生的 WebGPU API 实现（在 Chromium 中，这个实现就是基于 Dawn 的）。这意味着你不需要将 Dawn 库本身编译进你的 WASM 包，你的 WASM 直接调用浏览器提供的 WebGPU API。\n主要工具：Emscripten\n编写 C++ 渲染程序：\n你的渲染代码会调用标准的 WebGPU API（封装在 Dawn 的 C++ 头文件中，如 dawn/webgpu.h 或直接使用 wgpu 名称空间）。\n"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://localhost:1313/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/img.png' />
+    <meta name="twitter:image" content='https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/img.png' />
     <link rel="shortcut icon" href="../../favicon.ico" />
 
     </head>
@@ -292,11 +292,11 @@
 
                             <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
                                 
-                                    <option value="http://localhost:1313/" selected>中文</option>
+                                    <option value="https://wujilingfeng.github.io/" selected>中文</option>
                                 
-                                    <option value="http://localhost:1313/en/" >English</option>
+                                    <option value="https://wujilingfeng.github.io/en/" >English</option>
                                 
-                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                    <option value="https://wujilingfeng.github.io/ar/" >عربي</option>
                                 
                             </select>
                         </li>
@@ -860,7 +860,7 @@ int main() {
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="../../ts/main.6ba7a7ecd89a92a9da42c8cae11ee91ffa7884016ed75a4e001568498e737fdc.js" defer></script>
+            </script><script type="text/javascript" src="../../ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
