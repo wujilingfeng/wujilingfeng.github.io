@@ -3,21 +3,21 @@
     lang="zh-cn"
     dir="ltr"
 >
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <head>
         <meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\nzig语言的type类型可以直接比较判断\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 pub fn normalize(p: anytype) Math_Compute_Abandon!void { comptime { const T=@TypeOf(p[0]); if(@TypeOf(p)!=[]T) { @compileError(&#34;normalize error\\n&#34;++@typeName(@TypeOf(p))++&#34;fdsf&#34;); } } const norm = lb_norm(p); if (approxEqAbs(@TypeOf(p[0]), norm, 0, null)) { return error.Math_Compute_Abandon; } for (p) |*pv| { pv.* /= norm; } } 下面是zig语言类型反射用法，包括访问struct类型，访问字段类型\n">
 <title>Zig实战</title>
 
-<link rel='canonical' href='http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/'>
+<link rel='canonical' href='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/'>
 
 <link rel="stylesheet" href="../../scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Zig实战">
 <meta property='og:description' content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\nzig语言的type类型可以直接比较判断\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 pub fn normalize(p: anytype) Math_Compute_Abandon!void { comptime { const T=@TypeOf(p[0]); if(@TypeOf(p)!=[]T) { @compileError(&#34;normalize error\\n&#34;++@typeName(@TypeOf(p))++&#34;fdsf&#34;); } } const norm = lb_norm(p); if (approxEqAbs(@TypeOf(p[0]), norm, 0, null)) { return error.Math_Compute_Abandon; } for (p) |*pv| { pv.* /= norm; } } 下面是zig语言类型反射用法，包括访问struct类型，访问字段类型\n">
-<meta property='og:url' content='http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/'>
+<meta property='og:url' content='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/'>
 <meta property='og:site_name' content='五级灵风'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-06-20T10:36:14&#43;08:00'/><meta property='article:modified_time' content='2025-06-20T10:36:14&#43;08:00'/><meta property='og:image' content='http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/nature.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-06-20T10:36:14&#43;08:00'/><meta property='article:modified_time' content='2025-06-20T10:36:14&#43;08:00'/><meta property='og:image' content='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/nature.png' />
 <meta name="twitter:title" content="Zig实战">
 <meta name="twitter:description" content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\nzig语言的type类型可以直接比较判断\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 pub fn normalize(p: anytype) Math_Compute_Abandon!void { comptime { const T=@TypeOf(p[0]); if(@TypeOf(p)!=[]T) { @compileError(&#34;normalize error\\n&#34;++@typeName(@TypeOf(p))++&#34;fdsf&#34;); } } const norm = lb_norm(p); if (approxEqAbs(@TypeOf(p[0]), norm, 0, null)) { return error.Math_Compute_Abandon; } for (p) |*pv| { pv.* /= norm; } } 下面是zig语言类型反射用法，包括访问struct类型，访问字段类型\n"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/nature.png' />
+    <meta name="twitter:image" content='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/nature.png' />
     <link rel="shortcut icon" href="../../favicon.ico" />
 
     </head>
@@ -292,11 +292,11 @@
 
                             <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
                                 
-                                    <option value="http://localhost:1313/" selected>中文</option>
+                                    <option value="https://wujilingfeng.github.io/" selected>中文</option>
                                 
-                                    <option value="http://localhost:1313/en/" >English</option>
+                                    <option value="https://wujilingfeng.github.io/en/" >English</option>
                                 
-                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                    <option value="https://wujilingfeng.github.io/ar/" >عربي</option>
                                 
                             </select>
                         </li>
@@ -1014,7 +1014,7 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="../../ts/main.6ba7a7ecd89a92a9da42c8cae11ee91ffa7884016ed75a4e001568498e737fdc.js" defer></script>
+            </script><script type="text/javascript" src="../../ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
