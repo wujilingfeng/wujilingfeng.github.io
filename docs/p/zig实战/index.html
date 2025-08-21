@@ -364,6 +364,7 @@
     <li>
       <ol>
         <li><a href="#生成文档">生成文档</a></li>
+        <li><a href="#zig-gamedev项目实战">zig-gamedev项目实战</a></li>
       </ol>
     </li>
   </ol>
@@ -829,6 +830,12 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 </ul>
 <h4 id="生成文档">生成文档
 </h4><p>zig生成的文档，首先安装bun，然后在文档目录下执行命令<code>bunx serve .</code>。这是因为main.js里面需要借助http获取wasm，所以直接打开index.html没用。</p>
+<h4 id="zig-gamedev项目实战">zig-gamedev项目实战
+</h4><p><code>zig build -l </code>列出 所有构建项目</p>
+<p><code> zig build  minimal_glfw_g</code> 构建该项目</p>
+<p><code>zig build -l -Dtarget=wasm32-emscripten</code>列出web项目。</p>
+<p><code>zig build minimal_glfw_gl-run -Dtarget=wasm32-emscripten</code>构建该web项目。</p>
+<p>运行<code>bunx server .</code>运行网页。</p>
 
 </section>
 

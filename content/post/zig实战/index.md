@@ -340,3 +340,14 @@ pub fn build(b: *std.Build) void {
 
 zig生成的文档，首先安装bun，然后在文档目录下执行命令`bunx serve .`。这是因为main.js里面需要借助http获取wasm，所以直接打开index.html没用。
 
+#### zig-gamedev项目实战
+
+`zig build -l `列出 所有构建项目
+
+` zig build  minimal_glfw_g` 构建该项目
+
+`zig build -l -Dtarget=wasm32-emscripten`列出web项目。
+
+`zig build minimal_glfw_gl-run -Dtarget=wasm32-emscripten`构建该web项目。
+
+运行`bunx server .`运行网页。

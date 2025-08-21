@@ -861,6 +861,12 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;/ul&gt;
 &lt;h4 id=&#34;生成文档&#34;&gt;生成文档
 &lt;/h4&gt;&lt;p&gt;zig生成的文档，首先安装bun，然后在文档目录下执行命令&lt;code&gt;bunx serve .&lt;/code&gt;。这是因为main.js里面需要借助http获取wasm，所以直接打开index.html没用。&lt;/p&gt;
+&lt;h4 id=&#34;zig-gamedev项目实战&#34;&gt;zig-gamedev项目实战
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;zig build -l &lt;/code&gt;列出 所有构建项目&lt;/p&gt;
+&lt;p&gt;&lt;code&gt; zig build  minimal_glfw_g&lt;/code&gt; 构建该项目&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;zig build -l -Dtarget=wasm32-emscripten&lt;/code&gt;列出web项目。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;zig build minimal_glfw_gl-run -Dtarget=wasm32-emscripten&lt;/code&gt;构建该web项目。&lt;/p&gt;
+&lt;p&gt;运行&lt;code&gt;bunx server .&lt;/code&gt;运行网页。&lt;/p&gt;
 </description>
         </item>
         <item>
