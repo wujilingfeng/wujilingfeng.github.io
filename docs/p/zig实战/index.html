@@ -613,7 +613,67 @@
     >mach-glfw</a> 里面的main分支，就是@cImport()之后又裹了一层zig。</p>
 <p>如果zig语言想要实现类型类，只需要写个满足类型类约束的comptime函数，也就是在编译期进行类型检查是否有某些方法的判断，然后在需要添加类型类约束的函数上添加这个编译期函数判断即可。</p>
 <h3 id="编译系统">编译系统
-</h3><p>下面是编译c语言项目的构建代码，有冗余，这里的注释部分也能添加源文件，到底是cstructures_mod还是cstructures添加源文件呢？写法不统一。</p>
+</h3><p>zig语言编译系统的b.option是对编译命令添加选项，一般通过<code>zig build -Doption=content</code>来传递，b.addOptions是向项目程序里面的模块添加选项模块。</p>
+<p>比如下面的例子:</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">26
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">std</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@import</span>(<span style="color:#98c379">&#34;std&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">build</span>(<span style="color:#e06c75">b</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">Build</span>) <span style="color:#e5c07b">void</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">exe</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">addExecutable</span>(.{
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">name</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;app&#34;</span>,
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">root_module</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">createModule</span>(.{
+</span></span><span style="display:flex;"><span>            .<span style="color:#e06c75">root_source_file</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">path</span>(<span style="color:#98c379">&#34;app.zig&#34;</span>),
+</span></span><span style="display:flex;"><span>            .<span style="color:#e06c75">target</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">graph</span>.<span style="color:#e06c75">host</span>,
+</span></span><span style="display:flex;"><span>        }),
+</span></span><span style="display:flex;"><span>    });
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">version</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">option</span>([]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>, <span style="color:#98c379">&#34;version&#34;</span>, <span style="color:#98c379">&#34;application version string&#34;</span>) <span style="color:#c678dd">orelse</span> <span style="color:#98c379">&#34;0.0.0&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">enable_foo</span> <span style="color:#56b6c2">=</span> <span style="color:#61afef;font-weight:bold">detectWhetherToEnableLibFoo</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">options</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">addOptions</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">options</span>.<span style="color:#61afef;font-weight:bold">addOption</span>([]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>, <span style="color:#98c379">&#34;version&#34;</span>, <span style="color:#e06c75">version</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">options</span>.<span style="color:#61afef;font-weight:bold">addOption</span>(<span style="color:#e5c07b">bool</span>, <span style="color:#98c379">&#34;have_libfoo&#34;</span>, <span style="color:#e06c75">enable_foo</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">exe</span>.<span style="color:#e06c75">root_module</span>.<span style="color:#61afef;font-weight:bold">addOptions</span>(<span style="color:#98c379">&#34;config&#34;</span>, <span style="color:#e06c75">options</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">installArtifact</span>(<span style="color:#e06c75">exe</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">detectWhetherToEnableLibFoo</span>() <span style="color:#e5c07b">bool</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e5c07b">false</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>下面是编译c语言项目的构建代码，有冗余，这里的注释部分也能添加源文件，到底是cstructures_mod还是cstructures添加源文件呢？写法不统一。</p>
 <div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
