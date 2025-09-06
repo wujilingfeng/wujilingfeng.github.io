@@ -16,7 +16,7 @@ image = "nature.png"
 
 https://dev.to/sleibrock/webassembly-with-zig-part-1-4onm
 
-
+zig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）,
 
 zig语言的type类型可以直接比较判断
 
