@@ -2286,6 +2286,8 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;/div&gt;&lt;h4 id=&#34;数值&#34;&gt;数值
 &lt;/h4&gt;&lt;p&gt;在 Zig 语言中，‌&lt;strong&gt;低精度数值向高精度变量赋值时不需要显式转换，编译器会自动完成安全的隐式提升&lt;/strong&gt;‌。&lt;/p&gt;
 &lt;p&gt;在Zig语言中，‌&lt;strong&gt;高精度数值赋给低精度变量需要显式转换&lt;/strong&gt;‌，否则会触发编译错误。@intCast&lt;code&gt;、&lt;/code&gt;@truncate&lt;code&gt;、&lt;/code&gt;@floatCast&lt;/p&gt;
+&lt;h4 id=&#34;comptime-编译时计算&#34;&gt;comptime 编译时计算
+&lt;/h4&gt;&lt;p&gt;zig会尽量在编译时进行计算，但似乎机制不太好，大部分情况需要手动指定，比如用comptime {}来指定块内部分在编译时计算。此外inline和编译时计算也密切相关，在函数前加inline可以防止函数被强制视为运行时确定，从而不影响计算尽量在编译时进行。就算函数里面有comptime T:type，只能说这个函数在编译时确定该参数，但是这个函数如果不加inline,仍然被视为运行时确定的。也可以在while或者for前加inline，来防止循环被强制视为运行时部分，从而在合适的条件下在编译时进行。&lt;/p&gt;
 &lt;h3 id=&#34;zig-模块导入核心规则&#34;&gt;Zig 模块导入核心规则
 &lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;
