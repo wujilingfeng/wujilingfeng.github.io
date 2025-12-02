@@ -504,13 +504,15 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">3
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">4
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">6
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">myget_Array_rows</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">TT</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>) <span style="color:#e5c07b">usize</span> {
 </span></span><span style="display:flex;"><span>            <span style="color:#c678dd">return</span> <span style="color:#e5c07b">@typeInfo</span>(<span style="color:#e06c75">TT</span>).<span style="color:#e06c75">array</span>.<span style="color:#e06c75">len</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span><span style="color:#7f848e">//下面有typeinfo的用法
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">mult</span>(<span style="color:#e06c75">self</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">Self</span>, <span style="color:#e06c75">mat</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">anytype</span>) <span style="color:#61afef;font-weight:bold">LBMatrix</span>(<span style="color:#e06c75">T</span>, <span style="color:#e06c75">rows</span>, <span style="color:#61afef;font-weight:bold">myget_Array_rows</span>(<span style="color:#e5c07b">@typeInfo</span>(<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">mat</span>)).@<span style="color:#98c379">&#34;struct&#34;</span>.<span style="color:#e06c75">fields</span>[<span style="color:#d19a66">0</span>].<span style="color:#e5c07b">type</span>))
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">mult</span>(<span style="color:#e06c75">self</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">Self</span>, <span style="color:#e06c75">mat</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">anytype</span>) <span style="color:#61afef;font-weight:bold">LBMatrix</span>(<span style="color:#e06c75">T</span>, <span style="color:#e06c75">rows</span>, 	    		
+</span></span><span style="display:flex;"><span>  <span style="color:#61afef;font-weight:bold">myget_Array_rows</span>(<span style="color:#e5c07b">@typeInfo</span>(<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">mat</span>)).@<span style="color:#98c379">&#34;struct&#34;</span>.<span style="color:#e06c75">fields</span>[<span style="color:#d19a66">0</span>].<span style="color:#e5c07b">type</span>))
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>mat的类型如下:</p>
@@ -548,6 +550,7 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">12
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">13
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">15
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;inline while loop&#34;</span> {
@@ -560,7 +563,8 @@
 </span></span><span style="display:flex;"><span>            <span style="color:#d19a66">2</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#e5c07b">bool</span>,
 </span></span><span style="display:flex;"><span>            <span style="color:#c678dd">else</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#c678dd">unreachable</span>,
 </span></span><span style="display:flex;"><span>        };
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">sum</span> <span style="color:#56b6c2">+=</span> <span style="color:#61afef;font-weight:bold">typeNameLength</span>(<span style="color:#e06c75">T</span>); <span style="color:#7f848e">// typeNameLength 可能是一个编译期函数，用于获取类型名称的长度
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">sum</span> <span style="color:#56b6c2">+=</span> <span style="color:#61afef;font-weight:bold">typeNameLength</span>(<span style="color:#e06c75">T</span>); <span style="color:#7f848e">// typeNameLength 
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">//可能是一个编译期函数，用于获取类型名称的长度
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">sum</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">9</span>);
 </span></span><span style="display:flex;"><span>}

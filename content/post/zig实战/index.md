@@ -46,7 +46,8 @@ fn myget_Array_rows(comptime TT: type) usize {
             return @typeInfo(TT).array.len;
         }
 //下面有typeinfo的用法
-pub fn mult(self: *const Self, mat: anytype) LBMatrix(T, rows, myget_Array_rows(@typeInfo(@TypeOf(mat)).@"struct".fields[0].type))
+pub fn mult(self: *const Self, mat: anytype) LBMatrix(T, rows, 	    		
+  myget_Array_rows(@typeInfo(@TypeOf(mat)).@"struct".fields[0].type))
 
 
 
@@ -81,7 +82,8 @@ test "inline while loop" {
             2 => bool,
             else => unreachable,
         };
-        sum += typeNameLength(T); // typeNameLength 可能是一个编译期函数，用于获取类型名称的长度
+        sum += typeNameLength(T); // typeNameLength 
+        //可能是一个编译期函数，用于获取类型名称的长度
     }
     try expect(sum == 9);
 }
