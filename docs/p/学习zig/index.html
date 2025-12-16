@@ -1358,6 +1358,7 @@
 </table></div>
 <hr>
 <p>zig的编译系统中每个addTest和addExecutable都独立存在，哪怕它们指向同一个root_source_file，也就是有时多个文件内容test函数会多次运行。</p>
+<p>b.option的用途是在zig build时，通过<code>-D</code>来传递命令，b.addOption是创建可以向源文件传递编译的变量</p>
 <h4 id="zig-fetch">zig fetch
 </h4><p><code>zig fetch --save &quot;git+https://github.com/用户/仓库.git#&lt;commit_hash或者tag&gt;&quot;</code></p>
 <p>如果省掉<code>#&lt;commit_hash或者tag&gt;</code>就会拉取默认分支的最新的提交</p>
