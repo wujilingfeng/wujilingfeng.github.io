@@ -14,7 +14,11 @@ zig语言对函数声明和定义启用延迟检查分析，也就是如果定�
 
 zig语言的void和c语言的void不同，c语言的void对应anyopaque，是对opaque的泛化，就像anytype是对type的泛化，anyerror对error的泛化。void也是一个类型，它的值通常为`{}`。
 
-zig语言 的”元组“，.{"nihao",3}其实是个value, 它的类型是匿名结构体，
+ 匿名结构体的类型可以直接声明并初始化`var value=.{ .int = @as(**u32**, 1234),.float = @as(**f64**, 12.34), .b = true, .s = "hi",}`, 它的类型是`struct{int:u32,float:f64,b:true,s:const*[2:0]u8}`，你可以在写函数参数类型时用到。
+
+zig语言 的”元组“，.{"nihao",3}其实是个value, 它的类型是匿名结构体struct {const *[5:0]u8,u32}，也就是如果匿名结构体不带变量名就是元组。
+
+zig的运算符`**`和`++`都是中缀二元运算符，都要求两边的参数是编译期已知的。
 
 zig语言会自动对结构体的内存进行布局优化，下面的例子:
 
@@ -596,6 +600,8 @@ const bar = @import("my_module/bar.zig");
 ---
 
 zig的编译系统中每个addTest和addExecutable都独立存在，哪怕它们指向同一个root_source_file，也就是有时多个文件内容test函数会多次运行。
+
+b.option的用途是在zig build时，通过`-D`来传递命令，b.addOption是创建可以向源文件传递编译的变量
 
 
 

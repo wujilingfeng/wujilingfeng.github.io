@@ -1491,7 +1491,9 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png" alt="Featured image of post 学习zig" /&gt;&lt;p&gt;zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。&lt;/p&gt;
 &lt;p&gt;zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。&lt;/p&gt;
 &lt;p&gt;zig语言的void和c语言的void不同，c语言的void对应anyopaque，是对opaque的泛化，就像anytype是对type的泛化，anyerror对error的泛化。void也是一个类型，它的值通常为&lt;code&gt;{}&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;zig语言 的”元组“，.{&amp;ldquo;nihao&amp;rdquo;,3}其实是个value, 它的类型是匿名结构体，&lt;/p&gt;
+&lt;p&gt;匿名结构体的类型可以直接声明并初始化&lt;code&gt;var value=.{ .int = @as(**u32**, 1234),.float = @as(**f64**, 12.34), .b = true, .s = &amp;quot;hi&amp;quot;,}&lt;/code&gt;, 它的类型是&lt;code&gt;struct{int:u32,float:f64,b:true,s:const*[2:0]u8}&lt;/code&gt;，你可以在写函数参数类型时用到。&lt;/p&gt;
+&lt;p&gt;zig语言 的”元组“，.{&amp;ldquo;nihao&amp;rdquo;,3}其实是个value, 它的类型是匿名结构体struct {const *[5:0]u8,u32}，也就是如果匿名结构体不带变量名就是元组。&lt;/p&gt;
+&lt;p&gt;zig的运算符&lt;code&gt;**&lt;/code&gt;和&lt;code&gt;++&lt;/code&gt;都是中缀二元运算符，都要求两边的参数是编译期已知的。&lt;/p&gt;
 &lt;p&gt;zig语言会自动对结构体的内存进行布局优化，下面的例子:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;

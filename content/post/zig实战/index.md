@@ -26,7 +26,8 @@ pub fn normalize(p: anytype) Math_Compute_Abandon!void {
         const T=@TypeOf(p[0]);
         if(@TypeOf(p)!=[]T)
         {
-            @compileError("normalize error\n"++@typeName(@TypeOf(p))++"fdsf");
+            @compileError("normalize error\n" ++ 
+            	@typeName(@TypeOf(p)) ++ "fdsf");
         }
     }
     const norm = lb_norm(p);
