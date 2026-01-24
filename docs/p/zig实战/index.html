@@ -10,7 +10,7 @@
 
 <link rel='canonical' href='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/'>
 
-<link rel="stylesheet" href="../../scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Zig实战">
+<link rel="stylesheet" href="../../scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="Zig实战">
 <meta property='og:description' content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\nzig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）,\nzig语言的type类型可以直接比较判断\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 pub fn normalize(p: anytype) Math_Compute_Abandon!void { comptime { const T=@TypeOf(p[0]); if(@TypeOf(p)!=[]T) { @compileError(&#34;normalize error\\n&#34; ++ @typeName(@TypeOf(p)) ++ &#34;fdsf&#34;); } } const norm = lb_norm(p); if (approxEqAbs(@TypeOf(p[0]), norm, 0, null)) { return error.Math_Compute_Abandon; } for (p) |*pv| { pv.* /= norm; } } 下面是zig语言类型反射用法，包括访问struct类型，访问字段类型\n">
 <meta property='og:url' content='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/'>
 <meta property='og:site_name' content='五级灵风'>
@@ -351,20 +351,30 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#comptime实战">comptime实战</a></li>
-    <li><a href="#编译系统">编译系统</a></li>
-    <li><a href="#导出为webassembly">导出为webassembly</a></li>
-  </ol>
-
-  <ol>
-    <li><a href="#编译命令">编译命令</a></li>
-  </ol>
-
-  <ol>
     <li>
       <ol>
-        <li><a href="#生成文档">生成文档</a></li>
-        <li><a href="#zig-gamedev项目实战">zig-gamedev项目实战</a></li>
+        <li><a href="#comptime实战">comptime实战</a></li>
+        <li><a href="#编译系统">编译系统</a></li>
+        <li><a href="#导出为webassembly">导出为webassembly</a></li>
+      </ol>
+    </li>
+    <li><a href="#编写-zig-代码举例">编写 Zig 代码举例</a></li>
+    <li><a href="#编写-buildzig">编写 build.zig</a>
+      <ol>
+        <li><a href="#编译命令">编译命令</a></li>
+      </ol>
+    </li>
+    <li><a href="#用-javascript-加载-wasm">用 JavaScript 加载 WASM</a></li>
+    <li><a href="#进阶提示">进阶提示</a></li>
+    <li><a href="#参考更复杂的实际-buildzig-示例">参考更复杂的实际 build.zig 示例</a></li>
+    <li><a href="#常见问题">常见问题</a>
+      <ol>
+        <li>
+          <ol>
+            <li><a href="#生成文档">生成文档</a></li>
+            <li><a href="#zig-gamedev项目实战">zig-gamedev项目实战</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
   </ol>
@@ -479,7 +489,7 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">17
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">normalize</span>(<span style="color:#e06c75">p</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">anytype</span>) <span style="color:#e06c75">Math_Compute_Abandon</span><span style="color:#56b6c2">!</span><span style="color:#e5c07b">void</span> {
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">normalize</span>(<span style="color:#e06c75">p</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">anytype</span>) <span style="color:#e06c75">Math_Compute_Abandon</span><span style="color:#56b6c2">!</span><span style="color:#e5c07b">void</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">comptime</span> {
 </span></span><span style="display:flex;"><span>        <span style="color:#c678dd">const</span> <span style="color:#e06c75">T</span><span style="color:#56b6c2">=</span><span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">p</span>[<span style="color:#d19a66">0</span>]);
 </span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span>(<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">p</span>)<span style="color:#56b6c2">!=</span>[]<span style="color:#e06c75">T</span>)
@@ -488,8 +498,8 @@
 </span></span><span style="display:flex;"><span>            	<span style="color:#e5c07b">@typeName</span>(<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">p</span>)) <span style="color:#56b6c2">++</span> <span style="color:#98c379">&#34;fdsf&#34;</span>);
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">norm</span> <span style="color:#56b6c2">=</span> <span style="color:#61afef;font-weight:bold">lb_norm</span>(<span style="color:#e06c75">p</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> (<span style="color:#61afef;font-weight:bold">approxEqAbs</span>(<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">p</span>[<span style="color:#d19a66">0</span>]), <span style="color:#e06c75">norm</span>, <span style="color:#d19a66">0</span>, <span style="color:#e5c07b">null</span>)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">norm</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">lb_norm</span>(<span style="color:#e06c75">p</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> (<span style="color:#e06c75">approxEqAbs</span>(<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">p</span>[<span style="color:#d19a66">0</span>]), <span style="color:#e06c75">norm</span>, <span style="color:#d19a66">0</span>, <span style="color:#e5c07b">null</span>)) {
 </span></span><span style="display:flex;"><span>        <span style="color:#c678dd">return</span> <span style="color:#c678dd">error</span>.<span style="color:#e06c75">Math_Compute_Abandon</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> (<span style="color:#e06c75">p</span>) <span style="color:#56b6c2">|*</span><span style="color:#e06c75">pv</span><span style="color:#56b6c2">|</span> {
@@ -509,12 +519,12 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">6
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">myget_Array_rows</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">TT</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>) <span style="color:#e5c07b">usize</span> {
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#e06c75">myget_Array_rows</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">TT</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>) <span style="color:#e5c07b">usize</span> {
 </span></span><span style="display:flex;"><span>            <span style="color:#c678dd">return</span> <span style="color:#e5c07b">@typeInfo</span>(<span style="color:#e06c75">TT</span>).<span style="color:#e06c75">array</span>.<span style="color:#e06c75">len</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span><span style="color:#7f848e">//下面有typeinfo的用法
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">mult</span>(<span style="color:#e06c75">self</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">Self</span>, <span style="color:#e06c75">mat</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">anytype</span>) <span style="color:#61afef;font-weight:bold">LBMatrix</span>(<span style="color:#e06c75">T</span>, <span style="color:#e06c75">rows</span>, 	    		
-</span></span><span style="display:flex;"><span>  <span style="color:#61afef;font-weight:bold">myget_Array_rows</span>(<span style="color:#e5c07b">@typeInfo</span>(<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">mat</span>)).@<span style="color:#98c379">&#34;struct&#34;</span>.<span style="color:#e06c75">fields</span>[<span style="color:#d19a66">0</span>].<span style="color:#e5c07b">type</span>))
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">mult</span>(<span style="color:#e06c75">self</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">Self</span>, <span style="color:#e06c75">mat</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">anytype</span>) <span style="color:#e06c75">LBMatrix</span>(<span style="color:#e06c75">T</span>, <span style="color:#e06c75">rows</span>, 	    		
+</span></span><span style="display:flex;"><span>  <span style="color:#e06c75">myget_Array_rows</span>(<span style="color:#e5c07b">@typeInfo</span>(<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">mat</span>)).@<span style="color:#98c379">&#34;struct&#34;</span>.<span style="color:#e06c75">fields</span>[<span style="color:#d19a66">0</span>].<span style="color:#e5c07b">type</span>))
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>mat的类型如下:</p>
@@ -565,10 +575,10 @@
 </span></span><span style="display:flex;"><span>            <span style="color:#d19a66">2</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#e5c07b">bool</span>,
 </span></span><span style="display:flex;"><span>            <span style="color:#c678dd">else</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#c678dd">unreachable</span>,
 </span></span><span style="display:flex;"><span>        };
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">sum</span> <span style="color:#56b6c2">+=</span> <span style="color:#61afef;font-weight:bold">typeNameLength</span>(<span style="color:#e06c75">T</span>); <span style="color:#7f848e">// typeNameLength 
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">sum</span> <span style="color:#56b6c2">+=</span> <span style="color:#e06c75">typeNameLength</span>(<span style="color:#e06c75">T</span>); <span style="color:#7f848e">// typeNameLength 
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">//可能是一个编译期函数，用于获取类型名称的长度
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">sum</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">9</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">sum</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">9</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
@@ -587,11 +597,11 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;peer type resolution: ?T and T&#34;</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#61afef;font-weight:bold">peerTypeTAndOptionalT</span>(<span style="color:#e5c07b">true</span>, <span style="color:#e5c07b">false</span>).<span style="color:#56b6c2">?</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#61afef;font-weight:bold">peerTypeTAndOptionalT</span>(<span style="color:#e5c07b">false</span>, <span style="color:#e5c07b">false</span>).<span style="color:#56b6c2">?</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">3</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">peerTypeTAndOptionalT</span>(<span style="color:#e5c07b">true</span>, <span style="color:#e5c07b">false</span>).<span style="color:#56b6c2">?</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">peerTypeTAndOptionalT</span>(<span style="color:#e5c07b">false</span>, <span style="color:#e5c07b">false</span>).<span style="color:#56b6c2">?</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">3</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">comptime</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#61afef;font-weight:bold">peerTypeTAndOptionalT</span>(<span style="color:#e5c07b">true</span>, <span style="color:#e5c07b">false</span>).<span style="color:#56b6c2">?</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">0</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#61afef;font-weight:bold">peerTypeTAndOptionalT</span>(<span style="color:#e5c07b">false</span>, <span style="color:#e5c07b">false</span>).<span style="color:#56b6c2">?</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">3</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">peerTypeTAndOptionalT</span>(<span style="color:#e5c07b">true</span>, <span style="color:#e5c07b">false</span>).<span style="color:#56b6c2">?</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">peerTypeTAndOptionalT</span>(<span style="color:#e5c07b">false</span>, <span style="color:#e5c07b">false</span>).<span style="color:#56b6c2">?</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">3</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
@@ -612,7 +622,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#e06c75">safe_sqrt</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">var</span> <span style="color:#e06c75">x</span><span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#d19a66">1</span>;<span style="color:#98c379">\\这里需改为var x:f32=-1;即可修复错误</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#e06c75">x</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">x</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">testing</span>.<span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#61afef;font-weight:bold">safe_sqrt</span>(<span style="color:#e06c75">x</span>) <span style="color:#56b6c2">&gt;=</span> <span style="color:#d19a66">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">testing</span>.<span style="color:#e06c75">expect</span>(<span style="color:#e06c75">safe_sqrt</span>(<span style="color:#e06c75">x</span>) <span style="color:#56b6c2">&gt;=</span> <span style="color:#d19a66">0</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
@@ -654,28 +664,28 @@
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">std</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@import</span>(<span style="color:#98c379">&#34;std&#34;</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">build</span>(<span style="color:#e06c75">b</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">Build</span>) <span style="color:#e5c07b">void</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">exe</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">addExecutable</span>(.{
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">build</span>(<span style="color:#e06c75">b</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">Build</span>) <span style="color:#e5c07b">void</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">exe</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">addExecutable</span>(.{
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">name</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;app&#34;</span>,
-</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">root_module</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">createModule</span>(.{
-</span></span><span style="display:flex;"><span>            .<span style="color:#e06c75">root_source_file</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">path</span>(<span style="color:#98c379">&#34;app.zig&#34;</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">root_module</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">createModule</span>(.{
+</span></span><span style="display:flex;"><span>            .<span style="color:#e06c75">root_source_file</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">path</span>(<span style="color:#98c379">&#34;app.zig&#34;</span>),
 </span></span><span style="display:flex;"><span>            .<span style="color:#e06c75">target</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">graph</span>.<span style="color:#e06c75">host</span>,
 </span></span><span style="display:flex;"><span>        }),
 </span></span><span style="display:flex;"><span>    });
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">version</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">option</span>([]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>, <span style="color:#98c379">&#34;version&#34;</span>, <span style="color:#98c379">&#34;application version string&#34;</span>) <span style="color:#c678dd">orelse</span> <span style="color:#98c379">&#34;0.0.0&#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">enable_foo</span> <span style="color:#56b6c2">=</span> <span style="color:#61afef;font-weight:bold">detectWhetherToEnableLibFoo</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">version</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">option</span>([]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>, <span style="color:#98c379">&#34;version&#34;</span>, <span style="color:#98c379">&#34;application version string&#34;</span>) <span style="color:#c678dd">orelse</span> <span style="color:#98c379">&#34;0.0.0&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">enable_foo</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">detectWhetherToEnableLibFoo</span>();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">options</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">addOptions</span>();
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">options</span>.<span style="color:#61afef;font-weight:bold">addOption</span>([]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>, <span style="color:#98c379">&#34;version&#34;</span>, <span style="color:#e06c75">version</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">options</span>.<span style="color:#61afef;font-weight:bold">addOption</span>(<span style="color:#e5c07b">bool</span>, <span style="color:#98c379">&#34;have_libfoo&#34;</span>, <span style="color:#e06c75">enable_foo</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">options</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">addOptions</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">options</span>.<span style="color:#e06c75">addOption</span>([]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>, <span style="color:#98c379">&#34;version&#34;</span>, <span style="color:#e06c75">version</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">options</span>.<span style="color:#e06c75">addOption</span>(<span style="color:#e5c07b">bool</span>, <span style="color:#98c379">&#34;have_libfoo&#34;</span>, <span style="color:#e06c75">enable_foo</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">exe</span>.<span style="color:#e06c75">root_module</span>.<span style="color:#61afef;font-weight:bold">addOptions</span>(<span style="color:#98c379">&#34;config&#34;</span>, <span style="color:#e06c75">options</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">exe</span>.<span style="color:#e06c75">root_module</span>.<span style="color:#e06c75">addOptions</span>(<span style="color:#98c379">&#34;config&#34;</span>, <span style="color:#e06c75">options</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">installArtifact</span>(<span style="color:#e06c75">exe</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">b</span>.<span style="color:#e06c75">installArtifact</span>(<span style="color:#e06c75">exe</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">detectWhetherToEnableLibFoo</span>() <span style="color:#e5c07b">bool</span> {
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#e06c75">detectWhetherToEnableLibFoo</span>() <span style="color:#e5c07b">bool</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e5c07b">false</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
@@ -706,7 +716,7 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">21
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">cstructures_mod</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">addModule</span>(<span style="color:#98c379">&#34;cstructures_mod&#34;</span>, .{
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">cstructures_mod</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">addModule</span>(<span style="color:#98c379">&#34;cstructures_mod&#34;</span>, .{
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">target</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">target</span>,
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">optimize</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">optimize</span>,
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">root_source_file</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
@@ -716,17 +726,17 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">//     .files = &amp;.{&#34;cstructures/src/tools_node.c&#34;},
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">//     .flags = &amp;.{ &#34;-Wall&#34;, &#34;-O2&#34; },
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">// });
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">cstructures</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">addLibrary</span>(.{
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">cstructures</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">addLibrary</span>(.{
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">linkage</span> <span style="color:#56b6c2">=</span> .<span style="color:#e06c75">static</span>,
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">name</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;cstructures&#34;</span>,
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">root_module</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">cstructures_mod</span>,
 </span></span><span style="display:flex;"><span>    });
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">cstructures</span>.<span style="color:#61afef;font-weight:bold">addIncludePath</span>(<span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">path</span>(<span style="color:#98c379">&#34;cstructures/include&#34;</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">cstructures</span>.<span style="color:#61afef;font-weight:bold">addCSourceFiles</span>(.{
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">cstructures</span>.<span style="color:#e06c75">addIncludePath</span>(<span style="color:#e06c75">b</span>.<span style="color:#e06c75">path</span>(<span style="color:#98c379">&#34;cstructures/include&#34;</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">cstructures</span>.<span style="color:#e06c75">addCSourceFiles</span>(.{
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">files</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">&amp;</span>.{<span style="color:#98c379">&#34;cstructures/src/tools_node.c&#34;</span>},
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">flags</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">&amp;</span>.{ <span style="color:#98c379">&#34;-Wall&#34;</span>, <span style="color:#98c379">&#34;-O2&#34;</span> },
 </span></span><span style="display:flex;"><span>    });
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">cstructures</span>.<span style="color:#61afef;font-weight:bold">linkLibC</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">cstructures</span>.<span style="color:#e06c75">linkLibC</span>();
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="导出为webassembly">导出为webassembly
@@ -751,20 +761,20 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">std</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@import</span>(<span style="color:#98c379">&#34;std&#34;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">build</span>(<span style="color:#e06c75">b</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">Build</span>) <span style="color:#e5c07b">void</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">target</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">resolveTargetQuery</span>(<span style="color:#e06c75">std</span>.<span style="color:#e06c75">Target</span>.<span style="color:#e06c75">Query</span>.<span style="color:#61afef;font-weight:bold">parse</span>(
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">build</span>(<span style="color:#e06c75">b</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">Build</span>) <span style="color:#e5c07b">void</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">target</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">resolveTargetQuery</span>(<span style="color:#e06c75">std</span>.<span style="color:#e06c75">Target</span>.<span style="color:#e06c75">Query</span>.<span style="color:#e06c75">parse</span>(
 </span></span><span style="display:flex;"><span>        .{ .<span style="color:#e06c75">arch_os_abi</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;wasm32-wasi&#34;</span> },
 </span></span><span style="display:flex;"><span>    ) <span style="color:#c678dd">catch</span> <span style="color:#c678dd">unreachable</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">exe</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">addExecutable</span>(.{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">exe</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">addExecutable</span>(.{
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">name</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;main&#34;</span>,
-</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">root_source_file</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">path</span>(<span style="color:#98c379">&#34;src/main.zig&#34;</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">root_source_file</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">path</span>(<span style="color:#98c379">&#34;src/main.zig&#34;</span>),
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">target</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">target</span>,
-</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">optimize</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">standardOptimizeOption</span>(.{}),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">optimize</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">standardOptimizeOption</span>(.{}),
 </span></span><span style="display:flex;"><span>    });
 </span></span><span style="display:flex;"><span>    <span style="color:#7f848e">//注意这个选项
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e06c75">exe</span>.<span style="color:#e06c75">rdynamic</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">true</span>; <span style="color:#7f848e">//导出该可执行对象中标记了export的项目
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">// 此项默认为false，如果你需要在js环境中调用导出的方法，需要设置为true
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">installArtifact</span>(<span style="color:#e06c75">exe</span>); <span style="color:#7f848e">//保存生成的结果
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e06c75">b</span>.<span style="color:#e06c75">installArtifact</span>(<span style="color:#e06c75">exe</span>); <span style="color:#7f848e">//保存生成的结果
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>}
 </span></span></code></pre></td></tr></table>
 </div>

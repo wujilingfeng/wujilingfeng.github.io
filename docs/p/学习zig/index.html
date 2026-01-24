@@ -10,7 +10,7 @@
 
 <link rel='canonical' href='https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/'>
 
-<link rel="stylesheet" href="../../scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="学习zig">
+<link rel="stylesheet" href="../../scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="学习zig">
 <meta property='og:description' content="zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。\nzig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。\nzig语言的void和c语言的void不同，c语言的void对应anyopaque，是对opaque的泛化，就像anytype是对type的泛化，anyerror对error的泛化。void也是一个类型，它的值通常为{}。\n匿名结构体的类型可以直接声明并初始化var value=.{ .int = @as(**u32**, 1234),.float = @as(**f64**, 12.34), .b = true, .s = &quot;hi&quot;,}, 它的类型是struct{int:u32,float:f64,b:true,s:const*[2:0]u8}，你可以在写函数参数类型时用到。\nzig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体struct {const *[5:0]u8,u32}，也就是如果匿名结构体不带变量名就是元组。\nzig的运算符**和++都是中缀二元运算符，都要求两边的参数是编译期已知的。\nzig语言会自动对结构体的内存进行布局优化，下面的例子:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 const RB_Node = struct { key: i32, left: ?*RB_Node, right: ?*RB_Node, parent: ?*RB_Node, color: bool, }; dprint(&#34;rb node size:{}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Size of RB_Node: {}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Offset of key: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;key&#34;)}); std.debug.print(&#34;Offset of left: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;left&#34;)}); std.debug.print(&#34;Offset of right: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;right&#34;)}); std.debug.print(&#34;Offset of parent: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;parent&#34;)}); std.debug.print(&#34;Offset of color: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;color&#34;)}); zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype,似乎zig内置函数可以）。\n">
 <meta property='og:url' content='https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/'>
 <meta property='og:site_name' content='五级灵风'>
@@ -353,30 +353,36 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#错误处理">错误处理</a></li>
-        <li><a href="#可选联合类型">可选联合类型</a></li>
-        <li><a href="#标记联合体">标记联合体</a></li>
-        <li><a href="#逻辑流程控制">逻辑流程控制</a></li>
-        <li><a href="#内存分配器">内存分配器</a></li>
-        <li><a href="#数值">数值</a></li>
-        <li><a href="#comptime-编译时计算">comptime 编译时计算</a></li>
+        <li>
+          <ol>
+            <li><a href="#错误处理">错误处理</a></li>
+            <li><a href="#可选联合类型">可选联合类型</a></li>
+            <li><a href="#标记联合体">标记联合体</a></li>
+            <li><a href="#逻辑流程控制">逻辑流程控制</a></li>
+            <li><a href="#内存分配器">内存分配器</a></li>
+            <li><a href="#数值">数值</a></li>
+            <li><a href="#comptime-编译时计算">comptime 编译时计算</a></li>
+          </ol>
+        </li>
+        <li><a href="#zig-模块导入核心规则">Zig 模块导入核心规则</a>
+          <ol>
+            <li><a href="#额外说明">额外说明</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
-    <li><a href="#zig-模块导入核心规则">Zig 模块导入核心规则</a>
+    <li><a href="#zig语言的构建系统">zig语言的构建系统</a>
       <ol>
-        <li><a href="#额外说明">额外说明</a></li>
+        <li><a href="#1-addmodule">1. <code>addModule</code></a></li>
+        <li><a href="#2-createmodule">2. <code>createModule</code></a></li>
+        <li><a href="#总结对比表">总结对比表</a>
+          <ol>
+            <li><a href="#zig-fetch">zig fetch</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
-  </ol>
-
-  <ol>
-    <li><a href="#1-addmodule">1. <code>addModule</code></a></li>
-    <li><a href="#2-createmodule">2. <code>createModule</code></a></li>
-    <li><a href="#总结对比表">总结对比表</a>
-      <ol>
-        <li><a href="#zig-fetch">zig fetch</a></li>
-      </ol>
-    </li>
+    <li><a href="#和外部比如c交互">和外部（比如C）交互</a></li>
   </ol>
 </nav>
         </div>
@@ -492,13 +498,13 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#e06c75">parent</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?*</span><span style="color:#e06c75">RB_Node</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#e06c75">color</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
 </span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">dprint</span>(<span style="color:#98c379">&#34;rb node size:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@sizeOf</span>(<span style="color:#e06c75">RB_Node</span>)});
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;Size of RB_Node: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@sizeOf</span>(<span style="color:#e06c75">RB_Node</span>)});
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;Offset of key: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@offsetOf</span>(<span style="color:#e06c75">RB_Node</span>, <span style="color:#98c379">&#34;key&#34;</span>)});
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;Offset of left: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@offsetOf</span>(<span style="color:#e06c75">RB_Node</span>, <span style="color:#98c379">&#34;left&#34;</span>)});
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;Offset of right: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@offsetOf</span>(<span style="color:#e06c75">RB_Node</span>, <span style="color:#98c379">&#34;right&#34;</span>)});
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;Offset of parent: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@offsetOf</span>(<span style="color:#e06c75">RB_Node</span>, <span style="color:#98c379">&#34;parent&#34;</span>)});
-</span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;Offset of color: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@offsetOf</span>(<span style="color:#e06c75">RB_Node</span>, <span style="color:#98c379">&#34;color&#34;</span>)});
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">dprint</span>(<span style="color:#98c379">&#34;rb node size:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@sizeOf</span>(<span style="color:#e06c75">RB_Node</span>)});
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;Size of RB_Node: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@sizeOf</span>(<span style="color:#e06c75">RB_Node</span>)});
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;Offset of key: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@offsetOf</span>(<span style="color:#e06c75">RB_Node</span>, <span style="color:#98c379">&#34;key&#34;</span>)});
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;Offset of left: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@offsetOf</span>(<span style="color:#e06c75">RB_Node</span>, <span style="color:#98c379">&#34;left&#34;</span>)});
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;Offset of right: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@offsetOf</span>(<span style="color:#e06c75">RB_Node</span>, <span style="color:#98c379">&#34;right&#34;</span>)});
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;Offset of parent: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@offsetOf</span>(<span style="color:#e06c75">RB_Node</span>, <span style="color:#98c379">&#34;parent&#34;</span>)});
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;Offset of color: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@offsetOf</span>(<span style="color:#e06c75">RB_Node</span>, <span style="color:#98c379">&#34;color&#34;</span>)});
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype,似乎zig内置函数可以）。</p>
@@ -538,12 +544,12 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#e06c75">OutOfMemory</span>,
 </span></span><span style="display:flex;"><span>};
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">main</span>() <span style="color:#56b6c2">!</span><span style="color:#e5c07b">void</span> {
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">main</span>() <span style="color:#56b6c2">!</span><span style="color:#e5c07b">void</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">errort</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">FileOpenError</span>.<span style="color:#e06c75">OutOfMemory</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">err_int</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@intFromError</span>(<span style="color:#e06c75">errort</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">err_int1</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@intFromError</span>(<span style="color:#e06c75">AllocationError</span>.<span style="color:#e06c75">OutOfMemory</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">dprint</span>(<span style="color:#98c379">&#34;value errot:{},{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{ <span style="color:#e06c75">err_int</span>, <span style="color:#e06c75">err_int1</span> });
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">dprint</span>(<span style="color:#98c379">&#34;value errot:{},{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{ <span style="color:#e06c75">err_int</span>, <span style="color:#e06c75">err_int1</span> });
 </span></span><span style="display:flex;"><span> }
 </span></span></code></pre></td></tr></table>
 </div>
@@ -558,7 +564,7 @@
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">number</span> <span style="color:#56b6c2">=</span> <span style="color:#61afef;font-weight:bold">parseU64</span>(<span style="color:#e06c75">str</span>, <span style="color:#d19a66">10</span>) <span style="color:#c678dd">catch</span> <span style="color:#d19a66">13</span>;
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">number</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">parseU64</span>(<span style="color:#e06c75">str</span>, <span style="color:#d19a66">10</span>) <span style="color:#c678dd">catch</span> <span style="color:#d19a66">13</span>;
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>在 Zig 中，<code>catch</code> 还支持一种扩展形式，允许你在捕获错误时执行自定义逻辑。这种用法的语法是：</p>
@@ -603,25 +609,25 @@
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">a</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">anyerror</span><span style="color:#56b6c2">!</span><span style="color:#e5c07b">u32</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">error</span>.<span style="color:#e06c75">AlwaysError</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> (<span style="color:#e06c75">a</span>) <span style="color:#56b6c2">|</span><span style="color:#e06c75">value</span><span style="color:#56b6c2">|</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;type a{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">value</span>});
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;type a{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">value</span>});
 </span></span><span style="display:flex;"><span>        <span style="color:#7f848e">// 处理正常值
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    } <span style="color:#c678dd">else</span> <span style="color:#56b6c2">|</span><span style="color:#e06c75">err</span><span style="color:#56b6c2">|</span> {
-</span></span><span style="display:flex;"><span>      <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;type a{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">err</span>});
+</span></span><span style="display:flex;"><span>      <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;type a{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">err</span>});
 </span></span><span style="display:flex;"><span>       <span style="color:#7f848e">// 处理错误（必须显式捕获err）
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    }
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">fetchData</span>() <span style="color:#e5c07b">anyerror</span><span style="color:#56b6c2">!</span><span style="color:#e5c07b">u32</span> {
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#e06c75">fetchData</span>() <span style="color:#e5c07b">anyerror</span><span style="color:#56b6c2">!</span><span style="color:#e5c07b">u32</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// 模拟可能失败的操作
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">return</span> <span style="color:#c678dd">if</span> (<span style="color:#e06c75">std</span>.<span style="color:#e06c75">crypto</span>.<span style="color:#e06c75">random</span>.<span style="color:#61afef;font-weight:bold">int</span>(<span style="color:#e5c07b">u32</span>) <span style="color:#56b6c2">%</span> <span style="color:#d19a66">2</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">0</span>) <span style="color:#d19a66">42</span> <span style="color:#c678dd">else</span> <span style="color:#c678dd">error</span>.<span style="color:#e06c75">FetchFailed</span>;
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">return</span> <span style="color:#c678dd">if</span> (<span style="color:#e06c75">std</span>.<span style="color:#e06c75">crypto</span>.<span style="color:#e06c75">random</span>.<span style="color:#e06c75">int</span>(<span style="color:#e5c07b">u32</span>) <span style="color:#56b6c2">%</span> <span style="color:#d19a66">2</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">0</span>) <span style="color:#d19a66">42</span> <span style="color:#c678dd">else</span> <span style="color:#c678dd">error</span>.<span style="color:#e06c75">FetchFailed</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">main</span>() <span style="color:#e5c07b">void</span> {
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">main</span>() <span style="color:#e5c07b">void</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">var</span> <span style="color:#e06c75">retry</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">u32</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">while</span> (<span style="color:#61afef;font-weight:bold">fetchData</span>()) <span style="color:#56b6c2">|</span><span style="color:#e06c75">data</span><span style="color:#56b6c2">|</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;Data: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">data</span>});
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">while</span> (<span style="color:#e06c75">fetchData</span>()) <span style="color:#56b6c2">|</span><span style="color:#e06c75">data</span><span style="color:#56b6c2">|</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;Data: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">data</span>});
 </span></span><span style="display:flex;"><span>        <span style="color:#e06c75">retry</span> <span style="color:#56b6c2">+=</span> <span style="color:#d19a66">1</span>;
 </span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> (<span style="color:#e06c75">retry</span> <span style="color:#56b6c2">&gt;=</span> <span style="color:#d19a66">3</span>) <span style="color:#c678dd">break</span>; <span style="color:#7f848e">// 防止无限循环
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    } <span style="color:#c678dd">else</span> <span style="color:#56b6c2">|</span><span style="color:#e06c75">err</span><span style="color:#56b6c2">|</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;Error: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">err</span>});
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;Error: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">err</span>});
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>上面的<span style="color:#56b6c2">||</span>捕获可以是<span style="color:#56b6c2">|</span><span style="color:#e06c75">_</span><span style="color:#56b6c2">|</span>，即忽略捕获值。
@@ -671,7 +677,7 @@
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#7f848e">/// Checks if a `Ptr` is a pointer to `Item`.
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e">/// Note that the pointer is allowed to have the `const`, `volatile` or `allowzero` keyword.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">isSizeOnePoiner</span>(
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">isSizeOnePoiner</span>(
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">comptime</span> <span style="color:#e06c75">Item</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">comptime</span> <span style="color:#e06c75">Ptr</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
 </span></span><span style="display:flex;"><span>) <span style="color:#e5c07b">bool</span> {
@@ -715,13 +721,13 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">var</span> <span style="color:#e06c75">y</span><span style="color:#56b6c2">:</span><span style="color:#e5c07b">i32</span><span style="color:#56b6c2">=</span><span style="color:#61afef;font-weight:bold">add</span>(<span style="color:#d19a66">10</span>,<span style="color:#e06c75">x</span>);
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">x</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span><span style="color:#56b6c2">=</span><span style="color:#61afef;font-weight:bold">add</span>(<span style="color:#d19a66">12</span>,<span style="color:#d19a66">34</span>);
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">var</span> <span style="color:#e06c75">y</span><span style="color:#56b6c2">:</span><span style="color:#e5c07b">i32</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">add</span>(<span style="color:#d19a66">10</span>,<span style="color:#e06c75">x</span>);
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">x</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">add</span>(<span style="color:#d19a66">12</span>,<span style="color:#d19a66">34</span>);
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;container level variables&#34;</span>{
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">x</span><span style="color:#56b6c2">==</span><span style="color:#d19a66">46</span>);
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">y</span><span style="color:#56b6c2">==</span><span style="color:#d19a66">56</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">x</span><span style="color:#56b6c2">==</span><span style="color:#d19a66">46</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">y</span><span style="color:#56b6c2">==</span><span style="color:#d19a66">56</span>);
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">add</span>(<span style="color:#e06c75">a</span><span style="color:#56b6c2">:</span><span style="color:#e5c07b">i32</span>,<span style="color:#e06c75">b</span><span style="color:#56b6c2">:</span><span style="color:#e5c07b">i32</span>) <span style="color:#e5c07b">i32</span>{
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#e06c75">add</span>(<span style="color:#e06c75">a</span><span style="color:#56b6c2">:</span><span style="color:#e5c07b">i32</span>,<span style="color:#e06c75">b</span><span style="color:#56b6c2">:</span><span style="color:#e5c07b">i32</span>) <span style="color:#e5c07b">i32</span>{
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">return</span> <span style="color:#e06c75">a</span><span style="color:#56b6c2">+</span><span style="color:#e06c75">b</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">std</span><span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@import</span>(<span style="color:#98c379">&#34;std&#34;</span>)
@@ -757,8 +763,8 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#e06c75">x</span> <span style="color:#56b6c2">+=</span> <span style="color:#d19a66">1</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#e06c75">y</span> <span style="color:#56b6c2">+=</span> <span style="color:#d19a66">1</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">x</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">2</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">y</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">2</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">x</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">2</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">y</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">2</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> (<span style="color:#e06c75">y</span> <span style="color:#56b6c2">!=</span> <span style="color:#d19a66">2</span>) {
 </span></span><span style="display:flex;"><span>        <span style="color:#7f848e">// This compile error never triggers because y is a comptime variable,
@@ -799,13 +805,13 @@
 </span></span><span style="display:flex;"><span>};
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;compile-time array initialization&#34;</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">fancy_array</span>[<span style="color:#d19a66">4</span>].<span style="color:#e06c75">x</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">4</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">fancy_array</span>[<span style="color:#d19a66">4</span>].<span style="color:#e06c75">y</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">8</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">fancy_array</span>[<span style="color:#d19a66">4</span>].<span style="color:#e06c75">x</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">4</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">fancy_array</span>[<span style="color:#d19a66">4</span>].<span style="color:#e06c75">y</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">8</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#7f848e">// call a function to initialize an array
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">var</span> <span style="color:#e06c75">more_points</span> <span style="color:#56b6c2">=</span> [<span style="color:#e06c75">_</span>]<span style="color:#e06c75">Point</span>{<span style="color:#61afef;font-weight:bold">makePoint</span>(<span style="color:#d19a66">3</span>)} <span style="color:#56b6c2">**</span> <span style="color:#d19a66">10</span>;
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">makePoint</span>(<span style="color:#e06c75">x</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span>) <span style="color:#e06c75">Point</span> {
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">var</span> <span style="color:#e06c75">more_points</span> <span style="color:#56b6c2">=</span> [<span style="color:#e06c75">_</span>]<span style="color:#e06c75">Point</span>{<span style="color:#e06c75">makePoint</span>(<span style="color:#d19a66">3</span>)} <span style="color:#56b6c2">**</span> <span style="color:#d19a66">10</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#e06c75">makePoint</span>(<span style="color:#e06c75">x</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span>) <span style="color:#e06c75">Point</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">Point</span>{
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">x</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">x</span>,
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">y</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">x</span> <span style="color:#56b6c2">*</span> <span style="color:#d19a66">2</span>,
@@ -845,8 +851,8 @@
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">all_zero</span> <span style="color:#56b6c2">=</span> [<span style="color:#e06c75">_</span>]<span style="color:#e5c07b">u16</span>{<span style="color:#d19a66">0</span>} <span style="color:#56b6c2">**</span> <span style="color:#d19a66">10</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">comptime</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">assert</span>(<span style="color:#e06c75">all_zero</span>.<span style="color:#e06c75">len</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">10</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">assert</span>(<span style="color:#e06c75">all_zero</span>[<span style="color:#d19a66">5</span>] <span style="color:#56b6c2">==</span> <span style="color:#d19a66">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">assert</span>(<span style="color:#e06c75">all_zero</span>.<span style="color:#e06c75">len</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">10</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">assert</span>(<span style="color:#e06c75">all_zero</span>[<span style="color:#d19a66">5</span>] <span style="color:#56b6c2">==</span> <span style="color:#d19a66">0</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">Point</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#e06c75">x</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span>,
@@ -854,13 +860,13 @@
 </span></span><span style="display:flex;"><span>};
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;compile-time array initialization&#34;</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">fancy_array</span>[<span style="color:#d19a66">4</span>].<span style="color:#e06c75">x</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">4</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">fancy_array</span>[<span style="color:#d19a66">4</span>].<span style="color:#e06c75">y</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">8</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">fancy_array</span>[<span style="color:#d19a66">4</span>].<span style="color:#e06c75">x</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">4</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">fancy_array</span>[<span style="color:#d19a66">4</span>].<span style="color:#e06c75">y</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">8</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#7f848e">// call a function to initialize an array
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">var</span> <span style="color:#e06c75">more_points</span> <span style="color:#56b6c2">=</span> [<span style="color:#e06c75">_</span>]<span style="color:#e06c75">Point</span>{<span style="color:#61afef;font-weight:bold">makePoint</span>(<span style="color:#d19a66">3</span>)} <span style="color:#56b6c2">**</span> <span style="color:#d19a66">10</span>;
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">makePoint</span>(<span style="color:#e06c75">x</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span>) <span style="color:#e06c75">Point</span> {
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">var</span> <span style="color:#e06c75">more_points</span> <span style="color:#56b6c2">=</span> [<span style="color:#e06c75">_</span>]<span style="color:#e06c75">Point</span>{<span style="color:#e06c75">makePoint</span>(<span style="color:#d19a66">3</span>)} <span style="color:#56b6c2">**</span> <span style="color:#d19a66">10</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#e06c75">makePoint</span>(<span style="color:#e06c75">x</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span>) <span style="color:#e06c75">Point</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">Point</span>{
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">x</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">x</span>,
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">y</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">x</span> <span style="color:#56b6c2">*</span> <span style="color:#d19a66">2</span>,
@@ -885,16 +891,16 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">bytes</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> [<span style="color:#d19a66">5</span><span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>]<span style="color:#e5c07b">u8</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;hello&#34;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#61afef;font-weight:bold">dprint</span>(<span style="color:#98c379">&#34;bytes type:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">bytes</span>)});
+</span></span><span style="display:flex;"><span><span style="color:#e06c75">dprint</span>(<span style="color:#98c379">&#34;bytes type:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">bytes</span>)});
 </span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// const slice: []const u8 = &#34;slice&#34;;
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">const</span> <span style="color:#e06c75">slice</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">bytes</span>;<span style="color:#98c379">\\数组的指针转化为切片</span>
-</span></span><span style="display:flex;"><span> <span style="color:#61afef;font-weight:bold">dprint</span>(<span style="color:#98c379">&#34;slice type:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">slice</span>)});
+</span></span><span style="display:flex;"><span> <span style="color:#e06c75">dprint</span>(<span style="color:#98c379">&#34;slice type:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">slice</span>)});
 </span></span><span style="display:flex;"><span> 
 </span></span><span style="display:flex;"><span>   <span style="color:#c678dd">const</span> <span style="color:#e06c75">array</span><span style="color:#56b6c2">:</span> [<span style="color:#d19a66">5</span>]<span style="color:#e5c07b">u8</span> <span style="color:#56b6c2">=</span> [<span style="color:#d19a66">5</span>]<span style="color:#e5c07b">u8</span>{ <span style="color:#d19a66">1</span>, <span style="color:#d19a66">2</span>, <span style="color:#d19a66">3</span>, <span style="color:#d19a66">4</span>, <span style="color:#d19a66">5</span> };
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">array_ptr</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">&amp;</span><span style="color:#e06c75">array</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">dprint</span>(<span style="color:#98c379">&#34;array type:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">array_ptr</span>)});
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">dprint</span>(<span style="color:#98c379">&#34;array type:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">array_ptr</span>)});
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">array_ptr1</span><span style="color:#56b6c2">:</span> [<span style="color:#56b6c2">*</span>]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">&amp;</span><span style="color:#e06c75">array</span>;<span style="color:#98c379">\\数组的指针转化为指向多个元素的指针。</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#61afef;font-weight:bold">dprint</span>(<span style="color:#98c379">&#34;array type1:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">array_ptr1</span>)});
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">dprint</span>(<span style="color:#98c379">&#34;array type1:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">array_ptr1</span>)});
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>单个的指针ptr可以通过ptr[0..1]转化为切片（但是会在编译阶段优化为数组的指针）。</p>
@@ -950,7 +956,7 @@
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">var</span> <span style="color:#e06c75">sum2</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> (<span style="color:#e06c75">items</span>, <span style="color:#d19a66">0</span>..) <span style="color:#56b6c2">|</span><span style="color:#e06c75">_</span>, <span style="color:#e06c75">i</span><span style="color:#56b6c2">|</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">i</span>) <span style="color:#56b6c2">==</span> <span style="color:#e5c07b">usize</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">i</span>) <span style="color:#56b6c2">==</span> <span style="color:#e5c07b">usize</span>);
 </span></span><span style="display:flex;"><span>        <span style="color:#e06c75">sum2</span> <span style="color:#56b6c2">+=</span> <span style="color:#e5c07b">@as</span>(<span style="color:#e5c07b">i32</span>, <span style="color:#e5c07b">@intCast</span>(<span style="color:#e06c75">i</span>));
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
@@ -992,7 +998,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">else</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#d19a66">9</span>,
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">b</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">b</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">1</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1023,7 +1029,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#e06c75">j</span> <span style="color:#56b6c2">*=</span> <span style="color:#d19a66">3</span>;
 </span></span><span style="display:flex;"><span>    }) {
 </span></span><span style="display:flex;"><span>        <span style="color:#c678dd">const</span> <span style="color:#e06c75">my_ij</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">j</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">my_ij</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#d19a66">2000</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">my_ij</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#d19a66">2000</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
@@ -1041,7 +1047,7 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">rangeHasNumber</span>(<span style="color:#e06c75">begin</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">usize</span>, <span style="color:#e06c75">end</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">usize</span>, <span style="color:#e06c75">number</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">usize</span>) <span style="color:#e5c07b">bool</span> {
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#e06c75">rangeHasNumber</span>(<span style="color:#e06c75">begin</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">usize</span>, <span style="color:#e06c75">end</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">usize</span>, <span style="color:#e06c75">number</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">usize</span>) <span style="color:#e5c07b">bool</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">var</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">begin</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#c678dd">while</span> (<span style="color:#e06c75">i</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#e06c75">end</span>) <span style="color:#56b6c2">:</span> (<span style="color:#e06c75">i</span> <span style="color:#56b6c2">+=</span> <span style="color:#d19a66">1</span>) {
 </span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> (<span style="color:#e06c75">i</span> <span style="color:#56b6c2">==</span> <span style="color:#e06c75">number</span>) {
@@ -1067,12 +1073,12 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">myfun</span>()<span style="color:#56b6c2">!</span><span style="color:#e5c07b">void</span>{
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#e06c75">myfun</span>()<span style="color:#56b6c2">!</span><span style="color:#e5c07b">void</span>{
 </span></span><span style="display:flex;"><span>	<span style="color:#c678dd">var</span> <span style="color:#e06c75">buf</span><span style="color:#56b6c2">:</span> [<span style="color:#d19a66">30</span>]<span style="color:#e5c07b">u8</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">undefined</span>;
 </span></span><span style="display:flex;"><span>		
 </span></span><span style="display:flex;"><span>	<span style="color:#7f848e">//在这里try语句遇到错误会从终止函数并返回错误结果，因为stdin.readUntilDelimiterOrEof(&amp;buf, &#39;\n&#39;)的返回值类型为`!?[]u8`，所以
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>	<span style="color:#7f848e">//if语句解包的是可选类型，得到|line|
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>	<span style="color:#c678dd">if</span> (<span style="color:#c678dd">try</span> <span style="color:#e06c75">stdin</span>.<span style="color:#61afef;font-weight:bold">readUntilDelimiterOrEof</span>(<span style="color:#56b6c2">&amp;</span><span style="color:#e06c75">buf</span>, <span style="color:#98c379">&#39;\n&#39;</span>)) <span style="color:#56b6c2">|</span><span style="color:#e06c75">line</span><span style="color:#56b6c2">|</span> {
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>	<span style="color:#c678dd">if</span> (<span style="color:#c678dd">try</span> <span style="color:#e06c75">stdin</span>.<span style="color:#e06c75">readUntilDelimiterOrEof</span>(<span style="color:#56b6c2">&amp;</span><span style="color:#e06c75">buf</span>, <span style="color:#98c379">&#39;\n&#39;</span>)) <span style="color:#56b6c2">|</span><span style="color:#e06c75">line</span><span style="color:#56b6c2">|</span> {
 </span></span><span style="display:flex;"><span>	}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>}
@@ -1095,12 +1101,12 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span> <span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">addpolynomials</span>(<span style="color:#e06c75">self</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">Self</span>, <span style="color:#e06c75">p1</span><span style="color:#56b6c2">:</span> []<span style="color:#e06c75">T</span>, <span style="color:#e06c75">p2</span><span style="color:#56b6c2">:</span> []<span style="color:#e06c75">T</span>, <span style="color:#e06c75">result</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span>[]<span style="color:#e06c75">T</span>) <span style="color:#56b6c2">?</span>[]<span style="color:#e06c75">T</span> {
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span> <span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">addpolynomials</span>(<span style="color:#e06c75">self</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">Self</span>, <span style="color:#e06c75">p1</span><span style="color:#56b6c2">:</span> []<span style="color:#e06c75">T</span>, <span style="color:#e06c75">p2</span><span style="color:#56b6c2">:</span> []<span style="color:#e06c75">T</span>, <span style="color:#e06c75">result</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span>[]<span style="color:#e06c75">T</span>) <span style="color:#56b6c2">?</span>[]<span style="color:#e06c75">T</span> {
 </span></span><span style="display:flex;"><span>            <span style="color:#c678dd">const</span> <span style="color:#e06c75">maxDegree</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">if</span> (<span style="color:#e06c75">p1</span>.<span style="color:#e06c75">len</span> <span style="color:#56b6c2">&gt;</span> <span style="color:#e06c75">p2</span>.<span style="color:#e06c75">len</span>) <span style="color:#e06c75">p1</span>.<span style="color:#e06c75">len</span> <span style="color:#c678dd">else</span> <span style="color:#e06c75">p2</span>.<span style="color:#e06c75">len</span>;
 </span></span><span style="display:flex;"><span>            <span style="color:#c678dd">const</span> <span style="color:#e06c75">re</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">if</span> (<span style="color:#e06c75">result</span>) <span style="color:#56b6c2">|</span><span style="color:#e06c75">re1</span><span style="color:#56b6c2">|</span>
 </span></span><span style="display:flex;"><span>                <span style="color:#c678dd">if</span> (<span style="color:#e06c75">re1</span>.<span style="color:#e06c75">len</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#e06c75">maxDegree</span>) <span style="color:#c678dd">return</span> <span style="color:#e5c07b">null</span> <span style="color:#c678dd">else</span> <span style="color:#e06c75">re1</span>
 </span></span><span style="display:flex;"><span>            <span style="color:#c678dd">else</span>
-</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">self</span>.<span style="color:#e06c75">allocator</span>.<span style="color:#61afef;font-weight:bold">alloc</span>(<span style="color:#e06c75">T</span>, <span style="color:#e06c75">maxDegree</span>) <span style="color:#c678dd">catch</span> <span style="color:#c678dd">return</span> <span style="color:#e5c07b">null</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">self</span>.<span style="color:#e06c75">allocator</span>.<span style="color:#e06c75">alloc</span>(<span style="color:#e06c75">T</span>, <span style="color:#e06c75">maxDegree</span>) <span style="color:#c678dd">catch</span> <span style="color:#c678dd">return</span> <span style="color:#e5c07b">null</span>;
 </span></span><span style="display:flex;"><span>            <span style="color:#c678dd">for</span> (<span style="color:#d19a66">0</span>..<span style="color:#e06c75">maxDegree</span>) <span style="color:#56b6c2">|</span><span style="color:#e06c75">i</span><span style="color:#56b6c2">|</span> {
 </span></span><span style="display:flex;"><span>                <span style="color:#e06c75">re</span>[<span style="color:#e06c75">i</span>] <span style="color:#56b6c2">=</span> (<span style="color:#c678dd">if</span> (<span style="color:#e06c75">i</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#e06c75">p1</span>.<span style="color:#e06c75">len</span>) <span style="color:#e06c75">p1</span>[<span style="color:#e06c75">i</span>] <span style="color:#c678dd">else</span> <span style="color:#d19a66">0</span>) <span style="color:#56b6c2">+</span> (<span style="color:#c678dd">if</span> (<span style="color:#e06c75">i</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#e06c75">p2</span>.<span style="color:#e06c75">len</span>) <span style="color:#e06c75">p2</span>[<span style="color:#e06c75">i</span>] <span style="color:#c678dd">else</span> <span style="color:#d19a66">0</span>);
 </span></span><span style="display:flex;"><span>            }
@@ -1157,7 +1163,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#e06c75">ComplexTypeTag</span>.<span style="color:#e06c75">not_ok</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#c678dd">unreachable</span>,
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">c</span>.<span style="color:#e06c75">ok</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">43</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">c</span>.<span style="color:#e06c75">ok</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">43</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1190,21 +1196,21 @@
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">expect</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">testing</span>.<span style="color:#e06c75">expect</span>;
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">print</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">deferExample</span>() <span style="color:#56b6c2">!</span><span style="color:#e5c07b">usize</span> {
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#e06c75">deferExample</span>() <span style="color:#56b6c2">!</span><span style="color:#e5c07b">usize</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">var</span> <span style="color:#e06c75">a</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">usize</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    {
 </span></span><span style="display:flex;"><span>        <span style="color:#c678dd">defer</span> <span style="color:#e06c75">a</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">2</span>;
 </span></span><span style="display:flex;"><span>        <span style="color:#e06c75">a</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">a</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">2</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">a</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">2</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#e06c75">a</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">5</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">a</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;defer basics&#34;</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>((<span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">deferExample</span>()) <span style="color:#56b6c2">==</span> <span style="color:#d19a66">5</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>((<span style="color:#c678dd">try</span> <span style="color:#e06c75">deferExample</span>()) <span style="color:#56b6c2">==</span> <span style="color:#d19a66">5</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1222,11 +1228,11 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;detect leak&#34;</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">var</span> <span style="color:#e06c75">list</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">std</span>.<span style="color:#61afef;font-weight:bold">ArrayList</span>(<span style="color:#e06c75">u21</span>).<span style="color:#61afef;font-weight:bold">init</span>(<span style="color:#e06c75">std</span>.<span style="color:#e06c75">testing</span>.<span style="color:#e06c75">allocator</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">var</span> <span style="color:#e06c75">list</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">ArrayList</span>(<span style="color:#e06c75">u21</span>).<span style="color:#e06c75">init</span>(<span style="color:#e06c75">std</span>.<span style="color:#e06c75">testing</span>.<span style="color:#e06c75">allocator</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// missing `defer list.deinit();`
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">list</span>.<span style="color:#61afef;font-weight:bold">append</span>(<span style="color:#98c379">&#39;☔&#39;</span>);
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">list</span>.<span style="color:#e06c75">append</span>(<span style="color:#98c379">&#39;☔&#39;</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">testing</span>.<span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">list</span>.<span style="color:#e06c75">items</span>.<span style="color:#e06c75">len</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">testing</span>.<span style="color:#e06c75">expect</span>(<span style="color:#e06c75">list</span>.<span style="color:#e06c75">items</span>.<span style="color:#e06c75">len</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">1</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1272,7 +1278,7 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">3
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#e06c75">exe</span>.<span style="color:#61afef;font-weight:bold">addModule</span>(<span style="color:#98c379">&#34;my_module&#34;</span>, .{
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#e06c75">exe</span>.<span style="color:#e06c75">addModule</span>(<span style="color:#98c379">&#34;my_module&#34;</span>, .{
 </span></span><span style="display:flex;"><span>    .<span style="color:#e06c75">root_source_file</span> <span style="color:#56b6c2">=</span> .{ .<span style="color:#e06c75">path</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;src/my_module&#34;</span> }, <span style="color:#7f848e">// 这里是目录
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>});
 </span></span></code></pre></td></tr></table>
@@ -1306,7 +1312,7 @@
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">my_mod</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">addModule</span>(<span style="color:#98c379">&#34;my_mod&#34;</span>, .{ .<span style="color:#e06c75">root_source_file</span> <span style="color:#56b6c2">=</span> ... });
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">my_mod</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">addModule</span>(<span style="color:#98c379">&#34;my_mod&#34;</span>, .{ .<span style="color:#e06c75">root_source_file</span> <span style="color:#56b6c2">=</span> ... });
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -1326,7 +1332,7 @@
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">my_private_mod</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">createModule</span>(.{ .<span style="color:#e06c75">root_source_file</span> <span style="color:#56b6c2">=</span> ... });
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">my_private_mod</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">createModule</span>(.{ .<span style="color:#e06c75">root_source_file</span> <span style="color:#56b6c2">=</span> ... });
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
@@ -1392,9 +1398,9 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">4
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">exe</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">addExecutable</span>(...);
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">exe</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">addExecutable</span>(...);
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">if</span> (<span style="color:#e06c75">b</span>.<span style="color:#e06c75">args</span>) <span style="color:#56b6c2">|</span><span style="color:#e06c75">args</span><span style="color:#56b6c2">|</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">exe</span>.<span style="color:#61afef;font-weight:bold">addArgs</span>(<span style="color:#e06c75">args</span>); <span style="color:#7f848e">// 将构建参数传递给可执行文件
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">exe</span>.<span style="color:#e06c75">addArgs</span>(<span style="color:#e06c75">args</span>); <span style="color:#7f848e">// 将构建参数传递给可执行文件
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>}
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1414,13 +1420,13 @@
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">main</span>() <span style="color:#56b6c2">!</span><span style="color:#e5c07b">void</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">args</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">try</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">process</span>.<span style="color:#61afef;font-weight:bold">argsAlloc</span>(<span style="color:#e06c75">std</span>.<span style="color:#e06c75">heap</span>.<span style="color:#e06c75">page_allocator</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">defer</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">process</span>.<span style="color:#61afef;font-weight:bold">argsFree</span>(<span style="color:#e06c75">std</span>.<span style="color:#e06c75">heap</span>.<span style="color:#e06c75">page_allocator</span>, <span style="color:#e06c75">args</span>);
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">main</span>() <span style="color:#56b6c2">!</span><span style="color:#e5c07b">void</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">args</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">try</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">process</span>.<span style="color:#e06c75">argsAlloc</span>(<span style="color:#e06c75">std</span>.<span style="color:#e06c75">heap</span>.<span style="color:#e06c75">page_allocator</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">defer</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">process</span>.<span style="color:#e06c75">argsFree</span>(<span style="color:#e06c75">std</span>.<span style="color:#e06c75">heap</span>.<span style="color:#e06c75">page_allocator</span>, <span style="color:#e06c75">args</span>);
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// args[0]是程序名，args[1..]才是实际参数
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">for</span> (<span style="color:#e06c75">args</span>[<span style="color:#d19a66">1</span>..]) <span style="color:#56b6c2">|</span><span style="color:#e06c75">arg</span><span style="color:#56b6c2">|</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;参数: {s}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">arg</span>});
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;参数: {s}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">arg</span>});
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
@@ -1445,9 +1451,9 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e5c07b">@cDefine</span>(<span style="color:#98c379">&#34;_NO_CRT_STDIO_INLINE&#34;</span>, <span style="color:#98c379">&#34;1&#34;</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">@cInclude</span>(<span style="color:#98c379">&#34;stdio.h&#34;</span>);
 </span></span><span style="display:flex;"><span>});
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">main</span>() <span style="color:#e5c07b">void</span>{
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">main</span>() <span style="color:#e5c07b">void</span>{
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">_</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">cstdio</span>.<span style="color:#61afef;font-weight:bold">printf</span>(<span style="color:#98c379">&#34;hello</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">_</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">cstdio</span>.<span style="color:#e06c75">printf</span>(<span style="color:#98c379">&#34;hello</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
@@ -1468,8 +1474,8 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e">// extern 关键字后的引号标识符指定具有该函数的库。（例如，“c”-&gt;libc.so）
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e">// callconv 标记更改了函数的调用约定。
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">const</span> <span style="color:#e06c75">WINAPI</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">builtin</span>.<span style="color:#e06c75">CallingConvention</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">if</span> (<span style="color:#e06c75">native_arch</span> <span style="color:#56b6c2">==</span> .<span style="color:#e06c75">x86</span>) .<span style="color:#e06c75">Stdcall</span> <span style="color:#c678dd">else</span> .<span style="color:#e06c75">C</span>;
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">extern</span> <span style="color:#98c379">&#34;kernel32&#34;</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">ExitProcess</span>(<span style="color:#e06c75">exit_code</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">u32</span>) <span style="color:#61afef;font-weight:bold">callconv</span>(<span style="color:#e06c75">WINAPI</span>) <span style="color:#e5c07b">noreturn</span>;
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">extern</span> <span style="color:#98c379">&#34;c&#34;</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">atan2</span>(<span style="color:#e06c75">a</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">f64</span>, <span style="color:#e06c75">b</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">f64</span>) <span style="color:#e5c07b">f64</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">extern</span> <span style="color:#98c379">&#34;kernel32&#34;</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">ExitProcess</span>(<span style="color:#e06c75">exit_code</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">u32</span>) <span style="color:#e06c75">callconv</span>(<span style="color:#e06c75">WINAPI</span>) <span style="color:#e5c07b">noreturn</span>;
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">extern</span> <span style="color:#98c379">&#34;c&#34;</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">atan2</span>(<span style="color:#e06c75">a</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">f64</span>, <span style="color:#e06c75">b</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">f64</span>) <span style="color:#e5c07b">f64</span>;
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
