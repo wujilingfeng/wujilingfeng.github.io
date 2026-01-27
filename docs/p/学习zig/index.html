@@ -5,18 +5,18 @@
 >
     <head>
         <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。\nzig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。\nzig语言的void和c语言的void不同，c语言的void对应anyopaque，是对opaque的泛化，就像anytype是对type的泛化，anyerror对error的泛化。void也是一个类型，它的值通常为{}。\n匿名结构体的类型可以直接声明并初始化var value=.{ .int = @as(**u32**, 1234),.float = @as(**f64**, 12.34), .b = true, .s = &quot;hi&quot;,}, 它的类型是struct{int:u32,float:f64,b:true,s:const*[2:0]u8}，你可以在写函数参数类型时用到。\nzig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体struct {const *[5:0]u8,u32}，也就是如果匿名结构体不带变量名就是元组。\nzig的运算符**和++都是中缀二元运算符，都要求两边的参数是编译期已知的。\nzig语言会自动对结构体的内存进行布局优化，下面的例子:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 const RB_Node = struct { key: i32, left: ?*RB_Node, right: ?*RB_Node, parent: ?*RB_Node, color: bool, }; dprint(&#34;rb node size:{}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Size of RB_Node: {}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Offset of key: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;key&#34;)}); std.debug.print(&#34;Offset of left: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;left&#34;)}); std.debug.print(&#34;Offset of right: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;right&#34;)}); std.debug.print(&#34;Offset of parent: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;parent&#34;)}); std.debug.print(&#34;Offset of color: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;color&#34;)}); zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype,似乎zig内置函数可以）。\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。\nzig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。\nzig语言的void和c语言的void不同，c语言的void对应anyopaque，是对opaque的泛化，就像anytype是对type的泛化，anyerror对error的泛化。void也是一个类型，它的值通常为{}。\n结构体\r匿名结构体的类型可以直接声明并初始化var value=.{ .int = @as(**u32**, 1234),.float = @as(**f64**, 12.34), .b = true, .s = &quot;hi&quot;,}, 它的类型是struct{int:u32,float:f64,b:true,s:const*[2:0]u8}，你可以在写函数参数类型时用到。\nzig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体struct {const *[5:0]u8,u32}，也就是如果匿名结构体不带变量名就是元组。\nzig的运算符**和++都是中缀二元运算符，都要求两边的参数是编译期已知的。\nzig语言会自动对结构体的内存进行布局优化，下面的例子:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 const RB_Node = struct { key: i32, left: ?*RB_Node, right: ?*RB_Node, parent: ?*RB_Node, color: bool, }; dprint(&#34;rb node size:{}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Size of RB_Node: {}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Offset of key: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;key&#34;)}); std.debug.print(&#34;Offset of left: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;left&#34;)}); std.debug.print(&#34;Offset of right: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;right&#34;)}); std.debug.print(&#34;Offset of parent: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;parent&#34;)}); std.debug.print(&#34;Offset of color: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;color&#34;)}); zig中的文件，结构体，联合体等都是容器，容器里面声明的函数如果参数包含自身的类型，一般该参数使用self: Self代替，你可以在很多地方看到这种写法。在调用该函数时需要该容器的实例调用并省略掉该参数传入，这时默认会传入该实例的自身替换该参数。如果容器内的函数的参数并没有要传入该容器自身的类型，那么这个函数的调用不要通过该容器的实例调用，而是通过容器类型调用该函数。比如ArrayList的initCapacity函数调用时，要通过ArrayList(u32).initCapacity, 而deinit函数一般通过实例调用:var a:ArrayList(u32)=.empty; a.deinit(std.testing.allocator);\n">
 <title>学习zig</title>
 
 <link rel='canonical' href='https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/'>
 
 <link rel="stylesheet" href="../../scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="学习zig">
-<meta property='og:description' content="zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。\nzig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。\nzig语言的void和c语言的void不同，c语言的void对应anyopaque，是对opaque的泛化，就像anytype是对type的泛化，anyerror对error的泛化。void也是一个类型，它的值通常为{}。\n匿名结构体的类型可以直接声明并初始化var value=.{ .int = @as(**u32**, 1234),.float = @as(**f64**, 12.34), .b = true, .s = &quot;hi&quot;,}, 它的类型是struct{int:u32,float:f64,b:true,s:const*[2:0]u8}，你可以在写函数参数类型时用到。\nzig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体struct {const *[5:0]u8,u32}，也就是如果匿名结构体不带变量名就是元组。\nzig的运算符**和++都是中缀二元运算符，都要求两边的参数是编译期已知的。\nzig语言会自动对结构体的内存进行布局优化，下面的例子:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 const RB_Node = struct { key: i32, left: ?*RB_Node, right: ?*RB_Node, parent: ?*RB_Node, color: bool, }; dprint(&#34;rb node size:{}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Size of RB_Node: {}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Offset of key: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;key&#34;)}); std.debug.print(&#34;Offset of left: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;left&#34;)}); std.debug.print(&#34;Offset of right: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;right&#34;)}); std.debug.print(&#34;Offset of parent: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;parent&#34;)}); std.debug.print(&#34;Offset of color: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;color&#34;)}); zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype,似乎zig内置函数可以）。\n">
+<meta property='og:description' content="zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。\nzig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。\nzig语言的void和c语言的void不同，c语言的void对应anyopaque，是对opaque的泛化，就像anytype是对type的泛化，anyerror对error的泛化。void也是一个类型，它的值通常为{}。\n结构体\r匿名结构体的类型可以直接声明并初始化var value=.{ .int = @as(**u32**, 1234),.float = @as(**f64**, 12.34), .b = true, .s = &quot;hi&quot;,}, 它的类型是struct{int:u32,float:f64,b:true,s:const*[2:0]u8}，你可以在写函数参数类型时用到。\nzig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体struct {const *[5:0]u8,u32}，也就是如果匿名结构体不带变量名就是元组。\nzig的运算符**和++都是中缀二元运算符，都要求两边的参数是编译期已知的。\nzig语言会自动对结构体的内存进行布局优化，下面的例子:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 const RB_Node = struct { key: i32, left: ?*RB_Node, right: ?*RB_Node, parent: ?*RB_Node, color: bool, }; dprint(&#34;rb node size:{}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Size of RB_Node: {}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Offset of key: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;key&#34;)}); std.debug.print(&#34;Offset of left: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;left&#34;)}); std.debug.print(&#34;Offset of right: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;right&#34;)}); std.debug.print(&#34;Offset of parent: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;parent&#34;)}); std.debug.print(&#34;Offset of color: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;color&#34;)}); zig中的文件，结构体，联合体等都是容器，容器里面声明的函数如果参数包含自身的类型，一般该参数使用self: Self代替，你可以在很多地方看到这种写法。在调用该函数时需要该容器的实例调用并省略掉该参数传入，这时默认会传入该实例的自身替换该参数。如果容器内的函数的参数并没有要传入该容器自身的类型，那么这个函数的调用不要通过该容器的实例调用，而是通过容器类型调用该函数。比如ArrayList的initCapacity函数调用时，要通过ArrayList(u32).initCapacity, 而deinit函数一般通过实例调用:var a:ArrayList(u32)=.empty; a.deinit(std.testing.allocator);\n">
 <meta property='og:url' content='https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/'>
 <meta property='og:site_name' content='五级灵风'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-04-28T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-04-28T00:00:00&#43;00:00'/><meta property='og:image' content='https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png' />
 <meta name="twitter:title" content="学习zig">
-<meta name="twitter:description" content="zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。\nzig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。\nzig语言的void和c语言的void不同，c语言的void对应anyopaque，是对opaque的泛化，就像anytype是对type的泛化，anyerror对error的泛化。void也是一个类型，它的值通常为{}。\n匿名结构体的类型可以直接声明并初始化var value=.{ .int = @as(**u32**, 1234),.float = @as(**f64**, 12.34), .b = true, .s = &quot;hi&quot;,}, 它的类型是struct{int:u32,float:f64,b:true,s:const*[2:0]u8}，你可以在写函数参数类型时用到。\nzig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体struct {const *[5:0]u8,u32}，也就是如果匿名结构体不带变量名就是元组。\nzig的运算符**和++都是中缀二元运算符，都要求两边的参数是编译期已知的。\nzig语言会自动对结构体的内存进行布局优化，下面的例子:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 const RB_Node = struct { key: i32, left: ?*RB_Node, right: ?*RB_Node, parent: ?*RB_Node, color: bool, }; dprint(&#34;rb node size:{}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Size of RB_Node: {}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Offset of key: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;key&#34;)}); std.debug.print(&#34;Offset of left: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;left&#34;)}); std.debug.print(&#34;Offset of right: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;right&#34;)}); std.debug.print(&#34;Offset of parent: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;parent&#34;)}); std.debug.print(&#34;Offset of color: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;color&#34;)}); zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype,似乎zig内置函数可以）。\n"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。\nzig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。\nzig语言的void和c语言的void不同，c语言的void对应anyopaque，是对opaque的泛化，就像anytype是对type的泛化，anyerror对error的泛化。void也是一个类型，它的值通常为{}。\n结构体\r匿名结构体的类型可以直接声明并初始化var value=.{ .int = @as(**u32**, 1234),.float = @as(**f64**, 12.34), .b = true, .s = &quot;hi&quot;,}, 它的类型是struct{int:u32,float:f64,b:true,s:const*[2:0]u8}，你可以在写函数参数类型时用到。\nzig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体struct {const *[5:0]u8,u32}，也就是如果匿名结构体不带变量名就是元组。\nzig的运算符**和++都是中缀二元运算符，都要求两边的参数是编译期已知的。\nzig语言会自动对结构体的内存进行布局优化，下面的例子:\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 const RB_Node = struct { key: i32, left: ?*RB_Node, right: ?*RB_Node, parent: ?*RB_Node, color: bool, }; dprint(&#34;rb node size:{}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Size of RB_Node: {}\\n&#34;, .{@sizeOf(RB_Node)}); std.debug.print(&#34;Offset of key: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;key&#34;)}); std.debug.print(&#34;Offset of left: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;left&#34;)}); std.debug.print(&#34;Offset of right: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;right&#34;)}); std.debug.print(&#34;Offset of parent: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;parent&#34;)}); std.debug.print(&#34;Offset of color: {}\\n&#34;, .{@offsetOf(RB_Node, &#34;color&#34;)}); zig中的文件，结构体，联合体等都是容器，容器里面声明的函数如果参数包含自身的类型，一般该参数使用self: Self代替，你可以在很多地方看到这种写法。在调用该函数时需要该容器的实例调用并省略掉该参数传入，这时默认会传入该实例的自身替换该参数。如果容器内的函数的参数并没有要传入该容器自身的类型，那么这个函数的调用不要通过该容器的实例调用，而是通过容器类型调用该函数。比如ArrayList的initCapacity函数调用时，要通过ArrayList(u32).initCapacity, 而deinit函数一般通过实例调用:var a:ArrayList(u32)=.empty; a.deinit(std.testing.allocator);\n"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png' />
     <link rel="shortcut icon" href="../../favicon.ico" />
 
@@ -355,6 +355,7 @@
       <ol>
         <li>
           <ol>
+            <li><a href="#结构体">结构体</a></li>
             <li><a href="#错误处理">错误处理</a></li>
             <li><a href="#可选联合类型">可选联合类型</a></li>
             <li><a href="#标记联合体">标记联合体</a></li>
@@ -469,7 +470,8 @@
     <p>zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。</p>
 <p>zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。</p>
 <p>zig语言的void和c语言的void不同，c语言的void对应anyopaque，是对opaque的泛化，就像anytype是对type的泛化，anyerror对error的泛化。void也是一个类型，它的值通常为<code>{}</code>。</p>
-<p>匿名结构体的类型可以直接声明并初始化<code>var value=.{ .int = @as(**u32**, 1234),.float = @as(**f64**, 12.34), .b = true, .s = &quot;hi&quot;,}</code>, 它的类型是<code>struct{int:u32,float:f64,b:true,s:const*[2:0]u8}</code>，你可以在写函数参数类型时用到。</p>
+<h4 id="结构体">结构体
+</h4><p>匿名结构体的类型可以直接声明并初始化<code>var value=.{ .int = @as(**u32**, 1234),.float = @as(**f64**, 12.34), .b = true, .s = &quot;hi&quot;,}</code>, 它的类型是<code>struct{int:u32,float:f64,b:true,s:const*[2:0]u8}</code>，你可以在写函数参数类型时用到。</p>
 <p>zig语言 的”元组“，.{&ldquo;nihao&rdquo;,3}其实是个value, 它的类型是匿名结构体struct {const *[5:0]u8,u32}，也就是如果匿名结构体不带变量名就是元组。</p>
 <p>zig的运算符<code>**</code>和<code>++</code>都是中缀二元运算符，都要求两边的参数是编译期已知的。</p>
 <p>zig语言会自动对结构体的内存进行布局优化，下面的例子:</p>
@@ -507,7 +509,8 @@
 </span></span><span style="display:flex;"><span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;Offset of color: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@offsetOf</span>(<span style="color:#e06c75">RB_Node</span>, <span style="color:#98c379">&#34;color&#34;</span>)});
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype,似乎zig内置函数可以）。</p>
+</div><p>zig中的文件，结构体，联合体等都是容器，容器里面声明的函数如果参数包含自身的类型，一般该参数使用self: Self代替，你可以在很多地方看到这种写法。在调用该函数时需要该容器的实例调用并省略掉该参数传入，这时默认会传入该实例的自身替换该参数。如果容器内的函数的参数并没有要传入该容器自身的类型，那么这个函数的调用不要通过该容器的实例调用，而是通过容器类型调用该函数。比如ArrayList的initCapacity函数调用时，要通过ArrayList(u32).initCapacity, 而deinit函数一般通过实例调用:<code>var a:ArrayList(u32)=.empty; a.deinit(std.testing.allocator);</code></p>
+<p>zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype,似乎zig内置函数可以）。</p>
 <p>zig 的test的函数必须是字符串，否则必须是标识符，一般和某个函数名的标识符相同，这样会作为该函数的文档测试说明。test函数的默认返回类型是错误联合类型，也就是<code>!void</code></p>
 <p><a class="link" href="https://www.cnblogs.com/violeshnv/p/18200280"  target="_blank" rel="noopener"
     >这个网页说明了一些用法</a></p>
@@ -671,11 +674,9 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">12
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#7f848e">/// Checks if a `Ptr` is a pointer to `Item`.
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#7f848e">/// Checks if a `Ptr` is a pointer to `Item`.
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e">/// Note that the pointer is allowed to have the `const`, `volatile` or `allowzero` keyword.
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">isSizeOnePoiner</span>(
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">comptime</span> <span style="color:#e06c75">Item</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
@@ -724,11 +725,11 @@
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">var</span> <span style="color:#e06c75">y</span><span style="color:#56b6c2">:</span><span style="color:#e5c07b">i32</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">add</span>(<span style="color:#d19a66">10</span>,<span style="color:#e06c75">x</span>);
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">x</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">i32</span><span style="color:#56b6c2">=</span><span style="color:#e06c75">add</span>(<span style="color:#d19a66">12</span>,<span style="color:#d19a66">34</span>);
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;container level variables&#34;</span>{
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">x</span><span style="color:#56b6c2">==</span><span style="color:#d19a66">46</span>);
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">y</span><span style="color:#56b6c2">==</span><span style="color:#d19a66">56</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">x</span><span style="color:#56b6c2">==</span><span style="color:#d19a66">46</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">y</span><span style="color:#56b6c2">==</span><span style="color:#d19a66">56</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#e06c75">add</span>(<span style="color:#e06c75">a</span><span style="color:#56b6c2">:</span><span style="color:#e5c07b">i32</span>,<span style="color:#e06c75">b</span><span style="color:#56b6c2">:</span><span style="color:#e5c07b">i32</span>) <span style="color:#e5c07b">i32</span>{
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">return</span> <span style="color:#e06c75">a</span><span style="color:#56b6c2">+</span><span style="color:#e06c75">b</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">a</span><span style="color:#56b6c2">+</span><span style="color:#e06c75">b</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">std</span><span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@import</span>(<span style="color:#98c379">&#34;std&#34;</span>)
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">expect</span><span style="color:#56b6c2">=</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">testing</span>.<span style="color:#e06c75">expect</span>;
@@ -895,7 +896,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// const slice: []const u8 = &#34;slice&#34;;
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">const</span> <span style="color:#e06c75">slice</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">bytes</span>;<span style="color:#98c379">\\数组的指针转化为切片</span>
 </span></span><span style="display:flex;"><span> <span style="color:#e06c75">dprint</span>(<span style="color:#98c379">&#34;slice type:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">slice</span>)});
-</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>   <span style="color:#c678dd">const</span> <span style="color:#e06c75">array</span><span style="color:#56b6c2">:</span> [<span style="color:#d19a66">5</span>]<span style="color:#e5c07b">u8</span> <span style="color:#56b6c2">=</span> [<span style="color:#d19a66">5</span>]<span style="color:#e5c07b">u8</span>{ <span style="color:#d19a66">1</span>, <span style="color:#d19a66">2</span>, <span style="color:#d19a66">3</span>, <span style="color:#d19a66">4</span>, <span style="color:#d19a66">5</span> };
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">array_ptr</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">&amp;</span><span style="color:#e06c75">array</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#e06c75">dprint</span>(<span style="color:#98c379">&#34;array type:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">array_ptr</span>)});
@@ -959,7 +960,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">i</span>) <span style="color:#56b6c2">==</span> <span style="color:#e5c07b">usize</span>);
 </span></span><span style="display:flex;"><span>        <span style="color:#e06c75">sum2</span> <span style="color:#56b6c2">+=</span> <span style="color:#e5c07b">@as</span>(<span style="color:#e5c07b">i32</span>, <span style="color:#e5c07b">@intCast</span>(<span style="color:#e06c75">i</span>));
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;switch simple&#34;</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">a</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">u64</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">10</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">zz</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">u64</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">103</span>;
@@ -1059,30 +1060,26 @@
 </div>
 </div><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">9
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#e06c75">myfun</span>()<span style="color:#56b6c2">!</span><span style="color:#e5c07b">void</span>{
-</span></span><span style="display:flex;"><span>	<span style="color:#c678dd">var</span> <span style="color:#e06c75">buf</span><span style="color:#56b6c2">:</span> [<span style="color:#d19a66">30</span>]<span style="color:#e5c07b">u8</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">undefined</span>;
-</span></span><span style="display:flex;"><span>		
-</span></span><span style="display:flex;"><span>	<span style="color:#7f848e">//在这里try语句遇到错误会从终止函数并返回错误结果，因为stdin.readUntilDelimiterOrEof(&amp;buf, &#39;\n&#39;)的返回值类型为`!?[]u8`，所以
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>	<span style="color:#7f848e">//if语句解包的是可选类型，得到|line|
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>	<span style="color:#c678dd">if</span> (<span style="color:#c678dd">try</span> <span style="color:#e06c75">stdin</span>.<span style="color:#e06c75">readUntilDelimiterOrEof</span>(<span style="color:#56b6c2">&amp;</span><span style="color:#e06c75">buf</span>, <span style="color:#98c379">&#39;\n&#39;</span>)) <span style="color:#56b6c2">|</span><span style="color:#e06c75">line</span><span style="color:#56b6c2">|</span> {
-</span></span><span style="display:flex;"><span>	}
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#e06c75">myfun</span>()<span style="color:#56b6c2">!</span><span style="color:#e5c07b">void</span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">var</span> <span style="color:#e06c75">buf</span><span style="color:#56b6c2">:</span> [<span style="color:#d19a66">30</span>]<span style="color:#e5c07b">u8</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">undefined</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">//在这里try语句遇到错误会从终止函数并返回错误结果，因为stdin.readUntilDelimiterOrEof(&amp;buf, &#39;\n&#39;)的返回值类型为`!?[]u8`，所以
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">//if语句解包的是可选类型，得到|line|
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">if</span> (<span style="color:#c678dd">try</span> <span style="color:#e06c75">stdin</span>.<span style="color:#e06c75">readUntilDelimiterOrEof</span>(<span style="color:#56b6c2">&amp;</span><span style="color:#e06c75">buf</span>, <span style="color:#98c379">&#39;\n&#39;</span>)) <span style="color:#56b6c2">|</span><span style="color:#e06c75">line</span><span style="color:#56b6c2">|</span> {
+</span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>		
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>if else语句也可以当作表达式，如下:</p>
@@ -1323,10 +1320,17 @@
 <hr>
 <h3 id="2-createmodule">2. <code>createModule</code>
 </h3><ul>
-<li><strong>作用</strong>：创建一个模块，但<strong>不添加到包的模块集合</strong>，仅供当前包内部使用。</li>
-<li><strong>可见性</strong>：<strong>私有（private）</strong>。这个模块不会被暴露给依赖当前包的其他包。</li>
-<li><strong>典型用途</strong>：当你只需要在当前包内部组织代码、复用代码，但不希望对外暴露时，使用 <code>createModule</code>。</li>
-<li><strong>调用方式</strong>：
+<li>
+<p><strong>作用</strong>：创建一个模块，但<strong>不添加到包的模块集合</strong>，仅供当前包内部使用。</p>
+</li>
+<li>
+<p><strong>可见性</strong>：<strong>私有（private）</strong>。这个模块不会被暴露给依赖当前包的其他包。</p>
+</li>
+<li>
+<p><strong>典型用途</strong>：当你只需要在当前包内部组织代码、复用代码，但不希望对外暴露时，使用 <code>createModule</code>。</p>
+</li>
+<li>
+<p><strong>调用方式</strong>：</p>
 <div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
@@ -1336,7 +1340,9 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div></li>
-<li><strong>效果</strong>：只能在当前包的 build 脚本中通过 <code>addImport</code> 等方式引用，外部包无法通过 <code>@import</code> 访问。</li>
+<li>
+<p><strong>效果</strong>：只能在当前包的 build 脚本中通过 <code>addImport</code> 等方式引用，外部包无法通过 <code>@import</code> 访问。</p>
+</li>
 </ul>
 <hr>
 <h3 id="总结对比表">总结对比表
@@ -1407,23 +1413,21 @@
 </div><p>然后在程序中使用参数</p>
 <div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">9
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">main</span>() <span style="color:#56b6c2">!</span><span style="color:#e5c07b">void</span> {
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">main</span>() <span style="color:#56b6c2">!</span><span style="color:#e5c07b">void</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">args</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">try</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">process</span>.<span style="color:#e06c75">argsAlloc</span>(<span style="color:#e06c75">std</span>.<span style="color:#e06c75">heap</span>.<span style="color:#e06c75">page_allocator</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">defer</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">process</span>.<span style="color:#e06c75">argsFree</span>(<span style="color:#e06c75">std</span>.<span style="color:#e06c75">heap</span>.<span style="color:#e06c75">page_allocator</span>, <span style="color:#e06c75">args</span>);
-</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// args[0]是程序名，args[1..]才是实际参数
 </span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">for</span> (<span style="color:#e06c75">args</span>[<span style="color:#d19a66">1</span>..]) <span style="color:#56b6c2">|</span><span style="color:#e06c75">arg</span><span style="color:#56b6c2">|</span> {
 </span></span><span style="display:flex;"><span>        <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;参数: {s}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">arg</span>});
@@ -1453,7 +1457,7 @@
 </span></span><span style="display:flex;"><span>});
 </span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">main</span>() <span style="color:#e5c07b">void</span>{
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	<span style="color:#e06c75">_</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">cstdio</span>.<span style="color:#e06c75">printf</span>(<span style="color:#98c379">&#34;hello</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">_</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">cstdio</span>.<span style="color:#e06c75">printf</span>(<span style="color:#98c379">&#34;hello</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>

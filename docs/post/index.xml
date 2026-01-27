@@ -14,9 +14,9 @@
         
         <guid>https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/</guid>
         <description>&lt;img src="https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun.png" alt="Featured image of post B样条曲线" /&gt;&lt;p&gt;b样条曲线的连续形式推导:&lt;/p&gt;
-&lt;p&gt;$$B_0\left(x\right)=1 ,0\le x \le 1$&lt;/p&gt;
-&lt;p&gt;$$B_d(x)=\int B_{d-1}\left(y\right)B_0\left(x-y\right)dy=\int_{x-1}^{x}B_{d-1}\left(y\right)B_0\left(x-y\right)dy$&lt;/p&gt;
-&lt;p&gt;$$B_d\left(x\right)=\int_{x-1}^{x}B_{d-1}\left(y\right)dy=\int_{x-1}^{0}B_{d-1}\left(y\right)dy + \int_{0}^{x}B_{d-1}\left(y\right)dy$&lt;/p&gt;
+&lt;p&gt;$B_0\left(x\right)=1 ,0\le x \le 1$&lt;/p&gt;
+&lt;p&gt;$B_d(x)=\int B_{d-1}\left(y\right)B_0\left(x-y\right)dy=\int_{x-1}^{x}B_{d-1}\left(y\right)B_0\left(x-y\right)dy$&lt;/p&gt;
+&lt;p&gt;$B_d\left(x\right)=\int_{x-1}^{x}B_{d-1}\left(y\right)dy=\int_{x-1}^{0}B_{d-1}\left(y\right)dy + \int_{0}^{x}B_{d-1}\left(y\right)dy$&lt;/p&gt;
 &lt;p&gt;$=\int_{x}^{1}B_{d-1}^{i+1}\left(y\right)dy + \int_{0}^{x}B_{d-1}^{i}\left(y\right)dy$&lt;/p&gt;
 &lt;p&gt;b样条曲线不同阶的基函数递推公式：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/b.png&#34;
@@ -1519,7 +1519,8 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png" alt="Featured image of post 学习zig" /&gt;&lt;p&gt;zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。&lt;/p&gt;
 &lt;p&gt;zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。&lt;/p&gt;
 &lt;p&gt;zig语言的void和c语言的void不同，c语言的void对应anyopaque，是对opaque的泛化，就像anytype是对type的泛化，anyerror对error的泛化。void也是一个类型，它的值通常为&lt;code&gt;{}&lt;/code&gt;。&lt;/p&gt;
-&lt;p&gt;匿名结构体的类型可以直接声明并初始化&lt;code&gt;var value=.{ .int = @as(**u32**, 1234),.float = @as(**f64**, 12.34), .b = true, .s = &amp;quot;hi&amp;quot;,}&lt;/code&gt;, 它的类型是&lt;code&gt;struct{int:u32,float:f64,b:true,s:const*[2:0]u8}&lt;/code&gt;，你可以在写函数参数类型时用到。&lt;/p&gt;
+&lt;h4 id=&#34;结构体&#34;&gt;结构体
+&lt;/h4&gt;&lt;p&gt;匿名结构体的类型可以直接声明并初始化&lt;code&gt;var value=.{ .int = @as(**u32**, 1234),.float = @as(**f64**, 12.34), .b = true, .s = &amp;quot;hi&amp;quot;,}&lt;/code&gt;, 它的类型是&lt;code&gt;struct{int:u32,float:f64,b:true,s:const*[2:0]u8}&lt;/code&gt;，你可以在写函数参数类型时用到。&lt;/p&gt;
 &lt;p&gt;zig语言 的”元组“，.{&amp;ldquo;nihao&amp;rdquo;,3}其实是个value, 它的类型是匿名结构体struct {const *[5:0]u8,u32}，也就是如果匿名结构体不带变量名就是元组。&lt;/p&gt;
 &lt;p&gt;zig的运算符&lt;code&gt;**&lt;/code&gt;和&lt;code&gt;++&lt;/code&gt;都是中缀二元运算符，都要求两边的参数是编译期已知的。&lt;/p&gt;
 &lt;p&gt;zig语言会自动对结构体的内存进行布局优化，下面的例子:&lt;/p&gt;
@@ -1557,7 +1558,8 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;debug&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;Offset of color: {}&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;, .{&lt;span style=&#34;color:#e5c07b&#34;&gt;@offsetOf&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;RB_Node&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;color&amp;#34;&lt;/span&gt;)});
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype,似乎zig内置函数可以）。&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;zig中的文件，结构体，联合体等都是容器，容器里面声明的函数如果参数包含自身的类型，一般该参数使用self: Self代替，你可以在很多地方看到这种写法。在调用该函数时需要该容器的实例调用并省略掉该参数传入，这时默认会传入该实例的自身替换该参数。如果容器内的函数的参数并没有要传入该容器自身的类型，那么这个函数的调用不要通过该容器的实例调用，而是通过容器类型调用该函数。比如ArrayList的initCapacity函数调用时，要通过ArrayList(u32).initCapacity, 而deinit函数一般通过实例调用:&lt;code&gt;var a:ArrayList(u32)=.empty; a.deinit(std.testing.allocator);&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype,似乎zig内置函数可以）。&lt;/p&gt;
 &lt;p&gt;zig 的test的函数必须是字符串，否则必须是标识符，一般和某个函数名的标识符相同，这样会作为该函数的文档测试说明。test函数的默认返回类型是错误联合类型，也就是&lt;code&gt;!void&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/violeshnv/p/18200280&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;这个网页说明了一些用法&lt;/a&gt;&lt;/p&gt;
@@ -1721,11 +1723,9 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 9
 &lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;10
 &lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;11
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;12
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;/// Checks if a `Ptr` is a pointer to `Item`.
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;/// Checks if a `Ptr` is a pointer to `Item`.
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;/// Note that the pointer is allowed to have the `const`, `volatile` or `allowzero` keyword.
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;pub&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;isSizeOnePoiner&lt;/span&gt;(
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;comptime&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;Item&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;type&lt;/span&gt;,
@@ -1774,11 +1774,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;i32&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;add&lt;/span&gt;(&lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;i32&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;add&lt;/span&gt;(&lt;span style=&#34;color:#d19a66&#34;&gt;12&lt;/span&gt;,&lt;span style=&#34;color:#d19a66&#34;&gt;34&lt;/span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;test&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;container level variables&amp;#34;&lt;/span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;46&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;56&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;46&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;y&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;56&lt;/span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;add&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;i32&lt;/span&gt;,&lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;i32&lt;/span&gt;) &lt;span style=&#34;color:#e5c07b&#34;&gt;i32&lt;/span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;@import&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;std&amp;#34;&lt;/span&gt;)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;testing&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;;
@@ -1945,7 +1945,7 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#7f848e&#34;&gt;// const slice: []const u8 = &amp;#34;slice&amp;#34;;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;slice&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; []&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;u8&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;bytes&lt;/span&gt;;&lt;span style=&#34;color:#98c379&#34;&gt;\\数组的指针转化为切片&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;dprint&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;slice type:{}&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;, .{&lt;span style=&#34;color:#e5c07b&#34;&gt;@TypeOf&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;slice&lt;/span&gt;)});
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;   &lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; [&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;]&lt;span style=&#34;color:#e5c07b&#34;&gt;u8&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt;]&lt;span style=&#34;color:#e5c07b&#34;&gt;u8&lt;/span&gt;{ &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;2&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;3&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;4&lt;/span&gt;, &lt;span style=&#34;color:#d19a66&#34;&gt;5&lt;/span&gt; };
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;array_ptr&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;array&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;dprint&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;array type:{}&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;, .{&lt;span style=&#34;color:#e5c07b&#34;&gt;@TypeOf&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;array_ptr&lt;/span&gt;)});
@@ -2009,7 +2009,7 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#e5c07b&#34;&gt;@TypeOf&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;usize&lt;/span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;sum2&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;@as&lt;/span&gt;(&lt;span style=&#34;color:#e5c07b&#34;&gt;i32&lt;/span&gt;, &lt;span style=&#34;color:#e5c07b&#34;&gt;@intCast&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;i&lt;/span&gt;));
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;test&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;switch simple&amp;#34;&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;a&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;u64&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;10&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;zz&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;u64&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;103&lt;/span&gt;;
@@ -2109,30 +2109,26 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;/div&gt;
 &lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 1
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 2
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 3
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 4
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 5
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 6
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 7
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 8
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 9
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;10
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;11
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;8
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;9
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;myfun&lt;/span&gt;()&lt;span style=&#34;color:#56b6c2&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;void&lt;/span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#c678dd&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;buf&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; [&lt;span style=&#34;color:#d19a66&#34;&gt;30&lt;/span&gt;]&lt;span style=&#34;color:#e5c07b&#34;&gt;u8&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;undefined&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#7f848e&#34;&gt;//在这里try语句遇到错误会从终止函数并返回错误结果，因为stdin.readUntilDelimiterOrEof(&amp;amp;buf, &amp;#39;\n&amp;#39;)的返回值类型为`!?[]u8`，所以
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#7f848e&#34;&gt;//if语句解包的是可选类型，得到|line|
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;stdin&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;readUntilDelimiterOrEof&lt;/span&gt;(&lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;buf&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;)) &lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;line&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;myfun&lt;/span&gt;()&lt;span style=&#34;color:#56b6c2&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;void&lt;/span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;buf&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; [&lt;span style=&#34;color:#d19a66&#34;&gt;30&lt;/span&gt;]&lt;span style=&#34;color:#e5c07b&#34;&gt;u8&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;undefined&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#7f848e&#34;&gt;//在这里try语句遇到错误会从终止函数并返回错误结果，因为stdin.readUntilDelimiterOrEof(&amp;amp;buf, &amp;#39;\n&amp;#39;)的返回值类型为`!?[]u8`，所以
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#7f848e&#34;&gt;//if语句解包的是可选类型，得到|line|
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;stdin&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;readUntilDelimiterOrEof&lt;/span&gt;(&lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;buf&lt;/span&gt;, &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;)) &lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;line&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;if else语句也可以当作表达式，如下:&lt;/p&gt;
@@ -2373,10 +2369,17 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;hr&gt;
 &lt;h3 id=&#34;2-createmodule&#34;&gt;2. &lt;code&gt;createModule&lt;/code&gt;
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;作用&lt;/strong&gt;：创建一个模块，但&lt;strong&gt;不添加到包的模块集合&lt;/strong&gt;，仅供当前包内部使用。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;可见性&lt;/strong&gt;：&lt;strong&gt;私有（private）&lt;/strong&gt;。这个模块不会被暴露给依赖当前包的其他包。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;典型用途&lt;/strong&gt;：当你只需要在当前包内部组织代码、复用代码，但不希望对外暴露时，使用 &lt;code&gt;createModule&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;调用方式&lt;/strong&gt;：
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;作用&lt;/strong&gt;：创建一个模块，但&lt;strong&gt;不添加到包的模块集合&lt;/strong&gt;，仅供当前包内部使用。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;可见性&lt;/strong&gt;：&lt;strong&gt;私有（private）&lt;/strong&gt;。这个模块不会被暴露给依赖当前包的其他包。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;典型用途&lt;/strong&gt;：当你只需要在当前包内部组织代码、复用代码，但不希望对外暴露时，使用 &lt;code&gt;createModule&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;调用方式&lt;/strong&gt;：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
@@ -2386,7 +2389,9 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;效果&lt;/strong&gt;：只能在当前包的 build 脚本中通过 &lt;code&gt;addImport&lt;/code&gt; 等方式引用，外部包无法通过 &lt;code&gt;@import&lt;/code&gt; 访问。&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;效果&lt;/strong&gt;：只能在当前包的 build 脚本中通过 &lt;code&gt;addImport&lt;/code&gt; 等方式引用，外部包无法通过 &lt;code&gt;@import&lt;/code&gt; 访问。&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;总结对比表&#34;&gt;总结对比表
@@ -2457,23 +2462,21 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;/div&gt;&lt;p&gt;然后在程序中使用参数&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 1
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 2
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 3
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 4
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 5
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 6
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 7
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 8
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 9
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;10
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;8
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;9
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;pub&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt;() &lt;span style=&#34;color:#56b6c2&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;void&lt;/span&gt; {
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;pub&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt;() &lt;span style=&#34;color:#56b6c2&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color:#e5c07b&#34;&gt;void&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;args&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;process&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;argsAlloc&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;heap&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;page_allocator&lt;/span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;defer&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;process&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;argsFree&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;heap&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;page_allocator&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;args&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#7f848e&#34;&gt;// args[0]是程序名，args[1..]才是实际参数
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;args&lt;/span&gt;[&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;..]) &lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;arg&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;debug&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;参数: {s}&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;, .{&lt;span style=&#34;color:#e06c75&#34;&gt;arg&lt;/span&gt;});
@@ -2503,7 +2506,7 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;});
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;pub&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;fn&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;main&lt;/span&gt;() &lt;span style=&#34;color:#e5c07b&#34;&gt;void&lt;/span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#e06c75&#34;&gt;_&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;cstdio&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;printf&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;hello&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;_&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;cstdio&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;printf&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;hello&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
