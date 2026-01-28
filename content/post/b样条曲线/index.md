@@ -9,7 +9,7 @@ image = "wuyun.png"
 
 b样条曲线的连续形式推导:
 
-$B_0\left(x\right)=1 ,0\le x \le 1$
+ B_0\left(x\right)=1 ,0\le x \le 1 $
 
 $B_d(x)=\int B_{d-1}\left(y\right)B_0\left(x-y\right)dy=\int_{x-1}^{x}B_{d-1}\left(y\right)B_0\left(x-y\right)dy$
 

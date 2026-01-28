@@ -8,8 +8,6 @@ image = "nature.png"
 
 +++
 
-
-
 [zig语言中文社区](https://ziglang.cc/)
 
 [zig编译为webassembly](https://luojia.me/9940/)
@@ -27,7 +25,7 @@ pub fn normalize(p: anytype) Math_Compute_Abandon!void {
         if(@TypeOf(p)!=[]T)
         {
             @compileError("normalize error\n" ++ 
-            	@typeName(@TypeOf(p)) ++ "fdsf");
+                @typeName(@TypeOf(p)) ++ "fdsf");
         }
     }
     const norm = lb_norm(p);
@@ -47,11 +45,8 @@ fn myget_Array_rows(comptime TT: type) usize {
             return @typeInfo(TT).array.len;
         }
 //下面有typeinfo的用法
-pub fn mult(self: *const Self, mat: anytype) LBMatrix(T, rows, 	    		
+pub fn mult(self: *const Self, mat: anytype) LBMatrix(T, rows,                 
   myget_Array_rows(@typeInfo(@TypeOf(mat)).@"struct".fields[0].type))
-
-
-
 ```
 
 mat的类型如下:
@@ -64,11 +59,23 @@ struct {
 }
 ```
 
-
-
-
-
 似乎zig中的@import不能导入上层目录，也就是不能出现`..` 。那也就意味着每个子文件夹里面的zig源文件都要独立成为一个自摸块，除了依赖子文件夹，不会依赖其他文件夹的zig源文件
+
+#### tuple的用法
+
+```zig
+ const a = .{
+        @as(u32, 1234),
+        @as(f64, 12.34),
+        true,
+        "hi",
+    } ++ .{false} ** 2;
+    // a.@"2" = false;
+    std.debug.print("tuple 0:{}\n", .{a[0]});
+
+```
+
+请注意tuple的成员变量的值无法修改.可以配合inline for访问成员。
 
 ### comptime实战
 
@@ -92,8 +99,6 @@ test "inline while loop" {
 
 上面的例子中，如果i是不是comptime变量，就不能用inline while。
 
-
-
 deepseek说只能写`try comptime` 而非comptime try ，可是下面的例子
 
 ```zig
@@ -107,18 +112,11 @@ test "peer type resolution: ?T and T" {
 }
 ```
 
-
-
-
-
-
-
 zig语言的切片`[]T`可以安全地转向`[]const T` ，不需要显式转换。
 
 下面的代码报错是因为没有确定类型导致类型推断冲突，因为x没有给类型，而-1是comptime_int,故而x是comptime_int类型，这和var冲突。
 
 ```zig
-
 test safe_sqrt {
     var x= -1;\\这里需改为var x:f32=-1;即可修复错误
     x = x - 1;
@@ -126,19 +124,9 @@ test safe_sqrt {
 }
 ```
 
-
-
-
-
 一般来说zig语言的绑定库只需要@cImport()该库的暴露的.h文件即可，但是有些时候会再在上面裹上一层zig的wrapper， 比如这个[mach-glfw](https://gitee.com/wujilingfeng/mach-glfw) 里面的main分支，就是@cImport()之后又裹了一层zig。
 
-
-
-
-
 如果zig语言想要实现类型类，只需要写个满足类型类约束的comptime函数，也就是在编译期进行类型检查是否有某些方法的判断，然后在需要添加类型类约束的函数上添加这个编译期函数判断即可。
-
-
 
 ### 编译系统
 
@@ -174,10 +162,6 @@ fn detectWhetherToEnableLibFoo() bool {
     return false;
 }
 ```
-
-
-
-
 
 下面是编译c语言项目的构建代码，有冗余，这里的注释部分也能添加源文件，到底是cstructures_mod还是cstructures添加源文件呢？写法不统一。
 
@@ -225,8 +209,6 @@ pub fn build(b: *std.Build) void {
     b.installArtifact(exe); //保存生成的结果
 }
 ```
-
-
 
 下面是ai生成测试用例
 
@@ -373,8 +355,6 @@ pub fn build(b: *std.Build) void {
   A: wasmf32-freestanding下禁用 std，换用`wasm32-wasi`作为target 或手工实现基础IO。
 - **Q: 如何编译为Emscripten兼容的WASM？**
   A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue code。
-
-
 
 #### 生成文档
 
