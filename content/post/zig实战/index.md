@@ -61,6 +61,18 @@ struct {
 
 似乎zig中的@import不能导入上层目录，也就是不能出现`..` 。那也就意味着每个子文件夹里面的zig源文件都要独立成为一个自摸块，除了依赖子文件夹，不会依赖其他文件夹的zig源文件
 
+#### 整数整除需要注意
+
+```zig
+ const c: isize = 19;
+    const d: isize = 11;
+    const b = @mod(c, d);
+    const bb = @divFloor(c, d);
+    std.debug.print("tuple 0: {} {}\n", .{  b, bb });
+```
+
+上面这种整数和除余能保证b是大于等于0的整数，且bb*d+b=c。
+
 #### tuple的用法
 
 ```zig
@@ -72,7 +84,6 @@ struct {
     } ++ .{false} ** 2;
     // a.@"2" = false;
     std.debug.print("tuple 0:{}\n", .{a[0]});
-
 ```
 
 请注意tuple的成员变量的值无法修改.可以配合inline for访问成员。

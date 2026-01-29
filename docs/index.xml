@@ -2,18 +2,38 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>五级灵风</title>
-        <link>https://wujilingfeng.github.io/</link>
+        <link>http://localhost:1313/</link>
         <description>Recent content on 五级灵风</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>LI BO</copyright>
-        <lastBuildDate>Sat, 24 Jan 2026 11:45:01 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 29 Jan 2026 09:25:51 +0800</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>向量数</title>
+        <link>http://localhost:1313/p/%E5%90%91%E9%87%8F%E6%95%B0/</link>
+        <pubDate>Thu, 29 Jan 2026 09:25:51 +0800</pubDate>
+        
+        <guid>http://localhost:1313/p/%E5%90%91%E9%87%8F%E6%95%B0/</guid>
+        <description>&lt;p&gt;下面介绍一种向量进制的数据表示方式。比如N向量数，设集合为$B$是自然数的集合，那么N向量空间设为$C=B .. \times B$,也就是C中元素表示为$\left(t_0.. t_{N-1}\right) \in C$,  那么M深度的N向量数表示$D={s_0..s_m}$  其中$s_l\in C$，&lt;/p&gt;
+&lt;p&gt;。&lt;/p&gt;
+&lt;p&gt;对于任意的M深度N向量数$d\in D,d=s_0..s_m$都有$0..0s_0..s_m$,其中0表示$\left(0,0,0 \right)$, 和d都不相等，因为表示的深度不一样。&lt;/p&gt;
+&lt;p&gt;现在定义进制的等价关系，对于给定的正整数P。&lt;/p&gt;
+&lt;p&gt;对于 $d\in D,d=s_0..s_m$，都有$d=s_0..\alpha_i\left(s_{l+1}\right)\beta_i\left(s_l\right)..s_m$, 其中$\alpha_i$表示对向量的第i个分量加1，$\beta_i$表示对向量的第i个分量减P。&lt;/p&gt;
+&lt;p&gt;满足上面定义的等价关系叫M深度N向量P进制数。&lt;/p&gt;
+&lt;p&gt;八叉树的节点和根节点的关系（或者路径）都可以用3向量2进制数表示，它的邻接关系也一目了然。&lt;/p&gt;
+&lt;p&gt;在zig语言中直接用&lt;code&gt;ArrayList([3]u1)&lt;/code&gt;表示。&lt;/p&gt;
+&lt;p&gt;这样我完全不用像传统方式表示八叉树，也就是有parent和children指针，我完全可以申请一块内存即可,&lt;code&gt;const Oc_Node=struct{ArrayList([3]u1),isize};constr Octree=struct{octree:ArrayList(Oc_Node),octree_prop:ArrayList(T)}&lt;/code&gt;,其中usize是指向Octree_Prop的索引，如果没有属性值，置为-1。&lt;/p&gt;
+&lt;p&gt;一般为了提高效率，节省内存，令&lt;code&gt;const Oc_Node=struct{[M][3]u1,isize}&lt;/code&gt;;&lt;/p&gt;
+&lt;p&gt;如果要计算M深度N向量的id，可以按照P进制进行排列计算数值，但是该数值对于同一层深度的向量数具有唯一性，不同深度时id可能重复，因为上述表示法对于$0s$和$s$不具有唯一性。&lt;/p&gt;
+&lt;p&gt;如果想让M深度N向量数在不同深度都有唯一id表示，可以在上述表示法基础上加上,$TotalNodes(M-1) = 1 + P^N + (P^N)^2 + &amp;hellip; + (P^N)^(M-1)$&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>B样条曲线</title>
-        <link>https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/</link>
+        <link>http://localhost:1313/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/</link>
         <pubDate>Sat, 24 Jan 2026 11:45:01 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun.png" alt="Featured image of post B样条曲线" /&gt;&lt;p&gt;b样条曲线的连续形式推导:&lt;/p&gt;
+        <guid>http://localhost:1313/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/</guid>
+        <description>&lt;img src="http://localhost:1313/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun.png" alt="Featured image of post B样条曲线" /&gt;&lt;p&gt;b样条曲线的连续形式推导:&lt;/p&gt;
 &lt;p&gt;B_0\left(x\right)=1 ,0\le x \le 1 $&lt;/p&gt;
 &lt;p&gt;$B_d(x)=\int B_{d-1}\left(y\right)B_0\left(x-y\right)dy=\int_{x-1}^{x}B_{d-1}\left(y\right)B_0\left(x-y\right)dy$&lt;/p&gt;
 &lt;p&gt;$B_d\left(x\right)=\int_{x-1}^{x}B_{d-1}\left(y\right)dy=\int_{x-1}^{0}B_{d-1}\left(y\right)dy + \int_{0}^{x}B_{d-1}\left(y\right)dy$&lt;/p&gt;
@@ -37,11 +57,11 @@
         </item>
         <item>
         <title>微分几何</title>
-        <link>https://wujilingfeng.github.io/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/</link>
+        <link>http://localhost:1313/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/</link>
         <pubDate>Fri, 15 Aug 2025 17:15:58 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/image.png" alt="Featured image of post 微分几何" /&gt;&lt;p&gt;微分几何笔记&lt;/p&gt;
+        <guid>http://localhost:1313/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/</guid>
+        <description>&lt;img src="http://localhost:1313/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/image.png" alt="Featured image of post 微分几何" /&gt;&lt;p&gt;微分几何笔记&lt;/p&gt;
 &lt;h3 id=&#34;经典微分几何&#34;&gt;经典微分几何
 &lt;/h3&gt;&lt;h4 id=&#34;定理1&#34;&gt;定理1
 &lt;/h4&gt;&lt;p&gt;参数t是弧长参数s，的充分必要条件是$|r^{&amp;rsquo;} \left(t\right)|=1$&lt;/p&gt;
@@ -217,11 +237,11 @@ e _{3}\left(s\right)
         </item>
         <item>
         <title>Web端渲染</title>
-        <link>https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/</link>
+        <link>http://localhost:1313/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/</link>
         <pubDate>Wed, 16 Jul 2025 10:22:34 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/img.png" alt="Featured image of post Web端渲染" /&gt;&lt;p&gt;将使用 Dawn 库编写的渲染程序导出到 Web 端和本地端，需要采取不同的编译和部署策略，但核心思想是：&lt;strong&gt;你的 C++ 渲染逻辑（使用 WebGPU API）大部分可以保持不变，而平台特定的部分（如窗口创建、文件IO、事件处理）则需要抽象或有条件编译。&lt;/strong&gt;&lt;/p&gt;
+        <guid>http://localhost:1313/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/</guid>
+        <description>&lt;img src="http://localhost:1313/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/img.png" alt="Featured image of post Web端渲染" /&gt;&lt;p&gt;将使用 Dawn 库编写的渲染程序导出到 Web 端和本地端，需要采取不同的编译和部署策略，但核心思想是：&lt;strong&gt;你的 C++ 渲染逻辑（使用 WebGPU API）大部分可以保持不变，而平台特定的部分（如窗口创建、文件IO、事件处理）则需要抽象或有条件编译。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Dawn 本身是一个 C++ 库，实现了 WebGPU API 规范，并且是 Chromium 浏览器中 WebGPU 的底层实现。&lt;/p&gt;
 &lt;h3 id=&#34;核心思想平台无关的-webgpu-逻辑&#34;&gt;核心思想：平台无关的 WebGPU 逻辑
 &lt;/h3&gt;&lt;p&gt;你的渲染程序主体应该使用 WebGPU API（通过 &lt;code&gt;wgpu::Device&lt;/code&gt;, &lt;code&gt;wgpu::Queue&lt;/code&gt;, &lt;code&gt;wgpu::RenderPassEncoder&lt;/code&gt; 等）来定义渲染管线、加载资源、绘制等。这部分代码在概念上是平台无关的。&lt;/p&gt;
@@ -472,11 +492,11 @@ int main() {
         </item>
         <item>
         <title>Zig实战</title>
-        <link>https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/</link>
+        <link>http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/</link>
         <pubDate>Fri, 20 Jun 2025 10:36:14 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/nature.png" alt="Featured image of post Zig实战" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://ziglang.cc/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/</guid>
+        <description>&lt;img src="http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/nature.png" alt="Featured image of post Zig实战" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://ziglang.cc/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;zig语言中文社区&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://luojia.me/9940/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;zig编译为webassembly&lt;/a&gt;&lt;/p&gt;
@@ -561,6 +581,24 @@ int main() {
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;似乎zig中的@import不能导入上层目录，也就是不能出现&lt;code&gt;..&lt;/code&gt; 。那也就意味着每个子文件夹里面的zig源文件都要独立成为一个自摸块，除了依赖子文件夹，不会依赖其他文件夹的zig源文件&lt;/p&gt;
+&lt;h4 id=&#34;整数整除需要注意&#34;&gt;整数整除需要注意
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;c&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;isize&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;19&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;d&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;isize&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;11&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;@mod&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;c&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;d&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;bb&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;@divFloor&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;c&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;d&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;debug&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;print&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;tuple 0: {} {}&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;&lt;/span&gt;, .{  &lt;span style=&#34;color:#e06c75&#34;&gt;b&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;bb&lt;/span&gt; });
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;上面这种整数和除余能保证b是大于等于0的整数，且bb*d+b=c。&lt;/p&gt;
 &lt;h4 id=&#34;tuple的用法&#34;&gt;tuple的用法
 &lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
@@ -955,11 +993,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Gltf格式</title>
-        <link>https://wujilingfeng.github.io/p/gltf%E6%A0%BC%E5%BC%8F/</link>
+        <link>http://localhost:1313/p/gltf%E6%A0%BC%E5%BC%8F/</link>
         <pubDate>Mon, 19 May 2025 18:05:13 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/gltf%E6%A0%BC%E5%BC%8F/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/gltf%E6%A0%BC%E5%BC%8F/jiari.png" alt="Featured image of post Gltf格式" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/905671909b25&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>http://localhost:1313/p/gltf%E6%A0%BC%E5%BC%8F/</guid>
+        <description>&lt;img src="http://localhost:1313/p/gltf%E6%A0%BC%E5%BC%8F/jiari.png" alt="Featured image of post Gltf格式" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/905671909b25&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;gltf文件格式介绍&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/qq_22642239/article/details/129752911&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;gltf文件格式&lt;/a&gt;&lt;/p&gt;
@@ -967,11 +1005,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Minkowski框架学习</title>
-        <link>https://wujilingfeng.github.io/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</link>
+        <link>http://localhost:1313/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</link>
         <pubDate>Tue, 13 May 2025 17:46:40 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/rain.png" alt="Featured image of post Minkowski框架学习" /&gt;&lt;p&gt;按照&lt;a class=&#34;link&#34; href=&#34;https://rocm.docs.amd.com/projects/radeon/en/latest/docs/install/native_linux/install-radeon.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>http://localhost:1313/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</guid>
+        <description>&lt;img src="http://localhost:1313/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/rain.png" alt="Featured image of post Minkowski框架学习" /&gt;&lt;p&gt;按照&lt;a class=&#34;link&#34; href=&#34;https://rocm.docs.amd.com/projects/radeon/en/latest/docs/install/native_linux/install-radeon.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;网址&lt;/a&gt;进行配置.&lt;/p&gt;
 &lt;p&gt;对于zorin os等基于ubuntu的发行版本，需要修改&lt;code&gt;sudo vim /etc/os-release&lt;/code&gt; , 把ID设置为ubuntu。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -1001,19 +1039,19 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Futhark学习</title>
-        <link>https://wujilingfeng.github.io/p/futhark%E5%AD%A6%E4%B9%A0/</link>
+        <link>http://localhost:1313/p/futhark%E5%AD%A6%E4%B9%A0/</link>
         <pubDate>Wed, 30 Apr 2025 16:52:46 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/futhark%E5%AD%A6%E4%B9%A0/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/futhark%E5%AD%A6%E4%B9%A0/jinshan.png" alt="Featured image of post Futhark学习" /&gt;</description>
+        <guid>http://localhost:1313/p/futhark%E5%AD%A6%E4%B9%A0/</guid>
+        <description>&lt;img src="http://localhost:1313/p/futhark%E5%AD%A6%E4%B9%A0/jinshan.png" alt="Featured image of post Futhark学习" /&gt;</description>
         </item>
         <item>
         <title>Haskell学习</title>
-        <link>https://wujilingfeng.github.io/p/haskell%E5%AD%A6%E4%B9%A0/</link>
+        <link>http://localhost:1313/p/haskell%E5%AD%A6%E4%B9%A0/</link>
         <pubDate>Tue, 29 Apr 2025 10:58:01 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/haskell%E5%AD%A6%E4%B9%A0/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/haskell%E5%AD%A6%E4%B9%A0/img.png" alt="Featured image of post Haskell学习" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gitter.im/autumnai/leaf?utm_source=badge&amp;amp;utm_medium=badge&amp;amp;utm_campaign=pr-badge&amp;amp;utm_content=badge&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>http://localhost:1313/p/haskell%E5%AD%A6%E4%B9%A0/</guid>
+        <description>&lt;img src="http://localhost:1313/p/haskell%E5%AD%A6%E4%B9%A0/img.png" alt="Featured image of post Haskell学习" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gitter.im/autumnai/leaf?utm_source=badge&amp;amp;utm_medium=badge&amp;amp;utm_campaign=pr-badge&amp;amp;utm_content=badge&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;&lt;img src=&#34;https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg&#34;
 	
 	
@@ -1522,11 +1560,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Hugo&#43;github搭建博客</title>
-        <link>https://wujilingfeng.github.io/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link>
+        <link>http://localhost:1313/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link>
         <pubDate>Tue, 29 Apr 2025 08:57:27 +0800</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/shumu.png" alt="Featured image of post Hugo&#43;github搭建博客" /&gt;&lt;p&gt;hugo 似乎的确存在很多bug。&lt;/p&gt;
+        <guid>http://localhost:1313/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid>
+        <description>&lt;img src="http://localhost:1313/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/shumu.png" alt="Featured image of post Hugo&#43;github搭建博客" /&gt;&lt;p&gt;hugo 似乎的确存在很多bug。&lt;/p&gt;
 &lt;p&gt;stack主题对于baseurl的路径处理有bug，例如当baseurl = &lt;a class=&#34;link&#34; href=&#34;https://wujilingfeng.github.io/myblog/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://wujilingfeng.github.io/myblog/&lt;/a&gt;时，生成的网页内容路径会自动添加myblog。&lt;/p&gt;
 &lt;p&gt;stack主题对于文章的语言分类是以md的文件名中缀&lt;code&gt;zh-cn&lt;/code&gt;,&lt;code&gt;en&lt;/code&gt;,&lt;code&gt;ar&lt;/code&gt;来进行区分的。&lt;/p&gt;
@@ -1534,11 +1572,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>学习zig</title>
-        <link>https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/</link>
+        <link>http://localhost:1313/p/%E5%AD%A6%E4%B9%A0zig/</link>
         <pubDate>Mon, 28 Apr 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png" alt="Featured image of post 学习zig" /&gt;&lt;p&gt;zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。&lt;/p&gt;
+        <guid>http://localhost:1313/p/%E5%AD%A6%E4%B9%A0zig/</guid>
+        <description>&lt;img src="http://localhost:1313/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png" alt="Featured image of post 学习zig" /&gt;&lt;p&gt;zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。&lt;/p&gt;
 &lt;p&gt;zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。&lt;/p&gt;
 &lt;p&gt;zig语言的void和c语言的void不同，c语言的void对应anyopaque，是对opaque的泛化，就像anytype是对type的泛化，anyerror对error的泛化。void也是一个类型，它的值通常为&lt;code&gt;{}&lt;/code&gt;。&lt;/p&gt;
 &lt;h4 id=&#34;结构体&#34;&gt;结构体
@@ -2557,11 +2595,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Chinese Test</title>
-        <link>https://wujilingfeng.github.io/p/test-chinese/</link>
+        <link>http://localhost:1313/p/test-chinese/</link>
         <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/test-chinese/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.zh-cn.jpg" alt="Featured image of post Chinese Test" /&gt;&lt;h2 id=&#34;正文测试&#34;&gt;正文测试
+        <guid>http://localhost:1313/p/test-chinese/</guid>
+        <description>&lt;img src="http://localhost:1313/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.zh-cn.jpg" alt="Featured image of post Chinese Test" /&gt;&lt;h2 id=&#34;正文测试&#34;&gt;正文测试
 &lt;/h2&gt;&lt;p&gt;而这些并不是完全重要，更加重要的问题是， 带着这些问题，我们来审视一下学生会退会。 既然如何， 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 我们不得不面对一个非常尴尬的事实，那就是， 可是，即使是这样，学生会退会的出现仍然代表了一定的意义。 学生会退会，发生了会如何，不发生又会如何。 经过上述讨论， 生活中，若学生会退会出现了，我们就不得不考虑它出现了的事实。 学生会退会，到底应该如何实现。 这样看来， 在这种困难的抉择下，本人思来想去，寝食难安。 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 就我个人来说，学生会退会对我的意义，不能不说非常重大。 莎士比亚曾经提到过，人的一生是短的，但如果卑劣地过这一生，就太长了。这似乎解答了我的疑惑。 莫扎特说过一句富有哲理的话，谁和我一样用功，谁就会和我一样成功。这启发了我， 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 学生会退会，到底应该如何实现。 一般来说， 从这个角度来看， 这种事实对本人来说意义重大，相信对这个世界也是有一定意义的。 在这种困难的抉择下，本人思来想去，寝食难安。 了解清楚学生会退会到底是一种怎么样的存在，是解决一切问题的关键。 一般来说， 生活中，若学生会退会出现了，我们就不得不考虑它出现了的事实。 问题的关键究竟为何？ 而这些并不是完全重要，更加重要的问题是。&lt;/p&gt;
 &lt;p&gt;奥斯特洛夫斯基曾经说过，共同的事业，共同的斗争，可以使人们产生忍受一切的力量。　带着这句话，我们还要更加慎重的审视这个问题： 一般来讲，我们都必须务必慎重的考虑考虑。 既然如此， 这种事实对本人来说意义重大，相信对这个世界也是有一定意义的。 带着这些问题，我们来审视一下学生会退会。 我认为， 我认为， 在这种困难的抉择下，本人思来想去，寝食难安。 问题的关键究竟为何？ 每个人都不得不面对这些问题。 在面对这种问题时， 要想清楚，学生会退会，到底是一种怎么样的存在。 我认为， 既然如此， 每个人都不得不面对这些问题。 在面对这种问题时， 那么， 我认为， 学生会退会因何而发生。&lt;/p&gt;
 &lt;h2 id=&#34;引用&#34;&gt;引用
@@ -2645,19 +2683,19 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>归档</title>
-        <link>https://wujilingfeng.github.io/archives/</link>
+        <link>http://localhost:1313/archives/</link>
         <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/archives/</guid>
+        <guid>http://localhost:1313/archives/</guid>
         <description></description>
         </item>
         <item>
         <title>Markdown Syntax Guide</title>
-        <link>https://wujilingfeng.github.io/p/markdown-syntax-guide/</link>
+        <link>http://localhost:1313/p/markdown-syntax-guide/</link>
         <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/markdown-syntax-guide/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" /&gt;&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;
+        <guid>http://localhost:1313/p/markdown-syntax-guide/</guid>
+        <description>&lt;img src="http://localhost:1313/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" /&gt;&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;
 &lt;h2 id=&#34;headings&#34;&gt;Headings
 &lt;/h2&gt;&lt;p&gt;The following HTML &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;—&lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt; elements represent six levels of section headings. &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt; is the highest section level while &lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt; is the lowest.&lt;/p&gt;
 &lt;h1 id=&#34;h1&#34;&gt;H1
@@ -2881,11 +2919,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Placeholder Text</title>
-        <link>https://wujilingfeng.github.io/p/placeholder-text/</link>
+        <link>http://localhost:1313/p/placeholder-text/</link>
         <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/placeholder-text/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/placeholder-text/matt-le-SJSpo9hQf7s-unsplash.jpg" alt="Featured image of post Placeholder Text" /&gt;&lt;p&gt;Lorem est tota propiore conpellat pectoribus de pectora summo.&lt;/p&gt;
+        <guid>http://localhost:1313/p/placeholder-text/</guid>
+        <description>&lt;img src="http://localhost:1313/p/placeholder-text/matt-le-SJSpo9hQf7s-unsplash.jpg" alt="Featured image of post Placeholder Text" /&gt;&lt;p&gt;Lorem est tota propiore conpellat pectoribus de pectora summo.&lt;/p&gt;
 &lt;p&gt;Redit teque digerit hominumque toris verebor lumina non cervice subde tollit usus habet Arctonque, furores quas nec ferunt. Quoque montibus nunc caluere tempus inhospita parcite confusaque translucet patri vestro qui optatis lumine cognoscere flos nubis! Fronde ipsamque patulos Dryopen deorum.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Exierant elisi ambit vivere dedere&lt;/li&gt;
@@ -2912,10 +2950,10 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Math Typesetting</title>
-        <link>https://wujilingfeng.github.io/p/math-typesetting/</link>
+        <link>http://localhost:1313/p/math-typesetting/</link>
         <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/math-typesetting/</guid>
+        <guid>http://localhost:1313/p/math-typesetting/</guid>
         <description>&lt;p&gt;Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p&gt;
 &lt;p&gt;In this example we will be using &lt;a class=&#34;link&#34; href=&#34;https://katex.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;KaTeX&lt;/a&gt;&lt;/p&gt;
@@ -2954,11 +2992,11 @@ $$</description>
         </item>
         <item>
         <title>Emoji Support</title>
-        <link>https://wujilingfeng.github.io/p/emoji-support/</link>
+        <link>http://localhost:1313/p/emoji-support/</link>
         <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/p/emoji-support/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/emoji-support/the-creative-exchange-d2zvqp3fpro-unsplash.jpg" alt="Featured image of post Emoji Support" /&gt;&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;
+        <guid>http://localhost:1313/p/emoji-support/</guid>
+        <description>&lt;img src="http://localhost:1313/p/emoji-support/the-creative-exchange-d2zvqp3fpro-unsplash.jpg" alt="Featured image of post Emoji Support" /&gt;&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;
 &lt;p&gt;The &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/functions/emojify/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;&lt;code&gt;emojify&lt;/code&gt;&lt;/a&gt; function can be called directly in templates or &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/templates/shortcode-templates/#inline-shortcodes&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Inline Shortcodes&lt;/a&gt;.&lt;/p&gt;
@@ -2985,19 +3023,19 @@ $$</description>
         </item>
         <item>
         <title>关于</title>
-        <link>https://wujilingfeng.github.io/%E5%85%B3%E4%BA%8E/</link>
+        <link>http://localhost:1313/%E5%85%B3%E4%BA%8E/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/%E5%85%B3%E4%BA%8E/</guid>
+        <guid>http://localhost:1313/%E5%85%B3%E4%BA%8E/</guid>
         <description>&lt;p&gt;This is a test page for i18n support.&lt;/p&gt;
 </description>
         </item>
         <item>
         <title>链接</title>
-        <link>https://wujilingfeng.github.io/%E9%93%BE%E6%8E%A5/</link>
+        <link>http://localhost:1313/%E9%93%BE%E6%8E%A5/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/%E9%93%BE%E6%8E%A5/</guid>
+        <guid>http://localhost:1313/%E9%93%BE%E6%8E%A5/</guid>
         <description>&lt;p&gt;To use this feature, add &lt;code&gt;links&lt;/code&gt; section to frontmatter.&lt;/p&gt;
 &lt;p&gt;This page&amp;rsquo;s frontmatter:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -3029,10 +3067,10 @@ $$</description>
         </item>
         <item>
         <title>搜索</title>
-        <link>https://wujilingfeng.github.io/search/</link>
+        <link>http://localhost:1313/search/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/search/</guid>
+        <guid>http://localhost:1313/search/</guid>
         <description></description>
         </item>
         

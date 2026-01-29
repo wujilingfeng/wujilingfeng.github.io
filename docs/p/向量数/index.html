@@ -1,24 +1,33 @@
 <!doctype html>
 <html
-    lang="en"
+    lang="zh-cn"
     dir="ltr"
 >
     <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-        <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Guide to emoji usage in Hugo">
-<title>Emoji Support</title>
+         <script>
+  MathJax = {
+    tex: {
+      inlineMath: [ ['\$', '\$'] ],      
+      displayMath: [ ['$$','$$'], ['\$','\$'] ] 
+    },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+ <meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="下面介绍一种向量进制的数据表示方式。比如N向量数，设集合为$B$是自然数的集合，那么N向量空间设为$C=B .. \\times B$,也就是C中元素表示为$\\left(t_0.. t_{N-1}\\right) \\in C$, 那么M深度的N向量数表示$D={s_0..s_m}$ 其中$s_l\\in C$，\n。\n对于任意的M深度N向量数$d\\in D,d=s_0..s_m$都有$0..0s_0..s_m$,其中0表示$\\left(0,0,0 \\right)$, 和d都不相等，因为表示的深度不一样。\n现在定义进制的等价关系，对于给定的正整数P。\n对于 $d\\in D,d=s_0..s_m$，都有$d=s_0..\\alpha_i\\left(s_{l+1}\\right)\\beta_i\\left(s_l\\right)..s_m$, 其中$\\alpha_i$表示对向量的第i个分量加1，$\\beta_i$表示对向量的第i个分量减P。\n满足上面定义的等价关系叫M深度N向量P进制数。\n八叉树的节点和根节点的关系（或者路径）都可以用3向量2进制数表示，它的邻接关系也一目了然。\n在zig语言中直接用ArrayList([3]u1)表示。\n这样我完全不用像传统方式表示八叉树，也就是有parent和children指针，我完全可以申请一块内存即可,const Oc_Node=struct{ArrayList([3]u1),isize};constr Octree=struct{octree:ArrayList(Oc_Node),octree_prop:ArrayList(T)},其中usize是指向Octree_Prop的索引，如果没有属性值，置为-1。\n一般为了提高效率，节省内存，令const Oc_Node=struct{[M][3]u1,isize};\n如果要计算M深度N向量的id，可以按照P进制进行排列计算数值，但是该数值对于同一层深度的向量数具有唯一性，不同深度时id可能重复，因为上述表示法对于$0s$和$s$不具有唯一性。\n如果想让M深度N向量数在不同深度都有唯一id表示，可以在上述表示法基础上加上,$TotalNodes(M-1) = 1 + P^N + (P^N)^2 + &hellip; + (P^N)^(M-1)$\n">
+<title>向量数</title>
 
-<link rel='canonical' href='http://localhost:1313/en/p/emoji-support/'>
+<link rel='canonical' href='http://localhost:1313/p/%E5%90%91%E9%87%8F%E6%95%B0/'>
 
-<link rel="stylesheet" href="../../../scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="Emoji Support">
-<meta property='og:description' content="Guide to emoji usage in Hugo">
-<meta property='og:url' content='http://localhost:1313/en/p/emoji-support/'>
-<meta property='og:site_name' content='wujilingfeng'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='emoji' /><meta property='article:published_time' content='2019-03-05T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2019-03-05T00:00:00&#43;00:00'/><meta property='og:image' content='http://localhost:1313/p/emoji-support/the-creative-exchange-d2zvqp3fpro-unsplash.jpg' />
-<meta name="twitter:title" content="Emoji Support">
-<meta name="twitter:description" content="Guide to emoji usage in Hugo"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://localhost:1313/p/emoji-support/the-creative-exchange-d2zvqp3fpro-unsplash.jpg' />
-    <link rel="shortcut icon" href="../../../favicon.ico" />
+<link rel="stylesheet" href="../../scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="向量数">
+<meta property='og:description' content="下面介绍一种向量进制的数据表示方式。比如N向量数，设集合为$B$是自然数的集合，那么N向量空间设为$C=B .. \\times B$,也就是C中元素表示为$\\left(t_0.. t_{N-1}\\right) \\in C$, 那么M深度的N向量数表示$D={s_0..s_m}$ 其中$s_l\\in C$，\n。\n对于任意的M深度N向量数$d\\in D,d=s_0..s_m$都有$0..0s_0..s_m$,其中0表示$\\left(0,0,0 \\right)$, 和d都不相等，因为表示的深度不一样。\n现在定义进制的等价关系，对于给定的正整数P。\n对于 $d\\in D,d=s_0..s_m$，都有$d=s_0..\\alpha_i\\left(s_{l+1}\\right)\\beta_i\\left(s_l\\right)..s_m$, 其中$\\alpha_i$表示对向量的第i个分量加1，$\\beta_i$表示对向量的第i个分量减P。\n满足上面定义的等价关系叫M深度N向量P进制数。\n八叉树的节点和根节点的关系（或者路径）都可以用3向量2进制数表示，它的邻接关系也一目了然。\n在zig语言中直接用ArrayList([3]u1)表示。\n这样我完全不用像传统方式表示八叉树，也就是有parent和children指针，我完全可以申请一块内存即可,const Oc_Node=struct{ArrayList([3]u1),isize};constr Octree=struct{octree:ArrayList(Oc_Node),octree_prop:ArrayList(T)},其中usize是指向Octree_Prop的索引，如果没有属性值，置为-1。\n一般为了提高效率，节省内存，令const Oc_Node=struct{[M][3]u1,isize};\n如果要计算M深度N向量的id，可以按照P进制进行排列计算数值，但是该数值对于同一层深度的向量数具有唯一性，不同深度时id可能重复，因为上述表示法对于$0s$和$s$不具有唯一性。\n如果想让M深度N向量数在不同深度都有唯一id表示，可以在上述表示法基础上加上,$TotalNodes(M-1) = 1 + P^N + (P^N)^2 + &hellip; + (P^N)^(M-1)$\n">
+<meta property='og:url' content='http://localhost:1313/p/%E5%90%91%E9%87%8F%E6%95%B0/'>
+<meta property='og:site_name' content='五级灵风'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-29T09:25:51&#43;08:00'/><meta property='article:modified_time' content='2026-01-29T09:25:51&#43;08:00'/>
+<meta name="twitter:title" content="向量数">
+<meta name="twitter:description" content="下面介绍一种向量进制的数据表示方式。比如N向量数，设集合为$B$是自然数的集合，那么N向量空间设为$C=B .. \\times B$,也就是C中元素表示为$\\left(t_0.. t_{N-1}\\right) \\in C$, 那么M深度的N向量数表示$D={s_0..s_m}$ 其中$s_l\\in C$，\n。\n对于任意的M深度N向量数$d\\in D,d=s_0..s_m$都有$0..0s_0..s_m$,其中0表示$\\left(0,0,0 \\right)$, 和d都不相等，因为表示的深度不一样。\n现在定义进制的等价关系，对于给定的正整数P。\n对于 $d\\in D,d=s_0..s_m$，都有$d=s_0..\\alpha_i\\left(s_{l+1}\\right)\\beta_i\\left(s_l\\right)..s_m$, 其中$\\alpha_i$表示对向量的第i个分量加1，$\\beta_i$表示对向量的第i个分量减P。\n满足上面定义的等价关系叫M深度N向量P进制数。\n八叉树的节点和根节点的关系（或者路径）都可以用3向量2进制数表示，它的邻接关系也一目了然。\n在zig语言中直接用ArrayList([3]u1)表示。\n这样我完全不用像传统方式表示八叉树，也就是有parent和children指针，我完全可以申请一块内存即可,const Oc_Node=struct{ArrayList([3]u1),isize};constr Octree=struct{octree:ArrayList(Oc_Node),octree_prop:ArrayList(T)},其中usize是指向Octree_Prop的索引，如果没有属性值，置为-1。\n一般为了提高效率，节省内存，令const Oc_Node=struct{[M][3]u1,isize};\n如果要计算M深度N向量的id，可以按照P进制进行排列计算数值，但是该数值对于同一层深度的向量数具有唯一性，不同深度时id可能重复，因为上述表示法对于$0s$和$s$不具有唯一性。\n如果想让M深度N向量数在不同深度都有唯一id表示，可以在上述表示法基础上加上,$TotalNodes(M-1) = 1 + P^N + (P^N)^2 + &hellip; + (P^N)^(M-1)$\n">
+    <link rel="shortcut icon" href="../../favicon.ico" />
 
     </head>
     <body class="
@@ -49,7 +58,7 @@
 <div
             class="container main-container flex on-phone--column extended"
         ><aside class="sidebar left-sidebar sticky ">
-    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
         <span class="hamburger-box">
             <span class="hamburger-inner"></span>
         </span>
@@ -59,13 +68,13 @@
         
             
             <figure class="site-avatar">
-                <a href="../../../en/">
+                <a href="../../">
                 
                     
                     
                     
                         
-                        <img src="../../../img/lixiaoyao_hu_dfce66ea35f8d737.jpg" width="300"
+                        <img src="../../img/lixiaoyao_hu_dfce66ea35f8d737.jpg" width="300"
                             height="188" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -78,8 +87,8 @@
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="../../../en">wujilingfeng</a></h1>
-            <h2 class="site-description">talents of YingChuan</h2>
+            <h1 class="site-name"><a href="../../">五级灵风</a></h1>
+            <h2 class="site-description">颍川之才</h2>
         </div>
     </header><ol class="menu-social">
             
@@ -180,7 +189,7 @@
         
         
         <li >
-            <a href='../../../en/' >
+            <a href='../../' >
                 
                 
                 
@@ -194,13 +203,13 @@
 
 
                 
-                <span>Home</span>
+                <span>主页</span>
             </a>
         </li>
         
         
         <li >
-            <a href='../../../en/about/' >
+            <a href='../../%E5%85%B3%E4%BA%8E/' >
                 
                 
                 
@@ -213,13 +222,13 @@
 
 
                 
-                <span>About</span>
+                <span>关于</span>
             </a>
         </li>
         
         
         <li >
-            <a href='../../../en/archives/' >
+            <a href='../../archives/' >
                 
                 
                 
@@ -233,13 +242,13 @@
 
 
                 
-                <span>Archives</span>
+                <span>归档</span>
             </a>
         </li>
         
         
         <li >
-            <a href='../../../en/search/' >
+            <a href='../../search/' >
                 
                 
                 
@@ -252,13 +261,13 @@
 
 
                 
-                <span>Search</span>
+                <span>搜索</span>
             </a>
         </li>
         
         
         <li >
-            <a href='../../../en/links/' >
+            <a href='../../%E9%93%BE%E6%8E%A5/' >
                 
                 
                 
@@ -271,7 +280,7 @@
 
 
                 
-                <span>Links</span>
+                <span>链接</span>
             </a>
         </li>
         
@@ -292,9 +301,9 @@
 
                             <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
                                 
-                                    <option value="http://localhost:1313/" >中文</option>
+                                    <option value="http://localhost:1313/" selected>中文</option>
                                 
-                                    <option value="http://localhost:1313/en/" selected>English</option>
+                                    <option value="http://localhost:1313/en/" >English</option>
                                 
                                     <option value="http://localhost:1313/ar/" >عربي</option>
                                 
@@ -321,7 +330,7 @@
 
 
 
-                        <span>Dark Mode</span>
+                        <span>暗色模式</span>
                     </li>
                 
             </ol>
@@ -332,41 +341,17 @@
     
 
             <main class="main full-width">
-    <article class="has-image main-article">
+    <article class="main-article">
     <header class="article-header">
-        <div class="article-image">
-            <a href="../../../en/p/emoji-support/">
-                <img src="../../../p/emoji-support/the-creative-exchange-d2zvqp3fpro-unsplash_hu_4478d0ca4dd8c594.jpg"
-                        srcset="../../../p/emoji-support/the-creative-exchange-d2zvqp3fpro-unsplash_hu_4478d0ca4dd8c594.jpg 800w, ../../../p/emoji-support/the-creative-exchange-d2zvqp3fpro-unsplash_hu_8df8f39ac35f88d8.jpg 1600w"
-                        width="800" 
-                        height="566" 
-                        loading="lazy"
-                        alt="Featured image of post Emoji Support" />
-                
-            </a>
-        </div>
-    
 
     <div class="article-details">
-    
-    <header class="article-category">
-        
-            <a href="../../../en/categories/test/" >
-                Test
-            </a>
-        
-    </header>
     
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="../../../en/p/emoji-support/">Emoji Support</a>
+            <a href="../../p/%E5%90%91%E9%87%8F%E6%95%B0/">向量数</a>
         </h2>
     
-        
-        <h3 class="article-subtitle">
-            Guide to emoji usage in Hugo
-        </h3>
         
     </div>
 
@@ -386,7 +371,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">Mar 05, 2019</time>
+                <time class="article-time--published">Jan 29, 2026</time>
             </div>
         
 
@@ -401,32 +386,13 @@
 
 
                 <time class="article-time--reading">
-                    1 minute read
+                    阅读时长: 1 分钟
                 </time>
             </div>
         
     </footer>
     
 
-    
-        <footer class="article-translations">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M4 5h7" />
-  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
-  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
-  <path d="M12 20l4 -9l4 9" />
-  <path d="M19.1 18h-6.2" />
-</svg>
-
-
-
-            <div>
-                
-                    <a href="http://localhost:1313/p/emoji-support/" class="link">中文</a>
-                
-            </div>
-        </footer>
     
 </div>
 
@@ -435,41 +401,24 @@
     <section class="article-content">
     
     
-    <p>Emoji can be enabled in a Hugo project in a number of ways.</p>
-<p>The <a class="link" href="https://gohugo.io/functions/emojify/"  target="_blank" rel="noopener"
-    ><code>emojify</code></a> function can be called directly in templates or <a class="link" href="https://gohugo.io/templates/shortcode-templates/#inline-shortcodes"  target="_blank" rel="noopener"
-    >Inline Shortcodes</a>.</p>
-<p>To enable emoji globally, set <code>enableEmoji</code> to <code>true</code> in your site&rsquo;s <a class="link" href="https://gohugo.io/getting-started/configuration/"  target="_blank" rel="noopener"
-    >configuration</a> and then you can type emoji shorthand codes directly in content files; e.g.</p>
-<p><span class="nowrap"><span class="emojify">🙈</span> <code>:see_no_evil:</code></span>  <span class="nowrap"><span class="emojify">🙉</span> <code>:hear_no_evil:</code></span>  <span class="nowrap"><span class="emojify">🙊</span> <code>:speak_no_evil:</code></span></p>
-<br>
-<p>The <a class="link" href="http://www.emoji-cheat-sheet.com/"  target="_blank" rel="noopener"
-    >Emoji cheat sheet</a> is a useful reference for emoji shorthand codes.</p>
-<hr>
-<p><strong>N.B.</strong> The above steps enable Unicode Standard emoji characters and sequences in Hugo, however the rendering of these glyphs depends on the browser and the platform. To style the emoji you can either use a third party emoji font or a font stack; e.g.</p>
-<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>.emoji {
-</span></span><span style="display:flex;"><span>  font-family: Apple Color Emoji, Segoe UI Emoji, NotoColorEmoji, Segoe UI Symbol, Android Emoji, EmojiSymbols;
-</span></span><span style="display:flex;"><span>}</span></span></code></pre></td></tr></table>
-</div>
-</div>
+    <p>下面介绍一种向量进制的数据表示方式。比如N向量数，设集合为$B$是自然数的集合，那么N向量空间设为$C=B .. \times B$,也就是C中元素表示为$\left(t_0.. t_{N-1}\right) \in C$,  那么M深度的N向量数表示$D={s_0..s_m}$  其中$s_l\in C$，</p>
+<p>。</p>
+<p>对于任意的M深度N向量数$d\in D,d=s_0..s_m$都有$0..0s_0..s_m$,其中0表示$\left(0,0,0 \right)$, 和d都不相等，因为表示的深度不一样。</p>
+<p>现在定义进制的等价关系，对于给定的正整数P。</p>
+<p>对于 $d\in D,d=s_0..s_m$，都有$d=s_0..\alpha_i\left(s_{l+1}\right)\beta_i\left(s_l\right)..s_m$, 其中$\alpha_i$表示对向量的第i个分量加1，$\beta_i$表示对向量的第i个分量减P。</p>
+<p>满足上面定义的等价关系叫M深度N向量P进制数。</p>
+<p>八叉树的节点和根节点的关系（或者路径）都可以用3向量2进制数表示，它的邻接关系也一目了然。</p>
+<p>在zig语言中直接用<code>ArrayList([3]u1)</code>表示。</p>
+<p>这样我完全不用像传统方式表示八叉树，也就是有parent和children指针，我完全可以申请一块内存即可,<code>const Oc_Node=struct{ArrayList([3]u1),isize};constr Octree=struct{octree:ArrayList(Oc_Node),octree_prop:ArrayList(T)}</code>,其中usize是指向Octree_Prop的索引，如果没有属性值，置为-1。</p>
+<p>一般为了提高效率，节省内存，令<code>const Oc_Node=struct{[M][3]u1,isize}</code>;</p>
+<p>如果要计算M深度N向量的id，可以按照P进制进行排列计算数值，但是该数值对于同一层深度的向量数具有唯一性，不同深度时id可能重复，因为上述表示法对于$0s$和$s$不具有唯一性。</p>
+<p>如果想让M深度N向量数在不同深度都有唯一id表示，可以在上述表示法基础上加上,$TotalNodes(M-1) = 1 + P^N + (P^N)^2 + &hellip; + (P^N)^(M-1)$</p>
+
 </section>
 
 
     <footer class="article-footer">
     
-    <section class="article-tags">
-        
-            <a href="../../../en/tags/emoji/">Emoji</a>
-        
-    </section>
-
 
     
     <section class="article-copyright">
@@ -485,6 +434,32 @@
     </section>
     </footer>
 
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+	const mainArticleElement = document.querySelector(".main-article");
+        renderMathInElement(mainArticleElement, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
 
     
 </article>
@@ -550,8 +525,8 @@
     </section>
     
     <section class="powerby">
-        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
     </section>
 </footer>
 
@@ -639,7 +614,7 @@
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="../../../ts/main.539ecba1e6899d42d789312a942689629b3f09fa3f1fddb65c6467cfbbdb461e.js" defer></script>
+            </script><script type="text/javascript" src="../../ts/main.539ecba1e6899d42d789312a942689629b3f09fa3f1fddb65c6467cfbbdb461e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
