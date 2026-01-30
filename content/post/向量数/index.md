@@ -4,9 +4,8 @@ date = '2026-01-29T09:25:51+08:00'
 math= true
 draft = false
 title = '向量数'
+image = 'yangtai.png'
 +++
-
-
 
 下面介绍一种向量进制的数据表示方式。比如N向量数，设集合为$B$是自然数的集合，那么N向量空间设为$C=B .. \times B$,也就是C中元素表示为$\left(t_0.. t_{N-1}\right) \in C$,  那么M深度的N向量数表示$D={s_0..s_m}$  其中$s_l\in C$，
 

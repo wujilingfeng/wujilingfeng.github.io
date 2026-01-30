@@ -2,262 +2,262 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://wujilingfeng.github.io/</loc>
     <lastmod>2026-01-29T09:25:51+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/"
+                href="https://wujilingfeng.github.io/en/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="http://localhost:1313/ar/"
+                href="https://wujilingfeng.github.io/ar/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://localhost:1313/"
+                href="https://wujilingfeng.github.io/"
                 />
   </url><url>
-    <loc>http://localhost:1313/post/</loc>
+    <loc>https://wujilingfeng.github.io/post/</loc>
     <lastmod>2026-01-29T09:25:51+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/post/"
+                href="https://wujilingfeng.github.io/en/post/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="http://localhost:1313/ar/post/"
+                href="https://wujilingfeng.github.io/ar/post/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://localhost:1313/post/"
+                href="https://wujilingfeng.github.io/post/"
                 />
   </url><url>
-    <loc>http://localhost:1313/p/%E5%90%91%E9%87%8F%E6%95%B0/</loc>
+    <loc>https://wujilingfeng.github.io/p/%E5%90%91%E9%87%8F%E6%95%B0/</loc>
     <lastmod>2026-01-29T09:25:51+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/</loc>
+    <loc>https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/</loc>
     <lastmod>2026-01-24T11:45:01+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/</loc>
+    <loc>https://wujilingfeng.github.io/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/</loc>
     <lastmod>2025-08-15T17:15:58+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/</loc>
+    <loc>https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/</loc>
     <lastmod>2025-07-16T10:22:34+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/</loc>
+    <loc>https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/</loc>
     <lastmod>2025-06-20T10:36:14+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/gltf%E6%A0%BC%E5%BC%8F/</loc>
+    <loc>https://wujilingfeng.github.io/p/gltf%E6%A0%BC%E5%BC%8F/</loc>
     <lastmod>2025-05-19T18:05:13+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://wujilingfeng.github.io/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2025-05-13T17:46:40+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/futhark%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://wujilingfeng.github.io/p/futhark%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2025-04-30T16:52:46+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/haskell%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://wujilingfeng.github.io/p/haskell%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2025-04-29T10:58:01+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</loc>
+    <loc>https://wujilingfeng.github.io/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2025-04-29T08:57:27+08:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/%E5%AD%A6%E4%B9%A0zig/</loc>
+    <loc>https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/</loc>
     <lastmod>2025-04-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://wujilingfeng.github.io/categories/</loc>
     <lastmod>2020-09-09T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/categories/"
+                href="https://wujilingfeng.github.io/en/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="http://localhost:1313/ar/categories/"
+                href="https://wujilingfeng.github.io/ar/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://localhost:1313/categories/"
+                href="https://wujilingfeng.github.io/categories/"
                 />
   </url><url>
-    <loc>http://localhost:1313/p/test-chinese/</loc>
+    <loc>https://wujilingfeng.github.io/p/test-chinese/</loc>
     <lastmod>2020-09-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/test/</loc>
+    <loc>https://wujilingfeng.github.io/categories/test/</loc>
     <lastmod>2020-09-09T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/categories/test/"
+                href="https://wujilingfeng.github.io/en/categories/test/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://localhost:1313/categories/test/"
+                href="https://wujilingfeng.github.io/categories/test/"
                 />
   </url><url>
-    <loc>http://localhost:1313/categories/%E6%B5%8B%E8%AF%95/</loc>
+    <loc>https://wujilingfeng.github.io/categories/%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2020-09-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/page/</loc>
+    <loc>https://wujilingfeng.github.io/page/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/page/"
+                href="https://wujilingfeng.github.io/en/page/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://localhost:1313/page/"
+                href="https://wujilingfeng.github.io/page/"
                 />
   </url><url>
-    <loc>http://localhost:1313/archives/</loc>
+    <loc>https://wujilingfeng.github.io/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/archives/"
+                href="https://wujilingfeng.github.io/en/archives/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://localhost:1313/archives/"
+                href="https://wujilingfeng.github.io/archives/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tags/css/</loc>
+    <loc>https://wujilingfeng.github.io/tags/css/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/html/</loc>
+    <loc>https://wujilingfeng.github.io/tags/html/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/markdown/</loc>
+    <loc>https://wujilingfeng.github.io/tags/markdown/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/markdown-syntax-guide/</loc>
+    <loc>https://wujilingfeng.github.io/p/markdown-syntax-guide/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/syntax/</loc>
+    <loc>https://wujilingfeng.github.io/categories/syntax/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://wujilingfeng.github.io/tags/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/tags/"
+                href="https://wujilingfeng.github.io/en/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="http://localhost:1313/ar/tags/"
+                href="https://wujilingfeng.github.io/ar/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://localhost:1313/tags/"
+                href="https://wujilingfeng.github.io/tags/"
                 />
   </url><url>
-    <loc>http://localhost:1313/categories/themes/</loc>
+    <loc>https://wujilingfeng.github.io/categories/themes/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/themes/</loc>
+    <loc>https://wujilingfeng.github.io/tags/themes/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/placeholder-text/</loc>
+    <loc>https://wujilingfeng.github.io/p/placeholder-text/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="http://localhost:1313/ar/p/%D9%85%D8%AB%D8%A7%D9%84-%D9%86%D8%B5/"
+                href="https://wujilingfeng.github.io/ar/p/%D9%85%D8%AB%D8%A7%D9%84-%D9%86%D8%B5/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://localhost:1313/p/placeholder-text/"
+                href="https://wujilingfeng.github.io/p/placeholder-text/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tags/tag-with-whitespaces/</loc>
+    <loc>https://wujilingfeng.github.io/tags/tag-with-whitespaces/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/test-with-whitespaces/</loc>
+    <loc>https://wujilingfeng.github.io/categories/test-with-whitespaces/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/text/</loc>
+    <loc>https://wujilingfeng.github.io/tags/text/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/p/math-typesetting/</loc>
+    <loc>https://wujilingfeng.github.io/p/math-typesetting/</loc>
     <lastmod>2019-03-08T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/emoji/</loc>
+    <loc>https://wujilingfeng.github.io/tags/emoji/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/tags/emoji/"
+                href="https://wujilingfeng.github.io/en/tags/emoji/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://localhost:1313/tags/emoji/"
+                href="https://wujilingfeng.github.io/tags/emoji/"
                 />
   </url><url>
-    <loc>http://localhost:1313/p/emoji-support/</loc>
+    <loc>https://wujilingfeng.github.io/p/emoji-support/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/p/emoji-support/"
+                href="https://wujilingfeng.github.io/en/p/emoji-support/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://localhost:1313/p/emoji-support/"
+                href="https://wujilingfeng.github.io/p/emoji-support/"
                 />
   </url><url>
-    <loc>http://localhost:1313/%E5%85%B3%E4%BA%8E/</loc>
+    <loc>https://wujilingfeng.github.io/%E5%85%B3%E4%BA%8E/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/about/"
+                href="https://wujilingfeng.github.io/en/about/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://localhost:1313/%E5%85%B3%E4%BA%8E/"
+                href="https://wujilingfeng.github.io/%E5%85%B3%E4%BA%8E/"
                 />
   </url><url>
-    <loc>http://localhost:1313/%E9%93%BE%E6%8E%A5/</loc>
+    <loc>https://wujilingfeng.github.io/%E9%93%BE%E6%8E%A5/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/links/"
+                href="https://wujilingfeng.github.io/en/links/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://localhost:1313/%E9%93%BE%E6%8E%A5/"
+                href="https://wujilingfeng.github.io/%E9%93%BE%E6%8E%A5/"
                 />
   </url><url>
-    <loc>http://localhost:1313/search/</loc>
+    <loc>https://wujilingfeng.github.io/search/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/en/search/"
+                href="https://wujilingfeng.github.io/en/search/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="http://localhost:1313/search/"
+                href="https://wujilingfeng.github.io/search/"
                 />
   </url>
 </urlset>
