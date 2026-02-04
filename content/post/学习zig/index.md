@@ -6,7 +6,7 @@ date = "2025-04-28"
 image = "fanchuan.png"
 +++
 
-zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。
+zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同的。zig语言函数的参数默认都是const。
 
 zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。
 
@@ -40,10 +40,6 @@ std.debug.print("Offset of color: {}\n", .{@offsetOf(RB_Node, "color")});
 ```
 
 zig中的文件，结构体，联合体等都是容器，容器里面声明的函数如果参数包含自身的类型，一般该参数使用self: Self代替，你可以在很多地方看到这种写法。在调用该函数时需要该容器的实例调用并省略掉该参数传入，这时默认会传入该实例的自身替换该参数。如果容器内的函数的参数并没有要传入该容器自身的类型，那么这个函数的调用不要通过该容器的实例调用，而是通过容器类型调用该函数。比如ArrayList的initCapacity函数调用时，要通过ArrayList(u32).initCapacity, 而deinit函数一般通过实例调用:`var a:ArrayList(u32)=.empty; a.deinit(std.testing.allocator);`
-
-
-
-
 
 zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype,似乎zig内置函数可以）。
 
@@ -533,13 +529,17 @@ const bar = @import("my_module/bar.zig");
 ### 2. `createModule`
 
 - **作用**：创建一个模块，但**不添加到包的模块集合**，仅供当前包内部使用。
+
 - **可见性**：**私有（private）**。这个模块不会被暴露给依赖当前包的其他包。
+
 - **典型用途**：当你只需要在当前包内部组织代码、复用代码，但不希望对外暴露时，使用 `createModule`。
+
 - **调用方式**：  
   
   ```zig
   const my_private_mod = b.createModule(.{ .root_source_file = ... });
   ```
+
 - **效果**：只能在当前包的 build 脚本中通过 `addImport` 等方式引用，外部包无法通过 `@import` 访问。
 
 ---

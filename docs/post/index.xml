@@ -581,6 +581,12 @@ int main() {
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;似乎zig中的@import不能导入上层目录，也就是不能出现&lt;code&gt;..&lt;/code&gt; 。那也就意味着每个子文件夹里面的zig源文件都要独立成为一个自摸块，除了依赖子文件夹，不会依赖其他文件夹的zig源文件&lt;/p&gt;
+&lt;h4 id=&#34;as和作用和intcast等其他转换函数的区别&#34;&gt;@as和作用和@intCast等其他转换函数的区别
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;@as&lt;/code&gt; 的核心作用是&lt;strong&gt;在编译时明确指定类型&lt;/strong&gt;，帮助编译器理解你的意图，避免类型推断错误或歧义。所以@as本质上不会修改数据位，也不会对数据进行修改。所以一般的浮点数类型转换和整数类型转换不用@as。&lt;/p&gt;
+&lt;h4 id=&#34;数值之间的隐式转换&#34;&gt;数值之间的隐式转换
+&lt;/h4&gt;&lt;p&gt;zig对数值之间类型可以隐式转换，但只能是从小范围的类型转换为更大类型的，不会发生数值的截断，溢出等潜在风险，所以u8类型可以隐式转换为u16，但u16不能隐式转换为u8。usize和isize之间也不能隐式转换，因为二者没有包含关系，只有交集。&lt;/p&gt;
+&lt;h4 id=&#34;常见整数溢出&#34;&gt;常见整数溢出
+&lt;/h4&gt;&lt;p&gt;一般我们对索引进行整数模运算时，比如(i-j+len)%len 时会出现整数溢出，因为i,j一般都是usize,导致出现负数，故要写成(i+len-j)%len;&lt;/p&gt;
 &lt;h4 id=&#34;整数整除需要注意&#34;&gt;整数整除需要注意
 &lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
@@ -1576,7 +1582,7 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         <pubDate>Mon, 28 Apr 2025 00:00:00 +0000</pubDate>
         
         <guid>https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png" alt="Featured image of post 学习zig" /&gt;&lt;p&gt;zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同。&lt;/p&gt;
+        <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png" alt="Featured image of post 学习zig" /&gt;&lt;p&gt;zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同的。zig语言函数的参数默认都是const。&lt;/p&gt;
 &lt;p&gt;zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。&lt;/p&gt;
 &lt;p&gt;zig语言的void和c语言的void不同，c语言的void对应anyopaque，是对opaque的泛化，就像anytype是对type的泛化，anyerror对error的泛化。void也是一个类型，它的值通常为&lt;code&gt;{}&lt;/code&gt;。&lt;/p&gt;
 &lt;h4 id=&#34;结构体&#34;&gt;结构体

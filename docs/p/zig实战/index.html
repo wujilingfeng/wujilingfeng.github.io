@@ -355,6 +355,9 @@
       <ol>
         <li>
           <ol>
+            <li><a href="#as和作用和intcast等其他转换函数的区别">@as和作用和@intCast等其他转换函数的区别</a></li>
+            <li><a href="#数值之间的隐式转换">数值之间的隐式转换</a></li>
+            <li><a href="#常见整数溢出">常见整数溢出</a></li>
             <li><a href="#整数整除需要注意">整数整除需要注意</a></li>
             <li><a href="#tuple的用法">tuple的用法</a></li>
           </ol>
@@ -551,6 +554,12 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>似乎zig中的@import不能导入上层目录，也就是不能出现<code>..</code> 。那也就意味着每个子文件夹里面的zig源文件都要独立成为一个自摸块，除了依赖子文件夹，不会依赖其他文件夹的zig源文件</p>
+<h4 id="as和作用和intcast等其他转换函数的区别">@as和作用和@intCast等其他转换函数的区别
+</h4><p><code>@as</code> 的核心作用是<strong>在编译时明确指定类型</strong>，帮助编译器理解你的意图，避免类型推断错误或歧义。所以@as本质上不会修改数据位，也不会对数据进行修改。所以一般的浮点数类型转换和整数类型转换不用@as。</p>
+<h4 id="数值之间的隐式转换">数值之间的隐式转换
+</h4><p>zig对数值之间类型可以隐式转换，但只能是从小范围的类型转换为更大类型的，不会发生数值的截断，溢出等潜在风险，所以u8类型可以隐式转换为u16，但u16不能隐式转换为u8。usize和isize之间也不能隐式转换，因为二者没有包含关系，只有交集。</p>
+<h4 id="常见整数溢出">常见整数溢出
+</h4><p>一般我们对索引进行整数模运算时，比如(i-j+len)%len 时会出现整数溢出，因为i,j一般都是usize,导致出现负数，故要写成(i+len-j)%len;</p>
 <h4 id="整数整除需要注意">整数整除需要注意
 </h4><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
