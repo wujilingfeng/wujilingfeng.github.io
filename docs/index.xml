@@ -19,8 +19,11 @@
 &lt;p&gt;则不等式是否有解等价于 $0&amp;gt;\left(=\right) \max_{\lambda} B^T\lambda $是否恒成立。&lt;/p&gt;
 &lt;p&gt;如果$\max_{\lambda} B^T\lambda$ 是大于0的数，则无解。&lt;/p&gt;
 &lt;p&gt;如果 $\max_{\lambda} B^T\lambda$等于0，则看是否是$&amp;gt;$还是$\ge$, 前者无解，后者有解。至于到底是$&amp;gt;$ 还是$\ge$,那就要看那些$\lambda_i&amp;gt;0$的不等式了，如果那些$\lambda_i&amp;gt;0$的不等式有一个是$&amp;gt;$，那么判断的就是$0&amp;gt; \max_{\lambda} B^T\lambda$,否则就是$0 \ge \max_{\lambda} B^T\lambda$&lt;/p&gt;
-&lt;h4 id=&#34;补全逻辑&#34;&gt;补全逻辑
-&lt;/h4&gt;&lt;p&gt;$\lambda = \sum c_i \mathbf{v}_i \ge 0$&lt;/p&gt;
+&lt;h4 id=&#34;具体算法&#34;&gt;具体算法
+&lt;/h4&gt;&lt;p&gt;只需要把$A^T\lambda =0$ 求解为$\lambda=A_b\lambda_{re}+b$, 其中$\lambda_{re}$是自由变量，然后代入$\max_{\lambda} B^T\lambda$,即可。&lt;/p&gt;
+&lt;h4 id=&#34;不等式减少变量的手段&#34;&gt;不等式减少变量的手段
+&lt;/h4&gt;&lt;p&gt;假设齐次不等式约束中有一个齐次的不等式约束$a_ix &amp;gt;0$ ,那么可以直接令$a_ix=1$,因为这是言而易见，如果存在解，那么这个等式约束也是成立的。所以根据这个等式可以减少一个变量。如果是$a_ix\ge 0$,那么就可以分类讨论，分别令$a_ix=0$和$a_ix=1$,即可完成减少变量。&lt;/p&gt;
+&lt;p&gt;任何非齐次不等式约束都可以通过坐标变换转化为齐次不等式，，如$Ax+b&amp;gt;0$ ,那么存在$A^`y&amp;gt;0$ 。&lt;/p&gt;
 </description>
         </item>
         <item>
