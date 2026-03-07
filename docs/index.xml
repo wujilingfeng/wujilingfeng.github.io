@@ -7,7 +7,103 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>LI BO</copyright>
-        <lastBuildDate>Mon, 02 Mar 2026 15:02:11 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 07 Mar 2026 11:31:27 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>物竞天择</title>
+        <link>https://wujilingfeng.github.io/p/%E7%89%A9%E7%AB%9E%E5%A4%A9%E6%8B%A9/</link>
+        <pubDate>Sat, 07 Mar 2026 11:31:27 +0800</pubDate>
+        
+        <guid>https://wujilingfeng.github.io/p/%E7%89%A9%E7%AB%9E%E5%A4%A9%E6%8B%A9/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/%E7%89%A9%E7%AB%9E%E5%A4%A9%E6%8B%A9/liangu.jpg" alt="Featured image of post 物竞天择" /&gt;&lt;p&gt;在遗传算法（GA）中，使用混沌系统替代伪随机数生成器（PRNG）确实能通过其&lt;strong&gt;遍历性（Ergodicity）&lt;strong&gt;和&lt;/strong&gt;非重复性&lt;/strong&gt;提高全局搜索能力，避免早熟收    敛。&lt;/p&gt;
+&lt;p&gt;针对你提到的“计算耗时”和“分布概率无法调节”这两个痛点，我建议放弃传统的 Logistic 或 Tent 映射，转而采用以下两种方案：&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;方案一分段线性混沌映射-pwlcm--概率映射函数&#34;&gt;方案一：分段线性混沌映射 (PWLCM) + 概率映射函数
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;优点：&lt;/strong&gt; 极速计算（仅需比较和加减除），且分布比 Logistic 更均匀。&lt;/p&gt;
+&lt;p&gt;PWLCM 的公式如下：
+$x_{n+1} = \begin{cases} x_n / p &amp;amp; 0 \le x_n &amp;lt; p \ (x_n - p) / (0.5 - p) &amp;amp; p \le x_n &amp;lt; 0.5 \ f(1 - x_n, p) &amp;amp; 0.5 \le x_n &amp;lt; 1 \end{cases}$&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;(注：  $p$ 是控制参数，通常取 0.3-0.7)&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&#34;如何调节概率分布&#34;&gt;如何调节概率分布？
+&lt;/h4&gt;&lt;p&gt;混沌系统生成的通常是均匀分布。如果你想让概率集中在 &lt;strong&gt;0.3 附近&lt;/strong&gt;，不应该去修改混沌函数本身（这会破坏混沌特性），而应该对生成的混沌值 $x$ 进行&lt;strong&gt;变换（Warping）&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;推荐方法：Beta 分布映射 (Power Transform)&lt;/strong&gt;
+如果你想要在 $x=0.3$ 附近概率最高，可以使用一个简单的多项式来“挤压”数值空间：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;生成混沌值 $u \in [0, 1]$。&lt;/li&gt;
+&lt;li&gt;使用偏移变换：$y = u^a$。&lt;/li&gt;
+&lt;li&gt;或者使用更精准的&lt;strong&gt;三角形映射&lt;/strong&gt;或&lt;strong&gt;S型曲线&lt;/strong&gt;：
+$y = 0.3 + (u - 0.5) \cdot |u - 0.5|^k$
+（当 $k &amp;gt; 0$ 时，数值会向 0.3 或中心靠拢，调节 $k$ 即可控制集中程度）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;方案二正弦功率映射-sinusoidal-pow-map&#34;&gt;方案二：正弦功率映射 (Sinusoidal-Pow Map)
+&lt;/h3&gt;&lt;p&gt;如果你嫌 PWLCM 逻辑分支多，可以使用改进的复合混沌：
+$x_{n+1} = \sin(\pi \cdot r \cdot (x_n^k + \text{offset}))$
+通过调整 $k$ 和 $\text{offset}$，你可以改变吸引子的形状。&lt;/p&gt;
+&lt;p&gt;但为了性能，&lt;strong&gt;最工业级的做法&lt;/strong&gt;是：
+&lt;strong&gt;“混沌序列 + 查表法/形状函数”&lt;/strong&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;方案三极致性能线性同余混沌-lcg-like-chaos--偏置函数&#34;&gt;方案三：极致性能——线性同余混沌 (LCG-like Chaos) + 偏置函数
+&lt;/h3&gt;&lt;p&gt;这是目前很多高性能遗传算法的选择：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;快速混沌源：&lt;/strong&gt; 使用 &lt;strong&gt;Xorshift&lt;/strong&gt; 算法（比 Logistic 快 100 倍）产生一个基础随机位流。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;分布塑造（Shaping）：&lt;/strong&gt;
+你想让 0.3 附近概率高，这在数学上对应&lt;strong&gt;概率密度函数 (PDF)&lt;/strong&gt; 的调节。最快的方法是使用&lt;strong&gt;三个随机数求平均/加权&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;想让分布靠近 0.3：&lt;/strong&gt;
+令 $u1, u2, u3$ 为混沌函数生成的 [0, 1] 之间的值。
+$MutationValue = (u1 \cdot 0.1 + u2 \cdot 0.2 + u3 \cdot 0.6)$
+通过调整系数，你可以极其快速地改变“重心”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;核心建议不要直接把混沌值当变异步长&#34;&gt;核心建议：不要直接把混沌值当变异步长
+&lt;/h3&gt;&lt;p&gt;在遗传算法中，建议将变异分为两步：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;判定变异是否发生：&lt;/strong&gt; 用混沌映射 $x_n &amp;lt; MutationRate$。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;决定变异幅度：&lt;/strong&gt; 不要直接用 $x_n$，而是用一个 &lt;strong&gt;PDF 映射函数&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;一个能手动调节 0.3 概率分布的简单代码逻辑 (C++/Python 伪代码)：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 1. 产生基础混沌值 (PWLCM)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;get_chaos&lt;/span&gt;():
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#7f848e&#34;&gt;# 极简实现，p=0.4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0.4&lt;/span&gt;: &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0.4&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;else&lt;/span&gt;: &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt; (&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0.4&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;x&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#7f848e&#34;&gt;# 2. 概率分布调节 (关键！)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color:#61afef;font-weight:bold&#34;&gt;shape_distribution&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;u&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;target&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;0.3&lt;/span&gt;, &lt;span style=&#34;color:#e06c75&#34;&gt;strength&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#d19a66&#34;&gt;2.0&lt;/span&gt;):
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#7f848e&#34;&gt;# 使用简单的偏向函数：y = u^strength&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#7f848e&#34;&gt;# 如果想让概率集中在 target 附近，可以使用：&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;target&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;u&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0.5&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; (&lt;span style=&#34;color:#e5c07b&#34;&gt;abs&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;u&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;0.5&lt;/span&gt;) &lt;span style=&#34;color:#56b6c2&#34;&gt;**&lt;/span&gt; (&lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;/&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;strength&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;总结建议&#34;&gt;总结建议
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;性能：&lt;/strong&gt; 放弃 Logistic，改用 &lt;strong&gt;PWLCM&lt;/strong&gt; 或 &lt;strong&gt;Xorshift&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;分布控制：&lt;/strong&gt; 不要修改混沌方程，而是对输出值 $x$ 做一次 &lt;strong&gt;幂函数变换&lt;/strong&gt; 或 &lt;strong&gt;分段线性插值&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;针对 0.3 的需求：&lt;/strong&gt;
+使用映射：$f(x) = x^k$。如果 $k &amp;gt; 1$，分布偏向 0；如果 $k &amp;lt; 1$，分布偏向 1。
+或者最简单的：$Result = (Chaos1 + Chaos2 + 0.3) / 3$，根据大数定律，结果会迅速向 0.3 附近的中间值靠拢，且计算量极小。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;你目前的计算耗时大，大概率是因为在循环中频繁调用了 &lt;code&gt;sin&lt;/code&gt;, &lt;code&gt;log&lt;/code&gt; 等超越函数，改用&lt;strong&gt;移位运算&lt;/strong&gt;或&lt;strong&gt;简单的乘除法&lt;/strong&gt;构成的混沌系统，速度会提升几个数量级。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>带约束的凸优化</title>
         <link>https://wujilingfeng.github.io/p/%E5%B8%A6%E7%BA%A6%E6%9D%9F%E7%9A%84%E5%87%B8%E4%BC%98%E5%8C%96/</link>
         <pubDate>Mon, 02 Mar 2026 15:02:11 +0800</pubDate>
