@@ -95,3 +95,45 @@ def shape_distribution(u, target=0.3, strength=2.0):
    或者最简单的：$Result = (Chaos1 + Chaos2 + 0.3) / 3$，根据大数定律，结果会迅速向 0.3 附近的中间值靠拢，且计算量极小。
 
 你目前的计算耗时大，大概率是因为在循环中频繁调用了 `sin`, `log` 等超越函数，改用**移位运算**或**简单的乘除法**构成的混沌系统，速度会提升几个数量级。
+
+### 一种完备模型
+
+设$L$是个向量函数， $L\left(x\right)=\overline{x},\overline{x_i}=\begin{cases}   x_i & x_i>0 \\ fac*x_i & x_i<=0 \end{cases}$
+
+给定矩阵A和向量b ,并记变换$\alpha_{A,b}= Ax+b$
+
+有若干次累积变换$ L * \alpha_{A,b} * L * \alpha_{A,b}... *L*\alpha_{A,b} $,
+
+记$f_{n,A,b}$为n次$L*\alpha_{A,b}$累积变换。称作简单的累积交叉非线性变换。
+
+
+
+现在我们有一个能衡量$f_{n,A,b}$的能量函数，也就是$energy:f_{n,A,b} \to R$, 比如我们可以寻找若干个数据对$\left(x,y\right)$，令$energy(f_{n,A,b})=\sum |f_{n,A,b}\left(x\right)-y|^2$
+
+**为了降低$f_{n,A,b}$的能量，我们可以用随机方向梯度下降法。**
+
+比如我们可以选择任意方向（一般小于变量个数）$（\delta n ,\delta A, \delta b)$,  那么$(n,A,b)=(n_0,A_0,b_0)+t_1*(\delta n _i,\delta A_i ,\delta b_i)+t_2*(\delta n _i,\delta A_i ,\delta b_i)..., 那么可以根据差分法计算$
+
+$energy(f_{(n_0,A_0,b_0)+t_1*(\delta n _i,\delta A_i ,\delta b_i)+t_2*(\delta n _i,\delta A_i ,\delta b_i)...})$关于 $t_i$ 的梯度，自然可以用梯度下降法选取步长s获得新的   $f_{n,A,b}$。
+
+
+
+上述方法依赖一个混沌系统(chaotic system)来产生几个随机方向(包括方向的个数),我们记这个混沌系统为$ch$, 并记上述的随机方向的梯度下降法为变换$J_{energy,ch,s}$,它把一个简单的累积交叉非线性变换映射为另一个简单的累积交叉非线性变换。并称$J_{energy ,ch,s}$随机梯度下降变换。
+
+
+
+也就是任意一个对象，只要定义了能量，混沌系统，步长，就存在一个随机梯度下降变换。
+
+同样我们定义$energy_1:J_{energy,ch,s}->R, energy_1(J_{energy,ch,s})=energy(J_{energy,ch,s}* f_{n,A,b})$
+
+再定义另一个混沌系统$ch_1$和步长$s_1$, 那么也就定义了一个随机梯度下降变换$K_{energy1,ch_1,s_1}$。
+
+
+
+我们称$K_{energy1,ch_1,s_1}$,为物竞天择变换。在逻辑上我们用$K_{energy1,ch_1,s_1}$变换获得$J_{energy ,ch,s}$变换，然后再获得$f_{n,A,b}$变换。实际计算过程中，他们由于依赖性，计算顺序是反过来的。
+
+
+
+
+
+下面我们尝试详细定义一个物竞天择变换，包括所有细节，并用代码实现解决几个问题。
