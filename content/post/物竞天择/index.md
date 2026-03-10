@@ -98,15 +98,21 @@ def shape_distribution(u, target=0.3, strength=2.0):
 
 ### 一种完备模型
 
-设$L$是个向量函数， $L\left(x\right)=\overline{x},\overline{x_i}=\begin{cases}   x_i & x_i>0 \\ fac*x_i & x_i<=0 \end{cases}$
+给定线性空间一组基e_i,那么自然定义了一组对偶基e^i,
 
-给定矩阵A和向量b ,并记变换$\alpha_{A,b}= Ax+b$
+我们记$K(e_i)$为以$e_i$为基张成的线性空间。
+
+ 那么m阶张量空间$K(e_{i1}\otimes e_{i2}...\otimes e_{im})$的线性映射记为 $\alpha_{A,b}= Ax+b$,  A张量空间为$ K(E_{j1}\otimes E_{j1} ....\otimes E_{jm})$,  其中$E_j= e_{i1}\otimes e^{i1}...\otimes e^{im}$。
+
+
+
+设L是个向量函数， $L\left(x\right)=\overline{x},\overline{x_i}=\begin{cases} x_i & x_i>0 \\ fac*x_i & x_i<=0,fac \in (0,1) \end{cases}$
+
+
 
 有若干次累积变换$ L * \alpha_{A,b} * L * \alpha_{A,b}... *L*\alpha_{A,b} $,
 
 记$f_{n,A,b}$为n次$L*\alpha_{A,b}$累积变换。称作简单的累积交叉非线性变换。
-
-
 
 现在我们有一个能衡量$f_{n,A,b}$的能量函数，也就是$energy:f_{n,A,b} \to R$, 比如我们可以寻找若干个数据对$\left(x,y\right)$，令$energy(f_{n,A,b})=\sum |f_{n,A,b}\left(x\right)-y|^2$
 
@@ -116,24 +122,34 @@ def shape_distribution(u, target=0.3, strength=2.0):
 
 $energy(f_{(n_0,A_0,b_0)+t_1*(\delta n _i,\delta A_i ,\delta b_i)+t_2*(\delta n _i,\delta A_i ,\delta b_i)...})$关于 $t_i$ 的梯度，自然可以用梯度下降法选取步长s获得新的   $f_{n,A,b}$。
 
-
-
 上述方法依赖一个混沌系统(chaotic system)来产生几个随机方向(包括方向的个数),我们记这个混沌系统为$ch$, 并记上述的随机方向的梯度下降法为变换$J_{energy,ch,s}$,它把一个简单的累积交叉非线性变换映射为另一个简单的累积交叉非线性变换。并称$J_{energy ,ch,s}$随机梯度下降变换。
-
-
 
 也就是任意一个对象，只要定义了能量，混沌系统，步长，就存在一个随机梯度下降变换。
 
-同样我们定义$energy_1:J_{energy,ch,s}->R, energy_1(J_{energy,ch,s})=energy(J_{energy,ch,s}* f_{n,A,b})$
+同样我们定义$energy_1:J_{energy,ch,s}->R, energy_1(J_{energy,ch,s})=\sum_{f_{n,A,b}}energy(J_{energy,ch,s}* f_{n,A,b})$
 
 再定义另一个混沌系统$ch_1$和步长$s_1$, 那么也就定义了一个随机梯度下降变换$K_{energy1,ch_1,s_1}$。
-
-
 
 我们称$K_{energy1,ch_1,s_1}$,为物竞天择变换。在逻辑上我们用$K_{energy1,ch_1,s_1}$变换获得$J_{energy ,ch,s}$变换，然后再获得$f_{n,A,b}$变换。实际计算过程中，他们由于依赖性，计算顺序是反过来的。
 
 
 
+**下面我们尝试在工程上详细定义一个物竞天择变换，包括所有细节，并解决几个问题。**
+
+工程实践中，张量都要平铺为一维的形式，不要展开为多维数组，这样既能控制参数的空间变换大小，也能方便地变换基和系数。
+
+注意因为我们输入的变量一般表示为m个向量的张量积，所以在表示的时候，我们只储存这些向量，并不展开。也就是我们输入的张量不会展开计算基e_{i1}\otimes ...e_{im}的系数, 因为这样会占用大量内存，在做线性映射时，直接把这些向量用去分别和对偶空间的向量做运算<mark>即可</mark>。
+
+我们的线性映射一般也表示为某几个张量的张量积，所以我们也不需要真正展开，直需要保存这些代表性张量即可。
+
+基于上述预设条件，输入的张量是m个向量的张量积，线性映射也是m个张量的张量积且$P_{i1}\otimes ..P_{im}, P_i\in K(E_{ji})$， 所以在计算最后的结果储存中，又能分别计算并储存成m个向量，而不用展开为m阶张量。.
 
 
-下面我们尝试详细定义一个物竞天择变换，包括所有细节，并用代码实现解决几个问题。
+
+除此之外，工程实践中我们还会把张量分块，但是张量分块会导致系统隔离，块和块之间的空间无法影响，所以要最后复合一系列矩阵行加法变换，主要对块与块之间进行联系.
+
+
+
+初等变换矩阵里面的行加法变换记为$E_{ij}(c)$,它的逆是$E_{ij}(-c)$, 
+
+矩阵的二阶近似：(A+ΔA)−1≈A−1−A−1ΔAA−1+A−1ΔAA−1ΔAA−1.
