@@ -7,7 +7,17 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>LI BO</copyright>
-        <lastBuildDate>Sat, 07 Mar 2026 11:31:27 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 11 Mar 2026 11:13:13 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>一种bool运算</title>
+        <link>https://wujilingfeng.github.io/p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/</link>
+        <pubDate>Wed, 11 Mar 2026 11:13:13 +0800</pubDate>
+        
+        <guid>https://wujilingfeng.github.io/p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/%E5%B8%83%E5%B0%94.jpg" alt="Featured image of post 一种bool运算" /&gt;&lt;p&gt;求两个cell相交，不用判断是否平行等，直接遍历每个组件点，线，面，体&amp;hellip;.，然后求两两之间的交点即可。注意这里的点，线，面都是除去各自边界的开集，不是闭集。点的边界是空集，所以点是即开又闭的集合。&lt;/p&gt;
+&lt;p&gt;注意当三角形出现退化时，它的点，线（去除边界的开集），面（去除边界的开集）要么存在，要么为空，所以判断各个组件的相交在三角形退化时也是固定的，简单的。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>物竞天择</title>
         <link>https://wujilingfeng.github.io/p/%E7%89%A9%E7%AB%9E%E5%A4%A9%E6%8B%A9/</link>
         <pubDate>Sat, 07 Mar 2026 11:31:27 +0800</pubDate>
