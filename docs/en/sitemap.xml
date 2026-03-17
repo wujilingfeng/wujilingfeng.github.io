@@ -2,178 +2,178 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://wujilingfeng.github.io/en/</loc>
+    <loc>http://localhost:1313/en/</loc>
     <lastmod>2020-10-09T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/"
+                href="http://localhost:1313/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://wujilingfeng.github.io/ar/"
+                href="http://localhost:1313/ar/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://wujilingfeng.github.io/en/"
+                href="http://localhost:1313/en/"
                 />
   </url><url>
-    <loc>https://wujilingfeng.github.io/en/archives/</loc>
+    <loc>http://localhost:1313/en/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/archives/"
+                href="http://localhost:1313/archives/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://wujilingfeng.github.io/en/archives/"
+                href="http://localhost:1313/en/archives/"
                 />
   </url><url>
-    <loc>https://wujilingfeng.github.io/en/page/</loc>
+    <loc>http://localhost:1313/en/page/</loc>
     <lastmod>2020-10-09T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/page/"
+                href="http://localhost:1313/page/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://wujilingfeng.github.io/en/page/"
+                href="http://localhost:1313/en/page/"
                 />
   </url><url>
-    <loc>https://wujilingfeng.github.io/en/categories/</loc>
+    <loc>http://localhost:1313/en/categories/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/categories/"
+                href="http://localhost:1313/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://wujilingfeng.github.io/ar/categories/"
+                href="http://localhost:1313/ar/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://wujilingfeng.github.io/en/categories/"
+                href="http://localhost:1313/en/categories/"
                 />
   </url><url>
-    <loc>https://wujilingfeng.github.io/en/tags/emoji/</loc>
+    <loc>http://localhost:1313/en/tags/emoji/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/tags/emoji/"
+                href="http://localhost:1313/tags/emoji/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://wujilingfeng.github.io/en/tags/emoji/"
+                href="http://localhost:1313/en/tags/emoji/"
                 />
   </url><url>
-    <loc>https://wujilingfeng.github.io/en/p/emoji-support/</loc>
+    <loc>http://localhost:1313/en/p/emoji-support/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/p/emoji-support/"
+                href="http://localhost:1313/p/emoji-support/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://wujilingfeng.github.io/en/p/emoji-support/"
+                href="http://localhost:1313/en/p/emoji-support/"
                 />
   </url><url>
-    <loc>https://wujilingfeng.github.io/en/post/</loc>
+    <loc>http://localhost:1313/en/post/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/post/"
+                href="http://localhost:1313/post/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://wujilingfeng.github.io/ar/post/"
+                href="http://localhost:1313/ar/post/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://wujilingfeng.github.io/en/post/"
+                href="http://localhost:1313/en/post/"
                 />
   </url><url>
-    <loc>https://wujilingfeng.github.io/en/tags/</loc>
+    <loc>http://localhost:1313/en/tags/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/tags/"
+                href="http://localhost:1313/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="ar"
-                href="https://wujilingfeng.github.io/ar/tags/"
+                href="http://localhost:1313/ar/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://wujilingfeng.github.io/en/tags/"
+                href="http://localhost:1313/en/tags/"
                 />
   </url><url>
-    <loc>https://wujilingfeng.github.io/en/categories/test/</loc>
+    <loc>http://localhost:1313/en/categories/test/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/categories/test/"
+                href="http://localhost:1313/categories/test/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://wujilingfeng.github.io/en/categories/test/"
+                href="http://localhost:1313/en/categories/test/"
                 />
   </url><url>
-    <loc>https://wujilingfeng.github.io/en/about/</loc>
+    <loc>http://localhost:1313/en/about/</loc>
     <lastmod>2020-10-09T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/%E5%85%B3%E4%BA%8E/"
+                href="http://localhost:1313/%E5%85%B3%E4%BA%8E/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://wujilingfeng.github.io/en/about/"
+                href="http://localhost:1313/en/about/"
                 />
   </url><url>
-    <loc>https://wujilingfeng.github.io/en/links/</loc>
+    <loc>http://localhost:1313/en/links/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/%E9%93%BE%E6%8E%A5/"
+                href="http://localhost:1313/%E9%93%BE%E6%8E%A5/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://wujilingfeng.github.io/en/links/"
+                href="http://localhost:1313/en/links/"
                 />
   </url><url>
-    <loc>https://wujilingfeng.github.io/en/search/</loc>
+    <loc>http://localhost:1313/en/search/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/search/"
+                href="http://localhost:1313/search/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://wujilingfeng.github.io/en/search/"
+                href="http://localhost:1313/en/search/"
                 />
   </url>
 </urlset>
