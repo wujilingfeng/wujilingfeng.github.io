@@ -3,8 +3,13 @@ author = 'libo'
 date = '2026-03-17T15:23:49+08:00'
 math= true
 draft = false
+image = 'linjie.png'
 title = '对于多边形临界角度的判断'
 +++
+
+封面的完整图如下，他展示了几种临界情况:
+
+![临界情况](linjie.png)
 
 对于多边形出现退化的情况，也就是   ![相交情况](Untitled.png)
 
