@@ -387,35 +387,10 @@ if else语句也可以当作表达式，如下:
         }
 ```
 
-在函数的泛型参数中anytype和comptime T:type，在效率上似乎是一样的，comptime T更清晰但是接口更复杂，anytype接口简洁但是需要推导类型（@TypeOf）。
 
-```zig
-const std = @import("std");
-const expect = std.testing.expect;
+errdefer,defer是在作用域退出时执行表达式，表达式当然可以是块（block）。defer , if , while,for ,switch关键字都是控制语句，后面如果是单个语句要加`;`, 如果是`{}`不加分号。
 
-
-const ComplexTypeTag = enum {
-    ok,
-    not_ok,
-};
-const ComplexType = union(ComplexTypeTag) {
-    ok: u8,
-    not_ok: void,
-};
-
-test "modify tagged union in switch" {
-    var c = ComplexType{ .ok = 42 };
-
-    switch (c) {
-        ComplexTypeTag.ok => |*value| value.* += 1,
-        ComplexTypeTag.not_ok => unreachable,
-    }
-
-    try expect(c.ok == 43);
-}
-```
-
-defer是在作用域退出时执行表达式，表达式当然可以是块（block）。defer , if , while,for ,switch关键字都是控制语句，后面如果是单个语句要加`;`, 如果是`{}`不加分号。
+break在循环里面会跳出当前循环，如果要跳出block，那么必须给block命名，并在break指明块名。
 
 ```zig
 onst std = @import("std");
@@ -464,6 +439,33 @@ test "detect leak" {
 
 zig会尽量在编译时进行计算，但似乎机制不太好，大部分情况需要手动指定，比如用comptime {}来指定块内部分在编译时计算。此外inline和编译时计算也密切相关，在函数前加inline可以防止函数被强制视为运行时确定，从而不影响计算尽量在编译时进行。就算函数里面有comptime T:type，只能说这个函数在编译时确定该参数，但是这个函数如果不加inline,仍然被视为运行时确定的。也可以在while或者for前加inline，来防止循环被强制视为运行时部分，从而在合适的条件下在编译时进行。
 
+在函数的泛型参数中anytype和comptime T:type，在效率上似乎是一样的，comptime T更清晰但是接口更复杂，anytype接口简洁但是需要推导类型（@TypeOf）。
+
+```zig
+const std = @import("std");
+const expect = std.testing.expect;
+
+
+const ComplexTypeTag = enum {
+    ok,
+    not_ok,
+};
+const ComplexType = union(ComplexTypeTag) {
+    ok: u8,
+    not_ok: void,
+};
+
+test "modify tagged union in switch" {
+    var c = ComplexType{ .ok = 42 };
+
+    switch (c) {
+        ComplexTypeTag.ok => |*value| value.* += 1,
+        ComplexTypeTag.not_ok => unreachable,
+    }
+
+    try expect(c.ok == 43);
+}
+```
 ### Zig 模块导入核心规则
 
 1. **路径导入继承依赖**：使用 `@import("./file.zig")` 导入文件时，该文件会自动继承**父模块**（即调用 `@import` 的模块）通过 `addImport` 添加的所有命名模块。这意味着，只要在 `exe.root_module` 中添加了依赖（如 `addImport("tracy", tracy_mod)`），所有通过路径导入的 `.zig` 文件都能直接使用 `@import("tracy")`。

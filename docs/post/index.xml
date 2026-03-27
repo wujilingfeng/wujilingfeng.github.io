@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Posts on 五级灵风</title>
-        <link>http://localhost:1313/post/</link>
+        <link>https://wujilingfeng.github.io/post/</link>
         <description>Recent content in Posts on 五级灵风</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>LI BO</copyright>
-        <lastBuildDate>Tue, 24 Mar 2026 14:59:24 +0800</lastBuildDate><atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 24 Mar 2026 14:59:24 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>局部点云重建网格</title>
-        <link>http://localhost:1313/p/%E5%B1%80%E9%83%A8%E7%82%B9%E4%BA%91%E9%87%8D%E5%BB%BA%E7%BD%91%E6%A0%BC/</link>
+        <link>https://wujilingfeng.github.io/p/%E5%B1%80%E9%83%A8%E7%82%B9%E4%BA%91%E9%87%8D%E5%BB%BA%E7%BD%91%E6%A0%BC/</link>
         <pubDate>Tue, 24 Mar 2026 14:59:24 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/%E5%B1%80%E9%83%A8%E7%82%B9%E4%BA%91%E9%87%8D%E5%BB%BA%E7%BD%91%E6%A0%BC/</guid>
-        <description>&lt;img src="http://localhost:1313/p/%E5%B1%80%E9%83%A8%E7%82%B9%E4%BA%91%E9%87%8D%E5%BB%BA%E7%BD%91%E6%A0%BC/pic_d_03.jpg" alt="Featured image of post 局部点云重建网格" /&gt;&lt;p&gt;在局部点云重建网格时，给定一个邻域点集，包含一些属于网格的点，它有些是网格边界点，有些是内点。在这样的情况下，我们想实现一个稳定的局部重建网格算法。&lt;/p&gt;
+        <guid>https://wujilingfeng.github.io/p/%E5%B1%80%E9%83%A8%E7%82%B9%E4%BA%91%E9%87%8D%E5%BB%BA%E7%BD%91%E6%A0%BC/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%B1%80%E9%83%A8%E7%82%B9%E4%BA%91%E9%87%8D%E5%BB%BA%E7%BD%91%E6%A0%BC/pic_d_03.jpg" alt="Featured image of post 局部点云重建网格" /&gt;&lt;p&gt;在局部点云重建网格时，给定一个邻域点集，包含一些属于网格的点，它有些是网格边界点，有些是内点。在这样的情况下，我们想实现一个稳定的局部重建网格算法。&lt;/p&gt;
 &lt;p&gt;第一种方法是滚球法，可以先研究。&lt;/p&gt;
 &lt;p&gt;第二种方法，要尽量避免法向的判断加入进去，避免形成各种空洞&lt;/p&gt;
 &lt;p&gt;为了确定投影平面，也就是法向。这里是一种计算方式，当然用户可以指定任意平面（法向）。这里描述一些方法。&lt;/p&gt;
@@ -40,18 +40,18 @@
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;当然我可以此时直接进行delaunay剖分，然后插入边。&lt;/p&gt;
-&lt;p&gt;但是我们可以采用下面方法，过滤一些点。对于段曲线，我们可以拟合一条直线，这些曲线在各自的拟合直线投影后的首位点和右手定则能确定直线的方向和垂直方向，&lt;/p&gt;
+&lt;p&gt;但是我们可以采用下面方法，过滤一些点。对于段曲线，我们可以拟合一条直线，这些曲线在各自的拟合直线投影后的首尾点和右手定则能确定直线的方向和垂直方向，&lt;/p&gt;
 &lt;p&gt;我们需要移动这些直线，让曲线的点刚好都在直线的垂直方向一侧。此时保留所有的曲线和那些位于所有直线垂直方向一侧交集区域的点。&lt;/p&gt;
 &lt;p&gt;然后再delaunay剖分，然后插入边。&lt;/p&gt;
 </description>
         </item>
         <item>
         <title>对于多边形临界角度的判断</title>
-        <link>http://localhost:1313/p/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E8%BE%B9%E5%BD%A2%E4%B8%B4%E7%95%8C%E8%A7%92%E5%BA%A6%E7%9A%84%E5%88%A4%E6%96%AD/</link>
+        <link>https://wujilingfeng.github.io/p/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E8%BE%B9%E5%BD%A2%E4%B8%B4%E7%95%8C%E8%A7%92%E5%BA%A6%E7%9A%84%E5%88%A4%E6%96%AD/</link>
         <pubDate>Tue, 17 Mar 2026 15:23:49 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E8%BE%B9%E5%BD%A2%E4%B8%B4%E7%95%8C%E8%A7%92%E5%BA%A6%E7%9A%84%E5%88%A4%E6%96%AD/</guid>
-        <description>&lt;img src="http://localhost:1313/p/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E8%BE%B9%E5%BD%A2%E4%B8%B4%E7%95%8C%E8%A7%92%E5%BA%A6%E7%9A%84%E5%88%A4%E6%96%AD/linjie.png" alt="Featured image of post 对于多边形临界角度的判断" /&gt;&lt;p&gt;封面的完整图如下，他展示了几种临界情况:&lt;/p&gt;
+        <guid>https://wujilingfeng.github.io/p/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E8%BE%B9%E5%BD%A2%E4%B8%B4%E7%95%8C%E8%A7%92%E5%BA%A6%E7%9A%84%E5%88%A4%E6%96%AD/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E8%BE%B9%E5%BD%A2%E4%B8%B4%E7%95%8C%E8%A7%92%E5%BA%A6%E7%9A%84%E5%88%A4%E6%96%AD/linjie.png" alt="Featured image of post 对于多边形临界角度的判断" /&gt;&lt;p&gt;封面的完整图如下，他展示了几种临界情况:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../p/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E8%BE%B9%E5%BD%A2%E4%B8%B4%E7%95%8C%E8%A7%92%E5%BA%A6%E7%9A%84%E5%88%A4%E6%96%AD/linjie.png&#34;
 	width=&#34;1152&#34;
 	height=&#34;720&#34;
@@ -93,21 +93,95 @@
         </item>
         <item>
         <title>一种bool运算</title>
-        <link>http://localhost:1313/p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/</link>
+        <link>https://wujilingfeng.github.io/p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/</link>
         <pubDate>Wed, 11 Mar 2026 11:13:13 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/</guid>
-        <description>&lt;img src="http://localhost:1313/p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/%E5%B8%83%E5%B0%94.jpg" alt="Featured image of post 一种bool运算" /&gt;&lt;p&gt;求两个cell相交，不用判断是否平行等，直接遍历每个组件点，线，面，体&amp;hellip;.，然后求两两之间的交点即可。注意这里的点，线，面都是除去各自边界的开集，不是闭集。点的边界是空集，所以点是即开又闭的集合。&lt;/p&gt;
+        <guid>https://wujilingfeng.github.io/p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/%E5%B8%83%E5%B0%94.jpg" alt="Featured image of post 一种bool运算" /&gt;&lt;p&gt;求两个cell相交，不用判断是否平行等，直接遍历每个组件点，线，面，体&amp;hellip;.，然后求两两之间的交点即可。注意这里的点，线，面都是除去各自边界的开集，不是闭集。点的边界是空集，所以点是即开又闭的集合。&lt;/p&gt;
 &lt;p&gt;注意当三角形出现退化时，它的点，线（去除边界的开集），面（去除边界的开集）要么存在，要么为空，所以判断各个组件的相交在三角形退化时也是固定的，简单的。&lt;/p&gt;
+&lt;h4 id=&#34;退化边界膨胀为单纯形后的剖分&#34;&gt;退化边界膨胀为单纯形后的剖分
+&lt;/h4&gt;&lt;p&gt;如下的情况和边界方向：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/Untitled.png&#34;
+	width=&#34;1152&#34;
+	height=&#34;720&#34;
+	srcset=&#34;../p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/Untitled_hu_91b81c409a1f3fb4.png 480w, ../p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/Untitled_hu_168120c6cddf4e74.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;原始情况&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;384px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;红边替换为如下两种情况的三角形（其实是一种情况，只是从二维方向看来是两种情况，一种是顺时针的三角形，一种是逆时针。二者剖分后的情况看起来，一种交叠，一种不交叠，但是从拓扑看来其实是一种情况，这里为了说明与空间位置无关，所以故意分两种）。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/Untitled1.png&#34;
+	width=&#34;1152&#34;
+	height=&#34;720&#34;
+	srcset=&#34;../p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/Untitled1_hu_a74139e46613e7c9.png 480w, ../p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/Untitled1_hu_9572ff7d8872bf33.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;情况1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;384px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/Untitled2.png&#34;
+	width=&#34;1152&#34;
+	height=&#34;720&#34;
+	srcset=&#34;../p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/Untitled2_hu_83bc05d291948b1b.png 480w, ../p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/Untitled2_hu_4a1d2a68252eebbb.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;情况2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;384px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;他们的剖分情况如下:
+&lt;img src=&#34;../p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/Untitled4.png&#34;
+	width=&#34;1152&#34;
+	height=&#34;720&#34;
+	srcset=&#34;../p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/Untitled4_hu_ab05339aec27c4f5.png 480w, ../p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/Untitled4_hu_ce54dbfb09f384a7.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;剖分1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;384px&#34;
+	
+&gt;
+&lt;img src=&#34;../p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/Untitled3.png&#34;
+	width=&#34;1152&#34;
+	height=&#34;720&#34;
+	srcset=&#34;../p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/Untitled3_hu_96274d3c1277611a.png 480w, ../p/%E4%B8%80%E7%A7%8Dbool%E8%BF%90%E7%AE%97/Untitled3_hu_9d394a3963827836.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;剖分2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;384px&#34;
+	
+&gt;&lt;/p&gt;
 </description>
         </item>
         <item>
         <title>物竞天择</title>
-        <link>http://localhost:1313/p/%E7%89%A9%E7%AB%9E%E5%A4%A9%E6%8B%A9/</link>
+        <link>https://wujilingfeng.github.io/p/%E7%89%A9%E7%AB%9E%E5%A4%A9%E6%8B%A9/</link>
         <pubDate>Sat, 07 Mar 2026 11:31:27 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/%E7%89%A9%E7%AB%9E%E5%A4%A9%E6%8B%A9/</guid>
-        <description>&lt;img src="http://localhost:1313/p/%E7%89%A9%E7%AB%9E%E5%A4%A9%E6%8B%A9/liangu.jpg" alt="Featured image of post 物竞天择" /&gt;&lt;p&gt;在遗传算法（GA）中，使用混沌系统替代伪随机数生成器（PRNG）确实能通过其&lt;strong&gt;遍历性（Ergodicity）&lt;strong&gt;和&lt;/strong&gt;非重复性&lt;/strong&gt;提高全局搜索能力，避免早熟收    敛。&lt;/p&gt;
+        <guid>https://wujilingfeng.github.io/p/%E7%89%A9%E7%AB%9E%E5%A4%A9%E6%8B%A9/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/%E7%89%A9%E7%AB%9E%E5%A4%A9%E6%8B%A9/liangu.jpg" alt="Featured image of post 物竞天择" /&gt;&lt;p&gt;在遗传算法（GA）中，使用混沌系统替代伪随机数生成器（PRNG）确实能通过其&lt;strong&gt;遍历性（Ergodicity）&lt;strong&gt;和&lt;/strong&gt;非重复性&lt;/strong&gt;提高全局搜索能力，避免早熟收    敛。&lt;/p&gt;
 &lt;p&gt;针对你提到的“计算耗时”和“分布概率无法调节”这两个痛点，我建议放弃传统的 Logistic 或 Tent 映射，转而采用以下两种方案：&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;方案一分段线性混沌映射-pwlcm--概率映射函数&#34;&gt;方案一：分段线性混沌映射 (PWLCM) + 概率映射函数
@@ -223,11 +297,11 @@ $MutationValue = (u1 \cdot 0.1 + u2 \cdot 0.2 + u3 \cdot 0.6)$
         </item>
         <item>
         <title>带约束的凸优化</title>
-        <link>http://localhost:1313/p/%E5%B8%A6%E7%BA%A6%E6%9D%9F%E7%9A%84%E5%87%B8%E4%BC%98%E5%8C%96/</link>
+        <link>https://wujilingfeng.github.io/p/%E5%B8%A6%E7%BA%A6%E6%9D%9F%E7%9A%84%E5%87%B8%E4%BC%98%E5%8C%96/</link>
         <pubDate>Mon, 02 Mar 2026 15:02:11 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/%E5%B8%A6%E7%BA%A6%E6%9D%9F%E7%9A%84%E5%87%B8%E4%BC%98%E5%8C%96/</guid>
-        <description>&lt;img src="http://localhost:1313/p/%E5%B8%A6%E7%BA%A6%E6%9D%9F%E7%9A%84%E5%87%B8%E4%BC%98%E5%8C%96/wanxia.png" alt="Featured image of post 带约束的凸优化" /&gt;&lt;h4 id=&#34;带不等式约束的梯度下降法&#34;&gt;带不等式约束的梯度下降法
+        <guid>https://wujilingfeng.github.io/p/%E5%B8%A6%E7%BA%A6%E6%9D%9F%E7%9A%84%E5%87%B8%E4%BC%98%E5%8C%96/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%B8%A6%E7%BA%A6%E6%9D%9F%E7%9A%84%E5%87%B8%E4%BC%98%E5%8C%96/wanxia.png" alt="Featured image of post 带约束的凸优化" /&gt;&lt;h4 id=&#34;带不等式约束的梯度下降法&#34;&gt;带不等式约束的梯度下降法
 &lt;/h4&gt;&lt;p&gt;$\min_{x}f\left(x\right)$ $st.Ax\le b$&lt;/p&gt;
 &lt;p&gt;现假设$x_0$是满足不等式约束的点，按照梯度下降法它的梯度是$df\left(x_0\right)$,步长是$\alpha$。&lt;/p&gt;
 &lt;p&gt;检查$x_1=x+\alpha d f\left(x_0\right)$时，$Ax_1\le b$是否成立，如果不满足减小$\alpha$，令$\alpha_1$是0与$\alpha$之间 满足不等式约束的最大值。&lt;/p&gt;
@@ -247,11 +321,11 @@ $MutationValue = (u1 \cdot 0.1 + u2 \cdot 0.2 + u3 \cdot 0.6)$
         </item>
         <item>
         <title>不等式约束</title>
-        <link>http://localhost:1313/p/%E4%B8%8D%E7%AD%89%E5%BC%8F%E7%BA%A6%E6%9D%9F/</link>
+        <link>https://wujilingfeng.github.io/p/%E4%B8%8D%E7%AD%89%E5%BC%8F%E7%BA%A6%E6%9D%9F/</link>
         <pubDate>Tue, 10 Feb 2026 10:49:20 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/%E4%B8%8D%E7%AD%89%E5%BC%8F%E7%BA%A6%E6%9D%9F/</guid>
-        <description>&lt;img src="http://localhost:1313/p/%E4%B8%8D%E7%AD%89%E5%BC%8F%E7%BA%A6%E6%9D%9F/jiuwei.png" alt="Featured image of post 不等式约束" /&gt;&lt;h4 id=&#34;如何求解不等式约束是否有解&#34;&gt;如何求解不等式约束是否有解
+        <guid>https://wujilingfeng.github.io/p/%E4%B8%8D%E7%AD%89%E5%BC%8F%E7%BA%A6%E6%9D%9F/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/%E4%B8%8D%E7%AD%89%E5%BC%8F%E7%BA%A6%E6%9D%9F/jiuwei.png" alt="Featured image of post 不等式约束" /&gt;&lt;h4 id=&#34;如何求解不等式约束是否有解&#34;&gt;如何求解不等式约束是否有解
 &lt;/h4&gt;&lt;p&gt;有如下不等式约束n个$a_ix&amp;gt; \left(=\right)b_i$,(每个既可以是&amp;gt;，也可以是$\ge$),想要知道它是否有解。&lt;/p&gt;
 &lt;p&gt;把上述不等式约束写为$Ax&amp;gt;\left(=\right)B$,则令$\lambda_i \ge 0,i\in 0..(n-1)$ , $A^T\lambda=0$,  $\max_{\lambda} B^T\lambda$&lt;/p&gt;
 &lt;p&gt;则不等式是否有解等价于 $0&amp;gt;\left(=\right) \max_{\lambda} B^T\lambda $是否恒成立。&lt;/p&gt;
@@ -266,11 +340,11 @@ $MutationValue = (u1 \cdot 0.1 + u2 \cdot 0.2 + u3 \cdot 0.6)$
         </item>
         <item>
         <title>向量数</title>
-        <link>http://localhost:1313/p/%E5%90%91%E9%87%8F%E6%95%B0/</link>
+        <link>https://wujilingfeng.github.io/p/%E5%90%91%E9%87%8F%E6%95%B0/</link>
         <pubDate>Thu, 29 Jan 2026 09:25:51 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/%E5%90%91%E9%87%8F%E6%95%B0/</guid>
-        <description>&lt;img src="http://localhost:1313/p/%E5%90%91%E9%87%8F%E6%95%B0/yangtai.png" alt="Featured image of post 向量数" /&gt;&lt;p&gt;下面介绍一种向量进制的数据表示方式。比如N向量数，设集合为$B$是自然数的集合，那么N向量空间设为$C=B .. \times B$,也就是C中元素表示为$\left(t_0.. t_{N-1}\right) \in C$,  那么M深度的N向量数表示$D={s_0..s_m}$  其中$s_l\in C$，&lt;/p&gt;
+        <guid>https://wujilingfeng.github.io/p/%E5%90%91%E9%87%8F%E6%95%B0/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%90%91%E9%87%8F%E6%95%B0/yangtai.png" alt="Featured image of post 向量数" /&gt;&lt;p&gt;下面介绍一种向量进制的数据表示方式。比如N向量数，设集合为$B$是自然数的集合，那么N向量空间设为$C=B .. \times B$,也就是C中元素表示为$\left(t_0.. t_{N-1}\right) \in C$,  那么M深度的N向量数表示$D={s_0..s_m}$  其中$s_l\in C$，&lt;/p&gt;
 &lt;p&gt;。&lt;/p&gt;
 &lt;p&gt;对于任意的M深度N向量数$d\in D,d=s_0..s_m$都有$0..0s_0..s_m$,其中0表示$\left(0,0,0 \right)$, 和d都不相等，因为表示的深度不一样。&lt;/p&gt;
 &lt;p&gt;现在定义进制的等价关系，对于给定的正整数P。&lt;/p&gt;
@@ -286,11 +360,11 @@ $MutationValue = (u1 \cdot 0.1 + u2 \cdot 0.2 + u3 \cdot 0.6)$
         </item>
         <item>
         <title>B样条曲线</title>
-        <link>http://localhost:1313/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/</link>
+        <link>https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/</link>
         <pubDate>Sat, 24 Jan 2026 11:45:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/</guid>
-        <description>&lt;img src="http://localhost:1313/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun.png" alt="Featured image of post B样条曲线" /&gt;&lt;p&gt;b样条曲线的连续形式推导:&lt;/p&gt;
+        <guid>https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun.png" alt="Featured image of post B样条曲线" /&gt;&lt;p&gt;b样条曲线的连续形式推导:&lt;/p&gt;
 &lt;p&gt;B_0\left(x\right)=1 ,0\le x \le 1 $&lt;/p&gt;
 &lt;p&gt;$B_d(x)=\int B_{d-1}\left(y\right)B_0\left(x-y\right)dy=\int_{x-1}^{x}B_{d-1}\left(y\right)B_0\left(x-y\right)dy$&lt;/p&gt;
 &lt;p&gt;$B_d\left(x\right)=\int_{x-1}^{x}B_{d-1}\left(y\right)dy=\int_{x-1}^{0}B_{d-1}\left(y\right)dy + \int_{0}^{x}B_{d-1}\left(y\right)dy$&lt;/p&gt;
@@ -314,11 +388,11 @@ $MutationValue = (u1 \cdot 0.1 + u2 \cdot 0.2 + u3 \cdot 0.6)$
         </item>
         <item>
         <title>微分几何</title>
-        <link>http://localhost:1313/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/</link>
+        <link>https://wujilingfeng.github.io/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/</link>
         <pubDate>Fri, 15 Aug 2025 17:15:58 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/</guid>
-        <description>&lt;img src="http://localhost:1313/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/image.png" alt="Featured image of post 微分几何" /&gt;&lt;p&gt;微分几何笔记&lt;/p&gt;
+        <guid>https://wujilingfeng.github.io/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%BE%AE%E5%88%86%E5%87%A0%E4%BD%95/image.png" alt="Featured image of post 微分几何" /&gt;&lt;p&gt;微分几何笔记&lt;/p&gt;
 &lt;h3 id=&#34;经典微分几何&#34;&gt;经典微分几何
 &lt;/h3&gt;&lt;h4 id=&#34;定理1&#34;&gt;定理1
 &lt;/h4&gt;&lt;p&gt;参数t是弧长参数s，的充分必要条件是$|r^{&amp;rsquo;} \left(t\right)|=1$&lt;/p&gt;
@@ -494,11 +568,11 @@ e _{3}\left(s\right)
         </item>
         <item>
         <title>Web端渲染</title>
-        <link>http://localhost:1313/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/</link>
+        <link>https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/</link>
         <pubDate>Wed, 16 Jul 2025 10:22:34 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/</guid>
-        <description>&lt;img src="http://localhost:1313/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/img.png" alt="Featured image of post Web端渲染" /&gt;&lt;p&gt;将使用 Dawn 库编写的渲染程序导出到 Web 端和本地端，需要采取不同的编译和部署策略，但核心思想是：&lt;strong&gt;你的 C++ 渲染逻辑（使用 WebGPU API）大部分可以保持不变，而平台特定的部分（如窗口创建、文件IO、事件处理）则需要抽象或有条件编译。&lt;/strong&gt;&lt;/p&gt;
+        <guid>https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/web%E7%AB%AF%E6%B8%B2%E6%9F%93/img.png" alt="Featured image of post Web端渲染" /&gt;&lt;p&gt;将使用 Dawn 库编写的渲染程序导出到 Web 端和本地端，需要采取不同的编译和部署策略，但核心思想是：&lt;strong&gt;你的 C++ 渲染逻辑（使用 WebGPU API）大部分可以保持不变，而平台特定的部分（如窗口创建、文件IO、事件处理）则需要抽象或有条件编译。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Dawn 本身是一个 C++ 库，实现了 WebGPU API 规范，并且是 Chromium 浏览器中 WebGPU 的底层实现。&lt;/p&gt;
 &lt;h3 id=&#34;核心思想平台无关的-webgpu-逻辑&#34;&gt;核心思想：平台无关的 WebGPU 逻辑
 &lt;/h3&gt;&lt;p&gt;你的渲染程序主体应该使用 WebGPU API（通过 &lt;code&gt;wgpu::Device&lt;/code&gt;, &lt;code&gt;wgpu::Queue&lt;/code&gt;, &lt;code&gt;wgpu::RenderPassEncoder&lt;/code&gt; 等）来定义渲染管线、加载资源、绘制等。这部分代码在概念上是平台无关的。&lt;/p&gt;
@@ -749,11 +823,11 @@ int main() {
         </item>
         <item>
         <title>Zig实战</title>
-        <link>http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/</link>
+        <link>https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/</link>
         <pubDate>Fri, 20 Jun 2025 10:36:14 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/</guid>
-        <description>&lt;img src="http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/nature.png" alt="Featured image of post Zig实战" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://ziglang.cc/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/nature.png" alt="Featured image of post Zig实战" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://ziglang.cc/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;zig语言中文社区&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://luojia.me/9940/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;zig编译为webassembly&lt;/a&gt;&lt;/p&gt;
@@ -1256,11 +1330,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Gltf格式</title>
-        <link>http://localhost:1313/p/gltf%E6%A0%BC%E5%BC%8F/</link>
+        <link>https://wujilingfeng.github.io/p/gltf%E6%A0%BC%E5%BC%8F/</link>
         <pubDate>Mon, 19 May 2025 18:05:13 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/gltf%E6%A0%BC%E5%BC%8F/</guid>
-        <description>&lt;img src="http://localhost:1313/p/gltf%E6%A0%BC%E5%BC%8F/jiari.png" alt="Featured image of post Gltf格式" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/905671909b25&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>https://wujilingfeng.github.io/p/gltf%E6%A0%BC%E5%BC%8F/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/gltf%E6%A0%BC%E5%BC%8F/jiari.png" alt="Featured image of post Gltf格式" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jianshu.com/p/905671909b25&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;gltf文件格式介绍&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/qq_22642239/article/details/129752911&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;gltf文件格式&lt;/a&gt;&lt;/p&gt;
@@ -1268,11 +1342,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Minkowski框架学习</title>
-        <link>http://localhost:1313/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</link>
+        <link>https://wujilingfeng.github.io/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</link>
         <pubDate>Tue, 13 May 2025 17:46:40 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</guid>
-        <description>&lt;img src="http://localhost:1313/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/rain.png" alt="Featured image of post Minkowski框架学习" /&gt;&lt;p&gt;按照&lt;a class=&#34;link&#34; href=&#34;https://rocm.docs.amd.com/projects/radeon/en/latest/docs/install/native_linux/install-radeon.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>https://wujilingfeng.github.io/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/minkowski%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/rain.png" alt="Featured image of post Minkowski框架学习" /&gt;&lt;p&gt;按照&lt;a class=&#34;link&#34; href=&#34;https://rocm.docs.amd.com/projects/radeon/en/latest/docs/install/native_linux/install-radeon.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;网址&lt;/a&gt;进行配置.&lt;/p&gt;
 &lt;p&gt;对于zorin os等基于ubuntu的发行版本，需要修改&lt;code&gt;sudo vim /etc/os-release&lt;/code&gt; , 把ID设置为ubuntu。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -1302,19 +1376,19 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Futhark学习</title>
-        <link>http://localhost:1313/p/futhark%E5%AD%A6%E4%B9%A0/</link>
+        <link>https://wujilingfeng.github.io/p/futhark%E5%AD%A6%E4%B9%A0/</link>
         <pubDate>Wed, 30 Apr 2025 16:52:46 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/futhark%E5%AD%A6%E4%B9%A0/</guid>
-        <description>&lt;img src="http://localhost:1313/p/futhark%E5%AD%A6%E4%B9%A0/jinshan.png" alt="Featured image of post Futhark学习" /&gt;</description>
+        <guid>https://wujilingfeng.github.io/p/futhark%E5%AD%A6%E4%B9%A0/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/futhark%E5%AD%A6%E4%B9%A0/jinshan.png" alt="Featured image of post Futhark学习" /&gt;</description>
         </item>
         <item>
         <title>Haskell学习</title>
-        <link>http://localhost:1313/p/haskell%E5%AD%A6%E4%B9%A0/</link>
+        <link>https://wujilingfeng.github.io/p/haskell%E5%AD%A6%E4%B9%A0/</link>
         <pubDate>Tue, 29 Apr 2025 10:58:01 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/haskell%E5%AD%A6%E4%B9%A0/</guid>
-        <description>&lt;img src="http://localhost:1313/p/haskell%E5%AD%A6%E4%B9%A0/img.png" alt="Featured image of post Haskell学习" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gitter.im/autumnai/leaf?utm_source=badge&amp;amp;utm_medium=badge&amp;amp;utm_campaign=pr-badge&amp;amp;utm_content=badge&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+        <guid>https://wujilingfeng.github.io/p/haskell%E5%AD%A6%E4%B9%A0/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/haskell%E5%AD%A6%E4%B9%A0/img.png" alt="Featured image of post Haskell学习" /&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://gitter.im/autumnai/leaf?utm_source=badge&amp;amp;utm_medium=badge&amp;amp;utm_campaign=pr-badge&amp;amp;utm_content=badge&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;&lt;img src=&#34;https://img.shields.io/badge/gitter-join%20chat-brightgreen.svg&#34;
 	
 	
@@ -1823,11 +1897,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Hugo&#43;github搭建博客</title>
-        <link>http://localhost:1313/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link>
+        <link>https://wujilingfeng.github.io/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link>
         <pubDate>Tue, 29 Apr 2025 08:57:27 +0800</pubDate>
         
-        <guid>http://localhost:1313/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid>
-        <description>&lt;img src="http://localhost:1313/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/shumu.png" alt="Featured image of post Hugo&#43;github搭建博客" /&gt;&lt;p&gt;hugo 似乎的确存在很多bug。&lt;/p&gt;
+        <guid>https://wujilingfeng.github.io/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/hugo-github%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/shumu.png" alt="Featured image of post Hugo&#43;github搭建博客" /&gt;&lt;p&gt;hugo 似乎的确存在很多bug。&lt;/p&gt;
 &lt;p&gt;stack主题对于baseurl的路径处理有bug，例如当baseurl = &lt;a class=&#34;link&#34; href=&#34;https://wujilingfeng.github.io/myblog/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://wujilingfeng.github.io/myblog/&lt;/a&gt;时，生成的网页内容路径会自动添加myblog。&lt;/p&gt;
 &lt;p&gt;stack主题对于文章的语言分类是以md的文件名中缀&lt;code&gt;zh-cn&lt;/code&gt;,&lt;code&gt;en&lt;/code&gt;,&lt;code&gt;ar&lt;/code&gt;来进行区分的。&lt;/p&gt;
@@ -1835,11 +1909,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>学习zig</title>
-        <link>http://localhost:1313/p/%E5%AD%A6%E4%B9%A0zig/</link>
+        <link>https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/</link>
         <pubDate>Mon, 28 Apr 2025 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/%E5%AD%A6%E4%B9%A0zig/</guid>
-        <description>&lt;img src="http://localhost:1313/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png" alt="Featured image of post 学习zig" /&gt;&lt;p&gt;zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同的。zig语言函数的参数默认都是const。&lt;/p&gt;
+        <guid>https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/%E5%AD%A6%E4%B9%A0zig/fanchuan.png" alt="Featured image of post 学习zig" /&gt;&lt;p&gt;zig语言每个变量分为const 和var，结构体成员变量（除了静态变量）的const和var是和该结构体实例相同的。zig语言函数的参数默认都是const。&lt;/p&gt;
 &lt;p&gt;zig语言对函数声明和定义启用延迟检查分析，也就是如果定义的函数未使用，zig编译器就不会分析检查该函数，也就更不会对该函数报错。&lt;/p&gt;
 &lt;p&gt;zig语言的void和c语言的void不同，c语言的void对应anyopaque，是对opaque的泛化，就像anytype是对type的泛化，anyerror对error的泛化。void也是一个类型，它的值通常为&lt;code&gt;{}&lt;/code&gt;。&lt;/p&gt;
 &lt;h4 id=&#34;结构体&#34;&gt;结构体
@@ -2483,60 +2557,8 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        }
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;在函数的泛型参数中anytype和comptime T:type，在效率上似乎是一样的，comptime T更清晰但是接口更复杂，anytype接口简洁但是需要推导类型（@TypeOf）。&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
-&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 1
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 2
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 3
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 4
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 5
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 6
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 7
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 8
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 9
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;10
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;11
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;12
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;13
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;14
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;15
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;16
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;17
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;18
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;19
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;20
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;21
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;22
-&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;23
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;@import&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;std&amp;#34;&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;testing&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ComplexTypeTag&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;enum&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;ok&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;not_ok&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ComplexType&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;union&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;ComplexTypeTag&lt;/span&gt;) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;ok&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;u8&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;not_ok&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;void&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;test&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;modify tagged union in switch&amp;#34;&lt;/span&gt; {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;c&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ComplexType&lt;/span&gt;{ .&lt;span style=&#34;color:#e06c75&#34;&gt;ok&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;42&lt;/span&gt; };
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;switch&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;c&lt;/span&gt;) {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;ComplexTypeTag&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;ok&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;|*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;value&lt;/span&gt;.&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;ComplexTypeTag&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;not_ok&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;unreachable&lt;/span&gt;,
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;c&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;ok&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;43&lt;/span&gt;);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;defer是在作用域退出时执行表达式，表达式当然可以是块（block）。defer , if , while,for ,switch关键字都是控制语句，后面如果是单个语句要加&lt;code&gt;;&lt;/code&gt;, 如果是&lt;code&gt;{}&lt;/code&gt;不加分号。&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;errdefer,defer是在作用域退出时执行表达式，表达式当然可以是块（block）。defer , if , while,for ,switch关键字都是控制语句，后面如果是单个语句要加&lt;code&gt;;&lt;/code&gt;, 如果是&lt;code&gt;{}&lt;/code&gt;不加分号。&lt;/p&gt;
+&lt;p&gt;break在循环里面会跳出当前循环，如果要跳出block，那么必须给block命名，并在break指明块名。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 1
@@ -2610,7 +2632,60 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;p&gt;在Zig语言中，‌&lt;strong&gt;高精度数值赋给低精度变量需要显式转换&lt;/strong&gt;‌，否则会触发编译错误。@intCast&lt;code&gt;、&lt;/code&gt;@truncate&lt;code&gt;、&lt;/code&gt;@floatCast&lt;/p&gt;
 &lt;h4 id=&#34;comptime-编译时计算&#34;&gt;comptime 编译时计算
 &lt;/h4&gt;&lt;p&gt;zig会尽量在编译时进行计算，但似乎机制不太好，大部分情况需要手动指定，比如用comptime {}来指定块内部分在编译时计算。此外inline和编译时计算也密切相关，在函数前加inline可以防止函数被强制视为运行时确定，从而不影响计算尽量在编译时进行。就算函数里面有comptime T:type，只能说这个函数在编译时确定该参数，但是这个函数如果不加inline,仍然被视为运行时确定的。也可以在while或者for前加inline，来防止循环被强制视为运行时部分，从而在合适的条件下在编译时进行。&lt;/p&gt;
-&lt;h3 id=&#34;zig-模块导入核心规则&#34;&gt;Zig 模块导入核心规则
+&lt;p&gt;在函数的泛型参数中anytype和comptime T:type，在效率上似乎是一样的，comptime T更清晰但是接口更复杂，anytype接口简洁但是需要推导类型（@TypeOf）。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;12
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;13
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;14
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;15
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;16
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;17
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;18
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;19
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;20
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;21
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;22
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;23
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-zig&#34; data-lang=&#34;zig&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;@import&lt;/span&gt;(&lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;std&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;std&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;testing&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ComplexTypeTag&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;enum&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;ok&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;not_ok&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ComplexType&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;union&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;ComplexTypeTag&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;ok&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;u8&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e06c75&#34;&gt;not_ok&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#e5c07b&#34;&gt;void&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#c678dd&#34;&gt;test&lt;/span&gt; &lt;span style=&#34;color:#98c379&#34;&gt;&amp;#34;modify tagged union in switch&amp;#34;&lt;/span&gt; {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;c&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;ComplexType&lt;/span&gt;{ .&lt;span style=&#34;color:#e06c75&#34;&gt;ok&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;42&lt;/span&gt; };
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;switch&lt;/span&gt; (&lt;span style=&#34;color:#e06c75&#34;&gt;c&lt;/span&gt;) {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;ComplexTypeTag&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;ok&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;|*&lt;/span&gt;&lt;span style=&#34;color:#e06c75&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color:#56b6c2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;value&lt;/span&gt;.&lt;span style=&#34;color:#56b6c2&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;1&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#e06c75&#34;&gt;ComplexTypeTag&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;not_ok&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#c678dd&#34;&gt;unreachable&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#c678dd&#34;&gt;try&lt;/span&gt; &lt;span style=&#34;color:#e06c75&#34;&gt;expect&lt;/span&gt;(&lt;span style=&#34;color:#e06c75&#34;&gt;c&lt;/span&gt;.&lt;span style=&#34;color:#e06c75&#34;&gt;ok&lt;/span&gt; &lt;span style=&#34;color:#56b6c2&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#d19a66&#34;&gt;43&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;zig-模块导入核心规则&#34;&gt;Zig 模块导入核心规则
 &lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;路径导入继承依赖&lt;/strong&gt;：使用 &lt;code&gt;@import(&amp;quot;./file.zig&amp;quot;)&lt;/code&gt; 导入文件时，该文件会自动继承&lt;strong&gt;父模块&lt;/strong&gt;（即调用 &lt;code&gt;@import&lt;/code&gt; 的模块）通过 &lt;code&gt;addImport&lt;/code&gt; 添加的所有命名模块。这意味着，只要在 &lt;code&gt;exe.root_module&lt;/code&gt; 中添加了依赖（如 &lt;code&gt;addImport(&amp;quot;tracy&amp;quot;, tracy_mod)&lt;/code&gt;），所有通过路径导入的 &lt;code&gt;.zig&lt;/code&gt; 文件都能直接使用 &lt;code&gt;@import(&amp;quot;tracy&amp;quot;)&lt;/code&gt;。&lt;/p&gt;
@@ -2858,11 +2933,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Chinese Test</title>
-        <link>http://localhost:1313/p/test-chinese/</link>
+        <link>https://wujilingfeng.github.io/p/test-chinese/</link>
         <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/test-chinese/</guid>
-        <description>&lt;img src="http://localhost:1313/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.zh-cn.jpg" alt="Featured image of post Chinese Test" /&gt;&lt;h2 id=&#34;正文测试&#34;&gt;正文测试
+        <guid>https://wujilingfeng.github.io/p/test-chinese/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/test-chinese/helena-hertz-wWZzXlDpMog-unsplash.zh-cn.jpg" alt="Featured image of post Chinese Test" /&gt;&lt;h2 id=&#34;正文测试&#34;&gt;正文测试
 &lt;/h2&gt;&lt;p&gt;而这些并不是完全重要，更加重要的问题是， 带着这些问题，我们来审视一下学生会退会。 既然如何， 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 我们不得不面对一个非常尴尬的事实，那就是， 可是，即使是这样，学生会退会的出现仍然代表了一定的意义。 学生会退会，发生了会如何，不发生又会如何。 经过上述讨论， 生活中，若学生会退会出现了，我们就不得不考虑它出现了的事实。 学生会退会，到底应该如何实现。 这样看来， 在这种困难的抉择下，本人思来想去，寝食难安。 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 就我个人来说，学生会退会对我的意义，不能不说非常重大。 莎士比亚曾经提到过，人的一生是短的，但如果卑劣地过这一生，就太长了。这似乎解答了我的疑惑。 莫扎特说过一句富有哲理的话，谁和我一样用功，谁就会和我一样成功。这启发了我， 对我个人而言，学生会退会不仅仅是一个重大的事件，还可能会改变我的人生。 学生会退会，到底应该如何实现。 一般来说， 从这个角度来看， 这种事实对本人来说意义重大，相信对这个世界也是有一定意义的。 在这种困难的抉择下，本人思来想去，寝食难安。 了解清楚学生会退会到底是一种怎么样的存在，是解决一切问题的关键。 一般来说， 生活中，若学生会退会出现了，我们就不得不考虑它出现了的事实。 问题的关键究竟为何？ 而这些并不是完全重要，更加重要的问题是。&lt;/p&gt;
 &lt;p&gt;奥斯特洛夫斯基曾经说过，共同的事业，共同的斗争，可以使人们产生忍受一切的力量。　带着这句话，我们还要更加慎重的审视这个问题： 一般来讲，我们都必须务必慎重的考虑考虑。 既然如此， 这种事实对本人来说意义重大，相信对这个世界也是有一定意义的。 带着这些问题，我们来审视一下学生会退会。 我认为， 我认为， 在这种困难的抉择下，本人思来想去，寝食难安。 问题的关键究竟为何？ 每个人都不得不面对这些问题。 在面对这种问题时， 要想清楚，学生会退会，到底是一种怎么样的存在。 我认为， 既然如此， 每个人都不得不面对这些问题。 在面对这种问题时， 那么， 我认为， 学生会退会因何而发生。&lt;/p&gt;
 &lt;h2 id=&#34;引用&#34;&gt;引用
@@ -2946,11 +3021,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Markdown Syntax Guide</title>
-        <link>http://localhost:1313/p/markdown-syntax-guide/</link>
+        <link>https://wujilingfeng.github.io/p/markdown-syntax-guide/</link>
         <pubDate>Mon, 11 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/markdown-syntax-guide/</guid>
-        <description>&lt;img src="http://localhost:1313/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" /&gt;&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;
+        <guid>https://wujilingfeng.github.io/p/markdown-syntax-guide/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/markdown-syntax-guide/pawel-czerwinski-8uZPynIu-rQ-unsplash.jpg" alt="Featured image of post Markdown Syntax Guide" /&gt;&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;
 &lt;h2 id=&#34;headings&#34;&gt;Headings
 &lt;/h2&gt;&lt;p&gt;The following HTML &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;—&lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt; elements represent six levels of section headings. &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt; is the highest section level while &lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt; is the lowest.&lt;/p&gt;
 &lt;h1 id=&#34;h1&#34;&gt;H1
@@ -3174,11 +3249,11 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Placeholder Text</title>
-        <link>http://localhost:1313/p/placeholder-text/</link>
+        <link>https://wujilingfeng.github.io/p/placeholder-text/</link>
         <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/placeholder-text/</guid>
-        <description>&lt;img src="http://localhost:1313/p/placeholder-text/matt-le-SJSpo9hQf7s-unsplash.jpg" alt="Featured image of post Placeholder Text" /&gt;&lt;p&gt;Lorem est tota propiore conpellat pectoribus de pectora summo.&lt;/p&gt;
+        <guid>https://wujilingfeng.github.io/p/placeholder-text/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/placeholder-text/matt-le-SJSpo9hQf7s-unsplash.jpg" alt="Featured image of post Placeholder Text" /&gt;&lt;p&gt;Lorem est tota propiore conpellat pectoribus de pectora summo.&lt;/p&gt;
 &lt;p&gt;Redit teque digerit hominumque toris verebor lumina non cervice subde tollit usus habet Arctonque, furores quas nec ferunt. Quoque montibus nunc caluere tempus inhospita parcite confusaque translucet patri vestro qui optatis lumine cognoscere flos nubis! Fronde ipsamque patulos Dryopen deorum.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Exierant elisi ambit vivere dedere&lt;/li&gt;
@@ -3205,10 +3280,10 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
         </item>
         <item>
         <title>Math Typesetting</title>
-        <link>http://localhost:1313/p/math-typesetting/</link>
+        <link>https://wujilingfeng.github.io/p/math-typesetting/</link>
         <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/math-typesetting/</guid>
+        <guid>https://wujilingfeng.github.io/p/math-typesetting/</guid>
         <description>&lt;p&gt;Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.&lt;/p&gt;
 &lt;p&gt;In this example we will be using &lt;a class=&#34;link&#34; href=&#34;https://katex.org/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;KaTeX&lt;/a&gt;&lt;/p&gt;
@@ -3247,11 +3322,11 @@ $$</description>
         </item>
         <item>
         <title>Emoji Support</title>
-        <link>http://localhost:1313/p/emoji-support/</link>
+        <link>https://wujilingfeng.github.io/p/emoji-support/</link>
         <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>http://localhost:1313/p/emoji-support/</guid>
-        <description>&lt;img src="http://localhost:1313/p/emoji-support/the-creative-exchange-d2zvqp3fpro-unsplash.jpg" alt="Featured image of post Emoji Support" /&gt;&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;
+        <guid>https://wujilingfeng.github.io/p/emoji-support/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/emoji-support/the-creative-exchange-d2zvqp3fpro-unsplash.jpg" alt="Featured image of post Emoji Support" /&gt;&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;
 &lt;p&gt;The &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/functions/emojify/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;&lt;code&gt;emojify&lt;/code&gt;&lt;/a&gt; function can be called directly in templates or &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/templates/shortcode-templates/#inline-shortcodes&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Inline Shortcodes&lt;/a&gt;.&lt;/p&gt;
