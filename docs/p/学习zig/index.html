@@ -511,7 +511,8 @@
 </div>
 </div><p>zig中的文件，结构体，联合体等都是容器，容器里面声明的函数如果参数包含自身的类型，一般该参数使用self: Self代替，你可以在很多地方看到这种写法。在调用该函数时需要该容器的实例调用并省略掉该参数传入，这时默认会传入该实例的自身替换该参数。如果容器内的函数的参数并没有要传入该容器自身的类型，那么这个函数的调用不要通过该容器的实例调用，而是通过容器类型调用该函数。比如ArrayList的initCapacity函数调用时，要通过ArrayList(u32).initCapacity, 而deinit函数一般通过实例调用:<code>var a:ArrayList(u32)=.empty; a.deinit(std.testing.allocator);</code></p>
 <p>zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype,似乎zig内置函数可以）。</p>
-<p>zig 的test的函数必须是字符串，否则必须是标识符，一般和某个函数名的标识符相同，这样会作为该函数的文档测试说明。test函数的默认返回类型是错误联合类型，也就是<code>!void</code></p>
+<p>zig 的test的函数必须是字符串，否则必须是标识符，一般和某个函数名的标识符相同，这样会作为该函数的文档测试说明。test函数的默认返回类型是错误联合类型，也就是<code>!void</code> 。</p>
+<p>结构体，联合体等容器的test函数默认不执行。但当文件容器的test函数里面使用了该容器，这样该容器里面的test函数会被执行。</p>
 <p><a class="link" href="https://www.cnblogs.com/violeshnv/p/18200280"  target="_blank" rel="noopener"
     >这个网页说明了一些用法</a></p>
 <h4 id="错误处理">错误处理

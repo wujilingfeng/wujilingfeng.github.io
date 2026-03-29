@@ -913,7 +913,7 @@ int main() {
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;似乎zig中的@import不能导入上层目录，也就是不能出现&lt;code&gt;..&lt;/code&gt; 。那也就意味着每个子文件夹里面的zig源文件都要独立成为一个自摸块，除了依赖子文件夹，不会依赖其他文件夹的zig源文件&lt;/p&gt;
 &lt;h4 id=&#34;as和作用和intcast等其他转换函数的区别&#34;&gt;@as和作用和@intCast等其他转换函数的区别
-&lt;/h4&gt;&lt;p&gt;&lt;code&gt;@as&lt;/code&gt; 的核心作用是&lt;strong&gt;在编译时明确指定类型&lt;/strong&gt;，帮助编译器理解你的意图，避免类型推断错误或歧义。所以@as本质上不会修改数据位，也不会对数据进行修改。所以一般的浮点数类型转换和整数类型转换不用@as。&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;&lt;code&gt;@as&lt;/code&gt; 的核心作用是&lt;strong&gt;在编译时明确指定类型&lt;/strong&gt;，帮助编译器理解你的意图，避免类型推断错误或歧义。所以@as本质上不会修改数据位，也不会对数据进行修改。所以一般的浮点数类型转换和整数类型转换不用@as。一般用法是&lt;code&gt;@as(f32,1)&lt;/code&gt;，也就是用在字面量，也配合@intCast等转换函数，比如@as(u32,@intFromFloat(a)).&lt;/p&gt;
 &lt;h4 id=&#34;数值之间的隐式转换&#34;&gt;数值之间的隐式转换
 &lt;/h4&gt;&lt;p&gt;zig对数值之间类型可以隐式转换，但只能是从小范围的类型转换为更大类型的，不会发生数值的截断，溢出等潜在风险，所以u8类型可以隐式转换为u16，但u16不能隐式转换为u8。usize和isize之间也不能隐式转换，因为二者没有包含关系，只有交集。&lt;/p&gt;
 &lt;h4 id=&#34;常见整数溢出&#34;&gt;常见整数溢出
@@ -1957,7 +1957,8 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;zig中的文件，结构体，联合体等都是容器，容器里面声明的函数如果参数包含自身的类型，一般该参数使用self: Self代替，你可以在很多地方看到这种写法。在调用该函数时需要该容器的实例调用并省略掉该参数传入，这时默认会传入该实例的自身替换该参数。如果容器内的函数的参数并没有要传入该容器自身的类型，那么这个函数的调用不要通过该容器的实例调用，而是通过容器类型调用该函数。比如ArrayList的initCapacity函数调用时，要通过ArrayList(u32).initCapacity, 而deinit函数一般通过实例调用:&lt;code&gt;var a:ArrayList(u32)=.empty; a.deinit(std.testing.allocator);&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;zig语言的anytype只用于函数的参数声明（其他都不能用，函数的返回类型也不能用anytype,似乎zig内置函数可以）。&lt;/p&gt;
-&lt;p&gt;zig 的test的函数必须是字符串，否则必须是标识符，一般和某个函数名的标识符相同，这样会作为该函数的文档测试说明。test函数的默认返回类型是错误联合类型，也就是&lt;code&gt;!void&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;zig 的test的函数必须是字符串，否则必须是标识符，一般和某个函数名的标识符相同，这样会作为该函数的文档测试说明。test函数的默认返回类型是错误联合类型，也就是&lt;code&gt;!void&lt;/code&gt; 。&lt;/p&gt;
+&lt;p&gt;结构体，联合体等容器的test函数默认不执行。但当文件容器的test函数里面使用了该容器，这样该容器里面的test函数会被执行。&lt;/p&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/violeshnv/p/18200280&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;这个网页说明了一些用法&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&#34;错误处理&#34;&gt;错误处理
