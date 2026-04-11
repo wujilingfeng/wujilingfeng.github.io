@@ -15,18 +15,18 @@
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
  <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="b样条曲线的连续形式推导:\nB_0\\left(x\\right)=1 ,0\\le x \\le 1 $\n$B_d(x)=\\int B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy$\n$B_d\\left(x\\right)=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)dy=\\int_{x-1}^{0}B_{d-1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}\\left(y\\right)dy$\n$=\\int_{x}^{1}B_{d-1}^{i+1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}^{i}\\left(y\\right)dy$\nb样条曲线不同阶的基函数递推公式：\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="b样条曲线的卷积连续形式推导（下面的$B_0$ 默认都是定义在初始区间的）:\n$ B_0\\left(x\\right)=1 ,0\\le x \\le 1 $\n$B_d(x)=\\int B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy$\n$B_d\\left(x\\right)=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)dy=\\int_{x-1}^{0}B_{d-1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}\\left(y\\right)dy$\n$=\\int_{x}^{1}B_{d-1}^{i+1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}^{i}\\left(y\\right)dy$\nb样条曲线不同阶的基函数递推公式：\n在信号处理和数学中，门函数（通常也称为矩形函数）是构建各种复杂信号的基础。为了给出最通用且严谨的公式，我们先定义基础门函数，然后再推导二次和三次卷积。\n1. 基础门函数定义\r假设门函数的高度为 $A$，宽度为 $T$，且关于原点对称，其公式为 $g_1(t)$： $ g_1(t) = A \\cdot \\text{rect}\\left(\\frac{t}{T}\\right) = \\begin{cases} A, &amp; |t| \\le \\frac{T}{2} \\ 0, &amp; \\text{其他} \\end{cases} $\n(注：如果你使用的是单位门函数，只需在后续公式中令 $A=1, T=1$ 即可)\n2. 门函数的二次卷积 $g_2(t)$\r门函数与自身卷积一次，会得到一个三角形函数。其底边宽度会翻倍变成 $2T$，峰值为原来面积 $A \\times T$ 乘以 $A$，即 $A^2 T$。 $ g_2(t) = g_1(t) * g_1(t) = \\begin{cases} A^2 (t + T), &amp; -T \\le t \\le 0 \\ A^2 (-t + T), &amp; 0 &lt; t \\le T \\ 0, &amp; \\text{其他} \\end{cases} $ 用标准三角形函数表示为： $ g_2(t) = A^2 T \\cdot \\Lambda\\left(\\frac{t}{T}\\right) $ (其中 $\\Lambda(x) = \\max(1 - |x|, 0)$ 是标准三角形函数)\n">
 <title>B样条曲线</title>
 
 <link rel='canonical' href='https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/'>
 
 <link rel="stylesheet" href="../../scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="B样条曲线">
-<meta property='og:description' content="b样条曲线的连续形式推导:\nB_0\\left(x\\right)=1 ,0\\le x \\le 1 $\n$B_d(x)=\\int B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy$\n$B_d\\left(x\\right)=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)dy=\\int_{x-1}^{0}B_{d-1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}\\left(y\\right)dy$\n$=\\int_{x}^{1}B_{d-1}^{i+1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}^{i}\\left(y\\right)dy$\nb样条曲线不同阶的基函数递推公式：\n">
+<meta property='og:description' content="b样条曲线的卷积连续形式推导（下面的$B_0$ 默认都是定义在初始区间的）:\n$ B_0\\left(x\\right)=1 ,0\\le x \\le 1 $\n$B_d(x)=\\int B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy$\n$B_d\\left(x\\right)=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)dy=\\int_{x-1}^{0}B_{d-1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}\\left(y\\right)dy$\n$=\\int_{x}^{1}B_{d-1}^{i+1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}^{i}\\left(y\\right)dy$\nb样条曲线不同阶的基函数递推公式：\n在信号处理和数学中，门函数（通常也称为矩形函数）是构建各种复杂信号的基础。为了给出最通用且严谨的公式，我们先定义基础门函数，然后再推导二次和三次卷积。\n1. 基础门函数定义\r假设门函数的高度为 $A$，宽度为 $T$，且关于原点对称，其公式为 $g_1(t)$： $ g_1(t) = A \\cdot \\text{rect}\\left(\\frac{t}{T}\\right) = \\begin{cases} A, &amp; |t| \\le \\frac{T}{2} \\ 0, &amp; \\text{其他} \\end{cases} $\n(注：如果你使用的是单位门函数，只需在后续公式中令 $A=1, T=1$ 即可)\n2. 门函数的二次卷积 $g_2(t)$\r门函数与自身卷积一次，会得到一个三角形函数。其底边宽度会翻倍变成 $2T$，峰值为原来面积 $A \\times T$ 乘以 $A$，即 $A^2 T$。 $ g_2(t) = g_1(t) * g_1(t) = \\begin{cases} A^2 (t + T), &amp; -T \\le t \\le 0 \\ A^2 (-t + T), &amp; 0 &lt; t \\le T \\ 0, &amp; \\text{其他} \\end{cases} $ 用标准三角形函数表示为： $ g_2(t) = A^2 T \\cdot \\Lambda\\left(\\frac{t}{T}\\right) $ (其中 $\\Lambda(x) = \\max(1 - |x|, 0)$ 是标准三角形函数)\n">
 <meta property='og:url' content='https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/'>
 <meta property='og:site_name' content='五级灵风'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-24T11:45:01&#43;08:00'/><meta property='article:modified_time' content='2026-01-24T11:45:01&#43;08:00'/><meta property='og:image' content='https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun.png' />
 <meta name="twitter:title" content="B样条曲线">
-<meta name="twitter:description" content="b样条曲线的连续形式推导:\nB_0\\left(x\\right)=1 ,0\\le x \\le 1 $\n$B_d(x)=\\int B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy$\n$B_d\\left(x\\right)=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)dy=\\int_{x-1}^{0}B_{d-1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}\\left(y\\right)dy$\n$=\\int_{x}^{1}B_{d-1}^{i+1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}^{i}\\left(y\\right)dy$\nb样条曲线不同阶的基函数递推公式：\n"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="b样条曲线的卷积连续形式推导（下面的$B_0$ 默认都是定义在初始区间的）:\n$ B_0\\left(x\\right)=1 ,0\\le x \\le 1 $\n$B_d(x)=\\int B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy$\n$B_d\\left(x\\right)=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)dy=\\int_{x-1}^{0}B_{d-1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}\\left(y\\right)dy$\n$=\\int_{x}^{1}B_{d-1}^{i+1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}^{i}\\left(y\\right)dy$\nb样条曲线不同阶的基函数递推公式：\n在信号处理和数学中，门函数（通常也称为矩形函数）是构建各种复杂信号的基础。为了给出最通用且严谨的公式，我们先定义基础门函数，然后再推导二次和三次卷积。\n1. 基础门函数定义\r假设门函数的高度为 $A$，宽度为 $T$，且关于原点对称，其公式为 $g_1(t)$： $ g_1(t) = A \\cdot \\text{rect}\\left(\\frac{t}{T}\\right) = \\begin{cases} A, &amp; |t| \\le \\frac{T}{2} \\ 0, &amp; \\text{其他} \\end{cases} $\n(注：如果你使用的是单位门函数，只需在后续公式中令 $A=1, T=1$ 即可)\n2. 门函数的二次卷积 $g_2(t)$\r门函数与自身卷积一次，会得到一个三角形函数。其底边宽度会翻倍变成 $2T$，峰值为原来面积 $A \\times T$ 乘以 $A$，即 $A^2 T$。 $ g_2(t) = g_1(t) * g_1(t) = \\begin{cases} A^2 (t + T), &amp; -T \\le t \\le 0 \\ A^2 (-t + T), &amp; 0 &lt; t \\le T \\ 0, &amp; \\text{其他} \\end{cases} $ 用标准三角形函数表示为： $ g_2(t) = A^2 T \\cdot \\Lambda\\left(\\frac{t}{T}\\right) $ (其中 $\\Lambda(x) = \\max(1 - |x|, 0)$ 是标准三角形函数)\n"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun.png' />
     <link rel="shortcut icon" href="../../favicon.ico" />
 
@@ -339,7 +339,46 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#1-基础门函数定义">1. 基础门函数定义</a></li>
+        <li><a href="#2-门函数的二次卷积-g_2t">2. 门函数的二次卷积 $g_2(t)$</a></li>
+        <li><a href="#3-门函数的三次卷积-g_3t">3. 门函数的三次卷积 $g_3(t)$</a></li>
+        <li><a href="#-补充如果你需要的是单位门函数-a1-t1">💡 补充：如果你需要的是“单位门函数” ($A=1, T=1$)</a></li>
+        <li><a href="#-规律与性质总结">🔍 规律与性质总结</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="has-image main-article">
@@ -399,7 +438,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 2 分钟
                 </time>
             </div>
         
@@ -414,8 +453,8 @@
     <section class="article-content">
     
     
-    <p>b样条曲线的连续形式推导:</p>
-<p>B_0\left(x\right)=1 ,0\le x \le 1 $</p>
+    <p>b样条曲线的卷积连续形式推导（下面的$B_0$ 默认都是定义在初始区间的）:</p>
+<p>$ B_0\left(x\right)=1 ,0\le x \le 1 $</p>
 <p>$B_d(x)=\int B_{d-1}\left(y\right)B_0\left(x-y\right)dy=\int_{x-1}^{x}B_{d-1}\left(y\right)B_0\left(x-y\right)dy$</p>
 <p>$B_d\left(x\right)=\int_{x-1}^{x}B_{d-1}\left(y\right)dy=\int_{x-1}^{0}B_{d-1}\left(y\right)dy + \int_{0}^{x}B_{d-1}\left(y\right)dy$</p>
 <p>$=\int_{x}^{1}B_{d-1}^{i+1}\left(y\right)dy + \int_{0}^{x}B_{d-1}^{i}\left(y\right)dy$</p>
@@ -434,6 +473,67 @@
 		data-flex-basis="455px"
 	
 ></p>
+<p>在信号处理和数学中，<strong>门函数</strong>（通常也称为矩形函数）是构建各种复杂信号的基础。为了给出最通用且严谨的公式，我们先定义基础门函数，然后再推导二次和三次卷积。</p>
+<h3 id="1-基础门函数定义">1. 基础门函数定义
+</h3><p>假设门函数的高度为 $A$，宽度为 $T$，且关于原点对称，其公式为 $g_1(t)$：
+$
+g_1(t) = A \cdot \text{rect}\left(\frac{t}{T}\right) =
+\begin{cases}
+A, &amp; |t| \le \frac{T}{2} \
+0, &amp; \text{其他}
+\end{cases}
+$</p>
+<p><em>(注：如果你使用的是单位门函数，只需在后续公式中令 $A=1, T=1$ 即可)</em></p>
+<hr>
+<h3 id="2-门函数的二次卷积-g_2t">2. 门函数的二次卷积 $g_2(t)$
+</h3><p>门函数与自身卷积一次，会得到一个<strong>三角形函数</strong>。其底边宽度会翻倍变成 $2T$，峰值为原来面积 $A \times T$ 乘以 $A$，即 $A^2 T$。
+$
+g_2(t) = g_1(t) * g_1(t) =
+\begin{cases}
+A^2 (t + T), &amp; -T \le t \le 0 \
+A^2 (-t + T), &amp; 0 &lt; t \le T \
+0, &amp; \text{其他}
+\end{cases}
+$
+<strong>用标准三角形函数表示为：</strong>
+$ g_2(t) = A^2 T \cdot \Lambda\left(\frac{t}{T}\right) $
+<em>(其中 $\Lambda(x) = \max(1 - |x|, 0)$ 是标准三角形函数)</em></p>
+<hr>
+<h3 id="3-门函数的三次卷积-g_3t">3. 门函数的三次卷积 $g_3(t)$
+</h3><p>门函数与自身卷积两次（即三角形函数再与门函数卷积），会得到一个<strong>分段二次函数</strong>（二次样条曲线）。这是图像处理中“三次卷积插值”的核心基底函数。
+其底边宽度变为 $3T$（从 $-1.5T$ 到 $1.5T$），峰值为 $g_2$ 的峰值面积乘以 $A$，即 $\frac{3}{4} A^3 T^2$。
+$
+g_3(t) = g_2(t) * g_1(t) =
+\begin{cases}
+A^3 \left( \frac{1}{2}t^2 + \frac{3}{2}Tt + \frac{9}{8}T^2 \right), &amp; -\frac{3T}{2} \le t \le -\frac{T}{2} \
+A^3 \left( -t^2 + \frac{3}{4}T^2 \right), &amp; -\frac{T}{2} &lt; t \le \frac{T}{2} \
+A^3 \left( \frac{1}{2}t^2 - \frac{3}{2}Tt + \frac{9}{8}T^2 \right), &amp; \frac{T}{2} &lt; t \le \frac{3T}{2} \
+0, &amp; \text{其他}
+\end{cases}
+$</p>
+<hr>
+<h3 id="-补充如果你需要的是单位门函数-a1-t1">💡 补充：如果你需要的是“单位门函数” ($A=1, T=1$)
+</h3><p>很多教材直接使用宽度为2（从-1到1）的单位门函数 $rect(t)$，此时公式会大大简化：
+<strong>一次（原函数）：</strong>
+$ g_1(t) = \begin{cases} 1, &amp; |t| \le 1 \ 0, &amp; \text{其他} \end{cases} $
+<strong>二次卷积：</strong>
+$ g_2(t) = \begin{cases} t + 1, &amp; -1 \le t \le 0 \ -t + 1, &amp; 0 &lt; t \le 1 \ 0, &amp; \text{其他} \end{cases} $
+<strong>三次卷积：</strong>
+$
+g_3(t) =
+\begin{cases}
+\frac{1}{2}t^2 + \frac{3}{2}t + \frac{9}{8}, &amp; -\frac{3}{2} \le t \le -\frac{1}{2} \
+-t^2 + \frac{3}{4}, &amp; -\frac{1}{2} &lt; t \le \frac{1}{2} \
+\frac{1}{2}t^2 - \frac{3}{2}t + \frac{9}{8}, &amp; \frac{1}{2} &lt; t \le \frac{3}{2} \
+0, &amp; \text{其他}
+\end{cases}
+$</p>
+<h3 id="-规律与性质总结">🔍 规律与性质总结
+</h3><ol>
+<li><strong>平滑性递增</strong>：门函数（0阶导数连续） $\rightarrow$ 二次卷积（1阶导数连续，呈三角尖峰） $\rightarrow$ 三次卷积（2阶导数连续，呈光滑钟形）。</li>
+<li><strong>支撑区间</strong>：每次卷积，非零区间的宽度都会增加一个原门函数的宽度 $T$。</li>
+<li><strong>逼近高斯函数</strong>：根据中心极限定理，如果无限次地将门函数与自身卷积，其波形最终会趋近于完美的<strong>高斯函数（正态分布曲线）</strong>。三次卷积已经是高斯函数的一个相当不错的近似。</li>
+</ol>
 
 </section>
 

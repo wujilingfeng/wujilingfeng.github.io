@@ -364,8 +364,8 @@ $MutationValue = (u1 \cdot 0.1 + u2 \cdot 0.2 + u3 \cdot 0.6)$
         <pubDate>Sat, 24 Jan 2026 11:45:01 +0800</pubDate>
         
         <guid>https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun.png" alt="Featured image of post B样条曲线" /&gt;&lt;p&gt;b样条曲线的连续形式推导:&lt;/p&gt;
-&lt;p&gt;B_0\left(x\right)=1 ,0\le x \le 1 $&lt;/p&gt;
+        <description>&lt;img src="https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun.png" alt="Featured image of post B样条曲线" /&gt;&lt;p&gt;b样条曲线的卷积连续形式推导（下面的$B_0$ 默认都是定义在初始区间的）:&lt;/p&gt;
+&lt;p&gt;$ B_0\left(x\right)=1 ,0\le x \le 1 $&lt;/p&gt;
 &lt;p&gt;$B_d(x)=\int B_{d-1}\left(y\right)B_0\left(x-y\right)dy=\int_{x-1}^{x}B_{d-1}\left(y\right)B_0\left(x-y\right)dy$&lt;/p&gt;
 &lt;p&gt;$B_d\left(x\right)=\int_{x-1}^{x}B_{d-1}\left(y\right)dy=\int_{x-1}^{0}B_{d-1}\left(y\right)dy + \int_{0}^{x}B_{d-1}\left(y\right)dy$&lt;/p&gt;
 &lt;p&gt;$=\int_{x}^{1}B_{d-1}^{i+1}\left(y\right)dy + \int_{0}^{x}B_{d-1}^{i}\left(y\right)dy$&lt;/p&gt;
@@ -384,6 +384,67 @@ $MutationValue = (u1 \cdot 0.1 + u2 \cdot 0.2 + u3 \cdot 0.6)$
 		data-flex-basis=&#34;455px&#34;
 	
 &gt;&lt;/p&gt;
+&lt;p&gt;在信号处理和数学中，&lt;strong&gt;门函数&lt;/strong&gt;（通常也称为矩形函数）是构建各种复杂信号的基础。为了给出最通用且严谨的公式，我们先定义基础门函数，然后再推导二次和三次卷积。&lt;/p&gt;
+&lt;h3 id=&#34;1-基础门函数定义&#34;&gt;1. 基础门函数定义
+&lt;/h3&gt;&lt;p&gt;假设门函数的高度为 $A$，宽度为 $T$，且关于原点对称，其公式为 $g_1(t)$：
+$
+g_1(t) = A \cdot \text{rect}\left(\frac{t}{T}\right) =
+\begin{cases}
+A, &amp;amp; |t| \le \frac{T}{2} \
+0, &amp;amp; \text{其他}
+\end{cases}
+$&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;(注：如果你使用的是单位门函数，只需在后续公式中令 $A=1, T=1$ 即可)&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-门函数的二次卷积-g_2t&#34;&gt;2. 门函数的二次卷积 $g_2(t)$
+&lt;/h3&gt;&lt;p&gt;门函数与自身卷积一次，会得到一个&lt;strong&gt;三角形函数&lt;/strong&gt;。其底边宽度会翻倍变成 $2T$，峰值为原来面积 $A \times T$ 乘以 $A$，即 $A^2 T$。
+$
+g_2(t) = g_1(t) * g_1(t) =
+\begin{cases}
+A^2 (t + T), &amp;amp; -T \le t \le 0 \
+A^2 (-t + T), &amp;amp; 0 &amp;lt; t \le T \
+0, &amp;amp; \text{其他}
+\end{cases}
+$
+&lt;strong&gt;用标准三角形函数表示为：&lt;/strong&gt;
+$ g_2(t) = A^2 T \cdot \Lambda\left(\frac{t}{T}\right) $
+&lt;em&gt;(其中 $\Lambda(x) = \max(1 - |x|, 0)$ 是标准三角形函数)&lt;/em&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-门函数的三次卷积-g_3t&#34;&gt;3. 门函数的三次卷积 $g_3(t)$
+&lt;/h3&gt;&lt;p&gt;门函数与自身卷积两次（即三角形函数再与门函数卷积），会得到一个&lt;strong&gt;分段二次函数&lt;/strong&gt;（二次样条曲线）。这是图像处理中“三次卷积插值”的核心基底函数。
+其底边宽度变为 $3T$（从 $-1.5T$ 到 $1.5T$），峰值为 $g_2$ 的峰值面积乘以 $A$，即 $\frac{3}{4} A^3 T^2$。
+$
+g_3(t) = g_2(t) * g_1(t) =
+\begin{cases}
+A^3 \left( \frac{1}{2}t^2 + \frac{3}{2}Tt + \frac{9}{8}T^2 \right), &amp;amp; -\frac{3T}{2} \le t \le -\frac{T}{2} \
+A^3 \left( -t^2 + \frac{3}{4}T^2 \right), &amp;amp; -\frac{T}{2} &amp;lt; t \le \frac{T}{2} \
+A^3 \left( \frac{1}{2}t^2 - \frac{3}{2}Tt + \frac{9}{8}T^2 \right), &amp;amp; \frac{T}{2} &amp;lt; t \le \frac{3T}{2} \
+0, &amp;amp; \text{其他}
+\end{cases}
+$&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;-补充如果你需要的是单位门函数-a1-t1&#34;&gt;💡 补充：如果你需要的是“单位门函数” ($A=1, T=1$)
+&lt;/h3&gt;&lt;p&gt;很多教材直接使用宽度为2（从-1到1）的单位门函数 $rect(t)$，此时公式会大大简化：
+&lt;strong&gt;一次（原函数）：&lt;/strong&gt;
+$ g_1(t) = \begin{cases} 1, &amp;amp; |t| \le 1 \ 0, &amp;amp; \text{其他} \end{cases} $
+&lt;strong&gt;二次卷积：&lt;/strong&gt;
+$ g_2(t) = \begin{cases} t + 1, &amp;amp; -1 \le t \le 0 \ -t + 1, &amp;amp; 0 &amp;lt; t \le 1 \ 0, &amp;amp; \text{其他} \end{cases} $
+&lt;strong&gt;三次卷积：&lt;/strong&gt;
+$
+g_3(t) =
+\begin{cases}
+\frac{1}{2}t^2 + \frac{3}{2}t + \frac{9}{8}, &amp;amp; -\frac{3}{2} \le t \le -\frac{1}{2} \
+-t^2 + \frac{3}{4}, &amp;amp; -\frac{1}{2} &amp;lt; t \le \frac{1}{2} \
+\frac{1}{2}t^2 - \frac{3}{2}t + \frac{9}{8}, &amp;amp; \frac{1}{2} &amp;lt; t \le \frac{3}{2} \
+0, &amp;amp; \text{其他}
+\end{cases}
+$&lt;/p&gt;
+&lt;h3 id=&#34;-规律与性质总结&#34;&gt;🔍 规律与性质总结
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;平滑性递增&lt;/strong&gt;：门函数（0阶导数连续） $\rightarrow$ 二次卷积（1阶导数连续，呈三角尖峰） $\rightarrow$ 三次卷积（2阶导数连续，呈光滑钟形）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;支撑区间&lt;/strong&gt;：每次卷积，非零区间的宽度都会增加一个原门函数的宽度 $T$。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;逼近高斯函数&lt;/strong&gt;：根据中心极限定理，如果无限次地将门函数与自身卷积，其波形最终会趋近于完美的&lt;strong&gt;高斯函数（正态分布曲线）&lt;/strong&gt;。三次卷积已经是高斯函数的一个相当不错的近似。&lt;/li&gt;
+&lt;/ol&gt;
 </description>
         </item>
         <item>
