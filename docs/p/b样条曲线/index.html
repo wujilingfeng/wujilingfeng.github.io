@@ -15,18 +15,18 @@
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
  <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="b样条曲线的卷积连续形式推导（下面的$B_0$ 默认都是定义在初始区间的）:\n$ B_0\\left(x\\right)=1 ,0\\le x \\le 1 $\n$B_d(x)=\\int B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy$\n$B_d\\left(x\\right)=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)dy=\\int_{x-1}^{0}B_{d-1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}\\left(y\\right)dy$\n$=\\int_{x}^{1}B_{d-1}^{i+1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}^{i}\\left(y\\right)dy$\nb样条曲线不同阶的基函数递推公式：\n在信号处理和数学中，门函数（通常也称为矩形函数）是构建各种复杂信号的基础。为了给出最通用且严谨的公式，我们先定义基础门函数，然后再推导二次和三次卷积。\n1. 基础门函数定义\r假设门函数的高度为 $A$，宽度为 $T$，且关于原点对称，其公式为 $g_1(t)$： $ g_1(t) = A \\cdot \\text{rect}\\left(\\frac{t}{T}\\right) = \\begin{cases} A, &amp; |t| \\le \\frac{T}{2} \\ 0, &amp; \\text{其他} \\end{cases} $\n(注：如果你使用的是单位门函数，只需在后续公式中令 $A=1, T=1$ 即可)\n2. 门函数的二次卷积 $g_2(t)$\r门函数与自身卷积一次，会得到一个三角形函数。其底边宽度会翻倍变成 $2T$，峰值为原来面积 $A \\times T$ 乘以 $A$，即 $A^2 T$。 $ g_2(t) = g_1(t) * g_1(t) = \\begin{cases} A^2 (t + T), &amp; -T \\le t \\le 0 \\ A^2 (-t + T), &amp; 0 &lt; t \\le T \\ 0, &amp; \\text{其他} \\end{cases} $ 用标准三角形函数表示为： $ g_2(t) = A^2 T \\cdot \\Lambda\\left(\\frac{t}{T}\\right) $ (其中 $\\Lambda(x) = \\max(1 - |x|, 0)$ 是标准三角形函数)\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="b样条曲线的卷积连续形式推导（下面的$B_0$ 默认都是定义在初始区间的）:\n$ B_0\\left(x\\right)=1 ,0\\le x \\le 1 $\n$B_d(x)=\\int B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy$\n$B_d\\left(x\\right)=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)dy=\\int_{x-1}^{0}B_{d-1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}\\left(y\\right)dy$\n$=\\int_{x}^{1}B_{d-1}^{i+1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}^{i}\\left(y\\right)dy$\nb样条曲线不同阶的基函数递推公式：\n下面是一份比较系统、偏“教材式”的 B 样条曲线理论介绍，我会按定义、基函数、性质、算法、扩展（NURBS）这个逻辑来讲。\n一、先看直观结论 B 样条曲线是一条分段多项式参数曲线，由一组控制点和一组 B 样条基函数通过线性组合生成。 它的关键优点： 局部支撑：改动一个控制点只影响曲线的局部一段。 低次分段：即使控制点很多，每一段仍然是低次多项式，易于计算和数值稳定。 良好的几何性质：凸包性、变差缩减性、C^k−p−1 连续性（p 为节点重复度）等。 它是贝塞尔曲线的推广，也是 NURBS（非均匀有理 B 样条）的基础。 三、基本概念 1. 样条（spline） 历史上：样条是一根弹性木条，被一组“压块”固定后自然弯曲，用来通过给定点绘制光滑曲线。 数学上：样条是分段定义的多项式函数，在分段连接处满足一定的连续性（比如 C^2）。 B 样条的 “B” 代表 “basis”（基）：B 样条基函数就是构造这类分段多项式曲线的一组“基础函数”。 2. 控制点与控制多边形 给定 n+1 个控制点 P_0, P_1, …, P_n（在二维/三维空间中的点），把它们依次连接形成的折线称为“控制多边形”。 B 样条曲线一般不经过这些控制点（除非特殊设置节点重复等），但会被它们“吸引”和约束：曲线大致沿着控制多边形的形状。 3. 节点（knot）与节点向量 在参数轴上给定一串非递减的数： T = {t_0, t_1, …, t_m}, t_i ≤ t_{i+1} 每个 t_i 叫做一个节点（knot），T 叫做节点向量（knot vector）。 常见分类： 均匀（uniform）：节点间距相等，如 {0,1,2,3,4,5}。 非均匀（non‑uniform）：节点间距可任意，如 {0,0,0,1,2,3,4,4,4}。 准均匀（quasi‑uniform）：内部均匀，首尾重复一定次数。 节点重复度（multiplicity）：某个节点连续出现的次数。重数会影响曲线在该点的连续性：一般地，在重复度为 p 的节点处，曲线连续性降为 C^{k-p-1}（k 为阶数）。 4. 阶数（order）与次数（degree） 阶数 k：基函数的“高度”，常指“p+1 阶”，即基函数最大支撑区间包含 k 个节点段。 次数 p：多项式的最高幂次，满足 p = k − 1。 工程中常用： 二次 B 样条（p=2，k=3） 三次 B 样条（p=3，k=4），是 CAD 中最常用的选择（兼顾光滑与可控）。 四、B 样条基函数（de Boor–Cox 递推） 1. 节点向量长度与控制点数关系 若有 n+1 个控制点 P_0…P_n，基函数为 k 阶（p = k−1 次），则节点向量长度至少为 m+1 = n + k + 1（常取正好 n+k+1 个节点）。 参数 t 的定义域：t ∈ [t_{k−1}, t_{n+1}]（两端多余节点主要用于支撑基函数）。 2. 1 阶（p=0）基函数：阶梯函数 定义：\n">
 <title>B样条曲线</title>
 
 <link rel='canonical' href='https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/'>
 
-<link rel="stylesheet" href="../../scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="B样条曲线">
-<meta property='og:description' content="b样条曲线的卷积连续形式推导（下面的$B_0$ 默认都是定义在初始区间的）:\n$ B_0\\left(x\\right)=1 ,0\\le x \\le 1 $\n$B_d(x)=\\int B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy$\n$B_d\\left(x\\right)=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)dy=\\int_{x-1}^{0}B_{d-1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}\\left(y\\right)dy$\n$=\\int_{x}^{1}B_{d-1}^{i+1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}^{i}\\left(y\\right)dy$\nb样条曲线不同阶的基函数递推公式：\n在信号处理和数学中，门函数（通常也称为矩形函数）是构建各种复杂信号的基础。为了给出最通用且严谨的公式，我们先定义基础门函数，然后再推导二次和三次卷积。\n1. 基础门函数定义\r假设门函数的高度为 $A$，宽度为 $T$，且关于原点对称，其公式为 $g_1(t)$： $ g_1(t) = A \\cdot \\text{rect}\\left(\\frac{t}{T}\\right) = \\begin{cases} A, &amp; |t| \\le \\frac{T}{2} \\ 0, &amp; \\text{其他} \\end{cases} $\n(注：如果你使用的是单位门函数，只需在后续公式中令 $A=1, T=1$ 即可)\n2. 门函数的二次卷积 $g_2(t)$\r门函数与自身卷积一次，会得到一个三角形函数。其底边宽度会翻倍变成 $2T$，峰值为原来面积 $A \\times T$ 乘以 $A$，即 $A^2 T$。 $ g_2(t) = g_1(t) * g_1(t) = \\begin{cases} A^2 (t + T), &amp; -T \\le t \\le 0 \\ A^2 (-t + T), &amp; 0 &lt; t \\le T \\ 0, &amp; \\text{其他} \\end{cases} $ 用标准三角形函数表示为： $ g_2(t) = A^2 T \\cdot \\Lambda\\left(\\frac{t}{T}\\right) $ (其中 $\\Lambda(x) = \\max(1 - |x|, 0)$ 是标准三角形函数)\n">
+<link rel="stylesheet" href="../../scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="B样条曲线">
+<meta property='og:description' content="b样条曲线的卷积连续形式推导（下面的$B_0$ 默认都是定义在初始区间的）:\n$ B_0\\left(x\\right)=1 ,0\\le x \\le 1 $\n$B_d(x)=\\int B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy$\n$B_d\\left(x\\right)=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)dy=\\int_{x-1}^{0}B_{d-1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}\\left(y\\right)dy$\n$=\\int_{x}^{1}B_{d-1}^{i+1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}^{i}\\left(y\\right)dy$\nb样条曲线不同阶的基函数递推公式：\n下面是一份比较系统、偏“教材式”的 B 样条曲线理论介绍，我会按定义、基函数、性质、算法、扩展（NURBS）这个逻辑来讲。\n一、先看直观结论 B 样条曲线是一条分段多项式参数曲线，由一组控制点和一组 B 样条基函数通过线性组合生成。 它的关键优点： 局部支撑：改动一个控制点只影响曲线的局部一段。 低次分段：即使控制点很多，每一段仍然是低次多项式，易于计算和数值稳定。 良好的几何性质：凸包性、变差缩减性、C^k−p−1 连续性（p 为节点重复度）等。 它是贝塞尔曲线的推广，也是 NURBS（非均匀有理 B 样条）的基础。 三、基本概念 1. 样条（spline） 历史上：样条是一根弹性木条，被一组“压块”固定后自然弯曲，用来通过给定点绘制光滑曲线。 数学上：样条是分段定义的多项式函数，在分段连接处满足一定的连续性（比如 C^2）。 B 样条的 “B” 代表 “basis”（基）：B 样条基函数就是构造这类分段多项式曲线的一组“基础函数”。 2. 控制点与控制多边形 给定 n+1 个控制点 P_0, P_1, …, P_n（在二维/三维空间中的点），把它们依次连接形成的折线称为“控制多边形”。 B 样条曲线一般不经过这些控制点（除非特殊设置节点重复等），但会被它们“吸引”和约束：曲线大致沿着控制多边形的形状。 3. 节点（knot）与节点向量 在参数轴上给定一串非递减的数： T = {t_0, t_1, …, t_m}, t_i ≤ t_{i+1} 每个 t_i 叫做一个节点（knot），T 叫做节点向量（knot vector）。 常见分类： 均匀（uniform）：节点间距相等，如 {0,1,2,3,4,5}。 非均匀（non‑uniform）：节点间距可任意，如 {0,0,0,1,2,3,4,4,4}。 准均匀（quasi‑uniform）：内部均匀，首尾重复一定次数。 节点重复度（multiplicity）：某个节点连续出现的次数。重数会影响曲线在该点的连续性：一般地，在重复度为 p 的节点处，曲线连续性降为 C^{k-p-1}（k 为阶数）。 4. 阶数（order）与次数（degree） 阶数 k：基函数的“高度”，常指“p+1 阶”，即基函数最大支撑区间包含 k 个节点段。 次数 p：多项式的最高幂次，满足 p = k − 1。 工程中常用： 二次 B 样条（p=2，k=3） 三次 B 样条（p=3，k=4），是 CAD 中最常用的选择（兼顾光滑与可控）。 四、B 样条基函数（de Boor–Cox 递推） 1. 节点向量长度与控制点数关系 若有 n+1 个控制点 P_0…P_n，基函数为 k 阶（p = k−1 次），则节点向量长度至少为 m+1 = n + k + 1（常取正好 n+k+1 个节点）。 参数 t 的定义域：t ∈ [t_{k−1}, t_{n+1}]（两端多余节点主要用于支撑基函数）。 2. 1 阶（p=0）基函数：阶梯函数 定义：\n">
 <meta property='og:url' content='https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/'>
 <meta property='og:site_name' content='五级灵风'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-24T11:45:01&#43;08:00'/><meta property='article:modified_time' content='2026-01-24T11:45:01&#43;08:00'/><meta property='og:image' content='https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun.png' />
 <meta name="twitter:title" content="B样条曲线">
-<meta name="twitter:description" content="b样条曲线的卷积连续形式推导（下面的$B_0$ 默认都是定义在初始区间的）:\n$ B_0\\left(x\\right)=1 ,0\\le x \\le 1 $\n$B_d(x)=\\int B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy$\n$B_d\\left(x\\right)=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)dy=\\int_{x-1}^{0}B_{d-1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}\\left(y\\right)dy$\n$=\\int_{x}^{1}B_{d-1}^{i+1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}^{i}\\left(y\\right)dy$\nb样条曲线不同阶的基函数递推公式：\n在信号处理和数学中，门函数（通常也称为矩形函数）是构建各种复杂信号的基础。为了给出最通用且严谨的公式，我们先定义基础门函数，然后再推导二次和三次卷积。\n1. 基础门函数定义\r假设门函数的高度为 $A$，宽度为 $T$，且关于原点对称，其公式为 $g_1(t)$： $ g_1(t) = A \\cdot \\text{rect}\\left(\\frac{t}{T}\\right) = \\begin{cases} A, &amp; |t| \\le \\frac{T}{2} \\ 0, &amp; \\text{其他} \\end{cases} $\n(注：如果你使用的是单位门函数，只需在后续公式中令 $A=1, T=1$ 即可)\n2. 门函数的二次卷积 $g_2(t)$\r门函数与自身卷积一次，会得到一个三角形函数。其底边宽度会翻倍变成 $2T$，峰值为原来面积 $A \\times T$ 乘以 $A$，即 $A^2 T$。 $ g_2(t) = g_1(t) * g_1(t) = \\begin{cases} A^2 (t + T), &amp; -T \\le t \\le 0 \\ A^2 (-t + T), &amp; 0 &lt; t \\le T \\ 0, &amp; \\text{其他} \\end{cases} $ 用标准三角形函数表示为： $ g_2(t) = A^2 T \\cdot \\Lambda\\left(\\frac{t}{T}\\right) $ (其中 $\\Lambda(x) = \\max(1 - |x|, 0)$ 是标准三角形函数)\n"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="b样条曲线的卷积连续形式推导（下面的$B_0$ 默认都是定义在初始区间的）:\n$ B_0\\left(x\\right)=1 ,0\\le x \\le 1 $\n$B_d(x)=\\int B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy$\n$B_d\\left(x\\right)=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)dy=\\int_{x-1}^{0}B_{d-1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}\\left(y\\right)dy$\n$=\\int_{x}^{1}B_{d-1}^{i+1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}^{i}\\left(y\\right)dy$\nb样条曲线不同阶的基函数递推公式：\n下面是一份比较系统、偏“教材式”的 B 样条曲线理论介绍，我会按定义、基函数、性质、算法、扩展（NURBS）这个逻辑来讲。\n一、先看直观结论 B 样条曲线是一条分段多项式参数曲线，由一组控制点和一组 B 样条基函数通过线性组合生成。 它的关键优点： 局部支撑：改动一个控制点只影响曲线的局部一段。 低次分段：即使控制点很多，每一段仍然是低次多项式，易于计算和数值稳定。 良好的几何性质：凸包性、变差缩减性、C^k−p−1 连续性（p 为节点重复度）等。 它是贝塞尔曲线的推广，也是 NURBS（非均匀有理 B 样条）的基础。 三、基本概念 1. 样条（spline） 历史上：样条是一根弹性木条，被一组“压块”固定后自然弯曲，用来通过给定点绘制光滑曲线。 数学上：样条是分段定义的多项式函数，在分段连接处满足一定的连续性（比如 C^2）。 B 样条的 “B” 代表 “basis”（基）：B 样条基函数就是构造这类分段多项式曲线的一组“基础函数”。 2. 控制点与控制多边形 给定 n+1 个控制点 P_0, P_1, …, P_n（在二维/三维空间中的点），把它们依次连接形成的折线称为“控制多边形”。 B 样条曲线一般不经过这些控制点（除非特殊设置节点重复等），但会被它们“吸引”和约束：曲线大致沿着控制多边形的形状。 3. 节点（knot）与节点向量 在参数轴上给定一串非递减的数： T = {t_0, t_1, …, t_m}, t_i ≤ t_{i+1} 每个 t_i 叫做一个节点（knot），T 叫做节点向量（knot vector）。 常见分类： 均匀（uniform）：节点间距相等，如 {0,1,2,3,4,5}。 非均匀（non‑uniform）：节点间距可任意，如 {0,0,0,1,2,3,4,4,4}。 准均匀（quasi‑uniform）：内部均匀，首尾重复一定次数。 节点重复度（multiplicity）：某个节点连续出现的次数。重数会影响曲线在该点的连续性：一般地，在重复度为 p 的节点处，曲线连续性降为 C^{k-p-1}（k 为阶数）。 4. 阶数（order）与次数（degree） 阶数 k：基函数的“高度”，常指“p+1 阶”，即基函数最大支撑区间包含 k 个节点段。 次数 p：多项式的最高幂次，满足 p = k − 1。 工程中常用： 二次 B 样条（p=2，k=3） 三次 B 样条（p=3，k=4），是 CAD 中最常用的选择（兼顾光滑与可控）。 四、B 样条基函数（de Boor–Cox 递推） 1. 节点向量长度与控制点数关系 若有 n+1 个控制点 P_0…P_n，基函数为 k 阶（p = k−1 次），则节点向量长度至少为 m+1 = n + k + 1（常取正好 n+k+1 个节点）。 参数 t 的定义域：t ∈ [t_{k−1}, t_{n+1}]（两端多余节点主要用于支撑基函数）。 2. 1 阶（p=0）基函数：阶梯函数 定义：\n"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun.png' />
     <link rel="shortcut icon" href="../../favicon.ico" />
 
@@ -361,7 +361,57 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li>
+    <li><a href="#一先看直观结论">一、先看直观结论</a></li>
+    <li><a href="#三基本概念">三、基本概念</a>
+      <ol>
+        <li><a href="#1-样条spline">1. 样条（spline）</a></li>
+        <li><a href="#2-控制点与控制多边形">2. 控制点与控制多边形</a></li>
+        <li><a href="#3-节点knot与节点向量">3. 节点（knot）与节点向量</a></li>
+        <li><a href="#4-阶数order与次数degree">4. 阶数（order）与次数（degree）</a></li>
+      </ol>
+    </li>
+    <li><a href="#四b-样条基函数de-boorcox-递推">四、B 样条基函数（de Boor–Cox 递推）</a>
+      <ol>
+        <li><a href="#1-节点向量长度与控制点数关系">1. 节点向量长度与控制点数关系</a></li>
+        <li><a href="#2-1-阶p0基函数阶梯函数">2. 1 阶（p=0）基函数：阶梯函数</a></li>
+        <li><a href="#3-k-阶pk1基函数递推公式de-boorcox">3. k 阶（p=k−1）基函数递推公式（de Boor–Cox）</a></li>
+        <li><a href="#4-基函数的关键性质">4. 基函数的关键性质</a></li>
+      </ol>
+    </li>
+    <li><a href="#五b-样条曲线的数学定义">五、B 样条曲线的数学定义</a>
+      <ol>
+        <li><a href="#1-曲线表达式">1. 曲线表达式</a></li>
+        <li><a href="#2-几何解释">2. 几何解释</a></li>
+      </ol>
+    </li>
+    <li><a href="#六b-样条曲线的重要性质">六、B 样条曲线的重要性质</a>
+      <ol>
+        <li><a href="#1-局部控制local-control">1. 局部控制（local control）</a></li>
+        <li><a href="#2-凸包性convex-hull-property">2. 凸包性（convex hull property）</a></li>
+        <li><a href="#3-变差缩减性variation-diminishing-property">3. 变差缩减性（variation diminishing property）</a></li>
+        <li><a href="#4-连续性smoothness">4. 连续性（smoothness）</a></li>
+        <li><a href="#5-仿射不变性affine-invariance">5. 仿射不变性（affine invariance）</a></li>
+        <li><a href="#6-可微性导数公式">6. 可微性（导数公式）</a></li>
+        <li><a href="#7-端点插值能力通过节点重复">7. 端点插值能力（通过节点重复）</a></li>
+      </ol>
+    </li>
+    <li><a href="#七de-boor-算法计算-b-样条曲线上的点">七、de Boor 算法：计算 B 样条曲线上的点</a>
+      <ol>
+        <li><a href="#1-基本思想">1. 基本思想</a></li>
+        <li><a href="#2-算法步骤简略版">2. 算法步骤（简略版）</a></li>
+      </ol>
+    </li>
+    <li><a href="#八节点插入升阶与细分略述">八、节点插入、升阶与细分（略述）</a></li>
+    <li><a href="#九均匀非均匀有理-b-样条nurbs">九、均匀、非均匀、有理 B 样条（NURBS）</a>
+      <ol>
+        <li><a href="#1-均匀-b-样条uniform-bspline">1. 均匀 B 样条（uniform B‑spline）</a></li>
+        <li><a href="#2-非均匀-b-样条nonuniform-bspline">2. 非均匀 B 样条（non‑uniform B‑spline）</a></li>
+        <li><a href="#3-有理-b-样条--nurbs">3. 有理 B 样条 / NURBS</a></li>
+      </ol>
+    </li>
+    <li><a href="#十b-样条曲线-vs-贝塞尔曲线简略对比">十、B 样条曲线 vs 贝塞尔曲线：简略对比</a></li>
+    <li><a href="#十一应用场景">十一、应用场景</a></li>
+    <li><a href="#十二总结与学习建议">十二、总结与学习建议</a>
       <ol>
         <li><a href="#1-基础门函数定义">1. 基础门函数定义</a></li>
         <li><a href="#2-门函数的二次卷积-g_2t">2. 门函数的二次卷积 $g_2(t)$</a></li>
@@ -438,7 +488,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 2 分钟
+                    阅读时长: 5 分钟
                 </time>
             </div>
         
@@ -473,6 +523,284 @@
 		data-flex-basis="455px"
 	
 ></p>
+<p>下面是一份比较系统、偏“教材式”的 B 样条曲线理论介绍，我会按定义、基函数、性质、算法、扩展（NURBS）这个逻辑来讲。</p>
+<h2 id="一先看直观结论">一、先看直观结论
+</h2><ul>
+<li>B 样条曲线是一条分段多项式参数曲线，由一组控制点和一组 B 样条基函数通过线性组合生成。</li>
+<li>它的关键优点：
+<ul>
+<li>局部支撑：改动一个控制点只影响曲线的局部一段。</li>
+<li>低次分段：即使控制点很多，每一段仍然是低次多项式，易于计算和数值稳定。</li>
+<li>良好的几何性质：凸包性、变差缩减性、C^k−p−1 连续性（p 为节点重复度）等。</li>
+</ul>
+</li>
+<li>它是贝塞尔曲线的推广，也是 NURBS（非均匀有理 B 样条）的基础。</li>
+</ul>
+<h2 id="三基本概念">三、基本概念
+</h2><h3 id="1-样条spline">1. 样条（spline）
+</h3><ul>
+<li>历史上：样条是一根弹性木条，被一组“压块”固定后自然弯曲，用来通过给定点绘制光滑曲线。</li>
+<li>数学上：样条是分段定义的多项式函数，在分段连接处满足一定的连续性（比如 C^2）。</li>
+<li>B 样条的 “B” 代表 “basis”（基）：B 样条基函数就是构造这类分段多项式曲线的一组“基础函数”。</li>
+</ul>
+<h3 id="2-控制点与控制多边形">2. 控制点与控制多边形
+</h3><ul>
+<li>给定 n+1 个控制点 P_0, P_1, …, P_n（在二维/三维空间中的点），把它们依次连接形成的折线称为“控制多边形”。</li>
+<li>B 样条曲线一般不经过这些控制点（除非特殊设置节点重复等），但会被它们“吸引”和约束：曲线大致沿着控制多边形的形状。</li>
+</ul>
+<h3 id="3-节点knot与节点向量">3. 节点（knot）与节点向量
+</h3><ul>
+<li>在参数轴上给定一串非递减的数：
+T = {t_0, t_1, …, t_m},   t_i ≤ t_{i+1}</li>
+<li>每个 t_i 叫做一个节点（knot），T 叫做节点向量（knot vector）。</li>
+<li>常见分类：
+<ul>
+<li>均匀（uniform）：节点间距相等，如 {0,1,2,3,4,5}。</li>
+<li>非均匀（non‑uniform）：节点间距可任意，如 {0,0,0,1,2,3,4,4,4}。</li>
+<li>准均匀（quasi‑uniform）：内部均匀，首尾重复一定次数。</li>
+</ul>
+</li>
+<li>节点重复度（multiplicity）：某个节点连续出现的次数。重数会影响曲线在该点的连续性：一般地，在重复度为 p 的节点处，曲线连续性降为 C^{k-p-1}（k 为阶数）。</li>
+</ul>
+<h3 id="4-阶数order与次数degree">4. 阶数（order）与次数（degree）
+</h3><ul>
+<li>阶数 k：基函数的“高度”，常指“p+1 阶”，即基函数最大支撑区间包含 k 个节点段。</li>
+<li>次数 p：多项式的最高幂次，满足 p = k − 1。</li>
+<li>工程中常用：
+<ul>
+<li>二次 B 样条（p=2，k=3）</li>
+<li>三次 B 样条（p=3，k=4），是 CAD 中最常用的选择（兼顾光滑与可控）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="四b-样条基函数de-boorcox-递推">四、B 样条基函数（de Boor–Cox 递推）
+</h2><h3 id="1-节点向量长度与控制点数关系">1. 节点向量长度与控制点数关系
+</h3><ul>
+<li>若有 n+1 个控制点 P_0…P_n，基函数为 k 阶（p = k−1 次），则节点向量长度至少为 m+1 = n + k + 1（常取正好 n+k+1 个节点）。</li>
+<li>参数 t 的定义域：t ∈ [t_{k−1}, t_{n+1}]（两端多余节点主要用于支撑基函数）。</li>
+</ul>
+<h3 id="2-1-阶p0基函数阶梯函数">2. 1 阶（p=0）基函数：阶梯函数
+</h3><p>定义：</p>
+<pre tabindex="0"><code>N_{i,1}(t) = 
+    1,   t_i ≤ t &lt; t_{i+1}
+    0,   其他
+</code></pre><p>特点：只在区间 [t_i, t_{i+1}) 上为 1，其它地方为 0。也称为“特征函数”或“箱函数”。</p>
+<h3 id="3-k-阶pk1基函数递推公式de-boorcox">3. k 阶（p=k−1）基函数递推公式（de Boor–Cox）
+</h3><p>递推定义：</p>
+<pre tabindex="0"><code>N_{i,k}(t) = (t - t_i)/(t_{i+k-1} - t_i) * N_{i,k-1}(t)
+           + (t_{i+k} - t)/(t_{i+k} - t_{i+1}) * N_{i+1,k-1}(t)
+</code></pre><p>约定：当分母为 0 时，对应项取 0。
+这个公式通过低阶基函数构造高阶基函数，是整个 B 样条理论的核心。</p>
+<h3 id="4-基函数的关键性质">4. 基函数的关键性质
+</h3><ul>
+<li>局部支集（local support）：
+<ul>
+<li>N_{i,k}(t) &gt; 0 当且仅当 t ∈ (t_i, t_{i+k})；</li>
+<li>在此区间外，N_{i,k}(t) = 0。</li>
+<li>这意味着每个基函数只在最多 k 个节点区间上非零。</li>
+</ul>
+</li>
+<li>正性（positivity）：
+<ul>
+<li>在支集内部，N_{i,k}(t) &gt; 0。</li>
+</ul>
+</li>
+<li>单位分解（partition of unity）：
+<ul>
+<li>在定义域内，∑<em>i N</em>{i,k}(t) = 1；</li>
+<li>保证曲线的仿射不变性。</li>
+</ul>
+</li>
+<li>递推结构：
+<ul>
+<li>高阶基函数是两个低阶基函数的线性插值组合。</li>
+</ul>
+</li>
+<li>连续性：
+<ul>
+<li>在重复度为 p 的节点处，N_{i,k}(t) 具有 C^{k-p-1} 连续性；</li>
+<li>若节点不重复，则内部节点处 C^{k-1} 光滑。</li>
+</ul>
+</li>
+<li>紧支与最小支撑：
+<ul>
+<li>在给定次数和节点序列下，B 样条基函数是具有最小支集的一组基。</li>
+</ul>
+</li>
+</ul>
+<h2 id="五b-样条曲线的数学定义">五、B 样条曲线的数学定义
+</h2><h3 id="1-曲线表达式">1. 曲线表达式
+</h3><p>给定控制点 P_0,…,P_n，k 阶 B 样条基函数 N_{i,k}(t)，则 B 样条曲线定义为：</p>
+<pre tabindex="0"><code>p(t) = ∑_{i=0}^n P_i * N_{i,k}(t),   t ∈ [t_{k-1}, t_{n+1}]
+</code></pre><ul>
+<li>每个 N_{i,k}(t) 是一个“权重函数”，决定 P_i 在不同参数 t 处对曲线的贡献。</li>
+<li>与贝塞尔曲线对比：贝塞尔是全局伯恩斯坦基，一个点影响整个曲线；B 样条是局部基，一个点只影响局部。</li>
+</ul>
+<h3 id="2-几何解释">2. 几何解释
+</h3><ul>
+<li>对任意固定 t，N_{i,k}(t) ≥ 0 且和为 1，因此 p(t) 是控制点 P_i 的加权平均（凸组合）。</li>
+<li>曲线整体位于控制多边形的“凸包”（所有控制点的凸包）的内部；更精确地说，每一段曲线位于相关的 k 个控制点的局部凸包内（局部凸包性质）。</li>
+</ul>
+<h2 id="六b-样条曲线的重要性质">六、B 样条曲线的重要性质
+</h2><h3 id="1-局部控制local-control">1. 局部控制（local control）
+</h3><ul>
+<li>由于 N_{i,k}(t) 的局部支集，改动 P_i 只会改变曲线在区间 (t_i, t_{i+k}) 上的部分，其他部分保持不变。</li>
+<li>这使得 B 样条非常适合交互式建模和局部形状调整。</li>
+</ul>
+<h3 id="2-凸包性convex-hull-property">2. 凸包性（convex hull property）
+</h3><ul>
+<li>对任意 t，p(t) 都是某 k 个控制点的凸组合，因此：
+<ul>
+<li>每一段曲线落在对应的 k 个控制点张成的凸包内；</li>
+<li>整条曲线落在控制多边形的全局凸包内。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-变差缩减性variation-diminishing-property">3. 变差缩减性（variation diminishing property）
+</h3><ul>
+<li>任意一条直线与 B 样条曲线的交点个数不超过该直线与控制多边形的交点个数。</li>
+<li>直观含义：曲线不会比控制多边形产生更多的“波动”，形状更“简单”。</li>
+</ul>
+<h3 id="4-连续性smoothness">4. 连续性（smoothness）
+</h3><ul>
+<li>在无重节点的区间内部，曲线是 C^∞ 的多项式；</li>
+<li>在节点 t_j 处，若其重复度为 p_j，则曲线在该点连续性为：
+<ul>
+<li>C^{k-p_j-1}（例如三次 B 样条 k=4：若节点重复 1 次，则 C^2；若重复 2 次，则 C^1）。</li>
+</ul>
+</li>
+<li>通过调整节点重复度，可以在光滑性和插值需求之间折中（例如端点插值）。</li>
+</ul>
+<h3 id="5-仿射不变性affine-invariance">5. 仿射不变性（affine invariance）
+</h3><ul>
+<li>对控制点做任意仿射变换（平移、旋转、缩放、剪切等），等效于对整条曲线做相同的变换；</li>
+<li>源于 ∑ N_{i,k}(t) = 1 的单位分解性质。</li>
+</ul>
+<h3 id="6-可微性导数公式">6. 可微性（导数公式）
+</h3><ul>
+<li>对 p(t) 求导，可得到由低一阶 B 样条基函数表示的导数曲线；</li>
+</ul>
+<pre tabindex="0"><code>p&#39;(t) = (k-1) * ∑_{i} (P_{i+1} - P_i)/(t_{i+k} - t_{i+1}) * N_{i+1,k-1}(t)
+</code></pre><ul>
+<li>这意味着 B 样条曲线的导数仍然是 B 样条曲线（控制点为差分向量）。</li>
+</ul>
+<h3 id="7-端点插值能力通过节点重复">7. 端点插值能力（通过节点重复）
+</h3><ul>
+<li>若让首尾节点重复度为 k（例如 t_0 = … = t_{k−1}，t_{n+1} = … = t_{n+k}），则曲线：
+<ul>
+<li>在首端点 P_0 和末端点 P_n 处插值（通过这两个点）；</li>
+<li>在端点处的切线也由相邻控制点确定（类似贝塞尔端点行为）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="七de-boor-算法计算-b-样条曲线上的点">七、de Boor 算法：计算 B 样条曲线上的点
+</h2><p>de Boor 算法是 B 样条曲线求值的“核心算法”，类似于贝塞尔曲线的 de Casteljau 算法。它是一个递归的线性插值过程，稳定且易于实现。</p>
+<h3 id="1-基本思想">1. 基本思想
+</h3><ul>
+<li>给定参数 t，找到 t 所在的节点区间 [t_j, t_{j+1})；</li>
+<li>找到受该区间影响的 k 个控制点（例如 P_{j−k+1}, …, P_j）；</li>
+<li>通过 k−1 轮线性插值，递归构造中间点，最后得到 p(t)。</li>
+</ul>
+<h3 id="2-算法步骤简略版">2. 算法步骤（简略版）
+</h3><ul>
+<li>输入：
+<ul>
+<li>节点向量 T = {t_0,…,t_m}；</li>
+<li>控制点 P_0,…,P_n；</li>
+<li>阶数 k（次数 p = k−1）；</li>
+<li>参数 t ∈ [t_{k−1}, t_{n+1}]。</li>
+</ul>
+</li>
+<li>步骤：
+<ol>
+<li>找到节点区间索引 j，使得 t_j ≤ t &lt; t_{j+1}；</li>
+<li>取出相关控制点 d_{i,0} = P_{j−k+i+1}，i = 0,…,k−1；</li>
+<li>对 r = 1,…,k−1，i = k−1−r,…,0，计算：
+α_{i,r} = (t - t_{j−k+i+r+1}) / (t_{j+i+1} - t_{j−k+i+r+1})<br>
+d_{i,r} = (1 − α_{i,r}) * d_{i,r−1} + α_{i,r} * d_{i+1,r−1}</li>
+<li>最终 p(t) = d_{0,k−1}。</li>
+</ol>
+</li>
+<li>特点：每一步都是线性插值，数值稳定；可直接推广到计算导数（差分构造）。</li>
+</ul>
+<h2 id="八节点插入升阶与细分略述">八、节点插入、升阶与细分（略述）
+</h2><ul>
+<li>节点插入（knot insertion）：
+<ul>
+<li>在节点向量中增加一个新节点（可重复），可以在不改变曲线形状的前提下增加控制点（细分）；</li>
+<li>典型算法：Boehm 的节点插入算法、Oslo 算法等。</li>
+</ul>
+</li>
+<li>升阶（degree elevation）：
+<ul>
+<li>提高曲线的次数（k→k+1），而不改变曲线形状；</li>
+<li>代价是控制点数量增加，类似贝塞尔曲线的升阶。</li>
+</ul>
+</li>
+<li>这些操作在建模系统中用于局部编辑和拼接 B 样条曲线或曲面。</li>
+</ul>
+<h2 id="九均匀非均匀有理-b-样条nurbs">九、均匀、非均匀、有理 B 样条（NURBS）
+</h2><h3 id="1-均匀-b-样条uniform-bspline">1. 均匀 B 样条（uniform B‑spline）
+</h3><ul>
+<li>节点均匀分布，如 {0,1,2,3,…}；</li>
+<li>基函数平移等价，N_{i,k}(t) = N_{0,k}(t − i)；</li>
+<li>计算简单，适合规则曲线（如闭合周期曲线），但对不规则数据拟合不够灵活。</li>
+</ul>
+<h3 id="2-非均匀-b-样条nonuniform-bspline">2. 非均匀 B 样条（non‑uniform B‑spline）
+</h3><ul>
+<li>节点分布任意，可以在某些区域加密节点以获得更高局部精度；</li>
+<li>更灵活，适合表示不规则几何，是 CAD 系统中最常用形式。</li>
+</ul>
+<h3 id="3-有理-b-样条--nurbs">3. 有理 B 样条 / NURBS
+</h3><ul>
+<li>NURBS：Non‑Uniform Rational B‑Spline，非均匀有理 B 样条，是 B 样条的有理推广，给每个控制点附加一个权重 w_i：</li>
+</ul>
+<pre tabindex="0"><code>R(t) = ∑_{i=0}^n w_i P_i N_{i,k}(t) / ∑_{i=0}^n w_i N_{i,k}(t)
+</code></pre><ul>
+<li>当所有 w_i 相等时，退化为普通 B 样条。</li>
+<li>优点：能精确表示圆锥曲线、圆、球等解析几何对象（普通多项式 B 样条做不到）。</li>
+<li>性质：继承 B 样条的所有几何性质（局部性、凸包性等），并具有投影不变性。</li>
+</ul>
+<h2 id="十b-样条曲线-vs-贝塞尔曲线简略对比">十、B 样条曲线 vs 贝塞尔曲线：简略对比
+</h2><ul>
+<li>基函数：
+<ul>
+<li>贝塞尔：全局伯恩斯坦基，一个点影响整个区间；</li>
+<li>B 样条：局部基，一个点只影响局部。</li>
+</ul>
+</li>
+<li>拼接：
+<ul>
+<li>贝塞尔：若要拼接光滑曲线，需要精心匹配边界处控制点；</li>
+<li>B 样条：由节点和基函数自动保证连续性，更容易拼接。</li>
+</ul>
+</li>
+<li>灵活性：
+<ul>
+<li>B 样条通过调节节点向量可实现局部加密和端点插值；</li>
+<li>NURBS 进一步统一了自由曲线与解析曲线。</li>
+</ul>
+</li>
+</ul>
+<h2 id="十一应用场景">十一、应用场景
+</h2><ul>
+<li>CAD/CAM：船体、汽车、飞机外形等自由曲线曲面建模；</li>
+<li>计算机图形学：动画曲线、路径设计、几何建模；</li>
+<li>数值分析：数据拟合、插值与平滑、有限元等；</li>
+<li>机器人/运动规划：轨迹生成、平滑路径等。</li>
+</ul>
+<h2 id="十二总结与学习建议">十二、总结与学习建议
+</h2><ul>
+<li>理论上，B 样条的核心就是“一组具有局部支集、分段多项式的基函数” + “de Boor–Cox 递推公式” + “控制点线性组合”。</li>
+<li>实践上，要真正掌握，建议：
+<ul>
+<li>手算 1<del>2 个简单例子（如均匀二次或三次 B 样条、3</del>4 个控制点）的基函数，再代入不同参数 t 求点；</li>
+<li>编写一个小程序，实现 de Boor 算法，并在交互界面拖动控制点观察曲线变化；</li>
+<li>进一步尝试节点插入和升阶，理解它们对控制点和曲线形状的影响。
+如果你接下来希望看到具体例子的手算过程（比如给定节点向量和控制点，画出 N_{i,3}(t) 并计算 p(t)），或者想看 B 样条曲面的张量积构造，可以告诉我，我可以按具体例题一步步拆解。</li>
+</ul>
+</li>
+</ul>
 <p>在信号处理和数学中，<strong>门函数</strong>（通常也称为矩形函数）是构建各种复杂信号的基础。为了给出最通用且严谨的公式，我们先定义基础门函数，然后再推导二次和三次卷积。</p>
 <h3 id="1-基础门函数定义">1. 基础门函数定义
 </h3><p>假设门函数的高度为 $A$，宽度为 $T$，且关于原点对称，其公式为 $g_1(t)$：

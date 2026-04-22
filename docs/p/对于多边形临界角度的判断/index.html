@@ -20,7 +20,7 @@
 
 <link rel='canonical' href='https://wujilingfeng.github.io/p/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E8%BE%B9%E5%BD%A2%E4%B8%B4%E7%95%8C%E8%A7%92%E5%BA%A6%E7%9A%84%E5%88%A4%E6%96%AD/'>
 
-<link rel="stylesheet" href="../../scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="对于多边形临界角度的判断">
+<link rel="stylesheet" href="../../scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="对于多边形临界角度的判断">
 <meta property='og:description' content="封面的完整图如下，他展示了几种临界情况:\n对于多边形出现退化的情况，也就是 也就是出现折叠的情况，上面折叠顶点的内角，一个是凸的0度，一个是凹的2pi。但是在计算中，由于无法确定方向，自然无法确定凸凹。 此外在旋转指标定理中，这个折叠点的旋转角度是pi,但是方向（正负）无法确定。\n而且还可能出现 多个这种临界情况。\n这里我们先解决定向问题。对于这种不能确定$ pi $方向的情况，我们可以在计算旋转指标定理时，删除所有临界点（注意是删除，不是忽略），然后即可计算，最终结果是2pi * n,n是方向。\n但此时只能解决定向问题，每个临界点方向仍未确定。\n为了确定每个临界点的方向，我们只需要把所有其他临界点删除，此时只剩下一个临界点，由于所有的点旋转角度乘以方向之和是2pi*n, 这样就确定这个临界点的方向，其他临界点类似。\n确定好了方向，自然顶点的内角的凸凹也就确定了。\n注意是删除临界点，而不是忽略临界点，因为删除意味者改变拓扑结构， 忽略(continue)只是不让这个临界点参与计算\n">
 <meta property='og:url' content='https://wujilingfeng.github.io/p/%E5%AF%B9%E4%BA%8E%E5%A4%9A%E8%BE%B9%E5%BD%A2%E4%B8%B4%E7%95%8C%E8%A7%92%E5%BA%A6%E7%9A%84%E5%88%A4%E6%96%AD/'>
 <meta property='og:site_name' content='五级灵风'>

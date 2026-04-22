@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://wujilingfeng.github.io/</loc>
-    <lastmod>2026-03-24T14:59:24+08:00</lastmod>
+    <lastmod>2026-04-22T20:54:13+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -20,8 +20,11 @@
                 href="https://wujilingfeng.github.io/"
                 />
   </url><url>
+    <loc>https://wujilingfeng.github.io/p/dual_contouring%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2026-04-22T20:54:13+08:00</lastmod>
+  </url><url>
     <loc>https://wujilingfeng.github.io/post/</loc>
-    <lastmod>2026-03-24T14:59:24+08:00</lastmod>
+    <lastmod>2026-04-22T20:54:13+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -37,6 +40,9 @@
                 hreflang="zh-cn"
                 href="https://wujilingfeng.github.io/post/"
                 />
+  </url><url>
+    <loc>https://wujilingfeng.github.io/p/%E6%B3%8A%E6%9D%BE%E9%87%8D%E5%BB%BA/</loc>
+    <lastmod>2026-04-12T10:50:58+08:00</lastmod>
   </url><url>
     <loc>https://wujilingfeng.github.io/p/%E5%B1%80%E9%83%A8%E7%82%B9%E4%BA%91%E9%87%8D%E5%BB%BA%E7%BD%91%E6%A0%BC/</loc>
     <lastmod>2026-03-24T14:59:24+08:00</lastmod>
