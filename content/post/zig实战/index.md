@@ -14,7 +14,13 @@ image = "nature.png"
 
 https://dev.to/sleibrock/webassembly-with-zig-part-1-4onm
 
-zig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）,
+# zig语言tips
+
+最新的zig当需要忽略捕获值时，除了for循环必须写|_|，其他的try catch 不用写| _ |, switch 也不用写 |_ | 。
+
+zig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）.
+
+也就是两个模块互相导入时不能声明为pub。
 
 zig语言的type类型可以直接比较判断
 
@@ -38,28 +44,320 @@ pub fn normalize(p: anytype) Math_Compute_Abandon!void {
 }
 ```
 
-下面是zig语言类型反射用法，包括访问struct类型，访问字段类型
+下面是zig语言类型反射的一些用法，包括访问struct类型，访问字段类型
 
 ```zig
-fn myget_Array_rows(comptime TT: type) usize {
-            return @typeInfo(TT).array.len;
-        }
-//下面有typeinfo的用法
-pub fn mult(self: *const Self, mat: anytype) LBMatrix(T, rows,                 
-  myget_Array_rows(@typeInfo(@TypeOf(mat)).@"struct".fields[0].type))
-```
 
-mat的类型如下:
-
-```zig
-struct {
-        const Self = @This();
-
-        data: [rows][cols]T,
+/// 浮点类型相关的默认容差
+pub inline fn defaultTolerance(comptime T: type) T {
+    return switch (@typeInfo(T)) {
+        .float, .comptime_float => math.floatEps(T) * 100, // 100倍机器精度
+        else => @compileError("Only floating-point types supported"),
+    };
 }
+
+
+inline fn Sqrt(comptime T: type) type {
+    return switch (@typeInfo(T)) {
+        .int => |int| @Int(.unsigned, (int.bits + 1) / 2),
+        else => T,
+    };
+}
+ 
 ```
 
-似乎zig中的@import不能导入上层目录，也就是不能出现`..` 。那也就意味着每个子文件夹里面的zig源文件都要独立成为一个自摸块，除了依赖子文件夹，不会依赖其他文件夹的zig源文件。
+builtin.zig的类型源码如下:
+
+```zig
+pub const Type = union(enum) {
+    type,
+    void,
+    bool,
+    noreturn,
+    int: Int,
+    float: Float,
+    pointer: Pointer,
+    array: Array,
+    @"struct": Struct,
+    comptime_float,
+    comptime_int,
+    undefined,
+    null,
+    optional: Optional,
+    error_union: ErrorUnion,
+    error_set: ErrorSet,
+    @"enum": Enum,
+    @"union": Union,
+    @"fn": Fn,
+    @"opaque": Opaque,
+    frame: Frame,
+    @"anyframe": AnyFrame,
+    vector: Vector,
+    enum_literal,
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const Int = struct {
+        signedness: Signedness,
+        bits: u16,
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const Float = struct {
+        bits: u16,
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const Pointer = struct {
+        size: Size,
+        is_const: bool,
+        is_volatile: bool,
+        /// `null` means implicit alignment, which is equivalent to `@alignOf(child)`.
+        alignment: ?usize,
+        address_space: AddressSpace,
+        child: type,
+        is_allowzero: bool,
+
+        /// The type of the sentinel is the element type of the pointer, which is
+        /// the value of the `child` field in this struct. However there is no way
+        /// to refer to that type here, so we use `*const anyopaque`.
+        /// See also: `sentinel`
+        sentinel_ptr: ?*const anyopaque,
+
+        /// Loads the pointer type's sentinel value from `sentinel_ptr`.
+        /// Returns `null` if the pointer type has no sentinel.
+        pub inline fn sentinel(comptime ptr: Pointer) ?ptr.child {
+            const sp: *const ptr.child = @ptrCast(@alignCast(ptr.sentinel_ptr orelse return null));
+            return sp.*;
+        }
+
+        /// This data structure is used by the Zig language code generation and
+        /// therefore must be kept in sync with the compiler implementation.
+        pub const Size = enum(u2) {
+            one,
+            many,
+            slice,
+            c,
+        };
+
+        /// This data structure is used by the Zig language code generation and
+        /// therefore must be kept in sync with the compiler implementation.
+        pub const Attributes = struct {
+            @"const": bool = false,
+            @"volatile": bool = false,
+            @"allowzero": bool = false,
+            @"addrspace": ?AddressSpace = null,
+            @"align": ?usize = null,
+        };
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const Array = struct {
+        len: comptime_int,
+        child: type,
+
+        /// The type of the sentinel is the element type of the array, which is
+        /// the value of the `child` field in this struct. However there is no way
+        /// to refer to that type here, so we use `*const anyopaque`.
+        /// See also: `sentinel`.
+        sentinel_ptr: ?*const anyopaque,
+
+        /// Loads the array type's sentinel value from `sentinel_ptr`.
+        /// Returns `null` if the array type has no sentinel.
+        pub inline fn sentinel(comptime arr: Array) ?arr.child {
+            const sp: *const arr.child = @ptrCast(@alignCast(arr.sentinel_ptr orelse return null));
+            return sp.*;
+        }
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const ContainerLayout = enum(u2) {
+        auto,
+        @"extern",
+        @"packed",
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const StructField = struct {
+        name: [:0]const u8,
+        type: type,
+        /// The type of the default value is the type of this struct field, which
+        /// is the value of the `type` field in this struct. However there is no
+        /// way to refer to that type here, so we use `*const anyopaque`.
+        /// See also: `defaultValue`.
+        default_value_ptr: ?*const anyopaque,
+        is_comptime: bool,
+        /// `null` means the field alignment was not explicitly specified. The
+        /// field will still be aligned to at least `@alignOf` its `type`.
+        alignment: ?usize,
+
+        /// Loads the field's default value from `default_value_ptr`.
+        /// Returns `null` if the field has no default value.
+        pub inline fn defaultValue(comptime sf: StructField) ?sf.type {
+            const dp: *const sf.type = @ptrCast(@alignCast(sf.default_value_ptr orelse return null));
+            return dp.*;
+        }
+
+        /// This data structure is used by the Zig language code generation and
+        /// therefore must be kept in sync with the compiler implementation.
+        pub const Attributes = struct {
+            @"comptime": bool = false,
+            @"align": ?usize = null,
+            default_value_ptr: ?*const anyopaque = null,
+        };
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const Struct = struct {
+        layout: ContainerLayout,
+        /// Only valid if layout is .@"packed"
+        backing_integer: ?type = null,
+        fields: []const StructField,
+        decls: []const Declaration,
+        is_tuple: bool,
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const Optional = struct {
+        child: type,
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const ErrorUnion = struct {
+        error_set: type,
+        payload: type,
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const Error = struct {
+        name: [:0]const u8,
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const ErrorSet = ?[]const Error;
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const EnumField = struct {
+        name: [:0]const u8,
+        value: comptime_int,
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const Enum = struct {
+        tag_type: type,
+        fields: []const EnumField,
+        decls: []const Declaration,
+        is_exhaustive: bool,
+
+        /// This data structure is used by the Zig language code generation and
+        /// therefore must be kept in sync with the compiler implementation.
+        pub const Mode = enum { exhaustive, nonexhaustive };
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const UnionField = struct {
+        name: [:0]const u8,
+        type: type,
+        /// `null` means the field alignment was not explicitly specified. The
+        /// field will still be aligned to at least `@alignOf` its `type`.
+        alignment: ?usize,
+
+        /// This data structure is used by the Zig language code generation and
+        /// therefore must be kept in sync with the compiler implementation.
+        pub const Attributes = struct {
+            @"align": ?usize = null,
+        };
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const Union = struct {
+        layout: ContainerLayout,
+        tag_type: ?type,
+        fields: []const UnionField,
+        decls: []const Declaration,
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const Fn = struct {
+        calling_convention: CallingConvention,
+        is_generic: bool,
+        is_var_args: bool,
+        /// TODO change the language spec to make this not optional.
+        return_type: ?type,
+        params: []const Param,
+
+        /// This data structure is used by the Zig language code generation and
+        /// therefore must be kept in sync with the compiler implementation.
+        pub const Param = struct {
+            is_generic: bool,
+            is_noalias: bool,
+            type: ?type,
+
+            /// This data structure is used by the Zig language code generation and
+            /// therefore must be kept in sync with the compiler implementation.
+            pub const Attributes = struct {
+                @"noalias": bool = false,
+            };
+        };
+
+        /// This data structure is used by the Zig language code generation and
+        /// therefore must be kept in sync with the compiler implementation.
+        pub const Attributes = struct {
+            @"callconv": CallingConvention = .auto,
+            varargs: bool = false,
+        };
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const Opaque = struct {
+        decls: []const Declaration,
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const Frame = struct {
+        function: *const anyopaque,
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const AnyFrame = struct {
+        child: ?type,
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const Vector = struct {
+        len: comptime_int,
+        child: type,
+    };
+
+    /// This data structure is used by the Zig language code generation and
+    /// therefore must be kept in sync with the compiler implementation.
+    pub const Declaration = struct {
+        name: [:0]const u8,
+    };
+};
+
+```
+
+似乎zig中的@import不能导入上层目录的文件，也就是不能出现`..` 。那也就意味着每个子文件夹里面的zig源文件都要独立成为一个自摸块，除了依赖子文件夹，不会依赖其他文件夹的zig源文件。
 
 #### test函数
 
@@ -77,7 +375,7 @@ zig对数值之间类型可以隐式转换，但只能是从小范围的类型�
 
 #### 常见整数溢出
 
-一般我们对索引进行整数模运算时，比如(i-j+len)%len 时会出现整数溢出，因为i,j一般都是usize,导致出现负数，故要写成(i+len-j)%len;
+一般我们对索引进行整数模运算时，比如(i-j+len)%len 时会出现整数溢出，因为会先进行i-j的运算，而i,j一般都是usize,导致出现负数，故要写成(i+len-j)%len;
 
 #### 整数整除需要注意
 
@@ -89,7 +387,7 @@ zig对数值之间类型可以隐式转换，但只能是从小范围的类型�
     std.debug.print("tuple 0: {} {}\n", .{  b, bb });
 ```
 
-上面这种整数和除余能保证b是大于等于0的整数，且bb*d+b=c。
+上面这种整数和除余能保证b是大于等于0的整数，且bb*d+b=c。而一般的整除`/`对负数不能保证这个等式。
 
 #### tuple的用法
 
@@ -126,32 +424,23 @@ test "inline while loop" {
 }
 ```
 
-上面的例子中，如果i是不是comptime变量，就不能用inline while。
+上面的例子中，如果i不是comptime变量，就不能用inline while。
 
-deepseek说只能写`try comptime` 而非comptime try ，可是下面的例子
 
-```zig
-test "peer type resolution: ?T and T" {
-    try expect(peerTypeTAndOptionalT(true, false).? == 0);
-    try expect(peerTypeTAndOptionalT(false, false).? == 3);
-    comptime {
-        try expect(peerTypeTAndOptionalT(true, false).? == 0);
-        try expect(peerTypeTAndOptionalT(false, false).? == 3);
-    }
-}
-```
+````
 
 zig语言的切片`[]T`可以安全地转向`[]const T` ，不需要显式转换。
 
 下面的代码报错是因为没有确定类型导致类型推断冲突，因为x没有给类型，而-1是comptime_int,故而x是comptime_int类型，这和var冲突。
 
-```zig
+``` zig
 test safe_sqrt {
     var x= -1;\\这里需改为var x:f32=-1;即可修复错误
     x = x - 1;
     try std.testing.expect(safe_sqrt(x) >= 0);
 }
 ```
+````
 
 一般来说zig语言的绑定库只需要@cImport()该库的暴露的.h文件即可，但是有些时候会再在上面裹上一层zig的wrapper， 比如这个[mach-glfw](https://gitee.com/wujilingfeng/mach-glfw) 里面的main分支，就是@cImport()之后又裹了一层zig。
 
@@ -240,6 +529,36 @@ pub fn build(b: *std.Build) void {
 ```
 
 下面是ai生成测试用例
+
+# zig标准库的用法
+
+如何打开文件夹并遍历里面的文件，代码如下:
+
+```zig
+// abs_dir_src是上面创建好的变量
+var io = std.Io.Threaded.init(b.allocator, .{});
+defer io.deinit();
+var open_dir = std.Io.Dir.openDirAbsolute(io.io(), abs_dir_src, .{ .iterate = true }) catch |err| {
+     std.debug.print("open directory failed: {}\n", .{err});
+     return;
+};
+
+defer open_dir.close(io.io());
+var walker = open_dir.walk(b.allocator) catch |err| {
+    std.debug.print("walk directory failed: {}\n", .{err});
+    return;
+};
+defer walker.deinit();
+while (walker.next(io.io()) catch null) |entry| {
+    if (!std.mem.endsWith(u8, entry.path, ".zig")) {
+        continue;
+    }
+}
+```
+
+
+
+
 
 ## 编写 Zig 代码举例
 

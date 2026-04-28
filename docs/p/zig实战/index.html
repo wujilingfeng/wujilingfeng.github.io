@@ -5,18 +5,18 @@
 >
     <head>
         <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\nzig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）,\nzig语言的type类型可以直接比较判断\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 pub fn normalize(p: anytype) Math_Compute_Abandon!void { comptime { const T=@TypeOf(p[0]); if(@TypeOf(p)!=[]T) { @compileError(&#34;normalize error\\n&#34; ++ @typeName(@TypeOf(p)) ++ &#34;fdsf&#34;); } } const norm = lb_norm(p); if (approxEqAbs(@TypeOf(p[0]), norm, 0, null)) { return error.Math_Compute_Abandon; } for (p) |*pv| { pv.* /= norm; } } 下面是zig语言类型反射用法，包括访问struct类型，访问字段类型\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\nzig语言tips 最新的zig当需要忽略捕获值时，除了for循环必须写||，其他的try catch 不用写| _ |, switch 也不用写 | | 。\nzig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）.\n也就是两个模块互相导入时不能声明为pub。\nzig语言的type类型可以直接比较判断\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 pub fn normalize(p: anytype) Math_Compute_Abandon!void { comptime { const T=@TypeOf(p[0]); if(@TypeOf(p)!=[]T) { @compileError(&#34;normalize error\\n&#34; ++ @typeName(@TypeOf(p)) ++ &#34;fdsf&#34;); } } const norm = lb_norm(p); if (approxEqAbs(@TypeOf(p[0]), norm, 0, null)) { return error.Math_Compute_Abandon; } for (p) |*pv| { pv.* /= norm; } } 下面是zig语言类型反射的一些用法，包括访问struct类型，访问字段类型\n">
 <title>Zig实战</title>
 
 <link rel='canonical' href='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/'>
 
 <link rel="stylesheet" href="../../scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Zig实战">
-<meta property='og:description' content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\nzig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）,\nzig语言的type类型可以直接比较判断\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 pub fn normalize(p: anytype) Math_Compute_Abandon!void { comptime { const T=@TypeOf(p[0]); if(@TypeOf(p)!=[]T) { @compileError(&#34;normalize error\\n&#34; ++ @typeName(@TypeOf(p)) ++ &#34;fdsf&#34;); } } const norm = lb_norm(p); if (approxEqAbs(@TypeOf(p[0]), norm, 0, null)) { return error.Math_Compute_Abandon; } for (p) |*pv| { pv.* /= norm; } } 下面是zig语言类型反射用法，包括访问struct类型，访问字段类型\n">
+<meta property='og:description' content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\nzig语言tips 最新的zig当需要忽略捕获值时，除了for循环必须写||，其他的try catch 不用写| _ |, switch 也不用写 | | 。\nzig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）.\n也就是两个模块互相导入时不能声明为pub。\nzig语言的type类型可以直接比较判断\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 pub fn normalize(p: anytype) Math_Compute_Abandon!void { comptime { const T=@TypeOf(p[0]); if(@TypeOf(p)!=[]T) { @compileError(&#34;normalize error\\n&#34; ++ @typeName(@TypeOf(p)) ++ &#34;fdsf&#34;); } } const norm = lb_norm(p); if (approxEqAbs(@TypeOf(p[0]), norm, 0, null)) { return error.Math_Compute_Abandon; } for (p) |*pv| { pv.* /= norm; } } 下面是zig语言类型反射的一些用法，包括访问struct类型，访问字段类型\n">
 <meta property='og:url' content='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/'>
 <meta property='og:site_name' content='五级灵风'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-06-20T10:36:14&#43;08:00'/><meta property='article:modified_time' content='2025-06-20T10:36:14&#43;08:00'/><meta property='og:image' content='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/nature.png' />
 <meta name="twitter:title" content="Zig实战">
-<meta name="twitter:description" content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\nzig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）,\nzig语言的type类型可以直接比较判断\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 pub fn normalize(p: anytype) Math_Compute_Abandon!void { comptime { const T=@TypeOf(p[0]); if(@TypeOf(p)!=[]T) { @compileError(&#34;normalize error\\n&#34; ++ @typeName(@TypeOf(p)) ++ &#34;fdsf&#34;); } } const norm = lb_norm(p); if (approxEqAbs(@TypeOf(p[0]), norm, 0, null)) { return error.Math_Compute_Abandon; } for (p) |*pv| { pv.* /= norm; } } 下面是zig语言类型反射用法，包括访问struct类型，访问字段类型\n"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\nzig语言tips 最新的zig当需要忽略捕获值时，除了for循环必须写||，其他的try catch 不用写| _ |, switch 也不用写 | | 。\nzig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）.\n也就是两个模块互相导入时不能声明为pub。\nzig语言的type类型可以直接比较判断\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 pub fn normalize(p: anytype) Math_Compute_Abandon!void { comptime { const T=@TypeOf(p[0]); if(@TypeOf(p)!=[]T) { @compileError(&#34;normalize error\\n&#34; ++ @typeName(@TypeOf(p)) ++ &#34;fdsf&#34;); } } const norm = lb_norm(p); if (approxEqAbs(@TypeOf(p[0]), norm, 0, null)) { return error.Math_Compute_Abandon; } for (p) |*pv| { pv.* /= norm; } } 下面是zig语言类型反射的一些用法，包括访问struct类型，访问字段类型\n"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/nature.png' />
     <link rel="shortcut icon" href="../../favicon.ico" />
 
@@ -368,6 +368,9 @@
         <li><a href="#导出为webassembly">导出为webassembly</a></li>
       </ol>
     </li>
+  </ol>
+
+  <ol>
     <li><a href="#编写-zig-代码举例">编写 Zig 代码举例</a></li>
     <li><a href="#编写-buildzig">编写 build.zig</a>
       <ol>
@@ -455,7 +458,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 5 分钟
+                    阅读时长: 13 分钟
                 </time>
             </div>
         
@@ -476,7 +479,10 @@
     >zig编译为webassembly</a></p>
 <p><a class="link" href="https://dev.to/sleibrock/webassembly-with-zig-part-1-4onm"  target="_blank" rel="noopener"
     >https://dev.to/sleibrock/webassembly-with-zig-part-1-4onm</a></p>
-<p>zig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）,</p>
+<h1 id="zig语言tips">zig语言tips
+</h1><p>最新的zig当需要忽略捕获值时，除了for循环必须写|<em>|，其他的try catch 不用写| _ |, switch 也不用写 |</em> | 。</p>
+<p>zig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）.</p>
+<p>也就是两个模块互相导入时不能声明为pub。</p>
 <p>zig语言的type类型可以直接比较判断</p>
 <div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -518,43 +524,625 @@
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>下面是zig语言类型反射用法，包括访问struct类型，访问字段类型</p>
+</div><p>下面是zig语言类型反射的一些用法，包括访问struct类型，访问字段类型</p>
 <div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">6
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">17
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">myget_Array_rows</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">TT</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>) <span style="color:#e5c07b">usize</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">return</span> <span style="color:#e5c07b">@typeInfo</span>(<span style="color:#e06c75">TT</span>).<span style="color:#e06c75">array</span>.<span style="color:#e06c75">len</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span><span style="color:#7f848e">//下面有typeinfo的用法
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">mult</span>(<span style="color:#e06c75">self</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">Self</span>, <span style="color:#e06c75">mat</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">anytype</span>) <span style="color:#61afef;font-weight:bold">LBMatrix</span>(<span style="color:#e06c75">T</span>, <span style="color:#e06c75">rows</span>,                 
-</span></span><span style="display:flex;"><span>  <span style="color:#61afef;font-weight:bold">myget_Array_rows</span>(<span style="color:#e5c07b">@typeInfo</span>(<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">mat</span>)).@<span style="color:#98c379">&#34;struct&#34;</span>.<span style="color:#e06c75">fields</span>[<span style="color:#d19a66">0</span>].<span style="color:#e5c07b">type</span>))
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>mat的类型如下:</p>
-<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">5
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">const</span> <span style="color:#e06c75">Self</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@This</span>();
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">data</span><span style="color:#56b6c2">:</span> [<span style="color:#e06c75">rows</span>][<span style="color:#e06c75">cols</span>]<span style="color:#e06c75">T</span>,
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">/// 浮点类型相关的默认容差
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">inline</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">defaultTolerance</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">T</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>) <span style="color:#e06c75">T</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#c678dd">switch</span> (<span style="color:#e5c07b">@typeInfo</span>(<span style="color:#e06c75">T</span>)) {
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">float</span>, .<span style="color:#e5c07b">comptime_float</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#e06c75">math</span>.<span style="color:#61afef;font-weight:bold">floatEps</span>(<span style="color:#e06c75">T</span>) <span style="color:#56b6c2">*</span> <span style="color:#d19a66">100</span>, <span style="color:#7f848e">// 100倍机器精度
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">else</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#e5c07b">@compileError</span>(<span style="color:#98c379">&#34;Only floating-point types supported&#34;</span>),
+</span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">inline</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">Sqrt</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">T</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>) <span style="color:#e5c07b">type</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#c678dd">switch</span> (<span style="color:#e5c07b">@typeInfo</span>(<span style="color:#e06c75">T</span>)) {
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">int</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#56b6c2">|</span><span style="color:#e06c75">int</span><span style="color:#56b6c2">|</span> <span style="color:#e5c07b">@Int</span>(.<span style="color:#e06c75">unsigned</span>, (<span style="color:#e06c75">int</span>.<span style="color:#e06c75">bits</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">1</span>) <span style="color:#56b6c2">/</span> <span style="color:#d19a66">2</span>),
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">else</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#e06c75">T</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span> 
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>似乎zig中的@import不能导入上层目录，也就是不能出现<code>..</code> 。那也就意味着每个子文件夹里面的zig源文件都要独立成为一个自摸块，除了依赖子文件夹，不会依赖其他文件夹的zig源文件。</p>
+</div><p>builtin.zig的类型源码如下:</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">  1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">  2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">  3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">  4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">  5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">  6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">  7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">  8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">  9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 55
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 56
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 57
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 58
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 59
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 60
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 61
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 62
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 63
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 64
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 65
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 66
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 67
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 68
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 69
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 70
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 71
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 72
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 73
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 74
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 75
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 76
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 77
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 78
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 79
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 80
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 81
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 82
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 83
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 84
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 85
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 86
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 87
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 88
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 89
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 90
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 91
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 92
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 93
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 94
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 95
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 96
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 97
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 98
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 99
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">100
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">101
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">102
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">103
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">104
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">105
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">106
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">107
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">108
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">109
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">110
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">111
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">112
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">113
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">114
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">115
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">116
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">117
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">118
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">119
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">120
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">121
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">122
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">123
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">124
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">125
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">126
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">127
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">128
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">129
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">130
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">131
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">132
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">133
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">134
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">135
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">136
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">137
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">138
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">139
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">140
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">141
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">142
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">143
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">144
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">145
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">146
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">147
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">148
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">149
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">150
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">151
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">152
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">153
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">154
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">155
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">156
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">157
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">158
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">159
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">160
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">161
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">162
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">163
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">164
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">165
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">166
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">167
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">168
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">169
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">170
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">171
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">172
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">173
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">174
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">175
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">176
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">177
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">178
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">179
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">180
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">181
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">182
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">183
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">184
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">185
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">186
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">187
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">188
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">189
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">190
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">191
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">192
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">193
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">194
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">195
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">196
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">197
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">198
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">199
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">200
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">201
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">202
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">203
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">204
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">205
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">206
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">207
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">208
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">209
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">210
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">211
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">212
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">213
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">214
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">215
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">216
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">217
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">218
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">219
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">220
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">221
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">222
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">223
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">224
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">225
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">226
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">227
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">228
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">229
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">230
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">231
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">232
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">233
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">234
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">235
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">236
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">237
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">238
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">239
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">240
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">241
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">242
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">243
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">244
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">245
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">246
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">247
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">248
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">249
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">250
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">251
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">252
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">253
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">254
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">255
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">256
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">257
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">258
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">259
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">260
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">261
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">262
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">263
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">264
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">265
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">266
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">267
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">268
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">269
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">270
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">271
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">272
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">273
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">274
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">275
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">276
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">277
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">278
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">279
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">280
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">281
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">282
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">283
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">284
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">285
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Type</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">union</span>(<span style="color:#c678dd">enum</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">void</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">noreturn</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">int</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Int</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">float</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Float</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">pointer</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Pointer</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">array</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Array</span>,
+</span></span><span style="display:flex;"><span>    @<span style="color:#98c379">&#34;struct&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Struct</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">comptime_float</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">comptime_int</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">undefined</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">null</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">optional</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Optional</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">error_union</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">ErrorUnion</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">error_set</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">ErrorSet</span>,
+</span></span><span style="display:flex;"><span>    @<span style="color:#98c379">&#34;enum&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Enum</span>,
+</span></span><span style="display:flex;"><span>    @<span style="color:#98c379">&#34;union&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Union</span>,
+</span></span><span style="display:flex;"><span>    @<span style="color:#98c379">&#34;fn&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Fn</span>,
+</span></span><span style="display:flex;"><span>    @<span style="color:#98c379">&#34;opaque&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Opaque</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">frame</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Frame</span>,
+</span></span><span style="display:flex;"><span>    @<span style="color:#98c379">&#34;anyframe&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">AnyFrame</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">vector</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Vector</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">enum_literal</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Int</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">signedness</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Signedness</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">bits</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">u16</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Float</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">bits</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">u16</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Pointer</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">size</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Size</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_const</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_volatile</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// `null` means implicit alignment, which is equivalent to `@alignOf(child)`.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#e06c75">alignment</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">usize</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">address_space</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">AddressSpace</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">child</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_allowzero</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// The type of the sentinel is the element type of the pointer, which is
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// the value of the `child` field in this struct. However there is no way
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// to refer to that type here, so we use `*const anyopaque`.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// See also: `sentinel`
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#e06c75">sentinel_ptr</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">anyopaque</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// Loads the pointer type&#39;s sentinel value from `sentinel_ptr`.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// Returns `null` if the pointer type has no sentinel.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">inline</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">sentinel</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">ptr</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Pointer</span>) <span style="color:#56b6c2">?</span><span style="color:#e06c75">ptr</span>.<span style="color:#e06c75">child</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">const</span> <span style="color:#e06c75">sp</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">ptr</span>.<span style="color:#e06c75">child</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@ptrCast</span>(<span style="color:#e5c07b">@alignCast</span>(<span style="color:#e06c75">ptr</span>.<span style="color:#e06c75">sentinel_ptr</span> <span style="color:#c678dd">orelse</span> <span style="color:#c678dd">return</span> <span style="color:#e5c07b">null</span>));
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">return</span> <span style="color:#e06c75">sp</span>.<span style="color:#56b6c2">*</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Size</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">enum</span>(<span style="color:#e06c75">u2</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">one</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">many</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">slice</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">c</span>,
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Attributes</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>            @<span style="color:#98c379">&#34;const&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">false</span>,
+</span></span><span style="display:flex;"><span>            @<span style="color:#98c379">&#34;volatile&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">false</span>,
+</span></span><span style="display:flex;"><span>            @<span style="color:#98c379">&#34;allowzero&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">false</span>,
+</span></span><span style="display:flex;"><span>            @<span style="color:#98c379">&#34;addrspace&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e06c75">AddressSpace</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
+</span></span><span style="display:flex;"><span>            @<span style="color:#98c379">&#34;align&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">usize</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Array</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">len</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">comptime_int</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">child</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// The type of the sentinel is the element type of the array, which is
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// the value of the `child` field in this struct. However there is no way
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// to refer to that type here, so we use `*const anyopaque`.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// See also: `sentinel`.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#e06c75">sentinel_ptr</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">anyopaque</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// Loads the array type&#39;s sentinel value from `sentinel_ptr`.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// Returns `null` if the array type has no sentinel.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">inline</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">sentinel</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">arr</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Array</span>) <span style="color:#56b6c2">?</span><span style="color:#e06c75">arr</span>.<span style="color:#e06c75">child</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">const</span> <span style="color:#e06c75">sp</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">arr</span>.<span style="color:#e06c75">child</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@ptrCast</span>(<span style="color:#e5c07b">@alignCast</span>(<span style="color:#e06c75">arr</span>.<span style="color:#e06c75">sentinel_ptr</span> <span style="color:#c678dd">orelse</span> <span style="color:#c678dd">return</span> <span style="color:#e5c07b">null</span>));
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">return</span> <span style="color:#e06c75">sp</span>.<span style="color:#56b6c2">*</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">ContainerLayout</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">enum</span>(<span style="color:#e06c75">u2</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">auto</span>,
+</span></span><span style="display:flex;"><span>        @<span style="color:#98c379">&#34;extern&#34;</span>,
+</span></span><span style="display:flex;"><span>        @<span style="color:#98c379">&#34;packed&#34;</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">StructField</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">name</span><span style="color:#56b6c2">:</span> [<span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">type</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// The type of the default value is the type of this struct field, which
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// is the value of the `type` field in this struct. However there is no
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// way to refer to that type here, so we use `*const anyopaque`.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// See also: `defaultValue`.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#e06c75">default_value_ptr</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">anyopaque</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_comptime</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// `null` means the field alignment was not explicitly specified. The
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// field will still be aligned to at least `@alignOf` its `type`.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#e06c75">alignment</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">usize</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// Loads the field&#39;s default value from `default_value_ptr`.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// Returns `null` if the field has no default value.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">inline</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">defaultValue</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">sf</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">StructField</span>) <span style="color:#56b6c2">?</span><span style="color:#e06c75">sf</span>.<span style="color:#e5c07b">type</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">const</span> <span style="color:#e06c75">dp</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">sf</span>.<span style="color:#e5c07b">type</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@ptrCast</span>(<span style="color:#e5c07b">@alignCast</span>(<span style="color:#e06c75">sf</span>.<span style="color:#e06c75">default_value_ptr</span> <span style="color:#c678dd">orelse</span> <span style="color:#c678dd">return</span> <span style="color:#e5c07b">null</span>));
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">return</span> <span style="color:#e06c75">dp</span>.<span style="color:#56b6c2">*</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Attributes</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>            @<span style="color:#98c379">&#34;comptime&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">false</span>,
+</span></span><span style="display:flex;"><span>            @<span style="color:#98c379">&#34;align&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">usize</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">default_value_ptr</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">anyopaque</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Struct</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">layout</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">ContainerLayout</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// Only valid if layout is .@&#34;packed&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#e06c75">backing_integer</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">type</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">fields</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e06c75">StructField</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">decls</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e06c75">Declaration</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_tuple</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Optional</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">child</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">ErrorUnion</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">error_set</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">payload</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Error</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">name</span><span style="color:#56b6c2">:</span> [<span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">ErrorSet</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">?</span>[]<span style="color:#c678dd">const</span> <span style="color:#e06c75">Error</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">EnumField</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">name</span><span style="color:#56b6c2">:</span> [<span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">value</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">comptime_int</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Enum</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">tag_type</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">fields</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e06c75">EnumField</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">decls</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e06c75">Declaration</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_exhaustive</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Mode</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">enum</span> { <span style="color:#e06c75">exhaustive</span>, <span style="color:#e06c75">nonexhaustive</span> };
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">UnionField</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">name</span><span style="color:#56b6c2">:</span> [<span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">type</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// `null` means the field alignment was not explicitly specified. The
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// field will still be aligned to at least `@alignOf` its `type`.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#e06c75">alignment</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">usize</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Attributes</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>            @<span style="color:#98c379">&#34;align&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">usize</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Union</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">layout</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">ContainerLayout</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">tag_type</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">fields</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e06c75">UnionField</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">decls</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e06c75">Declaration</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Fn</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">calling_convention</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">CallingConvention</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_generic</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_var_args</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// TODO change the language spec to make this not optional.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#e06c75">return_type</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">params</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e06c75">Param</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Param</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">is_generic</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">is_noalias</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e5c07b">type</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Attributes</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>                @<span style="color:#98c379">&#34;noalias&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">false</span>,
+</span></span><span style="display:flex;"><span>            };
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Attributes</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>            @<span style="color:#98c379">&#34;callconv&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">CallingConvention</span> <span style="color:#56b6c2">=</span> .<span style="color:#e06c75">auto</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">varargs</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">false</span>,
+</span></span><span style="display:flex;"><span>        };
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Opaque</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">decls</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e06c75">Declaration</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Frame</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">function</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">anyopaque</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">AnyFrame</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">child</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Vector</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">len</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">comptime_int</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">child</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Declaration</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">name</span><span style="color:#56b6c2">:</span> [<span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>,
+</span></span><span style="display:flex;"><span>    };
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>似乎zig中的@import不能导入上层目录的文件，也就是不能出现<code>..</code> 。那也就意味着每个子文件夹里面的zig源文件都要独立成为一个自摸块，除了依赖子文件夹，不会依赖其他文件夹的zig源文件。</p>
 <h4 id="test函数">test函数
 </h4><p>最新的test函数里面的打印不能使用std.debug.print函数，否则zig build test时会报错。</p>
 <h4 id="as和作用和intcast等其他转换函数的区别">@as和作用和@intCast等其他转换函数的区别
@@ -562,7 +1150,7 @@
 <h4 id="数值之间的隐式转换">数值之间的隐式转换
 </h4><p>zig对数值之间类型可以隐式转换，但只能是从小范围的类型转换为更大类型的，不会发生数值的截断，溢出等潜在风险，所以u8类型可以隐式转换为u16，但u16不能隐式转换为u8。usize和isize之间也不能隐式转换，因为二者没有包含关系，只有交集。</p>
 <h4 id="常见整数溢出">常见整数溢出
-</h4><p>一般我们对索引进行整数模运算时，比如(i-j+len)%len 时会出现整数溢出，因为i,j一般都是usize,导致出现负数，故要写成(i+len-j)%len;</p>
+</h4><p>一般我们对索引进行整数模运算时，比如(i-j+len)%len 时会出现整数溢出，因为会先进行i-j的运算，而i,j一般都是usize,导致出现负数，故要写成(i+len-j)%len;</p>
 <h4 id="整数整除需要注意">整数整除需要注意
 </h4><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -580,7 +1168,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;tuple 0: {} {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{  <span style="color:#e06c75">b</span>, <span style="color:#e06c75">bb</span> });
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>上面这种整数和除余能保证b是大于等于0的整数，且bb*d+b=c。</p>
+</div><p>上面这种整数和除余能保证b是大于等于0的整数，且bb*d+b=c。而一般的整除<code>/</code>对负数不能保证这个等式。</p>
 <h4 id="tuple的用法">tuple的用法
 </h4><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -642,49 +1230,20 @@
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>上面的例子中，如果i是不是comptime变量，就不能用inline while。</p>
-<p>deepseek说只能写<code>try comptime</code> 而非comptime try ，可是下面的例子</p>
-<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">5
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">6
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">7
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">8
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;peer type resolution: ?T and T&#34;</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#61afef;font-weight:bold">peerTypeTAndOptionalT</span>(<span style="color:#e5c07b">true</span>, <span style="color:#e5c07b">false</span>).<span style="color:#56b6c2">?</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#61afef;font-weight:bold">peerTypeTAndOptionalT</span>(<span style="color:#e5c07b">false</span>, <span style="color:#e5c07b">false</span>).<span style="color:#56b6c2">?</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">3</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">comptime</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#61afef;font-weight:bold">peerTypeTAndOptionalT</span>(<span style="color:#e5c07b">true</span>, <span style="color:#e5c07b">false</span>).<span style="color:#56b6c2">?</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">0</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#61afef;font-weight:bold">peerTypeTAndOptionalT</span>(<span style="color:#e5c07b">false</span>, <span style="color:#e5c07b">false</span>).<span style="color:#56b6c2">?</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">3</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>zig语言的切片<code>[]T</code>可以安全地转向<code>[]const T</code> ，不需要显式转换。</p>
-<p>下面的代码报错是因为没有确定类型导致类型推断冲突，因为x没有给类型，而-1是comptime_int,故而x是comptime_int类型，这和var冲突。</p>
-<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">3
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">4
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">5
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#e06c75">safe_sqrt</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">var</span> <span style="color:#e06c75">x</span><span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#d19a66">1</span>;<span style="color:#98c379">\\这里需改为var x:f32=-1;即可修复错误</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">x</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">x</span> <span style="color:#56b6c2">-</span> <span style="color:#d19a66">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">testing</span>.<span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#61afef;font-weight:bold">safe_sqrt</span>(<span style="color:#e06c75">x</span>) <span style="color:#56b6c2">&gt;=</span> <span style="color:#d19a66">0</span>);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>一般来说zig语言的绑定库只需要@cImport()该库的暴露的.h文件即可，但是有些时候会再在上面裹上一层zig的wrapper， 比如这个<a class="link" href="https://gitee.com/wujilingfeng/mach-glfw"  target="_blank" rel="noopener"
+</div><p>上面的例子中，如果i不是comptime变量，就不能用inline while。</p>
+<pre tabindex="0"><code>
+zig语言的切片`[]T`可以安全地转向`[]const T` ，不需要显式转换。
+
+下面的代码报错是因为没有确定类型导致类型推断冲突，因为x没有给类型，而-1是comptime_int,故而x是comptime_int类型，这和var冲突。
+
+``` zig
+test safe_sqrt {
+    var x= -1;\\这里需改为var x:f32=-1;即可修复错误
+    x = x - 1;
+    try std.testing.expect(safe_sqrt(x) &gt;= 0);
+}
+```
+</code></pre><p>一般来说zig语言的绑定库只需要@cImport()该库的暴露的.h文件即可，但是有些时候会再在上面裹上一层zig的wrapper， 比如这个<a class="link" href="https://gitee.com/wujilingfeng/mach-glfw"  target="_blank" rel="noopener"
     >mach-glfw</a> 里面的main分支，就是@cImport()之后又裹了一层zig。</p>
 <p>如果zig语言想要实现类型类，只需要写个满足类型类约束的comptime函数，也就是在编译期进行类型检查是否有某些方法的判断，然后在需要添加类型类约束的函数上添加这个编译期函数判断即可。</p>
 <h3 id="编译系统">编译系统
@@ -837,7 +1396,53 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>下面是ai生成测试用例</p>
-<h2 id="编写-zig-代码举例">编写 Zig 代码举例
+<h1 id="zig标准库的用法">zig标准库的用法
+</h1><p>如何打开文件夹并遍历里面的文件，代码如下:</p>
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">19
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#7f848e">// abs_dir_src是上面创建好的变量
+</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">var</span> <span style="color:#e06c75">io</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">Io</span>.<span style="color:#e06c75">Threaded</span>.<span style="color:#61afef;font-weight:bold">init</span>(<span style="color:#e06c75">b</span>.<span style="color:#e06c75">allocator</span>, .{});
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">defer</span> <span style="color:#e06c75">io</span>.<span style="color:#61afef;font-weight:bold">deinit</span>();
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">var</span> <span style="color:#e06c75">open_dir</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">Io</span>.<span style="color:#e06c75">Dir</span>.<span style="color:#61afef;font-weight:bold">openDirAbsolute</span>(<span style="color:#e06c75">io</span>.<span style="color:#61afef;font-weight:bold">io</span>(), <span style="color:#e06c75">abs_dir_src</span>, .{ .<span style="color:#e06c75">iterate</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">true</span> }) <span style="color:#c678dd">catch</span> <span style="color:#56b6c2">|</span><span style="color:#e06c75">err</span><span style="color:#56b6c2">|</span> {
+</span></span><span style="display:flex;"><span>     <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;open directory failed: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">err</span>});
+</span></span><span style="display:flex;"><span>     <span style="color:#c678dd">return</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">defer</span> <span style="color:#e06c75">open_dir</span>.<span style="color:#61afef;font-weight:bold">close</span>(<span style="color:#e06c75">io</span>.<span style="color:#61afef;font-weight:bold">io</span>());
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">var</span> <span style="color:#e06c75">walker</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">open_dir</span>.<span style="color:#61afef;font-weight:bold">walk</span>(<span style="color:#e06c75">b</span>.<span style="color:#e06c75">allocator</span>) <span style="color:#c678dd">catch</span> <span style="color:#56b6c2">|</span><span style="color:#e06c75">err</span><span style="color:#56b6c2">|</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;walk directory failed: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">err</span>});
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span>;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">defer</span> <span style="color:#e06c75">walker</span>.<span style="color:#61afef;font-weight:bold">deinit</span>();
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">while</span> (<span style="color:#e06c75">walker</span>.<span style="color:#61afef;font-weight:bold">next</span>(<span style="color:#e06c75">io</span>.<span style="color:#61afef;font-weight:bold">io</span>()) <span style="color:#c678dd">catch</span> <span style="color:#e5c07b">null</span>) <span style="color:#56b6c2">|</span><span style="color:#e06c75">entry</span><span style="color:#56b6c2">|</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> (<span style="color:#56b6c2">!</span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">mem</span>.<span style="color:#61afef;font-weight:bold">endsWith</span>(<span style="color:#e5c07b">u8</span>, <span style="color:#e06c75">entry</span>.<span style="color:#e06c75">path</span>, <span style="color:#98c379">&#34;.zig&#34;</span>)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">continue</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="编写-zig-代码举例">编写 Zig 代码举例
 </h2><p>以最小 Hello World 为例：</p>
 <pre tabindex="0"><code>// main.zig
 const std = @import(&#34;std&#34;);
