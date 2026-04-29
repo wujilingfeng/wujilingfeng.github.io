@@ -838,6 +838,10 @@ $MutationValue = (u1 \cdot 0.1 + u2 \cdot 0.2 + u3 \cdot 0.6)$
 &lt;p&gt;一般为了提高效率，节省内存，令&lt;code&gt;const Oc_Node=struct{[M][3]u1,isize}&lt;/code&gt;;&lt;/p&gt;
 &lt;p&gt;如果要计算M深度N向量的id，可以按照P进制进行排列计算数值，但是该数值对于同一层深度的向量数具有唯一性，不同深度时id可能重复，因为上述表示法对于$0s$和$s$不具有唯一性。&lt;/p&gt;
 &lt;p&gt;如果想让M深度N向量数在不同深度都有唯一id表示，可以在上述表示法基础上加上,$TotalNodes(M-1) = 1 + P^N + (P^N)^2 + &amp;hellip; + (P^N)^(M-1)$&lt;/p&gt;
+&lt;h4 id=&#34;小数进制分数进制&#34;&gt;小数进制（分数进制）
+&lt;/h4&gt;&lt;p&gt;对于小数来说，它不仅满足进制的性质（低位满数向前进一），而且还满足其后加多少0都相等。&lt;/p&gt;
+&lt;p&gt;小数的进制形式是$1,\frac{1}{10},\frac{1}{10^2}&amp;hellip;$,&lt;/p&gt;
+&lt;p&gt;八叉树体素的每个方向都是二叉树，每个xyz方向的位置是$\frac{1}{2}$进制的.&lt;/p&gt;
 </description>
         </item>
         <item>
