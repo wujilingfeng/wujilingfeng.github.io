@@ -7,7 +7,395 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>LI BO</copyright>
-        <lastBuildDate>Wed, 22 Apr 2026 20:54:13 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 01 May 2026 06:05:08 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Svd分解</title>
+        <link>https://wujilingfeng.github.io/p/svd%E5%88%86%E8%A7%A3/</link>
+        <pubDate>Fri, 01 May 2026 06:05:08 +0800</pubDate>
+        
+        <guid>https://wujilingfeng.github.io/p/svd%E5%88%86%E8%A7%A3/</guid>
+        <description>&lt;img src="https://wujilingfeng.github.io/p/svd%E5%88%86%E8%A7%A3/img.png" alt="Featured image of post Svd分解" /&gt;&lt;p&gt;直接回答：&lt;strong&gt;有限维矩阵的 SVD 存在性证明是构造性证明&lt;/strong&gt;。它不仅断言分解存在，还给出了显式的构造步骤。下面从证明结构、构造细节、常见误解来源以及与数值算法的关系进行严格拆解。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;一标准证明的构造性本质&#34;&gt;一、标准证明的构造性本质
+&lt;/h2&gt;&lt;p&gt;设 $A \in \mathbb{C}^{m \times n}$（实矩阵同理，将共轭转置 $^*$ 换为转置 $^\top$，酉矩阵换为正交矩阵）。&lt;/p&gt;
+&lt;h3 id=&#34;构造步骤经典谱定理路径&#34;&gt;构造步骤（经典谱定理路径）
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;构造半正定 Hermitian 矩阵&lt;/strong&gt;&lt;br&gt;
+$H = A^&lt;em&gt;A \in \mathbb{C}^{n \times n}$。显然 $H^&lt;/em&gt; = H$，且 $\forall x,\ x^*Hx = |Ax|^2 \ge 0$，故 $H$ 半正定。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;对角化 $H$（谱定理）&lt;/strong&gt;&lt;br&gt;
+有限维 Hermitian 矩阵必可酉对角化：存在酉矩阵 $V \in \mathbb{C}^{n \times n}$ 和实对角阵 $\Lambda = \text{diag}(\lambda_1,\dots,\lambda_n)$，$\lambda_i \ge 0$，使得
+&lt;/p&gt;
+$$
+   A^*A = V \Lambda V^*.
+   $$&lt;p&gt;
+令 $v_i$ 为 $V$ 的第 $i$ 列（$H$ 的标准正交特征向量）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;定义奇异值与 $\Sigma$&lt;/strong&gt;&lt;br&gt;
+$\sigma_i = \sqrt{\lambda_i} \ge 0$。构造 $\Sigma \in \mathbb{R}^{m \times n}$，其 $(i,i)$ 元为 $\sigma_i$（$i=1,\dots,\min(m,n)$），其余为 0。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;构造左奇异向量&lt;/strong&gt;&lt;br&gt;
+对每个 $\sigma_i &amp;gt; 0$，定义
+&lt;/p&gt;
+$$
+   u_i = \frac{1}{\sigma_i} A v_i.
+   $$&lt;p&gt;
+可验证：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$|u_i| = 1$（因 $|Av_i|^2 = v_i^*A^&lt;em&gt;Av_i = v_i^&lt;/em&gt;\lambda_i v_i = \lambda_i = \sigma_i^2$）&lt;/li&gt;
+&lt;li&gt;$u_i^* u_j = 0\ (i \ne j)$（因 $v_i$ 正交且 $A^*A v_j = \lambda_j v_j$）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;扩充为标准正交基&lt;/strong&gt;&lt;br&gt;
+将 ${u_i \mid \sigma_i &amp;gt; 0}$ 用 Gram-Schmidt 扩充为 $\mathbb{C}^m$ 的标准正交基，组成酉矩阵 $U \in \mathbb{C}^{m \times m}$。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;验证分解&lt;/strong&gt;&lt;br&gt;
+直接计算可得 $A = U \Sigma V^*$。每一步均给出显式对象，&lt;strong&gt;证明本身即构造过程&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二为什么常被误认为存在性证明&#34;&gt;二、为什么常被误认为“存在性”证明？
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;误解来源&lt;/th&gt;
+          &lt;th&gt;实际情况&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;教材常写“由谱定理可知存在 $U,\Sigma,V$”&lt;/td&gt;
+          &lt;td&gt;谱定理在有限维是构造性的（特征多项式根+正交化），但表述偏抽象&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;“扩充为正交基”看似非构造&lt;/td&gt;
+          &lt;td&gt;有限维中 Gram-Schmidt 是显式算法，完全可计算&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;证明不给出数值稳定算法&lt;/td&gt;
+          &lt;td&gt;数学构造性 ≠ 数值可用性。证明提供理论构造，工程用其他路径&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;关键区分&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;数学构造性&lt;/strong&gt;：证明过程给出明确的对象生成规则（此处为 $V$ 来自 $A^*A$ 特征分解，$U$ 来自 $Av_i/\sigma_i$ 扩充）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数值构造性&lt;/strong&gt;：实际计算 SVD 不通过 $A^*A$（条件数平方导致不稳定），而用 Golub-Kahan 双对角化 + 隐式 QR / 分治法。这是工程算法，与数学证明路径不同，但两者都保证存在性。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;三其他证明路径的构造性分析&#34;&gt;三、其他证明路径的构造性分析
+&lt;/h2&gt;&lt;h3 id=&#34;1-变分归纳构造更贴近算法思想&#34;&gt;1. 变分/归纳构造（更贴近算法思想）
+&lt;/h3&gt;$$
+\sigma_1 = \max_{\|x\|=1} \|Ax\|, \quad v_1 = \arg\max, \quad u_1 = \frac{Av_1}{\sigma_1}
+$$&lt;p&gt;
+在 $v_1^\perp$ 和 $u_1^\perp$ 上递归。&lt;br&gt;
+✅ &lt;strong&gt;构造性&lt;/strong&gt;：每一步给出优化问题与显式向量，本质是幂迭代/Lanczos 的理论基础。&lt;/p&gt;
+&lt;h3 id=&#34;2-极分解路径&#34;&gt;2. 极分解路径
+&lt;/h3&gt;&lt;p&gt;$A = UP$（$U$ 酉，$P$ 半正定），再对 $P$ 做谱分解 $P = V\Sigma V^&lt;em&gt;$，得 $A = (UV)\Sigma V^&lt;/em&gt;$。&lt;br&gt;
+⚠️ 极分解的证明在有限维可构造，但部分教材用紧性/连续性论证，偏向存在性表述。&lt;/p&gt;
+&lt;h3 id=&#34;3-代数几何外积路径&#34;&gt;3. 代数几何/外积路径
+&lt;/h3&gt;&lt;p&gt;通过 $\bigwedge^k A$ 的范数定义奇异值，再用外代数构造奇异向量。&lt;br&gt;
+🔍 理论优美，但构造步骤隐含，教学中较少使用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;四严格数学视角下的构造性界定&#34;&gt;四、严格数学视角下的“构造性”界定
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;维度&lt;/th&gt;
+          &lt;th&gt;构造性状态&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;有限维矩阵&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;✅ 完全构造性&lt;/td&gt;
+          &lt;td&gt;谱定理+Gram-Schmidt 均为显式有限步过程&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;无限维紧算子&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;⚠️ 偏存在性&lt;/td&gt;
+          &lt;td&gt;依赖紧算子谱定理与 Hilbert 空间正交补，通常用紧性/弱收敛论证&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;直觉主义/可计算数学&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;✅ 可计算&lt;/td&gt;
+          &lt;td&gt;奇异值/向量可通过迭代算法逼近到任意精度，满足 Bishop 构造性标准&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;注：有限维 SVD 的构造性不依赖选择公理。特征值存在性由代数基本定理保证（$\mathbb{C}$ 代数闭），特征向量通过 $(A^*A - \lambda I)x=0$ 的零空间基显式构造。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;五与-dcqef-的关联提醒&#34;&gt;五、与 DC/QEF 的关联提醒
+&lt;/h2&gt;&lt;p&gt;你在 Dual Contouring 中使用的 SVD 求解 QEF：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;数学上&lt;/strong&gt;：依赖 SVD 的构造性存在定理，保证 $A^+ = V\Sigma^+ U^*$ 良定义。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数值上&lt;/strong&gt;：实际调用 LAPACK &lt;code&gt;gesvd&lt;/code&gt;/&lt;code&gt;gesdd&lt;/code&gt;，内部是双对角化+QR迭代，*&lt;em&gt;不执行证明中的 $A^&lt;em&gt;A$ 特征分解&lt;/em&gt;&lt;/em&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;理论闭环&lt;/strong&gt;：证明的构造性 → 广义逆良定义 → QEF 最小范数解唯一稳定 → DC 顶点可计算。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;六总结&#34;&gt;六、总结
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;SVD 存在性证明在有限维是构造性的&lt;/strong&gt;，核心路径为：$A^&lt;em&gt;A$ 谱分解 → 定义 $\sigma_i, v_i$ → 构造 $u_i = Av_i/\sigma_i$ → 扩充 $U$ → 验证 $A=U\Sigma V^&lt;/em&gt;$。&lt;/li&gt;
+&lt;li&gt;教学中“存在”的抽象表述、以及数学构造与数值算法的路径差异，是造成“非构造”误解的主因。&lt;/li&gt;
+&lt;li&gt;若需严格可计算视角：有限维 SVD 满足构造性数学标准；无限维紧算子版本则偏向存在性。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如需我给出该构造性证明的完整形式化推导（含正交性验证、秩亏处理、以及与 Moore-Penrose 广义逆的等价性证明），或对比数值 SVD 算法（Golub-Kahan）与数学构造的差异，可告知具体方向。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;点云法向估计中的-pca-与-svd理论推导与几何意义&#34;&gt;点云法向估计中的 PCA 与 SVD：理论、推导与几何意义
+&lt;/h1&gt;&lt;p&gt;在点云处理中，&lt;strong&gt;局部主成分分析（PCA）&lt;/strong&gt; 是估计法向、曲率、特征边最基础且最稳健的方法。其核心思想是：&lt;strong&gt;在局部邻域内，点云近似分布在一个平面上，PCA 通过最小二乘拟合该平面，法向即为数据变化最小的方向&lt;/strong&gt;。下面从数学理论、方向拟合机制、SVD 等价性、点云应用与工程意义五个层面系统展开。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;一pca-的数学定义与优化目标&#34;&gt;一、PCA 的数学定义与优化目标
+&lt;/h2&gt;&lt;p&gt;给定 $N$ 个 $d$ 维点 ${x_i}&lt;em&gt;{i=1}^N \subset \mathbb{R}^d$，记均值 $\mu = \frac{1}{N}\sum&lt;/em&gt;{i=1}^N x_i$，中心化数据 $\tilde{x}_i = x_i - \mu$。&lt;/p&gt;
+&lt;h3 id=&#34;1-协方差矩阵&#34;&gt;1. 协方差矩阵
+&lt;/h3&gt;$$
+C = \frac{1}{N} \sum_{i=1}^N \tilde{x}_i \tilde{x}_i^\top = \frac{1}{N} \tilde{X}^\top \tilde{X} \in \mathbb{R}^{d \times d}
+$$&lt;p&gt;
+其中 $\tilde{X} \in \mathbb{R}^{N \times d}$ 为按行堆叠的中心化数据矩阵。$C$ 是对称半正定矩阵。&lt;/p&gt;
+&lt;h3 id=&#34;2-pca-的两种等价表述&#34;&gt;2. PCA 的两种等价表述
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;视角&lt;/th&gt;
+          &lt;th&gt;优化问题&lt;/th&gt;
+          &lt;th&gt;几何意义&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;最大方差&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;$\max_{v:|v|=1} v^\top C v$&lt;/td&gt;
+          &lt;td&gt;寻找数据投影后方差最大的方向&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;最小重构误差&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;$\min_{V_k} \sum_{i=1}^N | \tilde{x}&lt;em&gt;i - \text{proj}&lt;/em&gt;{V_k}(\tilde{x}_i) |^2$&lt;/td&gt;
+          &lt;td&gt;寻找 $k$ 维子空间使正交投影误差最小&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;两者通过 &lt;strong&gt;Pythagoras 定理&lt;/strong&gt; 等价：$|\tilde{x}_i|^2 = |\text{proj}|^2 + |\text{residual}|^2$，最大化投影方差 $\Leftrightarrow$ 最小化残差。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;二pca-如何拟合主方向严格推导&#34;&gt;二、PCA 如何拟合“主方向”？（严格推导）
+&lt;/h2&gt;&lt;h3 id=&#34;1-第一主方向rayleigh-商与-lagrange-乘子&#34;&gt;1. 第一主方向：Rayleigh 商与 Lagrange 乘子
+&lt;/h3&gt;&lt;p&gt;求解 $\max_{v} v^\top C v \quad \text{s.t.} \quad v^\top v = 1$。&lt;/p&gt;
+&lt;p&gt;构造 Lagrange 函数：
+&lt;/p&gt;
+$$
+\mathcal{L}(v, \lambda) = v^\top C v - \lambda (v^\top v - 1)
+$$&lt;p&gt;
+求梯度并令为零：
+&lt;/p&gt;
+$$
+\nabla_v \mathcal{L} = 2Cv - 2\lambda v = 0 \quad \Rightarrow \quad Cv = \lambda v
+$$&lt;p&gt;
+&lt;strong&gt;结论&lt;/strong&gt;：主方向是协方差矩阵 $C$ 的特征向量，对应的特征值 $\lambda = v^\top C v$ 即为该方向上的方差。&lt;/p&gt;
+&lt;p&gt;由 Courant-Fischer 极小极大定理：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;最大特征值 $\lambda_1$ 对应第一主方向 $v_1$（数据最分散方向）&lt;/li&gt;
+&lt;li&gt;次大特征值 $\lambda_2$ 对应 $v_2 \perp v_1$&lt;/li&gt;
+&lt;li&gt;最小特征值 $\lambda_d$ 对应 $v_d$（数据最集中/变化最小方向）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-几何直观数据椭球&#34;&gt;2. 几何直观：数据椭球
+&lt;/h3&gt;&lt;p&gt;协方差矩阵 $C$ 定义了数据云的&lt;strong&gt;惯性椭球&lt;/strong&gt;：
+&lt;/p&gt;
+$$
+\{ x \mid x^\top C^{-1} x = 1 \}
+$$&lt;ul&gt;
+&lt;li&gt;特征向量 $v_i$ 为椭球主轴方向&lt;/li&gt;
+&lt;li&gt;特征值 $\lambda_i$ 为对应半轴长度的平方（方差）&lt;/li&gt;
+&lt;li&gt;PCA 本质是将坐标系旋转至与椭球主轴对齐，实现去相关与降维&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;三pca-与-svd-的严格等价关系&#34;&gt;三、PCA 与 SVD 的严格等价关系
+&lt;/h2&gt;&lt;p&gt;实际计算中&lt;strong&gt;从不显式构造 $C$ 再求特征分解&lt;/strong&gt;，而是直接对数据矩阵 $\tilde{X}$ 做 SVD：&lt;/p&gt;
+&lt;h3 id=&#34;1-数学等价性&#34;&gt;1. 数学等价性
+&lt;/h3&gt;&lt;p&gt;设 $\tilde{X} = U \Sigma V^\top$ 为紧凑 SVD（$U \in \mathbb{R}^{N \times r}, \Sigma \in \mathbb{R}^{r \times r}, V \in \mathbb{R}^{d \times r}, r=\text{rank}(\tilde{X})$）。&lt;/p&gt;
+&lt;p&gt;则：
+&lt;/p&gt;
+$$
+C = \frac{1}{N} \tilde{X}^\top \tilde{X} = \frac{1}{N} V \Sigma^\top U^\top U \Sigma V^\top = \frac{1}{N} V \Sigma^2 V^\top
+$$&lt;p&gt;
+对比特征分解 $C = V \Lambda V^\top$，可得：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;主方向&lt;/strong&gt;：$V$ 的列向量（右奇异向量）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;方差&lt;/strong&gt;：$\Lambda = \frac{1}{N} \Sigma^2$，即 $\lambda_i = \sigma_i^2 / N$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-为什么工程上必用-svd&#34;&gt;2. 为什么工程上必用 SVD？
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;方法&lt;/th&gt;
+          &lt;th&gt;条件数&lt;/th&gt;
+          &lt;th&gt;秩亏处理&lt;/th&gt;
+          &lt;th&gt;数值稳定性&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;显式 $C = \tilde{X}^\top \tilde{X}$ + eig&lt;/td&gt;
+          &lt;td&gt;$\kappa(C) = \kappa(\tilde{X})^2$&lt;/td&gt;
+          &lt;td&gt;需手动截断&lt;/td&gt;
+          &lt;td&gt;差（平方放大噪声）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;直接 SVD($\tilde{X}$)&lt;/td&gt;
+          &lt;td&gt;$\kappa(\tilde{X})$&lt;/td&gt;
+          &lt;td&gt;自动分离零空间&lt;/td&gt;
+          &lt;td&gt;优（LAPACK 标准）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;结论&lt;/strong&gt;：SVD 是 PCA 的数值实现标准，两者数学等价，但 SVD 避免条件数平方，且天然处理共线/共面退化。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;四点云法向估计中的-pca-应用&#34;&gt;四、点云法向估计中的 PCA 应用
+&lt;/h2&gt;&lt;h3 id=&#34;1-局部-pca-流程&#34;&gt;1. 局部 PCA 流程
+&lt;/h3&gt;&lt;p&gt;对每个查询点 $p$：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;搜索 $k$ 近邻或半径邻域 ${q_i}_{i=1}^k$&lt;/li&gt;
+&lt;li&gt;计算局部质心 $\mu = \frac{1}{k}\sum q_i$，中心化 $\tilde{q}_i = q_i - \mu$&lt;/li&gt;
+&lt;li&gt;构造 $3 \times 3$ 协方差矩阵 $C = \frac{1}{k} \sum_{i=1}^k \tilde{q}_i \tilde{q}_i^\top$&lt;/li&gt;
+&lt;li&gt;SVD 或特征分解：$C v_j = \lambda_j v_j$，排序 $\lambda_1 \ge \lambda_2 \ge \lambda_3 \ge 0$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;法向估计&lt;/strong&gt;：$n = v_3$（最小特征值对应的特征向量）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;2-为什么法向是最小方差方向&#34;&gt;2. 为什么法向是最小方差方向？
+&lt;/h3&gt;&lt;p&gt;局部表面近似平面，点云在切平面内分散（$\lambda_1, \lambda_2$ 大），沿法向厚度/噪声小（$\lambda_3$ 小）。&lt;/p&gt;
+&lt;p&gt;从最小二乘平面拟合角度严格推导：
+寻找单位法向 $n$ 使点到平面距离平方和最小：
+&lt;/p&gt;
+$$
+\min_{n:\|n\|=1} \sum_{i=1}^k \left[ n^\top (q_i - \mu) \right]^2 = \min_{n:\|n\|=1} n^\top \left( \sum \tilde{q}_i \tilde{q}_i^\top \right) n = \min_{n:\|n\|=1} n^\top (kC) n
+$$&lt;p&gt;
+这正是 Rayleigh 商最小化问题，解为 $C$ 的最小特征值对应的特征向量 $v_3$。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;对偶关系&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PCA 最大方差方向 $\Leftrightarrow$ 数据最分散方向（切平面基）&lt;/li&gt;
+&lt;li&gt;PCA 最小方差方向 $\Leftrightarrow$ 最小二乘平面法向&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-符号歧义与一致性定向&#34;&gt;3. 符号歧义与一致性定向
+&lt;/h3&gt;&lt;p&gt;$n$ 与 $-n$ 均满足优化。工程定向策略：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;视点法&lt;/strong&gt;：若已知传感器位置 $v_{\text{cam}}$，取 $n \cdot (v_{\text{cam}} - p) &amp;gt; 0$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;传播法&lt;/strong&gt;：构建 kNN 图，用最小生成树或 BFS 传播符号，保证相邻法向夹角 $&amp;lt; 90^\circ$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;曲率引导&lt;/strong&gt;：在尖锐特征处结合法向聚类或投票&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;五特征值的几何意义与工程诊断&#34;&gt;五、特征值的几何意义与工程诊断
+&lt;/h2&gt;&lt;p&gt;三个特征值 $\lambda_1 \ge \lambda_2 \ge \lambda_3$ 携带丰富的局部几何信息：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;比值/指标&lt;/th&gt;
+          &lt;th&gt;几何含义&lt;/th&gt;
+          &lt;th&gt;典型阈值&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\lambda_3 \ll \lambda_2 \approx \lambda_1$&lt;/td&gt;
+          &lt;td&gt;光滑平面区域&lt;/td&gt;
+          &lt;td&gt;$\lambda_3 / \sum \lambda &amp;lt; 0.05$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\lambda_3 \approx \lambda_2 \ll \lambda_1$&lt;/td&gt;
+          &lt;td&gt;边缘/折痕&lt;/td&gt;
+          &lt;td&gt;线状分布&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;$\lambda_1 \approx \lambda_2 \approx \lambda_3$&lt;/td&gt;
+          &lt;td&gt;角点/各向同性噪声&lt;/td&gt;
+          &lt;td&gt;球状分布&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;平面度&lt;/strong&gt; $P = \frac{\lambda_2 - \lambda_3}{\lambda_1}$&lt;/td&gt;
+          &lt;td&gt;表面平坦程度&lt;/td&gt;
+          &lt;td&gt;$P \to 1$ 为理想平面&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;线性度&lt;/strong&gt; $L = \frac{\lambda_1 - \lambda_2}{\lambda_1}$&lt;/td&gt;
+          &lt;td&gt;边缘显著程度&lt;/td&gt;
+          &lt;td&gt;$L \to 1$ 为锐边&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;各向同性&lt;/strong&gt; $S = \frac{3\lambda_3}{\sum \lambda}$&lt;/td&gt;
+          &lt;td&gt;噪声/角点程度&lt;/td&gt;
+          &lt;td&gt;$S \to 1$ 为球状&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;工程实践要点&#34;&gt;工程实践要点
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;邻域选择&lt;/strong&gt;：$k \in [10, 30]$ 或自适应半径 $r \approx 2\sim3 \times$ 平均点距。过小 $\to$ 噪声敏感；过大 $\to$ 跨越特征模糊法向。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;加权 PCA&lt;/strong&gt;：引入高斯权重 $w_i = \exp(-|q_i-p|^2 / 2\sigma^2)$，协方差改为 $C = \frac{\sum w_i \tilde{q}_i \tilde{q}_i^\top}{\sum w_i}$，显著提升边界/曲率处精度。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;退化处理&lt;/strong&gt;：若 $\lambda_3 / \lambda_1 &amp;lt; 10^{-6}$，说明邻域共面/共线，法向仍可用 $v_3$，但需标记为低置信度。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;与 QEF/DC 的对偶性&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;PCA：给定点 $\to$ 拟合平面（最小化点面距离）&lt;/li&gt;
+&lt;li&gt;QEF：给定平面 $\to$ 拟合点（最小化面点距离）&lt;/li&gt;
+&lt;li&gt;两者均为最小二乘，矩阵互为转置，SVD 统一求解&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;六总结pca-拟合主方向的理论闭环&#34;&gt;六、总结：PCA 拟合主方向的理论闭环
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;步骤&lt;/th&gt;
+          &lt;th&gt;数学机制&lt;/th&gt;
+          &lt;th&gt;几何意义&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;中心化&lt;/td&gt;
+          &lt;td&gt;$\tilde{x}_i = x_i - \mu$&lt;/td&gt;
+          &lt;td&gt;平移至质心，消除一阶矩&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;协方差&lt;/td&gt;
+          &lt;td&gt;$C = \frac{1}{N}\sum \tilde{x}_i \tilde{x}_i^\top$&lt;/td&gt;
+          &lt;td&gt;二阶矩描述数据散布形状&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;特征分解/SVD&lt;/td&gt;
+          &lt;td&gt;$C v = \lambda v$ 或 $\tilde{X}=U\Sigma V^\top$&lt;/td&gt;
+          &lt;td&gt;旋转坐标系至主轴对齐&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;排序特征值&lt;/td&gt;
+          &lt;td&gt;$\lambda_1 \ge \lambda_2 \ge \lambda_3$&lt;/td&gt;
+          &lt;td&gt;方差从大到小对应椭球长短轴&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;法向提取&lt;/td&gt;
+          &lt;td&gt;$n = v_3$&lt;/td&gt;
+          &lt;td&gt;最小变化方向 $\Leftrightarrow$ 最佳拟合平面法向&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;核心结论&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PCA 通过协方差矩阵的谱分解，&lt;strong&gt;严格等价于最小二乘正交平面拟合&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;SVD 是 PCA 的数值稳定实现，避免条件数平方，自动处理秩亏&lt;/li&gt;
+&lt;li&gt;在点云中，法向即局部数据椭球的&lt;strong&gt;最短轴方向&lt;/strong&gt;，特征值比值提供曲率/特征诊断&lt;/li&gt;
+&lt;li&gt;与 Dual Contouring 的 QEF 构成&lt;strong&gt;点-面对偶&lt;/strong&gt;，共享 SVD/广义逆的数学底座&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如需我提供：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;带加权/自适应邻域的 C++/Python 法向估计完整代码&lt;/li&gt;
+&lt;li&gt;特征值几何描述子（平面度/线性度/曲率）的计算与可视化示例&lt;/li&gt;
+&lt;li&gt;PCA 与 QEF 对偶性的严格矩阵推导
+可告知具体方向，我将给出可运行实现与数值验证。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>Dual_contouring算法</title>
         <link>https://wujilingfeng.github.io/p/dual_contouring%E7%AE%97%E6%B3%95/</link>
         <pubDate>Wed, 22 Apr 2026 20:54:13 +0800</pubDate>
@@ -19,6 +407,673 @@
 &lt;p&gt;由于流形定义，重建网格的边只能有两个面，所以体素的每个面只能有两个（差分为0）的边。&lt;/p&gt;
 &lt;p&gt;所以对于复杂情况，体素的点要计算多个，体素中的每个点都对应一组联通的（差分为0）的边。上面也说了如何把体素上的（差分为0）的边按连通性分割。&lt;/p&gt;
 &lt;p&gt;如何访问体素的边，每个八叉树的节点（体素）代表三个边，也就是左下角（xyz最小）为原点，向xyz正方向增长的三个边。同样，这三个边所在的三个面也由这个节点代表。这样通过访问每个节点就能访问所有的边和面。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;结论先说防止-dc-顶点逃出体素最稳的是盒约束-qef&#34;&gt;结论先说：防止 DC 顶点逃出体素，最稳的是“盒约束 QEF”
+&lt;/h2&gt;&lt;p&gt;在 Dual Contouring 里，体素内顶点 (x) 本质上是一个 &lt;strong&gt;QEF 最小二乘拟合点&lt;/strong&gt;。如果只做普通 QEF：&lt;/p&gt;
+&lt;p&gt;$\min_x E(x)=\sum_i \left(n_i^T(x-p_i)\right)^2$&lt;/p&gt;
+&lt;p&gt;这个点&lt;strong&gt;不一定落在当前体素内&lt;/strong&gt;，尤其是在平面、边特征、法线退化、Hermite 数据噪声较大时。&lt;/p&gt;
+&lt;p&gt;工程上有三种常见处理：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;方法&lt;/th&gt;
+          &lt;th&gt;是否保证在体素内&lt;/th&gt;
+          &lt;th&gt;是否改变原始 QEF&lt;/th&gt;
+          &lt;th&gt;推荐程度&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;令 $y=x-c$，求离质点最近的 QEF 解&lt;/td&gt;
+          &lt;td&gt;不严格保证&lt;/td&gt;
+          &lt;td&gt;不改变原 QEF，只选解&lt;/td&gt;
+          &lt;td&gt;推荐&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;加入 $\lambda|x-c|^2$正则项&lt;/td&gt;
+          &lt;td&gt;不严格保证&lt;/td&gt;
+          &lt;td&gt;会改变 QEF&lt;/td&gt;
+          &lt;td&gt;可用，但要谨慎&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;解盒约束 QEF：$\min E(x),\ l\le x\le u$&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;严格保证&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;不改变目标，只加约束&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;最推荐&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;如果你的目标是“&lt;strong&gt;绝对不能逃出体素&lt;/strong&gt;”，应该做：&lt;/p&gt;
+&lt;p&gt;$\boxed{
+\min_x |Ax-b|^2,\quad l_x\le x_x\le u_x,\ l_y\le x_y\le u_y,\ l_z\le x_z\le u_z
+}$&lt;/p&gt;
+&lt;p&gt;其中 (l,u) 是当前体素的最小、最大坐标。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;1-dual-contouring-算法整体流程&#34;&gt;1. Dual Contouring 算法整体流程
+&lt;/h1&gt;&lt;p&gt;Dual Contouring，简称 DC，是一种从体素 / 标量场中提取等值面的算法。它与 Marching Cubes 不同，Marching Cubes 是在每个体素边上插值出三角形，而 DC 是在每个包含等值面穿过的体素内部放置一个代表顶点，然后连接相邻体素的代表顶点。原始 DC 论文使用的是 Hermite 数据，也就是每条穿过等值面的体素边会保存交点位置和法线信息；这个方法的优势是可以较好保留锐边，而不需要显式识别特征线。(&lt;a class=&#34;link&#34; href=&#34;https://www.semanticscholar.org/paper/Dual-contouring-of-hermite-data-Ju-Losasso/23d67521848ca436ab9ec1b89bca6d35bc885d26?utm_source=chatgpt.com&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Semantic Scholar&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;流程如下。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;11-输入标量场&#34;&gt;1.1 输入：标量场
+&lt;/h2&gt;&lt;p&gt;假设有一个隐式函数：&lt;/p&gt;
+&lt;p&gt;$f(x,y,z)$&lt;/p&gt;
+&lt;p&gt;目标等值面是：&lt;/p&gt;
+&lt;p&gt;$f(x,y,z)=0$&lt;/p&gt;
+&lt;p&gt;对于一个体素，它有 8 个角点。如果某条体素边两端的 $f$值异号，说明等值面穿过这条边。&lt;/p&gt;
+&lt;p&gt;设边的两个端点为 (a,b)，标量值为 $f(a),f(b)$，则交点可以线性插值：
+$t=\frac{f(a)}{f(a)-f(b)}$&lt;/p&gt;
+&lt;p&gt;$p=a+t(b-a)$&lt;/p&gt;
+&lt;p&gt;这里的 $p$就是 Hermite 点。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;12-法线计算&#34;&gt;1.2 法线计算
+&lt;/h2&gt;&lt;p&gt;如果有隐式函数，可以直接用梯度：&lt;/p&gt;
+&lt;p&gt;$n=\frac{\nabla f(p)}{|\nabla f(p)|}$&lt;/p&gt;
+&lt;p&gt;如果只有离散体素数据，可以用中心差分近似：
+&lt;/p&gt;
+$$ \nabla f(x,y,z)\left(
+\frac{f(x+h,y,z)-f(x-h,y,z)}{2h},
+\frac{f(x,y+h,z)-f(x,y-h,z)}{2h},
+\frac{f(x,y,z+h)-f(x,y,z-h)}{2h}
+\right)$$&lt;p&gt;归一化后得到：&lt;/p&gt;
+&lt;p&gt;$n_i=\frac{\nabla f(p_i)}{|\nabla f(p_i)|}$&lt;/p&gt;
+&lt;p&gt;每个穿过当前体素边的交点 $p_i$和法线 $n_i$，组成一个 Hermite 样本：&lt;/p&gt;
+&lt;p&gt;$(p_i,n_i)$&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;13-每个活跃体素生成一个顶点&#34;&gt;1.3 每个活跃体素生成一个顶点
+&lt;/h2&gt;&lt;p&gt;如果一个体素中存在至少一条异号边，就认为这个体素被等值面穿过，需要生成一个 DC 顶点。&lt;/p&gt;
+&lt;p&gt;这个顶点不是简单取边交点平均，而是通过 QEF 拟合出来：&lt;/p&gt;
+&lt;p&gt;$x^*=\arg\min_x E(x)$&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;14-根据符号变化连接相邻体素顶点&#34;&gt;1.4 根据符号变化连接相邻体素顶点
+&lt;/h2&gt;&lt;p&gt;在 3D 中，一条发生符号变化的网格边通常被 4 个体素共享。DC 会把这 4 个体素各自的代表点连接成一个四边形。&lt;/p&gt;
+&lt;p&gt;也就是说：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Marching Cubes：体素内部生成三角形；&lt;/li&gt;
+&lt;li&gt;Dual Contouring：体素生成顶点，网格边生成面片；&lt;/li&gt;
+&lt;li&gt;“Dual”的含义就是原网格中的 cell 变成输出网格中的 vertex。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;2-qef-的来源点到切平面的平方距离&#34;&gt;2. QEF 的来源：点到切平面的平方距离
+&lt;/h1&gt;&lt;p&gt;对每个 Hermite 样本 $(p_i,n_i)$，用它构造一个切平面：&lt;/p&gt;
+&lt;p&gt;$n_i^T(x-p_i)=0$&lt;/p&gt;
+&lt;p&gt;也就是：&lt;/p&gt;
+&lt;p&gt;$n_i^Tx=n_i^Tp_i$&lt;/p&gt;
+&lt;p&gt;其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$p_i$：等值面与体素边的交点；&lt;/li&gt;
+&lt;li&gt;$n_i$：该点处的单位法线；&lt;/li&gt;
+&lt;li&gt;$x$：要求的体素内代表顶点。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果 (x) 在这个切平面上，那么：&lt;/p&gt;
+&lt;p&gt;$n_i^T(x-p_i)=0$&lt;/p&gt;
+&lt;p&gt;如果不在，则：&lt;/p&gt;
+&lt;p&gt;$n_i^T(x-p_i)$&lt;/p&gt;
+&lt;p&gt;就是 x到该切平面的有符号距离。&lt;/p&gt;
+&lt;p&gt;因此，对所有交点的切平面做最小二乘拟合：&lt;/p&gt;
+&lt;p&gt;$E(x)=\sum_i \left(n_i^T(x-p_i)\right)^2$&lt;/p&gt;
+&lt;p&gt;这就是 QEF，Quadratic Error Function，二次误差函数。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;3-qef-的矩阵形式&#34;&gt;3. QEF 的矩阵形式
+&lt;/h1&gt;&lt;p&gt;把所有法线堆成矩阵 (A)，把所有平面右端项堆成向量 (b)。&lt;/p&gt;
+&lt;p&gt;设：&lt;/p&gt;
+$$
+A=
+\begin{bmatrix}
+n_1^T\
+n_2^T\
+\vdots\
+n_m^T
+\end{bmatrix}
+$$$$
+b=
+\begin{bmatrix}
+n_1^Tp_1\
+n_2^Tp_2\
+\vdots\
+n_m^Tp_m
+\end{bmatrix}
+$$&lt;p&gt;那么：&lt;/p&gt;
+&lt;p&gt;$E(x)=|Ax-b|^2$&lt;/p&gt;
+&lt;p&gt;展开为：&lt;/p&gt;
+&lt;p&gt;$E(x)=
+x^TA^TAx-2x^TA^Tb+b^Tb$&lt;/p&gt;
+&lt;p&gt;原始 DC 的后续技术报告也采用了这种形式，并指出 (A^TA) 是一个对称 (3\times 3) 矩阵；同时，直接形成 (A^TA) 会平方条件数，因此数值稳定性会变差。(&lt;a class=&#34;link&#34; href=&#34;https://people.eecs.berkeley.edu/~jrs/meshpapers/SchaeferWarren2.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;People @ EECS&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;令：&lt;/p&gt;
+&lt;p&gt;$M=A^TA$&lt;/p&gt;
+&lt;p&gt;$q=A^Tb$&lt;/p&gt;
+&lt;p&gt;$r=b^Tb$&lt;/p&gt;
+&lt;p&gt;则：&lt;/p&gt;
+&lt;p&gt;$E(x)=x^TMx-2x^Tq+r$&lt;/p&gt;
+&lt;p&gt;对 (x) 求导：&lt;/p&gt;
+&lt;p&gt;$\nabla E(x)=2Mx-2q$&lt;/p&gt;
+&lt;p&gt;最小值满足：&lt;/p&gt;
+&lt;p&gt;$Mx=q$&lt;/p&gt;
+&lt;p&gt;也就是：&lt;/p&gt;
+&lt;p&gt;$A^TAx=A^Tb$&lt;/p&gt;
+&lt;p&gt;这就是 QEF 的正规方程。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;4-为什么-qef-拟合点会逃出体素&#34;&gt;4. 为什么 QEF 拟合点会逃出体素？
+&lt;/h1&gt;&lt;p&gt;关键原因是：&lt;strong&gt;QEF 只关心拟合切平面，不关心体素边界。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;例如在一个近似平面的体素中，所有法线都差不多：&lt;/p&gt;
+&lt;p&gt;$n_1\approx n_2\approx \cdots \approx n_m$&lt;/p&gt;
+&lt;p&gt;那么 QEF 只强烈约束法线方向，而对切平面上的两个切向方向几乎没有约束。&lt;/p&gt;
+&lt;p&gt;此时最小解不是唯一的，而是一整个平面：&lt;/p&gt;
+&lt;p&gt;${x\mid Ax=b}$&lt;/p&gt;
+&lt;p&gt;这时如果你用普通伪逆求解，它默认会选择“离世界坐标原点最近”的那个解。这个点可能远远跑出当前体素。&lt;/p&gt;
+&lt;p&gt;类似地：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;平面特征：约束秩约为 1，解空间接近平面；&lt;/li&gt;
+&lt;li&gt;边特征：约束秩约为 2，解空间接近直线；&lt;/li&gt;
+&lt;li&gt;角点特征：约束秩约为 3，解接近唯一点。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以 DC 中的“逃出体素”通常不是因为 QEF 写错，而是因为 QEF 在某些方向上欠约束。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;5-svd-和-qef-的关系&#34;&gt;5. SVD 和 QEF 的关系
+&lt;/h1&gt;&lt;p&gt;QEF 本质是一个最小二乘问题：&lt;/p&gt;
+&lt;p&gt;$\min_x |Ax-b|^2$&lt;/p&gt;
+&lt;p&gt;对 (A) 做奇异值分解：&lt;/p&gt;
+&lt;p&gt;$A=U\Sigma V^T$&lt;/p&gt;
+&lt;p&gt;其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$U$：左奇异向量矩阵；&lt;/li&gt;
+&lt;li&gt;$\Sigma$：奇异值矩阵；&lt;/li&gt;
+&lt;li&gt;$V$：右奇异向量矩阵；&lt;/li&gt;
+&lt;li&gt;$\sigma_i$：奇异值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;令：&lt;/p&gt;
+&lt;p&gt;$x=Vz$&lt;/p&gt;
+&lt;p&gt;由于 (V) 是正交矩阵，所以这只是换了一个坐标系。&lt;/p&gt;
+&lt;p&gt;又因为：&lt;/p&gt;
+&lt;p&gt;$Ax=U\Sigma V^T x$&lt;/p&gt;
+&lt;p&gt;$V^Tx=z$&lt;/p&gt;
+&lt;p&gt;所以：&lt;/p&gt;
+&lt;p&gt;$Ax=U\Sigma z$&lt;/p&gt;
+&lt;p&gt;左乘 (U^T)，利用正交矩阵不改变二范数：&lt;/p&gt;
+&lt;p&gt;$|Ax-b|^2=|\Sigma z-U^Tb|^2$&lt;/p&gt;
+&lt;p&gt;设：&lt;/p&gt;
+&lt;p&gt;$\beta=U^Tb$&lt;/p&gt;
+&lt;p&gt;那么：&lt;/p&gt;
+&lt;p&gt;$E(z)=\sum_i(\sigma_i z_i-\beta_i)^2+\text{常数项}$&lt;/p&gt;
+&lt;p&gt;对于每个 $\sigma_i&amp;gt;0$的方向：&lt;/p&gt;
+&lt;p&gt;$z_i=\frac{\beta_i}{\sigma_i}$&lt;/p&gt;
+&lt;p&gt;对于 $\sigma_i=0$的方向，目标函数不依赖 $z_i$，说明该方向没有被 QEF 约束。&lt;/p&gt;
+&lt;p&gt;Moore-Penrose 伪逆默认取：&lt;/p&gt;
+&lt;p&gt;$z_i=0$&lt;/p&gt;
+&lt;p&gt;也就是在所有最小二乘解中取欧氏范数最小的解。&lt;/p&gt;
+&lt;p&gt;因此：&lt;/p&gt;
+&lt;p&gt;$x=A^+b$&lt;/p&gt;
+&lt;p&gt;其中：&lt;/p&gt;
+&lt;p&gt;$A^+=V\Sigma^+U^T$&lt;/p&gt;
+&lt;p&gt;这就是 SVD 解 QEF 的理论来源。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;6-svd-的几何意义&#34;&gt;6. SVD 的几何意义
+&lt;/h1&gt;&lt;p&gt;在 DC 的 QEF 中，奇异值可以理解为“某个方向被法线约束的强度”。&lt;/p&gt;
+&lt;p&gt;设 (V) 的列向量为：&lt;/p&gt;
+&lt;p&gt;$v_1,v_2,v_3$&lt;/p&gt;
+&lt;p&gt;它们表示空间中的三个主方向。&lt;/p&gt;
+&lt;p&gt;如果某个奇异值 $\sigma_i$很大，说明 QEF 对方向 (v_i) 约束强。&lt;/p&gt;
+&lt;p&gt;如果某个奇异值 $\sigma_i$ 很小，说明该方向几乎没有约束。&lt;/p&gt;
+&lt;p&gt;因此：&lt;/p&gt;
+&lt;h2 id=&#34;平面区域&#34;&gt;平面区域
+&lt;/h2&gt;&lt;p&gt;所有法线几乎相同，(A) 的秩约为 1：&lt;/p&gt;
+&lt;p&gt;$\sigma_1\gg \sigma_2\approx 0,\quad \sigma_3\approx 0$&lt;/p&gt;
+&lt;p&gt;只约束法线方向，切平面内两个方向自由。&lt;/p&gt;
+&lt;h2 id=&#34;边特征&#34;&gt;边特征
+&lt;/h2&gt;&lt;p&gt;存在两组明显不同的法线，秩约为 2：&lt;/p&gt;
+&lt;p&gt;$\sigma_1,\sigma_2 \text{ 较大},\quad \sigma_3\approx 0$&lt;/p&gt;
+&lt;p&gt;两个法线方向约束后，解空间接近一条线，也就是锐边。&lt;/p&gt;
+&lt;h2 id=&#34;角点特征&#34;&gt;角点特征
+&lt;/h2&gt;&lt;p&gt;三个方向都有约束，秩约为 3：&lt;/p&gt;
+&lt;p&gt;[
+\sigma_1,\sigma_2,\sigma_3 \text{ 都较大}
+]&lt;/p&gt;
+&lt;p&gt;此时 QEF 解接近唯一点，也就是角点。&lt;/p&gt;
+&lt;p&gt;这也是 DC 能保留锐边的核心原因：它不是只插值边上的点，而是让多个局部切平面在一个体素内共同决定顶点位置。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;7-atasvd-和特征值的关系&#34;&gt;7. (A^TA)、SVD 和特征值的关系
+&lt;/h1&gt;&lt;p&gt;如果：&lt;/p&gt;
+&lt;p&gt;$A=U\Sigma V^T$&lt;/p&gt;
+&lt;p&gt;那么：&lt;/p&gt;
+&lt;h1 id=&#34;-ata&#34;&gt;[ A^TA
+&lt;/h1&gt;&lt;p&gt;V\Sigma^TU^TU\Sigma V^T
+]&lt;/p&gt;
+&lt;p&gt;因为：&lt;/p&gt;
+&lt;p&gt;[
+U^TU=I
+]&lt;/p&gt;
+&lt;p&gt;所以：&lt;/p&gt;
+&lt;p&gt;[
+A^TA=V\Sigma^T\Sigma V^T
+]&lt;/p&gt;
+&lt;p&gt;也就是说：&lt;/p&gt;
+&lt;p&gt;[
+A^TA
+]&lt;/p&gt;
+&lt;p&gt;的特征向量就是 (V)，特征值是：&lt;/p&gt;
+&lt;p&gt;[
+\lambda_i=\sigma_i^2
+]&lt;/p&gt;
+&lt;p&gt;因此：&lt;/p&gt;
+&lt;p&gt;[
+\sigma_i=\sqrt{\lambda_i}
+]&lt;/p&gt;
+&lt;p&gt;这说明两件事：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;对 (A) 做 SVD 和对 (A^TA) 做特征分解本质上是相关的；&lt;/li&gt;
+&lt;li&gt;但直接构造 (A^TA) 会把条件数平方，数值稳定性更差。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这也是为什么一些实现会使用 QR 或 SVD 来避免直接求逆。DC 的技术报告中也明确提到，形成 (A^TA) 会平方条件数，而 QR 表示可以更稳定地保存和合并 QEF。(&lt;a class=&#34;link&#34; href=&#34;https://people.eecs.berkeley.edu/~jrs/meshpapers/SchaeferWarren2.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;People @ EECS&lt;/a&gt;)&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;8-qef-和广义逆矩阵的关系&#34;&gt;8. QEF 和广义逆矩阵的关系
+&lt;/h1&gt;&lt;p&gt;普通满秩情况下：&lt;/p&gt;
+&lt;p&gt;$A^TAx=A^Tb$&lt;/p&gt;
+&lt;p&gt;如果 (A^TA) 可逆，则：&lt;/p&gt;
+&lt;p&gt;[
+x=(A^TA)^{-1}A^Tb
+]&lt;/p&gt;
+&lt;p&gt;但是在 DC 中，(A^TA) 经常不可逆或病态。比如平面区域、边区域，都会导致矩阵秩亏。&lt;/p&gt;
+&lt;p&gt;于是需要用广义逆，尤其是 Moore-Penrose 伪逆：&lt;/p&gt;
+&lt;p&gt;[
+x=(A^TA)^+A^Tb
+]&lt;/p&gt;
+&lt;p&gt;也可以写成：&lt;/p&gt;
+&lt;p&gt;[
+x=A^+b
+]&lt;/p&gt;
+&lt;p&gt;其中：&lt;/p&gt;
+&lt;p&gt;[
+A^+=(A^TA)^+A^T
+]&lt;/p&gt;
+&lt;p&gt;在 Moore-Penrose 意义下成立。&lt;/p&gt;
+&lt;p&gt;更一般地，最小二乘解集合可以写为：&lt;/p&gt;
+&lt;p&gt;$x=A^+b+(I-A^+A)z$&lt;/p&gt;
+&lt;p&gt;其中 $z$是任意向量。&lt;/p&gt;
+&lt;p&gt;这里：&lt;/p&gt;
+&lt;p&gt;$A^+b$&lt;/p&gt;
+&lt;p&gt;是最小范数解；&lt;/p&gt;
+&lt;p&gt;$(I-A^+A)z$&lt;/p&gt;
+&lt;p&gt;是 (A) 的零空间方向，也就是 QEF 没有约束的自由方向。&lt;/p&gt;
+&lt;p&gt;这正是 DC 顶点可能飞出去的根源：欠约束方向没有几何限制。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;9-令-yx-c到底是什么意思&#34;&gt;9. “令 (y=x-c)”到底是什么意思？
+&lt;/h1&gt;&lt;p&gt;设 (c) 是体素内的参考点，常用的是：&lt;/p&gt;
+&lt;h2 id=&#34;质点--mass-point&#34;&gt;质点 / mass point
+&lt;/h2&gt;&lt;p&gt;[
+c=\frac{1}{m}\sum_i p_i
+]&lt;/p&gt;
+&lt;p&gt;因为每个 (p_i) 都在体素边上，所以它们的平均值是体素内点。&lt;/p&gt;
+&lt;p&gt;原始 DC 后续说明中也采用了 mass point，即边交点平均值；它的好处是作为边交点的凸组合，天然位于生成它的体素内部。(&lt;a class=&#34;link&#34; href=&#34;https://people.eecs.berkeley.edu/~jrs/meshpapers/SchaeferWarren2.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;People @ EECS&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;现在令：&lt;/p&gt;
+&lt;p&gt;[
+y=x-c
+]&lt;/p&gt;
+&lt;p&gt;则：&lt;/p&gt;
+&lt;p&gt;[
+x=c+y
+]&lt;/p&gt;
+&lt;p&gt;代入 QEF：&lt;/p&gt;
+&lt;p&gt;[
+\min_x |Ax-b|^2
+]&lt;/p&gt;
+&lt;p&gt;得到：&lt;/p&gt;
+&lt;p&gt;[
+\min_y |A(c+y)-b|^2
+]&lt;/p&gt;
+&lt;h1 id=&#34;heading&#34;&gt;[
+&lt;/h1&gt;&lt;p&gt;\min_y |Ay-(b-Ac)|^2
+]&lt;/p&gt;
+&lt;p&gt;令：&lt;/p&gt;
+&lt;p&gt;[
+d=b-Ac
+]&lt;/p&gt;
+&lt;p&gt;则：&lt;/p&gt;
+&lt;p&gt;[
+\min_y |Ay-d|^2
+]&lt;/p&gt;
+&lt;p&gt;用伪逆求最小范数解：&lt;/p&gt;
+&lt;p&gt;[
+y=A^+d
+]&lt;/p&gt;
+&lt;p&gt;所以：&lt;/p&gt;
+&lt;p&gt;[
+\boxed{
+x=c+A^+(b-Ac)
+}
+]&lt;/p&gt;
+&lt;p&gt;这就是“以质点为中心”的 QEF 解法。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;91-它的意义&#34;&gt;9.1 它的意义
+&lt;/h2&gt;&lt;p&gt;这个方法不是给 QEF 加惩罚项，而是在所有 QEF 最小解中，选择距离 (c) 最近的那个解。&lt;/p&gt;
+&lt;p&gt;因为：&lt;/p&gt;
+&lt;p&gt;[
+x=c+y
+]&lt;/p&gt;
+&lt;p&gt;而伪逆求的是最小 (|y|) 的解，所以等价于：&lt;/p&gt;
+&lt;p&gt;[
+\min |x-c|
+]&lt;/p&gt;
+&lt;p&gt;也就是说，在 QEF 欠定时，它不再选择“离世界原点最近”的解，而是选择“离体素内质点最近”的解。&lt;/p&gt;
+&lt;p&gt;这能显著减少顶点逃出体素的情况。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;92-与-ata-写法的关系&#34;&gt;9.2 与 (A^TA) 写法的关系
+&lt;/h2&gt;&lt;p&gt;从正规方程角度看：&lt;/p&gt;
+&lt;p&gt;[
+M=A^TA
+]&lt;/p&gt;
+&lt;p&gt;[
+q=A^Tb
+]&lt;/p&gt;
+&lt;p&gt;令：&lt;/p&gt;
+&lt;p&gt;[
+x=c+y
+]&lt;/p&gt;
+&lt;p&gt;代入：&lt;/p&gt;
+&lt;p&gt;[
+M(c+y)=q
+]&lt;/p&gt;
+&lt;p&gt;得到：&lt;/p&gt;
+&lt;p&gt;[
+My=q-Mc
+]&lt;/p&gt;
+&lt;p&gt;用伪逆：&lt;/p&gt;
+&lt;p&gt;[
+y=M^+(q-Mc)
+]&lt;/p&gt;
+&lt;p&gt;所以：&lt;/p&gt;
+&lt;p&gt;[
+\boxed{
+x=c+M^+(q-Mc)
+}
+]&lt;/p&gt;
+&lt;p&gt;也就是：&lt;/p&gt;
+&lt;p&gt;[
+\boxed{
+x=c+(A^TA)^+(A^Tb-A^TAc)
+}
+]&lt;/p&gt;
+&lt;p&gt;这和原始 DC 技术报告里给出的“求离点 (p) 最近的 QEF 解”的形式一致。(&lt;a class=&#34;link&#34; href=&#34;https://people.eecs.berkeley.edu/~jrs/meshpapers/SchaeferWarren2.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;People @ EECS&lt;/a&gt;)&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;10-和加入质点距离能量项的区别&#34;&gt;10. 和“加入质点距离能量项”的区别
+&lt;/h1&gt;&lt;p&gt;有些实现会写成：&lt;/p&gt;
+&lt;h1 id=&#34;-e_lambdax&#34;&gt;[ E_\lambda(x)
+&lt;/h1&gt;&lt;p&gt;|Ax-b|^2+\lambda|x-c|^2
+]&lt;/p&gt;
+&lt;p&gt;这叫正则化，或者 Tikhonov / Ridge regularization。&lt;/p&gt;
+&lt;p&gt;它的解为：&lt;/p&gt;
+&lt;p&gt;[
+(A^TA+\lambda I)x=A^Tb+\lambda c
+]&lt;/p&gt;
+&lt;p&gt;即：&lt;/p&gt;
+&lt;p&gt;[
+\boxed{
+x=(A^TA+\lambda I)^{-1}(A^Tb+\lambda c)
+}
+]&lt;/p&gt;
+&lt;p&gt;这个方法的特点是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(\lambda&amp;gt;0) 后矩阵一定更稳定；&lt;/li&gt;
+&lt;li&gt;小奇异值方向会被抑制；&lt;/li&gt;
+&lt;li&gt;解会被拉向 (c)；&lt;/li&gt;
+&lt;li&gt;但它会改变原始 QEF 的最优点；&lt;/li&gt;
+&lt;li&gt;它仍然不能严格保证 (x) 在体素内。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;用 SVD 看得更清楚。&lt;/p&gt;
+&lt;p&gt;令：&lt;/p&gt;
+&lt;p&gt;[
+x=c+y
+]&lt;/p&gt;
+&lt;p&gt;则：&lt;/p&gt;
+&lt;p&gt;[
+E_\lambda(y)=|Ay-(b-Ac)|^2+\lambda|y|^2
+]&lt;/p&gt;
+&lt;p&gt;解为：&lt;/p&gt;
+&lt;p&gt;[
+y=V
+\operatorname{diag}
+\left(
+\frac{\sigma_i}{\sigma_i^2+\lambda}
+\right)
+U^T(b-Ac)
+]&lt;/p&gt;
+&lt;p&gt;所以：&lt;/p&gt;
+&lt;p&gt;[
+\boxed{
+x=c+
+V
+\operatorname{diag}
+\left(
+\frac{\sigma_i}{\sigma_i^2+\lambda}
+\right)
+U^T(b-Ac)
+}
+]&lt;/p&gt;
+&lt;p&gt;当 (\sigma_i) 很小时：&lt;/p&gt;
+&lt;p&gt;[
+\frac{\sigma_i}{\sigma_i^2+\lambda}
+]&lt;/p&gt;
+&lt;p&gt;会变得很小，说明小奇异值方向被压制。&lt;/p&gt;
+&lt;p&gt;所以这个方法更像“软约束”，而不是“严格不出体素”。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;11-如果要严格防止逃出体素盒约束-qef&#34;&gt;11. 如果要严格防止逃出体素：盒约束 QEF
+&lt;/h1&gt;&lt;p&gt;推荐你最终使用这个形式：&lt;/p&gt;
+&lt;p&gt;[
+\boxed{
+\min_x |Ax-b|^2
+}
+]&lt;/p&gt;
+&lt;p&gt;约束：&lt;/p&gt;
+&lt;p&gt;[
+l\le x\le u
+]&lt;/p&gt;
+&lt;p&gt;其中：&lt;/p&gt;
+&lt;p&gt;[
+l=(x_{\min},y_{\min},z_{\min})
+]&lt;/p&gt;
+&lt;p&gt;[
+u=(x_{\max},y_{\max},z_{\max})
+]&lt;/p&gt;
+&lt;p&gt;这是一个 3 维凸二次规划问题。&lt;/p&gt;
+&lt;p&gt;因为变量只有 3 个，所以不需要复杂 QP 求解器，可以直接枚举边界状态。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;111-盒约束求解思路&#34;&gt;11.1 盒约束求解思路
+&lt;/h2&gt;&lt;p&gt;每个坐标只有三种状态：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;自由；&lt;/li&gt;
+&lt;li&gt;固定在下边界；&lt;/li&gt;
+&lt;li&gt;固定在上边界。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;所以一共有：&lt;/p&gt;
+&lt;p&gt;[
+3^3=27
+]&lt;/p&gt;
+&lt;p&gt;种组合。&lt;/p&gt;
+&lt;p&gt;对于每一种组合：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;固定某些坐标到边界；&lt;/li&gt;
+&lt;li&gt;对剩下自由坐标解一个低维最小二乘；&lt;/li&gt;
+&lt;li&gt;如果自由坐标解仍在边界范围内，就计算 QEF；&lt;/li&gt;
+&lt;li&gt;选 QEF 最小的可行点。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;112-公式&#34;&gt;11.2 公式
+&lt;/h2&gt;&lt;p&gt;设坐标分成两部分：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自由变量：(x_f)&lt;/li&gt;
+&lt;li&gt;固定变量：(x_k)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;原问题：&lt;/p&gt;
+&lt;p&gt;[
+\min_x |Ax-b|^2
+]&lt;/p&gt;
+&lt;p&gt;拆成：&lt;/p&gt;
+&lt;p&gt;[
+A_f x_f + A_k x_k
+]&lt;/p&gt;
+&lt;p&gt;其中 (x_k) 已经被固定为某个边界值。&lt;/p&gt;
+&lt;p&gt;于是变成：&lt;/p&gt;
+&lt;p&gt;[
+\min_{x_f}|A_f x_f-(b-A_kx_k)|^2
+]&lt;/p&gt;
+&lt;p&gt;解：&lt;/p&gt;
+&lt;p&gt;[
+x_f=A_f^+(b-A_kx_k)
+]&lt;/p&gt;
+&lt;p&gt;如果：&lt;/p&gt;
+&lt;p&gt;[
+l_f\le x_f\le u_f
+]&lt;/p&gt;
+&lt;p&gt;则它是当前 active set 下的候选解。&lt;/p&gt;
+&lt;p&gt;最后在所有候选解中取 QEF 最小者：&lt;/p&gt;
+&lt;p&gt;[
+x^*=\arg\min_{x\in \text{candidates}} |Ax-b|^2
+]&lt;/p&gt;
+&lt;p&gt;这样得到的点一定在体素盒内。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;12-实际推荐计算流程&#34;&gt;12. 实际推荐计算流程
+&lt;/h1&gt;&lt;p&gt;我建议你的 DC 顶点放置流程这样写：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
+&lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 1
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 2
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 3
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 4
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 5
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 6
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 7
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 8
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt; 9
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;10
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;11
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;12
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;13
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;14
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;15
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;16
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;17
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;18
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;19
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;20
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;21
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;22
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;23
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;24
+&lt;/span&gt;&lt;span style=&#34;white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f&#34;&gt;25
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;;width:100%&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-text&#34; data-lang=&#34;text&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;输入：
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    当前体素 cell
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Hermite 点 p_i
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    Hermite 法线 n_i
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;1. 构造 A, b
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       A 的每一行 = n_i^T
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       b_i = n_i^T p_i
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;2. 计算质点 c
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       c = average(p_i)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;3. 先求 shifted QEF：
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       x = c + A^+ (b - A c)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;4. 如果 x 在 cell 内：
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       使用 x
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;5. 如果 x 不在 cell 内：
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       解 box-constrained QEF：
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       min ||A x - b||^2
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       subject to cell_min &amp;lt;= x &amp;lt;= cell_max
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;6. 如果数值异常：
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       fallback = c
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;核心是：&lt;/p&gt;
+&lt;p&gt;[
+\boxed{
+x=c+A^+(b-Ac)
+}
+]&lt;/p&gt;
+&lt;p&gt;再配合：&lt;/p&gt;
+&lt;p&gt;[
+\boxed{
+l\le x\le u
+}
+]&lt;/p&gt;
+&lt;p&gt;这样既有 DC 的锐特征能力，又能避免体素点飞出。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;13-不建议直接-clamp&#34;&gt;13. 不建议直接 clamp
+&lt;/h1&gt;&lt;p&gt;有些实现会直接：&lt;/p&gt;
+&lt;p&gt;[
+x=\operatorname{clamp}(x,l,u)
+]&lt;/p&gt;
+&lt;p&gt;这虽然能把点拉回体素，但它不是 QEF 在体素边界上的最优解。&lt;/p&gt;
+&lt;p&gt;直接 clamp 可能导致：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;顶点沿某个坐标轴被硬拉回；&lt;/li&gt;
+&lt;li&gt;锐边位置偏移；&lt;/li&gt;
+&lt;li&gt;面片局部折叠；&lt;/li&gt;
+&lt;li&gt;相邻体素顶点不连续；&lt;/li&gt;
+&lt;li&gt;出现小尖刺或皱褶。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以 clamp 只能作为最后兜底，不应该作为主要方法。&lt;/p&gt;
+&lt;p&gt;更合理的是：&lt;/p&gt;
+&lt;p&gt;[
+\min |Ax-b|^2,\quad l\le x\le u
+]&lt;/p&gt;
+&lt;p&gt;也就是盒约束 QEF。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;14-小结&#34;&gt;14. 小结
+&lt;/h1&gt;&lt;p&gt;你看到的两种做法本质不同：&lt;/p&gt;
+&lt;h2 id=&#34;做法一令-yx-c&#34;&gt;做法一：令 (y=x-c)
+&lt;/h2&gt;&lt;p&gt;[
+x=c+A^+(b-Ac)
+]&lt;/p&gt;
+&lt;p&gt;含义是：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在原始 QEF 的所有最小解中，选离体素内质点 (c) 最近的解。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;它不改变原 QEF，满秩时结果和普通 QEF 一样，欠秩时才发挥作用。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;做法二加入质点距离能量&#34;&gt;做法二：加入质点距离能量
+&lt;/h2&gt;&lt;p&gt;[
+E_\lambda(x)=|Ax-b|^2+\lambda|x-c|^2
+]&lt;/p&gt;
+&lt;p&gt;解为：&lt;/p&gt;
+&lt;p&gt;[
+x=(A^TA+\lambda I)^{-1}(A^Tb+\lambda c)
+]&lt;/p&gt;
+&lt;p&gt;含义是：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在 QEF 拟合和靠近质点之间做折中。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;它会改变原 QEF 的最优点，但数值更稳定。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;最稳工程方案&#34;&gt;最稳工程方案
+&lt;/h2&gt;&lt;p&gt;[
+\boxed{
+x_0=c+A^+(b-Ac)
+}
+]&lt;/p&gt;
+&lt;p&gt;如果：&lt;/p&gt;
+&lt;p&gt;[
+x_0\in [l,u]
+]&lt;/p&gt;
+&lt;p&gt;直接使用。&lt;/p&gt;
+&lt;p&gt;否则求：&lt;/p&gt;
+&lt;p&gt;[
+\boxed{
+x^*=\arg\min_{l\le x\le u}|Ax-b|^2
+}
+]&lt;/p&gt;
+&lt;p&gt;如果仍然异常，使用：&lt;/p&gt;
+&lt;p&gt;[
+\boxed{
+x=c}
+]&lt;/p&gt;
+&lt;p&gt;作为兜底。&lt;/p&gt;
+&lt;p&gt;这个方案在工程上比单纯加 (\lambda|x-c|^2) 更可靠，因为它真正保证顶点不会逃出当前体素。&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -841,7 +1896,7 @@ $MutationValue = (u1 \cdot 0.1 + u2 \cdot 0.2 + u3 \cdot 0.6)$
 &lt;h4 id=&#34;小数进制分数进制&#34;&gt;小数进制（分数进制）
 &lt;/h4&gt;&lt;p&gt;对于小数来说，它不仅满足进制的性质（低位满数向前进一），而且还满足其后加多少0都相等。&lt;/p&gt;
 &lt;p&gt;小数的进制形式是$1,\frac{1}{10},\frac{1}{10^2}&amp;hellip;$,&lt;/p&gt;
-&lt;p&gt;八叉树体素的每个方向都是二叉树，每个xyz方向的位置是$\frac{1}{2}$进制的.&lt;/p&gt;
+&lt;p&gt;八叉树体素的每个方向都是二叉树，每个xyz方向的位置是$\frac{1}{2}$进制的.,也就是八叉树节点的坐标值是1 ,(1/2)&amp;hellip; (1/2^depth)&lt;/p&gt;
 </description>
         </item>
         <item>
