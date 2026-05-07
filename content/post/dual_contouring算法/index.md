@@ -357,9 +357,7 @@ $\sigma_1,\sigma_2 \text{ 较大},\quad \sigma_3\approx 0$
 
 三个方向都有约束，秩约为 3：
 
-[
-\sigma_1,\sigma_2,\sigma_3 \text{ 都较大}
-]
+$\sigma_1,\sigma_2,\sigma_3 \text{ 都较大}$
 
 此时 QEF 解接近唯一点，也就是角点。
 
@@ -367,7 +365,7 @@ $\sigma_1,\sigma_2 \text{ 较大},\quad \sigma_3\approx 0$
 
 ------
 
-# 7. (A^TA)、SVD 和特征值的关系
+# 7. $A^TA$、SVD 和特征值的关系
 
 如果：
 
@@ -375,40 +373,27 @@ $A=U\Sigma V^T$
 
 那么：
 
-# [ A^TA
-
-V\Sigma^TU^TU\Sigma V^T
-]
+$A^TA= V\Sigma^TU^TU\Sigma V^T$
 
 因为：
 
-[
-U^TU=I
-]
+$U^TU=I$
 
 所以：
 
-[
-A^TA=V\Sigma^T\Sigma V^T
-]
+$A^TA=V\Sigma^T\Sigma V^T$
 
 也就是说：
 
-[
-A^TA
-]
+$A^TA$
 
 的特征向量就是 (V)，特征值是：
 
-[
-\lambda_i=\sigma_i^2
-]
+$\lambda_i=\sigma_i^2$
 
 因此：
 
-[
-\sigma_i=\sqrt{\lambda_i}
-]
+$\sigma_i=\sqrt{\lambda_i}$
 
 这说明两件事：
 
@@ -427,29 +412,21 @@ $A^TAx=A^Tb$
 
 如果 (A^TA) 可逆，则：
 
-[
-x=(A^TA)^{-1}A^Tb
-]
+$x=(A^TA)^{-1}A^Tb$
 
 但是在 DC 中，(A^TA) 经常不可逆或病态。比如平面区域、边区域，都会导致矩阵秩亏。
 
 于是需要用广义逆，尤其是 Moore-Penrose 伪逆：
 
-[
-x=(A^TA)^+A^Tb
-]
+$x=(A^TA)^+A^Tb$
 
 也可以写成：
 
-[
-x=A^+b
-]
+$x=A^+b$
 
 其中：
 
-[
-A^+=(A^TA)^+A^T
-]
+$A^+=(A^TA)^+A^T$
 
 在 Moore-Penrose 意义下成立。
 
@@ -479,9 +456,7 @@ $(I-A^+A)z$
 
 ## 质点 / mass point
 
-[
-c=\frac{1}{m}\sum_i p_i
-]
+$c=\frac{1}{m}\sum_i p_i$
 
 因为每个 (p_i) 都在体素边上，所以它们的平均值是体素内点。
 
@@ -489,58 +464,37 @@ c=\frac{1}{m}\sum_i p_i
 
 现在令：
 
-[
-y=x-c
-]
+$y=x-c$
 
 则：
 
-[
-x=c+y
-]
+$x=c+y$
 
 代入 QEF：
 
-[
-\min_x |Ax-b|^2
-]
+$\min_x |Ax-b|^2$
 
 得到：
 
-[
-\min_y |A(c+y)-b|^2
-]
-
-# [
-
-\min_y |Ay-(b-Ac)|^2
-]
+$\min_y |A(c+y)-b|^2=\min_y |Ay-(b-Ac)|^2$
 
 令：
 
-[
-d=b-Ac
-]
+$d=b-Ac$
 
 则：
 
-[
-\min_y |Ay-d|^2
-]
+$\min_y |Ay-d|^2$
 
 用伪逆求最小范数解：
 
-[
-y=A^+d
-]
+$y=A^+d$
 
 所以：
 
-[
-\boxed{
+$\boxed{
 x=c+A^+(b-Ac)
-}
-]
+}$
 
 这就是“以质点为中心”的 QEF 解法。
 
@@ -552,15 +506,11 @@ x=c+A^+(b-Ac)
 
 因为：
 
-[
-x=c+y
-]
+$x=c+y$
 
-而伪逆求的是最小 (|y|) 的解，所以等价于：
+而伪逆求的是最小 $|y|$的解，所以等价于：
 
-[
-\min |x-c|
-]
+$\min |x-c|$
 
 也就是说，在 QEF 欠定时，它不再选择“离世界原点最近”的解，而是选择“离体素内质点最近”的解。
 
@@ -568,57 +518,41 @@ x=c+y
 
 ------
 
-## 9.2 与 (A^TA) 写法的关系
+## 9.2 与 $A^TA$写法的关系
 
 从正规方程角度看：
 
-[
-M=A^TA
-]
+$M=A^TA$
 
-[
-q=A^Tb
-]
+$q=A^Tb$
 
 令：
 
-[
-x=c+y
-]
+$x=c+y$
 
 代入：
 
-[
-M(c+y)=q
-]
+$M(c+y)=q$
 
 得到：
 
-[
-My=q-Mc
-]
+$My=q-Mc$
 
 用伪逆：
 
-[
-y=M^+(q-Mc)
-]
+$y=M^+(q-Mc)$
 
 所以：
 
-[
-\boxed{
+$\boxed{
 x=c+M^+(q-Mc)
-}
-]
+}$
 
 也就是：
 
-[
-\boxed{
+$\boxed{
 x=c+(A^TA)^+(A^Tb-A^TAc)
-}
-]
+}$
 
 这和原始 DC 技术报告里给出的“求离点 (p) 最近的 QEF 解”的形式一致。([People @ EECS](https://people.eecs.berkeley.edu/~jrs/meshpapers/SchaeferWarren2.pdf))
 
@@ -628,30 +562,23 @@ x=c+(A^TA)^+(A^Tb-A^TAc)
 
 有些实现会写成：
 
-# [ E_\lambda(x)
-
-|Ax-b|^2+\lambda|x-c|^2
-]
+$E_\lambda(x)=|Ax-b|^2+\lambda|x-c|^2$
 
 这叫正则化，或者 Tikhonov / Ridge regularization。
 
 它的解为：
 
-[
-(A^TA+\lambda I)x=A^Tb+\lambda c
-]
+$(A^TA+\lambda I)x=A^Tb+\lambda c$
 
 即：
 
-[
-\boxed{
+$\boxed{
 x=(A^TA+\lambda I)^{-1}(A^Tb+\lambda c)
-}
-]
+}$
 
 这个方法的特点是：
 
-- (\lambda>0) 后矩阵一定更稳定；
+- $\lambda>0$后矩阵一定更稳定；
 - 小奇异值方向会被抑制；
 - 解会被拉向 (c)；
 - 但它会改变原始 QEF 的最优点；
@@ -661,31 +588,24 @@ x=(A^TA+\lambda I)^{-1}(A^Tb+\lambda c)
 
 令：
 
-[
-x=c+y
-]
+$x=c+y$
 
 则：
 
-[
-E_\lambda(y)=|Ay-(b-Ac)|^2+\lambda|y|^2
-]
+$E_\lambda(y)=|Ay-(b-Ac)|^2+\lambda|y|^2$
 
 解为：
 
-[
-y=V
+$$y=V
 \operatorname{diag}
 \left(
 \frac{\sigma_i}{\sigma_i^2+\lambda}
 \right)
-U^T(b-Ac)
-]
+U^T(b-Ac)$$
 
 所以：
 
-[
-\boxed{
+$$\boxed{
 x=c+
 V
 \operatorname{diag}
@@ -693,14 +613,11 @@ V
 \frac{\sigma_i}{\sigma_i^2+\lambda}
 \right)
 U^T(b-Ac)
-}
-]
+}$$
 
-当 (\sigma_i) 很小时：
+当 $\sigma_i$很小时：
 
-[
-\frac{\sigma_i}{\sigma_i^2+\lambda}
-]
+$\frac{\sigma_i}{\sigma_i^2+\lambda}$
 
 会变得很小，说明小奇异值方向被压制。
 
@@ -712,27 +629,19 @@ U^T(b-Ac)
 
 推荐你最终使用这个形式：
 
-[
-\boxed{
+$\boxed{
 \min_x |Ax-b|^2
-}
-]
+}$
 
 约束：
 
-[
-l\le x\le u
-]
+$l\le x\le u$
 
 其中：
 
-[
-l=(x_{\min},y_{\min},z_{\min})
-]
+$l=(x_{\min},y_{\min},z_{\min})$
 
-[
-u=(x_{\max},y_{\max},z_{\max})
-]
+$u=(x_{\max},y_{\max},z_{\max})$
 
 这是一个 3 维凸二次规划问题。
 
@@ -750,9 +659,7 @@ u=(x_{\max},y_{\max},z_{\max})
 
 所以一共有：
 
-[
-3^3=27
-]
+$3^3=27$
 
 种组合。
 
@@ -769,48 +676,36 @@ u=(x_{\max},y_{\max},z_{\max})
 
 设坐标分成两部分：
 
-- 自由变量：(x_f)
-- 固定变量：(x_k)
+- 自由变量：$x_f$
+- 固定变量：$x_k$
 
 原问题：
 
-[
-\min_x |Ax-b|^2
-]
+$\min_x |Ax-b|^2$
 
 拆成：
 
-[
-A_f x_f + A_k x_k
-]
+$A_f x_f + A_k x_k$
 
-其中 (x_k) 已经被固定为某个边界值。
+其中 $x_k$ 已经被固定为某个边界值。
 
 于是变成：
 
-[
-\min_{x_f}|A_f x_f-(b-A_kx_k)|^2
-]
+$\min_{x_f}|A_f x_f-(b-A_kx_k)|^2$
 
 解：
 
-[
-x_f=A_f^+(b-A_kx_k)
-]
+$x_f=A_f^+(b-A_kx_k)$
 
 如果：
 
-[
-l_f\le x_f\le u_f
-]
+$l_f\le x_f\le u_f$
 
 则它是当前 active set 下的候选解。
 
 最后在所有候选解中取 QEF 最小者：
 
-[
-x^*=\arg\min_{x\in \text{candidates}} |Ax-b|^2
-]
+$x^*=\arg\min_{x\in \text{candidates}} |Ax-b|^2$
 
 这样得到的点一定在体素盒内。
 
@@ -850,19 +745,15 @@ x^*=\arg\min_{x\in \text{candidates}} |Ax-b|^2
 
 核心是：
 
-[
-\boxed{
+$\boxed{
 x=c+A^+(b-Ac)
-}
-]
+}$
 
 再配合：
 
-[
-\boxed{
+$\boxed{
 l\le x\le u
-}
-]
+}$
 
 这样既有 DC 的锐特征能力，又能避免体素点飞出。
 
@@ -872,9 +763,7 @@ l\le x\le u
 
 有些实现会直接：
 
-[
-x=\operatorname{clamp}(x,l,u)
-]
+$x=\operatorname{clamp}(x,l,u)$
 
 这虽然能把点拉回体素，但它不是 QEF 在体素边界上的最优解。
 
@@ -890,9 +779,7 @@ x=\operatorname{clamp}(x,l,u)
 
 更合理的是：
 
-[
-\min |Ax-b|^2,\quad l\le x\le u
-]
+$\min |Ax-b|^2,\quad l\le x\le u$
 
 也就是盒约束 QEF。
 
@@ -904,9 +791,7 @@ x=\operatorname{clamp}(x,l,u)
 
 ## 做法一：令 (y=x-c)
 
-[
-x=c+A^+(b-Ac)
-]
+$x=c+A^+(b-Ac)$
 
 含义是：
 
@@ -918,15 +803,11 @@ x=c+A^+(b-Ac)
 
 ## 做法二：加入质点距离能量
 
-[
-E_\lambda(x)=|Ax-b|^2+\lambda|x-c|^2
-]
+$E_\lambda(x)=|Ax-b|^2+\lambda|x-c|^2$
 
 解为：
 
-[
-x=(A^TA+\lambda I)^{-1}(A^Tb+\lambda c)
-]
+$x=(A^TA+\lambda I)^{-1}(A^Tb+\lambda c)$
 
 含义是：
 
@@ -938,35 +819,27 @@ x=(A^TA+\lambda I)^{-1}(A^Tb+\lambda c)
 
 ## 最稳工程方案
 
-[
-\boxed{
+$\boxed{
 x_0=c+A^+(b-Ac)
-}
-]
+}$
 
 如果：
 
-[
-x_0\in [l,u]
-]
+$x_0\in [l,u]$
 
 直接使用。
 
 否则求：
 
-[
-\boxed{
+$\boxed{
 x^*=\arg\min_{l\le x\le u}|Ax-b|^2
-}
-]
+}$
 
 如果仍然异常，使用：
 
-[
-\boxed{
-x=c}
-]
+$\boxed{
+x=c}$
 
 作为兜底。
 
-这个方案在工程上比单纯加 (\lambda|x-c|^2) 更可靠，因为它真正保证顶点不会逃出当前体素。
+这个方案在工程上比单纯加 $\lambda|x-c|^2$更可靠，因为它真正保证顶点不会逃出当前体素。

@@ -379,11 +379,8 @@
 
   <ol>
     <li><a href="#质点--mass-point">质点 / mass point</a></li>
-  </ol>
-
-  <ol>
     <li><a href="#91-它的意义">9.1 它的意义</a></li>
-    <li><a href="#92-与-ata-写法的关系">9.2 与 (A^TA) 写法的关系</a></li>
+    <li><a href="#92-与-ata写法的关系">9.2 与 $A^TA$写法的关系</a></li>
   </ol>
 
   <ol>
@@ -702,39 +699,25 @@ x^TA^TAx-2x^TA^Tb+b^Tb$</p>
 <p>两个法线方向约束后，解空间接近一条线，也就是锐边。</p>
 <h2 id="角点特征">角点特征
 </h2><p>三个方向都有约束，秩约为 3：</p>
-<p>[
-\sigma_1,\sigma_2,\sigma_3 \text{ 都较大}
-]</p>
+<p>$\sigma_1,\sigma_2,\sigma_3 \text{ 都较大}$</p>
 <p>此时 QEF 解接近唯一点，也就是角点。</p>
 <p>这也是 DC 能保留锐边的核心原因：它不是只插值边上的点，而是让多个局部切平面在一个体素内共同决定顶点位置。</p>
 <hr>
-<h1 id="7-atasvd-和特征值的关系">7. (A^TA)、SVD 和特征值的关系
+<h1 id="7-atasvd-和特征值的关系">7. $A^TA$、SVD 和特征值的关系
 </h1><p>如果：</p>
 <p>$A=U\Sigma V^T$</p>
 <p>那么：</p>
-<h1 id="-ata">[ A^TA
-</h1><p>V\Sigma^TU^TU\Sigma V^T
-]</p>
+<p>$A^TA= V\Sigma^TU^TU\Sigma V^T$</p>
 <p>因为：</p>
-<p>[
-U^TU=I
-]</p>
+<p>$U^TU=I$</p>
 <p>所以：</p>
-<p>[
-A^TA=V\Sigma^T\Sigma V^T
-]</p>
+<p>$A^TA=V\Sigma^T\Sigma V^T$</p>
 <p>也就是说：</p>
-<p>[
-A^TA
-]</p>
+<p>$A^TA$</p>
 <p>的特征向量就是 (V)，特征值是：</p>
-<p>[
-\lambda_i=\sigma_i^2
-]</p>
+<p>$\lambda_i=\sigma_i^2$</p>
 <p>因此：</p>
-<p>[
-\sigma_i=\sqrt{\lambda_i}
-]</p>
+<p>$\sigma_i=\sqrt{\lambda_i}$</p>
 <p>这说明两件事：</p>
 <ol>
 <li>对 (A) 做 SVD 和对 (A^TA) 做特征分解本质上是相关的；</li>
@@ -747,22 +730,14 @@ A^TA
 </h1><p>普通满秩情况下：</p>
 <p>$A^TAx=A^Tb$</p>
 <p>如果 (A^TA) 可逆，则：</p>
-<p>[
-x=(A^TA)^{-1}A^Tb
-]</p>
+<p>$x=(A^TA)^{-1}A^Tb$</p>
 <p>但是在 DC 中，(A^TA) 经常不可逆或病态。比如平面区域、边区域，都会导致矩阵秩亏。</p>
 <p>于是需要用广义逆，尤其是 Moore-Penrose 伪逆：</p>
-<p>[
-x=(A^TA)^+A^Tb
-]</p>
+<p>$x=(A^TA)^+A^Tb$</p>
 <p>也可以写成：</p>
-<p>[
-x=A^+b
-]</p>
+<p>$x=A^+b$</p>
 <p>其中：</p>
-<p>[
-A^+=(A^TA)^+A^T
-]</p>
+<p>$A^+=(A^TA)^+A^T$</p>
 <p>在 Moore-Penrose 意义下成立。</p>
 <p>更一般地，最小二乘解集合可以写为：</p>
 <p>$x=A^+b+(I-A^+A)z$</p>
@@ -777,122 +752,75 @@ A^+=(A^TA)^+A^T
 <h1 id="9-令-yx-c到底是什么意思">9. “令 (y=x-c)”到底是什么意思？
 </h1><p>设 (c) 是体素内的参考点，常用的是：</p>
 <h2 id="质点--mass-point">质点 / mass point
-</h2><p>[
-c=\frac{1}{m}\sum_i p_i
-]</p>
+</h2><p>$c=\frac{1}{m}\sum_i p_i$</p>
 <p>因为每个 (p_i) 都在体素边上，所以它们的平均值是体素内点。</p>
 <p>原始 DC 后续说明中也采用了 mass point，即边交点平均值；它的好处是作为边交点的凸组合，天然位于生成它的体素内部。(<a class="link" href="https://people.eecs.berkeley.edu/~jrs/meshpapers/SchaeferWarren2.pdf"  target="_blank" rel="noopener"
     >People @ EECS</a>)</p>
 <p>现在令：</p>
-<p>[
-y=x-c
-]</p>
+<p>$y=x-c$</p>
 <p>则：</p>
-<p>[
-x=c+y
-]</p>
+<p>$x=c+y$</p>
 <p>代入 QEF：</p>
-<p>[
-\min_x |Ax-b|^2
-]</p>
+<p>$\min_x |Ax-b|^2$</p>
 <p>得到：</p>
-<p>[
-\min_y |A(c+y)-b|^2
-]</p>
-<h1 id="heading">[
-</h1><p>\min_y |Ay-(b-Ac)|^2
-]</p>
+<p>$\min_y |A(c+y)-b|^2=\min_y |Ay-(b-Ac)|^2$</p>
 <p>令：</p>
-<p>[
-d=b-Ac
-]</p>
+<p>$d=b-Ac$</p>
 <p>则：</p>
-<p>[
-\min_y |Ay-d|^2
-]</p>
+<p>$\min_y |Ay-d|^2$</p>
 <p>用伪逆求最小范数解：</p>
-<p>[
-y=A^+d
-]</p>
+<p>$y=A^+d$</p>
 <p>所以：</p>
-<p>[
-\boxed{
+<p>$\boxed{
 x=c+A^+(b-Ac)
-}
-]</p>
+}$</p>
 <p>这就是“以质点为中心”的 QEF 解法。</p>
 <hr>
 <h2 id="91-它的意义">9.1 它的意义
 </h2><p>这个方法不是给 QEF 加惩罚项，而是在所有 QEF 最小解中，选择距离 (c) 最近的那个解。</p>
 <p>因为：</p>
-<p>[
-x=c+y
-]</p>
-<p>而伪逆求的是最小 (|y|) 的解，所以等价于：</p>
-<p>[
-\min |x-c|
-]</p>
+<p>$x=c+y$</p>
+<p>而伪逆求的是最小 $|y|$的解，所以等价于：</p>
+<p>$\min |x-c|$</p>
 <p>也就是说，在 QEF 欠定时，它不再选择“离世界原点最近”的解，而是选择“离体素内质点最近”的解。</p>
 <p>这能显著减少顶点逃出体素的情况。</p>
 <hr>
-<h2 id="92-与-ata-写法的关系">9.2 与 (A^TA) 写法的关系
+<h2 id="92-与-ata写法的关系">9.2 与 $A^TA$写法的关系
 </h2><p>从正规方程角度看：</p>
-<p>[
-M=A^TA
-]</p>
-<p>[
-q=A^Tb
-]</p>
+<p>$M=A^TA$</p>
+<p>$q=A^Tb$</p>
 <p>令：</p>
-<p>[
-x=c+y
-]</p>
+<p>$x=c+y$</p>
 <p>代入：</p>
-<p>[
-M(c+y)=q
-]</p>
+<p>$M(c+y)=q$</p>
 <p>得到：</p>
-<p>[
-My=q-Mc
-]</p>
+<p>$My=q-Mc$</p>
 <p>用伪逆：</p>
-<p>[
-y=M^+(q-Mc)
-]</p>
+<p>$y=M^+(q-Mc)$</p>
 <p>所以：</p>
-<p>[
-\boxed{
+<p>$\boxed{
 x=c+M^+(q-Mc)
-}
-]</p>
+}$</p>
 <p>也就是：</p>
-<p>[
-\boxed{
+<p>$\boxed{
 x=c+(A^TA)^+(A^Tb-A^TAc)
-}
-]</p>
+}$</p>
 <p>这和原始 DC 技术报告里给出的“求离点 (p) 最近的 QEF 解”的形式一致。(<a class="link" href="https://people.eecs.berkeley.edu/~jrs/meshpapers/SchaeferWarren2.pdf"  target="_blank" rel="noopener"
     >People @ EECS</a>)</p>
 <hr>
 <h1 id="10-和加入质点距离能量项的区别">10. 和“加入质点距离能量项”的区别
 </h1><p>有些实现会写成：</p>
-<h1 id="-e_lambdax">[ E_\lambda(x)
-</h1><p>|Ax-b|^2+\lambda|x-c|^2
-]</p>
+<p>$E_\lambda(x)=|Ax-b|^2+\lambda|x-c|^2$</p>
 <p>这叫正则化，或者 Tikhonov / Ridge regularization。</p>
 <p>它的解为：</p>
-<p>[
-(A^TA+\lambda I)x=A^Tb+\lambda c
-]</p>
+<p>$(A^TA+\lambda I)x=A^Tb+\lambda c$</p>
 <p>即：</p>
-<p>[
-\boxed{
+<p>$\boxed{
 x=(A^TA+\lambda I)^{-1}(A^Tb+\lambda c)
-}
-]</p>
+}$</p>
 <p>这个方法的特点是：</p>
 <ul>
-<li>(\lambda&gt;0) 后矩阵一定更稳定；</li>
+<li>$\lambda&gt;0$后矩阵一定更稳定；</li>
 <li>小奇异值方向会被抑制；</li>
 <li>解会被拉向 (c)；</li>
 <li>但它会改变原始 QEF 的最优点；</li>
@@ -900,25 +828,17 @@ x=(A^TA+\lambda I)^{-1}(A^Tb+\lambda c)
 </ul>
 <p>用 SVD 看得更清楚。</p>
 <p>令：</p>
-<p>[
-x=c+y
-]</p>
+<p>$x=c+y$</p>
 <p>则：</p>
-<p>[
-E_\lambda(y)=|Ay-(b-Ac)|^2+\lambda|y|^2
-]</p>
+<p>$E_\lambda(y)=|Ay-(b-Ac)|^2+\lambda|y|^2$</p>
 <p>解为：</p>
-<p>[
-y=V
+$$y=V
 \operatorname{diag}
 \left(
 \frac{\sigma_i}{\sigma_i^2+\lambda}
 \right)
-U^T(b-Ac)
-]</p>
-<p>所以：</p>
-<p>[
-\boxed{
+U^T(b-Ac)$$<p>所以：</p>
+$$\boxed{
 x=c+
 V
 \operatorname{diag}
@@ -926,33 +846,21 @@ V
 \frac{\sigma_i}{\sigma_i^2+\lambda}
 \right)
 U^T(b-Ac)
-}
-]</p>
-<p>当 (\sigma_i) 很小时：</p>
-<p>[
-\frac{\sigma_i}{\sigma_i^2+\lambda}
-]</p>
+}$$<p>当 $\sigma_i$很小时：</p>
+<p>$\frac{\sigma_i}{\sigma_i^2+\lambda}$</p>
 <p>会变得很小，说明小奇异值方向被压制。</p>
 <p>所以这个方法更像“软约束”，而不是“严格不出体素”。</p>
 <hr>
 <h1 id="11-如果要严格防止逃出体素盒约束-qef">11. 如果要严格防止逃出体素：盒约束 QEF
 </h1><p>推荐你最终使用这个形式：</p>
-<p>[
-\boxed{
+<p>$\boxed{
 \min_x |Ax-b|^2
-}
-]</p>
+}$</p>
 <p>约束：</p>
-<p>[
-l\le x\le u
-]</p>
+<p>$l\le x\le u$</p>
 <p>其中：</p>
-<p>[
-l=(x_{\min},y_{\min},z_{\min})
-]</p>
-<p>[
-u=(x_{\max},y_{\max},z_{\max})
-]</p>
+<p>$l=(x_{\min},y_{\min},z_{\min})$</p>
+<p>$u=(x_{\max},y_{\max},z_{\max})$</p>
 <p>这是一个 3 维凸二次规划问题。</p>
 <p>因为变量只有 3 个，所以不需要复杂 QP 求解器，可以直接枚举边界状态。</p>
 <hr>
@@ -964,9 +872,7 @@ u=(x_{\max},y_{\max},z_{\max})
 <li>固定在上边界。</li>
 </ol>
 <p>所以一共有：</p>
-<p>[
-3^3=27
-]</p>
+<p>$3^3=27$</p>
 <p>种组合。</p>
 <p>对于每一种组合：</p>
 <ul>
@@ -979,35 +885,23 @@ u=(x_{\max},y_{\max},z_{\max})
 <h2 id="112-公式">11.2 公式
 </h2><p>设坐标分成两部分：</p>
 <ul>
-<li>自由变量：(x_f)</li>
-<li>固定变量：(x_k)</li>
+<li>自由变量：$x_f$</li>
+<li>固定变量：$x_k$</li>
 </ul>
 <p>原问题：</p>
-<p>[
-\min_x |Ax-b|^2
-]</p>
+<p>$\min_x |Ax-b|^2$</p>
 <p>拆成：</p>
-<p>[
-A_f x_f + A_k x_k
-]</p>
-<p>其中 (x_k) 已经被固定为某个边界值。</p>
+<p>$A_f x_f + A_k x_k$</p>
+<p>其中 $x_k$ 已经被固定为某个边界值。</p>
 <p>于是变成：</p>
-<p>[
-\min_{x_f}|A_f x_f-(b-A_kx_k)|^2
-]</p>
+<p>$\min_{x_f}|A_f x_f-(b-A_kx_k)|^2$</p>
 <p>解：</p>
-<p>[
-x_f=A_f^+(b-A_kx_k)
-]</p>
+<p>$x_f=A_f^+(b-A_kx_k)$</p>
 <p>如果：</p>
-<p>[
-l_f\le x_f\le u_f
-]</p>
+<p>$l_f\le x_f\le u_f$</p>
 <p>则它是当前 active set 下的候选解。</p>
 <p>最后在所有候选解中取 QEF 最小者：</p>
-<p>[
-x^*=\arg\min_{x\in \text{candidates}} |Ax-b|^2
-]</p>
+<p>$x^*=\arg\min_{x\in \text{candidates}} |Ax-b|^2$</p>
 <p>这样得到的点一定在体素盒内。</p>
 <hr>
 <h1 id="12-实际推荐计算流程">12. 实际推荐计算流程
@@ -1069,24 +963,18 @@ x^*=\arg\min_{x\in \text{candidates}} |Ax-b|^2
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>核心是：</p>
-<p>[
-\boxed{
+<p>$\boxed{
 x=c+A^+(b-Ac)
-}
-]</p>
+}$</p>
 <p>再配合：</p>
-<p>[
-\boxed{
+<p>$\boxed{
 l\le x\le u
-}
-]</p>
+}$</p>
 <p>这样既有 DC 的锐特征能力，又能避免体素点飞出。</p>
 <hr>
 <h1 id="13-不建议直接-clamp">13. 不建议直接 clamp
 </h1><p>有些实现会直接：</p>
-<p>[
-x=\operatorname{clamp}(x,l,u)
-]</p>
+<p>$x=\operatorname{clamp}(x,l,u)$</p>
 <p>这虽然能把点拉回体素，但它不是 QEF 在体素边界上的最优解。</p>
 <p>直接 clamp 可能导致：</p>
 <ul>
@@ -1098,59 +986,43 @@ x=\operatorname{clamp}(x,l,u)
 </ul>
 <p>所以 clamp 只能作为最后兜底，不应该作为主要方法。</p>
 <p>更合理的是：</p>
-<p>[
-\min |Ax-b|^2,\quad l\le x\le u
-]</p>
+<p>$\min |Ax-b|^2,\quad l\le x\le u$</p>
 <p>也就是盒约束 QEF。</p>
 <hr>
 <h1 id="14-小结">14. 小结
 </h1><p>你看到的两种做法本质不同：</p>
 <h2 id="做法一令-yx-c">做法一：令 (y=x-c)
-</h2><p>[
-x=c+A^+(b-Ac)
-]</p>
+</h2><p>$x=c+A^+(b-Ac)$</p>
 <p>含义是：</p>
 <blockquote>
 <p>在原始 QEF 的所有最小解中，选离体素内质点 (c) 最近的解。</p></blockquote>
 <p>它不改变原 QEF，满秩时结果和普通 QEF 一样，欠秩时才发挥作用。</p>
 <hr>
 <h2 id="做法二加入质点距离能量">做法二：加入质点距离能量
-</h2><p>[
-E_\lambda(x)=|Ax-b|^2+\lambda|x-c|^2
-]</p>
+</h2><p>$E_\lambda(x)=|Ax-b|^2+\lambda|x-c|^2$</p>
 <p>解为：</p>
-<p>[
-x=(A^TA+\lambda I)^{-1}(A^Tb+\lambda c)
-]</p>
+<p>$x=(A^TA+\lambda I)^{-1}(A^Tb+\lambda c)$</p>
 <p>含义是：</p>
 <blockquote>
 <p>在 QEF 拟合和靠近质点之间做折中。</p></blockquote>
 <p>它会改变原 QEF 的最优点，但数值更稳定。</p>
 <hr>
 <h2 id="最稳工程方案">最稳工程方案
-</h2><p>[
-\boxed{
+</h2><p>$\boxed{
 x_0=c+A^+(b-Ac)
-}
-]</p>
+}$</p>
 <p>如果：</p>
-<p>[
-x_0\in [l,u]
-]</p>
+<p>$x_0\in [l,u]$</p>
 <p>直接使用。</p>
 <p>否则求：</p>
-<p>[
-\boxed{
+<p>$\boxed{
 x^*=\arg\min_{l\le x\le u}|Ax-b|^2
-}
-]</p>
+}$</p>
 <p>如果仍然异常，使用：</p>
-<p>[
-\boxed{
-x=c}
-]</p>
+<p>$\boxed{
+x=c}$</p>
 <p>作为兜底。</p>
-<p>这个方案在工程上比单纯加 (\lambda|x-c|^2) 更可靠，因为它真正保证顶点不会逃出当前体素。</p>
+<p>这个方案在工程上比单纯加 $\lambda|x-c|^2$更可靠，因为它真正保证顶点不会逃出当前体素。</p>
 
 </section>
 
