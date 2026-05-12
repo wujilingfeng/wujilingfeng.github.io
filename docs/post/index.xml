@@ -7,13 +7,23 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>LI BO</copyright>
-        <lastBuildDate>Tue, 05 May 2026 18:00:46 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 12 May 2026 23:35:57 +0800</lastBuildDate><atom:link href="https://wujilingfeng.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Qem算法</title>
+        <link>https://wujilingfeng.github.io/p/qem%E7%AE%97%E6%B3%95/</link>
+        <pubDate>Tue, 12 May 2026 23:35:57 +0800</pubDate>
+        
+        <guid>https://wujilingfeng.github.io/p/qem%E7%AE%97%E6%B3%95/</guid>
+        <description>&lt;p&gt;qem在merge边为点时,创建的一组三角形可能出现折叠.先统计并维护其中出现折叠的边, 然后通过折耳朵多边形来减少折叠的边.&lt;/p&gt;
+&lt;p&gt;注意每次折耳朵会消失两个边,创建一个边.对于新创建的边要判断是否和merge的顶点折叠.如果折叠就加入维护的容器.知道容器清空.&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Sdf算法</title>
         <link>https://wujilingfeng.github.io/p/sdf%E7%AE%97%E6%B3%95/</link>
         <pubDate>Tue, 05 May 2026 18:00:46 +0800</pubDate>
         
         <guid>https://wujilingfeng.github.io/p/sdf%E7%AE%97%E6%B3%95/</guid>
-        <description>&lt;p&gt;可以“顺带实现”的原因是：&lt;strong&gt;Dual Contouring 本身就需要一个隐式标量场&lt;/strong&gt;，而 SDF 正好就是最常用、最稳定的一种隐式场。&lt;/p&gt;
+        <description>&lt;img src="https://wujilingfeng.github.io/p/sdf%E7%AE%97%E6%B3%95/img.jpg" alt="Featured image of post Sdf算法" /&gt;&lt;p&gt;可以“顺带实现”的原因是：&lt;strong&gt;Dual Contouring 本身就需要一个隐式标量场&lt;/strong&gt;，而 SDF 正好就是最常用、最稳定的一种隐式场。&lt;/p&gt;
 &lt;p&gt;你现在已经有八叉树了，所以 SDF 的实现重点不是再写一个全新的重建算法，而是给八叉树的采样点补一个函数：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
 &lt;table style=&#34;border-spacing:0;padding:0;margin:0;border:0;&#34;&gt;&lt;tr&gt;&lt;td style=&#34;vertical-align:top;padding:0;margin:0;border:0;&#34;&gt;

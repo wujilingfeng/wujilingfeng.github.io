@@ -4,6 +4,9 @@ date = '2026-05-05T18:00:46+08:00'
 math= true
 draft = false
 title = 'Sdf算法'
+
+image= 'img.jpg'
+
 +++
 
 可以“顺带实现”的原因是：**Dual Contouring 本身就需要一个隐式标量场**，而 SDF 正好就是最常用、最稳定的一种隐式场。
