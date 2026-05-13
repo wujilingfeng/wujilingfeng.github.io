@@ -3839,6 +3839,144 @@ x^*=\arg\min_{l\le x\le u}|Ax-b|^2
 x=c}$&lt;/p&gt;
 &lt;p&gt;作为兜底。&lt;/p&gt;
 &lt;p&gt;这个方案在工程上比单纯加 $\lambda|x-c|^2$更可靠，因为它真正保证顶点不会逃出当前体素。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;givens旋转求解对称矩阵特征向量&#34;&gt;givens旋转求解对称矩阵特征向量
+&lt;/h2&gt;&lt;p&gt;我是一个基于 Gemini 2.5 Pro的人工智能助手。&lt;/p&gt;
+&lt;p&gt;当然可以。下面为您详细梳理对称矩阵雅可比迭代法（Jacobi Iteration Method）的理论推导、核心公式和算法流程。这个方法的目标是将一个对称矩阵 &lt;code&gt;M&lt;/code&gt;（在您的问题中是 &lt;code&gt;AᵀA&lt;/code&gt;）通过一系列平面旋转（Givens Rotation）逐步转化为对角矩阵。&lt;/p&gt;
+&lt;h3 id=&#34;1-理论推导-theoretical-derivation&#34;&gt;1. 理论推导 (Theoretical Derivation)
+&lt;/h3&gt;&lt;h4 id=&#34;核心思想&#34;&gt;核心思想
+&lt;/h4&gt;&lt;p&gt;我们的目标是求解 &lt;code&gt;M = VΣVᵀ&lt;/code&gt;。雅可比法的策略不是一次性求出 &lt;code&gt;V&lt;/code&gt; 和 &lt;code&gt;Σ&lt;/code&gt;，而是构造一个正交矩阵序列 &lt;code&gt;G₁, G₂, G₃, ...&lt;/code&gt;，通过迭代变换 &lt;code&gt;M_{k+1} = G_kᵀ M_k G_k&lt;/code&gt;，使得矩阵 &lt;code&gt;M&lt;/code&gt; 越来越接近对角矩阵。当 &lt;code&gt;M_k&lt;/code&gt; 足够接近对角时，我们就得到了：
+&lt;code&gt;Σ ≈ M_k&lt;/code&gt;
+&lt;code&gt;V ≈ G₁G₂G₃...G_k&lt;/code&gt;&lt;/p&gt;
+&lt;h4 id=&#34;单步迭代推导如何用一次旋转消去一个非对角元素&#34;&gt;单步迭代推导：如何用一次旋转消去一个非对角元素？
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;选择目标&lt;/strong&gt;：在当前矩阵 &lt;code&gt;M&lt;/code&gt; 中，选择一个非对角元素 &lt;code&gt;m_pq&lt;/code&gt; (其中 &lt;code&gt;p &amp;lt; q&lt;/code&gt;)，我们希望通过一次旋转将它变为0。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;构造旋转矩阵&lt;/strong&gt;：我们使用的工具是 &lt;strong&gt;Givens旋转矩阵&lt;/strong&gt; &lt;code&gt;G(p, q, θ)&lt;/code&gt;。它看起来像一个单位矩阵，只在第 &lt;code&gt;p&lt;/code&gt; 行、&lt;code&gt;p&lt;/code&gt; 列、&lt;code&gt;q&lt;/code&gt; 行、&lt;code&gt;q&lt;/code&gt; 列有不同：
+&lt;/p&gt;
+$$
+    G(p, q, \theta) = \begin{pmatrix}
+    1 &amp; \cdots &amp; 0 &amp; \cdots &amp; 0 &amp; \cdots &amp; 0 \\
+    \vdots &amp; \ddots &amp; \vdots &amp; &amp; \vdots &amp; &amp; \vdots \\
+    0 &amp; \cdots &amp; \cos\theta &amp; \cdots &amp; -\sin\theta &amp; \cdots &amp; 0 \\
+    \vdots &amp; &amp; \vdots &amp; \ddots &amp; \vdots &amp; &amp; \vdots \\
+    0 &amp; \cdots &amp; \sin\theta &amp; \cdots &amp; \cos\theta &amp; \cdots &amp; 0 \\
+    \vdots &amp; &amp; \vdots &amp; &amp; \vdots &amp; \ddots &amp; \vdots \\
+    0 &amp; \cdots &amp; 0 &amp; \cdots &amp; 0 &amp; \cdots &amp; 1
+    \end{pmatrix} \begin{matrix} \\ \\ \leftarrow p \\ \\ \leftarrow q \\ \\ \\ \end{matrix}
+    $$&lt;p&gt;
+这是一个正交矩阵 (&lt;code&gt;GᵀG = I&lt;/code&gt;)，它表示在 &lt;code&gt;(p, q)&lt;/code&gt; 平面上的一个旋转。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;执行变换&lt;/strong&gt;：我们计算 &lt;code&gt;M&#39; = GᵀMG&lt;/code&gt;。这个变换只会影响 &lt;code&gt;M&lt;/code&gt; 的第 &lt;code&gt;p&lt;/code&gt; 行/列和第 &lt;code&gt;q&lt;/code&gt; 行/列。我们可以聚焦于一个2x2的子问题：
+&lt;/p&gt;
+$$
+    \begin{pmatrix} m&#39;_{pp} &amp; m&#39;_{pq} \\ m&#39;_{qp} &amp; m&#39;_{qq} \end{pmatrix} =
+    \begin{pmatrix} c &amp; s \\ -s &amp; c \end{pmatrix}
+    \begin{pmatrix} m_{pp} &amp; m_{pq} \\ m_{qp} &amp; m_{qq} \end{pmatrix}
+    \begin{pmatrix} c &amp; -s \\ s &amp; c \end{pmatrix}
+    $$&lt;p&gt;
+其中 &lt;code&gt;c = cos(θ)&lt;/code&gt;，&lt;code&gt;s = sin(θ)&lt;/code&gt;，并且因为 &lt;code&gt;M&lt;/code&gt; 对称，&lt;code&gt;m_{pq} = m_{qp}&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;求解旋转角 &lt;code&gt;θ&lt;/code&gt;&lt;/strong&gt;：
+我们展开矩阵乘法，得到新的非对角元素 &lt;code&gt;m&#39;_{pq}&lt;/code&gt; 的表达式：
+&lt;code&gt;m&#39;_{pq} = (m_{qq} - m_{pp})sc + m_{pq}(c² - s²) = 0&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;使用三角函数的二倍角公式 &lt;code&gt;sin(2θ) = 2sc&lt;/code&gt; 和 &lt;code&gt;cos(2θ) = c² - s²&lt;/code&gt;，上式变为：
+&lt;code&gt;½ (m_{qq} - m_{pp}) sin(2θ) + m_{pq} cos(2θ) = 0&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;整理可得：
+&lt;/p&gt;
+$$
+    \cot(2\theta) = \frac{m_{pp} - m_{qq}}{2m_{pq}}
+    $$&lt;p&gt;
+这个公式就是我们求解旋转角度的关键。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;收敛性&lt;/strong&gt;：可以证明，每次执行这样的操作，矩阵所有&lt;strong&gt;非对角元素&lt;/strong&gt;的平方和 &lt;code&gt;S = Σ_{i≠j} m_{ij}²&lt;/code&gt; 都会减小。具体来说，&lt;code&gt;S_{new} = S_{old} - 2m_{pq}²&lt;/code&gt;。由于 &lt;code&gt;S&lt;/code&gt; 是一个有下界（为0）且单调递减的序列，它必然收敛。当 &lt;code&gt;S&lt;/code&gt; 趋近于0时，矩阵就收敛为一个对角矩阵。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-核心公式-key-formulas&#34;&gt;2. 核心公式 (Key Formulas)
+&lt;/h3&gt;&lt;p&gt;在实际计算中，我们不直接求 &lt;code&gt;θ&lt;/code&gt;，而是直接计算 &lt;code&gt;c&lt;/code&gt; 和 &lt;code&gt;s&lt;/code&gt; 的值，这样更高效且数值稳定。&lt;/p&gt;
+&lt;p&gt;令 &lt;code&gt;τ = (m_{qq} - m_{pp}) / (2 * m_{pq})&lt;/code&gt;。（这里我们假设 &lt;code&gt;m_{pq} ≠ 0&lt;/code&gt;，否则无需旋转）
+从 &lt;code&gt;cot(2θ) = -τ&lt;/code&gt; (注意符号，与上面推导的公式略有不同，这是为了方便计算 &lt;code&gt;tan(θ)&lt;/code&gt;），可以推导出 &lt;code&gt;tan(θ)&lt;/code&gt; 的值。&lt;/p&gt;
+&lt;p&gt;为了数值稳定性，我们使用如下公式计算 &lt;code&gt;tan(θ)&lt;/code&gt; 的值 &lt;code&gt;t&lt;/code&gt;:
+&lt;/p&gt;
+$$
+t = \frac{\text{sign}(\tau)}{|\tau| + \sqrt{1 + \tau^2}}
+$$&lt;p&gt;
+然后计算 &lt;code&gt;c&lt;/code&gt; 和 &lt;code&gt;s&lt;/code&gt;：
+&lt;/p&gt;
+$$
+c = \frac{1}{\sqrt{1 + t^2}} \\
+s = c \cdot t
+$$&lt;p&gt;
+得到 &lt;code&gt;c&lt;/code&gt; 和 &lt;code&gt;s&lt;/code&gt; 后，我们用它们来更新矩阵 &lt;code&gt;M&lt;/code&gt; 和特征向量矩阵 &lt;code&gt;V&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;矩阵 &lt;code&gt;M&lt;/code&gt; 的更新规则：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;m&#39;_{pp} = m_{pp} - t \cdot m_{pq}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;m&#39;_{qq} = m_{qq} + t \cdot m_{pq}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;m&#39;_{pq} = m&#39;_{qp} = 0&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;对于所有 &lt;code&gt;i ≠ p, q&lt;/code&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;m&#39;_{ip} = m_{ip} \cdot c - m_{iq} \cdot s&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;m&#39;_{iq} = m_{ip} \cdot s + m_{iq} \cdot c&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;m&#39;_{pi} = m&#39;_{ip}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;m&#39;_{qi} = m&#39;_{iq}&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;特征向量矩阵 &lt;code&gt;V&lt;/code&gt; 的更新规则：&lt;/strong&gt;
+&lt;code&gt;V&lt;/code&gt; 的列向量就是我们最终要求的特征向量。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于所有 &lt;code&gt;i&lt;/code&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;v&#39;_{ip} = v_{ip} \cdot c - v_{iq} \cdot s&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;v&#39;_{iq} = v_{ip} \cdot s + v_{iq} \cdot c&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-算法流程-algorithm-flow&#34;&gt;3. 算法流程 (Algorithm Flow)
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;输入&lt;/strong&gt;: 对称矩阵 &lt;code&gt;M&lt;/code&gt; (例如 &lt;code&gt;AᵀA&lt;/code&gt;), 容忍误差 &lt;code&gt;ε&lt;/code&gt;, 最大迭代次数 &lt;code&gt;max_iter&lt;/code&gt;。
+&lt;strong&gt;输出&lt;/strong&gt;: 特征值 (对角矩阵 &lt;code&gt;M&lt;/code&gt; 的对角线), 特征向量 (矩阵 &lt;code&gt;V&lt;/code&gt; 的列)。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;初始化&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;将特征向量矩阵 &lt;code&gt;V&lt;/code&gt; 初始化为单位矩阵 &lt;code&gt;I&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;iter_count = 0&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;主循环&lt;/strong&gt;: &lt;code&gt;while (iter_count &amp;lt; max_iter)&lt;/code&gt;
+a.  &lt;strong&gt;计算非对角元素平方和 (或绝对值和)&lt;/strong&gt;: &lt;code&gt;S = Σ_{i≠j} m_{ij}²&lt;/code&gt;。
+b.  &lt;strong&gt;检查收敛&lt;/strong&gt;: &lt;code&gt;if (S &amp;lt; ε)&lt;/code&gt;，则跳出循环，算法结束。
+c.  &lt;strong&gt;选择旋转目标 (p, q)&lt;/strong&gt;:
+*   &lt;strong&gt;经典雅可比法&lt;/strong&gt;: 遍历 &lt;code&gt;M&lt;/code&gt; 的上三角部分，找到绝对值最大的非对角元素 &lt;code&gt;|m_pq|&lt;/code&gt;。
+*   &lt;strong&gt;循环雅可比法 (更常用)&lt;/strong&gt;: 按固定顺序依次遍历所有非对角元素对 &lt;code&gt;(p, q)&lt;/code&gt; (例如，&lt;code&gt;(0,1), (0,2), ..., (0,n-1), (1,2), ...&lt;/code&gt;)。完成一轮遍历称为一次“扫荡”(sweep)。&lt;/p&gt;
+&lt;p&gt;d.  &lt;strong&gt;计算旋转参数&lt;/strong&gt;:
+*   &lt;code&gt;if (|m_pq| &amp;lt; ε / n²)&lt;/code&gt;，跳过此对，因为它已经足够小了。
+*   计算 &lt;code&gt;τ = (m_{qq} - m_{pp}) / (2 * m_{pq})&lt;/code&gt;。
+*   计算 &lt;code&gt;t&lt;/code&gt;, &lt;code&gt;c&lt;/code&gt;, &lt;code&gt;s&lt;/code&gt; (使用第二节的稳定公式)。&lt;/p&gt;
+&lt;p&gt;e.  &lt;strong&gt;更新矩阵 &lt;code&gt;M&lt;/code&gt;&lt;/strong&gt;:
+*   缓存 &lt;code&gt;m_ip&lt;/code&gt;, &lt;code&gt;m_iq&lt;/code&gt; 等旧值。
+*   根据第二节的更新规则，计算 &lt;code&gt;m&#39;_{pp}&lt;/code&gt;, &lt;code&gt;m&#39;_{qq}&lt;/code&gt; 以及所有 &lt;code&gt;m&#39;_{ip}&lt;/code&gt;, &lt;code&gt;m&#39;_{iq}&lt;/code&gt;。
+*   将 &lt;code&gt;m&#39;_{pq}&lt;/code&gt; 和 &lt;code&gt;m&#39;_{qp}&lt;/code&gt; 设为 0。&lt;/p&gt;
+&lt;p&gt;f.  &lt;strong&gt;更新特征向量矩阵 &lt;code&gt;V&lt;/code&gt;&lt;/strong&gt;:
+*   根据第二节的更新规则，更新 &lt;code&gt;V&lt;/code&gt; 的第 &lt;code&gt;p&lt;/code&gt; 列和第 &lt;code&gt;q&lt;/code&gt; 列。&lt;/p&gt;
+&lt;p&gt;g.  &lt;code&gt;iter_count++&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;结束&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;循环结束后，矩阵 &lt;code&gt;M&lt;/code&gt; 的对角线元素 &lt;code&gt;m_ii&lt;/code&gt; 就是特征值。&lt;/li&gt;
+&lt;li&gt;矩阵 &lt;code&gt;V&lt;/code&gt; 的第 &lt;code&gt;i&lt;/code&gt; 列就是对应于特征值 &lt;code&gt;m_ii&lt;/code&gt; 的特征向量。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 </description>
         </item>
         <item>

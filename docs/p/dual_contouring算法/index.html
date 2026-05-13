@@ -392,6 +392,18 @@
     <li><a href="#做法一令-yx-c">做法一：令 (y=x-c)</a></li>
     <li><a href="#做法二加入质点距离能量">做法二：加入质点距离能量</a></li>
     <li><a href="#最稳工程方案">最稳工程方案</a></li>
+    <li><a href="#givens旋转求解对称矩阵特征向量">givens旋转求解对称矩阵特征向量</a>
+      <ol>
+        <li><a href="#1-理论推导-theoretical-derivation">1. 理论推导 (Theoretical Derivation)</a>
+          <ol>
+            <li><a href="#核心思想">核心思想</a></li>
+            <li><a href="#单步迭代推导如何用一次旋转消去一个非对角元素">单步迭代推导：如何用一次旋转消去一个非对角元素？</a></li>
+          </ol>
+        </li>
+        <li><a href="#2-核心公式-key-formulas">2. 核心公式 (Key Formulas)</a></li>
+        <li><a href="#3-算法流程-algorithm-flow">3. 算法流程 (Algorithm Flow)</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -460,7 +472,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 5 分钟
+                    阅读时长: 8 分钟
                 </time>
             </div>
         
@@ -1023,6 +1035,144 @@ x^*=\arg\min_{l\le x\le u}|Ax-b|^2
 x=c}$</p>
 <p>作为兜底。</p>
 <p>这个方案在工程上比单纯加 $\lambda|x-c|^2$更可靠，因为它真正保证顶点不会逃出当前体素。</p>
+<hr>
+<h2 id="givens旋转求解对称矩阵特征向量">givens旋转求解对称矩阵特征向量
+</h2><p>我是一个基于 Gemini 2.5 Pro的人工智能助手。</p>
+<p>当然可以。下面为您详细梳理对称矩阵雅可比迭代法（Jacobi Iteration Method）的理论推导、核心公式和算法流程。这个方法的目标是将一个对称矩阵 <code>M</code>（在您的问题中是 <code>AᵀA</code>）通过一系列平面旋转（Givens Rotation）逐步转化为对角矩阵。</p>
+<h3 id="1-理论推导-theoretical-derivation">1. 理论推导 (Theoretical Derivation)
+</h3><h4 id="核心思想">核心思想
+</h4><p>我们的目标是求解 <code>M = VΣVᵀ</code>。雅可比法的策略不是一次性求出 <code>V</code> 和 <code>Σ</code>，而是构造一个正交矩阵序列 <code>G₁, G₂, G₃, ...</code>，通过迭代变换 <code>M_{k+1} = G_kᵀ M_k G_k</code>，使得矩阵 <code>M</code> 越来越接近对角矩阵。当 <code>M_k</code> 足够接近对角时，我们就得到了：
+<code>Σ ≈ M_k</code>
+<code>V ≈ G₁G₂G₃...G_k</code></p>
+<h4 id="单步迭代推导如何用一次旋转消去一个非对角元素">单步迭代推导：如何用一次旋转消去一个非对角元素？
+</h4><ol>
+<li>
+<p><strong>选择目标</strong>：在当前矩阵 <code>M</code> 中，选择一个非对角元素 <code>m_pq</code> (其中 <code>p &lt; q</code>)，我们希望通过一次旋转将它变为0。</p>
+</li>
+<li>
+<p><strong>构造旋转矩阵</strong>：我们使用的工具是 <strong>Givens旋转矩阵</strong> <code>G(p, q, θ)</code>。它看起来像一个单位矩阵，只在第 <code>p</code> 行、<code>p</code> 列、<code>q</code> 行、<code>q</code> 列有不同：
+</p>
+$$
+    G(p, q, \theta) = \begin{pmatrix}
+    1 & \cdots & 0 & \cdots & 0 & \cdots & 0 \\
+    \vdots & \ddots & \vdots & & \vdots & & \vdots \\
+    0 & \cdots & \cos\theta & \cdots & -\sin\theta & \cdots & 0 \\
+    \vdots & & \vdots & \ddots & \vdots & & \vdots \\
+    0 & \cdots & \sin\theta & \cdots & \cos\theta & \cdots & 0 \\
+    \vdots & & \vdots & & \vdots & \ddots & \vdots \\
+    0 & \cdots & 0 & \cdots & 0 & \cdots & 1
+    \end{pmatrix} \begin{matrix} \\ \\ \leftarrow p \\ \\ \leftarrow q \\ \\ \\ \end{matrix}
+    $$<p>
+这是一个正交矩阵 (<code>GᵀG = I</code>)，它表示在 <code>(p, q)</code> 平面上的一个旋转。</p>
+</li>
+<li>
+<p><strong>执行变换</strong>：我们计算 <code>M' = GᵀMG</code>。这个变换只会影响 <code>M</code> 的第 <code>p</code> 行/列和第 <code>q</code> 行/列。我们可以聚焦于一个2x2的子问题：
+</p>
+$$
+    \begin{pmatrix} m'_{pp} & m'_{pq} \\ m'_{qp} & m'_{qq} \end{pmatrix} =
+    \begin{pmatrix} c & s \\ -s & c \end{pmatrix}
+    \begin{pmatrix} m_{pp} & m_{pq} \\ m_{qp} & m_{qq} \end{pmatrix}
+    \begin{pmatrix} c & -s \\ s & c \end{pmatrix}
+    $$<p>
+其中 <code>c = cos(θ)</code>，<code>s = sin(θ)</code>，并且因为 <code>M</code> 对称，<code>m_{pq} = m_{qp}</code>。</p>
+</li>
+<li>
+<p><strong>求解旋转角 <code>θ</code></strong>：
+我们展开矩阵乘法，得到新的非对角元素 <code>m'_{pq}</code> 的表达式：
+<code>m'_{pq} = (m_{qq} - m_{pp})sc + m_{pq}(c² - s²) = 0</code></p>
+<p>使用三角函数的二倍角公式 <code>sin(2θ) = 2sc</code> 和 <code>cos(2θ) = c² - s²</code>，上式变为：
+<code>½ (m_{qq} - m_{pp}) sin(2θ) + m_{pq} cos(2θ) = 0</code></p>
+<p>整理可得：
+</p>
+$$
+    \cot(2\theta) = \frac{m_{pp} - m_{qq}}{2m_{pq}}
+    $$<p>
+这个公式就是我们求解旋转角度的关键。</p>
+</li>
+<li>
+<p><strong>收敛性</strong>：可以证明，每次执行这样的操作，矩阵所有<strong>非对角元素</strong>的平方和 <code>S = Σ_{i≠j} m_{ij}²</code> 都会减小。具体来说，<code>S_{new} = S_{old} - 2m_{pq}²</code>。由于 <code>S</code> 是一个有下界（为0）且单调递减的序列，它必然收敛。当 <code>S</code> 趋近于0时，矩阵就收敛为一个对角矩阵。</p>
+</li>
+</ol>
+<hr>
+<h3 id="2-核心公式-key-formulas">2. 核心公式 (Key Formulas)
+</h3><p>在实际计算中，我们不直接求 <code>θ</code>，而是直接计算 <code>c</code> 和 <code>s</code> 的值，这样更高效且数值稳定。</p>
+<p>令 <code>τ = (m_{qq} - m_{pp}) / (2 * m_{pq})</code>。（这里我们假设 <code>m_{pq} ≠ 0</code>，否则无需旋转）
+从 <code>cot(2θ) = -τ</code> (注意符号，与上面推导的公式略有不同，这是为了方便计算 <code>tan(θ)</code>），可以推导出 <code>tan(θ)</code> 的值。</p>
+<p>为了数值稳定性，我们使用如下公式计算 <code>tan(θ)</code> 的值 <code>t</code>:
+</p>
+$$
+t = \frac{\text{sign}(\tau)}{|\tau| + \sqrt{1 + \tau^2}}
+$$<p>
+然后计算 <code>c</code> 和 <code>s</code>：
+</p>
+$$
+c = \frac{1}{\sqrt{1 + t^2}} \\
+s = c \cdot t
+$$<p>
+得到 <code>c</code> 和 <code>s</code> 后，我们用它们来更新矩阵 <code>M</code> 和特征向量矩阵 <code>V</code>。</p>
+<p><strong>矩阵 <code>M</code> 的更新规则：</strong></p>
+<ul>
+<li><code>m'_{pp} = m_{pp} - t \cdot m_{pq}</code></li>
+<li><code>m'_{qq} = m_{qq} + t \cdot m_{pq}</code></li>
+<li><code>m'_{pq} = m'_{qp} = 0</code></li>
+<li>对于所有 <code>i ≠ p, q</code>：
+<ul>
+<li><code>m'_{ip} = m_{ip} \cdot c - m_{iq} \cdot s</code></li>
+<li><code>m'_{iq} = m_{ip} \cdot s + m_{iq} \cdot c</code></li>
+<li><code>m'_{pi} = m'_{ip}</code></li>
+<li><code>m'_{qi} = m'_{iq}</code></li>
+</ul>
+</li>
+</ul>
+<p><strong>特征向量矩阵 <code>V</code> 的更新规则：</strong>
+<code>V</code> 的列向量就是我们最终要求的特征向量。</p>
+<ul>
+<li>对于所有 <code>i</code>：
+<ul>
+<li><code>v'_{ip} = v_{ip} \cdot c - v_{iq} \cdot s</code></li>
+<li><code>v'_{iq} = v_{ip} \cdot s + v_{iq} \cdot c</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-算法流程-algorithm-flow">3. 算法流程 (Algorithm Flow)
+</h3><p><strong>输入</strong>: 对称矩阵 <code>M</code> (例如 <code>AᵀA</code>), 容忍误差 <code>ε</code>, 最大迭代次数 <code>max_iter</code>。
+<strong>输出</strong>: 特征值 (对角矩阵 <code>M</code> 的对角线), 特征向量 (矩阵 <code>V</code> 的列)。</p>
+<ol>
+<li>
+<p><strong>初始化</strong>:</p>
+<ul>
+<li>将特征向量矩阵 <code>V</code> 初始化为单位矩阵 <code>I</code>。</li>
+<li><code>iter_count = 0</code>。</li>
+</ul>
+</li>
+<li>
+<p><strong>主循环</strong>: <code>while (iter_count &lt; max_iter)</code>
+a.  <strong>计算非对角元素平方和 (或绝对值和)</strong>: <code>S = Σ_{i≠j} m_{ij}²</code>。
+b.  <strong>检查收敛</strong>: <code>if (S &lt; ε)</code>，则跳出循环，算法结束。
+c.  <strong>选择旋转目标 (p, q)</strong>:
+*   <strong>经典雅可比法</strong>: 遍历 <code>M</code> 的上三角部分，找到绝对值最大的非对角元素 <code>|m_pq|</code>。
+*   <strong>循环雅可比法 (更常用)</strong>: 按固定顺序依次遍历所有非对角元素对 <code>(p, q)</code> (例如，<code>(0,1), (0,2), ..., (0,n-1), (1,2), ...</code>)。完成一轮遍历称为一次“扫荡”(sweep)。</p>
+<p>d.  <strong>计算旋转参数</strong>:
+*   <code>if (|m_pq| &lt; ε / n²)</code>，跳过此对，因为它已经足够小了。
+*   计算 <code>τ = (m_{qq} - m_{pp}) / (2 * m_{pq})</code>。
+*   计算 <code>t</code>, <code>c</code>, <code>s</code> (使用第二节的稳定公式)。</p>
+<p>e.  <strong>更新矩阵 <code>M</code></strong>:
+*   缓存 <code>m_ip</code>, <code>m_iq</code> 等旧值。
+*   根据第二节的更新规则，计算 <code>m'_{pp}</code>, <code>m'_{qq}</code> 以及所有 <code>m'_{ip}</code>, <code>m'_{iq}</code>。
+*   将 <code>m'_{pq}</code> 和 <code>m'_{qp}</code> 设为 0。</p>
+<p>f.  <strong>更新特征向量矩阵 <code>V</code></strong>:
+*   根据第二节的更新规则，更新 <code>V</code> 的第 <code>p</code> 列和第 <code>q</code> 列。</p>
+<p>g.  <code>iter_count++</code>。</p>
+</li>
+<li>
+<p><strong>结束</strong>:</p>
+<ul>
+<li>循环结束后，矩阵 <code>M</code> 的对角线元素 <code>m_ii</code> 就是特征值。</li>
+<li>矩阵 <code>V</code> 的第 <code>i</code> 列就是对应于特征值 <code>m_ii</code> 的特征向量。</li>
+</ul>
+</li>
+</ol>
 
 </section>
 
