@@ -3845,9 +3845,9 @@ x=c}$&lt;/p&gt;
 &lt;p&gt;当然可以。下面为您详细梳理对称矩阵雅可比迭代法（Jacobi Iteration Method）的理论推导、核心公式和算法流程。这个方法的目标是将一个对称矩阵 &lt;code&gt;M&lt;/code&gt;（在您的问题中是 &lt;code&gt;AᵀA&lt;/code&gt;）通过一系列平面旋转（Givens Rotation）逐步转化为对角矩阵。&lt;/p&gt;
 &lt;h3 id=&#34;1-理论推导-theoretical-derivation&#34;&gt;1. 理论推导 (Theoretical Derivation)
 &lt;/h3&gt;&lt;h4 id=&#34;核心思想&#34;&gt;核心思想
-&lt;/h4&gt;&lt;p&gt;我们的目标是求解 &lt;code&gt;M = VΣVᵀ&lt;/code&gt;。雅可比法的策略不是一次性求出 &lt;code&gt;V&lt;/code&gt; 和 &lt;code&gt;Σ&lt;/code&gt;，而是构造一个正交矩阵序列 &lt;code&gt;G₁, G₂, G₃, ...&lt;/code&gt;，通过迭代变换 &lt;code&gt;M_{k+1} = G_kᵀ M_k G_k&lt;/code&gt;，使得矩阵 &lt;code&gt;M&lt;/code&gt; 越来越接近对角矩阵。当 &lt;code&gt;M_k&lt;/code&gt; 足够接近对角时，我们就得到了：
-&lt;code&gt;Σ ≈ M_k&lt;/code&gt;
-&lt;code&gt;V ≈ G₁G₂G₃...G_k&lt;/code&gt;&lt;/p&gt;
+&lt;/h4&gt;&lt;p&gt;我们的目标是求解 $M = VΣVᵀ$。雅可比法的策略不是一次性求出 &lt;code&gt;V&lt;/code&gt; 和 &lt;code&gt;Σ&lt;/code&gt;，而是构造一个正交矩阵序列 &lt;code&gt;G₁, G₂, G₃, ...&lt;/code&gt;，通过迭代变换 $M_{k+1} = G_kᵀ M_k G_k$，使得矩阵 &lt;code&gt;M&lt;/code&gt; 越来越接近对角矩阵。当 $M_k$足够接近对角时，我们就得到了：
+$Σ ≈ M_k$,
+$V ≈ G₁G₂G₃&amp;hellip;G_k$&lt;/p&gt;
 &lt;h4 id=&#34;单步迭代推导如何用一次旋转消去一个非对角元素&#34;&gt;单步迭代推导：如何用一次旋转消去一个非对角元素？
 &lt;/h4&gt;&lt;ol&gt;
 &lt;li&gt;

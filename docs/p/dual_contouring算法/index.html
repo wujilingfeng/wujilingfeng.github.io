@@ -1041,9 +1041,9 @@ x=c}$</p>
 <p>当然可以。下面为您详细梳理对称矩阵雅可比迭代法（Jacobi Iteration Method）的理论推导、核心公式和算法流程。这个方法的目标是将一个对称矩阵 <code>M</code>（在您的问题中是 <code>AᵀA</code>）通过一系列平面旋转（Givens Rotation）逐步转化为对角矩阵。</p>
 <h3 id="1-理论推导-theoretical-derivation">1. 理论推导 (Theoretical Derivation)
 </h3><h4 id="核心思想">核心思想
-</h4><p>我们的目标是求解 <code>M = VΣVᵀ</code>。雅可比法的策略不是一次性求出 <code>V</code> 和 <code>Σ</code>，而是构造一个正交矩阵序列 <code>G₁, G₂, G₃, ...</code>，通过迭代变换 <code>M_{k+1} = G_kᵀ M_k G_k</code>，使得矩阵 <code>M</code> 越来越接近对角矩阵。当 <code>M_k</code> 足够接近对角时，我们就得到了：
-<code>Σ ≈ M_k</code>
-<code>V ≈ G₁G₂G₃...G_k</code></p>
+</h4><p>我们的目标是求解 $M = VΣVᵀ$。雅可比法的策略不是一次性求出 <code>V</code> 和 <code>Σ</code>，而是构造一个正交矩阵序列 <code>G₁, G₂, G₃, ...</code>，通过迭代变换 $M_{k+1} = G_kᵀ M_k G_k$，使得矩阵 <code>M</code> 越来越接近对角矩阵。当 $M_k$足够接近对角时，我们就得到了：
+$Σ ≈ M_k$,
+$V ≈ G₁G₂G₃&hellip;G_k$</p>
 <h4 id="单步迭代推导如何用一次旋转消去一个非对角元素">单步迭代推导：如何用一次旋转消去一个非对角元素？
 </h4><ol>
 <li>
