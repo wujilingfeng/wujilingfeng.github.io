@@ -1090,7 +1090,7 @@ $$
 <hr>
 <h3 id="2-核心公式-key-formulas">2. 核心公式 (Key Formulas)
 </h3><p>在实际计算中，我们不直接求 <code>θ</code>，而是直接计算 <code>c</code> 和 <code>s</code> 的值，这样更高效且数值稳定。</p>
-<p>令 <code>τ = (m_{qq} - m_{pp}) / (2 * m_{pq})</code>。（这里我们假设 <code>m_{pq} ≠ 0</code>，否则无需旋转）
+<p>令 $τ = (m_{qq} - m_{pp}) / (2 * m_{pq})$。（这里我们假设 $m_{pq} ≠ 0$，否则无需旋转）
 从 <code>cot(2θ) = -τ</code> (注意符号，与上面推导的公式略有不同，这是为了方便计算 <code>tan(θ)</code>），可以推导出 <code>tan(θ)</code> 的值。</p>
 <p>为了数值稳定性，我们使用如下公式计算 <code>tan(θ)</code> 的值 <code>t</code>:
 </p>
@@ -1108,13 +1108,13 @@ $$<p>
 <ul>
 <li>$m&rsquo;<em>{pp} = m</em>{pp} - t \cdot m_{pq}$</li>
 <li>$m&rsquo;<em>{qq} = m</em>{qq} + t \cdot m_{pq}$</li>
-<li><code>m'_{pq} = m'_{qp} = 0</code></li>
+<li>$m&rsquo;<em>{pq} = m&rsquo;</em>{qp} = 0$</li>
 <li>对于所有 <code>i ≠ p, q</code>：
 <ul>
-<li><code>m'_{ip} = m_{ip} \cdot c - m_{iq} \cdot s</code></li>
-<li><code>m'_{iq} = m_{ip} \cdot s + m_{iq} \cdot c</code></li>
-<li><code>m'_{pi} = m'_{ip}</code></li>
-<li><code>m'_{qi} = m'_{iq}</code></li>
+<li>$m&rsquo;<em>{ip} = m</em>{ip} \cdot c - m_{iq} \cdot s$</li>
+<li>$m&rsquo;<em>{iq} = m</em>{ip} \cdot s + m_{iq} \cdot c$</li>
+<li>$m&rsquo;<em>{pi} = m&rsquo;</em>{ip}$</li>
+<li>$m&rsquo;<em>{qi} = m&rsquo;</em>{iq}$</li>
 </ul>
 </li>
 </ul>
@@ -1123,8 +1123,8 @@ $$<p>
 <ul>
 <li>对于所有 <code>i</code>：
 <ul>
-<li><code>v'_{ip} = v_{ip} \cdot c - v_{iq} \cdot s</code></li>
-<li><code>v'_{iq} = v_{ip} \cdot s + v_{iq} \cdot c</code></li>
+<li>$v&rsquo;<em>{ip} = v</em>{ip} \cdot c - v_{iq} \cdot s$</li>
+<li>$v&rsquo;<em>{iq} = v</em>{ip} \cdot s + v_{iq} \cdot c$</li>
 </ul>
 </li>
 </ul>
@@ -1145,18 +1145,18 @@ $$<p>
 a.  <strong>计算非对角元素平方和 (或绝对值和)</strong>: <code>S = Σ_{i≠j} m_{ij}²</code>。
 b.  <strong>检查收敛</strong>: <code>if (S &lt; ε)</code>，则跳出循环，算法结束。
 c.  <strong>选择旋转目标 (p, q)</strong>:</p>
-<pre><code>*   **经典雅可比法**: 遍历 `M` 的上三角部分，找到绝对值最大的非对角元素 `|m_pq|`。
+<pre><code>*   **经典雅可比法**: 遍历 `M` 的上三角部分，找到绝对值最大的非对角元素 $|m_pq|$。
 *   **循环雅可比法 (更常用)**: 按固定顺序依次遍历所有非对角元素对 `(p, q)` (例如，`(0,1), (0,2), ..., (0,n-1), (1,2), ...`)。完成一轮遍历称为一次“扫荡”(sweep)。
 </code></pre>
 <p>d.  <strong>计算旋转参数</strong>:</p>
 <pre><code>*   `if (|m_pq| &lt; ε / n²)`，跳过此对，因为它已经足够小了。
-*   计算 `τ = (m_{qq} - m_{pp}) / (2 * m_{pq})`。
+*   计算 $τ = (m_{qq} - m_{pp}) / (2 * m_{pq})$。
 *   计算 `t`, `c`, `s` (使用第二节的稳定公式)。
 </code></pre>
 <p>e.  <strong>更新矩阵 <code>M</code></strong>:</p>
-<pre><code>*   缓存 `m_ip`, `m_iq` 等旧值。
-*   根据第二节的更新规则，计算 `m'_{pp}`, `m'_{qq}` 以及所有 `m'_{ip}`, `m'_{iq}`。
-*   将 `m'_{pq}` 和 `m'_{qp}` 设为 0。
+<pre><code>*   缓存 $m_ip$, $m_iq$ 等旧值。
+*   根据第二节的更新规则，计算 $m'_{pp}$, $m'_{qq}$ 以及所有 $m'_{ip}$, $m'_{iq}$。
+*   将 $m'_{pq}$ 和 $m'_{qp}$ 设为 0。
 </code></pre>
 <p>f.  <strong>更新特征向量矩阵 <code>V</code></strong>:</p>
 <pre><code>*   根据第二节的更新规则，更新 `V` 的第 `p` 列和第 `q` 列。
@@ -1166,8 +1166,8 @@ c.  <strong>选择旋转目标 (p, q)</strong>:</p>
 <li>
 <p><strong>结束</strong>:</p>
 <ul>
-<li>循环结束后，矩阵 <code>M</code> 的对角线元素 <code>m_ii</code> 就是特征值。</li>
-<li>矩阵 <code>V</code> 的第 <code>i</code> 列就是对应于特征值 <code>m_ii</code> 的特征向量。</li>
+<li>循环结束后，矩阵 <code>M</code> 的对角线元素 $m_ii$ 就是特征值。</li>
+<li>矩阵 <code>V</code> 的第 <code>i</code> 列就是对应于特征值 $m_ii$ 的特征向量。</li>
 </ul>
 </li>
 </ol>
