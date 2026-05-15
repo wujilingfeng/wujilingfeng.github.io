@@ -918,10 +918,9 @@ $$
 t = \frac{\text{sign}(\tau)}{|\tau| + \sqrt{1 + \tau^2}}
 $$
 然后计算 `c` 和 `s`：
-$$
-c = \frac{1}{\sqrt{1 + t^2}} \\
-s = c \cdot t
-$$
+
+$c = \frac{1}{\sqrt{1 + t^2}}$,
+$s = c \cdot t$
 得到 `c` 和 `s` 后，我们用它们来更新矩阵 `M` 和特征向量矩阵 `V`。
 
 **矩阵 `M` 的更新规则：**
