@@ -925,7 +925,7 @@ $s = c \cdot t$
 
 **矩阵 `M` 的更新规则：**
 
-* $$m'_{pp} = m_{pp} - t \cdot m_{pq}$
+* $m'_{pp} = m_{pp} - t \cdot m_{pq}$
 * $m'_{qq} = m_{qq} + t \cdot m_{pq}$
 * $m'_{pq} = m'_{qp} = 0$
 * 对于所有 `i ≠ p, q`：
