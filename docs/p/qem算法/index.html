@@ -15,18 +15,18 @@
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
  <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="qem在merge边为点时,创建的一组三角形可能出现折叠.先统计并维护其中出现折叠的边, 然后通过折耳朵多边形来减少折叠的边.\n注意每次折耳朵会消失两个边,创建一个边.对于新创建的边要判断是否和merge的顶点折叠.如果折叠就加入维护的容器.知道容器清空.\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="qem在merge边为点时,创建的一组三角形可能出现折叠.先统计并维护其中出现折叠的边, 然后通过折耳朵多边形来减少折叠的边.\n注意每次折耳朵会消失两个边,创建一个边.对于新创建的边要判断是否和merge的顶点折叠.如果折叠就加入维护的容器.知道容器清空.\n网格简化中的 QEM（Quadric Error Metrics，二次误差度量） 算法由 Garland &amp; Heckbert 于 1997 年提出。你提到的“拟合点”和“能量更新”正是该算法的数学核心。下面从原理到实现逐步拆解：\n🔷 一、拟合点（最优收缩目标点）是如何计算的？\r1. 平面距离的二次型表示\r对于三角形面片所在的平面方程 $ax + by + cz + d = 0$，设法向量已单位化（$a^2+b^2+c^2=1$），记平面参数向量为 $\\mathbf{p} = [a, b, c, d]^\\top$。\n齐次坐标下的点 $\\mathbf{v} = [x, y, z, 1]^\\top$ 到该平面的有符号距离为 $\\mathbf{p}^\\top \\mathbf{v}$，距离平方为： $$\r(\\mathbf{p}^\\top \\mathbf{v})^2 = \\mathbf{v}^\\top (\\mathbf{p}\\mathbf{p}^\\top) \\mathbf{v}\r$$ 定义该平面的基础二次型矩阵为 $K_\\mathbf{p} = \\mathbf{p}\\mathbf{p}^\\top$（$4\\times4$ 对称半正定矩阵）。\n2. 顶点的 Quadric 矩阵\r对每个顶点 $v$，将其所有相邻面片的 $K_\\mathbf{p}$ 累加： $$\rQ_v = \\sum_{f \\in \\text{adj}(v)} K_{\\mathbf{p}_f}\r$$ $Q_v$ 隐含了该顶点周围局部几何的“平面约束集合”。\n">
 <title>Qem算法</title>
 
 <link rel='canonical' href='https://wujilingfeng.github.io/p/qem%E7%AE%97%E6%B3%95/'>
 
 <link rel="stylesheet" href="../../scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="Qem算法">
-<meta property='og:description' content="qem在merge边为点时,创建的一组三角形可能出现折叠.先统计并维护其中出现折叠的边, 然后通过折耳朵多边形来减少折叠的边.\n注意每次折耳朵会消失两个边,创建一个边.对于新创建的边要判断是否和merge的顶点折叠.如果折叠就加入维护的容器.知道容器清空.\n">
+<meta property='og:description' content="qem在merge边为点时,创建的一组三角形可能出现折叠.先统计并维护其中出现折叠的边, 然后通过折耳朵多边形来减少折叠的边.\n注意每次折耳朵会消失两个边,创建一个边.对于新创建的边要判断是否和merge的顶点折叠.如果折叠就加入维护的容器.知道容器清空.\n网格简化中的 QEM（Quadric Error Metrics，二次误差度量） 算法由 Garland &amp; Heckbert 于 1997 年提出。你提到的“拟合点”和“能量更新”正是该算法的数学核心。下面从原理到实现逐步拆解：\n🔷 一、拟合点（最优收缩目标点）是如何计算的？\r1. 平面距离的二次型表示\r对于三角形面片所在的平面方程 $ax + by + cz + d = 0$，设法向量已单位化（$a^2+b^2+c^2=1$），记平面参数向量为 $\\mathbf{p} = [a, b, c, d]^\\top$。\n齐次坐标下的点 $\\mathbf{v} = [x, y, z, 1]^\\top$ 到该平面的有符号距离为 $\\mathbf{p}^\\top \\mathbf{v}$，距离平方为： $$\r(\\mathbf{p}^\\top \\mathbf{v})^2 = \\mathbf{v}^\\top (\\mathbf{p}\\mathbf{p}^\\top) \\mathbf{v}\r$$ 定义该平面的基础二次型矩阵为 $K_\\mathbf{p} = \\mathbf{p}\\mathbf{p}^\\top$（$4\\times4$ 对称半正定矩阵）。\n2. 顶点的 Quadric 矩阵\r对每个顶点 $v$，将其所有相邻面片的 $K_\\mathbf{p}$ 累加： $$\rQ_v = \\sum_{f \\in \\text{adj}(v)} K_{\\mathbf{p}_f}\r$$ $Q_v$ 隐含了该顶点周围局部几何的“平面约束集合”。\n">
 <meta property='og:url' content='https://wujilingfeng.github.io/p/qem%E7%AE%97%E6%B3%95/'>
 <meta property='og:site_name' content='五级灵风'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-05-12T23:35:57&#43;08:00'/><meta property='article:modified_time' content='2026-05-12T23:35:57&#43;08:00'/>
 <meta name="twitter:title" content="Qem算法">
-<meta name="twitter:description" content="qem在merge边为点时,创建的一组三角形可能出现折叠.先统计并维护其中出现折叠的边, 然后通过折耳朵多边形来减少折叠的边.\n注意每次折耳朵会消失两个边,创建一个边.对于新创建的边要判断是否和merge的顶点折叠.如果折叠就加入维护的容器.知道容器清空.\n">
+<meta name="twitter:description" content="qem在merge边为点时,创建的一组三角形可能出现折叠.先统计并维护其中出现折叠的边, 然后通过折耳朵多边形来减少折叠的边.\n注意每次折耳朵会消失两个边,创建一个边.对于新创建的边要判断是否和merge的顶点折叠.如果折叠就加入维护的容器.知道容器清空.\n网格简化中的 QEM（Quadric Error Metrics，二次误差度量） 算法由 Garland &amp; Heckbert 于 1997 年提出。你提到的“拟合点”和“能量更新”正是该算法的数学核心。下面从原理到实现逐步拆解：\n🔷 一、拟合点（最优收缩目标点）是如何计算的？\r1. 平面距离的二次型表示\r对于三角形面片所在的平面方程 $ax + by + cz + d = 0$，设法向量已单位化（$a^2+b^2+c^2=1$），记平面参数向量为 $\\mathbf{p} = [a, b, c, d]^\\top$。\n齐次坐标下的点 $\\mathbf{v} = [x, y, z, 1]^\\top$ 到该平面的有符号距离为 $\\mathbf{p}^\\top \\mathbf{v}$，距离平方为： $$\r(\\mathbf{p}^\\top \\mathbf{v})^2 = \\mathbf{v}^\\top (\\mathbf{p}\\mathbf{p}^\\top) \\mathbf{v}\r$$ 定义该平面的基础二次型矩阵为 $K_\\mathbf{p} = \\mathbf{p}\\mathbf{p}^\\top$（$4\\times4$ 对称半正定矩阵）。\n2. 顶点的 Quadric 矩阵\r对每个顶点 $v$，将其所有相邻面片的 $K_\\mathbf{p}$ 累加： $$\rQ_v = \\sum_{f \\in \\text{adj}(v)} K_{\\mathbf{p}_f}\r$$ $Q_v$ 隐含了该顶点周围局部几何的“平面约束集合”。\n">
     <link rel="shortcut icon" href="../../favicon.ico" />
 
     </head>
@@ -338,7 +338,57 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#-一拟合点最优收缩目标点是如何计算的">🔷 一、拟合点（最优收缩目标点）是如何计算的？</a>
+          <ol>
+            <li><a href="#1-平面距离的二次型表示">1. 平面距离的二次型表示</a></li>
+            <li><a href="#2-顶点的-quadric-矩阵">2. 顶点的 Quadric 矩阵</a></li>
+            <li><a href="#3-边收缩的最优目标点">3. 边收缩的最优目标点</a></li>
+            <li><a href="#4-奇异情况处理">4. 奇异情况处理</a></li>
+          </ol>
+        </li>
+        <li><a href="#-二能量是如何更新的">🔷 二、“能量”是如何更新的？</a>
+          <ol>
+            <li><a href="#1-初始化">1. 初始化</a></li>
+            <li><a href="#2-边收缩时的更新">2. 边收缩时的更新</a></li>
+          </ol>
+        </li>
+        <li><a href="#-三工程实现注意事项">🔷 三、工程实现注意事项</a></li>
+        <li><a href="#-原始文献与参考实现">📚 原始文献与参考实现</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -386,7 +436,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 1 分钟
+                    阅读时长: 2 分钟
                 </time>
             </div>
         
@@ -403,6 +453,130 @@
     
     <p>qem在merge边为点时,创建的一组三角形可能出现折叠.先统计并维护其中出现折叠的边, 然后通过折耳朵多边形来减少折叠的边.</p>
 <p>注意每次折耳朵会消失两个边,创建一个边.对于新创建的边要判断是否和merge的顶点折叠.如果折叠就加入维护的容器.知道容器清空.</p>
+<p>网格简化中的 <strong>QEM（Quadric Error Metrics，二次误差度量）</strong> 算法由 Garland &amp; Heckbert 于 1997 年提出。你提到的“拟合点”和“能量更新”正是该算法的数学核心。下面从原理到实现逐步拆解：</p>
+<hr>
+<h3 id="-一拟合点最优收缩目标点是如何计算的">🔷 一、拟合点（最优收缩目标点）是如何计算的？
+</h3><h4 id="1-平面距离的二次型表示">1. 平面距离的二次型表示
+</h4><p>对于三角形面片所在的平面方程 $ax + by + cz + d = 0$，设法向量已单位化（$a^2+b^2+c^2=1$），记平面参数向量为 $\mathbf{p} = [a, b, c, d]^\top$。<br>
+齐次坐标下的点 $\mathbf{v} = [x, y, z, 1]^\top$ 到该平面的<strong>有符号距离</strong>为 $\mathbf{p}^\top \mathbf{v}$，<strong>距离平方</strong>为：
+</p>
+$$
+(\mathbf{p}^\top \mathbf{v})^2 = \mathbf{v}^\top (\mathbf{p}\mathbf{p}^\top) \mathbf{v}
+$$<p>
+定义该平面的<strong>基础二次型矩阵</strong>为 $K_\mathbf{p} = \mathbf{p}\mathbf{p}^\top$（$4\times4$ 对称半正定矩阵）。</p>
+<h4 id="2-顶点的-quadric-矩阵">2. 顶点的 Quadric 矩阵
+</h4><p>对每个顶点 $v$，将其所有相邻面片的 $K_\mathbf{p}$ 累加：
+</p>
+$$
+Q_v = \sum_{f \in \text{adj}(v)} K_{\mathbf{p}_f}
+$$<p>
+$Q_v$ 隐含了该顶点周围局部几何的“平面约束集合”。</p>
+<h4 id="3-边收缩的最优目标点">3. 边收缩的最优目标点
+</h4><p>当收缩边 $(v_1, v_2)$ 时，新顶点 $\bar{v}$ 的 Quadric 矩阵为：
+</p>
+$$
+Q = Q_{v_1} + Q_{v_2}
+$$<p>
+收缩代价（即“能量”）定义为 $\bar{v}$ 到所有相关平面距离平方和：
+</p>
+$$
+E(\bar{v}) = \bar{v}^\top Q \bar{v}
+$$<p>
+将 $Q$ 分块为：
+</p>
+$$
+Q = \begin{bmatrix}
+A & \mathbf{b} \\
+\mathbf{b}^\top & c
+\end{bmatrix}, \quad
+\bar{v} = \begin{bmatrix} \mathbf{x} \\ 1 \end{bmatrix}, \quad \mathbf{x}=[x,y,z]^\top
+$$<p>
+代入得标量函数：
+</p>
+$$
+E(\mathbf{x}) = \mathbf{x}^\top A \mathbf{x} + 2\mathbf{b}^\top \mathbf{x} + c
+$$<p>
+对 $\mathbf{x}$ 求梯度并令为零：
+</p>
+$$
+\nabla E = 2A\mathbf{x} + 2\mathbf{b} = 0 \quad \Rightarrow \quad A\mathbf{x} = -\mathbf{b}
+$$<p>
+✅ <strong>这就是你提到的最小二乘问题</strong>：<br>
+$A\mathbf{x} = -\mathbf{b}$ 实际上是超定平面方程组 $\mathbf{p}_i^\top \mathbf{v} \approx 0$ 的<strong>正规方程（Normal Equations）</strong>。求解该 $3\times3$ 线性系统即可得到使距离平方和最小的最优位置 $\mathbf{x}^*$。</p>
+<h4 id="4-奇异情况处理">4. 奇异情况处理
+</h4><ul>
+<li>若 $A$ 可逆：$\mathbf{x}^* = -A^{-1}\mathbf{b}$</li>
+<li>若 $A$ 奇异（如共面区域、退化网格）：原论文采用回退策略，比较 ${v_1, v_2, \frac{v_1+v_2}{2}}$ 三者的 $E(\cdot)$，取最小者作为收缩目标。工程中也常用 SVD 或 Moore-Penrose 伪逆。</li>
+</ul>
+<hr>
+<h3 id="-二能量是如何更新的">🔷 二、“能量”是如何更新的？
+</h3><p>QEM 中<strong>没有独立存储的“能量标量”</strong>，能量完全由 $Q$ 矩阵隐式定义。更新机制的核心是 <strong>矩阵的可加性</strong>：</p>
+<h4 id="1-初始化">1. 初始化
+</h4><ul>
+<li>遍历所有面片，计算 $K_\mathbf{p}$，累加到三个顶点的 $Q_v$。</li>
+<li>对每条边 $(v_i, v_j)$，计算 $Q_{ij} = Q_{v_i} + Q_{v_j}$，求解最优 $\bar{v}$ 并计算代价 $E = \bar{v}^\top Q_{ij} \bar{v}$。</li>
+<li>将所有边按代价插入最小堆（优先队列）。</li>
+</ul>
+<h4 id="2-边收缩时的更新">2. 边收缩时的更新
+</h4><p>当弹出代价最小的边 $(v_1, v_2) \to \bar{v}$ 时：</p>
+<ol>
+<li><strong>矩阵相加</strong>：$Q_{\bar{v}} = Q_{v_1} + Q_{v_2}$（$O(1)$ 操作，仅 10 个独立元素相加）</li>
+<li><strong>拓扑更新</strong>：删除 $v_1, v_2$ 及其关联面/边，将邻接点全部重连到 $\bar{v}$</li>
+<li><strong>邻边代价刷新</strong>：对 $\bar{v}$ 的每条新邻边 $(\bar{v}, u)$：
+<ul>
+<li>计算 $Q_{\text{new}} = Q_{\bar{v}} + Q_u$</li>
+<li>重新求解 $A\mathbf{x}=-\mathbf{b}$ 得新目标点</li>
+<li>计算新代价 $E = \bar{v}<em>{\text{opt}}^\top Q</em>{\text{new}} \bar{v}_{\text{opt}}$</li>
+<li>更新优先队列中的对应边（删除旧条目，插入新条目）</li>
+</ul>
+</li>
+</ol>
+<p>✅ <strong>关键点</strong>：</p>
+<ul>
+<li>“能量更新”本质是 <strong>$Q$ 矩阵的累加 + 局部重新求解最小二乘</strong>。</li>
+<li>由于 $Q$ 矩阵具有可加性，无需重新遍历面片，每次收缩仅需更新一阶邻域，复杂度极低。</li>
+</ul>
+<hr>
+<h3 id="-三工程实现注意事项">🔷 三、工程实现注意事项
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>问题</th>
+          <th>常见处理方案</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>数值稳定性</td>
+          <td>$A$ 条件数大时加微小正则项 $\epsilon I$，或用 LDLT/Cholesky 分解</td>
+      </tr>
+      <tr>
+          <td>边界保护</td>
+          <td>边界边赋予极大权重，或单独维护边界顶点 $Q$ 矩阵</td>
+      </tr>
+      <tr>
+          <td>面积/曲率加权</td>
+          <td>$K_\mathbf{p}$ 累加时乘面片面积或曲率估计值</td>
+      </tr>
+      <tr>
+          <td>法向翻转检测</td>
+          <td>收缩后检查邻面法向一致性，若翻转则拒绝该收缩</td>
+      </tr>
+      <tr>
+          <td>优先队列更新</td>
+          <td>使用 <code>std::priority_queue</code> 需惰性删除；推荐 <code>boost::heap</code> 或手写可更新堆</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h3 id="-原始文献与参考实现">📚 原始文献与参考实现
+</h3><ul>
+<li>Garland, M., &amp; Heckbert, P. S. (1997). <em>Surface Simplification Using Quadric Error Metrics</em>. SIGGRAPH.</li>
+<li>开源实现参考：<code>libigl::decimate</code>、<code>OpenMesh::Mod_QEM</code>、<code>MeshLab</code> 的 Quadric Edge Collapse Decimation</li>
+<li>数学细节推导可参见：<a class="link" href="https://www.cs.cmu.edu/~garland/Papers/quadrics.pdf"  target="_blank" rel="noopener"
+    >QEM 详细笔记（含代码）</a></li>
+</ul>
+<p>若你需要具体代码片段（如 $3\times3$ 系统求解、优先队列更新逻辑、或奇异回退实现），可告知使用语言（C++/Python），我可直接给出可运行示例。</p>
 
 </section>
 

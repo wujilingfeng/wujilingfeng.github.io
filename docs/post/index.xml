@@ -15,6 +15,130 @@
         <guid>https://wujilingfeng.github.io/p/qem%E7%AE%97%E6%B3%95/</guid>
         <description>&lt;p&gt;qem在merge边为点时,创建的一组三角形可能出现折叠.先统计并维护其中出现折叠的边, 然后通过折耳朵多边形来减少折叠的边.&lt;/p&gt;
 &lt;p&gt;注意每次折耳朵会消失两个边,创建一个边.对于新创建的边要判断是否和merge的顶点折叠.如果折叠就加入维护的容器.知道容器清空.&lt;/p&gt;
+&lt;p&gt;网格简化中的 &lt;strong&gt;QEM（Quadric Error Metrics，二次误差度量）&lt;/strong&gt; 算法由 Garland &amp;amp; Heckbert 于 1997 年提出。你提到的“拟合点”和“能量更新”正是该算法的数学核心。下面从原理到实现逐步拆解：&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;-一拟合点最优收缩目标点是如何计算的&#34;&gt;🔷 一、拟合点（最优收缩目标点）是如何计算的？
+&lt;/h3&gt;&lt;h4 id=&#34;1-平面距离的二次型表示&#34;&gt;1. 平面距离的二次型表示
+&lt;/h4&gt;&lt;p&gt;对于三角形面片所在的平面方程 $ax + by + cz + d = 0$，设法向量已单位化（$a^2+b^2+c^2=1$），记平面参数向量为 $\mathbf{p} = [a, b, c, d]^\top$。&lt;br&gt;
+齐次坐标下的点 $\mathbf{v} = [x, y, z, 1]^\top$ 到该平面的&lt;strong&gt;有符号距离&lt;/strong&gt;为 $\mathbf{p}^\top \mathbf{v}$，&lt;strong&gt;距离平方&lt;/strong&gt;为：
+&lt;/p&gt;
+$$
+(\mathbf{p}^\top \mathbf{v})^2 = \mathbf{v}^\top (\mathbf{p}\mathbf{p}^\top) \mathbf{v}
+$$&lt;p&gt;
+定义该平面的&lt;strong&gt;基础二次型矩阵&lt;/strong&gt;为 $K_\mathbf{p} = \mathbf{p}\mathbf{p}^\top$（$4\times4$ 对称半正定矩阵）。&lt;/p&gt;
+&lt;h4 id=&#34;2-顶点的-quadric-矩阵&#34;&gt;2. 顶点的 Quadric 矩阵
+&lt;/h4&gt;&lt;p&gt;对每个顶点 $v$，将其所有相邻面片的 $K_\mathbf{p}$ 累加：
+&lt;/p&gt;
+$$
+Q_v = \sum_{f \in \text{adj}(v)} K_{\mathbf{p}_f}
+$$&lt;p&gt;
+$Q_v$ 隐含了该顶点周围局部几何的“平面约束集合”。&lt;/p&gt;
+&lt;h4 id=&#34;3-边收缩的最优目标点&#34;&gt;3. 边收缩的最优目标点
+&lt;/h4&gt;&lt;p&gt;当收缩边 $(v_1, v_2)$ 时，新顶点 $\bar{v}$ 的 Quadric 矩阵为：
+&lt;/p&gt;
+$$
+Q = Q_{v_1} + Q_{v_2}
+$$&lt;p&gt;
+收缩代价（即“能量”）定义为 $\bar{v}$ 到所有相关平面距离平方和：
+&lt;/p&gt;
+$$
+E(\bar{v}) = \bar{v}^\top Q \bar{v}
+$$&lt;p&gt;
+将 $Q$ 分块为：
+&lt;/p&gt;
+$$
+Q = \begin{bmatrix}
+A &amp; \mathbf{b} \\
+\mathbf{b}^\top &amp; c
+\end{bmatrix}, \quad
+\bar{v} = \begin{bmatrix} \mathbf{x} \\ 1 \end{bmatrix}, \quad \mathbf{x}=[x,y,z]^\top
+$$&lt;p&gt;
+代入得标量函数：
+&lt;/p&gt;
+$$
+E(\mathbf{x}) = \mathbf{x}^\top A \mathbf{x} + 2\mathbf{b}^\top \mathbf{x} + c
+$$&lt;p&gt;
+对 $\mathbf{x}$ 求梯度并令为零：
+&lt;/p&gt;
+$$
+\nabla E = 2A\mathbf{x} + 2\mathbf{b} = 0 \quad \Rightarrow \quad A\mathbf{x} = -\mathbf{b}
+$$&lt;p&gt;
+✅ &lt;strong&gt;这就是你提到的最小二乘问题&lt;/strong&gt;：&lt;br&gt;
+$A\mathbf{x} = -\mathbf{b}$ 实际上是超定平面方程组 $\mathbf{p}_i^\top \mathbf{v} \approx 0$ 的&lt;strong&gt;正规方程（Normal Equations）&lt;/strong&gt;。求解该 $3\times3$ 线性系统即可得到使距离平方和最小的最优位置 $\mathbf{x}^*$。&lt;/p&gt;
+&lt;h4 id=&#34;4-奇异情况处理&#34;&gt;4. 奇异情况处理
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;若 $A$ 可逆：$\mathbf{x}^* = -A^{-1}\mathbf{b}$&lt;/li&gt;
+&lt;li&gt;若 $A$ 奇异（如共面区域、退化网格）：原论文采用回退策略，比较 ${v_1, v_2, \frac{v_1+v_2}{2}}$ 三者的 $E(\cdot)$，取最小者作为收缩目标。工程中也常用 SVD 或 Moore-Penrose 伪逆。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;-二能量是如何更新的&#34;&gt;🔷 二、“能量”是如何更新的？
+&lt;/h3&gt;&lt;p&gt;QEM 中&lt;strong&gt;没有独立存储的“能量标量”&lt;/strong&gt;，能量完全由 $Q$ 矩阵隐式定义。更新机制的核心是 &lt;strong&gt;矩阵的可加性&lt;/strong&gt;：&lt;/p&gt;
+&lt;h4 id=&#34;1-初始化&#34;&gt;1. 初始化
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;遍历所有面片，计算 $K_\mathbf{p}$，累加到三个顶点的 $Q_v$。&lt;/li&gt;
+&lt;li&gt;对每条边 $(v_i, v_j)$，计算 $Q_{ij} = Q_{v_i} + Q_{v_j}$，求解最优 $\bar{v}$ 并计算代价 $E = \bar{v}^\top Q_{ij} \bar{v}$。&lt;/li&gt;
+&lt;li&gt;将所有边按代价插入最小堆（优先队列）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-边收缩时的更新&#34;&gt;2. 边收缩时的更新
+&lt;/h4&gt;&lt;p&gt;当弹出代价最小的边 $(v_1, v_2) \to \bar{v}$ 时：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;矩阵相加&lt;/strong&gt;：$Q_{\bar{v}} = Q_{v_1} + Q_{v_2}$（$O(1)$ 操作，仅 10 个独立元素相加）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;拓扑更新&lt;/strong&gt;：删除 $v_1, v_2$ 及其关联面/边，将邻接点全部重连到 $\bar{v}$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;邻边代价刷新&lt;/strong&gt;：对 $\bar{v}$ 的每条新邻边 $(\bar{v}, u)$：
+&lt;ul&gt;
+&lt;li&gt;计算 $Q_{\text{new}} = Q_{\bar{v}} + Q_u$&lt;/li&gt;
+&lt;li&gt;重新求解 $A\mathbf{x}=-\mathbf{b}$ 得新目标点&lt;/li&gt;
+&lt;li&gt;计算新代价 $E = \bar{v}&lt;em&gt;{\text{opt}}^\top Q&lt;/em&gt;{\text{new}} \bar{v}_{\text{opt}}$&lt;/li&gt;
+&lt;li&gt;更新优先队列中的对应边（删除旧条目，插入新条目）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;✅ &lt;strong&gt;关键点&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;“能量更新”本质是 &lt;strong&gt;$Q$ 矩阵的累加 + 局部重新求解最小二乘&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;由于 $Q$ 矩阵具有可加性，无需重新遍历面片，每次收缩仅需更新一阶邻域，复杂度极低。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;-三工程实现注意事项&#34;&gt;🔷 三、工程实现注意事项
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;问题&lt;/th&gt;
+          &lt;th&gt;常见处理方案&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;数值稳定性&lt;/td&gt;
+          &lt;td&gt;$A$ 条件数大时加微小正则项 $\epsilon I$，或用 LDLT/Cholesky 分解&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;边界保护&lt;/td&gt;
+          &lt;td&gt;边界边赋予极大权重，或单独维护边界顶点 $Q$ 矩阵&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;面积/曲率加权&lt;/td&gt;
+          &lt;td&gt;$K_\mathbf{p}$ 累加时乘面片面积或曲率估计值&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;法向翻转检测&lt;/td&gt;
+          &lt;td&gt;收缩后检查邻面法向一致性，若翻转则拒绝该收缩&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;优先队列更新&lt;/td&gt;
+          &lt;td&gt;使用 &lt;code&gt;std::priority_queue&lt;/code&gt; 需惰性删除；推荐 &lt;code&gt;boost::heap&lt;/code&gt; 或手写可更新堆&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;-原始文献与参考实现&#34;&gt;📚 原始文献与参考实现
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Garland, M., &amp;amp; Heckbert, P. S. (1997). &lt;em&gt;Surface Simplification Using Quadric Error Metrics&lt;/em&gt;. SIGGRAPH.&lt;/li&gt;
+&lt;li&gt;开源实现参考：&lt;code&gt;libigl::decimate&lt;/code&gt;、&lt;code&gt;OpenMesh::Mod_QEM&lt;/code&gt;、&lt;code&gt;MeshLab&lt;/code&gt; 的 Quadric Edge Collapse Decimation&lt;/li&gt;
+&lt;li&gt;数学细节推导可参见：&lt;a class=&#34;link&#34; href=&#34;https://www.cs.cmu.edu/~garland/Papers/quadrics.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;QEM 详细笔记（含代码）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;若你需要具体代码片段（如 $3\times3$ 系统求解、优先队列更新逻辑、或奇异回退实现），可告知使用语言（C++/Python），我可直接给出可运行示例。&lt;/p&gt;
 </description>
         </item>
         <item>
