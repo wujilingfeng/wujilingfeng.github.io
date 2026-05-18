@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>wujilingfeng</title>
-        <link>https://wujilingfeng.github.io/en/</link>
+        <link>http://localhost:1313/en/</link>
         <description>Recent content on wujilingfeng</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>LI BO</copyright>
-        <lastBuildDate>Fri, 09 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://wujilingfeng.github.io/en/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 09 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/en/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Archives</title>
-        <link>https://wujilingfeng.github.io/en/archives/</link>
+        <link>http://localhost:1313/en/archives/</link>
         <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/en/archives/</guid>
+        <guid>http://localhost:1313/en/archives/</guid>
         <description></description>
         </item>
         <item>
         <title>Emoji Support</title>
-        <link>https://wujilingfeng.github.io/en/p/emoji-support/</link>
+        <link>http://localhost:1313/en/p/emoji-support/</link>
         <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/en/p/emoji-support/</guid>
-        <description>&lt;img src="https://wujilingfeng.github.io/p/emoji-support/the-creative-exchange-d2zvqp3fpro-unsplash.jpg" alt="Featured image of post Emoji Support" /&gt;&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;
+        <guid>http://localhost:1313/en/p/emoji-support/</guid>
+        <description>&lt;img src="http://localhost:1313/p/emoji-support/the-creative-exchange-d2zvqp3fpro-unsplash.jpg" alt="Featured image of post Emoji Support" /&gt;&lt;p&gt;Emoji can be enabled in a Hugo project in a number of ways.&lt;/p&gt;
 &lt;p&gt;The &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/functions/emojify/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;&lt;code&gt;emojify&lt;/code&gt;&lt;/a&gt; function can be called directly in templates or &lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/templates/shortcode-templates/#inline-shortcodes&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Inline Shortcodes&lt;/a&gt;.&lt;/p&gt;
@@ -48,10 +48,10 @@
         </item>
         <item>
         <title>About</title>
-        <link>https://wujilingfeng.github.io/en/about/</link>
+        <link>http://localhost:1313/en/about/</link>
         <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/en/about/</guid>
+        <guid>http://localhost:1313/en/about/</guid>
         <description>&lt;p&gt;Written in Go, Hugo is an open source static site generator available under the &lt;a class=&#34;link&#34; href=&#34;https://github.com/gohugoio/hugo/blob/master/LICENSE&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Apache License 2.0.&lt;/a&gt; Hugo supports TOML, YAML and JSON data file types, Markdown and HTML content files and uses shortcodes to add rich content. Other notable features are taxonomies, multilingual mode, image processing, custom output formats, HTML/CSS/JS minification and support for Sass SCSS workflows.&lt;/p&gt;
 &lt;p&gt;Hugo makes use of a variety of open source projects including:&lt;/p&gt;
@@ -76,10 +76,10 @@
         </item>
         <item>
         <title>Links</title>
-        <link>https://wujilingfeng.github.io/en/links/</link>
+        <link>http://localhost:1313/en/links/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/en/links/</guid>
+        <guid>http://localhost:1313/en/links/</guid>
         <description>&lt;p&gt;To use this feature, add &lt;code&gt;links&lt;/code&gt; section to frontmatter.&lt;/p&gt;
 &lt;p&gt;This page&amp;rsquo;s frontmatter:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div style=&#34;color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;
@@ -111,10 +111,10 @@
         </item>
         <item>
         <title>Search</title>
-        <link>https://wujilingfeng.github.io/en/search/</link>
+        <link>http://localhost:1313/en/search/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://wujilingfeng.github.io/en/search/</guid>
+        <guid>http://localhost:1313/en/search/</guid>
         <description></description>
         </item>
         

@@ -1023,11 +1023,7 @@ A_{ij}
 
 展开为：
 
-[
-A_{ij}
-======
-
-\int_\Omega
+$$A_{ij}=\int_\Omega
 \frac{\partial B_i}{\partial x}
 \frac{\partial B_j}{\partial x}dx
 +
@@ -1037,49 +1033,32 @@ A_{ij}
 +
 \int_\Omega
 \frac{\partial B_i}{\partial z}
-\frac{\partial B_j}{\partial z}dx
-]
+\frac{\partial B_j}{\partial z}dx$$
 
 因为 (B_i) 是张量积，所以例如第一项可以拆成：
 
-[
-\int
+$$\int
 N_{i_x}'(x)N_{j_x}'(x)dx
 \cdot
 \int
 N_{i_y}(y)N_{j_y}(y)dy
 \cdot
 \int
-N_{i_z}(z)N_{j_z}(z)dz
-]
+N_{i_z}(z)N_{j_z}(z)dz$$
 
 不同层级时，积分仍然成立，只是两个一维函数的尺度不同：
 
-[
-N_i^{\ell_i}(x)
-===============
+$N_i^{\ell_i}(x)=N\left(\frac{x-c_i}{h_i}\right)$
 
-N\left(\frac{x-c_i}{h_i}\right)
-]
-
-[
-N_j^{\ell_j}(x)
-===============
-
-N\left(\frac{x-c_j}{h_j}\right)
-]
+$N_j^{\ell_j}(x)=N\left(\frac{x-c_j}{h_j}\right)$
 
 若：
 
-[
-\operatorname{supp}(B_i)\cap\operatorname{supp}(B_j)=\varnothing
-]
+$\operatorname{supp}(B_i)\cap\operatorname{supp}(B_j)=\varnothing$
 
 则：
 
-[
-A_{ij}=0
-]
+$A_{ij}=0$
 
 若支撑有交集，则进行积分。
 
