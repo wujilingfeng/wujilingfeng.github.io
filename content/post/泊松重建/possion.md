@@ -16,7 +16,7 @@
 
 $\text{相邻叶子节点的深度差不超过}1$
 
-等价地，若两个相邻叶子单元为(K_i,K_j)，边长分别为(h_i,h_j)，则
+等价地，若两个相邻叶子单元为$(K_i,K_j)$，边长分别为$(h_i,h_j)$，则
 
 $\frac{\max(h_i,h_j)}{\min(h_i,h_j)}\leq 2$
 
@@ -947,49 +947,25 @@ $(A+\lambda C)x=b+\lambda d$
 
 其中：
 
-[
-A_{ij}
-======
+$A_{ij}=\int_\Omega
+\nabla B_j\cdot\nabla B_i,dx$
 
-\int_\Omega
-\nabla B_j\cdot\nabla B_i,dx
-]
+$C_{ij}=\sum_s
+w_sB_j(p_s)B_i(p_s)$
 
-[
-C_{ij}
-======
+$b_i=\int_\Omega
+V\cdot\nabla B_i,dx$
 
-\sum_s
-w_sB_j(p_s)B_i(p_s)
-]
-
-[
-b_i
-===
-
-\int_\Omega
-V\cdot\nabla B_i,dx
-]
-
-[
-d_i
-===
-
-\sum_s
-w_s\tau_sB_i(p_s)
-]
+$d_i=\sum_s
+w_s\tau_sB_i(p_s)$
 
 如果不使用 screening，则：
 
-[
-\lambda=0
-]
+$\lambda=0$
 
 系统退化为：
 
-[
-Ax=b
-]
+$Ax=b$
 
 PoissonRecon 官方说明中，`pointWeight` 控制 screened poisson 中点样本插值的重要性；设为 0 可得到原始 unscreened Poisson reconstruction。([GitHub][2])
 

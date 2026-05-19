@@ -20,7 +20,7 @@
 
 <link rel='canonical' href='http://localhost:1313/p/%E6%B3%8A%E6%9D%BE%E9%87%8D%E5%BB%BA/'>
 
-<link rel="stylesheet" href="../../scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="泊松重建">
+<link rel="stylesheet" href="../../scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="泊松重建">
 <meta property='og:description' content="下面给出一个尽量“数学化、简洁、按理论—算法分层”的说明。范围限定：只讲泊松重建/Screened Poisson 重建的连续模型、离散有限元/样条基表示、自适应八叉树上的方程构造与求解；不讲隐函数如何再经 marching cubes 提取三角网格。\n目录\n问题设定与基本思想\n经典泊松重建的连续理论 2.1 指示函数与法向场 2.2 变分形式与泊松方程 2.3 边界条件的意义\nScreened Poisson 的连续理论 3.1 screened 项的由来 3.2 连续能量泛函 3.3 与经典泊松模型的差异\n自适应八叉树上的离散化 4.1 八叉树函数空间 4.2 基函数如何定义 4.3 不同分辨率节点的支撑半径与影响范围 4.4 相邻节点积分内积如何写 4.5 右端项如何由点云法向构造\n你的疑问 1：自适应八叉树中基函数、半径、积分内积的本质 5.1 基函数不是“拍脑袋选半径”，而是由层级有限元空间决定 5.2 不同尺度节点如何兼容 5.3 内积矩阵为何仍然稀疏\n你的疑问 2：点云权重如何影响重建 6.1 在经典泊松中的影响 6.2 在 screened poisson 中的影响 6.3 权重对几何效果的具体作用\n你的疑问 3：Neumann 与 Dirichlet 边界条件在新版 screened poisson 中的作用 7.1 它们不是“仅在无基函数区域给初值” 7.2 它们改变的是算子定义、零空间与解的全局行为 7.3 两类边界条件在重建中的几何后果\n从理论到算法：完整流程 8.1 输入与预处理 8.2 八叉树构建 8.3 法向 splat 到层级网格 8.4 装配线性系统 8.5 多重网格/层级求解\n">
 <meta property='og:url' content='http://localhost:1313/p/%E6%B3%8A%E6%9D%BE%E9%87%8D%E5%BB%BA/'>
 <meta property='og:site_name' content='五级灵风'>
@@ -1055,7 +1055,7 @@ $A_{\alpha\beta}=\int \nabla B_\alpha\cdot\nabla B_\beta,$
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="../../ts/main.6ba7a7ecd89a92a9da42c8cae11ee91ffa7884016ed75a4e001568498e737fdc.js" defer></script>
+            </script><script type="text/javascript" src="../../ts/main.539ecba1e6899d42d789312a942689629b3f09fa3f1fddb65c6467cfbbdb461e.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
