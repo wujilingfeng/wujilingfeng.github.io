@@ -3,7 +3,7 @@
     lang="zh-cn"
     dir="ltr"
 >
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <head>
          <script>
   MathJax = {
     tex: {
@@ -15,19 +15,19 @@
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
  <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="b样条曲线的卷积连续形式推导（下面的$B_0$ 默认都是定义在初始区间的）:\n$ B_0\\left(x\\right)=1 ,0\\le x \\le 1 $\n$B_d(x)=\\int B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy$\n$B_d\\left(x\\right)=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)dy=\\int_{x-1}^{0}B_{d-1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}\\left(y\\right)dy$\n$=\\int_{x}^{1}B_{d-1}^{i+1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}^{i}\\left(y\\right)dy$\nb样条曲线不同阶的基函数递推公式：\n下面是一份比较系统、偏“教材式”的 B 样条曲线理论介绍，我会按定义、基函数、性质、算法、扩展（NURBS）这个逻辑来讲。\n一、先看直观结论\rB 样条曲线是一条分段多项式参数曲线，由一组控制点和一组 B 样条基函数通过线性组合生成。 它的关键优点： 局部支撑：改动一个控制点只影响曲线的局部一段。 低次分段：即使控制点很多，每一段仍然是低次多项式，易于计算和数值稳定。 良好的几何性质：凸包性、变差缩减性、C^k−p−1 连续性（p 为节点重复度）等。 它是贝塞尔曲线的推广，也是 NURBS（非均匀有理 B 样条）的基础。 三、基本概念\r1. 样条（spline）\r历史上：样条是一根弹性木条，被一组“压块”固定后自然弯曲，用来通过给定点绘制光滑曲线。 数学上：样条是分段定义的多项式函数，在分段连接处满足一定的连续性（比如 C^2）。 B 样条的 “B” 代表 “basis”（基）：B 样条基函数就是构造这类分段多项式曲线的一组“基础函数”。 2. 控制点与控制多边形\r给定 n+1 个控制点 P_0, P_1, …, P_n（在二维/三维空间中的点），把它们依次连接形成的折线称为“控制多边形”。 B 样条曲线一般不经过这些控制点（除非特殊设置节点重复等），但会被它们“吸引”和约束：曲线大致沿着控制多边形的形状。 3. 节点（knot）与节点向量\r在参数轴上给定一串非递减的数： T = {t_0, t_1, …, t_m}, t_i ≤ t_{i+1} 每个 t_i 叫做一个节点（knot），T 叫做节点向量（knot vector）。 常见分类： 均匀（uniform）：节点间距相等，如 {0,1,2,3,4,5}。 非均匀（non‑uniform）：节点间距可任意，如 {0,0,0,1,2,3,4,4,4}。 准均匀（quasi‑uniform）：内部均匀，首尾重复一定次数。 节点重复度（multiplicity）：某个节点连续出现的次数。重数会影响曲线在该点的连续性：一般地，在重复度为 p 的节点处，曲线连续性降为 C^{k-p-1}（k 为阶数）。 4. 阶数（order）与次数（degree）\r阶数 k：基函数的“高度”，常指“p+1 阶”，即基函数最大支撑区间包含 k 个节点段。 次数 p：多项式的最高幂次，满足 p = k − 1。 工程中常用： 二次 B 样条（p=2，k=3） 三次 B 样条（p=3，k=4），是 CAD 中最常用的选择（兼顾光滑与可控）。 四、B 样条基函数（de Boor–Cox 递推）\r1. 节点向量长度与控制点数关系\r若有 n+1 个控制点 P_0…P_n，基函数为 k 阶（p = k−1 次），则节点向量长度至少为 m+1 = n + k + 1（常取正好 n+k+1 个节点）。 参数 t 的定义域：t ∈ [t_{k−1}, t_{n+1}]（两端多余节点主要用于支撑基函数）。 2. 1 阶（p=0）基函数：阶梯函数\r定义：\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="b样条曲线的卷积连续形式推导（下面的$B_0$ 默认都是定义在初始区间的）:\n$ B_0\\left(x\\right)=1 ,0\\le x \\le 1 $\n$B_d(x)=\\int B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy$\n$B_d\\left(x\\right)=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)dy=\\int_{x-1}^{0}B_{d-1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}\\left(y\\right)dy$\n$=\\int_{x}^{1}B_{d-1}^{i+1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}^{i}\\left(y\\right)dy$\nb样条曲线不同阶的基函数递推公式：\n下面是一份比较系统、偏“教材式”的 B 样条曲线理论介绍，我会按定义、基函数、性质、算法、扩展（NURBS）这个逻辑来讲。\n一、先看直观结论 B 样条曲线是一条分段多项式参数曲线，由一组控制点和一组 B 样条基函数通过线性组合生成。 它的关键优点： 局部支撑：改动一个控制点只影响曲线的局部一段。 低次分段：即使控制点很多，每一段仍然是低次多项式，易于计算和数值稳定。 良好的几何性质：凸包性、变差缩减性、C^k−p−1 连续性（p 为节点重复度）等。 它是贝塞尔曲线的推广，也是 NURBS（非均匀有理 B 样条）的基础。 三、基本概念 1. 样条（spline） 历史上：样条是一根弹性木条，被一组“压块”固定后自然弯曲，用来通过给定点绘制光滑曲线。 数学上：样条是分段定义的多项式函数，在分段连接处满足一定的连续性（比如 C^2）。 B 样条的 “B” 代表 “basis”（基）：B 样条基函数就是构造这类分段多项式曲线的一组“基础函数”。 2. 控制点与控制多边形 给定 n+1 个控制点 P_0, P_1, …, P_n（在二维/三维空间中的点），把它们依次连接形成的折线称为“控制多边形”。 B 样条曲线一般不经过这些控制点（除非特殊设置节点重复等），但会被它们“吸引”和约束：曲线大致沿着控制多边形的形状。 3. 节点（knot）与节点向量 在参数轴上给定一串非递减的数： T = {t_0, t_1, …, t_m}, t_i ≤ t_{i+1} 每个 t_i 叫做一个节点（knot），T 叫做节点向量（knot vector）。 常见分类： 均匀（uniform）：节点间距相等，如 {0,1,2,3,4,5}。 非均匀（non‑uniform）：节点间距可任意，如 {0,0,0,1,2,3,4,4,4}。 准均匀（quasi‑uniform）：内部均匀，首尾重复一定次数。 节点重复度（multiplicity）：某个节点连续出现的次数。重数会影响曲线在该点的连续性：一般地，在重复度为 p 的节点处，曲线连续性降为 C^{k-p-1}（k 为阶数）。 4. 阶数（order）与次数（degree） 阶数 k：基函数的“高度”，常指“p+1 阶”，即基函数最大支撑区间包含 k 个节点段。 次数 p：多项式的最高幂次，满足 p = k − 1。 工程中常用： 二次 B 样条（p=2，k=3） 三次 B 样条（p=3，k=4），是 CAD 中最常用的选择（兼顾光滑与可控）。 四、B 样条基函数（de Boor–Cox 递推） 1. 节点向量长度与控制点数关系 若有 n+1 个控制点 P_0…P_n，基函数为 k 阶（p = k−1 次），则节点向量长度至少为 m+1 = n + k + 1（常取正好 n+k+1 个节点）。 参数 t 的定义域：t ∈ [t_{k−1}, t_{n+1}]（两端多余节点主要用于支撑基函数）。 2. 1 阶（p=0）基函数：阶梯函数 定义：\n">
 <title>B样条曲线</title>
 
-<link rel='canonical' href='http://localhost:1313/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/'>
+<link rel='canonical' href='https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/'>
 
-<link rel="stylesheet" href="../../scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="B样条曲线">
-<meta property='og:description' content="b样条曲线的卷积连续形式推导（下面的$B_0$ 默认都是定义在初始区间的）:\n$ B_0\\left(x\\right)=1 ,0\\le x \\le 1 $\n$B_d(x)=\\int B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy$\n$B_d\\left(x\\right)=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)dy=\\int_{x-1}^{0}B_{d-1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}\\left(y\\right)dy$\n$=\\int_{x}^{1}B_{d-1}^{i+1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}^{i}\\left(y\\right)dy$\nb样条曲线不同阶的基函数递推公式：\n下面是一份比较系统、偏“教材式”的 B 样条曲线理论介绍，我会按定义、基函数、性质、算法、扩展（NURBS）这个逻辑来讲。\n一、先看直观结论\rB 样条曲线是一条分段多项式参数曲线，由一组控制点和一组 B 样条基函数通过线性组合生成。 它的关键优点： 局部支撑：改动一个控制点只影响曲线的局部一段。 低次分段：即使控制点很多，每一段仍然是低次多项式，易于计算和数值稳定。 良好的几何性质：凸包性、变差缩减性、C^k−p−1 连续性（p 为节点重复度）等。 它是贝塞尔曲线的推广，也是 NURBS（非均匀有理 B 样条）的基础。 三、基本概念\r1. 样条（spline）\r历史上：样条是一根弹性木条，被一组“压块”固定后自然弯曲，用来通过给定点绘制光滑曲线。 数学上：样条是分段定义的多项式函数，在分段连接处满足一定的连续性（比如 C^2）。 B 样条的 “B” 代表 “basis”（基）：B 样条基函数就是构造这类分段多项式曲线的一组“基础函数”。 2. 控制点与控制多边形\r给定 n+1 个控制点 P_0, P_1, …, P_n（在二维/三维空间中的点），把它们依次连接形成的折线称为“控制多边形”。 B 样条曲线一般不经过这些控制点（除非特殊设置节点重复等），但会被它们“吸引”和约束：曲线大致沿着控制多边形的形状。 3. 节点（knot）与节点向量\r在参数轴上给定一串非递减的数： T = {t_0, t_1, …, t_m}, t_i ≤ t_{i+1} 每个 t_i 叫做一个节点（knot），T 叫做节点向量（knot vector）。 常见分类： 均匀（uniform）：节点间距相等，如 {0,1,2,3,4,5}。 非均匀（non‑uniform）：节点间距可任意，如 {0,0,0,1,2,3,4,4,4}。 准均匀（quasi‑uniform）：内部均匀，首尾重复一定次数。 节点重复度（multiplicity）：某个节点连续出现的次数。重数会影响曲线在该点的连续性：一般地，在重复度为 p 的节点处，曲线连续性降为 C^{k-p-1}（k 为阶数）。 4. 阶数（order）与次数（degree）\r阶数 k：基函数的“高度”，常指“p+1 阶”，即基函数最大支撑区间包含 k 个节点段。 次数 p：多项式的最高幂次，满足 p = k − 1。 工程中常用： 二次 B 样条（p=2，k=3） 三次 B 样条（p=3，k=4），是 CAD 中最常用的选择（兼顾光滑与可控）。 四、B 样条基函数（de Boor–Cox 递推）\r1. 节点向量长度与控制点数关系\r若有 n+1 个控制点 P_0…P_n，基函数为 k 阶（p = k−1 次），则节点向量长度至少为 m+1 = n + k + 1（常取正好 n+k+1 个节点）。 参数 t 的定义域：t ∈ [t_{k−1}, t_{n+1}]（两端多余节点主要用于支撑基函数）。 2. 1 阶（p=0）基函数：阶梯函数\r定义：\n">
-<meta property='og:url' content='http://localhost:1313/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/'>
+<link rel="stylesheet" href="../../scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="B样条曲线">
+<meta property='og:description' content="b样条曲线的卷积连续形式推导（下面的$B_0$ 默认都是定义在初始区间的）:\n$ B_0\\left(x\\right)=1 ,0\\le x \\le 1 $\n$B_d(x)=\\int B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy$\n$B_d\\left(x\\right)=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)dy=\\int_{x-1}^{0}B_{d-1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}\\left(y\\right)dy$\n$=\\int_{x}^{1}B_{d-1}^{i+1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}^{i}\\left(y\\right)dy$\nb样条曲线不同阶的基函数递推公式：\n下面是一份比较系统、偏“教材式”的 B 样条曲线理论介绍，我会按定义、基函数、性质、算法、扩展（NURBS）这个逻辑来讲。\n一、先看直观结论 B 样条曲线是一条分段多项式参数曲线，由一组控制点和一组 B 样条基函数通过线性组合生成。 它的关键优点： 局部支撑：改动一个控制点只影响曲线的局部一段。 低次分段：即使控制点很多，每一段仍然是低次多项式，易于计算和数值稳定。 良好的几何性质：凸包性、变差缩减性、C^k−p−1 连续性（p 为节点重复度）等。 它是贝塞尔曲线的推广，也是 NURBS（非均匀有理 B 样条）的基础。 三、基本概念 1. 样条（spline） 历史上：样条是一根弹性木条，被一组“压块”固定后自然弯曲，用来通过给定点绘制光滑曲线。 数学上：样条是分段定义的多项式函数，在分段连接处满足一定的连续性（比如 C^2）。 B 样条的 “B” 代表 “basis”（基）：B 样条基函数就是构造这类分段多项式曲线的一组“基础函数”。 2. 控制点与控制多边形 给定 n+1 个控制点 P_0, P_1, …, P_n（在二维/三维空间中的点），把它们依次连接形成的折线称为“控制多边形”。 B 样条曲线一般不经过这些控制点（除非特殊设置节点重复等），但会被它们“吸引”和约束：曲线大致沿着控制多边形的形状。 3. 节点（knot）与节点向量 在参数轴上给定一串非递减的数： T = {t_0, t_1, …, t_m}, t_i ≤ t_{i+1} 每个 t_i 叫做一个节点（knot），T 叫做节点向量（knot vector）。 常见分类： 均匀（uniform）：节点间距相等，如 {0,1,2,3,4,5}。 非均匀（non‑uniform）：节点间距可任意，如 {0,0,0,1,2,3,4,4,4}。 准均匀（quasi‑uniform）：内部均匀，首尾重复一定次数。 节点重复度（multiplicity）：某个节点连续出现的次数。重数会影响曲线在该点的连续性：一般地，在重复度为 p 的节点处，曲线连续性降为 C^{k-p-1}（k 为阶数）。 4. 阶数（order）与次数（degree） 阶数 k：基函数的“高度”，常指“p+1 阶”，即基函数最大支撑区间包含 k 个节点段。 次数 p：多项式的最高幂次，满足 p = k − 1。 工程中常用： 二次 B 样条（p=2，k=3） 三次 B 样条（p=3，k=4），是 CAD 中最常用的选择（兼顾光滑与可控）。 四、B 样条基函数（de Boor–Cox 递推） 1. 节点向量长度与控制点数关系 若有 n+1 个控制点 P_0…P_n，基函数为 k 阶（p = k−1 次），则节点向量长度至少为 m+1 = n + k + 1（常取正好 n+k+1 个节点）。 参数 t 的定义域：t ∈ [t_{k−1}, t_{n+1}]（两端多余节点主要用于支撑基函数）。 2. 1 阶（p=0）基函数：阶梯函数 定义：\n">
+<meta property='og:url' content='https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/'>
 <meta property='og:site_name' content='五级灵风'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-24T11:45:01&#43;08:00'/><meta property='article:modified_time' content='2026-01-24T11:45:01&#43;08:00'/><meta property='og:image' content='http://localhost:1313/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-24T11:45:01&#43;08:00'/><meta property='article:modified_time' content='2026-01-24T11:45:01&#43;08:00'/><meta property='og:image' content='https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun.png' />
 <meta name="twitter:title" content="B样条曲线">
-<meta name="twitter:description" content="b样条曲线的卷积连续形式推导（下面的$B_0$ 默认都是定义在初始区间的）:\n$ B_0\\left(x\\right)=1 ,0\\le x \\le 1 $\n$B_d(x)=\\int B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy$\n$B_d\\left(x\\right)=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)dy=\\int_{x-1}^{0}B_{d-1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}\\left(y\\right)dy$\n$=\\int_{x}^{1}B_{d-1}^{i+1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}^{i}\\left(y\\right)dy$\nb样条曲线不同阶的基函数递推公式：\n下面是一份比较系统、偏“教材式”的 B 样条曲线理论介绍，我会按定义、基函数、性质、算法、扩展（NURBS）这个逻辑来讲。\n一、先看直观结论\rB 样条曲线是一条分段多项式参数曲线，由一组控制点和一组 B 样条基函数通过线性组合生成。 它的关键优点： 局部支撑：改动一个控制点只影响曲线的局部一段。 低次分段：即使控制点很多，每一段仍然是低次多项式，易于计算和数值稳定。 良好的几何性质：凸包性、变差缩减性、C^k−p−1 连续性（p 为节点重复度）等。 它是贝塞尔曲线的推广，也是 NURBS（非均匀有理 B 样条）的基础。 三、基本概念\r1. 样条（spline）\r历史上：样条是一根弹性木条，被一组“压块”固定后自然弯曲，用来通过给定点绘制光滑曲线。 数学上：样条是分段定义的多项式函数，在分段连接处满足一定的连续性（比如 C^2）。 B 样条的 “B” 代表 “basis”（基）：B 样条基函数就是构造这类分段多项式曲线的一组“基础函数”。 2. 控制点与控制多边形\r给定 n+1 个控制点 P_0, P_1, …, P_n（在二维/三维空间中的点），把它们依次连接形成的折线称为“控制多边形”。 B 样条曲线一般不经过这些控制点（除非特殊设置节点重复等），但会被它们“吸引”和约束：曲线大致沿着控制多边形的形状。 3. 节点（knot）与节点向量\r在参数轴上给定一串非递减的数： T = {t_0, t_1, …, t_m}, t_i ≤ t_{i+1} 每个 t_i 叫做一个节点（knot），T 叫做节点向量（knot vector）。 常见分类： 均匀（uniform）：节点间距相等，如 {0,1,2,3,4,5}。 非均匀（non‑uniform）：节点间距可任意，如 {0,0,0,1,2,3,4,4,4}。 准均匀（quasi‑uniform）：内部均匀，首尾重复一定次数。 节点重复度（multiplicity）：某个节点连续出现的次数。重数会影响曲线在该点的连续性：一般地，在重复度为 p 的节点处，曲线连续性降为 C^{k-p-1}（k 为阶数）。 4. 阶数（order）与次数（degree）\r阶数 k：基函数的“高度”，常指“p+1 阶”，即基函数最大支撑区间包含 k 个节点段。 次数 p：多项式的最高幂次，满足 p = k − 1。 工程中常用： 二次 B 样条（p=2，k=3） 三次 B 样条（p=3，k=4），是 CAD 中最常用的选择（兼顾光滑与可控）。 四、B 样条基函数（de Boor–Cox 递推）\r1. 节点向量长度与控制点数关系\r若有 n+1 个控制点 P_0…P_n，基函数为 k 阶（p = k−1 次），则节点向量长度至少为 m+1 = n + k + 1（常取正好 n+k+1 个节点）。 参数 t 的定义域：t ∈ [t_{k−1}, t_{n+1}]（两端多余节点主要用于支撑基函数）。 2. 1 阶（p=0）基函数：阶梯函数\r定义：\n"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://localhost:1313/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun.png' />
+<meta name="twitter:description" content="b样条曲线的卷积连续形式推导（下面的$B_0$ 默认都是定义在初始区间的）:\n$ B_0\\left(x\\right)=1 ,0\\le x \\le 1 $\n$B_d(x)=\\int B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)B_0\\left(x-y\\right)dy$\n$B_d\\left(x\\right)=\\int_{x-1}^{x}B_{d-1}\\left(y\\right)dy=\\int_{x-1}^{0}B_{d-1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}\\left(y\\right)dy$\n$=\\int_{x}^{1}B_{d-1}^{i+1}\\left(y\\right)dy + \\int_{0}^{x}B_{d-1}^{i}\\left(y\\right)dy$\nb样条曲线不同阶的基函数递推公式：\n下面是一份比较系统、偏“教材式”的 B 样条曲线理论介绍，我会按定义、基函数、性质、算法、扩展（NURBS）这个逻辑来讲。\n一、先看直观结论 B 样条曲线是一条分段多项式参数曲线，由一组控制点和一组 B 样条基函数通过线性组合生成。 它的关键优点： 局部支撑：改动一个控制点只影响曲线的局部一段。 低次分段：即使控制点很多，每一段仍然是低次多项式，易于计算和数值稳定。 良好的几何性质：凸包性、变差缩减性、C^k−p−1 连续性（p 为节点重复度）等。 它是贝塞尔曲线的推广，也是 NURBS（非均匀有理 B 样条）的基础。 三、基本概念 1. 样条（spline） 历史上：样条是一根弹性木条，被一组“压块”固定后自然弯曲，用来通过给定点绘制光滑曲线。 数学上：样条是分段定义的多项式函数，在分段连接处满足一定的连续性（比如 C^2）。 B 样条的 “B” 代表 “basis”（基）：B 样条基函数就是构造这类分段多项式曲线的一组“基础函数”。 2. 控制点与控制多边形 给定 n+1 个控制点 P_0, P_1, …, P_n（在二维/三维空间中的点），把它们依次连接形成的折线称为“控制多边形”。 B 样条曲线一般不经过这些控制点（除非特殊设置节点重复等），但会被它们“吸引”和约束：曲线大致沿着控制多边形的形状。 3. 节点（knot）与节点向量 在参数轴上给定一串非递减的数： T = {t_0, t_1, …, t_m}, t_i ≤ t_{i+1} 每个 t_i 叫做一个节点（knot），T 叫做节点向量（knot vector）。 常见分类： 均匀（uniform）：节点间距相等，如 {0,1,2,3,4,5}。 非均匀（non‑uniform）：节点间距可任意，如 {0,0,0,1,2,3,4,4,4}。 准均匀（quasi‑uniform）：内部均匀，首尾重复一定次数。 节点重复度（multiplicity）：某个节点连续出现的次数。重数会影响曲线在该点的连续性：一般地，在重复度为 p 的节点处，曲线连续性降为 C^{k-p-1}（k 为阶数）。 4. 阶数（order）与次数（degree） 阶数 k：基函数的“高度”，常指“p+1 阶”，即基函数最大支撑区间包含 k 个节点段。 次数 p：多项式的最高幂次，满足 p = k − 1。 工程中常用： 二次 B 样条（p=2，k=3） 三次 B 样条（p=3，k=4），是 CAD 中最常用的选择（兼顾光滑与可控）。 四、B 样条基函数（de Boor–Cox 递推） 1. 节点向量长度与控制点数关系 若有 n+1 个控制点 P_0…P_n，基函数为 k 阶（p = k−1 次），则节点向量长度至少为 m+1 = n + k + 1（常取正好 n+k+1 个节点）。 参数 t 的定义域：t ∈ [t_{k−1}, t_{n+1}]（两端多余节点主要用于支撑基函数）。 2. 1 阶（p=0）基函数：阶梯函数 定义：\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://wujilingfeng.github.io/p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun.png' />
     <link rel="shortcut icon" href="../../favicon.ico" />
 
     </head>
@@ -75,7 +75,7 @@
                     
                     
                         
-                        <img src="../../img/lixiaoyao_hu_dfce66ea35f8d737.jpg" width="300"
+                        <img src="../../img/lixiaoyao_hu_3f94c8178f214856.jpg" width="300"
                             height="188" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -302,11 +302,11 @@
 
                             <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
                                 
-                                    <option value="http://localhost:1313/" selected>中文</option>
+                                    <option value="https://wujilingfeng.github.io/" selected>中文</option>
                                 
-                                    <option value="http://localhost:1313/en/" >English</option>
+                                    <option value="https://wujilingfeng.github.io/en/" >English</option>
                                 
-                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                    <option value="https://wujilingfeng.github.io/ar/" >عربي</option>
                                 
                             </select>
                         </li>
@@ -435,8 +435,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="../../p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/">
-                <img src="../../p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun_hu_3bef708a025fc5cf.png"
-                        srcset="../../p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun_hu_3bef708a025fc5cf.png 800w, ../../p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun_hu_e7c6bde20c6fd2da.png 1600w"
+                <img src="../../p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun_hu_1c62cad5e8582fd7.png"
+                        srcset="../../p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun_hu_1c62cad5e8582fd7.png 800w, ../../p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/wuyun_hu_a69403e24a0d466f.png 1600w"
                         width="800" 
                         height="457" 
                         loading="lazy"
@@ -512,7 +512,7 @@
 <p><img src="../../p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/b.png"
 	width="869"
 	height="458"
-	srcset="../../p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/b_hu_ded2d57388fa2d1.png 480w, ../../p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/b_hu_e15f0be43b306657.png 1024w"
+	srcset="../../p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/b_hu_816c092eaa138bf3.png 480w, ../../p/b%E6%A0%B7%E6%9D%A1%E6%9B%B2%E7%BA%BF/b_hu_9505d7de69e97c25.png 1024w"
 	loading="lazy"
 	
 		alt="b样条"
@@ -1063,7 +1063,7 @@ $</p>
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="../../ts/main.539ecba1e6899d42d789312a942689629b3f09fa3f1fddb65c6467cfbbdb461e.js" defer></script>
+            </script><script type="text/javascript" src="../../ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

@@ -60,7 +60,7 @@ $$\chi(x)=
 0,&x\notin M
 \end{cases}$$
 
-则(\chi)在区域内部和外部几乎处处为常数，只有在边界(\partial M)附近发生跃迁。因此(\nabla\chi)只在曲面附近非零，并与曲面法向相关。Kazhdan等人的原始泊松重建正是把有向点云看作指示函数梯度场的离散采样，然后求一个标量函数(\chi)，使其梯度尽量逼近由法向点云构造出的向量场(V)。([Hugues Hoppe][1])
+则$\chi$在区域内部和外部几乎处处为常数，只有在边界$\partial M$附近发生跃迁。因此$\nabla\chi$只在曲面附近非零，并与曲面法向相关。Kazhdan等人的原始泊松重建正是把有向点云看作指示函数梯度场的离散采样，然后求一个标量函数$\chi$，使其梯度尽量逼近由法向点云构造出的向量场(V)。([Hugues Hoppe][1])
 
 连续变分问题可写为：
 
@@ -68,7 +68,7 @@ $\min_{\chi}\int_{\Omega}|\nabla \chi(x)-V(x)|^2,dx$
 
 其中$\Omega$是包含点云的有限计算区域，通常取归一化后的包围立方体。
 
-对$\chi$取一阶变分。令扰动函数为(\delta\chi)，则有：
+对$\chi$取一阶变分。令扰动函数为$\delta\chi$，则有：
 
 $$0=\frac{d}{d\epsilon}
 \int_{\Omega}|\nabla(\chi+\epsilon\delta\chi)-V|^2dx
@@ -989,13 +989,8 @@ $$N_i^\ell(x)=N\left(\frac{x-i h_\ell}{h_\ell}\right)$$
 
 对于另一个基函数 $B_j$，刚度矩阵元素为：
 
-[
-A_{ij}
-======
-
-\int_\Omega
-\nabla B_i\cdot\nabla B_j,dx
-]
+$A_{ij}=\int_\Omega
+\nabla B_i\cdot\nabla B_j,dx$
 
 展开为：
 
@@ -2007,7 +2002,7 @@ $\text{第 }L\text{ 层细化区域内部不再由 }B_i^{L-1}\text{ 负责。}$
 
 ## 5.3 更粗层要递归经过所有更细层
 
-对第 (\ell) 层基函数：
+对第 $\ell$ 层基函数：
 
 $B_i^\ell$
 

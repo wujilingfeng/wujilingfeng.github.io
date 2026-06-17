@@ -3,21 +3,21 @@
     lang="zh-cn"
     dir="ltr"
 >
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <head>
         <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\nzig语言tips\r最新的zig当需要忽略捕获值时，除了for循环必须写||，其他的try catch 不用写| _ |, switch 也不用写 | | 。\nzig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）.\n也就是两个模块互相导入时不能声明为pub。\nzig语言的type类型可以直接比较判断\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 pub fn normalize(p: anytype) Math_Compute_Abandon!void { comptime { const T=@TypeOf(p[0]); if(@TypeOf(p)!=[]T) { @compileError(&#34;normalize error\\n&#34; ++ @typeName(@TypeOf(p)) ++ &#34;fdsf&#34;); } } const norm = lb_norm(p); if (approxEqAbs(@TypeOf(p[0]), norm, 0, null)) { return error.Math_Compute_Abandon; } for (p) |*pv| { pv.* /= norm; } } 下面是zig语言类型反射的一些用法，包括访问struct类型，访问字段类型\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\nzig语言tips 最新的zig当需要忽略捕获值时，除了for循环必须写||，其他的try catch 不用写| _ |, switch 也不用写 | | 。\nzig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）.\n也就是两个模块互相导入时不能声明为pub。\nzig语言的type类型可以直接比较判断\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 pub fn normalize(p: anytype) Math_Compute_Abandon!void { comptime { const T=@TypeOf(p[0]); if(@TypeOf(p)!=[]T) { @compileError(&#34;normalize error\\n&#34; ++ @typeName(@TypeOf(p)) ++ &#34;fdsf&#34;); } } const norm = lb_norm(p); if (approxEqAbs(@TypeOf(p[0]), norm, 0, null)) { return error.Math_Compute_Abandon; } for (p) |*pv| { pv.* /= norm; } } 下面是zig语言类型反射的一些用法，包括访问struct类型，访问字段类型\n">
 <title>Zig实战</title>
 
-<link rel='canonical' href='http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/'>
+<link rel='canonical' href='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/'>
 
-<link rel="stylesheet" href="../../scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="Zig实战">
-<meta property='og:description' content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\nzig语言tips\r最新的zig当需要忽略捕获值时，除了for循环必须写||，其他的try catch 不用写| _ |, switch 也不用写 | | 。\nzig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）.\n也就是两个模块互相导入时不能声明为pub。\nzig语言的type类型可以直接比较判断\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 pub fn normalize(p: anytype) Math_Compute_Abandon!void { comptime { const T=@TypeOf(p[0]); if(@TypeOf(p)!=[]T) { @compileError(&#34;normalize error\\n&#34; ++ @typeName(@TypeOf(p)) ++ &#34;fdsf&#34;); } } const norm = lb_norm(p); if (approxEqAbs(@TypeOf(p[0]), norm, 0, null)) { return error.Math_Compute_Abandon; } for (p) |*pv| { pv.* /= norm; } } 下面是zig语言类型反射的一些用法，包括访问struct类型，访问字段类型\n">
-<meta property='og:url' content='http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/'>
+<link rel="stylesheet" href="../../scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="Zig实战">
+<meta property='og:description' content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\nzig语言tips 最新的zig当需要忽略捕获值时，除了for循环必须写||，其他的try catch 不用写| _ |, switch 也不用写 | | 。\nzig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）.\n也就是两个模块互相导入时不能声明为pub。\nzig语言的type类型可以直接比较判断\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 pub fn normalize(p: anytype) Math_Compute_Abandon!void { comptime { const T=@TypeOf(p[0]); if(@TypeOf(p)!=[]T) { @compileError(&#34;normalize error\\n&#34; ++ @typeName(@TypeOf(p)) ++ &#34;fdsf&#34;); } } const norm = lb_norm(p); if (approxEqAbs(@TypeOf(p[0]), norm, 0, null)) { return error.Math_Compute_Abandon; } for (p) |*pv| { pv.* /= norm; } } 下面是zig语言类型反射的一些用法，包括访问struct类型，访问字段类型\n">
+<meta property='og:url' content='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/'>
 <meta property='og:site_name' content='五级灵风'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-06-20T10:36:14&#43;08:00'/><meta property='article:modified_time' content='2025-06-20T10:36:14&#43;08:00'/><meta property='og:image' content='http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/nature.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-06-20T10:36:14&#43;08:00'/><meta property='article:modified_time' content='2025-06-20T10:36:14&#43;08:00'/><meta property='og:image' content='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/nature.png' />
 <meta name="twitter:title" content="Zig实战">
-<meta name="twitter:description" content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\nzig语言tips\r最新的zig当需要忽略捕获值时，除了for循环必须写||，其他的try catch 不用写| _ |, switch 也不用写 | | 。\nzig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）.\n也就是两个模块互相导入时不能声明为pub。\nzig语言的type类型可以直接比较判断\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 pub fn normalize(p: anytype) Math_Compute_Abandon!void { comptime { const T=@TypeOf(p[0]); if(@TypeOf(p)!=[]T) { @compileError(&#34;normalize error\\n&#34; ++ @typeName(@TypeOf(p)) ++ &#34;fdsf&#34;); } } const norm = lb_norm(p); if (approxEqAbs(@TypeOf(p[0]), norm, 0, null)) { return error.Math_Compute_Abandon; } for (p) |*pv| { pv.* /= norm; } } 下面是zig语言类型反射的一些用法，包括访问struct类型，访问字段类型\n"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://localhost:1313/p/zig%E5%AE%9E%E6%88%98/nature.png' />
+<meta name="twitter:description" content="zig语言中文社区\nzig编译为webassembly\nhttps://dev.to/sleibrock/webassembly-with-zig-part-1-4onm\nzig语言tips 最新的zig当需要忽略捕获值时，除了for循环必须写||，其他的try catch 不用写| _ |, switch 也不用写 | | 。\nzig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）.\n也就是两个模块互相导入时不能声明为pub。\nzig语言的type类型可以直接比较判断\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 pub fn normalize(p: anytype) Math_Compute_Abandon!void { comptime { const T=@TypeOf(p[0]); if(@TypeOf(p)!=[]T) { @compileError(&#34;normalize error\\n&#34; ++ @typeName(@TypeOf(p)) ++ &#34;fdsf&#34;); } } const norm = lb_norm(p); if (approxEqAbs(@TypeOf(p[0]), norm, 0, null)) { return error.Math_Compute_Abandon; } for (p) |*pv| { pv.* /= norm; } } 下面是zig语言类型反射的一些用法，包括访问struct类型，访问字段类型\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://wujilingfeng.github.io/p/zig%E5%AE%9E%E6%88%98/nature.png' />
     <link rel="shortcut icon" href="../../favicon.ico" />
 
     </head>
@@ -65,7 +65,7 @@
                     
                     
                         
-                        <img src="../../img/lixiaoyao_hu_dfce66ea35f8d737.jpg" width="300"
+                        <img src="../../img/lixiaoyao_hu_3f94c8178f214856.jpg" width="300"
                             height="188" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -292,11 +292,11 @@
 
                             <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
                                 
-                                    <option value="http://localhost:1313/" selected>中文</option>
+                                    <option value="https://wujilingfeng.github.io/" selected>中文</option>
                                 
-                                    <option value="http://localhost:1313/en/" >English</option>
+                                    <option value="https://wujilingfeng.github.io/en/" >English</option>
                                 
-                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                    <option value="https://wujilingfeng.github.io/ar/" >عربي</option>
                                 
                             </select>
                         </li>
@@ -405,8 +405,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="../../p/zig%E5%AE%9E%E6%88%98/">
-                <img src="../../p/zig%E5%AE%9E%E6%88%98/nature_hu_8d25fd44b6031fd8.png"
-                        srcset="../../p/zig%E5%AE%9E%E6%88%98/nature_hu_8d25fd44b6031fd8.png 800w, ../../p/zig%E5%AE%9E%E6%88%98/nature_hu_870ca72d8c52d721.png 1600w"
+                <img src="../../p/zig%E5%AE%9E%E6%88%98/nature_hu_2cd0bc7fc9e86341.png"
+                        srcset="../../p/zig%E5%AE%9E%E6%88%98/nature_hu_2cd0bc7fc9e86341.png 800w, ../../p/zig%E5%AE%9E%E6%88%98/nature_hu_4973284bac6db94c.png 1600w"
                         width="800" 
                         height="547" 
                         loading="lazy"
@@ -484,9 +484,9 @@
 <p>zig的文件互相不可循环导入，如果要循环导入（彼此依赖），必须导入对方时不可见（不可声明为pub）.</p>
 <p>也就是两个模块互相导入时不能声明为pub。</p>
 <p>zig语言的type类型可以直接比较判断</p>
-<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
@@ -505,7 +505,7 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">17
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">normalize</span>(<span style="color:#e06c75">p</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">anytype</span>) <span style="color:#e06c75">Math_Compute_Abandon</span><span style="color:#56b6c2">!</span><span style="color:#e5c07b">void</span> {
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">normalize</span>(<span style="color:#e06c75">p</span>: <span style="color:#c678dd">anytype</span>) <span style="color:#e06c75">Math_Compute_Abandon</span><span style="color:#56b6c2">!</span><span style="color:#e5c07b">void</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">comptime</span> {
 </span></span><span style="display:flex;"><span>        <span style="color:#c678dd">const</span> <span style="color:#e06c75">T</span><span style="color:#56b6c2">=</span><span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">p</span>[<span style="color:#d19a66">0</span>]);
 </span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span>(<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">p</span>)<span style="color:#56b6c2">!=</span>[]<span style="color:#e06c75">T</span>)
@@ -514,20 +514,20 @@
 </span></span><span style="display:flex;"><span>                <span style="color:#e5c07b">@typeName</span>(<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">p</span>)) <span style="color:#56b6c2">++</span> <span style="color:#98c379">&#34;fdsf&#34;</span>);
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">norm</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">lb_norm</span>(<span style="color:#e06c75">p</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> (<span style="color:#e06c75">approxEqAbs</span>(<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">p</span>[<span style="color:#d19a66">0</span>]), <span style="color:#e06c75">norm</span>, <span style="color:#d19a66">0</span>, <span style="color:#e5c07b">null</span>)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">norm</span> <span style="color:#56b6c2">=</span> <span style="color:#61afef;font-weight:bold">lb_norm</span>(<span style="color:#e06c75">p</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> (<span style="color:#61afef;font-weight:bold">approxEqAbs</span>(<span style="color:#e5c07b">@TypeOf</span>(<span style="color:#e06c75">p</span>[<span style="color:#d19a66">0</span>]), <span style="color:#e06c75">norm</span>, <span style="color:#d19a66">0</span>, <span style="color:#e5c07b">null</span>)) {
 </span></span><span style="display:flex;"><span>        <span style="color:#c678dd">return</span> <span style="color:#c678dd">error</span>.<span style="color:#e06c75">Math_Compute_Abandon</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> (<span style="color:#e06c75">p</span>) <span style="color:#56b6c2">|*</span><span style="color:#e06c75">pv</span><span style="color:#56b6c2">|</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">pv</span>.<span style="color:#56b6c2">*</span> <span style="color:#56b6c2">/=</span> <span style="color:#e06c75">norm</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">pv</span><span style="color:#56b6c2">.*</span> <span style="color:#56b6c2">/=</span> <span style="color:#e06c75">norm</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>下面是zig语言类型反射的一些用法，包括访问struct类型，访问字段类型</p>
-<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
@@ -546,17 +546,17 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">17
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#7f848e">/// 浮点类型相关的默认容差
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">inline</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">defaultTolerance</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">T</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>) <span style="color:#e06c75">T</span> {
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#7f848e">/// 浮点类型相关的默认容差</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">inline</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">defaultTolerance</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">T</span>: <span style="color:#e5c07b">type</span>) <span style="color:#e06c75">T</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#c678dd">switch</span> (<span style="color:#e5c07b">@typeInfo</span>(<span style="color:#e06c75">T</span>)) {
-</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">float</span>, .<span style="color:#e5c07b">comptime_float</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#e06c75">math</span>.<span style="color:#e06c75">floatEps</span>(<span style="color:#e06c75">T</span>) <span style="color:#56b6c2">*</span> <span style="color:#d19a66">100</span>, <span style="color:#7f848e">// 100倍机器精度
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">else</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#e5c07b">@compileError</span>(<span style="color:#98c379">&#34;Only floating-point types supported&#34;</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">float</span>, .<span style="color:#e5c07b">comptime_float</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#e06c75">math</span>.<span style="color:#61afef;font-weight:bold">floatEps</span>(<span style="color:#e06c75">T</span>) <span style="color:#56b6c2">*</span> <span style="color:#d19a66">100</span>, <span style="color:#7f848e">// 100倍机器精度</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">else</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#e5c07b">@compileError</span>(<span style="color:#98c379">&#34;Only floating-point types supported&#34;</span>),
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">inline</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">Sqrt</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">T</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>) <span style="color:#e5c07b">type</span> {
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">inline</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">Sqrt</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">T</span>: <span style="color:#e5c07b">type</span>) <span style="color:#e5c07b">type</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#c678dd">switch</span> (<span style="color:#e5c07b">@typeInfo</span>(<span style="color:#e06c75">T</span>)) {
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">int</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#56b6c2">|</span><span style="color:#e06c75">int</span><span style="color:#56b6c2">|</span> <span style="color:#e5c07b">@Int</span>(.<span style="color:#e06c75">unsigned</span>, (<span style="color:#e06c75">int</span>.<span style="color:#e06c75">bits</span> <span style="color:#56b6c2">+</span> <span style="color:#d19a66">1</span>) <span style="color:#56b6c2">/</span> <span style="color:#d19a66">2</span>),
 </span></span><span style="display:flex;"><span>        <span style="color:#c678dd">else</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#e06c75">T</span>,
@@ -566,9 +566,9 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>builtin.zig的类型源码如下:</p>
-<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">  1
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">  1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">  2
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">  3
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">  4
@@ -855,289 +855,289 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">285
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Type</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">union</span>(<span style="color:#c678dd">enum</span>) {
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Type</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">union</span>(<span style="color:#c678dd">enum</span>) {
 </span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">type</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">void</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">bool</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">noreturn</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">int</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Int</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">float</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Float</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">pointer</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Pointer</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">array</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Array</span>,
-</span></span><span style="display:flex;"><span>    @<span style="color:#98c379">&#34;struct&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Struct</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">int</span>: <span style="color:#e06c75">Int</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">float</span>: <span style="color:#e06c75">Float</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">pointer</span>: <span style="color:#e06c75">Pointer</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">array</span>: <span style="color:#e06c75">Array</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">@&#34;struct&#34;</span>: <span style="color:#e06c75">Struct</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">comptime_float</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">comptime_int</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">undefined</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#e5c07b">null</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">optional</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Optional</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">error_union</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">ErrorUnion</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">error_set</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">ErrorSet</span>,
-</span></span><span style="display:flex;"><span>    @<span style="color:#98c379">&#34;enum&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Enum</span>,
-</span></span><span style="display:flex;"><span>    @<span style="color:#98c379">&#34;union&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Union</span>,
-</span></span><span style="display:flex;"><span>    @<span style="color:#98c379">&#34;fn&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Fn</span>,
-</span></span><span style="display:flex;"><span>    @<span style="color:#98c379">&#34;opaque&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Opaque</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">frame</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Frame</span>,
-</span></span><span style="display:flex;"><span>    @<span style="color:#98c379">&#34;anyframe&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">AnyFrame</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">vector</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Vector</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">optional</span>: <span style="color:#e06c75">Optional</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">error_union</span>: <span style="color:#e06c75">ErrorUnion</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">error_set</span>: <span style="color:#e06c75">ErrorSet</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">@&#34;enum&#34;</span>: <span style="color:#e06c75">Enum</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">@&#34;union&#34;</span>: <span style="color:#e06c75">Union</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">@&#34;fn&#34;</span>: <span style="color:#e06c75">Fn</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">@&#34;opaque&#34;</span>: <span style="color:#e06c75">Opaque</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">frame</span>: <span style="color:#e06c75">Frame</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">@&#34;anyframe&#34;</span>: <span style="color:#e06c75">AnyFrame</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">vector</span>: <span style="color:#e06c75">Vector</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#e06c75">enum_literal</span>,
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Int</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">signedness</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Signedness</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">bits</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">u16</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Int</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">signedness</span>: <span style="color:#e06c75">Signedness</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">bits</span>: <span style="color:#e5c07b">u16</span>,
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Float</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">bits</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">u16</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Float</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">bits</span>: <span style="color:#e5c07b">u16</span>,
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Pointer</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">size</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Size</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_const</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_volatile</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// `null` means implicit alignment, which is equivalent to `@alignOf(child)`.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#e06c75">alignment</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">usize</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">address_space</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">AddressSpace</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">child</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_allowzero</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Pointer</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">size</span>: <span style="color:#e06c75">Size</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_const</span>: <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_volatile</span>: <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// `null` means implicit alignment, which is equivalent to `@alignOf(child)`.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">alignment</span>: ?<span style="color:#e5c07b">usize</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">address_space</span>: <span style="color:#e06c75">AddressSpace</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">child</span>: <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_allowzero</span>: <span style="color:#e5c07b">bool</span>,
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// The type of the sentinel is the element type of the pointer, which is
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// the value of the `child` field in this struct. However there is no way
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// to refer to that type here, so we use `*const anyopaque`.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// See also: `sentinel`
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#e06c75">sentinel_ptr</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">anyopaque</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// The type of the sentinel is the element type of the pointer, which is</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// the value of the `child` field in this struct. However there is no way</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// to refer to that type here, so we use `*const anyopaque`.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// See also: `sentinel`</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">sentinel_ptr</span>: ?<span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e5c07b">anyopaque</span>,
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// Loads the pointer type&#39;s sentinel value from `sentinel_ptr`.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// Returns `null` if the pointer type has no sentinel.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">inline</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">sentinel</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">ptr</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Pointer</span>) <span style="color:#56b6c2">?</span><span style="color:#e06c75">ptr</span>.<span style="color:#e06c75">child</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">const</span> <span style="color:#e06c75">sp</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">ptr</span>.<span style="color:#e06c75">child</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@ptrCast</span>(<span style="color:#e5c07b">@alignCast</span>(<span style="color:#e06c75">ptr</span>.<span style="color:#e06c75">sentinel_ptr</span> <span style="color:#c678dd">orelse</span> <span style="color:#c678dd">return</span> <span style="color:#e5c07b">null</span>));
-</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">return</span> <span style="color:#e06c75">sp</span>.<span style="color:#56b6c2">*</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// Loads the pointer type&#39;s sentinel value from `sentinel_ptr`.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// Returns `null` if the pointer type has no sentinel.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">inline</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">sentinel</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">ptr</span>: <span style="color:#e06c75">Pointer</span>) ?<span style="color:#e06c75">ptr</span>.<span style="color:#e06c75">child</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">const</span> <span style="color:#e06c75">sp</span>: <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">ptr</span>.<span style="color:#e06c75">child</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@ptrCast</span>(<span style="color:#e5c07b">@alignCast</span>(<span style="color:#e06c75">ptr</span>.<span style="color:#e06c75">sentinel_ptr</span> <span style="color:#c678dd">orelse</span> <span style="color:#c678dd">return</span> <span style="color:#e5c07b">null</span>));
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">return</span> <span style="color:#e06c75">sp</span><span style="color:#56b6c2">.*</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Size</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">enum</span>(<span style="color:#e06c75">u2</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Size</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">enum</span>(<span style="color:#e06c75">u2</span>) {
 </span></span><span style="display:flex;"><span>            <span style="color:#e06c75">one</span>,
 </span></span><span style="display:flex;"><span>            <span style="color:#e06c75">many</span>,
 </span></span><span style="display:flex;"><span>            <span style="color:#e06c75">slice</span>,
 </span></span><span style="display:flex;"><span>            <span style="color:#e06c75">c</span>,
 </span></span><span style="display:flex;"><span>        };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Attributes</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>            @<span style="color:#98c379">&#34;const&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">false</span>,
-</span></span><span style="display:flex;"><span>            @<span style="color:#98c379">&#34;volatile&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">false</span>,
-</span></span><span style="display:flex;"><span>            @<span style="color:#98c379">&#34;allowzero&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">false</span>,
-</span></span><span style="display:flex;"><span>            @<span style="color:#98c379">&#34;addrspace&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e06c75">AddressSpace</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
-</span></span><span style="display:flex;"><span>            @<span style="color:#98c379">&#34;align&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">usize</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Attributes</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">@&#34;const&#34;</span>: <span style="color:#e5c07b">bool</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">false</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">@&#34;volatile&#34;</span>: <span style="color:#e5c07b">bool</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">false</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">@&#34;allowzero&#34;</span>: <span style="color:#e5c07b">bool</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">false</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">@&#34;addrspace&#34;</span>: ?<span style="color:#e06c75">AddressSpace</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">@&#34;align&#34;</span>: ?<span style="color:#e5c07b">usize</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
 </span></span><span style="display:flex;"><span>        };
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Array</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">len</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">comptime_int</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">child</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Array</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">len</span>: <span style="color:#e5c07b">comptime_int</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">child</span>: <span style="color:#e5c07b">type</span>,
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// The type of the sentinel is the element type of the array, which is
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// the value of the `child` field in this struct. However there is no way
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// to refer to that type here, so we use `*const anyopaque`.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// See also: `sentinel`.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#e06c75">sentinel_ptr</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">anyopaque</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// The type of the sentinel is the element type of the array, which is</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// the value of the `child` field in this struct. However there is no way</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// to refer to that type here, so we use `*const anyopaque`.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// See also: `sentinel`.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">sentinel_ptr</span>: ?<span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e5c07b">anyopaque</span>,
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// Loads the array type&#39;s sentinel value from `sentinel_ptr`.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// Returns `null` if the array type has no sentinel.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">inline</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">sentinel</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">arr</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">Array</span>) <span style="color:#56b6c2">?</span><span style="color:#e06c75">arr</span>.<span style="color:#e06c75">child</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">const</span> <span style="color:#e06c75">sp</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">arr</span>.<span style="color:#e06c75">child</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@ptrCast</span>(<span style="color:#e5c07b">@alignCast</span>(<span style="color:#e06c75">arr</span>.<span style="color:#e06c75">sentinel_ptr</span> <span style="color:#c678dd">orelse</span> <span style="color:#c678dd">return</span> <span style="color:#e5c07b">null</span>));
-</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">return</span> <span style="color:#e06c75">sp</span>.<span style="color:#56b6c2">*</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// Loads the array type&#39;s sentinel value from `sentinel_ptr`.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// Returns `null` if the array type has no sentinel.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">inline</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">sentinel</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">arr</span>: <span style="color:#e06c75">Array</span>) ?<span style="color:#e06c75">arr</span>.<span style="color:#e06c75">child</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">const</span> <span style="color:#e06c75">sp</span>: <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">arr</span>.<span style="color:#e06c75">child</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@ptrCast</span>(<span style="color:#e5c07b">@alignCast</span>(<span style="color:#e06c75">arr</span>.<span style="color:#e06c75">sentinel_ptr</span> <span style="color:#c678dd">orelse</span> <span style="color:#c678dd">return</span> <span style="color:#e5c07b">null</span>));
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">return</span> <span style="color:#e06c75">sp</span><span style="color:#56b6c2">.*</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">ContainerLayout</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">enum</span>(<span style="color:#e06c75">u2</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">ContainerLayout</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">enum</span>(<span style="color:#e06c75">u2</span>) {
 </span></span><span style="display:flex;"><span>        <span style="color:#e06c75">auto</span>,
-</span></span><span style="display:flex;"><span>        @<span style="color:#98c379">&#34;extern&#34;</span>,
-</span></span><span style="display:flex;"><span>        @<span style="color:#98c379">&#34;packed&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">@&#34;extern&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">@&#34;packed&#34;</span>,
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">StructField</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">name</span><span style="color:#56b6c2">:</span> [<span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">type</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// The type of the default value is the type of this struct field, which
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// is the value of the `type` field in this struct. However there is no
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// way to refer to that type here, so we use `*const anyopaque`.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// See also: `defaultValue`.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#e06c75">default_value_ptr</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">anyopaque</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_comptime</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// `null` means the field alignment was not explicitly specified. The
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// field will still be aligned to at least `@alignOf` its `type`.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#e06c75">alignment</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">usize</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">StructField</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">name</span>: [:<span style="color:#d19a66">0</span>]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">type</span>: <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// The type of the default value is the type of this struct field, which</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// is the value of the `type` field in this struct. However there is no</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// way to refer to that type here, so we use `*const anyopaque`.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// See also: `defaultValue`.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">default_value_ptr</span>: ?<span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e5c07b">anyopaque</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_comptime</span>: <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// `null` means the field alignment was not explicitly specified. The</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// field will still be aligned to at least `@alignOf` its `type`.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">alignment</span>: ?<span style="color:#e5c07b">usize</span>,
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// Loads the field&#39;s default value from `default_value_ptr`.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// Returns `null` if the field has no default value.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">inline</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">defaultValue</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">sf</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">StructField</span>) <span style="color:#56b6c2">?</span><span style="color:#e06c75">sf</span>.<span style="color:#e5c07b">type</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">const</span> <span style="color:#e06c75">dp</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">sf</span>.<span style="color:#e5c07b">type</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@ptrCast</span>(<span style="color:#e5c07b">@alignCast</span>(<span style="color:#e06c75">sf</span>.<span style="color:#e06c75">default_value_ptr</span> <span style="color:#c678dd">orelse</span> <span style="color:#c678dd">return</span> <span style="color:#e5c07b">null</span>));
-</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">return</span> <span style="color:#e06c75">dp</span>.<span style="color:#56b6c2">*</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// Loads the field&#39;s default value from `default_value_ptr`.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// Returns `null` if the field has no default value.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">inline</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">defaultValue</span>(<span style="color:#c678dd">comptime</span> <span style="color:#e06c75">sf</span>: <span style="color:#e06c75">StructField</span>) ?<span style="color:#e06c75">sf</span>.<span style="color:#e5c07b">type</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">const</span> <span style="color:#e06c75">dp</span>: <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">sf</span>.<span style="color:#e5c07b">type</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@ptrCast</span>(<span style="color:#e5c07b">@alignCast</span>(<span style="color:#e06c75">sf</span>.<span style="color:#e06c75">default_value_ptr</span> <span style="color:#c678dd">orelse</span> <span style="color:#c678dd">return</span> <span style="color:#e5c07b">null</span>));
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">return</span> <span style="color:#e06c75">dp</span><span style="color:#56b6c2">.*</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Attributes</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>            @<span style="color:#98c379">&#34;comptime&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">false</span>,
-</span></span><span style="display:flex;"><span>            @<span style="color:#98c379">&#34;align&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">usize</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
-</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">default_value_ptr</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">anyopaque</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Attributes</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">@&#34;comptime&#34;</span>: <span style="color:#e5c07b">bool</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">false</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">@&#34;align&#34;</span>: ?<span style="color:#e5c07b">usize</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">default_value_ptr</span>: ?<span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e5c07b">anyopaque</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
 </span></span><span style="display:flex;"><span>        };
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Struct</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">layout</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">ContainerLayout</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// Only valid if layout is .@&#34;packed&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#e06c75">backing_integer</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">type</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">fields</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e06c75">StructField</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">decls</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e06c75">Declaration</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_tuple</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Struct</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">layout</span>: <span style="color:#e06c75">ContainerLayout</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// Only valid if layout is .@&#34;packed&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">backing_integer</span>: ?<span style="color:#e5c07b">type</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">fields</span>: []<span style="color:#c678dd">const</span> <span style="color:#e06c75">StructField</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">decls</span>: []<span style="color:#c678dd">const</span> <span style="color:#e06c75">Declaration</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_tuple</span>: <span style="color:#e5c07b">bool</span>,
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Optional</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">child</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Optional</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">child</span>: <span style="color:#e5c07b">type</span>,
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">ErrorUnion</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">error_set</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">payload</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">ErrorUnion</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">error_set</span>: <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">payload</span>: <span style="color:#e5c07b">type</span>,
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Error</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">name</span><span style="color:#56b6c2">:</span> [<span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Error</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">name</span>: [:<span style="color:#d19a66">0</span>]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>,
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">ErrorSet</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">?</span>[]<span style="color:#c678dd">const</span> <span style="color:#e06c75">Error</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">ErrorSet</span> <span style="color:#56b6c2">=</span> ?[]<span style="color:#c678dd">const</span> <span style="color:#e06c75">Error</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">EnumField</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">name</span><span style="color:#56b6c2">:</span> [<span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">value</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">comptime_int</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">EnumField</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">name</span>: [:<span style="color:#d19a66">0</span>]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">value</span>: <span style="color:#e5c07b">comptime_int</span>,
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Enum</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">tag_type</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">fields</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e06c75">EnumField</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">decls</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e06c75">Declaration</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_exhaustive</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Enum</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">tag_type</span>: <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">fields</span>: []<span style="color:#c678dd">const</span> <span style="color:#e06c75">EnumField</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">decls</span>: []<span style="color:#c678dd">const</span> <span style="color:#e06c75">Declaration</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_exhaustive</span>: <span style="color:#e5c07b">bool</span>,
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Mode</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">enum</span> { <span style="color:#e06c75">exhaustive</span>, <span style="color:#e06c75">nonexhaustive</span> };
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Mode</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">enum</span> { <span style="color:#e06c75">exhaustive</span>, <span style="color:#e06c75">nonexhaustive</span> };
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">UnionField</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">name</span><span style="color:#56b6c2">:</span> [<span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">type</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// `null` means the field alignment was not explicitly specified. The
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// field will still be aligned to at least `@alignOf` its `type`.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#e06c75">alignment</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">usize</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">UnionField</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">name</span>: [:<span style="color:#d19a66">0</span>]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">type</span>: <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// `null` means the field alignment was not explicitly specified. The</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// field will still be aligned to at least `@alignOf` its `type`.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">alignment</span>: ?<span style="color:#e5c07b">usize</span>,
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Attributes</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>            @<span style="color:#98c379">&#34;align&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">usize</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Attributes</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">@&#34;align&#34;</span>: ?<span style="color:#e5c07b">usize</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
 </span></span><span style="display:flex;"><span>        };
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Union</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">layout</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">ContainerLayout</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">tag_type</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">type</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">fields</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e06c75">UnionField</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">decls</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e06c75">Declaration</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Union</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">layout</span>: <span style="color:#e06c75">ContainerLayout</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">tag_type</span>: ?<span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">fields</span>: []<span style="color:#c678dd">const</span> <span style="color:#e06c75">UnionField</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">decls</span>: []<span style="color:#c678dd">const</span> <span style="color:#e06c75">Declaration</span>,
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Fn</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">calling_convention</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">CallingConvention</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_generic</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_var_args</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// TODO change the language spec to make this not optional.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#e06c75">return_type</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">type</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">params</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e06c75">Param</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Fn</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">calling_convention</span>: <span style="color:#e06c75">CallingConvention</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_generic</span>: <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">is_var_args</span>: <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// TODO change the language spec to make this not optional.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">return_type</span>: ?<span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">params</span>: []<span style="color:#c678dd">const</span> <span style="color:#e06c75">Param</span>,
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Param</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">is_generic</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
-</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">is_noalias</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span>,
-</span></span><span style="display:flex;"><span>            <span style="color:#e5c07b">type</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Param</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">is_generic</span>: <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">is_noalias</span>: <span style="color:#e5c07b">bool</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e5c07b">type</span>: ?<span style="color:#e5c07b">type</span>,
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>            <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Attributes</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>                @<span style="color:#98c379">&#34;noalias&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">false</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Attributes</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">@&#34;noalias&#34;</span>: <span style="color:#e5c07b">bool</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">false</span>,
 </span></span><span style="display:flex;"><span>            };
 </span></span><span style="display:flex;"><span>        };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Attributes</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>            @<span style="color:#98c379">&#34;callconv&#34;</span><span style="color:#56b6c2">:</span> <span style="color:#e06c75">CallingConvention</span> <span style="color:#56b6c2">=</span> .<span style="color:#e06c75">auto</span>,
-</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">varargs</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">bool</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">false</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Attributes</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">@&#34;callconv&#34;</span>: <span style="color:#e06c75">CallingConvention</span> <span style="color:#56b6c2">=</span> .<span style="color:#e06c75">auto</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#e06c75">varargs</span>: <span style="color:#e5c07b">bool</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">false</span>,
 </span></span><span style="display:flex;"><span>        };
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Opaque</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">decls</span><span style="color:#56b6c2">:</span> []<span style="color:#c678dd">const</span> <span style="color:#e06c75">Declaration</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Opaque</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">decls</span>: []<span style="color:#c678dd">const</span> <span style="color:#e06c75">Declaration</span>,
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Frame</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">function</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e06c75">anyopaque</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Frame</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">function</span>: <span style="color:#56b6c2">*</span><span style="color:#c678dd">const</span> <span style="color:#e5c07b">anyopaque</span>,
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">AnyFrame</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">child</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">?</span><span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">AnyFrame</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">child</span>: ?<span style="color:#e5c07b">type</span>,
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Vector</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">len</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">comptime_int</span>,
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">child</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">type</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Vector</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">len</span>: <span style="color:#e5c07b">comptime_int</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">child</span>: <span style="color:#e5c07b">type</span>,
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Declaration</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">name</span><span style="color:#56b6c2">:</span> [<span style="color:#56b6c2">:</span><span style="color:#d19a66">0</span>]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// This data structure is used by the Zig language code generation and</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">/// therefore must be kept in sync with the compiler implementation.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">pub</span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">Declaration</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">struct</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">name</span>: [:<span style="color:#d19a66">0</span>]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>,
 </span></span><span style="display:flex;"><span>    };
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></td></tr></table>
@@ -1152,27 +1152,27 @@
 <h4 id="常见整数溢出">常见整数溢出
 </h4><p>一般我们对索引进行整数模运算时，比如(i-j+len)%len 时会出现整数溢出，因为会先进行i-j的运算，而i,j一般都是usize,导致出现负数，故要写成(i+len-j)%len;</p>
 <h4 id="整数整除需要注意">整数整除需要注意
-</h4><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+</h4><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">2
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">3
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">4
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">5
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">c</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">isize</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">19</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">d</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">isize</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">11</span>;
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">c</span>: <span style="color:#e5c07b">isize</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">19</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">d</span>: <span style="color:#e5c07b">isize</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">11</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">b</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@mod</span>(<span style="color:#e06c75">c</span>, <span style="color:#e06c75">d</span>);
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">bb</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@divFloor</span>(<span style="color:#e06c75">c</span>, <span style="color:#e06c75">d</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;tuple 0: {} {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{  <span style="color:#e06c75">b</span>, <span style="color:#e06c75">bb</span> });
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;tuple 0: {} {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{  <span style="color:#e06c75">b</span>, <span style="color:#e06c75">bb</span> });
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>上面这种整数和除余能保证b是大于等于0的整数，且bb*d+b=c。而一般的整除<code>/</code>对负数不能保证这个等式。</p>
 <h4 id="tuple的用法">tuple的用法
-</h4><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+</h4><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">2
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">3
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">4
@@ -1182,21 +1182,21 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">8
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">a</span> <span style="color:#56b6c2">=</span> .{
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span> <span style="color:#c678dd">const</span> <span style="color:#e06c75">a</span> <span style="color:#56b6c2">=</span> .{
 </span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">@as</span>(<span style="color:#e5c07b">u32</span>, <span style="color:#d19a66">1234</span>),
 </span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">@as</span>(<span style="color:#e5c07b">f64</span>, <span style="color:#d19a66">12.34</span>),
 </span></span><span style="display:flex;"><span>        <span style="color:#e5c07b">true</span>,
 </span></span><span style="display:flex;"><span>        <span style="color:#98c379">&#34;hi&#34;</span>,
 </span></span><span style="display:flex;"><span>    } <span style="color:#56b6c2">++</span> .{<span style="color:#e5c07b">false</span>} <span style="color:#56b6c2">**</span> <span style="color:#d19a66">2</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// a.@&#34;2&#34; = false;
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;tuple 0:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">a</span>[<span style="color:#d19a66">0</span>]});
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// a.@&#34;2&#34; = false;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;tuple 0:{}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">a</span>[<span style="color:#d19a66">0</span>]});
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>请注意tuple的成员变量的值无法修改.可以配合inline for访问成员。</p>
 <h3 id="comptime实战">comptime实战
-</h3><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+</h3><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
@@ -1213,20 +1213,20 @@
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">15
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;inline while loop&#34;</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">comptime</span> <span style="color:#c678dd">var</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>; <span style="color:#7f848e">// i 是一个编译期常量
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">var</span> <span style="color:#e06c75">sum</span><span style="color:#56b6c2">:</span> <span style="color:#e5c07b">usize</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>; <span style="color:#7f848e">// sum 是一个运行时变量
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">inline</span> <span style="color:#c678dd">while</span> (<span style="color:#e06c75">i</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#d19a66">3</span>) <span style="color:#56b6c2">:</span> (<span style="color:#e06c75">i</span> <span style="color:#56b6c2">+=</span> <span style="color:#d19a66">1</span>) {
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">test</span> <span style="color:#98c379">&#34;inline while loop&#34;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">comptime</span> <span style="color:#c678dd">var</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>; <span style="color:#7f848e">// i 是一个编译期常量</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">var</span> <span style="color:#e06c75">sum</span>: <span style="color:#e5c07b">usize</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0</span>; <span style="color:#7f848e">// sum 是一个运行时变量</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">inline</span> <span style="color:#c678dd">while</span> (<span style="color:#e06c75">i</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#d19a66">3</span>) : (<span style="color:#e06c75">i</span> <span style="color:#56b6c2">+=</span> <span style="color:#d19a66">1</span>) {
 </span></span><span style="display:flex;"><span>        <span style="color:#c678dd">const</span> <span style="color:#e06c75">T</span> <span style="color:#56b6c2">=</span> <span style="color:#c678dd">switch</span> (<span style="color:#e06c75">i</span>) {
 </span></span><span style="display:flex;"><span>            <span style="color:#d19a66">0</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#e5c07b">f32</span>,
-</span></span><span style="display:flex;"><span>            <span style="color:#d19a66">1</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#e06c75">i8</span>,
+</span></span><span style="display:flex;"><span>            <span style="color:#d19a66">1</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#e5c07b">i8</span>,
 </span></span><span style="display:flex;"><span>            <span style="color:#d19a66">2</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#e5c07b">bool</span>,
 </span></span><span style="display:flex;"><span>            <span style="color:#c678dd">else</span> <span style="color:#56b6c2">=&gt;</span> <span style="color:#c678dd">unreachable</span>,
 </span></span><span style="display:flex;"><span>        };
-</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">sum</span> <span style="color:#56b6c2">+=</span> <span style="color:#e06c75">typeNameLength</span>(<span style="color:#e06c75">T</span>); <span style="color:#7f848e">// typeNameLength 
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>        <span style="color:#7f848e">//可能是一个编译期函数，用于获取类型名称的长度
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#e06c75">expect</span>(<span style="color:#e06c75">sum</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">9</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">sum</span> <span style="color:#56b6c2">+=</span> <span style="color:#61afef;font-weight:bold">typeNameLength</span>(<span style="color:#e06c75">T</span>); <span style="color:#7f848e">// typeNameLength </span>
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e">//可能是一个编译期函数，用于获取类型名称的长度</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">try</span> <span style="color:#61afef;font-weight:bold">expect</span>(<span style="color:#e06c75">sum</span> <span style="color:#56b6c2">==</span> <span style="color:#d19a66">9</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
@@ -1249,9 +1249,9 @@ test safe_sqrt {
 <h3 id="编译系统">编译系统
 </h3><p>zig语言编译系统的b.option是对编译命令添加选项，一般通过<code>zig build -Doption=content</code>来传递，b.addOptions是向项目程序里面的模块添加选项模块。</p>
 <p>比如下面的例子:</p>
-<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
@@ -1279,38 +1279,38 @@ test safe_sqrt {
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">26
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">std</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@import</span>(<span style="color:#98c379">&#34;std&#34;</span>);
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">std</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@import</span>(<span style="color:#98c379">&#34;std&#34;</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">build</span>(<span style="color:#e06c75">b</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">Build</span>) <span style="color:#e5c07b">void</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">exe</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">addExecutable</span>(.{
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">build</span>(<span style="color:#e06c75">b</span>: <span style="color:#56b6c2">*</span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">Build</span>) <span style="color:#e5c07b">void</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">exe</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">addExecutable</span>(.{
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">name</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;app&#34;</span>,
-</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">root_module</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">createModule</span>(.{
-</span></span><span style="display:flex;"><span>            .<span style="color:#e06c75">root_source_file</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">path</span>(<span style="color:#98c379">&#34;app.zig&#34;</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">root_module</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">createModule</span>(.{
+</span></span><span style="display:flex;"><span>            .<span style="color:#e06c75">root_source_file</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">path</span>(<span style="color:#98c379">&#34;app.zig&#34;</span>),
 </span></span><span style="display:flex;"><span>            .<span style="color:#e06c75">target</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">graph</span>.<span style="color:#e06c75">host</span>,
 </span></span><span style="display:flex;"><span>        }),
 </span></span><span style="display:flex;"><span>    });
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">version</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">option</span>([]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>, <span style="color:#98c379">&#34;version&#34;</span>, <span style="color:#98c379">&#34;application version string&#34;</span>) <span style="color:#c678dd">orelse</span> <span style="color:#98c379">&#34;0.0.0&#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">enable_foo</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">detectWhetherToEnableLibFoo</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">version</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">option</span>([]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>, <span style="color:#98c379">&#34;version&#34;</span>, <span style="color:#98c379">&#34;application version string&#34;</span>) <span style="color:#c678dd">orelse</span> <span style="color:#98c379">&#34;0.0.0&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">enable_foo</span> <span style="color:#56b6c2">=</span> <span style="color:#61afef;font-weight:bold">detectWhetherToEnableLibFoo</span>();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">options</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">addOptions</span>();
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">options</span>.<span style="color:#e06c75">addOption</span>([]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>, <span style="color:#98c379">&#34;version&#34;</span>, <span style="color:#e06c75">version</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">options</span>.<span style="color:#e06c75">addOption</span>(<span style="color:#e5c07b">bool</span>, <span style="color:#98c379">&#34;have_libfoo&#34;</span>, <span style="color:#e06c75">enable_foo</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">options</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">addOptions</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">options</span>.<span style="color:#61afef;font-weight:bold">addOption</span>([]<span style="color:#c678dd">const</span> <span style="color:#e5c07b">u8</span>, <span style="color:#98c379">&#34;version&#34;</span>, <span style="color:#e06c75">version</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">options</span>.<span style="color:#61afef;font-weight:bold">addOption</span>(<span style="color:#e5c07b">bool</span>, <span style="color:#98c379">&#34;have_libfoo&#34;</span>, <span style="color:#e06c75">enable_foo</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">exe</span>.<span style="color:#e06c75">root_module</span>.<span style="color:#e06c75">addOptions</span>(<span style="color:#98c379">&#34;config&#34;</span>, <span style="color:#e06c75">options</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">exe</span>.<span style="color:#e06c75">root_module</span>.<span style="color:#61afef;font-weight:bold">addOptions</span>(<span style="color:#98c379">&#34;config&#34;</span>, <span style="color:#e06c75">options</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">b</span>.<span style="color:#e06c75">installArtifact</span>(<span style="color:#e06c75">exe</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">installArtifact</span>(<span style="color:#e06c75">exe</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#e06c75">detectWhetherToEnableLibFoo</span>() <span style="color:#e5c07b">bool</span> {
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">detectWhetherToEnableLibFoo</span>() <span style="color:#e5c07b">bool</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e5c07b">false</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>下面是编译c语言项目的构建代码，有冗余，这里的注释部分也能添加源文件，到底是cstructures_mod还是cstructures添加源文件呢？写法不统一。</p>
-<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
@@ -1333,33 +1333,33 @@ test safe_sqrt {
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">21
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">cstructures_mod</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">addModule</span>(<span style="color:#98c379">&#34;cstructures_mod&#34;</span>, .{
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">cstructures_mod</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">addModule</span>(<span style="color:#98c379">&#34;cstructures_mod&#34;</span>, .{
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">target</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">target</span>,
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">optimize</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">optimize</span>,
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">root_source_file</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">null</span>,
 </span></span><span style="display:flex;"><span>    });
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// cstructures_mod.addIncludePath(b.path(&#34;cstructures/include&#34;));
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">// cstructures_mod.addCSourceFiles(.{
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">//     .files = &amp;.{&#34;cstructures/src/tools_node.c&#34;},
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">//     .flags = &amp;.{ &#34;-Wall&#34;, &#34;-O2&#34; },
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">// });
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">cstructures</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">addLibrary</span>(.{
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// cstructures_mod.addIncludePath(b.path(&#34;cstructures/include&#34;));</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// cstructures_mod.addCSourceFiles(.{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">//     .files = &amp;.{&#34;cstructures/src/tools_node.c&#34;},</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">//     .flags = &amp;.{ &#34;-Wall&#34;, &#34;-O2&#34; },</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// });</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">cstructures</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">addLibrary</span>(.{
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">linkage</span> <span style="color:#56b6c2">=</span> .<span style="color:#e06c75">static</span>,
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">name</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;cstructures&#34;</span>,
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">root_module</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">cstructures_mod</span>,
 </span></span><span style="display:flex;"><span>    });
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">cstructures</span>.<span style="color:#e06c75">addIncludePath</span>(<span style="color:#e06c75">b</span>.<span style="color:#e06c75">path</span>(<span style="color:#98c379">&#34;cstructures/include&#34;</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">cstructures</span>.<span style="color:#e06c75">addCSourceFiles</span>(.{
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">cstructures</span>.<span style="color:#61afef;font-weight:bold">addIncludePath</span>(<span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">path</span>(<span style="color:#98c379">&#34;cstructures/include&#34;</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">cstructures</span>.<span style="color:#61afef;font-weight:bold">addCSourceFiles</span>(.{
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">files</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">&amp;</span>.{<span style="color:#98c379">&#34;cstructures/src/tools_node.c&#34;</span>},
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">flags</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">&amp;</span>.{ <span style="color:#98c379">&#34;-Wall&#34;</span>, <span style="color:#98c379">&#34;-O2&#34;</span> },
 </span></span><span style="display:flex;"><span>    });
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">cstructures</span>.<span style="color:#e06c75">linkLibC</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">cstructures</span>.<span style="color:#61afef;font-weight:bold">linkLibC</span>();
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="导出为webassembly">导出为webassembly
-</h3><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+</h3><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
@@ -1377,30 +1377,30 @@ test safe_sqrt {
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">16
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">std</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@import</span>(<span style="color:#98c379">&#34;std&#34;</span>);
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#e06c75">build</span>(<span style="color:#e06c75">b</span><span style="color:#56b6c2">:</span> <span style="color:#56b6c2">*</span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">Build</span>) <span style="color:#e5c07b">void</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">target</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">resolveTargetQuery</span>(<span style="color:#e06c75">std</span>.<span style="color:#e06c75">Target</span>.<span style="color:#e06c75">Query</span>.<span style="color:#e06c75">parse</span>(
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#c678dd">const</span> <span style="color:#e06c75">std</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">@import</span>(<span style="color:#98c379">&#34;std&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">pub</span> <span style="color:#c678dd">fn</span> <span style="color:#61afef;font-weight:bold">build</span>(<span style="color:#e06c75">b</span>: <span style="color:#56b6c2">*</span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">Build</span>) <span style="color:#e5c07b">void</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">target</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">resolveTargetQuery</span>(<span style="color:#e06c75">std</span>.<span style="color:#e06c75">Target</span>.<span style="color:#e06c75">Query</span>.<span style="color:#61afef;font-weight:bold">parse</span>(
 </span></span><span style="display:flex;"><span>        .{ .<span style="color:#e06c75">arch_os_abi</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;wasm32-wasi&#34;</span> },
 </span></span><span style="display:flex;"><span>    ) <span style="color:#c678dd">catch</span> <span style="color:#c678dd">unreachable</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">exe</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">addExecutable</span>(.{
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">const</span> <span style="color:#e06c75">exe</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">addExecutable</span>(.{
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">name</span> <span style="color:#56b6c2">=</span> <span style="color:#98c379">&#34;main&#34;</span>,
-</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">root_source_file</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">path</span>(<span style="color:#98c379">&#34;src/main.zig&#34;</span>),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">root_source_file</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">path</span>(<span style="color:#98c379">&#34;src/main.zig&#34;</span>),
 </span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">target</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">target</span>,
-</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">optimize</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#e06c75">standardOptimizeOption</span>(.{}),
+</span></span><span style="display:flex;"><span>        .<span style="color:#e06c75">optimize</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">standardOptimizeOption</span>(.{}),
 </span></span><span style="display:flex;"><span>    });
-</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">//注意这个选项
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e06c75">exe</span>.<span style="color:#e06c75">rdynamic</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">true</span>; <span style="color:#7f848e">//导出该可执行对象中标记了export的项目
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#7f848e">// 此项默认为false，如果你需要在js环境中调用导出的方法，需要设置为true
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>    <span style="color:#e06c75">b</span>.<span style="color:#e06c75">installArtifact</span>(<span style="color:#e06c75">exe</span>); <span style="color:#7f848e">//保存生成的结果
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span>}
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">//注意这个选项</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">exe</span>.<span style="color:#e06c75">rdynamic</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">true</span>; <span style="color:#7f848e">//导出该可执行对象中标记了export的项目</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e">// 此项默认为false，如果你需要在js环境中调用导出的方法，需要设置为true</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">b</span>.<span style="color:#61afef;font-weight:bold">installArtifact</span>(<span style="color:#e06c75">exe</span>); <span style="color:#7f848e">//保存生成的结果</span>
+</span></span><span style="display:flex;"><span>}
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>下面是ai生成测试用例</p>
 <h1 id="zig标准库的用法">zig标准库的用法
 </h1><p>如何打开文件夹并遍历里面的文件，代码如下:</p>
-<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
@@ -1421,22 +1421,22 @@ test safe_sqrt {
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">19
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#7f848e">// abs_dir_src是上面创建好的变量
-</span></span></span><span style="display:flex;"><span><span style="color:#7f848e"></span><span style="color:#c678dd">var</span> <span style="color:#e06c75">io</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">Io</span>.<span style="color:#e06c75">Threaded</span>.<span style="color:#e06c75">init</span>(<span style="color:#e06c75">b</span>.<span style="color:#e06c75">allocator</span>, .{});
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">defer</span> <span style="color:#e06c75">io</span>.<span style="color:#e06c75">deinit</span>();
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">var</span> <span style="color:#e06c75">open_dir</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">Io</span>.<span style="color:#e06c75">Dir</span>.<span style="color:#e06c75">openDirAbsolute</span>(<span style="color:#e06c75">io</span>.<span style="color:#e06c75">io</span>(), <span style="color:#e06c75">abs_dir_src</span>, .{ .<span style="color:#e06c75">iterate</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">true</span> }) <span style="color:#c678dd">catch</span> <span style="color:#56b6c2">|</span><span style="color:#e06c75">err</span><span style="color:#56b6c2">|</span> {
-</span></span><span style="display:flex;"><span>     <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;open directory failed: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">err</span>});
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-zig" data-lang="zig"><span style="display:flex;"><span><span style="color:#7f848e">// abs_dir_src是上面创建好的变量</span>
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">var</span> <span style="color:#e06c75">io</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">Io</span>.<span style="color:#e06c75">Threaded</span>.<span style="color:#61afef;font-weight:bold">init</span>(<span style="color:#e06c75">b</span>.<span style="color:#e06c75">allocator</span>, .{});
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">defer</span> <span style="color:#e06c75">io</span>.<span style="color:#61afef;font-weight:bold">deinit</span>();
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">var</span> <span style="color:#e06c75">open_dir</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">std</span>.<span style="color:#e06c75">Io</span>.<span style="color:#e06c75">Dir</span>.<span style="color:#61afef;font-weight:bold">openDirAbsolute</span>(<span style="color:#e06c75">io</span>.<span style="color:#61afef;font-weight:bold">io</span>(), <span style="color:#e06c75">abs_dir_src</span>, .{ .<span style="color:#e06c75">iterate</span> <span style="color:#56b6c2">=</span> <span style="color:#e5c07b">true</span> }) <span style="color:#c678dd">catch</span> <span style="color:#56b6c2">|</span><span style="color:#e06c75">err</span><span style="color:#56b6c2">|</span> {
+</span></span><span style="display:flex;"><span>     <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;open directory failed: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">err</span>});
 </span></span><span style="display:flex;"><span>     <span style="color:#c678dd">return</span>;
 </span></span><span style="display:flex;"><span>};
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">defer</span> <span style="color:#e06c75">open_dir</span>.<span style="color:#e06c75">close</span>(<span style="color:#e06c75">io</span>.<span style="color:#e06c75">io</span>());
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">var</span> <span style="color:#e06c75">walker</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">open_dir</span>.<span style="color:#e06c75">walk</span>(<span style="color:#e06c75">b</span>.<span style="color:#e06c75">allocator</span>) <span style="color:#c678dd">catch</span> <span style="color:#56b6c2">|</span><span style="color:#e06c75">err</span><span style="color:#56b6c2">|</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#e06c75">print</span>(<span style="color:#98c379">&#34;walk directory failed: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">err</span>});
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">defer</span> <span style="color:#e06c75">open_dir</span>.<span style="color:#61afef;font-weight:bold">close</span>(<span style="color:#e06c75">io</span>.<span style="color:#61afef;font-weight:bold">io</span>());
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">var</span> <span style="color:#e06c75">walker</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">open_dir</span>.<span style="color:#61afef;font-weight:bold">walk</span>(<span style="color:#e06c75">b</span>.<span style="color:#e06c75">allocator</span>) <span style="color:#c678dd">catch</span> <span style="color:#56b6c2">|</span><span style="color:#e06c75">err</span><span style="color:#56b6c2">|</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">std</span>.<span style="color:#e06c75">debug</span>.<span style="color:#61afef;font-weight:bold">print</span>(<span style="color:#98c379">&#34;walk directory failed: {}</span><span style="color:#98c379">\n</span><span style="color:#98c379">&#34;</span>, .{<span style="color:#e06c75">err</span>});
 </span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span>;
 </span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">defer</span> <span style="color:#e06c75">walker</span>.<span style="color:#e06c75">deinit</span>();
-</span></span><span style="display:flex;"><span><span style="color:#c678dd">while</span> (<span style="color:#e06c75">walker</span>.<span style="color:#e06c75">next</span>(<span style="color:#e06c75">io</span>.<span style="color:#e06c75">io</span>()) <span style="color:#c678dd">catch</span> <span style="color:#e5c07b">null</span>) <span style="color:#56b6c2">|</span><span style="color:#e06c75">entry</span><span style="color:#56b6c2">|</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> (<span style="color:#56b6c2">!</span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">mem</span>.<span style="color:#e06c75">endsWith</span>(<span style="color:#e5c07b">u8</span>, <span style="color:#e06c75">entry</span>.<span style="color:#e06c75">path</span>, <span style="color:#98c379">&#34;.zig&#34;</span>)) {
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">defer</span> <span style="color:#e06c75">walker</span>.<span style="color:#61afef;font-weight:bold">deinit</span>();
+</span></span><span style="display:flex;"><span><span style="color:#c678dd">while</span> (<span style="color:#e06c75">walker</span>.<span style="color:#61afef;font-weight:bold">next</span>(<span style="color:#e06c75">io</span>.<span style="color:#61afef;font-weight:bold">io</span>()) <span style="color:#c678dd">catch</span> <span style="color:#e5c07b">null</span>) <span style="color:#56b6c2">|</span><span style="color:#e06c75">entry</span><span style="color:#56b6c2">|</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">if</span> (<span style="color:#56b6c2">!</span><span style="color:#e06c75">std</span>.<span style="color:#e06c75">mem</span>.<span style="color:#61afef;font-weight:bold">endsWith</span>(<span style="color:#e5c07b">u8</span>, <span style="color:#e06c75">entry</span>.<span style="color:#e06c75">path</span>, <span style="color:#98c379">&#34;.zig&#34;</span>)) {
 </span></span><span style="display:flex;"><span>        <span style="color:#c678dd">continue</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
@@ -1751,7 +1751,7 @@ A: 目前Zig不直接输出专为Emscripten定制代码。需自己对接JS glue
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="../../ts/main.539ecba1e6899d42d789312a942689629b3f09fa3f1fddb65c6467cfbbdb461e.js" defer></script>
+            </script><script type="text/javascript" src="../../ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

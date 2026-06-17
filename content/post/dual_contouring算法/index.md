@@ -842,144 +842,175 @@ x=c}$
 
 -----
 
-## givens旋转求解对称矩阵特征向量
+这里为你提供一套**完全自洽、严谨且适合直接转化为代码**的 Jacobi 方法（基于 Givens 旋转）求解实对称矩阵特征值和特征向量的理论公式与算法流程。
 
-我是一个基于 Gemini 2.5 Pro的人工智能助手。
+我们采用数值线性代数经典教材（如 Golub & Van Loan）中推荐的符号约定，确保矩阵定义、角度推导和更新公式**100% 自洽**。
 
-当然可以。下面为您详细梳理对称矩阵雅可比迭代法（Jacobi Iteration Method）的理论推导、核心公式和算法流程。这个方法的目标是将一个对称矩阵 `M`（在您的问题中是 `AᵀA`）通过一系列平面旋转（Givens Rotation）逐步转化为对角矩阵。
+---
 
-### 1. 理论推导 (Theoretical Derivation)
+### 一、 理论推导 (Theoretical Derivation)
 
-#### 核心思想
+#### 1. 定义 Givens 旋转矩阵 $J$
+设我们要消去对称矩阵 $M$ 中的非对角元素 $m_{pq}$（其中 $p < q$）。我们构造一个 Givens 旋转矩阵 $J(p, q, \theta)$，它在 $(p, q)$ 二维子空间上的形式为：
 
-我们的目标是求解 $M = VΣVᵀ$。雅可比法的策略不是一次性求出 `V` 和 `Σ`，而是构造一个正交矩阵序列 `G₁, G₂, G₃, ...`，通过迭代变换 $M_{k+1} = G_kᵀ M_k G_k$，使得矩阵 `M` 越来越接近对角矩阵。当 $M_k$足够接近对角时，我们就得到了：
-$Σ ≈ M_k$,
-$V ≈ G₁G₂G₃...G_k$
+$$
+J_{sub} = \begin{pmatrix} c & s \\ -s & c \end{pmatrix}
+\quad \text{即} \quad
+J_{pp} = c, \; J_{pq} = s, \; J_{qp} = -s, \; J_{qq} = c
+$$
+*(注：其余对角线元素为 1，非对角线元素为 0。$c = \cos\theta, s = \sin\theta$)*
 
-#### 单步迭代推导：如何用一次旋转消去一个非对角元素？
+#### 2. 相似变换与消元条件
+我们对 $M$ 进行正交相似变换：$M' = J^T M J$。
+提取出 $(p, q)$ 对应的 $2 \times 2$ 子矩阵进行计算：
 
-1. **选择目标**：在当前矩阵 `M` 中，选择一个非对角元素 `m_pq` (其中 `p < q`)，我们希望通过一次旋转将它变为0。
-
-2. **构造旋转矩阵**：我们使用的工具是 **Givens旋转矩阵** `G(p, q, θ)`。它看起来像一个单位矩阵，只在第 `p` 行、`p` 列、`q` 行、`q` 列有不同：
-   
-   $$
-   G(p, q, \theta) = \begin{pmatrix}
-1 & \cdots & 0 & \cdots & 0 & \cdots & 0 \\
-\vdots & \ddots & \vdots & & \vdots & & \vdots \\
-0 & \cdots & \cos\theta & \cdots & -\sin\theta & \cdots & 0 \\
-\vdots & & \vdots & \ddots & \vdots & & \vdots \\
-0 & \cdots & \sin\theta & \cdots & \cos\theta & \cdots & 0 \\
-\vdots & & \vdots & & \vdots & \ddots & \vdots \\
-0 & \cdots & 0 & \cdots & 0 & \cdots & 1
-\end{pmatrix} \begin{matrix} \\ \\ \leftarrow p \\ \\ \leftarrow q \\ \\ \\ \end{matrix}
-   $$
-   
-   这是一个正交矩阵 (`GᵀG = I`)，它表示在 `(p, q)` 平面上的一个旋转。
-
-3. **执行变换**：我们计算 `M' = GᵀMG`。这个变换只会影响 `M` 的第 `p` 行/列和第 `q` 行/列。我们可以聚焦于一个2x2的子问题：
-   
-   $$
-   \begin{pmatrix} m'_{pp} & m'_{pq} \\ m'_{qp} & m'_{qq} \end{pmatrix} =
-\begin{pmatrix} c & s \\ -s & c \end{pmatrix}
-\begin{pmatrix} m_{pp} & m_{pq} \\ m_{qp} & m_{qq} \end{pmatrix}
+$$
+\begin{pmatrix} m'_{pp} & m'_{pq} \\ m'_{qp} & m'_{qq} \end{pmatrix} =
 \begin{pmatrix} c & -s \\ s & c \end{pmatrix}
-   $$
-   
-   其中 `c = cos(θ)`，`s = sin(θ)`，并且因为 `M` 对称，`m_{pq} = m_{qp}`。
+\begin{pmatrix} m_{pp} & m_{pq} \\ m_{pq} & m_{qq} \end{pmatrix}
+\begin{pmatrix} c & s \\ -s & c \end{pmatrix}
+$$
 
-4. **求解旋转角 `θ`**：
-   我们展开矩阵乘法，得到新的非对角元素 `m'_{pq}` 的表达式：
-   $m'_{pq} = (m_{qq} - m_{pp})sc + m_{pq}(c² - s²) = 0$
-   
-   使用三角函数的二倍角公式 `sin(2θ) = 2sc` 和 `cos(2θ) = c² - s²`，上式变为：
-   $½ (m_{qq} - m_{pp}) sin(2θ) + m_{pq} cos(2θ) = 0$
-   
-   整理可得：
-   
-   $$
-   \cot(2\theta) = \frac{m_{pp} - m_{qq}}{2m_{pq}}
-   $$
-   
-   这个公式就是我们求解旋转角度的关键。
+展开乘法后，新的非对角元素 $m'_{pq}$ 为：
+$$ m'_{pq} = sc(m_{pp} - m_{qq}) + (c^2 - s^2)m_{pq} $$
 
-5. **收敛性**：可以证明，每次执行这样的操作，矩阵所有**非对角元素**的平方和 $S = Σ_{i≠j} m_{ij}²$ 都会减小。具体来说，$S_{new} = S_{old} - 2m_{pq}²$。由于 `S` 是一个有下界（为0）且单调递减的序列，它必然收敛。当 `S` 趋近于0时，矩阵就收敛为一个对角矩阵。
+为了消去该元素，令 $m'_{pq} = 0$，并利用二倍角公式 $\sin(2\theta) = 2sc$ 和 $\cos(2\theta) = c^2 - s^2$：
+$$ \frac{1}{2}\sin(2\theta)(m_{pp} - m_{qq}) + \cos(2\theta)m_{pq} = 0 $$
+
+整理得到求解旋转角 $\theta$ 的核心方程：
+$$ \cot(2\theta) = \frac{\cos(2\theta)}{\sin(2\theta)} = \frac{m_{qq} - m_{pp}}{2m_{pq}} $$
+
+#### 3. 数值稳定的参数计算 (核心)
+在实际编程中，我们**不直接计算 $\theta$**，而是计算 $t = \tan\theta$，进而求出 $c$ 和 $s$。
+
+令 $\tau = \cot(2\theta) = \frac{m_{qq} - m_{pp}}{2m_{pq}}$。
+利用三角恒等式 $\cot(2\theta) = \frac{1 - \tan^2\theta}{2\tan\theta}$，可得关于 $t$ 的二次方程：
+$$ t^2 + 2\tau t - 1 = 0 $$
+
+解得 $t = -\tau \pm \sqrt{\tau^2 + 1}$。为了保证数值稳定性并使得旋转角度 $|\theta| \le \frac{\pi}{4}$，我们**选择绝对值较小的根**：
+
+$$
+t = \begin{cases} 
+\frac{\text{sign}(\tau)}{|\tau| + \sqrt{1 + \tau^2}} & \text{if } \tau \neq 0 \\
+1 & \text{if } \tau = 0 
+\end{cases}
+$$
+*(注：$\text{sign}(\tau)$ 是符号函数，$\tau>0$ 时为 1，$\tau<0$ 时为 -1)*
+
+得到 $t$ 后，计算 $c$ 和 $s$：
+$$ c = \frac{1}{\sqrt{1 + t^2}}, \quad s = t \cdot c $$
 
 ---
 
-### 2. 核心公式 (Key Formulas)
+### 二、 核心更新公式 (Update Formulas)
 
-在实际计算中，我们不直接求 `θ`，而是直接计算 `c` 和 `s` 的值，这样更高效且数值稳定。
+得到 $c, s, t$ 后，使用以下公式更新矩阵。**这套公式与上述推导完全自洽。**
 
-令 $τ = (m_{qq} - m_{pp}) / (2 * m_{pq})$。（这里我们假设 $m_{pq} ≠ 0$，否则无需旋转）
-从 `cot(2θ) = -τ` (注意符号，与上面推导的公式略有不同，这是为了方便计算 `tan(θ)`），可以推导出 `tan(θ)` 的值。
+#### 1. 更新目标矩阵 $M$ ($M' = J^T M J$)
+* **对角线元素**：
+  $$ m'_{pp} = m_{pp} - t \cdot m_{pq} $$
+  $$ m'_{qq} = m_{qq} + t \cdot m_{pq} $$
+* **被消去的非对角元素**：
+  $$ m'_{pq} = m'_{qp} = 0 $$
+* **受影响的其余非对角元素** (对于所有 $i \neq p, q$)：
+  $$ m'_{ip} = m_{pi}' = c \cdot m_{ip} - s \cdot m_{iq} $$
+  $$ m'_{iq} = m_{qi}' = s \cdot m_{ip} + c \cdot m_{iq} $$
+  *(注：由于 $M$ 是对称矩阵，只需更新上三角或下三角，然后对称赋值即可)*
 
-为了数值稳定性，我们使用如下公式计算 `tan(θ)` 的值 `t`:
-$$
-t = \frac{\text{sign}(\tau)}{|\tau| + \sqrt{1 + \tau^2}}
-$$
-然后计算 `c` 和 `s`：
-
-$c = \frac{1}{\sqrt{1 + t^2}}$,
-$s = c \cdot t$
-得到 `c` 和 `s` 后，我们用它们来更新矩阵 `M` 和特征向量矩阵 `V`。
-
-**矩阵 `M` 的更新规则：**
-
-* $m'_{pp} = m_{pp} - t \cdot m_{pq}$
-* $m'_{qq} = m_{qq} + t \cdot m_{pq}$
-* $m'_{pq} = m'_{qp} = 0$
-* 对于所有 `i ≠ p, q`：
-  * $m'_{ip} = m_{ip} \cdot c - m_{iq} \cdot s$
-  * $m'_{iq} = m_{ip} \cdot s + m_{iq} \cdot c$
-  * $m'_{pi} = m'_{ip}$
-  * $m'_{qi} = m'_{iq}$
-
-**特征向量矩阵 `V` 的更新规则：**
-`V` 的列向量就是我们最终要求的特征向量。
-
-* 对于所有 `i`：
-  * $v'_{ip} = v_{ip} \cdot c - v_{iq} \cdot s$
-  * $v'_{iq} = v_{ip} \cdot s + v_{iq} \cdot c$
+#### 2. 更新特征向量矩阵 $V$ ($V' = V J$)
+初始时 $V = I$（单位矩阵）。每次旋转时，只需更新 $V$ 的第 $p$ 列和第 $q$ 列：
+* 对于所有行 $i \in \{1, 2, \dots, n\}$：
+  $$ v'_{ip} = c \cdot v_{ip} - s \cdot v_{iq} $$
+  $$ v'_{iq} = s \cdot v_{ip} + c \cdot v_{iq} $$
 
 ---
 
-### 3. 算法流程 (Algorithm Flow)
+### 三、 算法流程 (Algorithm Flow)
 
-**输入**: 对称矩阵 `M` (例如 `AᵀA`), 容忍误差 `ε`, 最大迭代次数 `max_iter`。
-**输出**: 特征值 (对角矩阵 `M` 的对角线), 特征向量 (矩阵 `V` 的列)。
+Jacobi 算法有两种常见的扫描策略：**经典 Jacobi**（每次找绝对值最大的非对角元）和 **循环 Jacobi**（按固定顺序扫描）。
+由于寻找最大元素需要 $O(n^2)$ 的额外开销，现代工程实现中**几乎总是使用循环 Jacobi (Cyclic Jacobi)**，其收敛速度在实际中同样具有二次收敛性。
 
-1. **初始化**:
-   
-   * 将特征向量矩阵 `V` 初始化为单位矩阵 `I`。
-   * `iter_count = 0`。
+#### 循环 Jacobi 算法伪代码
 
-2. **主循环**: `while (iter_count < max_iter)`
-   a.  **计算非对角元素平方和 (或绝对值和)**: `S = Σ_{i≠j} m_{ij}²`。
-   b.  **检查收敛**: `if (S < ε)`，则跳出循环，算法结束。
-   c.  **选择旋转目标 (p, q)**:
-   
-       *   **经典雅可比法**: 遍历 `M` 的上三角部分，找到绝对值最大的非对角元素 $|m_pq|$。
-       *   **循环雅可比法 (更常用)**: 按固定顺序依次遍历所有非对角元素对 `(p, q)` (例如，`(0,1), (0,2), ..., (0,n-1), (1,2), ...`)。完成一轮遍历称为一次“扫荡”(sweep)。
-   
-   d.  **计算旋转参数**:
-   
-       *   `if (|m_pq| < ε / n²)`，跳过此对，因为它已经足够小了。
-       *   计算 $τ = (m_{qq} - m_{pp}) / (2 * m_{pq})$。
-       *   计算 `t`, `c`, `s` (使用第二节的稳定公式)。
-   
-   e.  **更新矩阵 `M`**:
-   
-       *   缓存 $m_ip$, $m_iq$ 等旧值。
-       *   根据第二节的更新规则，计算 $m'_{pp}$, $m'_{qq}$ 以及所有 $m'_{ip}$, $m'_{iq}$。
-       *   将 $m'_{pq}$ 和 $m'_{qp}$ 设为 0。
-   
-   f.  **更新特征向量矩阵 `V`**:
-   
-       *   根据第二节的更新规则，更新 `V` 的第 `p` 列和第 `q` 列。
-   
-   g.  `iter_count++`。
+```python
+def jacobi_eigen(M, max_sweeps=100, tol=1e-10):
+    """
+    使用循环 Jacobi 方法求解实对称矩阵 M 的特征值和特征向量。
+    返回: eigenvalues (对角线元素), eigenvectors (矩阵 V 的列)
+    """
+    n = M.shape[0]
+    V = np.eye(n)  # 初始化特征向量矩阵为单位阵
+    A = M.copy()   # 工作矩阵
+    
+    for sweep in range(max_sweeps):
+        # 1. 计算当前非对角元素的平方和 (Frobenius 范数的 off-diagonal 部分)
+        off_diag_norm = 0.0
+        for i in range(n):
+            for j in range(i+1, n):
+                off_diag_norm += A[i, j]**2
+                
+        # 2. 收敛判断
+        if off_diag_norm < tol:
+            break
+            
+        # 3. 一次完整的扫掠 (Sweep)：按行优先顺序遍历所有上三角元素
+        for p in range(n-1):
+            for q in range(p+1, n):
+                
+                if abs(A[p, q]) < 1e-15:  # 如果已经接近 0，跳过
+                    continue
+                    
+                # --- 计算旋转参数 ---
+                tau = (A[q, q] - A[p, p]) / (2.0 * A[p, q])
+                if tau >= 0:
+                    t = 1.0 / (tau + np.sqrt(1.0 + tau**2))
+                else:
+                    t = -1.0 / (-tau + np.sqrt(1.0 + tau**2))
+                    
+                c = 1.0 / np.sqrt(1.0 + t**2)
+                s = t * c
+                
+                # --- 更新矩阵 A (即 M) ---
+                # 更新对角线
+                A[p, p] = A[p, p] - t * A[p, q]
+                A[q, q] = A[q, q] + t * A[p, q]
+                A[p, q] = 0.0
+                A[q, p] = 0.0
+                
+                # 更新非对角线 (利用对称性，只算一半然后赋值)
+                for i in range(n):
+                    if i != p and i != q:
+                        a_ip = A[i, p]
+                        a_iq = A[i, q]
+                        A[i, p] = c * a_ip - s * a_iq
+                        A[p, i] = A[i, p]
+                        A[i, q] = s * a_ip + c * a_iq
+                        A[q, i] = A[i, q]
+                        
+                # --- 更新特征向量矩阵 V ---
+                for i in range(n):
+                    v_ip = V[i, p]
+                    v_iq = V[i, q]
+                    V[i, p] = c * v_ip - s * v_iq
+                    V[i, q] = s * v_ip + c * v_iq
+                    
+    # 4. 提取特征值并排序 (通常按从大到小或从小到大排列)
+    eigenvalues = np.diag(A)
+    
+    # 按特征值降序排序，并相应调整特征向量矩阵的列
+    idx = np.argsort(eigenvalues)[::-1] 
+    eigenvalues = eigenvalues[idx]
+    V = V[:, idx]
+    
+    return eigenvalues, V
+```
 
-3. **结束**:
-   
-   * 循环结束后，矩阵 `M` 的对角线元素 $m_ii$ 就是特征值。
-   * 矩阵 `V` 的第 `i` 列就是对应于特征值 $m_ii$ 的特征向量。
+### 四、 算法复杂度与特性总结
+
+1. **时间复杂度**：
+   * 单次旋转（更新 $A$ 和 $V$）：$O(n)$。
+   * 单次扫掠（Sweep，包含 $\frac{n(n-1)}{2}$ 次旋转）：$O(n^3)$。
+   * 总时间复杂度：通常为 $O(n^3)$，因为对于大多数矩阵，只需要 5~10 次扫掠即可收敛。
+2. **空间复杂度**：$O(n^2)$，用于存储矩阵 $A$ 和 $V$。
+3. **数值稳定性**：极高。由于只使用正交变换，不会放大舍入误差，是求解中小型（$n < 1000$）密集对称矩阵特征问题的**最稳定方法之一**。
+4. **并行性**：Jacobi 方法天然适合并行计算（特别是 One-sided Jacobi 或 Block Jacobi 变体），在 GPU 加速场景下表现优异。

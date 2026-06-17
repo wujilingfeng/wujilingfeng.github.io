@@ -3,7 +3,7 @@
     lang="zh-cn"
     dir="ltr"
 >
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <head>
          <script>
   MathJax = {
     tex: {
@@ -15,19 +15,19 @@
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
  <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="dc算法中，每个体素对应重建网格中的点，每个体素的面对应重建网格的边，每个体素的边对应重建网格的面。\n由于重建网格的连通性由边来联通，所以体素通过面来联通。\n也就是重建网格从一个面同过共用的边来访问另一个面，那么体素的（差分为0）的边通过共用的体素面来访问另一个（差分为0）的边。\n由于流形定义，重建网格的边只能有两个面，所以体素的每个面只能有两个（差分为0）的边。\n所以对于复杂情况，体素的点要计算多个，体素中的每个点都对应一组联通的（差分为0）的边。上面也说了如何把体素上的（差分为0）的边按连通性分割。\n如何访问体素的边，每个八叉树的节点（体素）代表三个边，也就是左下角（xyz最小）为原点，向xyz正方向增长的三个边。同样，这三个边所在的三个面也由这个节点代表。这样通过访问每个节点就能访问所有的边和面。\n结论先说：防止 DC 顶点逃出体素，最稳的是“盒约束 QEF”\r在 Dual Contouring 里，体素内顶点 (x) 本质上是一个 QEF 最小二乘拟合点。如果只做普通 QEF：\n$\\min_x E(x)=\\sum_i \\left(n_i^T(x-p_i)\\right)^2$\n这个点不一定落在当前体素内，尤其是在平面、边特征、法线退化、Hermite 数据噪声较大时。\n工程上有三种常见处理：\n方法 是否保证在体素内 是否改变原始 QEF 推荐程度 令 $y=x-c$，求离质点最近的 QEF 解 不严格保证 不改变原 QEF，只选解 推荐 加入 $\\lambda|x-c|^2$正则项 不严格保证 会改变 QEF 可用，但要谨慎 解盒约束 QEF：$\\min E(x),\\ l\\le x\\le u$ 严格保证 不改变目标，只加约束 最推荐 如果你的目标是“绝对不能逃出体素”，应该做：\n$\\boxed{ \\min_x |Ax-b|^2,\\quad l_x\\le x_x\\le u_x,\\ l_y\\le x_y\\le u_y,\\ l_z\\le x_z\\le u_z }$\n其中 (l,u) 是当前体素的最小、最大坐标。\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="dc算法中，每个体素对应重建网格中的点，每个体素的面对应重建网格的边，每个体素的边对应重建网格的面。\n由于重建网格的连通性由边来联通，所以体素通过面来联通。\n也就是重建网格从一个面同过共用的边来访问另一个面，那么体素的（差分为0）的边通过共用的体素面来访问另一个（差分为0）的边。\n由于流形定义，重建网格的边只能有两个面，所以体素的每个面只能有两个（差分为0）的边。\n所以对于复杂情况，体素的点要计算多个，体素中的每个点都对应一组联通的（差分为0）的边。上面也说了如何把体素上的（差分为0）的边按连通性分割。\n如何访问体素的边，每个八叉树的节点（体素）代表三个边，也就是左下角（xyz最小）为原点，向xyz正方向增长的三个边。同样，这三个边所在的三个面也由这个节点代表。这样通过访问每个节点就能访问所有的边和面。\n结论先说：防止 DC 顶点逃出体素，最稳的是“盒约束 QEF” 在 Dual Contouring 里，体素内顶点 (x) 本质上是一个 QEF 最小二乘拟合点。如果只做普通 QEF：\n$\\min_x E(x)=\\sum_i \\left(n_i^T(x-p_i)\\right)^2$\n这个点不一定落在当前体素内，尤其是在平面、边特征、法线退化、Hermite 数据噪声较大时。\n工程上有三种常见处理：\n方法 是否保证在体素内 是否改变原始 QEF 推荐程度 令 $y=x-c$，求离质点最近的 QEF 解 不严格保证 不改变原 QEF，只选解 推荐 加入 $\\lambda|x-c|^2$正则项 不严格保证 会改变 QEF 可用，但要谨慎 解盒约束 QEF：$\\min E(x),\\ l\\le x\\le u$ 严格保证 不改变目标，只加约束 最推荐 如果你的目标是“绝对不能逃出体素”，应该做：\n$\\boxed{ \\min_x |Ax-b|^2,\\quad l_x\\le x_x\\le u_x,\\ l_y\\le x_y\\le u_y,\\ l_z\\le x_z\\le u_z }$\n其中 (l,u) 是当前体素的最小、最大坐标。\n">
 <title>Dual_contouring算法</title>
 
-<link rel='canonical' href='http://localhost:1313/p/dual_contouring%E7%AE%97%E6%B3%95/'>
+<link rel='canonical' href='https://wujilingfeng.github.io/p/dual_contouring%E7%AE%97%E6%B3%95/'>
 
-<link rel="stylesheet" href="../../scss/style.min.b9c8156d464c343bdacaf14a871581fb94cbbdb9dd5cbce4ba017361187cc930.css"><meta property='og:title' content="Dual_contouring算法">
-<meta property='og:description' content="dc算法中，每个体素对应重建网格中的点，每个体素的面对应重建网格的边，每个体素的边对应重建网格的面。\n由于重建网格的连通性由边来联通，所以体素通过面来联通。\n也就是重建网格从一个面同过共用的边来访问另一个面，那么体素的（差分为0）的边通过共用的体素面来访问另一个（差分为0）的边。\n由于流形定义，重建网格的边只能有两个面，所以体素的每个面只能有两个（差分为0）的边。\n所以对于复杂情况，体素的点要计算多个，体素中的每个点都对应一组联通的（差分为0）的边。上面也说了如何把体素上的（差分为0）的边按连通性分割。\n如何访问体素的边，每个八叉树的节点（体素）代表三个边，也就是左下角（xyz最小）为原点，向xyz正方向增长的三个边。同样，这三个边所在的三个面也由这个节点代表。这样通过访问每个节点就能访问所有的边和面。\n结论先说：防止 DC 顶点逃出体素，最稳的是“盒约束 QEF”\r在 Dual Contouring 里，体素内顶点 (x) 本质上是一个 QEF 最小二乘拟合点。如果只做普通 QEF：\n$\\min_x E(x)=\\sum_i \\left(n_i^T(x-p_i)\\right)^2$\n这个点不一定落在当前体素内，尤其是在平面、边特征、法线退化、Hermite 数据噪声较大时。\n工程上有三种常见处理：\n方法 是否保证在体素内 是否改变原始 QEF 推荐程度 令 $y=x-c$，求离质点最近的 QEF 解 不严格保证 不改变原 QEF，只选解 推荐 加入 $\\lambda|x-c|^2$正则项 不严格保证 会改变 QEF 可用，但要谨慎 解盒约束 QEF：$\\min E(x),\\ l\\le x\\le u$ 严格保证 不改变目标，只加约束 最推荐 如果你的目标是“绝对不能逃出体素”，应该做：\n$\\boxed{ \\min_x |Ax-b|^2,\\quad l_x\\le x_x\\le u_x,\\ l_y\\le x_y\\le u_y,\\ l_z\\le x_z\\le u_z }$\n其中 (l,u) 是当前体素的最小、最大坐标。\n">
-<meta property='og:url' content='http://localhost:1313/p/dual_contouring%E7%AE%97%E6%B3%95/'>
+<link rel="stylesheet" href="../../scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="Dual_contouring算法">
+<meta property='og:description' content="dc算法中，每个体素对应重建网格中的点，每个体素的面对应重建网格的边，每个体素的边对应重建网格的面。\n由于重建网格的连通性由边来联通，所以体素通过面来联通。\n也就是重建网格从一个面同过共用的边来访问另一个面，那么体素的（差分为0）的边通过共用的体素面来访问另一个（差分为0）的边。\n由于流形定义，重建网格的边只能有两个面，所以体素的每个面只能有两个（差分为0）的边。\n所以对于复杂情况，体素的点要计算多个，体素中的每个点都对应一组联通的（差分为0）的边。上面也说了如何把体素上的（差分为0）的边按连通性分割。\n如何访问体素的边，每个八叉树的节点（体素）代表三个边，也就是左下角（xyz最小）为原点，向xyz正方向增长的三个边。同样，这三个边所在的三个面也由这个节点代表。这样通过访问每个节点就能访问所有的边和面。\n结论先说：防止 DC 顶点逃出体素，最稳的是“盒约束 QEF” 在 Dual Contouring 里，体素内顶点 (x) 本质上是一个 QEF 最小二乘拟合点。如果只做普通 QEF：\n$\\min_x E(x)=\\sum_i \\left(n_i^T(x-p_i)\\right)^2$\n这个点不一定落在当前体素内，尤其是在平面、边特征、法线退化、Hermite 数据噪声较大时。\n工程上有三种常见处理：\n方法 是否保证在体素内 是否改变原始 QEF 推荐程度 令 $y=x-c$，求离质点最近的 QEF 解 不严格保证 不改变原 QEF，只选解 推荐 加入 $\\lambda|x-c|^2$正则项 不严格保证 会改变 QEF 可用，但要谨慎 解盒约束 QEF：$\\min E(x),\\ l\\le x\\le u$ 严格保证 不改变目标，只加约束 最推荐 如果你的目标是“绝对不能逃出体素”，应该做：\n$\\boxed{ \\min_x |Ax-b|^2,\\quad l_x\\le x_x\\le u_x,\\ l_y\\le x_y\\le u_y,\\ l_z\\le x_z\\le u_z }$\n其中 (l,u) 是当前体素的最小、最大坐标。\n">
+<meta property='og:url' content='https://wujilingfeng.github.io/p/dual_contouring%E7%AE%97%E6%B3%95/'>
 <meta property='og:site_name' content='五级灵风'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-04-22T20:54:13&#43;08:00'/><meta property='article:modified_time' content='2026-04-22T20:54:13&#43;08:00'/><meta property='og:image' content='http://localhost:1313/p/dual_contouring%E7%AE%97%E6%B3%95/img.png' />
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-04-22T20:54:13&#43;08:00'/><meta property='article:modified_time' content='2026-04-22T20:54:13&#43;08:00'/><meta property='og:image' content='https://wujilingfeng.github.io/p/dual_contouring%E7%AE%97%E6%B3%95/img.png' />
 <meta name="twitter:title" content="Dual_contouring算法">
-<meta name="twitter:description" content="dc算法中，每个体素对应重建网格中的点，每个体素的面对应重建网格的边，每个体素的边对应重建网格的面。\n由于重建网格的连通性由边来联通，所以体素通过面来联通。\n也就是重建网格从一个面同过共用的边来访问另一个面，那么体素的（差分为0）的边通过共用的体素面来访问另一个（差分为0）的边。\n由于流形定义，重建网格的边只能有两个面，所以体素的每个面只能有两个（差分为0）的边。\n所以对于复杂情况，体素的点要计算多个，体素中的每个点都对应一组联通的（差分为0）的边。上面也说了如何把体素上的（差分为0）的边按连通性分割。\n如何访问体素的边，每个八叉树的节点（体素）代表三个边，也就是左下角（xyz最小）为原点，向xyz正方向增长的三个边。同样，这三个边所在的三个面也由这个节点代表。这样通过访问每个节点就能访问所有的边和面。\n结论先说：防止 DC 顶点逃出体素，最稳的是“盒约束 QEF”\r在 Dual Contouring 里，体素内顶点 (x) 本质上是一个 QEF 最小二乘拟合点。如果只做普通 QEF：\n$\\min_x E(x)=\\sum_i \\left(n_i^T(x-p_i)\\right)^2$\n这个点不一定落在当前体素内，尤其是在平面、边特征、法线退化、Hermite 数据噪声较大时。\n工程上有三种常见处理：\n方法 是否保证在体素内 是否改变原始 QEF 推荐程度 令 $y=x-c$，求离质点最近的 QEF 解 不严格保证 不改变原 QEF，只选解 推荐 加入 $\\lambda|x-c|^2$正则项 不严格保证 会改变 QEF 可用，但要谨慎 解盒约束 QEF：$\\min E(x),\\ l\\le x\\le u$ 严格保证 不改变目标，只加约束 最推荐 如果你的目标是“绝对不能逃出体素”，应该做：\n$\\boxed{ \\min_x |Ax-b|^2,\\quad l_x\\le x_x\\le u_x,\\ l_y\\le x_y\\le u_y,\\ l_z\\le x_z\\le u_z }$\n其中 (l,u) 是当前体素的最小、最大坐标。\n"><meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content='http://localhost:1313/p/dual_contouring%E7%AE%97%E6%B3%95/img.png' />
+<meta name="twitter:description" content="dc算法中，每个体素对应重建网格中的点，每个体素的面对应重建网格的边，每个体素的边对应重建网格的面。\n由于重建网格的连通性由边来联通，所以体素通过面来联通。\n也就是重建网格从一个面同过共用的边来访问另一个面，那么体素的（差分为0）的边通过共用的体素面来访问另一个（差分为0）的边。\n由于流形定义，重建网格的边只能有两个面，所以体素的每个面只能有两个（差分为0）的边。\n所以对于复杂情况，体素的点要计算多个，体素中的每个点都对应一组联通的（差分为0）的边。上面也说了如何把体素上的（差分为0）的边按连通性分割。\n如何访问体素的边，每个八叉树的节点（体素）代表三个边，也就是左下角（xyz最小）为原点，向xyz正方向增长的三个边。同样，这三个边所在的三个面也由这个节点代表。这样通过访问每个节点就能访问所有的边和面。\n结论先说：防止 DC 顶点逃出体素，最稳的是“盒约束 QEF” 在 Dual Contouring 里，体素内顶点 (x) 本质上是一个 QEF 最小二乘拟合点。如果只做普通 QEF：\n$\\min_x E(x)=\\sum_i \\left(n_i^T(x-p_i)\\right)^2$\n这个点不一定落在当前体素内，尤其是在平面、边特征、法线退化、Hermite 数据噪声较大时。\n工程上有三种常见处理：\n方法 是否保证在体素内 是否改变原始 QEF 推荐程度 令 $y=x-c$，求离质点最近的 QEF 解 不严格保证 不改变原 QEF，只选解 推荐 加入 $\\lambda|x-c|^2$正则项 不严格保证 会改变 QEF 可用，但要谨慎 解盒约束 QEF：$\\min E(x),\\ l\\le x\\le u$ 严格保证 不改变目标，只加约束 最推荐 如果你的目标是“绝对不能逃出体素”，应该做：\n$\\boxed{ \\min_x |Ax-b|^2,\\quad l_x\\le x_x\\le u_x,\\ l_y\\le x_y\\le u_y,\\ l_z\\le x_z\\le u_z }$\n其中 (l,u) 是当前体素的最小、最大坐标。\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://wujilingfeng.github.io/p/dual_contouring%E7%AE%97%E6%B3%95/img.png' />
     <link rel="shortcut icon" href="../../favicon.ico" />
 
     </head>
@@ -75,7 +75,7 @@
                     
                     
                         
-                        <img src="../../img/lixiaoyao_hu_dfce66ea35f8d737.jpg" width="300"
+                        <img src="../../img/lixiaoyao_hu_3f94c8178f214856.jpg" width="300"
                             height="188" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -302,11 +302,11 @@
 
                             <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
                                 
-                                    <option value="http://localhost:1313/" selected>中文</option>
+                                    <option value="https://wujilingfeng.github.io/" selected>中文</option>
                                 
-                                    <option value="http://localhost:1313/en/" >English</option>
+                                    <option value="https://wujilingfeng.github.io/en/" >English</option>
                                 
-                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                    <option value="https://wujilingfeng.github.io/ar/" >عربي</option>
                                 
                             </select>
                         </li>
@@ -391,17 +391,27 @@
   <ol>
     <li><a href="#做法一令-yx-c">做法一：令 (y=x-c)</a></li>
     <li><a href="#做法二加入质点距离能量">做法二：加入质点距离能量</a></li>
-    <li><a href="#最稳工程方案">最稳工程方案</a></li>
-    <li><a href="#givens旋转求解对称矩阵特征向量">givens旋转求解对称矩阵特征向量</a>
+    <li><a href="#最稳工程方案">最稳工程方案</a>
       <ol>
-        <li><a href="#1-理论推导-theoretical-derivation">1. 理论推导 (Theoretical Derivation)</a>
+        <li><a href="#一-理论推导-theoretical-derivation">一、 理论推导 (Theoretical Derivation)</a>
           <ol>
-            <li><a href="#核心思想">核心思想</a></li>
-            <li><a href="#单步迭代推导如何用一次旋转消去一个非对角元素">单步迭代推导：如何用一次旋转消去一个非对角元素？</a></li>
+            <li><a href="#1-定义-givens-旋转矩阵-j">1. 定义 Givens 旋转矩阵 $J$</a></li>
+            <li><a href="#2-相似变换与消元条件">2. 相似变换与消元条件</a></li>
+            <li><a href="#3-数值稳定的参数计算-核心">3. 数值稳定的参数计算 (核心)</a></li>
           </ol>
         </li>
-        <li><a href="#2-核心公式-key-formulas">2. 核心公式 (Key Formulas)</a></li>
-        <li><a href="#3-算法流程-algorithm-flow">3. 算法流程 (Algorithm Flow)</a></li>
+        <li><a href="#二-核心更新公式-update-formulas">二、 核心更新公式 (Update Formulas)</a>
+          <ol>
+            <li><a href="#1-更新目标矩阵-m-m--jt-m-j">1. 更新目标矩阵 $M$ ($M&rsquo; = J^T M J$)</a></li>
+            <li><a href="#2-更新特征向量矩阵-v-v--v-j">2. 更新特征向量矩阵 $V$ ($V&rsquo; = V J$)</a></li>
+          </ol>
+        </li>
+        <li><a href="#三-算法流程-algorithm-flow">三、 算法流程 (Algorithm Flow)</a>
+          <ol>
+            <li><a href="#循环-jacobi-算法伪代码">循环 Jacobi 算法伪代码</a></li>
+          </ol>
+        </li>
+        <li><a href="#四-算法复杂度与特性总结">四、 算法复杂度与特性总结</a></li>
       </ol>
     </li>
   </ol>
@@ -419,8 +429,8 @@
     <header class="article-header">
         <div class="article-image">
             <a href="../../p/dual_contouring%E7%AE%97%E6%B3%95/">
-                <img src="../../p/dual_contouring%E7%AE%97%E6%B3%95/img_hu_e09b43f30a9098fa.png"
-                        srcset="../../p/dual_contouring%E7%AE%97%E6%B3%95/img_hu_e09b43f30a9098fa.png 800w, ../../p/dual_contouring%E7%AE%97%E6%B3%95/img_hu_c9bb4d76cdabfdb1.png 1600w"
+                <img src="../../p/dual_contouring%E7%AE%97%E6%B3%95/img_hu_3f806f436ba542ac.png"
+                        srcset="../../p/dual_contouring%E7%AE%97%E6%B3%95/img_hu_3f806f436ba542ac.png 800w, ../../p/dual_contouring%E7%AE%97%E6%B3%95/img_hu_8a6b2699e6a63179.png 1600w"
                         width="800" 
                         height="450" 
                         loading="lazy"
@@ -472,7 +482,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 7 分钟
+                    阅读时长: 9 分钟
                 </time>
             </div>
         
@@ -918,9 +928,9 @@ U^T(b-Ac)
 <hr>
 <h1 id="12-实际推荐计算流程">12. 实际推荐计算流程
 </h1><p>我建议你的 DC 顶点放置流程这样写：</p>
-<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
@@ -947,7 +957,7 @@ U^T(b-Ac)
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">25
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>输入：
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>输入：
 </span></span><span style="display:flex;"><span>    当前体素 cell
 </span></span><span style="display:flex;"><span>    Hermite 点 p_i
 </span></span><span style="display:flex;"><span>    Hermite 法线 n_i
@@ -1007,7 +1017,8 @@ l\le x\le u
 </h2><p>$x=c+A^+(b-Ac)$</p>
 <p>含义是：</p>
 <blockquote>
-<p>在原始 QEF 的所有最小解中，选离体素内质点 (c) 最近的解。</p></blockquote>
+<p>在原始 QEF 的所有最小解中，选离体素内质点 (c) 最近的解。</p>
+</blockquote>
 <p>它不改变原 QEF，满秩时结果和普通 QEF 一样，欠秩时才发挥作用。</p>
 <hr>
 <h2 id="做法二加入质点距离能量">做法二：加入质点距离能量
@@ -1016,7 +1027,8 @@ l\le x\le u
 <p>$x=(A^TA+\lambda I)^{-1}(A^Tb+\lambda c)$</p>
 <p>含义是：</p>
 <blockquote>
-<p>在 QEF 拟合和靠近质点之间做折中。</p></blockquote>
+<p>在 QEF 拟合和靠近质点之间做折中。</p>
+</blockquote>
 <p>它会改变原 QEF 的最优点，但数值更稳定。</p>
 <hr>
 <h2 id="最稳工程方案">最稳工程方案
@@ -1036,137 +1048,239 @@ x=c}$</p>
 <p>作为兜底。</p>
 <p>这个方案在工程上比单纯加 $\lambda|x-c|^2$更可靠，因为它真正保证顶点不会逃出当前体素。</p>
 <hr>
-<h2 id="givens旋转求解对称矩阵特征向量">givens旋转求解对称矩阵特征向量
-</h2><p>我是一个基于 Gemini 2.5 Pro的人工智能助手。</p>
-<p>当然可以。下面为您详细梳理对称矩阵雅可比迭代法（Jacobi Iteration Method）的理论推导、核心公式和算法流程。这个方法的目标是将一个对称矩阵 <code>M</code>（在您的问题中是 <code>AᵀA</code>）通过一系列平面旋转（Givens Rotation）逐步转化为对角矩阵。</p>
-<h3 id="1-理论推导-theoretical-derivation">1. 理论推导 (Theoretical Derivation)
-</h3><h4 id="核心思想">核心思想
-</h4><p>我们的目标是求解 $M = VΣVᵀ$。雅可比法的策略不是一次性求出 <code>V</code> 和 <code>Σ</code>，而是构造一个正交矩阵序列 <code>G₁, G₂, G₃, ...</code>，通过迭代变换 $M_{k+1} = G_kᵀ M_k G_k$，使得矩阵 <code>M</code> 越来越接近对角矩阵。当 $M_k$足够接近对角时，我们就得到了：
-$Σ ≈ M_k$,
-$V ≈ G₁G₂G₃&hellip;G_k$</p>
-<h4 id="单步迭代推导如何用一次旋转消去一个非对角元素">单步迭代推导：如何用一次旋转消去一个非对角元素？
-</h4><ol>
-<li>
-<p><strong>选择目标</strong>：在当前矩阵 <code>M</code> 中，选择一个非对角元素 <code>m_pq</code> (其中 <code>p &lt; q</code>)，我们希望通过一次旋转将它变为0。</p>
-</li>
-<li>
-<p><strong>构造旋转矩阵</strong>：我们使用的工具是 <strong>Givens旋转矩阵</strong> <code>G(p, q, θ)</code>。它看起来像一个单位矩阵，只在第 <code>p</code> 行、<code>p</code> 列、<code>q</code> 行、<code>q</code> 列有不同：</p>
-$$
-   G(p, q, \theta) = \begin{pmatrix}
-1 & \cdots & 0 & \cdots & 0 & \cdots & 0 \\
-\vdots & \ddots & \vdots & & \vdots & & \vdots \\
-0 & \cdots & \cos\theta & \cdots & -\sin\theta & \cdots & 0 \\
-\vdots & & \vdots & \ddots & \vdots & & \vdots \\
-0 & \cdots & \sin\theta & \cdots & \cos\theta & \cdots & 0 \\
-\vdots & & \vdots & & \vdots & \ddots & \vdots \\
-0 & \cdots & 0 & \cdots & 0 & \cdots & 1
-\end{pmatrix} \begin{matrix} \\ \\ \leftarrow p \\ \\ \leftarrow q \\ \\ \\ \end{matrix}
-   $$<p>这是一个正交矩阵 (<code>GᵀG = I</code>)，它表示在 <code>(p, q)</code> 平面上的一个旋转。</p>
-</li>
-<li>
-<p><strong>执行变换</strong>：我们计算 <code>M' = GᵀMG</code>。这个变换只会影响 <code>M</code> 的第 <code>p</code> 行/列和第 <code>q</code> 行/列。我们可以聚焦于一个2x2的子问题：</p>
-$$
-   \begin{pmatrix} m'_{pp} & m'_{pq} \\ m'_{qp} & m'_{qq} \end{pmatrix} =
-\begin{pmatrix} c & s \\ -s & c \end{pmatrix}
-\begin{pmatrix} m_{pp} & m_{pq} \\ m_{qp} & m_{qq} \end{pmatrix}
-\begin{pmatrix} c & -s \\ s & c \end{pmatrix}
-   $$<p>其中 <code>c = cos(θ)</code>，<code>s = sin(θ)</code>，并且因为 <code>M</code> 对称，<code>m_{pq} = m_{qp}</code>。</p>
-</li>
-<li>
-<p><strong>求解旋转角 <code>θ</code></strong>：
-我们展开矩阵乘法，得到新的非对角元素 <code>m'_{pq}</code> 的表达式：
-$m&rsquo;<em>{pq} = (m</em>{qq} - m_{pp})sc + m_{pq}(c² - s²) = 0$</p>
-<p>使用三角函数的二倍角公式 <code>sin(2θ) = 2sc</code> 和 <code>cos(2θ) = c² - s²</code>，上式变为：
-$½ (m_{qq} - m_{pp}) sin(2θ) + m_{pq} cos(2θ) = 0$</p>
-<p>整理可得：</p>
-$$
-   \cot(2\theta) = \frac{m_{pp} - m_{qq}}{2m_{pq}}
-   $$<p>这个公式就是我们求解旋转角度的关键。</p>
-</li>
-<li>
-<p><strong>收敛性</strong>：可以证明，每次执行这样的操作，矩阵所有<strong>非对角元素</strong>的平方和 $S = Σ_{i≠j} m_{ij}²$ 都会减小。具体来说，$S_{new} = S_{old} - 2m_{pq}²$。由于 <code>S</code> 是一个有下界（为0）且单调递减的序列，它必然收敛。当 <code>S</code> 趋近于0时，矩阵就收敛为一个对角矩阵。</p>
-</li>
-</ol>
+<p>这里为你提供一套<strong>完全自洽、严谨且适合直接转化为代码</strong>的 Jacobi 方法（基于 Givens 旋转）求解实对称矩阵特征值和特征向量的理论公式与算法流程。</p>
+<p>我们采用数值线性代数经典教材（如 Golub &amp; Van Loan）中推荐的符号约定，确保矩阵定义、角度推导和更新公式<strong>100% 自洽</strong>。</p>
 <hr>
-<h3 id="2-核心公式-key-formulas">2. 核心公式 (Key Formulas)
-</h3><p>在实际计算中，我们不直接求 <code>θ</code>，而是直接计算 <code>c</code> 和 <code>s</code> 的值，这样更高效且数值稳定。</p>
-<p>令 $τ = (m_{qq} - m_{pp}) / (2 * m_{pq})$。（这里我们假设 $m_{pq} ≠ 0$，否则无需旋转）
-从 <code>cot(2θ) = -τ</code> (注意符号，与上面推导的公式略有不同，这是为了方便计算 <code>tan(θ)</code>），可以推导出 <code>tan(θ)</code> 的值。</p>
-<p>为了数值稳定性，我们使用如下公式计算 <code>tan(θ)</code> 的值 <code>t</code>:
-</p>
+<h3 id="一-理论推导-theoretical-derivation">一、 理论推导 (Theoretical Derivation)
+</h3><h4 id="1-定义-givens-旋转矩阵-j">1. 定义 Givens 旋转矩阵 $J$
+</h4><p>设我们要消去对称矩阵 $M$ 中的非对角元素 $m_{pq}$（其中 $p &lt; q$）。我们构造一个 Givens 旋转矩阵 $J(p, q, \theta)$，它在 $(p, q)$ 二维子空间上的形式为：</p>
 $$
-t = \frac{\text{sign}(\tau)}{|\tau| + \sqrt{1 + \tau^2}}
+J_{sub} = \begin{pmatrix} c & s \\ -s & c \end{pmatrix}
+\quad \text{即} \quad
+J_{pp} = c, \; J_{pq} = s, \; J_{qp} = -s, \; J_{qq} = c
 $$<p>
-然后计算 <code>c</code> 和 <code>s</code>：</p>
-<p>$c = \frac{1}{\sqrt{1 + t^2}}$,
-$s = c \cdot t$
-得到 <code>c</code> 和 <code>s</code> 后，我们用它们来更新矩阵 <code>M</code> 和特征向量矩阵 <code>V</code>。</p>
-<p><strong>矩阵 <code>M</code> 的更新规则：</strong></p>
-<ul>
-<li>$m&rsquo;<em>{pp} = m</em>{pp} - t \cdot m_{pq}$</li>
-<li>$m&rsquo;<em>{qq} = m</em>{qq} + t \cdot m_{pq}$</li>
-<li>$m&rsquo;<em>{pq} = m&rsquo;</em>{qp} = 0$</li>
-<li>对于所有 <code>i ≠ p, q</code>：
-<ul>
-<li>$m&rsquo;<em>{ip} = m</em>{ip} \cdot c - m_{iq} \cdot s$</li>
-<li>$m&rsquo;<em>{iq} = m</em>{ip} \cdot s + m_{iq} \cdot c$</li>
-<li>$m&rsquo;<em>{pi} = m&rsquo;</em>{ip}$</li>
-<li>$m&rsquo;<em>{qi} = m&rsquo;</em>{iq}$</li>
+<em>(注：其余对角线元素为 1，非对角线元素为 0。$c = \cos\theta, s = \sin\theta$)</em></p>
+<h4 id="2-相似变换与消元条件">2. 相似变换与消元条件
+</h4><p>我们对 $M$ 进行正交相似变换：$M&rsquo; = J^T M J$。
+提取出 $(p, q)$ 对应的 $2 \times 2$ 子矩阵进行计算：</p>
+$$
+\begin{pmatrix} m'_{pp} & m'_{pq} \\ m'_{qp} & m'_{qq} \end{pmatrix} =
+\begin{pmatrix} c & -s \\ s & c \end{pmatrix}
+\begin{pmatrix} m_{pp} & m_{pq} \\ m_{pq} & m_{qq} \end{pmatrix}
+\begin{pmatrix} c & s \\ -s & c \end{pmatrix}
+$$<p>展开乘法后，新的非对角元素 $m&rsquo;_{pq}$ 为：
+</p>
+$$ m'_{pq} = sc(m_{pp} - m_{qq}) + (c^2 - s^2)m_{pq} $$<p>为了消去该元素，令 $m&rsquo;_{pq} = 0$，并利用二倍角公式 $\sin(2\theta) = 2sc$ 和 $\cos(2\theta) = c^2 - s^2$：
+</p>
+$$ \frac{1}{2}\sin(2\theta)(m_{pp} - m_{qq}) + \cos(2\theta)m_{pq} = 0 $$<p>整理得到求解旋转角 $\theta$ 的核心方程：
+</p>
+$$ \cot(2\theta) = \frac{\cos(2\theta)}{\sin(2\theta)} = \frac{m_{qq} - m_{pp}}{2m_{pq}} $$<h4 id="3-数值稳定的参数计算-核心">3. 数值稳定的参数计算 (核心)
+</h4><p>在实际编程中，我们<strong>不直接计算 $\theta$</strong>，而是计算 $t = \tan\theta$，进而求出 $c$ 和 $s$。</p>
+<p>令 $\tau = \cot(2\theta) = \frac{m_{qq} - m_{pp}}{2m_{pq}}$。
+利用三角恒等式 $\cot(2\theta) = \frac{1 - \tan^2\theta}{2\tan\theta}$，可得关于 $t$ 的二次方程：
+</p>
+$$ t^2 + 2\tau t - 1 = 0 $$<p>解得 $t = -\tau \pm \sqrt{\tau^2 + 1}$。为了保证数值稳定性并使得旋转角度 $|\theta| \le \frac{\pi}{4}$，我们<strong>选择绝对值较小的根</strong>：</p>
+$$
+t = \begin{cases} 
+\frac{\text{sign}(\tau)}{|\tau| + \sqrt{1 + \tau^2}} & \text{if } \tau \neq 0 \\
+1 & \text{if } \tau = 0 
+\end{cases}
+$$<p>
+<em>(注：$\text{sign}(\tau)$ 是符号函数，$\tau&gt;0$ 时为 1，$\tau&lt;0$ 时为 -1)</em></p>
+<p>得到 $t$ 后，计算 $c$ 和 $s$：
+</p>
+$$ c = \frac{1}{\sqrt{1 + t^2}}, \quad s = t \cdot c $$<hr>
+<h3 id="二-核心更新公式-update-formulas">二、 核心更新公式 (Update Formulas)
+</h3><p>得到 $c, s, t$ 后，使用以下公式更新矩阵。<strong>这套公式与上述推导完全自洽。</strong></p>
+<h4 id="1-更新目标矩阵-m-m--jt-m-j">1. 更新目标矩阵 $M$ ($M&rsquo; = J^T M J$)
+</h4><ul>
+<li><strong>对角线元素</strong>：
+
+$$ m'_{pp} = m_{pp} - t \cdot m_{pq} $$
+
+$$ m'_{qq} = m_{qq} + t \cdot m_{pq} $$</li>
+<li><strong>被消去的非对角元素</strong>：
+
+$$ m'_{pq} = m'_{qp} = 0 $$</li>
+<li><strong>受影响的其余非对角元素</strong> (对于所有 $i \neq p, q$)：
+
+$$ m'_{ip} = m_{pi}' = c \cdot m_{ip} - s \cdot m_{iq} $$
+
+$$ m'_{iq} = m_{qi}' = s \cdot m_{ip} + c \cdot m_{iq} $$
+<em>(注：由于 $M$ 是对称矩阵，只需更新上三角或下三角，然后对称赋值即可)</em></li>
 </ul>
-</li>
-</ul>
-<p><strong>特征向量矩阵 <code>V</code> 的更新规则：</strong>
-<code>V</code> 的列向量就是我们最终要求的特征向量。</p>
+<h4 id="2-更新特征向量矩阵-v-v--v-j">2. 更新特征向量矩阵 $V$ ($V&rsquo; = V J$)
+</h4><p>初始时 $V = I$（单位矩阵）。每次旋转时，只需更新 $V$ 的第 $p$ 列和第 $q$ 列：</p>
 <ul>
-<li>对于所有 <code>i</code>：
-<ul>
-<li>$v&rsquo;<em>{ip} = v</em>{ip} \cdot c - v_{iq} \cdot s$</li>
-<li>$v&rsquo;<em>{iq} = v</em>{ip} \cdot s + v_{iq} \cdot c$</li>
-</ul>
-</li>
+<li>对于所有行 $i \in {1, 2, \dots, n}$：
+
+$$ v'_{ip} = c \cdot v_{ip} - s \cdot v_{iq} $$
+
+$$ v'_{iq} = s \cdot v_{ip} + c \cdot v_{iq} $$</li>
 </ul>
 <hr>
-<h3 id="3-算法流程-algorithm-flow">3. 算法流程 (Algorithm Flow)
-</h3><p><strong>输入</strong>: 对称矩阵 <code>M</code> (例如 <code>AᵀA</code>), 容忍误差 <code>ε</code>, 最大迭代次数 <code>max_iter</code>。
-<strong>输出</strong>: 特征值 (对角矩阵 <code>M</code> 的对角线), 特征向量 (矩阵 <code>V</code> 的列)。</p>
-<ol>
-<li>
-<p><strong>初始化</strong>:</p>
+<h3 id="三-算法流程-algorithm-flow">三、 算法流程 (Algorithm Flow)
+</h3><p>Jacobi 算法有两种常见的扫描策略：<strong>经典 Jacobi</strong>（每次找绝对值最大的非对角元）和 <strong>循环 Jacobi</strong>（按固定顺序扫描）。
+由于寻找最大元素需要 $O(n^2)$ 的额外开销，现代工程实现中<strong>几乎总是使用循环 Jacobi (Cyclic Jacobi)</strong>，其收敛速度在实际中同样具有二次收敛性。</p>
+<h4 id="循环-jacobi-算法伪代码">循环 Jacobi 算法伪代码
+</h4><div class="highlight"><div style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">34
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">35
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">36
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">37
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">38
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">39
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">40
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">41
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">42
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">43
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">44
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">45
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">46
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">47
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">48
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">49
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">50
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">51
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">52
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">53
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">54
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">55
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">56
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">57
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">58
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">59
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">60
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">61
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">62
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">63
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">64
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">65
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">66
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">67
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">68
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">69
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#55595f">70
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#abb2bf;background-color:#282c34;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#c678dd">def</span> <span style="color:#61afef;font-weight:bold">jacobi_eigen</span>(<span style="color:#e06c75">M</span>, <span style="color:#e06c75">max_sweeps</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">100</span>, <span style="color:#e06c75">tol</span><span style="color:#56b6c2">=</span><span style="color:#d19a66">1e-10</span>):
+</span></span><span style="display:flex;"><span>    <span style="color:#98c379">&#34;&#34;&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">    使用循环 Jacobi 方法求解实对称矩阵 M 的特征值和特征向量。
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">    返回: eigenvalues (对角线元素), eigenvectors (矩阵 V 的列)
+</span></span></span><span style="display:flex;"><span><span style="color:#98c379">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">n</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">M</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">shape</span>[<span style="color:#d19a66">0</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">V</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">np</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">eye</span>(<span style="color:#e06c75">n</span>)  <span style="color:#7f848e"># 初始化特征向量矩阵为单位阵</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">A</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">M</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">copy</span>()   <span style="color:#7f848e"># 工作矩阵</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">for</span> <span style="color:#e06c75">sweep</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">max_sweeps</span>):
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e"># 1. 计算当前非对角元素的平方和 (Frobenius 范数的 off-diagonal 部分)</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e06c75">off_diag_norm</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0.0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">n</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">for</span> <span style="color:#e06c75">j</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">i</span><span style="color:#56b6c2">+</span><span style="color:#d19a66">1</span>, <span style="color:#e06c75">n</span>):
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">off_diag_norm</span> <span style="color:#56b6c2">+=</span> <span style="color:#e06c75">A</span>[<span style="color:#e06c75">i</span>, <span style="color:#e06c75">j</span>]<span style="color:#56b6c2">**</span><span style="color:#d19a66">2</span>
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e"># 2. 收敛判断</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">if</span> <span style="color:#e06c75">off_diag_norm</span> <span style="color:#56b6c2">&lt;</span> <span style="color:#e06c75">tol</span>:
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">break</span>
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        <span style="color:#7f848e"># 3. 一次完整的扫掠 (Sweep)：按行优先顺序遍历所有上三角元素</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#c678dd">for</span> <span style="color:#e06c75">p</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">n</span><span style="color:#56b6c2">-</span><span style="color:#d19a66">1</span>):
+</span></span><span style="display:flex;"><span>            <span style="color:#c678dd">for</span> <span style="color:#e06c75">q</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">p</span><span style="color:#56b6c2">+</span><span style="color:#d19a66">1</span>, <span style="color:#e06c75">n</span>):
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#c678dd">if</span> <span style="color:#e5c07b">abs</span>(<span style="color:#e06c75">A</span>[<span style="color:#e06c75">p</span>, <span style="color:#e06c75">q</span>]) <span style="color:#56b6c2">&lt;</span> <span style="color:#d19a66">1e-15</span>:  <span style="color:#7f848e"># 如果已经接近 0，跳过</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#c678dd">continue</span>
+</span></span><span style="display:flex;"><span>                    
+</span></span><span style="display:flex;"><span>                <span style="color:#7f848e"># --- 计算旋转参数 ---</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">tau</span> <span style="color:#56b6c2">=</span> (<span style="color:#e06c75">A</span>[<span style="color:#e06c75">q</span>, <span style="color:#e06c75">q</span>] <span style="color:#56b6c2">-</span> <span style="color:#e06c75">A</span>[<span style="color:#e06c75">p</span>, <span style="color:#e06c75">p</span>]) <span style="color:#56b6c2">/</span> (<span style="color:#d19a66">2.0</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">A</span>[<span style="color:#e06c75">p</span>, <span style="color:#e06c75">q</span>])
+</span></span><span style="display:flex;"><span>                <span style="color:#c678dd">if</span> <span style="color:#e06c75">tau</span> <span style="color:#56b6c2">&gt;=</span> <span style="color:#d19a66">0</span>:
+</span></span><span style="display:flex;"><span>                    <span style="color:#e06c75">t</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1.0</span> <span style="color:#56b6c2">/</span> (<span style="color:#e06c75">tau</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">np</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">sqrt</span>(<span style="color:#d19a66">1.0</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">tau</span><span style="color:#56b6c2">**</span><span style="color:#d19a66">2</span>))
+</span></span><span style="display:flex;"><span>                <span style="color:#c678dd">else</span>:
+</span></span><span style="display:flex;"><span>                    <span style="color:#e06c75">t</span> <span style="color:#56b6c2">=</span> <span style="color:#56b6c2">-</span><span style="color:#d19a66">1.0</span> <span style="color:#56b6c2">/</span> (<span style="color:#56b6c2">-</span><span style="color:#e06c75">tau</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">np</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">sqrt</span>(<span style="color:#d19a66">1.0</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">tau</span><span style="color:#56b6c2">**</span><span style="color:#d19a66">2</span>))
+</span></span><span style="display:flex;"><span>                    
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">c</span> <span style="color:#56b6c2">=</span> <span style="color:#d19a66">1.0</span> <span style="color:#56b6c2">/</span> <span style="color:#e06c75">np</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">sqrt</span>(<span style="color:#d19a66">1.0</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">t</span><span style="color:#56b6c2">**</span><span style="color:#d19a66">2</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">s</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">t</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">c</span>
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#7f848e"># --- 更新矩阵 A (即 M) ---</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#7f848e"># 更新对角线</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">A</span>[<span style="color:#e06c75">p</span>, <span style="color:#e06c75">p</span>] <span style="color:#56b6c2">=</span> <span style="color:#e06c75">A</span>[<span style="color:#e06c75">p</span>, <span style="color:#e06c75">p</span>] <span style="color:#56b6c2">-</span> <span style="color:#e06c75">t</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">A</span>[<span style="color:#e06c75">p</span>, <span style="color:#e06c75">q</span>]
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">A</span>[<span style="color:#e06c75">q</span>, <span style="color:#e06c75">q</span>] <span style="color:#56b6c2">=</span> <span style="color:#e06c75">A</span>[<span style="color:#e06c75">q</span>, <span style="color:#e06c75">q</span>] <span style="color:#56b6c2">+</span> <span style="color:#e06c75">t</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">A</span>[<span style="color:#e06c75">p</span>, <span style="color:#e06c75">q</span>]
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">A</span>[<span style="color:#e06c75">p</span>, <span style="color:#e06c75">q</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0.0</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#e06c75">A</span>[<span style="color:#e06c75">q</span>, <span style="color:#e06c75">p</span>] <span style="color:#56b6c2">=</span> <span style="color:#d19a66">0.0</span>
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#7f848e"># 更新非对角线 (利用对称性，只算一半然后赋值)</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">n</span>):
+</span></span><span style="display:flex;"><span>                    <span style="color:#c678dd">if</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">!=</span> <span style="color:#e06c75">p</span> <span style="color:#56b6c2">and</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">!=</span> <span style="color:#e06c75">q</span>:
+</span></span><span style="display:flex;"><span>                        <span style="color:#e06c75">a_ip</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">A</span>[<span style="color:#e06c75">i</span>, <span style="color:#e06c75">p</span>]
+</span></span><span style="display:flex;"><span>                        <span style="color:#e06c75">a_iq</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">A</span>[<span style="color:#e06c75">i</span>, <span style="color:#e06c75">q</span>]
+</span></span><span style="display:flex;"><span>                        <span style="color:#e06c75">A</span>[<span style="color:#e06c75">i</span>, <span style="color:#e06c75">p</span>] <span style="color:#56b6c2">=</span> <span style="color:#e06c75">c</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">a_ip</span> <span style="color:#56b6c2">-</span> <span style="color:#e06c75">s</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">a_iq</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#e06c75">A</span>[<span style="color:#e06c75">p</span>, <span style="color:#e06c75">i</span>] <span style="color:#56b6c2">=</span> <span style="color:#e06c75">A</span>[<span style="color:#e06c75">i</span>, <span style="color:#e06c75">p</span>]
+</span></span><span style="display:flex;"><span>                        <span style="color:#e06c75">A</span>[<span style="color:#e06c75">i</span>, <span style="color:#e06c75">q</span>] <span style="color:#56b6c2">=</span> <span style="color:#e06c75">s</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">a_ip</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">c</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">a_iq</span>
+</span></span><span style="display:flex;"><span>                        <span style="color:#e06c75">A</span>[<span style="color:#e06c75">q</span>, <span style="color:#e06c75">i</span>] <span style="color:#56b6c2">=</span> <span style="color:#e06c75">A</span>[<span style="color:#e06c75">i</span>, <span style="color:#e06c75">q</span>]
+</span></span><span style="display:flex;"><span>                        
+</span></span><span style="display:flex;"><span>                <span style="color:#7f848e"># --- 更新特征向量矩阵 V ---</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#c678dd">for</span> <span style="color:#e06c75">i</span> <span style="color:#56b6c2">in</span> <span style="color:#e5c07b">range</span>(<span style="color:#e06c75">n</span>):
+</span></span><span style="display:flex;"><span>                    <span style="color:#e06c75">v_ip</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">V</span>[<span style="color:#e06c75">i</span>, <span style="color:#e06c75">p</span>]
+</span></span><span style="display:flex;"><span>                    <span style="color:#e06c75">v_iq</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">V</span>[<span style="color:#e06c75">i</span>, <span style="color:#e06c75">q</span>]
+</span></span><span style="display:flex;"><span>                    <span style="color:#e06c75">V</span>[<span style="color:#e06c75">i</span>, <span style="color:#e06c75">p</span>] <span style="color:#56b6c2">=</span> <span style="color:#e06c75">c</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">v_ip</span> <span style="color:#56b6c2">-</span> <span style="color:#e06c75">s</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">v_iq</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#e06c75">V</span>[<span style="color:#e06c75">i</span>, <span style="color:#e06c75">q</span>] <span style="color:#56b6c2">=</span> <span style="color:#e06c75">s</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">v_ip</span> <span style="color:#56b6c2">+</span> <span style="color:#e06c75">c</span> <span style="color:#56b6c2">*</span> <span style="color:#e06c75">v_iq</span>
+</span></span><span style="display:flex;"><span>                    
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 4. 提取特征值并排序 (通常按从大到小或从小到大排列)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">eigenvalues</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">np</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">diag</span>(<span style="color:#e06c75">A</span>)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#7f848e"># 按特征值降序排序，并相应调整特征向量矩阵的列</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">idx</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">np</span><span style="color:#56b6c2">.</span><span style="color:#e06c75">argsort</span>(<span style="color:#e06c75">eigenvalues</span>)[::<span style="color:#56b6c2">-</span><span style="color:#d19a66">1</span>] 
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">eigenvalues</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">eigenvalues</span>[<span style="color:#e06c75">idx</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#e06c75">V</span> <span style="color:#56b6c2">=</span> <span style="color:#e06c75">V</span>[:, <span style="color:#e06c75">idx</span>]
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#c678dd">return</span> <span style="color:#e06c75">eigenvalues</span>, <span style="color:#e06c75">V</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="四-算法复杂度与特性总结">四、 算法复杂度与特性总结
+</h3><ol>
+<li><strong>时间复杂度</strong>：
 <ul>
-<li>将特征向量矩阵 <code>V</code> 初始化为单位矩阵 <code>I</code>。</li>
-<li><code>iter_count = 0</code>。</li>
+<li>单次旋转（更新 $A$ 和 $V$）：$O(n)$。</li>
+<li>单次扫掠（Sweep，包含 $\frac{n(n-1)}{2}$ 次旋转）：$O(n^3)$。</li>
+<li>总时间复杂度：通常为 $O(n^3)$，因为对于大多数矩阵，只需要 5~10 次扫掠即可收敛。</li>
 </ul>
 </li>
-<li>
-<p><strong>主循环</strong>: <code>while (iter_count &lt; max_iter)</code>
-a.  <strong>计算非对角元素平方和 (或绝对值和)</strong>: <code>S = Σ_{i≠j} m_{ij}²</code>。
-b.  <strong>检查收敛</strong>: <code>if (S &lt; ε)</code>，则跳出循环，算法结束。
-c.  <strong>选择旋转目标 (p, q)</strong>:</p>
-<pre><code>*   **经典雅可比法**: 遍历 `M` 的上三角部分，找到绝对值最大的非对角元素 $|m_pq|$。
-*   **循环雅可比法 (更常用)**: 按固定顺序依次遍历所有非对角元素对 `(p, q)` (例如，`(0,1), (0,2), ..., (0,n-1), (1,2), ...`)。完成一轮遍历称为一次“扫荡”(sweep)。
-</code></pre>
-<p>d.  <strong>计算旋转参数</strong>:</p>
-<pre><code>*   `if (|m_pq| &lt; ε / n²)`，跳过此对，因为它已经足够小了。
-*   计算 $τ = (m_{qq} - m_{pp}) / (2 * m_{pq})$。
-*   计算 `t`, `c`, `s` (使用第二节的稳定公式)。
-</code></pre>
-<p>e.  <strong>更新矩阵 <code>M</code></strong>:</p>
-<pre><code>*   缓存 $m_ip$, $m_iq$ 等旧值。
-*   根据第二节的更新规则，计算 $m'_{pp}$, $m'_{qq}$ 以及所有 $m'_{ip}$, $m'_{iq}$。
-*   将 $m'_{pq}$ 和 $m'_{qp}$ 设为 0。
-</code></pre>
-<p>f.  <strong>更新特征向量矩阵 <code>V</code></strong>:</p>
-<pre><code>*   根据第二节的更新规则，更新 `V` 的第 `p` 列和第 `q` 列。
-</code></pre>
-<p>g.  <code>iter_count++</code>。</p>
-</li>
-<li>
-<p><strong>结束</strong>:</p>
-<ul>
-<li>循环结束后，矩阵 <code>M</code> 的对角线元素 $m_ii$ 就是特征值。</li>
-<li>矩阵 <code>V</code> 的第 <code>i</code> 列就是对应于特征值 $m_ii$ 的特征向量。</li>
-</ul>
-</li>
+<li><strong>空间复杂度</strong>：$O(n^2)$，用于存储矩阵 $A$ 和 $V$。</li>
+<li><strong>数值稳定性</strong>：极高。由于只使用正交变换，不会放大舍入误差，是求解中小型（$n &lt; 1000$）密集对称矩阵特征问题的<strong>最稳定方法之一</strong>。</li>
+<li><strong>并行性</strong>：Jacobi 方法天然适合并行计算（特别是 One-sided Jacobi 或 Block Jacobi 变体），在 GPU 加速场景下表现优异。</li>
 </ol>
 
 </section>
@@ -1369,7 +1483,7 @@ c.  <strong>选择旋转目标 (p, q)</strong>:</p>
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="../../ts/main.539ecba1e6899d42d789312a942689629b3f09fa3f1fddb65c6467cfbbdb461e.js" defer></script>
+            </script><script type="text/javascript" src="../../ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');
