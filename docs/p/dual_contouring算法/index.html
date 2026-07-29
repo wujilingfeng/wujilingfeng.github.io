@@ -510,34 +510,34 @@
 <p>这个点<strong>不一定落在当前体素内</strong>，尤其是在平面、边特征、法线退化、Hermite 数据噪声较大时。</p>
 <p>工程上有三种常见处理：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>方法</th>
-          <th>是否保证在体素内</th>
-          <th>是否改变原始 QEF</th>
-          <th>推荐程度</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>令 $y=x-c$，求离质点最近的 QEF 解</td>
-          <td>不严格保证</td>
-          <td>不改变原 QEF，只选解</td>
-          <td>推荐</td>
-      </tr>
-      <tr>
-          <td>加入 $\lambda|x-c|^2$正则项</td>
-          <td>不严格保证</td>
-          <td>会改变 QEF</td>
-          <td>可用，但要谨慎</td>
-      </tr>
-      <tr>
-          <td>解盒约束 QEF：$\min E(x),\ l\le x\le u$</td>
-          <td><strong>严格保证</strong></td>
-          <td>不改变目标，只加约束</td>
-          <td><strong>最推荐</strong></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th>是否保证在体素内</th>
+					<th>是否改变原始 QEF</th>
+					<th>推荐程度</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>令 $y=x-c$，求离质点最近的 QEF 解</td>
+					<td>不严格保证</td>
+					<td>不改变原 QEF，只选解</td>
+					<td>推荐</td>
+			</tr>
+			<tr>
+					<td>加入 $\lambda|x-c|^2$正则项</td>
+					<td>不严格保证</td>
+					<td>会改变 QEF</td>
+					<td>可用，但要谨慎</td>
+			</tr>
+			<tr>
+					<td>解盒约束 QEF：$\min E(x),\ l\le x\le u$</td>
+					<td><strong>严格保证</strong></td>
+					<td>不改变目标，只加约束</td>
+					<td><strong>最推荐</strong></td>
+			</tr>
+	</tbody>
 </table></div>
 <p>如果你的目标是“<strong>绝对不能逃出体素</strong>”，应该做：</p>
 <p>$\boxed{
@@ -1359,8 +1359,9 @@ $$ v'_{iq} = s \cdot v_{ip} + c \cdot v_{iq} $$</li>
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
 </div>
 
 <style>

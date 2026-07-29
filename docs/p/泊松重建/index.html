@@ -361,72 +361,158 @@
             <nav id="TableOfContents">
   <ol>
     <li><a href="#这样即使-chi-存在整体缩放或平移等值面仍可以保持一致原始论文明确采用输入点函数值的平均值确定等值面hugues-hoppe1">设未知实体为
-
+$$
+M\subset\mathbb R^3,
+$$
 定义其指示函数
-
+$$
+\chi_M(x)=
+\begin{cases}
+1,&x\in M,\\
+0,&x\notin M.
+\end{cases}
+$$
 如果能够恢复 $\chi_M$，那么物体表面就是它的跳变位置。实际计算得到的是平滑近似 $\chi$，最后提取某个等值面：
-
+$$
+S=\{x\in\Omega:\chi(x)=\gamma\}.
+$$
 Screened Poisson 常把点云位置约束到
-
+$$
+\chi(p_i)\approx \frac12,
+$$
 因此通常取 $\gamma=0.5$。原始非 screened 方法则常用所有输入点上的平均函数值作为等值面值：
-
+$$
+\gamma=\frac{1}{N}\sum_{i=1}^{N}\chi(p_i).
+$$
 这样，即使 $\chi$ 存在整体缩放或平移，等值面仍可以保持一致。原始论文明确采用输入点函数值的平均值确定等值面。([Hugues Hoppe][1])</a></li>
   </ol>
 
   <ol>
     <li><a href="#21-指示函数的梯度不是普通函数">2.1 指示函数的梯度不是普通函数</a></li>
-    <li><a href="#这就是指示函数梯度等于表面法向场的严格含义">$\chi_M$ 在内部和外部都是常数，所以普通意义下 几乎处处成立。 但它在表面 $\partial M$ 发生跳变，因此从<strong>分布意义</strong>看，梯度集中在表面上。 设 $\varphi$ 是光滑测试函数，取外法向为 $n_{\mathrm{out}}$。分布导数定义为 利用散度定理： 所以 若使用内法向 则 因此可以形式化地写成 其中 $\delta_{\partial M}$ 是集中在物体表面上的面 Dirac 分布。 这就是&#34;指示函数梯度等于表面法向场&#34;的严格含义。</a></li>
+    <li><a href="#这就是指示函数梯度等于表面法向场的严格含义">$\chi_M$ 在内部和外部都是常数，所以普通意义下 $$ \nabla\chi_M=0 $$ 几乎处处成立。 但它在表面 $\partial M$ 发生跳变，因此从<strong>分布意义</strong>看，梯度集中在表面上。 设 $\varphi$ 是光滑测试函数，取外法向为 $n_{\mathrm{out}}$。分布导数定义为 $$ \langle \partial_j\chi_M,\varphi\rangle = -\langle\chi_M,\partial_j\varphi\rangle = -\int_M\partial_j\varphi\,dx. $$ 利用散度定理： $$ \int_M\partial_j\varphi\,dx = \int_{\partial M}\varphi n_{\mathrm{out},j}\,dS. $$ 所以 $$ \langle \partial_j\chi_M,\varphi\rangle = -\int_{\partial M}\varphi n_{\mathrm{out},j}\,dS. $$ 若使用内法向 $$ n_{\mathrm{in}}=-n_{\mathrm{out}}, $$ 则 $$ \langle \partial_j\chi_M,\varphi\rangle = \int_{\partial M}\varphi n_{\mathrm{in},j}\,dS. $$ 因此可以形式化地写成 $$ \boxed{ \nabla\chi_M=n_{\mathrm{in}}\delta_{\partial M} } $$ 其中 $\delta_{\partial M}$ 是集中在物体表面上的面 Dirac 分布。 这就是&#34;指示函数梯度等于表面法向场&#34;的严格含义。</a></li>
     <li><a href="#22-为什么需要平滑核">2.2 为什么需要平滑核</a></li>
     <li><a href="#这就是原始-poisson-重建论文中的核心积分关系论文利用散度定理证明平滑指示函数的梯度等于经过相同平滑核处理的表面法向场hugues-hoppe1">直接使用 $\nabla\chi_M$ 会得到表面上的奇异分布，因此引入平滑核 $F$：
-
+$$
+\widetilde\chi=\chi_M*F.
+$$
 利用微分与卷积可交换：
-
+$$
+\nabla\widetilde\chi
+= \nabla(\chi_M*F)
+= (\nabla\chi_M)*F.
+$$
 代入表面分布：
-
+$$
+\boxed{
+\nabla\widetilde\chi(q)
+= \int_{\partial M}
+F(q-p)n_{\mathrm{in}}(p)\,dS(p)
+}
+$$
 这就是原始 Poisson 重建论文中的核心积分关系。论文利用散度定理证明，平滑指示函数的梯度等于经过相同平滑核处理的表面法向场。([Hugues Hoppe][1])</a></li>
     <li><a href="#23-用离散有向点近似积分">2.3 用离散有向点近似积分</a></li>
     <li><a href="#原始论文也是将表面积分用有向点和面片面积的加权和近似再把结果记作向量场-vhugues-hoppe1">输入点云为
-
+$$
+P=\{(p_s,n_s)\}_{s=1}^{N},
+$$
 其中 $n_s$ 是一致定向的法向。
 将表面分成每个采样点对应的小面片 $P_s$，可近似为
-
+$$
+\nabla\widetilde\chi(q)
+\approx
+\sum_s |P_s|F(q-p_s)n_s.
+$$
 定义向量场
-
+$$
+\boxed{
+V(q)=\sum_s w_s F(q-p_s)n_s
+}
+$$
 其中 $w_s\approx |P_s|$ 是局部面积或密度补偿权重。
 于是目标变成：
-
+$$
+\nabla\chi\approx V.
+$$
 原始论文也是将表面积分用有向点和面片面积的加权和近似，再把结果记作向量场 $V$。([Hugues Hoppe][1])</a></li>
   </ol>
 
   <ol>
     <li><a href="#hugues-hoppe1">由于点云噪声、法向误差、离散误差以及采样不均匀，构造出的 $V$ 通常不是严格可积场：
-
+$$
+\nabla\times V\neq 0.
+$$
 因此一般不存在一个函数 $\chi$ 能够处处满足
-
+$$
+\nabla\chi=V.
+$$
 于是改为求最小二乘意义下最接近的梯度场：
-
+$$
+\boxed{
+E_0(\chi)
+= \frac12\int_\Omega
+|\nabla\chi-V|^2\,dx
+}
+$$
 这比直接写
-
+$$
+\Delta\chi=\nabla\cdot V
+$$
 更基础，因为 Poisson 方程实际上是这个能量的 Euler–Lagrange 方程。
 原始 Poisson 重建将问题描述为寻找梯度最接近 $V$ 的指示函数，并由此得到
-
+$$
+\Delta\chi=\nabla\cdot V.
+$$
 ([Hugues Hoppe][1])</a></li>
   </ol>
 
   <ol>
     <li><a href="#41-使用广义-stokesgreen-公式">4.1 使用广义 Stokes/Green 公式</a></li>
     <li><a href="#弱形式通过-green-公式把二阶导数转移成一阶导数并自然产生边界项这也是有限元处理-poisson-方程的标准方式挪威科技大学数学系2">$\int  \nabla \cdot W dx=\int_{\Gamma} (\nabla \cdot W) \cdot n dS$(散度公式)
-
+$$
+\int_\Omega
+(\nabla\chi-V)\cdot\nabla\phi\,dx
+= -\int_\Omega
+\phi(\Delta\chi-\nabla\cdot V)\,dx
++
+\int_{\Gamma}
+\phi(\partial_n\chi-V\cdot n)\,dS.
+$$
 因此平稳条件是
-
+$$
+-\int_\Omega
+\phi(\Delta\chi-\nabla\cdot V)\,dx
++
+\int_{\Gamma}
+\phi(\partial_n\chi-V\cdot n)\,dS
+=0.
+$$
 如果 $\phi$ 在内部和边界上都可以任意变化，就得到(强形式就是令两项都为0即可)：
-
+$$
+\boxed{
+\Delta\chi=\nabla\cdot V
+\qquad\text{in }\Omega
+}
+$$
 以及自然边界条件
-
+$$
+\boxed{
+\partial_n\chi=V\cdot n
+\qquad\text{on }\Gamma.
+}
+$$
 所以，完整的强形式并不只是
-
+$$
+\Delta\chi=\nabla\cdot V,
+$$
 而是
-
+$$
+\boxed{
+\begin{cases}
+\Delta\chi=\nabla\cdot V,&x\in\Omega,\\
+\partial_n\chi=V\cdot n,&x\in\partial\Omega.
+\end{cases}
+}
+$$
 弱形式通过 Green 公式把二阶导数转移成一阶导数，并自然产生边界项；这也是有限元处理 Poisson 方程的标准方式。([挪威科技大学数学系][2])</a></li>
   </ol>
 
@@ -437,21 +523,38 @@ Screened Poisson 常把点云位置约束到
       </ol>
     </li>
     <li><a href="#52-neumann-边界条件">5.2 Neumann 边界条件</a></li>
-    <li><a href="#官方-poissonrecon-实现支持-freedirichletneumann-三种有限元边界类型当前重建程序默认使用-neumann其-pointweight0-对应原始非-screened-poissongithub4">如果 $V$ 在计算域边界附近已经衰减到零，那么 自然条件近似为齐次 Neumann： 官方 PoissonRecon 实现支持 Free、Dirichlet、Neumann 三种有限元边界类型，当前重建程序默认使用 Neumann；其 <code>pointWeight=0</code> 对应原始非 screened Poisson。([GitHub][4])</a></li>
+    <li><a href="#官方-poissonrecon-实现支持-freedirichletneumann-三种有限元边界类型当前重建程序默认使用-neumann其-pointweight0-对应原始非-screened-poissongithub4">如果 $V$ 在计算域边界附近已经衰减到零，那么 $$ V\cdot n\approx0, $$ 自然条件近似为齐次 Neumann： $$ \partial_n\chi=0. $$ 官方 PoissonRecon 实现支持 Free、Dirichlet、Neumann 三种有限元边界类型，当前重建程序默认使用 Neumann；其 <code>pointWeight=0</code> 对应原始非 screened Poisson。([GitHub][4])</a></li>
     <li><a href="#53-neumann-问题的兼容条件">5.3 Neumann 问题的兼容条件</a></li>
     <li><a href="#如果-v-的支撑完全位于计算域内部这一条件通常自动成立">对
-
+$$
+\Delta\chi=\nabla\cdot V
+$$
 在整个 $\Omega$ 上积分：
-
+$$
+\int_\Omega\Delta\chi\,dx
+= \int_\Omega\nabla\cdot V\,dx.
+$$
 利用散度定理：
-
+$$
+\int_\Gamma\partial_n\chi\,dS
+= \int_\Gamma V\cdot n\,dS.
+$$
 所以一般 Neumann 数据必须满足
-
+$$
+\boxed{
+\int_\Gamma g_N\,dS
+= \int_\Gamma V\cdot n\,dS.
+}
+$$
 自然条件 $g_N=V\cdot n$ 自动满足这一要求。
 若强行设置齐次 Neumann：
-
+$$
+g_N=0,
+$$
 就需要
-
+$$
+\int_\Gamma V\cdot n\,dS=0.
+$$
 如果 $V$ 的支撑完全位于计算域内部，这一条件通常自动成立。</a></li>
   </ol>
 
@@ -460,56 +563,100 @@ Screened Poisson 常把点云位置约束到
     <li><a href="#62-弱解不一定是经典强解">6.2 弱解不一定是经典强解</a></li>
     <li><a href="#63-有限元实际求的是弱解">6.3 有限元实际求的是弱解</a></li>
     <li><a href="#是良好定义的所以代码应主要基于弱形式组装">你的八叉树基函数可能是截断 B-spline、分片多项式或有限元基函数。它们通常只有有限阶连续性，不适合逐点计算
-
+$$
+\Delta\chi.
+$$
 但
-
+$$
+\nabla B_i
+$$
 以及积分
-
+$$
+\int\nabla B_i\cdot\nabla B_j
+$$
 是良好定义的，所以代码应主要基于弱形式组装。</a></li>
   </ol>
 
   <ol>
     <li><a href="#71-一个最简单的一维例子">7.1 一个最简单的一维例子</a></li>
     <li><a href="#中的常数-b-仍然任意">考虑
-
+$$
+u''(x)=0,\qquad x\in(0,1).
+$$
 所有
-
+$$
+u(x)=ax+b
+$$
 都是解。
 仅凭内部方程无法确定 $a,b$。
 加入 Dirichlet 条件：
-
+$$
+u(0)=0,\qquad u(1)=0,
+$$
 才得到唯一解
-
+$$
+u=0.
+$$
 加入 Neumann 条件：
-
+$$
+u'(0)=u'(1)=0,
+$$
 只能推出
-
+$$
+a=0,
+$$
 但
-
+$$
+u=b
+$$
 中的常数 $b$ 仍然任意。</a></li>
     <li><a href="#72-三维中的情况更严重">7.2 三维中的情况更严重</a></li>
     <li><a href="#所以仅有内部-poisson-方程时解并不是只差一个常数而是可以相差整个调和函数空间只有加入边界条件后才会把这些自由度限制掉">假设 $\chi_1,\chi_2$ 都满足
-
+$$
+\Delta\chi=\nabla\cdot V.
+$$
 令
-
+$$
+h=\chi_1-\chi_2,
+$$
 则
-
+$$
+\Delta h=0.
+$$
 也就是说，两个解可以相差任意调和函数。
 所以仅有内部 Poisson 方程时，解并不是只差一个常数，而是可以相差整个调和函数空间。只有加入边界条件后，才会把这些自由度限制掉。</a></li>
     <li><a href="#73-纯-neumann-为什么只差一个常数">7.3 纯 Neumann 为什么只差一个常数</a></li>
     <li><a href="#或者指定输入点上的平均函数值">如果两个解还满足相同 Neumann 条件，则
-
+$$
+\Delta h=0,
+\qquad
+\partial_n h=0.
+$$
 有
-
+$$
+\int_\Omega|\nabla h|^2\,dx
+= -\int_\Omega h\Delta h\,dx
++
+\int_\Gamma h\partial_nh\,dS
+=0.
+$$
 因此
-
+$$
+\nabla h=0,
+$$
 所以 $h$ 只能是常数。
 因此纯 Neumann Poisson 问题通常是：
-
+$$
+\boxed{\text{解存在时，只在加法常数意义下唯一。}}
+$$
 可以通过下列方式固定：
-
+$$
+\int_\Omega\chi\,dx=0,
+$$
 或者固定一个自由度：
-
+$$
+x_k=0,
+$$
 或者指定输入点上的平均函数值。</a></li>
     <li><a href="#74-线性系统解唯一不代表-pde-本身不需要边界条件">7.4 &ldquo;线性系统解唯一&quot;不代表 PDE 本身不需要边界条件</a></li>
   </ol>
@@ -517,55 +664,130 @@ Screened Poisson 常把点云位置约束到
   <ol>
     <li><a href="#81-screened-poisson-的弱形式">8.1 Screened Poisson 的弱形式</a></li>
     <li><a href="#这是代码组装最应使用的形式">对 $\chi$ 做变分：
-
+$$
+\int_\Omega
+(\nabla\chi-V)\cdot\nabla\phi\,dx
++
+\lambda
+\sum_s\eta_s
+(\chi(p_s)-a_s)\phi(p_s)
+=0.
+$$
 所以
-
+$$
+\boxed{
+\int_\Omega
+\nabla\chi\cdot\nabla\phi\,dx
++
+\lambda\sum_s\eta_s
+\chi(p_s)\phi(p_s)
+= \int_\Omega
+V\cdot\nabla\phi\,dx
++
+\lambda\sum_s\eta_s
+a_s\phi(p_s).
+}
+$$
 这是代码组装最应使用的形式。</a></li>
     <li><a href="#82-screened-poisson-的形式强方程">8.2 Screened Poisson 的形式强方程</a></li>
-    <li><a href="#严格地说在三维无限维-h1-空间中任意点值不是连续泛函因此上述-dirac-强形式主要是一种形式表达实际代码中-chi_h-位于连续的有限维-b-spline-空间chi_hp_s-可以直接计算因此离散能量是完全明确的">引入采样算子 权重矩阵 则能量可写为 Euler–Lagrange 方程是 如果形式化地把点采样写成 Dirac 分布： 这与经典的全域 screened Poisson 不同。Poisson 表面重建使用的是<strong>稀疏点 screening</strong>。 严格地说，在三维无限维 $H^1$ 空间中，任意点值不是连续泛函，因此上述 Dirac 强形式主要是一种形式表达。实际代码中 $\chi_h$ 位于连续的有限维 B-spline 空间，$\chi_h(p_s)$ 可以直接计算，因此离散能量是完全明确的。</a></li>
+    <li><a href="#严格地说在三维无限维-h1-空间中任意点值不是连续泛函因此上述-dirac-强形式主要是一种形式表达实际代码中-chi_h-位于连续的有限维-b-spline-空间chi_hp_s-可以直接计算因此离散能量是完全明确的">引入采样算子 $$ S\chi= \begin{bmatrix} \chi(p_1)\\ \vdots\\ \chi(p_N) \end{bmatrix}, $$ 权重矩阵 $$ W=\operatorname{diag}(\eta_1,\dots,\eta_N), $$ 则能量可写为 $$ E(\chi) = \frac12|\nabla\chi-V|_{L^2}^2 + \frac{\lambda}{2}|S\chi-a|_W^2. $$ Euler–Lagrange 方程是 $$ \boxed{ -\Delta\chi + \lambda S^*WS\chi = -\nabla\cdot V + \lambda S^*Wa. } $$ 如果形式化地把点采样写成 Dirac 分布： $$ \boxed{ -\Delta\chi + \lambda\sum_s \eta_s\chi(p_s)\delta_{p_s} = -\nabla\cdot V + \lambda\sum_s \eta_s a_s\delta_{p_s}. } $$ 这与经典的全域 screened Poisson $$ -\Delta\chi+\lambda\chi=f $$ 不同。Poisson 表面重建使用的是<strong>稀疏点 screening</strong>。 严格地说，在三维无限维 $H^1$ 空间中，任意点值不是连续泛函，因此上述 Dirac 强形式主要是一种形式表达。实际代码中 $\chi_h$ 位于连续的有限维 B-spline 空间，$\chi_h(p_s)$ 可以直接计算，因此离散能量是完全明确的。</a></li>
   </ol>
 
   <ol>
     <li><a href="#91-poisson-刚度矩阵">9.1 Poisson 刚度矩阵</a></li>
-    <li><a href="#其中-mathbf-c-是表示常数函数的系数向量">
+    <li><a href="#其中-mathbf-c-是表示常数函数的系数向量">$$
+\boxed{
+A_{ij}
+= \int_\Omega
+\nabla B_i\cdot\nabla B_j\,dx
+}
+$$
 右端项：
-
+$$
+\boxed{
+b_i
+= \int_\Omega
+V\cdot\nabla B_i\,dx.
+}
+$$
 于是非 screened 系统为
-
+$$
+\boxed{
+Ax=b.
+}
+$$
 其中 $A$ 是对称半正定矩阵。
 对于纯 Neumann 边界，如果基函数能够表示常数，则
-
+$$
+A\mathbf c=0
+$$
 其中 $\mathbf c$ 是表示常数函数的系数向量。</a></li>
     <li><a href="#92-screened-矩阵">9.2 Screened 矩阵</a></li>
     <li><a href="#screened-poisson-的有限元离散会产生稀疏对称通常正定的线性系统并可利用八叉树层次结构进行多重网格求解普林斯顿图形组3">定义
-
+$$
+C_{ij}
+= \sum_s
+\eta_s B_i(p_s)B_j(p_s),
+$$
 以及
-
+$$
+d_i
+= \sum_s
+\eta_s a_sB_i(p_s).
+$$
 最终线性系统为
-
+$$
+\boxed{
+(A+\lambda C)x
+= b+\lambda d.
+}
+$$
 其中：
-
-
-
-
+$$
+A_{ij}
+= \int\nabla B_i\cdot\nabla B_j,
+$$
+$$
+C_{ij}
+= \sum_s\eta_sB_i(p_s)B_j(p_s),
+$$
+$$
+b_i
+= \int V\cdot\nabla B_i,
+$$
+$$
+d_i
+= \sum_s\eta_s a_sB_i(p_s).
+$$
 Screened Poisson 的有限元离散会产生稀疏、对称、通常正定的线性系统，并可利用八叉树层次结构进行多重网格求解。([普林斯顿图形组][3])</a></li>
   </ol>
 
   <ol>
     <li><a href="#screening-解决的是常数零空间和数据贴合问题边界条件仍决定函数在计算域边缘的行为">对任意常数 $c$：
-
+$$
+\nabla(\chi+c)=\nabla\chi.
+$$
 所以非 screened 能量满足
-
+$$
+E_0(\chi+c)=E_0(\chi).
+$$
 它无法确定函数的整体偏移。
 但 screened 项变为
-
+$$
+\sum_s
+(\chi(p_s)+c-a_s)^2,
+$$
 一般会随 $c$ 改变。
 因此，只要至少有有效采样约束，screening 就会惩罚常数模式，使
-
+$$
+A+\lambda C
+$$
 从半正定变为正定。
 不过这不等于&quot;screened Poisson 不需要边界条件&rdquo;。
 原因是：当你把能量定义在整个 $H^1(\Omega)$ 中时，已经隐式采用了自然边界条件
-
+$$
+\partial_n\chi=V\cdot n.
+$$
 screening 解决的是常数零空间和数据贴合问题；边界条件仍决定函数在计算域边缘的行为。</a></li>
   </ol>
 
@@ -578,20 +800,46 @@ screening 解决的是常数零空间和数据贴合问题；边界条件仍决�
     <li><a href="#131-构造向量场-v">13.1 构造向量场 $V$</a></li>
     <li><a href="#132-组装-poisson-项">13.2 组装 Poisson 项</a></li>
     <li><a href="#">对所有支撑相交的基函数对：
-
+$$
+A_{ij}
+= \int_\Omega
+\nabla B_i\cdot\nabla B_j\,dx.
+$$
 因为基函数紧支撑，只有支撑重叠时矩阵项非零。
 右端项：
-
+$$
+b_i
+= \int_\Omega
+V\cdot\nabla B_i\,dx.
+$$
 如果 $V$ 也展开在基函数中：
-
+$$
+V=\sum_k v_kB_k,
+$$
 则
-</a></li>
+$$
+b_i
+= \sum_k
+v_k\cdot
+\int_\Omega
+B_k\nabla B_i\,dx.
+$$</a></li>
     <li><a href="#133-加入-screening">13.3 加入 screening</a></li>
     <li><a href="#">遍历每个输入点，只对包含该点的局部基函数组装：
-
-
+$$
+C_{ij}
+\mathrel{+}=
+\eta_sB_i(p_s)B_j(p_s),
+$$
+$$
+d_i
+\mathrel{+}=
+\eta_sa_sB_i(p_s).
+$$
 然后求解：
-</a></li>
+$$
+(A+\lambda C)x=b+\lambda d.
+$$</a></li>
     <li><a href="#134-处理边界">13.4 处理边界</a>
       <ol>
         <li><a href="#齐次-dirichlet">齐次 Dirichlet</a></li>
@@ -600,15 +848,25 @@ screening 解决的是常数零空间和数据贴合问题；边界条件仍决�
       </ol>
     </li>
     <li><a href="#或固定一个自由度">需要显式处理常数零空间：
-
+$$
+\int_\Omega\chi=0,
+$$
 或固定一个自由度。</a></li>
     <li><a href="#135-求解和提取">13.5 求解和提取</a></li>
     <li><a href="#最后在叶节点网格上计算角点函数值并执行-marching-cubes同时处理不同八叉树深度之间的非一致面避免裂缝">求得 $x$ 后：
-
+$$
+\chi_h(x)=\sum_jx_jB_j(x).
+$$
 非 screened 可取
-
+$$
+\gamma
+= \frac{\sum_s\eta_s\chi_h(p_s)}
+{\sum_s\eta_s}.
+$$
 Screened 且目标值为 $0.5$ 时通常取
-
+$$
+\gamma=0.5.
+$$
 最后在叶节点网格上计算角点函数值并执行 Marching Cubes，同时处理不同八叉树深度之间的非一致面，避免裂缝。</a></li>
   </ol>
 </nav>
@@ -1063,45 +1321,45 @@ $$
 如果 $V$ 的支撑完全位于计算域内部，这一条件通常自动成立。
 </h2><h1 id="六强形式和弱形式究竟有什么区别">六、强形式和弱形式究竟有什么区别
 </h1><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>项目</th>
-          <th>强形式</th>
-          <th>弱形式</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>方程</td>
-          <td>$\Delta\chi=\nabla\cdot V$</td>
-          <td>$\int\nabla\chi\cdot\nabla\phi=\int V\cdot\nabla\phi$</td>
-      </tr>
-      <tr>
-          <td>正则性</td>
-          <td>通常要求 $\chi$ 有二阶导数</td>
-          <td>只要求一阶弱导数</td>
-      </tr>
-      <tr>
-          <td>解空间</td>
-          <td>如 $C^2$、$H^2$</td>
-          <td>通常为 $H^1$</td>
-      </tr>
-      <tr>
-          <td>边界条件</td>
-          <td>直接写在 PDE 后面</td>
-          <td>部分编码在函数空间，部分出现在边界积分中</td>
-      </tr>
-      <tr>
-          <td>有限元适用性</td>
-          <td>不能直接用分片低阶基函数逐点满足</td>
-          <td>非常适合 Galerkin/FEM</td>
-      </tr>
-      <tr>
-          <td>含噪、分布源</td>
-          <td>较难解释</td>
-          <td>可以自然处理弱导数和分布右端项</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>项目</th>
+					<th>强形式</th>
+					<th>弱形式</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>方程</td>
+					<td>$\Delta\chi=\nabla\cdot V$</td>
+					<td>$\int\nabla\chi\cdot\nabla\phi=\int V\cdot\nabla\phi$</td>
+			</tr>
+			<tr>
+					<td>正则性</td>
+					<td>通常要求 $\chi$ 有二阶导数</td>
+					<td>只要求一阶弱导数</td>
+			</tr>
+			<tr>
+					<td>解空间</td>
+					<td>如 $C^2$、$H^2$</td>
+					<td>通常为 $H^1$</td>
+			</tr>
+			<tr>
+					<td>边界条件</td>
+					<td>直接写在 PDE 后面</td>
+					<td>部分编码在函数空间，部分出现在边界积分中</td>
+			</tr>
+			<tr>
+					<td>有限元适用性</td>
+					<td>不能直接用分片低阶基函数逐点满足</td>
+					<td>非常适合 Galerkin/FEM</td>
+			</tr>
+			<tr>
+					<td>含噪、分布源</td>
+					<td>较难解释</td>
+					<td>可以自然处理弱导数和分布右端项</td>
+			</tr>
+	</tbody>
 </table></div>
 <h2 id="61-强解一定是弱解">6.1 强解一定是弱解
 </h2><p>如果 $\chi$ 足够光滑，并满足强形式和相应边界条件，那么通过分部积分可以证明它一定满足弱形式。</p>
@@ -2899,8 +3157,9 @@ $$
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
 </div>
 
 <style>

@@ -1,9 +1,15 @@
+
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://wujilingfeng.github.io/</loc>
     <lastmod>2026-05-12T23:35:57+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://wujilingfeng.github.io/"
+                />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -14,14 +20,24 @@
                 hreflang="ar"
                 href="https://wujilingfeng.github.io/ar/"
                 />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/"
-                />
   </url><url>
     <loc>https://wujilingfeng.github.io/post/</loc>
     <lastmod>2026-05-12T23:35:57+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://wujilingfeng.github.io/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://wujilingfeng.github.io/en/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://wujilingfeng.github.io/ar/post/"
+                />
   </url><url>
     <loc>https://wujilingfeng.github.io/p/qem%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2026-05-12T23:35:57+08:00</lastmod>
@@ -93,6 +109,11 @@
     <lastmod>2020-09-09T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
+                hreflang="zh-cn"
+                href="https://wujilingfeng.github.io/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="en"
                 href="https://wujilingfeng.github.io/en/categories/"
                 />
@@ -100,11 +121,6 @@
                 rel="alternate"
                 hreflang="ar"
                 href="https://wujilingfeng.github.io/ar/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/categories/"
                 />
   </url><url>
     <loc>https://wujilingfeng.github.io/p/test-chinese/</loc>
@@ -114,13 +130,13 @@
     <lastmod>2020-09-09T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://wujilingfeng.github.io/en/categories/test/"
+                hreflang="zh-cn"
+                href="https://wujilingfeng.github.io/categories/test/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/categories/test/"
+                hreflang="en"
+                href="https://wujilingfeng.github.io/en/categories/test/"
                 />
   </url><url>
     <loc>https://wujilingfeng.github.io/categories/%E6%B5%8B%E8%AF%95/</loc>
@@ -130,26 +146,26 @@
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://wujilingfeng.github.io/en/page/"
+                hreflang="zh-cn"
+                href="https://wujilingfeng.github.io/page/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/page/"
+                hreflang="en"
+                href="https://wujilingfeng.github.io/en/page/"
                 />
   </url><url>
     <loc>https://wujilingfeng.github.io/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://wujilingfeng.github.io/en/archives/"
+                hreflang="zh-cn"
+                href="https://wujilingfeng.github.io/archives/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/archives/"
+                hreflang="en"
+                href="https://wujilingfeng.github.io/en/archives/"
                 />
   </url><url>
     <loc>https://wujilingfeng.github.io/tags/css/</loc>
@@ -171,6 +187,11 @@
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
+                hreflang="zh-cn"
+                href="https://wujilingfeng.github.io/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
                 hreflang="en"
                 href="https://wujilingfeng.github.io/en/tags/"
                 />
@@ -178,11 +199,6 @@
                 rel="alternate"
                 hreflang="ar"
                 href="https://wujilingfeng.github.io/ar/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/tags/"
                 />
   </url><url>
     <loc>https://wujilingfeng.github.io/categories/themes/</loc>
@@ -195,13 +211,13 @@
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="ar"
-                href="https://wujilingfeng.github.io/ar/p/%D9%85%D8%AB%D8%A7%D9%84-%D9%86%D8%B5/"
+                hreflang="zh-cn"
+                href="https://wujilingfeng.github.io/p/placeholder-text/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/p/placeholder-text/"
+                hreflang="ar"
+                href="https://wujilingfeng.github.io/ar/p/%D9%85%D8%AB%D8%A7%D9%84-%D9%86%D8%B5/"
                 />
   </url><url>
     <loc>https://wujilingfeng.github.io/tags/tag-with-whitespaces/</loc>
@@ -220,62 +236,62 @@
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://wujilingfeng.github.io/en/tags/emoji/"
+                hreflang="zh-cn"
+                href="https://wujilingfeng.github.io/tags/emoji/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/tags/emoji/"
+                hreflang="en"
+                href="https://wujilingfeng.github.io/en/tags/emoji/"
                 />
   </url><url>
     <loc>https://wujilingfeng.github.io/p/emoji-support/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://wujilingfeng.github.io/en/p/emoji-support/"
+                hreflang="zh-cn"
+                href="https://wujilingfeng.github.io/p/emoji-support/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/p/emoji-support/"
+                hreflang="en"
+                href="https://wujilingfeng.github.io/en/p/emoji-support/"
                 />
   </url><url>
     <loc>https://wujilingfeng.github.io/%E5%85%B3%E4%BA%8E/</loc>
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://wujilingfeng.github.io/en/about/"
+                hreflang="zh-cn"
+                href="https://wujilingfeng.github.io/%E5%85%B3%E4%BA%8E/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/%E5%85%B3%E4%BA%8E/"
+                hreflang="en"
+                href="https://wujilingfeng.github.io/en/about/"
                 />
   </url><url>
     <loc>https://wujilingfeng.github.io/%E9%93%BE%E6%8E%A5/</loc>
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://wujilingfeng.github.io/en/links/"
+                hreflang="zh-cn"
+                href="https://wujilingfeng.github.io/%E9%93%BE%E6%8E%A5/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/%E9%93%BE%E6%8E%A5/"
+                hreflang="en"
+                href="https://wujilingfeng.github.io/en/links/"
                 />
   </url><url>
     <loc>https://wujilingfeng.github.io/search/</loc>
     <xhtml:link
                 rel="alternate"
-                hreflang="en"
-                href="https://wujilingfeng.github.io/en/search/"
+                hreflang="zh-cn"
+                href="https://wujilingfeng.github.io/search/"
                 />
     <xhtml:link
                 rel="alternate"
-                hreflang="zh-cn"
-                href="https://wujilingfeng.github.io/search/"
+                hreflang="en"
+                href="https://wujilingfeng.github.io/en/search/"
                 />
   </url>
 </urlset>

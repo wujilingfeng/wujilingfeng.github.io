@@ -539,34 +539,34 @@ $A\mathbf{x} = -\mathbf{b}$ 实际上是超定平面方程组 $\mathbf{p}_i^\top
 <hr>
 <h3 id="-三工程实现注意事项">🔷 三、工程实现注意事项
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>问题</th>
-          <th>常见处理方案</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>数值稳定性</td>
-          <td>$A$ 条件数大时加微小正则项 $\epsilon I$，或用 LDLT/Cholesky 分解</td>
-      </tr>
-      <tr>
-          <td>边界保护</td>
-          <td>边界边赋予极大权重，或单独维护边界顶点 $Q$ 矩阵</td>
-      </tr>
-      <tr>
-          <td>面积/曲率加权</td>
-          <td>$K_\mathbf{p}$ 累加时乘面片面积或曲率估计值</td>
-      </tr>
-      <tr>
-          <td>法向翻转检测</td>
-          <td>收缩后检查邻面法向一致性，若翻转则拒绝该收缩</td>
-      </tr>
-      <tr>
-          <td>优先队列更新</td>
-          <td>使用 <code>std::priority_queue</code> 需惰性删除；推荐 <code>boost::heap</code> 或手写可更新堆</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>问题</th>
+					<th>常见处理方案</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>数值稳定性</td>
+					<td>$A$ 条件数大时加微小正则项 $\epsilon I$，或用 LDLT/Cholesky 分解</td>
+			</tr>
+			<tr>
+					<td>边界保护</td>
+					<td>边界边赋予极大权重，或单独维护边界顶点 $Q$ 矩阵</td>
+			</tr>
+			<tr>
+					<td>面积/曲率加权</td>
+					<td>$K_\mathbf{p}$ 累加时乘面片面积或曲率估计值</td>
+			</tr>
+			<tr>
+					<td>法向翻转检测</td>
+					<td>收缩后检查邻面法向一致性，若翻转则拒绝该收缩</td>
+			</tr>
+			<tr>
+					<td>优先队列更新</td>
+					<td>使用 <code>std::priority_queue</code> 需惰性删除；推荐 <code>boost::heap</code> 或手写可更新堆</td>
+			</tr>
+	</tbody>
 </table></div>
 <hr>
 <h3 id="-原始文献与参考实现">📚 原始文献与参考实现
@@ -654,8 +654,9 @@ $A\mathbf{x} = -\mathbf{b}$ 实际上是超定平面方程组 $\mathbf{p}_i^\top
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
 </div>
 
 <style>

@@ -542,26 +542,26 @@ $$
 <hr>
 <h2 id="二为什么常被误认为存在性证明">二、为什么常被误认为“存在性”证明？
 </h2><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>误解来源</th>
-          <th>实际情况</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>教材常写“由谱定理可知存在 $U,\Sigma,V$”</td>
-          <td>谱定理在有限维是构造性的（特征多项式根+正交化），但表述偏抽象</td>
-      </tr>
-      <tr>
-          <td>“扩充为正交基”看似非构造</td>
-          <td>有限维中 Gram-Schmidt 是显式算法，完全可计算</td>
-      </tr>
-      <tr>
-          <td>证明不给出数值稳定算法</td>
-          <td>数学构造性 ≠ 数值可用性。证明提供理论构造，工程用其他路径</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>误解来源</th>
+					<th>实际情况</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>教材常写“由谱定理可知存在 $U,\Sigma,V$”</td>
+					<td>谱定理在有限维是构造性的（特征多项式根+正交化），但表述偏抽象</td>
+			</tr>
+			<tr>
+					<td>“扩充为正交基”看似非构造</td>
+					<td>有限维中 Gram-Schmidt 是显式算法，完全可计算</td>
+			</tr>
+			<tr>
+					<td>证明不给出数值稳定算法</td>
+					<td>数学构造性 ≠ 数值可用性。证明提供理论构造，工程用其他路径</td>
+			</tr>
+	</tbody>
 </table></div>
 <p><strong>关键区分</strong>：</p>
 <ul>
@@ -585,30 +585,30 @@ $$<p>
 <hr>
 <h2 id="四严格数学视角下的构造性界定">四、严格数学视角下的“构造性”界定
 </h2><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>维度</th>
-          <th>构造性状态</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>有限维矩阵</strong></td>
-          <td>✅ 完全构造性</td>
-          <td>谱定理+Gram-Schmidt 均为显式有限步过程</td>
-      </tr>
-      <tr>
-          <td><strong>无限维紧算子</strong></td>
-          <td>⚠️ 偏存在性</td>
-          <td>依赖紧算子谱定理与 Hilbert 空间正交补，通常用紧性/弱收敛论证</td>
-      </tr>
-      <tr>
-          <td><strong>直觉主义/可计算数学</strong></td>
-          <td>✅ 可计算</td>
-          <td>奇异值/向量可通过迭代算法逼近到任意精度，满足 Bishop 构造性标准</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>维度</th>
+					<th>构造性状态</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>有限维矩阵</strong></td>
+					<td>✅ 完全构造性</td>
+					<td>谱定理+Gram-Schmidt 均为显式有限步过程</td>
+			</tr>
+			<tr>
+					<td><strong>无限维紧算子</strong></td>
+					<td>⚠️ 偏存在性</td>
+					<td>依赖紧算子谱定理与 Hilbert 空间正交补，通常用紧性/弱收敛论证</td>
+			</tr>
+			<tr>
+					<td><strong>直觉主义/可计算数学</strong></td>
+					<td>✅ 可计算</td>
+					<td>奇异值/向量可通过迭代算法逼近到任意精度，满足 Bishop 构造性标准</td>
+			</tr>
+	</tbody>
 </table></div>
 <p>注：有限维 SVD 的构造性不依赖选择公理。特征值存在性由代数基本定理保证（$\mathbb{C}$ 代数闭），特征向量通过 $(A^*A - \lambda I)x=0$ 的零空间基显式构造。</p>
 <hr>
@@ -640,25 +640,25 @@ $$<p>
 其中 $\tilde{X} \in \mathbb{R}^{N \times d}$ 为按行堆叠的中心化数据矩阵。$C$ 是对称半正定矩阵。</p>
 <h3 id="2-pca-的两种等价表述">2. PCA 的两种等价表述
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>视角</th>
-          <th>优化问题</th>
-          <th>几何意义</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>最大方差</strong></td>
-          <td>$\max_{v:|v|=1} v^\top C v$</td>
-          <td>寻找数据投影后方差最大的方向</td>
-      </tr>
-      <tr>
-          <td><strong>最小重构误差</strong></td>
-          <td>$\min_{V_k} \sum_{i=1}^N | \tilde{x}<em>i - \text{proj}</em>{V_k}(\tilde{x}_i) |^2$</td>
-          <td>寻找 $k$ 维子空间使正交投影误差最小</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>视角</th>
+					<th>优化问题</th>
+					<th>几何意义</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>最大方差</strong></td>
+					<td>$\max_{v:|v|=1} v^\top C v$</td>
+					<td>寻找数据投影后方差最大的方向</td>
+			</tr>
+			<tr>
+					<td><strong>最小重构误差</strong></td>
+					<td>$\min_{V_k} \sum_{i=1}^N | \tilde{x}<em>i - \text{proj}</em>{V_k}(\tilde{x}_i) |^2$</td>
+					<td>寻找 $k$ 维子空间使正交投影误差最小</td>
+			</tr>
+	</tbody>
 </table></div>
 <p>两者通过 <strong>Pythagoras 定理</strong> 等价：$|\tilde{x}_i|^2 = |\text{proj}|^2 + |\text{residual}|^2$，最大化投影方差 $\Leftrightarrow$ 最小化残差。</p>
 <hr>
@@ -709,28 +709,28 @@ $$<p>
 </ul>
 <h3 id="2-为什么工程上必用-svd">2. 为什么工程上必用 SVD？
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>方法</th>
-          <th>条件数</th>
-          <th>秩亏处理</th>
-          <th>数值稳定性</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>显式 $C = \tilde{X}^\top \tilde{X}$ + eig</td>
-          <td>$\kappa(C) = \kappa(\tilde{X})^2$</td>
-          <td>需手动截断</td>
-          <td>差（平方放大噪声）</td>
-      </tr>
-      <tr>
-          <td>直接 SVD($\tilde{X}$)</td>
-          <td>$\kappa(\tilde{X})$</td>
-          <td>自动分离零空间</td>
-          <td>优（LAPACK 标准）</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th>条件数</th>
+					<th>秩亏处理</th>
+					<th>数值稳定性</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>显式 $C = \tilde{X}^\top \tilde{X}$ + eig</td>
+					<td>$\kappa(C) = \kappa(\tilde{X})^2$</td>
+					<td>需手动截断</td>
+					<td>差（平方放大噪声）</td>
+			</tr>
+			<tr>
+					<td>直接 SVD($\tilde{X}$)</td>
+					<td>$\kappa(\tilde{X})$</td>
+					<td>自动分离零空间</td>
+					<td>优（LAPACK 标准）</td>
+			</tr>
+	</tbody>
 </table></div>
 <p><strong>结论</strong>：SVD 是 PCA 的数值实现标准，两者数学等价，但 SVD 避免条件数平方，且天然处理共线/共面退化。</p>
 <hr>
@@ -769,45 +769,45 @@ $$<p>
 <h2 id="五特征值的几何意义与工程诊断">五、特征值的几何意义与工程诊断
 </h2><p>三个特征值 $\lambda_1 \ge \lambda_2 \ge \lambda_3$ 携带丰富的局部几何信息：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>比值/指标</th>
-          <th>几何含义</th>
-          <th>典型阈值</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>$\lambda_3 \ll \lambda_2 \approx \lambda_1$</td>
-          <td>光滑平面区域</td>
-          <td>$\lambda_3 / \sum \lambda &lt; 0.05$</td>
-      </tr>
-      <tr>
-          <td>$\lambda_3 \approx \lambda_2 \ll \lambda_1$</td>
-          <td>边缘/折痕</td>
-          <td>线状分布</td>
-      </tr>
-      <tr>
-          <td>$\lambda_1 \approx \lambda_2 \approx \lambda_3$</td>
-          <td>角点/各向同性噪声</td>
-          <td>球状分布</td>
-      </tr>
-      <tr>
-          <td><strong>平面度</strong> $P = \frac{\lambda_2 - \lambda_3}{\lambda_1}$</td>
-          <td>表面平坦程度</td>
-          <td>$P \to 1$ 为理想平面</td>
-      </tr>
-      <tr>
-          <td><strong>线性度</strong> $L = \frac{\lambda_1 - \lambda_2}{\lambda_1}$</td>
-          <td>边缘显著程度</td>
-          <td>$L \to 1$ 为锐边</td>
-      </tr>
-      <tr>
-          <td><strong>各向同性</strong> $S = \frac{3\lambda_3}{\sum \lambda}$</td>
-          <td>噪声/角点程度</td>
-          <td>$S \to 1$ 为球状</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>比值/指标</th>
+					<th>几何含义</th>
+					<th>典型阈值</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>$\lambda_3 \ll \lambda_2 \approx \lambda_1$</td>
+					<td>光滑平面区域</td>
+					<td>$\lambda_3 / \sum \lambda &lt; 0.05$</td>
+			</tr>
+			<tr>
+					<td>$\lambda_3 \approx \lambda_2 \ll \lambda_1$</td>
+					<td>边缘/折痕</td>
+					<td>线状分布</td>
+			</tr>
+			<tr>
+					<td>$\lambda_1 \approx \lambda_2 \approx \lambda_3$</td>
+					<td>角点/各向同性噪声</td>
+					<td>球状分布</td>
+			</tr>
+			<tr>
+					<td><strong>平面度</strong> $P = \frac{\lambda_2 - \lambda_3}{\lambda_1}$</td>
+					<td>表面平坦程度</td>
+					<td>$P \to 1$ 为理想平面</td>
+			</tr>
+			<tr>
+					<td><strong>线性度</strong> $L = \frac{\lambda_1 - \lambda_2}{\lambda_1}$</td>
+					<td>边缘显著程度</td>
+					<td>$L \to 1$ 为锐边</td>
+			</tr>
+			<tr>
+					<td><strong>各向同性</strong> $S = \frac{3\lambda_3}{\sum \lambda}$</td>
+					<td>噪声/角点程度</td>
+					<td>$S \to 1$ 为球状</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="工程实践要点">工程实践要点
 </h3><ol>
@@ -825,40 +825,40 @@ $$<p>
 <hr>
 <h2 id="六总结pca-拟合主方向的理论闭环">六、总结：PCA 拟合主方向的理论闭环
 </h2><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>步骤</th>
-          <th>数学机制</th>
-          <th>几何意义</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>中心化</td>
-          <td>$\tilde{x}_i = x_i - \mu$</td>
-          <td>平移至质心，消除一阶矩</td>
-      </tr>
-      <tr>
-          <td>协方差</td>
-          <td>$C = \frac{1}{N}\sum \tilde{x}_i \tilde{x}_i^\top$</td>
-          <td>二阶矩描述数据散布形状</td>
-      </tr>
-      <tr>
-          <td>特征分解/SVD</td>
-          <td>$C v = \lambda v$ 或 $\tilde{X}=U\Sigma V^\top$</td>
-          <td>旋转坐标系至主轴对齐</td>
-      </tr>
-      <tr>
-          <td>排序特征值</td>
-          <td>$\lambda_1 \ge \lambda_2 \ge \lambda_3$</td>
-          <td>方差从大到小对应椭球长短轴</td>
-      </tr>
-      <tr>
-          <td>法向提取</td>
-          <td>$n = v_3$</td>
-          <td>最小变化方向 $\Leftrightarrow$ 最佳拟合平面法向</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>步骤</th>
+					<th>数学机制</th>
+					<th>几何意义</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>中心化</td>
+					<td>$\tilde{x}_i = x_i - \mu$</td>
+					<td>平移至质心，消除一阶矩</td>
+			</tr>
+			<tr>
+					<td>协方差</td>
+					<td>$C = \frac{1}{N}\sum \tilde{x}_i \tilde{x}_i^\top$</td>
+					<td>二阶矩描述数据散布形状</td>
+			</tr>
+			<tr>
+					<td>特征分解/SVD</td>
+					<td>$C v = \lambda v$ 或 $\tilde{X}=U\Sigma V^\top$</td>
+					<td>旋转坐标系至主轴对齐</td>
+			</tr>
+			<tr>
+					<td>排序特征值</td>
+					<td>$\lambda_1 \ge \lambda_2 \ge \lambda_3$</td>
+					<td>方差从大到小对应椭球长短轴</td>
+			</tr>
+			<tr>
+					<td>法向提取</td>
+					<td>$n = v_3$</td>
+					<td>最小变化方向 $\Leftrightarrow$ 最佳拟合平面法向</td>
+			</tr>
+	</tbody>
 </table></div>
 <p><strong>核心结论</strong>：</p>
 <ul>
@@ -951,8 +951,9 @@ $$<p>
         (d.head || d.body).appendChild(s);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+	
 </div>
 
 <style>
