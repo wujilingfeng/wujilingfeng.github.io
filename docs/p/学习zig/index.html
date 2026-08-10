@@ -1185,6 +1185,7 @@
 </div><h4 id="数值">数值
 </h4><p>在 Zig 语言中，‌<strong>低精度数值向高精度变量赋值时不需要显式转换，编译器会自动完成安全的隐式提升</strong>‌。</p>
 <p>在Zig语言中，‌<strong>高精度数值赋给低精度变量需要显式转换</strong>‌，否则会触发编译错误。@intCast<code>、</code>@truncate<code>、</code>@floatCast</p>
+<p>还应该注意运算级的顺序问题，比如 ((@as(usize, 1) &laquo; (depth * BITS_PER_LAYER)) - 1)， r和 (@as(usize, 1) &laquo; (depth * BITS_PER_LAYER) - 1)运算完全不同，后者会先计算&lt; (depth * BITS_PER_LAYER) - 1，因为位运算的优先级比较低。</p>
 <h4 id="comptime-编译时计算">comptime 编译时计算
 </h4><p>zig会尽量在编译时进行计算，但似乎机制不太好，大部分情况需要手动指定，比如用comptime {}来指定块内部分在编译时计算。此外inline和编译时计算也密切相关，在函数前加inline可以防止函数被强制视为运行时确定，从而不影响计算尽量在编译时进行。就算函数里面有comptime T:type，只能说这个函数在编译时确定该参数，但是这个函数如果不加inline,仍然被视为运行时确定的。也可以在while或者for前加inline，来防止循环被强制视为运行时部分，从而在合适的条件下在编译时进行。</p>
 <p>在函数的泛型参数中anytype和comptime T:type，在效率上似乎是一样的，comptime T更清晰但是接口更复杂，anytype接口简洁但是需要推导类型（@TypeOf）。</p>
