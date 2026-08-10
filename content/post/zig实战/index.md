@@ -1565,6 +1565,222 @@ pub fn build(b: *std.Build) void {
 
 基于zlibcell项目的mesh.zig实际应用经验，总结Zig标准库数据结构和内存分配器的高级用法。
 
+### Zig 0.16内存分配器完整指南
+
+Zig 0.16对内存分配器系统进行了重大更新，提供了更丰富和高效的内存管理选项。
+
+#### 🔄 主要API变化
+
+**1. GeneralPurposeAllocator重命名**
+```zig
+// Zig 0.15及之前
+var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+defer _ = gpa.deinit();
+
+// Zig 0.16
+var debug_alloc = std.heap.DebugAllocator(.{
+    .stack_trace_frames = 8, // 启用堆栈跟踪
+}){};
+defer _ = debug_alloc.deinit();
+```
+
+**2. 新增smp_allocator**
+- 专为多线程环境设计的高性能分配器
+- 使用per-thread freelists减少竞争
+- 线程安全且性能优化
+
+```zig
+const smp_allocator = std.heap.smp_allocator;
+const data = try smp_allocator.alloc(u32, 1000);
+defer smp_allocator.free(data);
+```
+
+#### 📊 完整的分配器体系
+
+**1. std.testing.allocator - 测试专用**
+```zig
+test "memory leak detection" {
+    const allocator = std.testing.allocator;
+    
+    const data = try allocator.create(MyType);
+    defer allocator.destroy(data);
+    
+    // 自动检测内存泄漏
+}
+```
+
+**2. std.heap.page_allocator - 系统级分配**
+```zig
+// 直接从OS获取页面内存
+const big_buffer = try std.heap.page_allocator.alloc(u8, 1024 * 1024);
+defer std.heap.page_allocator.free(big_buffer);
+```
+
+**3. std.heap.ArenaAllocator - 批量管理**
+```zig
+var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+defer arena.deinit();
+const allocator = arena.allocator();
+
+// 所有分配都会持久化，直到arena.deinit()
+const data1 = try allocator.alloc(u8, 100);
+const data2 = try allocator.alloc(u8, 200);
+// 无需单独释放！
+```
+
+**4. std.heap.DebugAllocator - 调试专用**
+```zig
+var debug_alloc = std.heap.DebugAllocator(.{
+    .stack_trace_frames = 8,
+}){};
+defer {
+    const leaks = debug_alloc.detectLeaks();
+    if (leaks > 0) {
+        std.debug.print("Found {} memory leaks\n", .{leaks});
+    }
+    _ = debug_alloc.deinit();
+}
+
+const allocator = debug_alloc.allocator();
+const data = try allocator.create(MyType);
+allocator.destroy(data);
+```
+
+**5. std.heap.FixedBufferAllocator - 栈上分配**
+```zig
+var buffer: [1024]u8 = undefined;
+var fba = std.heap.FixedBufferAllocator.init(&buffer);
+const fba_allocator = fba.allocator();
+
+const data = try fba_allocator.create(i32);
+// 无需释放，超出作用域自动清理
+```
+
+**6. std.heap.smp_allocator - 多线程高性能**
+```zig
+// 适合生产环境的多线程应用
+const allocator = std.heap.smp_allocator;
+const data = try allocator.alloc(u32, 1000);
+defer allocator.free(data);
+```
+
+#### 🎯 分配器选择决策表
+
+| 分配器 | 线程安全 | 调试功能 | 速度 | 内存开销 | 适用场景 |
+|--------|----------|----------|------|----------|----------|
+| testing.allocator | ✅ | ✅ | 中等 | 低 | 单元测试 |
+| page_allocator | ❓ | ❌ | 慢 | 极低 | 大块内存 |
+| ArenaAllocator | ❌ | ❌ | 快 | 中等 | 批量临时分配 |
+| DebugAllocator | ❌ | ✅ | 慢 | 高 | 内存调试 |
+| smp_allocator | ✅ | ❌ | 快 | 低 | 多线程生产 |
+| FixedBufferAllocator | ❌ | ❌ | 极快 | 无 | 栈上临时数据 |
+
+#### 💡 最佳实践
+
+**选择指南**:
+```
+需要内存分配
+    │
+    ├─ 测试环境？ → std.testing.allocator
+    ├─ 需要调试？ → std.heap.DebugAllocator  
+    ├─ 多线程？ → std.heap.smp_allocator
+    ├─ 大块内存？ → std.heap.page_allocator
+    ├─ 批量临时？ → std.heap.ArenaAllocator
+    └─ 小数据临时？ → std.heap.FixedBufferAllocator
+```
+
+**内存管理黄金法则**:
+```zig
+// ✅ 正确的内存管理模式
+const data = try allocator.create(MyType);
+defer allocator.destroy(data);
+
+const slice = try allocator.alloc(u8, 100);
+defer allocator.free(slice);
+
+// ❌ 避免的陷阱
+const slice = try allocator.alloc(u8, 100);
+defer allocator.free(slice);  // 这会有问题！
+
+const larger = try allocator.realloc(slice, 200);  // slice已失效
+// 正确做法：移除第一个defer，只释放最终指针
+```
+
+**调试技巧**:
+```zig
+// 检测内存泄漏
+var debug_alloc = std.heap.DebugAllocator(.{
+    .stack_trace_frames = 8,
+}){};
+defer {
+    const leaks = debug_alloc.detectLeaks();
+    std.debug.print("Memory leaks: {}\n", .{leaks});
+    _ = debug_alloc.deinit();
+}
+```
+
+#### 🔧 实际应用示例
+
+**HTTP服务器请求处理**:
+```zig
+fn handleRequest(allocator: std.mem.Allocator, request: []const u8) ![]const u8 {
+    // 使用ArenaAllocator处理临时请求
+    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+    defer arena.deinit();
+    
+    const temp_alloc = arena.allocator();
+    
+    // 解析请求
+    const parsed = try parseRequest(temp_alloc, request);
+    
+    // 处理数据
+    const response = try processRequest(parsed);
+    
+    // 无需清理临时数据，arena会自动处理
+    return response;
+}
+```
+
+**游戏引擎帧处理**:
+```zig
+fn gameFrame(allocator: std.mem.Allocator) !void {
+    // 每帧使用ArenaAllocator管理临时对象
+    var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+    defer arena.deinit();
+    
+    const frame_alloc = arena.allocator();
+    
+    // 临时计算数据
+    const collisions = try detectCollisions(frame_alloc, entities);
+    const visible_objects = try cullObjects(frame_alloc, camera);
+    
+    // 帧结束后自动清理
+}
+```
+
+**长期数据结构管理**:
+```zig
+const GameWorld = struct {
+    entities: std.ArrayList(Entity),
+    spatial_index: std.AutoHashMap(Position, []Entity),
+    
+    fn init(allocator: std.mem.Allocator) !GameWorld {
+        return GameWorld{
+            .entities = std.ArrayList(Entity).empty,
+            .spatial_index = std.AutoHashMap(Position, []Entity).init(allocator),
+        };
+    }
+    
+    fn deinit(self: *GameWorld, allocator: std.mem.Allocator) void {
+        // 按相反顺序清理
+        self.spatial_index.deinit();
+        self.entities.deinit(allocator);
+    }
+};
+```
+
+### ArrayList动态数组（Zig 0.16.0 API）
+
 ### ArrayList动态数组（Zig 0.16.0 API）
 
 **基本初始化和操作**:
@@ -1849,6 +2065,588 @@ defer cleanup_list.deinit(allocator);
 - 最后释放主结构体
 
 通过这些实际项目中验证的模式，可以有效管理Zig程序中的内存和数据结构，避免内存泄漏和性能问题。
+
+### c_allocator详细用法（Zig 0.16.0）
+
+**c_allocator简介**:
+- c_allocator是Zig标准库中C标准库malloc/free接口的包装
+- 它是唯一支持与C库FFI集成的分配器
+- 提供与标准C库兼容的内存管理功能
+- 在需要调试工具支持时具有重要价值
+
+#### c_allocator的初始化和配置
+
+**编译配置要求**:
+```zig
+// 在build.zig中必须设置link_libc
+const exe = b.addExecutable(.{
+    .name = "myapp",
+    .root_source_file = b.path("src/main.zig"),
+    .target = target,
+    .optimize = optimize,
+});
+
+exe.link_libc = true;  // 必须设置！
+```
+
+**测试时链接libc**:
+```bash
+zig test src/test.zig -lc
+```
+
+#### c_allocator基本用法
+
+**简单内存分配**:
+```zig
+const std = @import("std");
+
+// c_allocator是全局可用的，无需初始化
+const data = try std.heap.c_allocator.alloc(u8, 100);
+defer std.heap.c_allocator.free(data);
+
+// 创建单个对象
+const ptr = try std.heap.c_allocator.create(i32);
+ptr.* = 42;
+defer std.heap.c_allocator.destroy(ptr);
+```
+
+**与ArrayList结合使用**:
+```zig
+var list = std.ArrayList(i32).empty;
+defer list.deinit(std.heap.c_allocator);
+
+// 需要传入allocator参数
+try list.append(std.heap.c_allocator, 10);
+try list.append(std.heap.c_allocator, 20);
+try list.append(std.heap.c_allocator, 30);
+```
+
+#### c_allocator的核心优势
+
+**1. C库FFI集成**:
+```zig
+// 与C库交互时，c_allocator是唯一选择
+const C = @cImport({
+    @cInclude("stdlib.h");
+});
+
+fn processDataWithC(data: []const u8) !void {
+    // 将Zig分配的内存传递给C函数
+    const c_data = try std.heap.c_allocator.alloc(u8, data.len);
+    defer std.heap.c_allocator.free(c_data);
+    
+    @memmove(c_data, data);
+    
+    // C函数可以使用这块内存
+    C.process_data(c_data.ptr, @intCast(c_data.len));
+}
+```
+
+**2. 调试工具支持**:
+```zig
+// c_allocator可以与Valgrind、AddressSanitizer等工具配合
+// 这在调试内存问题时非常重要
+
+// 使用AddressSanitizer编译
+zig build-exe main.zig -lc -fsanitize=address
+
+// 使用Valgrind检测内存泄漏
+valgrind --leak-check=full ./main
+```
+
+**3. 跨平台一致性**:
+```zig
+// c_allocator在不同平台上提供一致的行为
+// 这是标准C库malloc/free实现的优势
+
+const data = try std.heap.c_allocator.alloc(u8, 1024);
+defer std.heap.c_allocator.free(data);
+// 在Windows、Linux、macOS上都能正常工作
+```
+
+#### c_allocator的实际应用场景
+
+**1. C库绑定和FFI**:
+```zig
+const sqlite = @cImport({
+    @cInclude("sqlite3.h");
+});
+
+fn createDatabase() !void {
+    // SQLite需要使用c_allocator分配内存
+    var db: ?*sqlite.sqlite3 = null;
+    const rc = sqlite.sqlite3_open("test.db", &db);
+    
+    // 查询结果也使用c_allocator分配内存
+    var stmt: ?*sqlite.sqlite3_stmt = null;
+    defer if (stmt) |s| sqlite.sqlite3_finalize(s);
+    
+    // SQLite会通过c_allocator管理内存
+    _ = sqlite.sqlite3_prepare_v2(db, "SELECT * FROM users", -1, &stmt, null);
+}
+```
+
+**2. 调试和内存分析**:
+```zig
+// 在开发阶段使用c_allocator便于调试
+fn debugAllocate(allocator: std.mem.Allocator, size: usize) ![]u8 {
+    const data = try allocator.alloc(u8, size);
+    
+    // 在调试模式下，可以使用Valgrind等工具检查内存
+    std.debug.print("Allocated {} bytes at {*}\n", .{size, data.ptr});
+    
+    return data;
+}
+
+// 在生产代码中切换到其他分配器
+const allocator = if (build_mode == .Debug)
+    std.heap.c_allocator  // 调试时用c_allocator
+else
+    std.heap.smp_allocator;  // 发布时用smp_allocator
+```
+
+**3. 跨语言边界的数据传递**:
+```zig
+// 与C++库交互
+extern fn cpp_process_data(ptr: [*]u8, len: usize) callconv(.C) void;
+
+fn sendDataToCpp(data: []const u8) !void {
+    // 必须使用c_allocator确保内存管理兼容
+    const buffer = try std.heap.c_allocator.alloc(u8, data.len);
+    defer std.heap.c_allocator.free(buffer);
+    
+    @memmove(buffer, data);
+    cpp_process_data(buffer.ptr, buffer.len);
+}
+```
+
+#### c_allocator的常见错误和解决方案
+
+在实际使用c_allocator过程中，遇到了以下常见错误和解决方案：
+
+**错误1: 未链接libc导致编译失败**
+```
+error: dependency on libc must be explicitly specified in the build command
+pub extern "c" fn malloc(usize) ?*anyopaque;
+```
+
+**解决方案**:
+```zig
+// 在build.zig中必须添加
+exe.link_libc = true;
+
+// 命令行测试时需要
+zig test src/test.zig -lc
+```
+
+**错误2: ArrayList API使用错误**
+```
+error: struct 'array_list.Aligned([]u8,null)' has no member named 'init'
+var list = std.ArrayList(i32).init(std.heap.c_allocator);
+```
+
+**解决方案**:
+```zig
+// ❌ Zig 0.16.0之前的写法
+var list = std.ArrayList(i32).init(std.heap.c_allocator);
+
+// ✅ Zig 0.16.0正确写法
+var list = std.ArrayList(i32).empty;
+defer list.deinit(std.heap.c_allocator);
+
+// 添加元素时需要传入allocator
+try list.append(std.heap.c_allocator, 42);
+```
+
+**错误3: HashMap remove API错误**
+```
+error: expected optional type, found 'bool'
+const removed = map.remove(key);
+if (removed) |entry| {
+    std.heap.c_allocator.free(removed.value);
+}
+```
+
+**解决方案**:
+```zig
+// ❌ 错误的remove使用
+const removed = map.remove(key);
+if (removed) |entry| {
+    std.heap.c_allocator.free(removed.value);
+}
+
+// ✅ 正确的fetchRemove使用
+const removed = map.fetchRemove(key);
+if (removed) |entry| {
+    std.heap.c_allocator.free(entry.value);
+}
+```
+
+**错误4: 内存写入API错误**
+```
+error: root source file struct 'std' has no member named 'memwrite'
+std.memwrite(u8, value[0..4], @as(u32, @intCast(i)));
+```
+
+**解决方案**:
+```zig
+// ❌ 错误的memwrite使用
+std.memwrite(u8, value[0..4], @as(u32, @intCast(i)));
+
+// ✅ 正确的内存写入方式
+@memset(value, 0);  // 先清零
+// 然后逐字节写入
+value[0] = @as(u8, @intCast(i & 0xFF));
+value[1] = @as(u8, @intCast((i >> 8) & 0xFF));
+value[2] = @as(u8, @intCast((i >> 16) & 0xFF));
+value[3] = @as(u8, @intCast((i >> 24) & 0xFF));
+```
+
+**错误5: 时间计算类型错误**
+```
+error: expected type 'u64', found 'i96'
+elapsed_ns +%= batch_ns;
+```
+
+**解决方案**:
+```zig
+// ❌ 错误的加法操作
+elapsed_ns +%= batch_ns;
+
+// ✅ 正确的饱和加法
+elapsed_ns +|= @intCast(batch_ns);  // 使用wrap加法防止溢出
+```
+
+#### c_allocator完整使用模板
+
+**基础使用模板**:
+```zig
+const std = @import("std");
+
+// 简单分配
+const data = try std.heap.c_allocator.alloc(u8, 100);
+defer std.heap.c_allocator.free(data);
+
+// 单个对象
+const ptr = try std.heap.c_allocator.create(i32);
+ptr.* = 42;
+defer std.heap.c_allocator.destroy(ptr);
+
+// 重新分配
+const larger = try std.heap.c_allocator.realloc(data, 200);
+defer std.heap.c_allocator.free(larger);
+```
+
+**ArrayList完整模板**:
+```zig
+var list = std.ArrayList(i32).empty;
+defer list.deinit(std.heap.c_allocator);
+
+try list.append(std.heap.c_allocator, 10);
+try list.appendSlice(std.heap.c_allocator, &.{ 1, 2, 3 });
+const value = list.pop();
+const owned = try list.toOwnedSlice(std.heap.c_allocator);
+defer std.heap.c_allocator.free(owned);
+```
+
+**HashMap完整模板**:
+```zig
+var map = std.AutoHashMap(u32, []const u8).init(std.heap.c_allocator);
+defer map.deinit();
+
+// 插入
+const value = try std.heap.c_allocator.alloc(u8, 32);
+@memset(value, 0xAA);
+try map.put(1, value);
+
+// 查找
+if (map.get(1)) |found| {
+    std.debug.print("Found: {any}\n", .{found});
+}
+
+// 删除
+const removed = map.fetchRemove(1);
+if (removed) |entry| {
+    std.heap.c_allocator.free(entry.value);
+}
+```
+
+#### c_allocator的限制和注意事项
+
+**性能特征**:
+- 在小对象分配中表现中等（比SMP慢，比Arena快）
+- 在大对象分配中性能较好（接近系统调用）
+- 不适合单线程高性能应用（Arena更好）
+- 不适合多线程环境（SMP更合适）
+
+**使用限制**:
+- 需要显式链接libc（exe.link_libc = true）
+- 测试时需要-lc编译选项
+- 不是线程安全的（多线程环境需外部同步）
+
+**使用限制**:
+```zig
+// ❌ 错误：c_allocator不是线程安全的
+// 在多线程环境中需要外部同步
+
+threadlocal var tls_data: ?[]u8 = null;
+
+fn threadSafeAlloc(size: usize) ![]u8 {
+    // 需要使用线程局部存储或外部锁
+    if (tls_data) |data| {
+        if (data.len >= size) {
+            return data[0..size];
+        }
+    }
+    
+    const new_data = try std.heap.c_allocator.alloc(u8, size);
+    tls_data = new_data;
+    return new_data;
+}
+```
+
+### 详细时间API用法（Zig 0.16.0）
+
+**时间测量的重要性**:
+Zig 0.16.0引入了全新的时间测量API，基于`std.Io.Timestamp`系统，提供了纳秒级精度的可靠时间测量功能。
+
+#### 时间API基本用法
+
+**核心API模式**（基于zlibcell项目验证）:
+```zig
+const std = @import("std");
+
+// 1. 创建IO实例
+var threadio = std.Io.Threaded.init(allocator, .{});
+defer threadio.deinit();
+
+// 2. 获取开始时间戳
+const start = std.Io.Timestamp.now(threadio.io(), .real);
+
+// 3. 执行需要测量的操作
+// ... 你的代码 ...
+
+// 4. 获取结束时间戳
+const end = std.Io.Timestamp.now(threadio.io(), .real);
+
+// 5. 计算时间差
+const elapsed_ns = std.Io.Timestamp.durationTo(start, end).nanoseconds;
+
+// 6. 格式化输出
+std.debug.print("耗时: {} 纳秒\n", .{elapsed_ns});
+```
+
+#### 时间戳类型和选项
+
+**时间戳类型**:
+```zig
+// .real - 真实时间（墙上时钟），受系统时间调整影响
+const real_time = std.Io.Timestamp.now(io, .real);
+
+// .monotonic - 单调时间，不受系统时间调整影响，适合性能测量
+const monotonic_time = std.Io.Timestamp.now(io, .monotonic);
+```
+
+**时间戳结构**:
+```zig
+const Timestamp = struct {
+    nanoseconds: u64,  // 纳秒精度的时间戳
+    
+    // 计算两个时间戳之间的持续时间
+    fn durationTo(start: Timestamp, end: Timestamp) Duration {
+        return .{
+            .nanoseconds = end.nanoseconds - start.nanoseconds,
+        };
+    }
+};
+
+const Duration = struct {
+    nanoseconds: u64,
+    
+    // 便捷属性
+    const seconds = nanoseconds / 1_000_000_000;
+    const milliseconds = nanoseconds / 1_000_000;
+    const microseconds = nanoseconds / 1_000;
+};
+```
+
+#### 实际应用示例
+
+**函数执行时间测量**:
+```zig
+fn measureFunctionTime(func: fn () anyerror!void) !void {
+    var threadio = std.Io.Threaded.init(std.testing.allocator, .{});
+    defer threadio.deinit();
+
+    const start = std.Io.Timestamp.now(threadio.io(), .real);
+    
+    _ = try func();
+    
+    const end = std.Io.Timestamp.now(threadio.io(), .real);
+    const elapsed = std.Io.Timestamp.durationTo(start, end);
+    
+    std.debug.print("函数执行时间: {} 微秒\n", .{elapsed.nanoseconds / 1_000});
+}
+```
+
+**内存分配器性能对比**:
+```zig
+fn benchmarkAllocators() !void {
+    var threadio = std.Io.Threaded.init(std.testing.allocator, .{});
+    defer threadio.deinit();
+    
+    const iterations = 100000;
+    const alloc_size = 64;
+    
+    // 测试c_allocator
+    {
+        const start = std.Io.Timestamp.now(threadio.io(), .real);
+        
+        var i: usize = 0;
+        while (i < iterations) : (i += 1) {
+            const data = try std.heap.c_allocator.alloc(u8, alloc_size);
+            std.heap.c_allocator.free(data);
+        }
+        
+        const end = std.Io.Timestamp.now(threadio.io(), .real);
+        const elapsed = std.Io.Timestamp.durationTo(start, end);
+        
+        std.debug.print("c_allocator: {} 纳秒/操作\n", .{@as(f64, @floatFromInt(elapsed.nanoseconds)) / @as(f64, @floatFromInt(iterations))});
+    }
+    
+    // 测试SMP
+    {
+        const start = std.Io.Timestamp.now(threadio.io(), .real);
+        
+        var i: usize = 0;
+        while (i < iterations) : (i += 1) {
+            const data = try std.heap.smp_allocator.alloc(u8, alloc_size);
+            std.heap.smp_allocator.free(data);
+        }
+        
+        const end = std.Io.Timestamp.now(threadio.io(), .real);
+        const elapsed = std.Io.Timestamp.durationTo(start, end);
+        
+        std.debug.print("SMP: {} 纳秒/操作\n", .{@as(f64, @floatFromInt(elapsed.nanoseconds)) / @as(f64, @floatFromInt(iterations))});
+    }
+    
+    // 测试Arena
+    {
+        var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
+        defer arena.deinit();
+        const allocator = arena.allocator();
+        
+        const start = std.Io.Timestamp.now(threadio.io(), .real);
+        
+        var i: usize = 0;
+        while (i < iterations) : (i += 1) {
+            const data = try allocator.alloc(u8, alloc_size);
+            _ = data;
+        }
+        
+        const end = std.Io.Timestamp.now(threadio.io(), .real);
+        const elapsed = std.Io.Timestamp.durationTo(start, end);
+        
+        std.debug.print("Arena: {} 纳秒/操作\n", .{@as(f64, @floatFromInt(elapsed.nanoseconds)) / @as(f64, @floatFromInt(iterations))});
+    }
+}
+```
+
+#### 时间测量的最佳实践
+
+**1. 选择合适的时间戳类型**:
+```zig
+// 性能测量：使用.monotonic避免系统时间调整的影响
+const start = std.Io.Timestamp.now(io, .monotonic);
+
+// 实际时间显示：使用.real获取真实墙上时钟时间
+const current_time = std.Io.Timestamp.now(io, .real);
+```
+
+**2. 避免常见的测量错误**:
+```zig
+// ❌ 错误：在测量代码中包含IO操作
+const start = std.Io.Timestamp.now(io, .real);
+std.debug.print("Starting measurement...\n", .{});  // 这会影响测量！
+// ... 实际代码 ...
+const end = std.Io.Timestamp.now(io, .real);
+
+// ✅ 正确：只测量核心代码
+const start = std.Io.Timestamp.now(io, .real);
+// ... 核心代码 ...
+const end = std.Io.Timestamp.now(io, .real);
+std.debug.print("Measurement: {} ns\n", .{std.Io.Timestamp.durationTo(start, end).nanoseconds});
+```
+
+**3. 处理纳秒溢出**:
+```zig
+// 对于长时间运行的操作，纳秒可能溢出
+fn formatDuration(ns: u64) []const u8 {
+    if (ns > 1_000_000_000) {
+        return "秒";
+    } else if (ns > 1_000_000) {
+        return "毫秒";
+    } else if (ns > 1_000) {
+        return "微秒";
+    } else {
+        return "纳秒";
+    }
+}
+```
+
+#### WebAssembly兼容的时间测量
+
+**在WebAssembly环境中使用时间API**:
+```zig
+// WebAssembly兼容的单线程模式
+var io_backend: std.Io.Threaded = .init_single_threaded;
+const io = io_backend.io();
+
+const start = std.Io.Timestamp.now(io, .real);
+// ... 操作 ...
+const end = std.Io.Timestamp.now(io, .real);
+
+std.debug.print("WebAssembly耗时: {} ns\n", .{std.Io.Timestamp.durationTo(start, end).nanoseconds});
+```
+
+#### 时间API的高级用法
+
+**性能分析器模式**:
+```zig
+const PerformanceTimer = struct {
+    name: []const u8,
+    start: std.Io.Timestamp,
+    
+    fn init(name: []const u8, io: *std.Io.Threaded) @This() {
+        return .{
+            .name = name,
+            .start = std.Io.Timestamp.now(io.io(), .real),
+        };
+    }
+    
+    fn deinit(self: @This(), io: *std.Io.Threaded) void {
+        const end = std.Io.Timestamp.now(io.io(), .real);
+        const elapsed = std.Io.Timestamp.durationTo(self.start, end);
+        std.debug.print("{s}: {} 微秒\n", .{self.name, elapsed.nanoseconds / 1_000});
+    }
+};
+
+// 使用示例
+fn processLargeData(data: []const u8) !void {
+    var threadio = std.Io.Threaded.init(std.testing.allocator, .{});
+    defer threadio.deinit();
+    
+    // 自动计时
+    var timer = PerformanceTimer.init("数据处理", &threadio);
+    defer timer.deinit(&threadio);
+    
+    // ... 数据处理逻辑 ...
+    
+    // 函数结束时自动输出耗时
+}
+```
+
+通过c_allocator和时间API的正确使用，可以在需要C库集成和性能测量的场景中提供可靠的解决方案。
 
 ------
 
