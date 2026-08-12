@@ -166,10 +166,10 @@ $$
 此外，顶点 $v$ 的相邻顶点 $v_i$ 也定义了各自的能量。由于我们是对 $p$（即 $v$ 的位置）进行求导，因此 $v_i$ 能量对 $p$ 的梯度贡献为：
 
 $$
-\nabla_p energy(v_i) = -2 J_{N_i} \overline{N(v_i)}
+\nabla_p energy(v_i) = -2 J_{N_i}^T \overline{N(v_i)}
 $$
 
-v的邻域点v_i的能量$\Sigma ||N(v_i)||^2$,在对v的坐标p进行求梯度时，存在v
+v的邻域点v_i的能量$ ||\sum N(v_i)||^2$,在对v的坐标p进行求梯度时，存在v
 
 _i其他的半边he的N(he)受到p的影响，存在边v_j ，v_i的N(he)值受到v影响，那么同样v_j的能量$$\Sigma||n(v_j)||^2$也可以对p求梯度，我们称边(v_i,v_j)是v的环状边。边(v,v_i)是v的邻接边。
 
@@ -177,10 +177,14 @@ _i其他的半边he的N(he)受到p的影响，存在边v_j ，v_i的N(he)值受�
 
 那么记$\nabla_pE_{1}(v)=2 \sum_{he} \left( J_{N_{he}}^{\mathsf T} (\overline{N(v)} - \overline{N(v_i)}) \right)$, 这里he属于邻接半边
 
-$\nabla_pE_{2}(v)=2\sum_{he}\left((\overline{N(v_j)} - \overline{N(v_i)})\right)$
+$K_{ij}​≡\frac{​\partial N_h}{\partial p_v}​​=J_a​.$
+
+$\nabla_pE_{2}(v)=2\sum_{he}\left(K_{ij}^T(\overline{N(v_j)} - \overline{N(v_i)})\right)$
 这里he属于环状半边
 
 然后总能量为$\nabla_p E(v)=\nabla_p E_1+\nabla_p E_2$ 
+
+*注: 当出现退化情况也就是$e\wedge a=0 e\wedge b=0$时，梯度计算应该跳过，因为分母不能等于0*
 
 *注：请注意，这里的求和符号 $\sum$ 位于最外层。*
 
