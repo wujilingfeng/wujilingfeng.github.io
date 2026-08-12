@@ -509,8 +509,14 @@ $$
 \frac{\partial f}{\partial e} = \frac{e c^{\mathsf T} + s I}{D} - \frac{s}{D} \, e \left( \frac{M_a e}{A} + \frac{M_b e}{B} \right)^{\mathsf T}
 $$<p>因此，最终的雅可比矩阵为：</p>
 $$
-J_N = -\frac{\partial f}{\partial e} = -\frac{s}{D} I - \frac{e c^{\mathsf T}}{D} + \frac{s}{D} \, e \left( \frac{M_a e}{A} + \frac{M_b e}{B} \right)^{\mathsf T}
-$$<h3 id="3-在离散三角网格中的应用">3. 在离散三角网格中的应用
+J_N = -\frac{\partial f}{\partial e} = -\frac{s}{D} I - \frac{e c^{\mathsf T}}{D} + \frac{s}{D} \, e \left( \frac{M_a e}{A} + \frac{M_b e}{B} \right)^{\mathsf T} 
+$$<p>并定义</p>
+<p>$M_e=||e||^2I-ee^T$</p>
+<p>那么可以继续解析求出：</p>
+<p>$J_a=\frac{\partial N}{\partial a} =\frac{-e(b\wedge e)^T}{D}+\frac{s}{D}e(\frac{M_ea}{A})^T$</p>
+<p>以及</p>
+<p>$J_b=\frac{\partial N}{\partial b} =\frac{-e(e\wedge a)^T}{D}+\frac{s}{D}e(\frac{M_eb}{B})^T$</p>
+<h3 id="3-在离散三角网格中的应用">3. 在离散三角网格中的应用
 </h3><p>现考虑离散三角网格，设中心顶点为 $v$，其邻接顶点为 $v_i$。顶点 $v$ 与 $v_i$ 之间存在边，对应的半边定义为 $he = v - v_i$。</p>
 <p>对于该半边所在的三角形，设其第三个顶点为 $p_2$；对于与该半边相对的相邻三角形，设其除 $v$ 和 $v_i$ 外的第三个顶点为 $p_3$。同时，记 $v$ 的坐标为 $p_1$，$v_i$ 的坐标为 $p_0$。基于上述定义，半边法向量 $N(he)$ 可由前文给出的函数计算。</p>
 <p>定义能量函数：</p>
@@ -526,10 +532,14 @@ $$
 $$<p>此外，顶点 $v$ 的相邻顶点 $v_i$ 也定义了各自的能量。由于我们是对 $p$（即 $v$ 的位置）进行求导，因此 $v_i$ 能量对 $p$ 的梯度贡献为：</p>
 $$
 \nabla_p energy(v_i) = -2 J_{N_i} \overline{N(v_i)}
-$$<p>将上述两部分梯度相加，得到系统总能量 $E(v)$ 对位置 $p$ 的总梯度：</p>
-$$
-\nabla_p E(v) = 2 \sum_i \left( J_{N_i}^{\mathsf T} (\overline{N(v)} - \overline{N(v_i)}) \right)
-$$<p><em>注：请注意，这里的求和符号 $\sum$ 位于最外层。</em></p>
+$$<p>v的邻域点v_i的能量$\Sigma ||N(v_i)||^2$,在对v的坐标p进行求梯度时，存在v</p>
+<p>_i其他的半边he的N(he)受到p的影响，存在边v_j ，v_i的N(he)值受到v影响，那么同样v_j的能量$$\Sigma||n(v_j)||^2$也可以对p求梯度，我们称边(v_i,v_j)是v的环状边。边(v,v_i)是v的邻接边。</p>
+<p>将上述两部分梯度相加，得到系统总能量 $E(v)$ 对位置 $p$ 的总梯度：</p>
+<p>那么记$\nabla_pE_{1}(v)=2 \sum_{he} \left( J_{N_{he}}^{\mathsf T} (\overline{N(v)} - \overline{N(v_i)}) \right)$, 这里he属于邻接半边</p>
+<p>$\nabla_pE_{2}(v)=2\sum_{he}\left((\overline{N(v_j)} - \overline{N(v_i)})\right)$
+这里he属于环状半边</p>
+<p>然后总能量为$\nabla_p E(v)=\nabla_p E_1+\nabla_p E_2$</p>
+<p><em>注：请注意，这里的求和符号 $\sum$ 位于最外层。</em></p>
 <p>对于处在边界处的半边，也就是边界边只有一个半边时，有三种办法，第一，这种半边计算跳过。第二，$N(he)$的值直接取he的单位化向量即可。第三种方法，由于这样的半边缺少另一个半边极其三角形，因为我们需要的是两个三角形的点。所以我们可以手动添加一个虚拟点坐标即可。这样$N（he）$就可以计算了，形象的描述这个添加的点坐标和半边的点组成了一个虚拟的三角形。</p>
 <p>那么每个边界处的半边如何对应一个点呢？这个点坐标如何获得？</p>
 <p>这个半边相邻的边界半边（一般是有两个相邻的边界处半边），这些相邻半边的所有点的重心坐标可以当作此半边对应的虚拟点。</p>

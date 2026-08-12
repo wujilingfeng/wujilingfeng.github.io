@@ -122,8 +122,20 @@ $$
 因此，最终的雅可比矩阵为：
 
 $$
-J_N = -\frac{\partial f}{\partial e} = -\frac{s}{D} I - \frac{e c^{\mathsf T}}{D} + \frac{s}{D} \, e \left( \frac{M_a e}{A} + \frac{M_b e}{B} \right)^{\mathsf T}
+J_N = -\frac{\partial f}{\partial e} = -\frac{s}{D} I - \frac{e c^{\mathsf T}}{D} + \frac{s}{D} \, e \left( \frac{M_a e}{A} + \frac{M_b e}{B} \right)^{\mathsf T} 
 $$
+
+并定义
+
+$M_e=||e||^2I-ee^T$
+
+那么可以继续解析求出：
+
+$J_a=\frac{\partial N}{\partial a} =\frac{-e(b\wedge e)^T}{D}+\frac{s}{D}e(\frac{M_ea}{A})^T$
+
+以及
+
+$J_b=\frac{\partial N}{\partial b} =\frac{-e(e\wedge a)^T}{D}+\frac{s}{D}e(\frac{M_eb}{B})^T$
 
 ### 3. 在离散三角网格中的应用
 
@@ -157,11 +169,18 @@ $$
 \nabla_p energy(v_i) = -2 J_{N_i} \overline{N(v_i)}
 $$
 
+v的邻域点v_i的能量$\Sigma ||N(v_i)||^2$,在对v的坐标p进行求梯度时，存在v
+
+_i其他的半边he的N(he)受到p的影响，存在边v_j ，v_i的N(he)值受到v影响，那么同样v_j的能量$$\Sigma||n(v_j)||^2$也可以对p求梯度，我们称边(v_i,v_j)是v的环状边。边(v,v_i)是v的邻接边。
+
 将上述两部分梯度相加，得到系统总能量 $E(v)$ 对位置 $p$ 的总梯度：
 
-$$
-\nabla_p E(v) = 2 \sum_i \left( J_{N_i}^{\mathsf T} (\overline{N(v)} - \overline{N(v_i)}) \right)
-$$
+那么记$\nabla_pE_{1}(v)=2 \sum_{he} \left( J_{N_{he}}^{\mathsf T} (\overline{N(v)} - \overline{N(v_i)}) \right)$, 这里he属于邻接半边
+
+$\nabla_pE_{2}(v)=2\sum_{he}\left((\overline{N(v_j)} - \overline{N(v_i)})\right)$
+这里he属于环状半边
+
+然后总能量为$\nabla_p E(v)=\nabla_p E_1+\nabla_p E_2$ 
 
 *注：请注意，这里的求和符号 $\sum$ 位于最外层。*
 
