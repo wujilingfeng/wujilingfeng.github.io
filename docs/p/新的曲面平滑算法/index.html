@@ -15,18 +15,18 @@
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
  <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="假设有顶点 $p_0, p_1, p_2, p_3$。令 $e = p_1 - p_0, a = p_2 - p_0, b = p_3 - p_0$。\n定义法向量计算函数为：\n$$\rN(e) = \\frac{(e \\times a) \\times (b \\times e)}{\\|e \\times a\\| \\|b \\times e\\|}\r$$下面将梳理整个推导过程，并验证雅可比矩阵。\n1. 利用向量三重积恒等式化简\r利用向量三重积恒等式：\n$$\r(e \\times a) \\times (b \\times e) = \\bigl(e \\cdot (b \\times e)\\bigr) a - \\bigl(a \\cdot (b \\times e)\\bigr) e\r$$因为 $e \\cdot (b \\times e) = b \\cdot (e \\times e) = 0$，第一项消失；再利用混合积的轮换性：\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="新的曲面平滑算法\r1. 半边法向量定义\r设四个顶点为 $p_0,p_1,p_2,p_3$，定义：\n$$\re=p_1-p_0,\\qquad a=p_2-p_0,\\qquad b=p_3-p_0\r$$定义半边向量函数：\n$$\rN(e)=\\frac{(e\\times a)\\times(b\\times e)}{\\|e\\times a\\|\\|b\\times e\\|}\r$$利用三重积恒等式：\n$$\r(e\\times a)\\times(b\\times e)=\\bigl(e\\cdot(b\\times e)\\bigr)a-\\bigl(a\\cdot(b\\times e)\\bigr)e\r$$第一项为零，并且：\n$$\ra\\cdot(b\\times e)=e\\cdot(a\\times b)\r$$因此：\n$$\r(e\\times a)\\times(b\\times e)=-\\bigl(e\\cdot(a\\times b)\\bigr)e\r$$令：\n$$\rc=a\\times b,\\qquad s=c^Te\r$$则分子为：\n$$\r-se\r$$定义：\n$$\rM_a=\\|a\\|^2I-aa^T,\\qquad M_b=\\|b\\|^2I-bb^T\r$$则：\n$$\rA=e^TM_ae=\\|e\\times a\\|^2\r$$$$\rB=e^TM_be=\\|b\\times e\\|^2\r$$令：\n$$\rD=\\sqrt A\\sqrt B\r$$最终得到：\n$$\rN(e)=-\\frac{s}{D}e\r$$ 2. 雅可比矩阵\r令：\n$$\rf(e)=\\frac{s}{D}e\r$$则：\n$$\rN=-f\r$$因此：\n">
 <title>新的曲面平滑算法</title>
 
 <link rel='canonical' href='https://wujilingfeng.github.io/p/%E6%96%B0%E7%9A%84%E6%9B%B2%E9%9D%A2%E5%B9%B3%E6%BB%91%E7%AE%97%E6%B3%95/'>
 
 <link rel="stylesheet" href="../../scss/style.min.b1a5b48e9268da293f0e82d09fd1299e5ecbd5ea47ba1f408b3687d520ce0c2b.css"><meta property='og:title' content="新的曲面平滑算法">
-<meta property='og:description' content="假设有顶点 $p_0, p_1, p_2, p_3$。令 $e = p_1 - p_0, a = p_2 - p_0, b = p_3 - p_0$。\n定义法向量计算函数为：\n$$\rN(e) = \\frac{(e \\times a) \\times (b \\times e)}{\\|e \\times a\\| \\|b \\times e\\|}\r$$下面将梳理整个推导过程，并验证雅可比矩阵。\n1. 利用向量三重积恒等式化简\r利用向量三重积恒等式：\n$$\r(e \\times a) \\times (b \\times e) = \\bigl(e \\cdot (b \\times e)\\bigr) a - \\bigl(a \\cdot (b \\times e)\\bigr) e\r$$因为 $e \\cdot (b \\times e) = b \\cdot (e \\times e) = 0$，第一项消失；再利用混合积的轮换性：\n">
+<meta property='og:description' content="新的曲面平滑算法\r1. 半边法向量定义\r设四个顶点为 $p_0,p_1,p_2,p_3$，定义：\n$$\re=p_1-p_0,\\qquad a=p_2-p_0,\\qquad b=p_3-p_0\r$$定义半边向量函数：\n$$\rN(e)=\\frac{(e\\times a)\\times(b\\times e)}{\\|e\\times a\\|\\|b\\times e\\|}\r$$利用三重积恒等式：\n$$\r(e\\times a)\\times(b\\times e)=\\bigl(e\\cdot(b\\times e)\\bigr)a-\\bigl(a\\cdot(b\\times e)\\bigr)e\r$$第一项为零，并且：\n$$\ra\\cdot(b\\times e)=e\\cdot(a\\times b)\r$$因此：\n$$\r(e\\times a)\\times(b\\times e)=-\\bigl(e\\cdot(a\\times b)\\bigr)e\r$$令：\n$$\rc=a\\times b,\\qquad s=c^Te\r$$则分子为：\n$$\r-se\r$$定义：\n$$\rM_a=\\|a\\|^2I-aa^T,\\qquad M_b=\\|b\\|^2I-bb^T\r$$则：\n$$\rA=e^TM_ae=\\|e\\times a\\|^2\r$$$$\rB=e^TM_be=\\|b\\times e\\|^2\r$$令：\n$$\rD=\\sqrt A\\sqrt B\r$$最终得到：\n$$\rN(e)=-\\frac{s}{D}e\r$$ 2. 雅可比矩阵\r令：\n$$\rf(e)=\\frac{s}{D}e\r$$则：\n$$\rN=-f\r$$因此：\n">
 <meta property='og:url' content='https://wujilingfeng.github.io/p/%E6%96%B0%E7%9A%84%E6%9B%B2%E9%9D%A2%E5%B9%B3%E6%BB%91%E7%AE%97%E6%B3%95/'>
 <meta property='og:site_name' content='五级灵风'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-08-10T09:04:57&#43;08:00'/><meta property='article:modified_time' content='2026-08-10T09:04:57&#43;08:00'/><meta property='og:image' content='https://wujilingfeng.github.io/p/%E6%96%B0%E7%9A%84%E6%9B%B2%E9%9D%A2%E5%B9%B3%E6%BB%91%E7%AE%97%E6%B3%95/image.png' />
 <meta name="twitter:title" content="新的曲面平滑算法">
-<meta name="twitter:description" content="假设有顶点 $p_0, p_1, p_2, p_3$。令 $e = p_1 - p_0, a = p_2 - p_0, b = p_3 - p_0$。\n定义法向量计算函数为：\n$$\rN(e) = \\frac{(e \\times a) \\times (b \\times e)}{\\|e \\times a\\| \\|b \\times e\\|}\r$$下面将梳理整个推导过程，并验证雅可比矩阵。\n1. 利用向量三重积恒等式化简\r利用向量三重积恒等式：\n$$\r(e \\times a) \\times (b \\times e) = \\bigl(e \\cdot (b \\times e)\\bigr) a - \\bigl(a \\cdot (b \\times e)\\bigr) e\r$$因为 $e \\cdot (b \\times e) = b \\cdot (e \\times e) = 0$，第一项消失；再利用混合积的轮换性：\n"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="新的曲面平滑算法\r1. 半边法向量定义\r设四个顶点为 $p_0,p_1,p_2,p_3$，定义：\n$$\re=p_1-p_0,\\qquad a=p_2-p_0,\\qquad b=p_3-p_0\r$$定义半边向量函数：\n$$\rN(e)=\\frac{(e\\times a)\\times(b\\times e)}{\\|e\\times a\\|\\|b\\times e\\|}\r$$利用三重积恒等式：\n$$\r(e\\times a)\\times(b\\times e)=\\bigl(e\\cdot(b\\times e)\\bigr)a-\\bigl(a\\cdot(b\\times e)\\bigr)e\r$$第一项为零，并且：\n$$\ra\\cdot(b\\times e)=e\\cdot(a\\times b)\r$$因此：\n$$\r(e\\times a)\\times(b\\times e)=-\\bigl(e\\cdot(a\\times b)\\bigr)e\r$$令：\n$$\rc=a\\times b,\\qquad s=c^Te\r$$则分子为：\n$$\r-se\r$$定义：\n$$\rM_a=\\|a\\|^2I-aa^T,\\qquad M_b=\\|b\\|^2I-bb^T\r$$则：\n$$\rA=e^TM_ae=\\|e\\times a\\|^2\r$$$$\rB=e^TM_be=\\|b\\times e\\|^2\r$$令：\n$$\rD=\\sqrt A\\sqrt B\r$$最终得到：\n$$\rN(e)=-\\frac{s}{D}e\r$$ 2. 雅可比矩阵\r令：\n$$\rf(e)=\\frac{s}{D}e\r$$则：\n$$\rN=-f\r$$因此：\n"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://wujilingfeng.github.io/p/%E6%96%B0%E7%9A%84%E6%9B%B2%E9%9D%A2%E5%B9%B3%E6%BB%91%E7%AE%97%E6%B3%95/image.png' />
     <link rel="shortcut icon" href="../../favicon.ico" />
 
@@ -361,13 +361,11 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li>
-      <ol>
-        <li><a href="#1-利用向量三重积恒等式化简">1. 利用向量三重积恒等式化简</a></li>
-        <li><a href="#2-雅可比矩阵推导">2. 雅可比矩阵推导</a></li>
-        <li><a href="#3-在离散三角网格中的应用">3. 在离散三角网格中的应用</a></li>
-      </ol>
-    </li>
+    <li><a href="#1-半边法向量定义">1. 半边法向量定义</a></li>
+    <li><a href="#2-雅可比矩阵">2. 雅可比矩阵</a></li>
+    <li><a href="#3-三角网格中的能量梯度">3. 三角网格中的能量梯度</a></li>
+    <li><a href="#4-环状边贡献">4. 环状边贡献</a></li>
+    <li><a href="#5-退化情况与边界处理">5. 退化情况与边界处理</a></li>
   </ol>
 </nav>
         </div>
@@ -436,7 +434,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 3 分钟
+                    阅读时长: 1 分钟
                 </time>
             </div>
         
@@ -451,100 +449,132 @@
     <section class="article-content">
     
     
-    <p>假设有顶点 $p_0, p_1, p_2, p_3$。令 $e = p_1 - p_0, a = p_2 - p_0, b = p_3 - p_0$。</p>
-<p>定义法向量计算函数为：</p>
+    <h1 id="新的曲面平滑算法">新的曲面平滑算法
+</h1><h2 id="1-半边法向量定义">1. 半边法向量定义
+</h2><p>设四个顶点为 $p_0,p_1,p_2,p_3$，定义：</p>
 $$
-N(e) = \frac{(e \times a) \times (b \times e)}{\|e \times a\| \|b \times e\|}
-$$<p>下面将梳理整个推导过程，并验证雅可比矩阵。</p>
-<h3 id="1-利用向量三重积恒等式化简">1. 利用向量三重积恒等式化简
-</h3><p>利用向量三重积恒等式：</p>
+e=p_1-p_0,\qquad a=p_2-p_0,\qquad b=p_3-p_0
+$$<p>定义半边向量函数：</p>
 $$
-(e \times a) \times (b \times e) = \bigl(e \cdot (b \times e)\bigr) a - \bigl(a \cdot (b \times e)\bigr) e
-$$<p>因为 $e \cdot (b \times e) = b \cdot (e \times e) = 0$，第一项消失；再利用混合积的轮换性：</p>
+N(e)=\frac{(e\times a)\times(b\times e)}{\|e\times a\|\|b\times e\|}
+$$<p>利用三重积恒等式：</p>
 $$
-a \cdot (b \times e) = e \cdot (a \times b)
-$$<p>所以：</p>
+(e\times a)\times(b\times e)=\bigl(e\cdot(b\times e)\bigr)a-\bigl(a\cdot(b\times e)\bigr)e
+$$<p>第一项为零，并且：</p>
 $$
-(e \times a) \times (b \times e) = -\bigl(e \cdot (a \times b)\bigr) \, e
+a\cdot(b\times e)=e\cdot(a\times b)
+$$<p>因此：</p>
+$$
+(e\times a)\times(b\times e)=-\bigl(e\cdot(a\times b)\bigr)e
 $$<p>令：</p>
 $$
-c = a \times b, \qquad s = c^{\mathsf T} e
-$$<p>则分子为 $-s , e$。</p>
-<p>分母由两个范数组成：</p>
+c=a\times b,\qquad s=c^Te
+$$<p>则分子为：</p>
 $$
-\|e \times a\|^2 = \|e\|^2 \|a\|^2 - (e \cdot a)^2 = e^{\mathsf T} (\|a\|^2 I - aa^{\mathsf T}) e
+-se
+$$<p>定义：</p>
+$$
+M_a=\|a\|^2I-aa^T,\qquad M_b=\|b\|^2I-bb^T
+$$<p>则：</p>
+$$
+A=e^TM_ae=\|e\times a\|^2
 $$$$
-\|b \times e\|^2 = \|b\|^2 \|e\|^2 - (b \cdot e)^2 = e^{\mathsf T} (\|b\|^2 I - bb^{\mathsf T}) e
-$$<p>定义矩阵：</p>
+B=e^TM_be=\|b\times e\|^2
+$$<p>令：</p>
 $$
-M_a = \|a\|^2 I - aa^{\mathsf T}, \qquad M_b = \|b\|^2 I - bb^{\mathsf T}
-$$<p>以及标量：</p>
+D=\sqrt A\sqrt B
+$$<p>最终得到：</p>
 $$
-A = e^{\mathsf T} M_a e, \qquad B = e^{\mathsf T} M_b e, \qquad D = \sqrt{A}\sqrt{B}
-$$<p>于是化简得到：</p>
+N(e)=-\frac{s}{D}e
+$$<hr>
+<h2 id="2-雅可比矩阵">2. 雅可比矩阵
+</h2><p>令：</p>
 $$
-N(e) = -\frac{s}{D} \, e
-$$<p>（注：原推导中存在笔误写为 $N = -\frac{D}{s} e$，根据前后文逻辑已修正为 $-\frac{s}{D} e$。）</p>
-<h3 id="2-雅可比矩阵推导">2. 雅可比矩阵推导
-</h3><p>令 $f(e) = \dfrac{s}{D} , e$，则 $N = -f$，故雅可比矩阵 $J_N = -\dfrac{\partial f}{\partial e}$。</p>
-<p>先对 $f = u/v$ 求导，其中 $u = s e$，$v = D$。</p>
+f(e)=\frac{s}{D}e
+$$<p>则：</p>
 $$
-\frac{\partial u}{\partial e} = e \frac{\partial s}{\partial e}^{\mathsf T} + s I = e c^{\mathsf T} + s I
-$$$$
-\frac{\partial v}{\partial e} = \frac{\partial D}{\partial e}
-$$<p>由 $D = \sqrt{A}\sqrt{B}$，得：</p>
+N=-f
+$$<p>因此：</p>
 $$
-\frac{\partial D}{\partial e} = \frac{\sqrt{B}}{2\sqrt{A}} \frac{\partial A}{\partial e} + \frac{\sqrt{A}}{2\sqrt{B}} \frac{\partial B}{\partial e}
-$$<p>而：</p>
+J_N=-\frac{\partial f}{\partial e}
+$$<p>其中：</p>
 $$
-\frac{\partial A}{\partial e} = 2 M_a e, \qquad \frac{\partial B}{\partial e} = 2 M_b e
+\frac{\partial(se)}{\partial e}=ec^T+sI
+$$<p>又因为：</p>
+$$
+\frac{\partial A}{\partial e}=2M_ae,\qquad
+\frac{\partial B}{\partial e}=2M_be
 $$<p>所以：</p>
 $$
-\frac{\partial D}{\partial e} = \frac{\sqrt{B}}{\sqrt{A}} M_a e + \frac{\sqrt{A}}{\sqrt{B}} M_b e = D \left( \frac{M_a e}{A} + \frac{M_b e}{B} \right)
-$$<p>利用商法则求导：</p>
+\frac{\partial D}{\partial e}
+=D(\frac{M_ae}{A}+\frac{M_be}{B})
+$$<p>由商法则：</p>
 $$
-\frac{\partial f}{\partial e} = \frac{v \frac{\partial u}{\partial e} - u \frac{\partial v}{\partial e}^{\mathsf T}}{v^2} = \frac{D (e c^{\mathsf T} + s I) - s e \, D \left( \frac{M_a e}{A} + \frac{M_b e}{B} \right)^{\mathsf T}}{D^2}
-$$<p>整理得：</p>
+J_N=-\frac{s}{D}I-\frac{ec^T}{D}
++\frac{s}{D}e(\frac{M_ae}{A}+\frac{M_be}{B})^T
+$$<p>进一步定义：</p>
 $$
-\frac{\partial f}{\partial e} = \frac{e c^{\mathsf T} + s I}{D} - \frac{s}{D} \, e \left( \frac{M_a e}{A} + \frac{M_b e}{B} \right)^{\mathsf T}
-$$<p>因此，最终的雅可比矩阵为：</p>
+M_e=\|e\|^2I-ee^T
+$$<p>得到：</p>
 $$
-J_N = -\frac{\partial f}{\partial e} = -\frac{s}{D} I - \frac{e c^{\mathsf T}}{D} + \frac{s}{D} \, e \left( \frac{M_a e}{A} + \frac{M_b e}{B} \right)^{\mathsf T} 
-$$<p>并定义</p>
-<p>$M_e=||e||^2I-ee^T$</p>
-<p>那么可以继续解析求出：</p>
-<p>$J_a=\frac{\partial N}{\partial a} =\frac{-e(b\wedge e)^T}{D}+\frac{s}{D}e(\frac{M_ea}{A})^T$</p>
-<p>以及</p>
-<p>$J_b=\frac{\partial N}{\partial b} =\frac{-e(e\wedge a)^T}{D}+\frac{s}{D}e(\frac{M_eb}{B})^T$</p>
-<h3 id="3-在离散三角网格中的应用">3. 在离散三角网格中的应用
-</h3><p>现考虑离散三角网格，设中心顶点为 $v$，其邻接顶点为 $v_i$。顶点 $v$ 与 $v_i$ 之间存在边，对应的半边定义为 $he = v - v_i$。</p>
-<p>对于该半边所在的三角形，设其第三个顶点为 $p_2$；对于与该半边相对的相邻三角形，设其除 $v$ 和 $v_i$ 外的第三个顶点为 $p_3$。同时，记 $v$ 的坐标为 $p_1$，$v_i$ 的坐标为 $p_0$。基于上述定义，半边法向量 $N(he)$ 可由前文给出的函数计算。</p>
-<p>定义能量函数：</p>
+J_a=\frac{\partial N}{\partial a}
+=-\frac{e(b\times e)^T}{D}
++\frac{s}{D}e(\frac{M_ea}{A})^T
+$$$$
+J_b=\frac{\partial N}{\partial b}
+=-\frac{e(e\times a)^T}{D}
++\frac{s}{D}e(\frac{M_eb}{B})^T
+$$<hr>
+<h2 id="3-三角网格中的能量梯度">3. 三角网格中的能量梯度
+</h2><p>设中心顶点为 $v$，邻接顶点为 $v_i$。</p>
+<p>对于邻接半边：</p>
 $$
-energy(v) = \left( \sum_{i} N(e_i) \right)^{\mathsf T} \left( \sum_{i} N(e_i) \right)
-$$<p>其中，$p$ 为顶点 $v$ 的位置坐标，$e_i$ 表示所有 $v - v_i$ 的半边。</p>
-<p>对 $p$ 求导，得到能量的梯度：</p>
+he=(v_i,v),\qquad e=v-v_i
+$$<p>对应两个三角形的另外两个顶点记为 $p_2,p_3$，由上述公式计算 $N(he)$。</p>
+<p>定义顶点能量：</p>
 $$
-\nabla_p energy(v) = 2 \left( \sum_i J_{N_i} \right)^{\mathsf T} \left( \sum_i N(e_i) \right)
-$$<p>为简化表达，记 $\overline{N(v)} = \sum_i N(e_i)$，则：</p>
+E(v)=\|\sum_iN(e_i)\|^2
+$$<p>记：</p>
 $$
-\nabla_p energy(v) = 2 \left( \sum_i J_{N_i} \right)^{\mathsf T} \overline{N(v)}
-$$<p>此外，顶点 $v$ 的相邻顶点 $v_i$ 也定义了各自的能量。由于我们是对 $p$（即 $v$ 的位置）进行求导，因此 $v_i$ 能量对 $p$ 的梯度贡献为：</p>
+\bar N(v)=\sum_iN(e_i)
+$$<p>对于顶点 $v$ 自身能量：</p>
 $$
-\nabla_p energy(v_i) = -2 J_{N_i}^T \overline{N(v_i)}
-$$<p>v的邻域点v_i的能量$ ||\sum N(v_i)||^2$,在对v的坐标p进行求梯度时，存在v</p>
-<p>_i其他的半边he的N(he)受到p的影响，存在边v_j ，v_i的N(he)值受到v影响，那么同样v_j的能量$$\Sigma||n(v_j)||^2$也可以对p求梯度，我们称边(v_i,v_j)是v的环状边。边(v,v_i)是v的邻接边。</p>
-<p>将上述两部分梯度相加，得到系统总能量 $E(v)$ 对位置 $p$ 的总梯度：</p>
-<p>那么记$\nabla_pE_{1}(v)=2 \sum_{he} \left( J_{N_{he}}^{\mathsf T} (\overline{N(v)} - \overline{N(v_i)}) \right)$, 这里he属于邻接半边</p>
-<p>$K_{ij}​≡\frac{​\partial N_h}{\partial p_v}​​=J_a​.$</p>
-<p>$\nabla_pE_{2}(v)=2\sum_{he}\left(K_{ij}^T(\overline{N(v_j)} - \overline{N(v_i)})\right)$
-这里he属于环状半边</p>
-<p>然后总能量为$\nabla_p E(v)=\nabla_p E_1+\nabla_p E_2$</p>
-<p><em>注: 当出现退化情况也就是$e\wedge a=0 e\wedge b=0$时，梯度计算应该跳过，因为分母不能等于0</em></p>
-<p><em>注：请注意，这里的求和符号 $\sum$ 位于最外层。</em></p>
-<p>对于处在边界处的半边，也就是边界边只有一个半边时，有三种办法，第一，这种半边计算跳过。第二，$N(he)$的值直接取he的单位化向量即可。第三种方法，由于这样的半边缺少另一个半边极其三角形，因为我们需要的是两个三角形的点。所以我们可以手动添加一个虚拟点坐标即可。这样$N（he）$就可以计算了，形象的描述这个添加的点坐标和半边的点组成了一个虚拟的三角形。</p>
-<p>那么每个边界处的半边如何对应一个点呢？这个点坐标如何获得？</p>
-<p>这个半边相邻的边界半边（一般是有两个相邻的边界处半边），这些相邻半边的所有点的重心坐标可以当作此半边对应的虚拟点。</p>
+\nabla_pE(v)=2(\sum_iJ_{N_i})^T\bar N(v)
+$$<p>邻接顶点能量同样会受到 $p_v$ 的影响。由于半边方向满足：</p>
+$$
+e=v-v_i
+$$<p>因此对邻接边贡献：</p>
+$$
+\nabla_pE_1(v)=2\sum_{he}
+J_{N_{he}}^T(\bar N(v)-\bar N(v_i))
+$$<p>其中 $he=(v_i,v)$。</p>
+<hr>
+<h2 id="4-环状边贡献">4. 环状边贡献
+</h2><p>对于二环邻域中的半边：</p>
+$$
+he=(v_j,v_i),\qquad e=v_i-v_j
+$$<p>如果 $v$ 是该半边对应三角形中的第三个顶点，则：</p>
+$$
+K_{ij}=\frac{\partial N_h}{\partial p_v}=J_a
+$$<p>对应梯度贡献：</p>
+$$
+\nabla_pE_2(v)=2\sum_{he}K_{ij}^T(\bar N(v_j)-\bar N(v_i))
+$$<p>最终：</p>
+$$
+\nabla_pE(v)=\nabla_pE_1(v)+\nabla_pE_2(v)
+$$<hr>
+<h2 id="5-退化情况与边界处理">5. 退化情况与边界处理
+</h2><p>当：</p>
+$$
+e\times a=0\quad\text{或}\quad e\times b=0
+$$<p>表示三角形退化，此时分母为零，应跳过该半边梯度计算。</p>
+<p>对于边界半边，由于缺少相邻三角形，可以采用：</p>
+<ol>
+<li>直接跳过边界半边；</li>
+<li>使用单位化边方向近似 $N(he)$；</li>
+<li>构造虚拟顶点形成虚拟三角形，使 $N(he)$ 可以继续计算。</li>
+</ol>
+<p>若采用虚拟顶点，可利用相邻边界半边相关顶点的重心作为虚拟点位置，细节则各自决定即可。</p>
 
 </section>
 

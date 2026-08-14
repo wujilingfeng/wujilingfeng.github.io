@@ -7,189 +7,240 @@ title = '新的曲面平滑算法'
 image = "image.png"
 +++
 
-假设有顶点 $p_0, p_1, p_2, p_3$。令 $e = p_1 - p_0, a = p_2 - p_0, b = p_3 - p_0$。
+# 新的曲面平滑算法
 
-定义法向量计算函数为：
+## 1. 半边法向量定义
 
-$$
-N(e) = \frac{(e \times a) \times (b \times e)}{\|e \times a\| \|b \times e\|}
-$$
-
-下面将梳理整个推导过程，并验证雅可比矩阵。
-
-### 1. 利用向量三重积恒等式化简
-
-利用向量三重积恒等式：
+设四个顶点为 $p_0,p_1,p_2,p_3$，定义：
 
 $$
-(e \times a) \times (b \times e) = \bigl(e \cdot (b \times e)\bigr) a - \bigl(a \cdot (b \times e)\bigr) e
+e=p_1-p_0,\qquad a=p_2-p_0,\qquad b=p_3-p_0
 $$
 
-因为 $e \cdot (b \times e) = b \cdot (e \times e) = 0$，第一项消失；再利用混合积的轮换性：
+定义半边向量函数：
 
 $$
-a \cdot (b \times e) = e \cdot (a \times b)
+N(e)=\frac{(e\times a)\times(b\times e)}{\|e\times a\|\|b\times e\|}
 $$
 
-所以：
+利用三重积恒等式：
 
 $$
-(e \times a) \times (b \times e) = -\bigl(e \cdot (a \times b)\bigr) \, e
+(e\times a)\times(b\times e)=\bigl(e\cdot(b\times e)\bigr)a-\bigl(a\cdot(b\times e)\bigr)e
+$$
+
+第一项为零，并且：
+
+$$
+a\cdot(b\times e)=e\cdot(a\times b)
+$$
+
+因此：
+
+$$
+(e\times a)\times(b\times e)=-\bigl(e\cdot(a\times b)\bigr)e
 $$
 
 令：
 
 $$
-c = a \times b, \qquad s = c^{\mathsf T} e
+c=a\times b,\qquad s=c^Te
 $$
 
-则分子为 $-s \, e$。
-
-分母由两个范数组成：
+则分子为：
 
 $$
-\|e \times a\|^2 = \|e\|^2 \|a\|^2 - (e \cdot a)^2 = e^{\mathsf T} (\|a\|^2 I - aa^{\mathsf T}) e
+-se
 $$
 
-$$
-\|b \times e\|^2 = \|b\|^2 \|e\|^2 - (b \cdot e)^2 = e^{\mathsf T} (\|b\|^2 I - bb^{\mathsf T}) e
-$$
-
-定义矩阵：
+定义：
 
 $$
-M_a = \|a\|^2 I - aa^{\mathsf T}, \qquad M_b = \|b\|^2 I - bb^{\mathsf T}
+M_a=\|a\|^2I-aa^T,\qquad M_b=\|b\|^2I-bb^T
 $$
 
-以及标量：
+则：
 
 $$
-A = e^{\mathsf T} M_a e, \qquad B = e^{\mathsf T} M_b e, \qquad D = \sqrt{A}\sqrt{B}
-$$
-
-于是化简得到：
-
-$$
-N(e) = -\frac{s}{D} \, e
-$$
-
-（注：原推导中存在笔误写为 $N = -\frac{D}{s} e$，根据前后文逻辑已修正为 $-\frac{s}{D} e$。）
-
-### 2. 雅可比矩阵推导
-
-令 $f(e) = \dfrac{s}{D} \, e$，则 $N = -f$，故雅可比矩阵 $J_N = -\dfrac{\partial f}{\partial e}$。
-
-先对 $f = u/v$ 求导，其中 $u = s e$，$v = D$。
-
-$$
-\frac{\partial u}{\partial e} = e \frac{\partial s}{\partial e}^{\mathsf T} + s I = e c^{\mathsf T} + s I
+A=e^TM_ae=\|e\times a\|^2
 $$
 
 $$
-\frac{\partial v}{\partial e} = \frac{\partial D}{\partial e}
+B=e^TM_be=\|b\times e\|^2
 $$
 
-由 $D = \sqrt{A}\sqrt{B}$，得：
+令：
 
 $$
-\frac{\partial D}{\partial e} = \frac{\sqrt{B}}{2\sqrt{A}} \frac{\partial A}{\partial e} + \frac{\sqrt{A}}{2\sqrt{B}} \frac{\partial B}{\partial e}
+D=\sqrt A\sqrt B
 $$
 
-而：
+最终得到：
 
 $$
-\frac{\partial A}{\partial e} = 2 M_a e, \qquad \frac{\partial B}{\partial e} = 2 M_b e
+N(e)=-\frac{s}{D}e
+$$
+
+---
+
+## 2. 雅可比矩阵
+
+令：
+
+$$
+f(e)=\frac{s}{D}e
+$$
+
+则：
+
+$$
+N=-f
+$$
+
+因此：
+
+$$
+J_N=-\frac{\partial f}{\partial e}
+$$
+
+其中：
+
+$$
+\frac{\partial(se)}{\partial e}=ec^T+sI
+$$
+
+又因为：
+
+$$
+\frac{\partial A}{\partial e}=2M_ae,\qquad
+\frac{\partial B}{\partial e}=2M_be
 $$
 
 所以：
 
 $$
-\frac{\partial D}{\partial e} = \frac{\sqrt{B}}{\sqrt{A}} M_a e + \frac{\sqrt{A}}{\sqrt{B}} M_b e = D \left( \frac{M_a e}{A} + \frac{M_b e}{B} \right)
+\frac{\partial D}{\partial e}
+=D(\frac{M_ae}{A}+\frac{M_be}{B})
 $$
 
-利用商法则求导：
+由商法则：
 
 $$
-\frac{\partial f}{\partial e} = \frac{v \frac{\partial u}{\partial e} - u \frac{\partial v}{\partial e}^{\mathsf T}}{v^2} = \frac{D (e c^{\mathsf T} + s I) - s e \, D \left( \frac{M_a e}{A} + \frac{M_b e}{B} \right)^{\mathsf T}}{D^2}
+J_N=-\frac{s}{D}I-\frac{ec^T}{D}
++\frac{s}{D}e(\frac{M_ae}{A}+\frac{M_be}{B})^T
 $$
 
-整理得：
+进一步定义：
 
 $$
-\frac{\partial f}{\partial e} = \frac{e c^{\mathsf T} + s I}{D} - \frac{s}{D} \, e \left( \frac{M_a e}{A} + \frac{M_b e}{B} \right)^{\mathsf T}
+M_e=\|e\|^2I-ee^T
 $$
 
-因此，最终的雅可比矩阵为：
+得到：
 
 $$
-J_N = -\frac{\partial f}{\partial e} = -\frac{s}{D} I - \frac{e c^{\mathsf T}}{D} + \frac{s}{D} \, e \left( \frac{M_a e}{A} + \frac{M_b e}{B} \right)^{\mathsf T} 
+J_a=\frac{\partial N}{\partial a}
+=-\frac{e(b\times e)^T}{D}
++\frac{s}{D}e(\frac{M_ea}{A})^T
 $$
 
-并定义
-
-$M_e=||e||^2I-ee^T$
-
-那么可以继续解析求出：
-
-$J_a=\frac{\partial N}{\partial a} =\frac{-e(b\wedge e)^T}{D}+\frac{s}{D}e(\frac{M_ea}{A})^T$
-
-以及
-
-$J_b=\frac{\partial N}{\partial b} =\frac{-e(e\wedge a)^T}{D}+\frac{s}{D}e(\frac{M_eb}{B})^T$
-
-### 3. 在离散三角网格中的应用
-
-现考虑离散三角网格，设中心顶点为 $v$，其邻接顶点为 $v_i$。顶点 $v$ 与 $v_i$ 之间存在边，对应的半边定义为 $he = v - v_i$。
-
-对于该半边所在的三角形，设其第三个顶点为 $p_2$；对于与该半边相对的相邻三角形，设其除 $v$ 和 $v_i$ 外的第三个顶点为 $p_3$。同时，记 $v$ 的坐标为 $p_1$，$v_i$ 的坐标为 $p_0$。基于上述定义，半边法向量 $N(he)$ 可由前文给出的函数计算。
-
-定义能量函数：
-
 $$
-energy(v) = \left( \sum_{i} N(e_i) \right)^{\mathsf T} \left( \sum_{i} N(e_i) \right)
+J_b=\frac{\partial N}{\partial b}
+=-\frac{e(e\times a)^T}{D}
++\frac{s}{D}e(\frac{M_eb}{B})^T
 $$
 
-其中，$p$ 为顶点 $v$ 的位置坐标，$e_i$ 表示所有 $v - v_i$ 的半边。
+---
 
-对 $p$ 求导，得到能量的梯度：
+## 3. 三角网格中的能量梯度
 
-$$
-\nabla_p energy(v) = 2 \left( \sum_i J_{N_i} \right)^{\mathsf T} \left( \sum_i N(e_i) \right)
-$$
+设中心顶点为 $v$，邻接顶点为 $v_i$。
 
-为简化表达，记 $\overline{N(v)} = \sum_i N(e_i)$，则：
+对于邻接半边：
 
 $$
-\nabla_p energy(v) = 2 \left( \sum_i J_{N_i} \right)^{\mathsf T} \overline{N(v)}
+he=(v_i,v),\qquad e=v-v_i
 $$
 
-此外，顶点 $v$ 的相邻顶点 $v_i$ 也定义了各自的能量。由于我们是对 $p$（即 $v$ 的位置）进行求导，因此 $v_i$ 能量对 $p$ 的梯度贡献为：
+对应两个三角形的另外两个顶点记为 $p_2,p_3$，由上述公式计算 $N(he)$。
+
+定义顶点能量：
 
 $$
-\nabla_p energy(v_i) = -2 J_{N_i}^T \overline{N(v_i)}
+E(v)=\|\sum_iN(e_i)\|^2
 $$
 
-v的邻域点v_i的能量$ ||\sum N(v_i)||^2$,在对v的坐标p进行求梯度时，存在v
+记：
 
-_i其他的半边he的N(he)受到p的影响，存在边v_j ，v_i的N(he)值受到v影响，那么同样v_j的能量$$\Sigma||n(v_j)||^2$也可以对p求梯度，我们称边(v_i,v_j)是v的环状边。边(v,v_i)是v的邻接边。
+$$
+\bar N(v)=\sum_iN(e_i)
+$$
 
-将上述两部分梯度相加，得到系统总能量 $E(v)$ 对位置 $p$ 的总梯度：
+对于顶点 $v$ 自身能量：
 
-那么记$\nabla_pE_{1}(v)=2 \sum_{he} \left( J_{N_{he}}^{\mathsf T} (\overline{N(v)} - \overline{N(v_i)}) \right)$, 这里he属于邻接半边
+$$
+\nabla_pE(v)=2(\sum_iJ_{N_i})^T\bar N(v)
+$$
 
-$K_{ij}​≡\frac{​\partial N_h}{\partial p_v}​​=J_a​.$
+邻接顶点能量同样会受到 $p_v$ 的影响。由于半边方向满足：
 
-$\nabla_pE_{2}(v)=2\sum_{he}\left(K_{ij}^T(\overline{N(v_j)} - \overline{N(v_i)})\right)$
-这里he属于环状半边
+$$
+e=v-v_i
+$$
 
-然后总能量为$\nabla_p E(v)=\nabla_p E_1+\nabla_p E_2$ 
+因此对邻接边贡献：
 
-*注: 当出现退化情况也就是$e\wedge a=0 e\wedge b=0$时，梯度计算应该跳过，因为分母不能等于0*
+$$
+\nabla_pE_1(v)=2\sum_{he}
+J_{N_{he}}^T(\bar N(v)-\bar N(v_i))
+$$
 
-*注：请注意，这里的求和符号 $\sum$ 位于最外层。*
+其中 $he=(v_i,v)$。
 
-对于处在边界处的半边，也就是边界边只有一个半边时，有三种办法，第一，这种半边计算跳过。第二，$N(he)$的值直接取he的单位化向量即可。第三种方法，由于这样的半边缺少另一个半边极其三角形，因为我们需要的是两个三角形的点。所以我们可以手动添加一个虚拟点坐标即可。这样$N（he）$就可以计算了，形象的描述这个添加的点坐标和半边的点组成了一个虚拟的三角形。
+---
 
-那么每个边界处的半边如何对应一个点呢？这个点坐标如何获得？
+## 4. 环状边贡献
 
- 这个半边相邻的边界半边（一般是有两个相邻的边界处半边），这些相邻半边的所有点的重心坐标可以当作此半边对应的虚拟点。
+对于二环邻域中的半边：
+
+$$
+he=(v_j,v_i),\qquad e=v_i-v_j
+$$
+
+如果 $v$ 是该半边对应三角形中的第三个顶点，则：
+
+$$
+K_{ij}=\frac{\partial N_h}{\partial p_v}=J_a
+$$
+
+对应梯度贡献：
+
+$$
+\nabla_pE_2(v)=2\sum_{he}K_{ij}^T(\bar N(v_j)-\bar N(v_i))
+$$
+
+最终：
+
+$$
+\nabla_pE(v)=\nabla_pE_1(v)+\nabla_pE_2(v)
+$$
+
+---
+
+## 5. 退化情况与边界处理
+
+当：
+
+$$
+e\times a=0\quad\text{或}\quad e\times b=0
+$$
+
+表示三角形退化，此时分母为零，应跳过该半边梯度计算。
+
+对于边界半边，由于缺少相邻三角形，可以采用：
+
+1. 直接跳过边界半边；
+2. 使用单位化边方向近似 $N(he)$；
+3. 构造虚拟顶点形成虚拟三角形，使 $N(he)$ 可以继续计算。
+
+若采用虚拟顶点，可利用相邻边界半边相关顶点的重心作为虚拟点位置，细节则各自决定即可。
