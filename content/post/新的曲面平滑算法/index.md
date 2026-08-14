@@ -216,7 +216,7 @@ $$
 对应梯度贡献：
 
 $$
-\nabla_pE_2(v)=2\sum_{he}K_{ij}^T(\bar N(v_j)-\bar N(v_i))
+\nabla_pE_2(v)=2\sum_{he}K_{ij}^T(\bar N(v_i)-\bar N(v_j))
 $$
 
 最终：
