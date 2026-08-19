@@ -14,132 +14,771 @@
         
         <guid>https://wujilingfeng.github.io/p/%E6%96%B0%E7%9A%84%E6%9B%B2%E9%9D%A2%E5%B9%B3%E6%BB%91%E7%AE%97%E6%B3%95/</guid>
         <description>&lt;img src="https://wujilingfeng.github.io/p/%E6%96%B0%E7%9A%84%E6%9B%B2%E9%9D%A2%E5%B9%B3%E6%BB%91%E7%AE%97%E6%B3%95/image.png" alt="Featured image of post 新的曲面平滑算法" /&gt;&lt;h1 id=&#34;新的曲面平滑算法&#34;&gt;新的曲面平滑算法
-&lt;/h1&gt;&lt;h2 id=&#34;1-半边法向量定义&#34;&gt;1. 半边法向量定义
-&lt;/h2&gt;&lt;p&gt;设四个顶点为 $p_0,p_1,p_2,p_3$，定义：&lt;/p&gt;
+&lt;/h1&gt;&lt;p&gt;本文沿用带符号精确二面角 (\phi) 的定义，只把半边向量修改为：&lt;/p&gt;
+&lt;h1 id=&#34;ne&#34;&gt;$$
+\boxed{
+N(e)
+&lt;/h1&gt;&lt;p&gt;\phi\left(
+\frac{e}{|e|}
++
+\frac{e\times a}{|e\times a|}
++
+\frac{b\times e}{|b\times e|}
+\right).
+}
+$$&lt;/p&gt;
+&lt;p&gt;下文中三维楔积 (\wedge) 统一写成叉积 (\times)。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;1-半边法向量定义&#34;&gt;1. 半边法向量定义
+&lt;/h2&gt;&lt;p&gt;设内部半边周围四个顶点为 (p_0,p_1,p_2,p_3)，定义：&lt;/p&gt;
 $$
-e=p_1-p_0,\qquad a=p_2-p_0,\qquad b=p_3-p_0
-$$&lt;p&gt;定义半边向量函数：&lt;/p&gt;
-$$
-N(e)=\frac{(e\times a)\times(b\times e)}{\|e\times a\|\|b\times e\|}
-$$&lt;p&gt;利用三重积恒等式：&lt;/p&gt;
-$$
-(e\times a)\times(b\times e)=\bigl(e\cdot(b\times e)\bigr)a-\bigl(a\cdot(b\times e)\bigr)e
-$$&lt;p&gt;第一项为零，并且：&lt;/p&gt;
-$$
-a\cdot(b\times e)=e\cdot(a\times b)
-$$&lt;p&gt;因此：&lt;/p&gt;
-$$
-(e\times a)\times(b\times e)=-\bigl(e\cdot(a\times b)\bigr)e
-$$&lt;p&gt;令：&lt;/p&gt;
-$$
-c=a\times b,\qquad s=c^Te
-$$&lt;p&gt;则分子为：&lt;/p&gt;
-$$
--se
-$$&lt;p&gt;定义：&lt;/p&gt;
-$$
-M_a=\|a\|^2I-aa^T,\qquad M_b=\|b\|^2I-bb^T
-$$&lt;p&gt;则：&lt;/p&gt;
-$$
-A=e^TM_ae=\|e\times a\|^2
-$$$$
-B=e^TM_be=\|b\times e\|^2
-$$&lt;p&gt;令：&lt;/p&gt;
-$$
-D=\sqrt A\sqrt B
-$$&lt;p&gt;最终得到：&lt;/p&gt;
-$$
-N(e)=-\frac{s}{D}e
-$$&lt;hr&gt;
-&lt;h2 id=&#34;2-雅可比矩阵&#34;&gt;2. 雅可比矩阵
-&lt;/h2&gt;&lt;p&gt;令：&lt;/p&gt;
-$$
-f(e)=\frac{s}{D}e
-$$&lt;p&gt;则：&lt;/p&gt;
-$$
-N=-f
-$$&lt;p&gt;因此：&lt;/p&gt;
-$$
-J_N=-\frac{\partial f}{\partial e}
-$$&lt;p&gt;其中：&lt;/p&gt;
-$$
-\frac{\partial(se)}{\partial e}=ec^T+sI
-$$&lt;p&gt;又因为：&lt;/p&gt;
-$$
-\frac{\partial A}{\partial e}=2M_ae,\qquad
-\frac{\partial B}{\partial e}=2M_be
-$$&lt;p&gt;所以：&lt;/p&gt;
-$$
-\frac{\partial D}{\partial e}
-=D(\frac{M_ae}{A}+\frac{M_be}{B})
-$$&lt;p&gt;由商法则：&lt;/p&gt;
-$$
-J_N=-\frac{s}{D}I-\frac{ec^T}{D}
-+\frac{s}{D}e(\frac{M_ae}{A}+\frac{M_be}{B})^T
-$$&lt;p&gt;进一步定义：&lt;/p&gt;
-$$
-M_e=\|e\|^2I-ee^T
-$$&lt;p&gt;得到：&lt;/p&gt;
-$$
-J_a=\frac{\partial N}{\partial a}
-=-\frac{e(b\times e)^T}{D}
-+\frac{s}{D}e(\frac{M_ea}{A})^T
-$$$$
-J_b=\frac{\partial N}{\partial b}
-=-\frac{e(e\times a)^T}{D}
-+\frac{s}{D}e(\frac{M_eb}{B})^T
-$$&lt;hr&gt;
-&lt;h2 id=&#34;3-三角网格中的能量梯度&#34;&gt;3. 三角网格中的能量梯度
-&lt;/h2&gt;&lt;p&gt;设中心顶点为 $v$，邻接顶点为 $v_i$。&lt;/p&gt;
-&lt;p&gt;对于邻接半边：&lt;/p&gt;
-$$
-he=(v_i,v),\qquad e=v-v_i
-$$&lt;p&gt;对应两个三角形的另外两个顶点记为 $p_2,p_3$，由上述公式计算 $N(he)$。&lt;/p&gt;
-&lt;p&gt;定义顶点能量：&lt;/p&gt;
-$$
-E(v)=\|\sum_iN(e_i)\|^2
+\boxed{
+e=p_1-p_0,\qquad
+a=p_2-p_0,\qquad
+b=p_3-p_0.
+}
 $$&lt;p&gt;记：&lt;/p&gt;
 $$
-\bar N(v)=\sum_iN(e_i)
-$$&lt;p&gt;对于顶点 $v$ 自身能量：&lt;/p&gt;
+\ell=\|e\|,
+\qquad
+x=e\times a,
+\qquad
+\alpha=\|x\|,
+$$$$
+y=b\times e,
+\qquad
+\beta=\|y\|.
+$$&lt;p&gt;三个单位向量为：&lt;/p&gt;
 $$
-\nabla_pE(v)=2(\sum_iJ_{N_i})^T\bar N(v)
-$$&lt;p&gt;邻接顶点能量同样会受到 $p_v$ 的影响。由于半边方向满足：&lt;/p&gt;
+u=\frac{e}{\ell},
+\qquad
+n_a=\frac{x}{\alpha},
+\qquad
+n_b=\frac{y}{\beta}.
+$$&lt;p&gt;带符号精确二面角仍定义为：&lt;/p&gt;
+&lt;h1 id=&#34;phi&#34;&gt;$$
+\boxed{
+\phi
+&lt;/h1&gt;&lt;p&gt;\operatorname{atan2}
+\left(
+-\ell,[e\cdot(a\times b)],
+(e\times a)\cdot(b\times e)
+\right).
+}
+$$&lt;/p&gt;
+&lt;p&gt;因此新的有向半边向量为：&lt;/p&gt;
 $$
-e=v-v_i
-$$&lt;p&gt;因此对邻接边贡献：&lt;/p&gt;
+\boxed{
+N_+(e)=\phi S_+,
+\qquad
+S_+=u+n_a+n_b.
+}
+$$&lt;h3 id=&#34;11-反向半边&#34;&gt;1.1 反向半边
+&lt;/h3&gt;&lt;p&gt;当前半边为：&lt;/p&gt;
 $$
-\nabla_pE_1(v)=2\sum_{he}
-J_{N_{he}}^T(\bar N(v)-\bar N(v_i))
-$$&lt;p&gt;其中 $he=(v_i,v)$。&lt;/p&gt;
+(p_0,p_1,p_2,p_3).
+$$&lt;p&gt;反向半边为：&lt;/p&gt;
+$$
+(p_1,p_0,p_3,p_2).
+$$&lt;p&gt;其局部向量满足：&lt;/p&gt;
+$$
+e^-=-e,
+\qquad
+a^-=b-e,
+\qquad
+b^-=a-e.
+$$&lt;p&gt;并且：&lt;/p&gt;
+$$
+e^-\times a^-=b\times e=y,
+$$$$
+b^-\times e^-=e\times a=x,
+$$$$
+\phi^-=\phi.
+$$&lt;p&gt;所以反向半边向量可以直接用正向半边的 (e,a,b) 写成：&lt;/p&gt;
+$$
+\boxed{
+N_-(e)=\phi S_-,
+\qquad
+S_-=-u+n_a+n_b.
+}
+$$&lt;p&gt;因此：&lt;/p&gt;
+$$
+\boxed{
+N_-(e)\neq -N_+(e).
+}
+$$&lt;p&gt;更具体地：&lt;/p&gt;
+$$
+\boxed{
+N_-(e)=N_+(e)-2\phi\frac{e}{\|e\|}.
+}
+$$&lt;p&gt;这一点与旧定义不同。因此后面的能量梯度不能再把正反半边贡献简单合并成
+(\bar N(v)-\bar N(v_i))。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;2-雅可比矩阵&#34;&gt;2. 雅可比矩阵
+&lt;/h2&gt;&lt;p&gt;定义叉乘矩阵 ([q]_\times)：&lt;/p&gt;
+$$
+[q]_\times r=q\times r.
+$$&lt;p&gt;定义三个单位向量的正交投影矩阵：&lt;/p&gt;
+$$
+\boxed{
+P_e
+=I-uu^T
+=I-\frac{ee^T}{\ell^2},
+}
+$$$$
+\boxed{
+P_a
+=I-n_an_a^T
+=I-\frac{xx^T}{\alpha^2},
+}
+$$$$
+\boxed{
+P_b
+=I-n_bn_b^T
+=I-\frac{yy^T}{\beta^2}.
+}
+$$&lt;h3 id=&#34;21-带符号角度-phi-的梯度&#34;&gt;2.1 带符号角度 (\phi) 的梯度
+&lt;/h3&gt;&lt;p&gt;对 (e) 的梯度：&lt;/p&gt;
+&lt;h1 id=&#34;fracpartialphipartial-e&#34;&gt;$$
+\boxed{
+g_e
+:=
+\frac{\partial\phi}{\partial e}
+&lt;/h1&gt;&lt;p&gt;\frac{a\cdot e}{\ell}
+\frac{x}{\alpha^2}
++
+\frac{b\cdot e}{\ell}
+\frac{y}{\beta^2}.
+}
+$$&lt;/p&gt;
+&lt;p&gt;对 (a) 的梯度：&lt;/p&gt;
+&lt;h1 id=&#34;fracpartialphipartial-a&#34;&gt;$$
+\boxed{
+g_a
+:=
+\frac{\partial\phi}{\partial a}
+&lt;/h1&gt;&lt;p&gt;-\ell\frac{x}{\alpha^2}.
+}
+$$&lt;/p&gt;
+&lt;p&gt;对 (b) 的梯度：&lt;/p&gt;
+&lt;h1 id=&#34;fracpartialphipartial-b&#34;&gt;$$
+\boxed{
+g_b
+:=
+\frac{\partial\phi}{\partial b}
+&lt;/h1&gt;&lt;p&gt;-\ell\frac{y}{\beta^2}.
+}
+$$&lt;/p&gt;
+&lt;p&gt;因此对四个原始顶点：&lt;/p&gt;
+$$
+\boxed{
+\frac{\partial\phi}{\partial p_1}=g_e,
+\qquad
+\frac{\partial\phi}{\partial p_2}=g_a,
+\qquad
+\frac{\partial\phi}{\partial p_3}=g_b,
+}
+$$$$
+\boxed{
+\frac{\partial\phi}{\partial p_0}
+=-(g_e+g_a+g_b).
+}
+$$&lt;h3 id=&#34;22-三个单位向量的雅可比&#34;&gt;2.2 三个单位向量的雅可比
+&lt;/h3&gt;&lt;p&gt;对于边方向：&lt;/p&gt;
+&lt;h1 id=&#34;fracpartial-upartial-e&#34;&gt;$$
+\boxed{
+\frac{\partial u}{\partial e}
+&lt;/h1&gt;&lt;p&gt;\frac{P_e}{\ell}.
+}
+$$&lt;/p&gt;
+&lt;p&gt;由于：&lt;/p&gt;
+$$
+dx=d(e\times a)
+=-[a]_\times de+[e]_\times da,
+$$&lt;p&gt;所以：&lt;/p&gt;
+$$
+\boxed{
+\frac{\partial n_a}{\partial e}
+=-\frac{P_a[a]_\times}{\alpha},
+}
+$$$$
+\boxed{
+\frac{\partial n_a}{\partial a}
+=\frac{P_a[e]_\times}{\alpha}.
+}
+$$&lt;p&gt;由于：&lt;/p&gt;
+$$
+dy=d(b\times e)
+=[b]_\times de-[e]_\times db,
+$$&lt;p&gt;所以：&lt;/p&gt;
+$$
+\boxed{
+\frac{\partial n_b}{\partial e}
+=\frac{P_b[b]_\times}{\beta},
+}
+$$$$
+\boxed{
+\frac{\partial n_b}{\partial b}
+=-\frac{P_b[e]_\times}{\beta}.
+}
+$$&lt;p&gt;其余交叉偏导均为零。&lt;/p&gt;
+&lt;h3 id=&#34;23-s_sigma-的雅可比&#34;&gt;2.3 (S_\sigma) 的雅可比
+&lt;/h3&gt;&lt;p&gt;为了同时表示正向和反向半边，令：&lt;/p&gt;
+$$
+\sigma\in\{+1,-1\},
+$$&lt;h1 id=&#34;s_sigma&#34;&gt;$$
+\boxed{
+S_\sigma
+&lt;/h1&gt;&lt;p&gt;\sigma u+n_a+n_b.
+}
+$$&lt;/p&gt;
+&lt;p&gt;其中：&lt;/p&gt;
+$$
+S_{+1}=S_+,
+\qquad
+S_{-1}=S_-.
+$$&lt;p&gt;则：&lt;/p&gt;
+&lt;h1 id=&#34;fracpartial-s_sigmapartial-e&#34;&gt;$$
+\boxed{
+J_{S,e}^{(\sigma)}
+:=
+\frac{\partial S_\sigma}{\partial e}
+&lt;/h1&gt;&lt;h2 id=&#34;sigmafracp_eell&#34;&gt;\sigma\frac{P_e}{\ell}
+&lt;/h2&gt;&lt;p&gt;\frac{P_a[a]&lt;em&gt;\times}{\alpha}
++
+\frac{P_b[b]&lt;/em&gt;\times}{\beta}.
+}
+$$&lt;/p&gt;
+&lt;h1 id=&#34;fracpartial-s_sigmapartial-a&#34;&gt;$$
+\boxed{
+J_{S,a}^{(\sigma)}
+:=
+\frac{\partial S_\sigma}{\partial a}
+&lt;/h1&gt;&lt;p&gt;\frac{P_a[e]_\times}{\alpha}.
+}
+$$&lt;/p&gt;
+&lt;h1 id=&#34;fracpartial-s_sigmapartial-b&#34;&gt;$$
+\boxed{
+J_{S,b}^{(\sigma)}
+:=
+\frac{\partial S_\sigma}{\partial b}
+&lt;/h1&gt;&lt;p&gt;-\frac{P_b[e]_\times}{\beta}.
+}
+$$&lt;/p&gt;
+&lt;p&gt;注意 (J_{S,a}^{(\sigma)}) 和 (J_{S,b}^{(\sigma)}) 与 (\sigma) 无关。&lt;/p&gt;
+&lt;h3 id=&#34;24-新半边向量-n_sigmaphi-s_sigma-的雅可比&#34;&gt;2.4 新半边向量 (N_\sigma=\phi S_\sigma) 的雅可比
+&lt;/h3&gt;&lt;p&gt;由乘积法则：&lt;/p&gt;
+$$
+dN_\sigma
+=S_\sigma\,d\phi+\phi\,dS_\sigma.
+$$&lt;p&gt;因此对 (e)：&lt;/p&gt;
+&lt;h1 id=&#34;fracpartial-n_sigmapartial-e&#34;&gt;$$
+\boxed{
+J_e^{(\sigma)}
+:=
+\frac{\partial N_\sigma}{\partial e}
+&lt;/h1&gt;&lt;h2 id=&#34;sigmafracp_eell-1&#34;&gt;S_\sigma g_e^T
++
+\phi
+\left(
+\sigma\frac{P_e}{\ell}
+&lt;/h2&gt;&lt;p&gt;\frac{P_a[a]&lt;em&gt;\times}{\alpha}
++
+\frac{P_b[b]&lt;/em&gt;\times}{\beta}
+\right).
+}
+$$&lt;/p&gt;
+&lt;p&gt;完全展开为：&lt;/p&gt;
+&lt;h2 id=&#34;sigmafracp_eell-2&#34;&gt;$$
+\boxed{
+\begin{aligned}
+J_e^{(\sigma)}
+={}&amp;amp;
+S_\sigma
+\left[
+\frac{a\cdot e}{\ell}
+\frac{x}{\alpha^2}
++
+\frac{b\cdot e}{\ell}
+\frac{y}{\beta^2}
+\right]^T
+\[4pt]
+&amp;amp;+
+\phi
+\left(
+\sigma\frac{P_e}{\ell}
+&lt;/h2&gt;&lt;p&gt;\frac{P_a[a]&lt;em&gt;\times}{\alpha}
++
+\frac{P_b[b]&lt;/em&gt;\times}{\beta}
+\right).
+\end{aligned}
+}
+$$&lt;/p&gt;
+&lt;p&gt;对 (a)：&lt;/p&gt;
+&lt;h1 id=&#34;fracpartial-n_sigmapartial-a&#34;&gt;$$
+\boxed{
+J_a^{(\sigma)}
+:=
+\frac{\partial N_\sigma}{\partial a}
+&lt;/h1&gt;&lt;p&gt;S_\sigma g_a^T
++
+\phi\frac{P_a[e]_\times}{\alpha}.
+}
+$$&lt;/p&gt;
+&lt;p&gt;即：&lt;/p&gt;
+&lt;h1 id=&#34;j_asigma&#34;&gt;$$
+\boxed{
+J_a^{(\sigma)}
+&lt;/h1&gt;&lt;p&gt;-\ell S_\sigma\frac{x^T}{\alpha^2}
++
+\phi\frac{P_a[e]_\times}{\alpha}.
+}
+$$&lt;/p&gt;
+&lt;p&gt;对 (b)：&lt;/p&gt;
+&lt;h1 id=&#34;fracpartial-n_sigmapartial-b&#34;&gt;$$
+\boxed{
+J_b^{(\sigma)}
+:=
+\frac{\partial N_\sigma}{\partial b}
+&lt;/h1&gt;&lt;h2 id=&#34;s_sigma-g_bt&#34;&gt;S_\sigma g_b^T
+&lt;/h2&gt;&lt;p&gt;\phi\frac{P_b[e]_\times}{\beta}.
+}
+$$&lt;/p&gt;
+&lt;p&gt;即：&lt;/p&gt;
+&lt;h1 id=&#34;j_bsigma&#34;&gt;$$
+\boxed{
+J_b^{(\sigma)}
+&lt;/h1&gt;&lt;h2 id=&#34;-ell-s_sigmafracytbeta2&#34;&gt;-\ell S_\sigma\frac{y^T}{\beta^2}
+&lt;/h2&gt;&lt;p&gt;\phi\frac{P_b[e]_\times}{\beta}.
+}
+$$&lt;/p&gt;
+&lt;p&gt;正向半边直接取 (\sigma=+1)：&lt;/p&gt;
+$$
+\boxed{
+J_e^+=J_e^{(+1)},
+\qquad
+J_a^+=J_a^{(+1)},
+\qquad
+J_b^+=J_b^{(+1)}.
+}
+$$&lt;p&gt;反向半边用同一组正向局部变量 (e,a,b) 表示时取 (\sigma=-1)：&lt;/p&gt;
+$$
+\boxed{
+J_e^-=J_e^{(-1)},
+\qquad
+J_a^-=J_a^{(-1)},
+\qquad
+J_b^-=J_b^{(-1)}.
+}
+$$&lt;h3 id=&#34;25-对四个顶点的雅可比&#34;&gt;2.5 对四个顶点的雅可比
+&lt;/h3&gt;&lt;p&gt;对于 (N_\sigma)，由于：&lt;/p&gt;
+$$
+de=dp_1-dp_0,
+\qquad
+da=dp_2-dp_0,
+\qquad
+db=dp_3-dp_0,
+$$&lt;p&gt;所以：&lt;/p&gt;
+$$
+\boxed{
+\frac{\partial N_\sigma}{\partial p_1}=J_e^{(\sigma)},
+\qquad
+\frac{\partial N_\sigma}{\partial p_2}=J_a^{(\sigma)},
+\qquad
+\frac{\partial N_\sigma}{\partial p_3}=J_b^{(\sigma)}.
+}
+$$$$
+\boxed{
+\frac{\partial N_\sigma}{\partial p_0}
+=-\left(
+J_e^{(\sigma)}
++J_a^{(\sigma)}
++J_b^{(\sigma)}
+\right).
+}
+$$&lt;p&gt;因此自动满足平移不变性：&lt;/p&gt;
+$$
+\boxed{
+\frac{\partial N_\sigma}{\partial p_0}
++
+\frac{\partial N_\sigma}{\partial p_1}
++
+\frac{\partial N_\sigma}{\partial p_2}
++
+\frac{\partial N_\sigma}{\partial p_3}
+=0.
+}
+$$&lt;h3 id=&#34;26-能量中直接使用的-jtr&#34;&gt;2.6 能量中直接使用的 (J^Tr)
+&lt;/h3&gt;&lt;p&gt;对于任意三维向量 (r)，有：&lt;/p&gt;
+&lt;h2 id=&#34;fracatimesp_aralpha&#34;&gt;$$
+\boxed{
+\begin{aligned}
+\left(J_e^{(\sigma)}\right)^Tr
+={}&amp;amp;
+g_e,(S_\sigma\cdot r)
+\[2pt]
+&amp;amp;+
+\phi\left[
+\sigma\frac{P_er}{\ell}
++
+\frac{a\times(P_ar)}{\alpha}
+&lt;/h2&gt;&lt;p&gt;\frac{b\times(P_br)}{\beta}
+\right].
+\end{aligned}
+}
+$$&lt;/p&gt;
+&lt;h1 id=&#34;leftj_asigmarighttr&#34;&gt;$$
+\boxed{
+\left(J_a^{(\sigma)}\right)^Tr
+&lt;/h1&gt;&lt;h2 id=&#34;g_as_sigmacdot-r&#34;&gt;g_a,(S_\sigma\cdot r)
+&lt;/h2&gt;&lt;p&gt;\phi\frac{e\times(P_ar)}{\alpha}.
+}
+$$&lt;/p&gt;
+&lt;h1 id=&#34;leftj_bsigmarighttr&#34;&gt;$$
+\boxed{
+\left(J_b^{(\sigma)}\right)^Tr
+&lt;/h1&gt;&lt;p&gt;g_b,(S_\sigma\cdot r)
++
+\phi\frac{e\times(P_br)}{\beta}.
+}
+$$&lt;/p&gt;
+&lt;p&gt;这三式可以直接用于能量梯度计算，不需要显式构造 (3\times3) 矩阵。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;3-三角网格中的能量梯度&#34;&gt;3. 三角网格中的能量梯度
+&lt;/h2&gt;&lt;p&gt;设所有指向顶点 (v) 的有向半边集合为：&lt;/p&gt;
+$$
+\mathcal H(v)=\{h=(v_i,v)\}.
+$$&lt;p&gt;定义：&lt;/p&gt;
+&lt;h1 id=&#34;bar-nv&#34;&gt;$$
+\boxed{
+\bar N(v)
+&lt;/h1&gt;&lt;p&gt;\sum_{h\in\mathcal H(v)}N(h).
+}
+$$&lt;/p&gt;
+&lt;p&gt;顶点能量为：&lt;/p&gt;
+$$
+\boxed{
+E(v)=\|\bar N(v)\|^2.
+}
+$$&lt;p&gt;整个网格总能量为：&lt;/p&gt;
+&lt;h1 id=&#34;mathcal-e&#34;&gt;$$
+\boxed{
+\mathcal E
+&lt;/h1&gt;&lt;p&gt;\sum_v|\bar N(v)|^2.
+}
+$$&lt;/p&gt;
+&lt;p&gt;对任意顶点 (p_v)，总梯度的一般形式为：&lt;/p&gt;
+&lt;h1 id=&#34;nabla_p_vmathcal-e&#34;&gt;$$
+\boxed{
+\nabla_{p_v}\mathcal E
+&lt;/h1&gt;&lt;p&gt;2\sum_q
+\left(
+\frac{\partial\bar N(q)}{\partial p_v}
+\right)^T
+\bar N(q).
+}
+$$&lt;/p&gt;
+&lt;p&gt;等价地，对所有局部四点结构中包含 (v) 的有向半边求和：&lt;/p&gt;
+&lt;h1 id=&#34;nabla_p_vmathcal-e-1&#34;&gt;$$
+\boxed{
+\nabla_{p_v}\mathcal E
+&lt;/h1&gt;&lt;p&gt;2\sum_{h:,v\in Q(h)}
+J_{h,v}^T,
+\bar N(\operatorname{head}(h)).
+}
+$$&lt;/p&gt;
+&lt;p&gt;其中 (Q(h)) 表示该半边对应的四个局部顶点。&lt;/p&gt;
+&lt;p&gt;完整梯度仍分为：&lt;/p&gt;
+&lt;h1 id=&#34;nabla_p_vmathcal-e-2&#34;&gt;$$
+\boxed{
+\nabla_{p_v}\mathcal E
+&lt;/h1&gt;&lt;p&gt;\nabla_pE_1(v)
++
+\nabla_pE_2(v).
+}
+$$&lt;/p&gt;
+&lt;p&gt;其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(E_1)：(v) 作为边端点时的贡献；&lt;/li&gt;
+&lt;li&gt;(E_2)：(v) 作为相邻三角形第三个顶点时的贡献。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;31-邻接半边贡献-e_1&#34;&gt;3.1 邻接半边贡献 (E_1)
+&lt;/h3&gt;&lt;p&gt;对每个邻接顶点 (v_i)，统一取正向半边：&lt;/p&gt;
+$$
+h=(v_i,v),
+$$&lt;p&gt;因此：&lt;/p&gt;
+$$
+p_0=v_i,
+\qquad
+p_1=v.
+$$&lt;p&gt;正向半边 (N_+) 进入 (\bar N(v))，反向半边 (N_-) 进入 (\bar N(v_i))。&lt;/p&gt;
+&lt;p&gt;由于移动 (v=p_1) 时，在正向局部变量中只改变 (e)，所以单条邻接边对梯度的贡献为：&lt;/p&gt;
+$$
+\boxed{
+2
+\left[
+(J_e^+)^T\bar N(v)
++
+(J_e^-)^T\bar N(v_i)
+\right].
+}
+$$&lt;p&gt;因此：&lt;/p&gt;
+&lt;h1 id=&#34;nabla_pe_1v&#34;&gt;$$
+\boxed{
+\nabla_pE_1(v)
+&lt;/h1&gt;&lt;p&gt;2\sum_{h=(v_i,v)}
+\left[
+(J_e^+)^T\bar N(v)
++
+(J_e^-)^T\bar N(v_i)
+\right].
+}
+$$&lt;/p&gt;
+&lt;p&gt;展开后得到：&lt;/p&gt;
+$$
+\boxed{
+\begin{aligned}
+\nabla_pE_1(v)
+=2\sum_{h=(v_i,v)}
+\Bigg\{
+&amp;g_e\Big[
+S_+\cdot\bar N(v)
++
+S_-\cdot\bar N(v_i)
+\Big]
+\\[3pt]
+&amp;+
+\phi\frac{P_e[\bar N(v)-\bar N(v_i)]}{\ell}
+\\[3pt]
+&amp;+
+\phi\frac{
+a\times P_a[\bar N(v)+\bar N(v_i)]
+}{\alpha}
+\\[3pt]
+&amp;-
+\phi\frac{
+b\times P_b[\bar N(v)+\bar N(v_i)]
+}{\beta}
+\Bigg\}.
+\end{aligned}
+}
+$$&lt;p&gt;这里每条半边的 (e,a,b,\phi,S_\pm,P_e,P_a,P_b,g_e) 都使用该半边自己的局部几何量。&lt;/p&gt;
+&lt;p&gt;与旧公式相比，只有边方向项出现
+(\bar N(v)-\bar N(v_i))，两个面法向方向项对应的是
+(\bar N(v)+\bar N(v_i))。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;4-环状边贡献&#34;&gt;4. 环状边贡献
-&lt;/h2&gt;&lt;p&gt;对于二环邻域中的半边：&lt;/p&gt;
+&lt;/h2&gt;&lt;p&gt;考虑二环邻域中的一条边：&lt;/p&gt;
 $$
-he=(v_j,v_i),\qquad e=v_i-v_j
-$$&lt;p&gt;如果 $v$ 是该半边对应三角形中的第三个顶点，则：&lt;/p&gt;
+h=(v_j,v_i),
+\qquad
+e=v_i-v_j.
+$$&lt;p&gt;取：&lt;/p&gt;
 $$
-K_{ij}=\frac{\partial N_h}{\partial p_v}=J_a
-$$&lt;p&gt;对应梯度贡献：&lt;/p&gt;
+p_0=v_j,
+\qquad
+p_1=v_i.
+$$&lt;p&gt;正向半边 (N_+) 进入 (\bar N(v_i))，反向半边 (N_-) 进入 (\bar N(v_j))。&lt;/p&gt;
+&lt;p&gt;记：&lt;/p&gt;
 $$
-\nabla_pE_2(v)=2\sum_{he}K_{ij}^T(\bar N(v_i)-\bar N(v_j))
-$$&lt;p&gt;最终：&lt;/p&gt;
+\bar N_i=\bar N(v_i),
+\qquad
+\bar N_j=\bar N(v_j).
+$$&lt;h3 id=&#34;41-当前顶点-vp_2&#34;&gt;4.1 当前顶点 (v=p_2)
+&lt;/h3&gt;&lt;p&gt;此时：&lt;/p&gt;
 $$
-\nabla_pE(v)=\nabla_pE_1(v)+\nabla_pE_2(v)
-$$&lt;hr&gt;
+a=v-v_j.
+$$&lt;p&gt;移动 (v) 只改变局部变量 (a)。&lt;/p&gt;
+&lt;p&gt;单条环状边的贡献为：&lt;/p&gt;
+$$
+\boxed{
+2
+\left[
+(J_a^+)^T\bar N_i
++
+(J_a^-)^T\bar N_j
+\right].
+}
+$$&lt;p&gt;因此：&lt;/p&gt;
+&lt;h1 id=&#34;nabla_pe_2av&#34;&gt;$$
+\boxed{
+\nabla_pE_{2,a}(v)
+&lt;/h1&gt;&lt;p&gt;2\sum_{h=(v_j,v_i),,v=p_2}
+\left[
+(J_a^+)^T\bar N_i
++
+(J_a^-)^T\bar N_j
+\right].
+}
+$$&lt;/p&gt;
+&lt;p&gt;展开为：&lt;/p&gt;
+$$
+\boxed{
+\begin{aligned}
+\nabla_pE_{2,a}(v)
+=2\sum_{h=(v_j,v_i),\,v=p_2}
+\Bigg\{
+&amp;g_a
+\Big[
+S_+\cdot\bar N_i
++
+S_-\cdot\bar N_j
+\Big]
+\\[3pt]
+&amp;-
+\phi
+\frac{
+e\times P_a(\bar N_i+\bar N_j)
+}{\alpha}
+\Bigg\}.
+\end{aligned}
+}
+$$&lt;p&gt;其中：&lt;/p&gt;
+$$
+\boxed{
+g_a=-\ell\frac{x}{\alpha^2}.}
+$$&lt;h3 id=&#34;42-当前顶点-vp_3&#34;&gt;4.2 当前顶点 (v=p_3)
+&lt;/h3&gt;&lt;p&gt;此时：&lt;/p&gt;
+$$
+b=v-v_j.
+$$&lt;p&gt;移动 (v) 只改变局部变量 (b)。&lt;/p&gt;
+&lt;p&gt;单条环状边的贡献为：&lt;/p&gt;
+$$
+\boxed{
+2
+\left[
+(J_b^+)^T\bar N_i
++
+(J_b^-)^T\bar N_j
+\right].
+}
+$$&lt;p&gt;因此：&lt;/p&gt;
+&lt;h1 id=&#34;nabla_pe_2bv&#34;&gt;$$
+\boxed{
+\nabla_pE_{2,b}(v)
+&lt;/h1&gt;&lt;p&gt;2\sum_{h=(v_j,v_i),,v=p_3}
+\left[
+(J_b^+)^T\bar N_i
++
+(J_b^-)^T\bar N_j
+\right].
+}
+$$&lt;/p&gt;
+&lt;p&gt;展开为：&lt;/p&gt;
+$$
+\boxed{
+\begin{aligned}
+\nabla_pE_{2,b}(v)
+=2\sum_{h=(v_j,v_i),\,v=p_3}
+\Bigg\{
+&amp;g_b
+\Big[
+S_+\cdot\bar N_i
++
+S_-\cdot\bar N_j
+\Big]
+\\[3pt]
+&amp;+
+\phi
+\frac{
+e\times P_b(\bar N_i+\bar N_j)
+}{\beta}
+\Bigg\}.
+\end{aligned}
+}
+$$&lt;p&gt;其中：&lt;/p&gt;
+$$
+\boxed{
+g_b=-\ell\frac{y}{\beta^2}.}
+$$&lt;p&gt;因此：&lt;/p&gt;
+&lt;h1 id=&#34;nabla_pe_2v&#34;&gt;$$
+\boxed{
+\nabla_pE_2(v)
+&lt;/h1&gt;&lt;p&gt;\nabla_pE_{2,a}(v)
++
+\nabla_pE_{2,b}(v),
+}
+$$&lt;/p&gt;
+&lt;p&gt;最终顶点总梯度为：&lt;/p&gt;
+&lt;h1 id=&#34;nabla_p_vmathcal-e-3&#34;&gt;$$
+\boxed{
+\nabla_{p_v}\mathcal E
+&lt;/h1&gt;&lt;p&gt;\nabla_pE_1(v)
++
+\nabla_pE_{2,a}(v)
++
+\nabla_pE_{2,b}(v).
+}
+$$&lt;/p&gt;
+&lt;p&gt;如果拓扑遍历可以统一选择半边方向，使待求顶点始终位于 (p_2)，则实现中只需要保留 (E_{2,a}) 分支。&lt;/p&gt;
+&lt;hr&gt;
 &lt;h2 id=&#34;5-退化情况与边界处理&#34;&gt;5. 退化情况与边界处理
-&lt;/h2&gt;&lt;p&gt;当：&lt;/p&gt;
+&lt;/h2&gt;&lt;h3 id=&#34;51-零长度边&#34;&gt;5.1 零长度边
+&lt;/h3&gt;&lt;p&gt;当：&lt;/p&gt;
 $$
-e\times a=0\quad\text{或}\quad e\times b=0
-$$&lt;p&gt;表示三角形退化，此时分母为零，应跳过该半边梯度计算。&lt;/p&gt;
-&lt;p&gt;对于边界半边，由于缺少相邻三角形，可以采用：&lt;/p&gt;
+\boxed{
+\ell=\|e\|=0,
+}
+$$&lt;p&gt;则 (e/|e|) 和对应雅可比无法定义，应跳过该半边。&lt;/p&gt;
+&lt;h3 id=&#34;52-退化三角形&#34;&gt;5.2 退化三角形
+&lt;/h3&gt;&lt;p&gt;当：&lt;/p&gt;
+$$
+\boxed{
+\alpha=\|e\times a\|=0
+}
+$$&lt;p&gt;或：&lt;/p&gt;
+$$
+\boxed{
+\beta=\|b\times e\|=0,
+}
+$$&lt;p&gt;对应三角形退化，(n_a,n_b)、角度梯度和雅可比均无法定义，应跳过该半边或先修复网格。&lt;/p&gt;
+&lt;p&gt;实际计算建议使用阈值：&lt;/p&gt;
+$$
+\|e\times a\|^2
+\le
+\varepsilon_{area}^2\|e\|^2\|a\|^2,
+$$$$
+\|b\times e\|^2
+\le
+\varepsilon_{area}^2\|b\|^2\|e\|^2.
+$$&lt;h3 id=&#34;53-phi0&#34;&gt;5.3 (\phi=0)
+&lt;/h3&gt;&lt;p&gt;平面状态 (\phi=0) 不是退化情况。&lt;/p&gt;
+&lt;p&gt;此时：&lt;/p&gt;
+$$
+N_+=N_-=0,
+$$&lt;p&gt;但是 (J_e,J_a,J_b) 中的 (S_\sigma g^T) 项一般仍然存在，因此不能因为 (\phi=0) 就直接把雅可比设为零。&lt;/p&gt;
+&lt;h3 id=&#34;54-接近-180circ-翻折&#34;&gt;5.4 接近 (180^\circ) 翻折
+&lt;/h3&gt;&lt;p&gt;当：&lt;/p&gt;
+$$
+(e\times a)\cdot(b\times e)&lt;0
+$$&lt;p&gt;且 &lt;code&gt;atan2&lt;/code&gt; 的第一个参数接近零时，(|\phi|\approx\pi)。&lt;/p&gt;
+&lt;p&gt;此时 (\phi) 位于 (+\pi/-\pi) 分支附近，角度本身不连续。建议检测并跳过完全翻折状态，或者对 (\phi) 做跨迭代连续展开。&lt;/p&gt;
+&lt;h3 id=&#34;55-边界半边&#34;&gt;5.5 边界半边
+&lt;/h3&gt;&lt;p&gt;边界半边缺少一个相邻三角形，因此无法同时定义：&lt;/p&gt;
+$$
+\frac{e\times a}{\|e\times a\|},
+\qquad
+\frac{b\times e}{\|b\times e\|},
+\qquad
+\phi.
+$$&lt;p&gt;可以采用：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;直接跳过边界半边；&lt;/li&gt;
-&lt;li&gt;使用单位化边方向近似 $N(he)$；&lt;/li&gt;
-&lt;li&gt;构造虚拟顶点形成虚拟三角形，使 $N(he)$ 可以继续计算。&lt;/li&gt;
+&lt;li&gt;跳过边界半边；&lt;/li&gt;
+&lt;li&gt;固定边界顶点；&lt;/li&gt;
+&lt;li&gt;构造 ghost 顶点补齐第二个三角形。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;若采用虚拟顶点，可利用相邻边界半边相关顶点的重心作为虚拟点位置，细节则各自决定即可。&lt;/p&gt;
-</description>
+&lt;p&gt;如果 ghost 顶点依赖真实顶点：&lt;/p&gt;
+$$
+p_g=\sum_kw_kp_k,
+$$&lt;p&gt;则严格梯度还需要链式回传：&lt;/p&gt;
+$$
+\boxed{
+\frac{\partial\mathcal E}{\partial p_k}
+\mathrel{+}=
+w_k
+\frac{\partial\mathcal E}{\partial p_g}.
+}
+$$</description>
         </item>
         <item>
         <title>Qem算法</title>
