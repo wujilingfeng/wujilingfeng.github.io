@@ -13,9 +13,7 @@ image = "image.png"
 
 $$
 \boxed{
-N(e)
-=
-\phi\left(
+N(e) =\phi\left(
 \frac{e}{\|e\|}
 +
 \frac{e\times a}{\|e\times a\|}
@@ -71,9 +69,7 @@ $$
 
 $$
 \boxed{
-\phi
-=
-\operatorname{atan2}
+\phi=\operatorname{atan2}
 \left(
 -\ell\,[e\cdot(a\times b)],
 (e\times a)\cdot(b\times e)
