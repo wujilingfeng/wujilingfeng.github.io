@@ -3,7 +3,7 @@ author = 'libo'
 date = '2026-08-19T00:00:00+08:00'
 math = true
 draft = false
-title = '新的曲面平滑算法'
+title = '新的曲面平滑算法 '
 image = "image.png"
 +++
 
