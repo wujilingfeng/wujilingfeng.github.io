@@ -184,8 +184,7 @@ $$
 
 $$
 \boxed{
-P_b
-=I-n_bn_b^T
+P_b=I-n_bn_b^T
 =I-\frac{yy^T}{\beta^2}.
 }
 $$
@@ -196,11 +195,7 @@ $$
 
 $$
 \boxed{
-g_e
-:=
-\frac{\partial\phi}{\partial e}
-=
-\frac{a\cdot e}{\ell}
+g_e:=\frac{\partial\phi}{\partial e}=\frac{a\cdot e}{\ell}
 \frac{x}{\alpha^2}
 +
 \frac{b\cdot e}{\ell}
@@ -212,11 +207,7 @@ $$
 
 $$
 \boxed{
-g_a
-:=
-\frac{\partial\phi}{\partial a}
-=
--\ell\frac{x}{\alpha^2}.
+g_a:=\frac{\partial\phi}{\partial a}=-\ell\frac{x}{\alpha^2}.
 }
 $$
 
@@ -224,11 +215,7 @@ $$
 
 $$
 \boxed{
-g_b
-:=
-\frac{\partial\phi}{\partial b}
-=
--\ell\frac{y}{\beta^2}.
+g_b:=\frac{\partial\phi}{\partial b}=-\ell\frac{y}{\beta^2}.
 }
 $$
 
@@ -246,8 +233,7 @@ $$
 
 $$
 \boxed{
-\frac{\partial\phi}{\partial p_0}
-=-(g_e+g_a+g_b).
+\frac{\partial\phi}{\partial p_0}=-(g_e+g_a+g_b).
 }
 $$
 
@@ -257,9 +243,7 @@ $$
 
 $$
 \boxed{
-\frac{\partial u}{\partial e}
-=
-\frac{P_e}{\ell}.
+\frac{\partial u}{\partial e}=\frac{P_e}{\ell}.
 }
 $$
 
@@ -321,9 +305,7 @@ $$
 
 $$
 \boxed{
-S_\sigma
-=
-\sigma u+n_a+n_b.
+S_\sigma=\sigma u+n_a+n_b.
 }
 $$
 
@@ -339,11 +321,7 @@ $$
 
 $$
 \boxed{
-J_{S,e}^{(\sigma)}
-:=
-\frac{\partial S_\sigma}{\partial e}
-=
-\sigma\frac{P_e}{\ell}
+J_{S,e}^{(\sigma)}:=\frac{\partial S_\sigma}{\partial e}=\sigma\frac{P_e}{\ell}
 -
 \frac{P_a[a]_\times}{\alpha}
 +
@@ -353,21 +331,13 @@ $$
 
 $$
 \boxed{
-J_{S,a}^{(\sigma)}
-:=
-\frac{\partial S_\sigma}{\partial a}
-=
-\frac{P_a[e]_\times}{\alpha}.
+J_{S,a}^{(\sigma)}:=\frac{\partial S_\sigma}{\partial a}=\frac{P_a[e]_\times}{\alpha}.
 }
 $$
 
 $$
 \boxed{
-J_{S,b}^{(\sigma)}
-:=
-\frac{\partial S_\sigma}{\partial b}
-=
--\frac{P_b[e]_\times}{\beta}.
+J_{S,b}^{(\sigma)}:=\frac{\partial S_\sigma}{\partial b}=-\frac{P_b[e]_\times}{\beta}.
 }
 $$
 
@@ -386,11 +356,7 @@ $$
 
 $$
 \boxed{
-J_e^{(\sigma)}
-:=
-\frac{\partial N_\sigma}{\partial e}
-=
-S_\sigma g_e^T
+J_e^{(\sigma)}:=\frac{\partial N_\sigma}{\partial e}=S_\sigma g_e^T
 +
 \phi
 \left(
@@ -436,11 +402,7 @@ $$
 
 $$
 \boxed{
-J_a^{(\sigma)}
-:=
-\frac{\partial N_\sigma}{\partial a}
-=
-S_\sigma g_a^T
+J_a^{(\sigma)}:=\frac{\partial N_\sigma}{\partial a}=S_\sigma g_a^T
 +
 \phi\frac{P_a[e]_\times}{\alpha}.
 }
@@ -450,9 +412,7 @@ $$
 
 $$
 \boxed{
-J_a^{(\sigma)}
-=
--\ell S_\sigma\frac{x^T}{\alpha^2}
+J_a^{(\sigma)}=-\ell S_\sigma\frac{x^T}{\alpha^2}
 +
 \phi\frac{P_a[e]_\times}{\alpha}.
 }
@@ -462,9 +422,7 @@ $$
 
 $$
 \boxed{
-J_b^{(\sigma)}
-:=
-\frac{\partial N_\sigma}{\partial b}
+J_b^{(\sigma)}:=\frac{\partial N_\sigma}{\partial b}
 =
 S_\sigma g_b^T
 -
@@ -476,9 +434,7 @@ $$
 
 $$
 \boxed{
-J_b^{(\sigma)}
-=
--\ell S_\sigma\frac{y^T}{\beta^2}
+J_b^{(\sigma)}=-\ell S_\sigma\frac{y^T}{\beta^2}
 -
 \phi\frac{P_b[e]_\times}{\beta}.
 }
@@ -583,9 +539,7 @@ $$
 
 $$
 \boxed{
-\left(J_a^{(\sigma)}\right)^Tr
-=
- g_a\,(S_\sigma\cdot r)
+\left(J_a^{(\sigma)}\right)^Tr=g_a\,(S_\sigma\cdot r)
 -
 \phi\frac{e\times(P_ar)}{\alpha}.
 }
@@ -593,9 +547,7 @@ $$
 
 $$
 \boxed{
-\left(J_b^{(\sigma)}\right)^Tr
-=
- g_b\,(S_\sigma\cdot r)
+\left(J_b^{(\sigma)}\right)^Tr=g_b\,(S_\sigma\cdot r)
 +
 \phi\frac{e\times(P_br)}{\beta}.
 }
@@ -617,9 +569,7 @@ $$
 
 $$
 \boxed{
-\bar N(v)
-=
-\sum_{h\in\mathcal H(v)}N(h).
+\bar N(v)=\sum_{h\in\mathcal H(v)}N(h).
 }
 $$
 
@@ -635,9 +585,7 @@ $$
 
 $$
 \boxed{
-\mathcal E
-=
-\sum_v\|\bar N(v)\|^2.
+\mathcal E=\sum_v\|\bar N(v)\|^2.
 }
 $$
 
@@ -645,9 +593,7 @@ $$
 
 $$
 \boxed{
-\nabla_{p_v}\mathcal E
-=
-2\sum_q
+\nabla_{p_v}\mathcal E=2\sum_q
 \left(
 \frac{\partial\bar N(q)}{\partial p_v}
 \right)^T
@@ -659,9 +605,7 @@ $$
 
 $$
 \boxed{
-\nabla_{p_v}\mathcal E
-=
-2\sum_{h:\,v\in Q(h)}
+\nabla_{p_v}\mathcal E=2\sum_{h:\,v\in Q(h)}
 J_{h,v}^T\,
 \bar N(\operatorname{head}(h)).
 }
@@ -673,9 +617,7 @@ $$
 
 $$
 \boxed{
-\nabla_{p_v}\mathcal E
-=
-\nabla_pE_1(v)
+\nabla_{p_v}\mathcal E=\nabla_pE_1(v)
 +
 \nabla_pE_2(v).
 }
@@ -708,8 +650,7 @@ $$
 
 $$
 \boxed{
-2
-\left[
+2\left[
 (J_e^+)^T\bar N(v)
 +
 (J_e^-)^T\bar N(v_i)
@@ -721,9 +662,7 @@ $$
 
 $$
 \boxed{
-\nabla_pE_1(v)
-=
-2\sum_{h=(v_i,v)}
+\nabla_pE_1(v)=2\sum_{h=(v_i,v)}
 \left[
 (J_e^+)^T\bar N(v)
 +
@@ -813,8 +752,7 @@ $$
 
 $$
 \boxed{
-2
-\left[
+2\left[
 (J_a^+)^T\bar N_i
 +
 (J_a^-)^T\bar N_j
@@ -826,9 +764,7 @@ $$
 
 $$
 \boxed{
-\nabla_pE_{2,a}(v)
-=
-2\sum_{h=(v_j,v_i),\,v=p_2}
+\nabla_pE_{2,a}(v)=2\sum_{h=(v_j,v_i),\,v=p_2}
 \left[
 (J_a^+)^T\bar N_i
 +
@@ -883,8 +819,7 @@ $$
 
 $$
 \boxed{
-2
-\left[
+2\left[
 (J_b^+)^T\bar N_i
 +
 (J_b^-)^T\bar N_j
@@ -896,9 +831,7 @@ $$
 
 $$
 \boxed{
-\nabla_pE_{2,b}(v)
-=
-2\sum_{h=(v_j,v_i),\,v=p_3}
+\nabla_pE_{2,b}(v)=2\sum_{h=(v_j,v_i),\,v=p_3}
 \left[
 (J_b^+)^T\bar N_i
 +
@@ -943,9 +876,7 @@ $$
 
 $$
 \boxed{
-\nabla_pE_2(v)
-=
-\nabla_pE_{2,a}(v)
+\nabla_pE_2(v)=\nabla_pE_{2,a}(v)
 +
 \nabla_pE_{2,b}(v),
 }
@@ -955,9 +886,7 @@ $$
 
 $$
 \boxed{
-\nabla_{p_v}\mathcal E
-=
-\nabla_pE_1(v)
+\nabla_{p_v}\mathcal E=\nabla_pE_1(v)
 +
 \nabla_pE_{2,a}(v)
 +

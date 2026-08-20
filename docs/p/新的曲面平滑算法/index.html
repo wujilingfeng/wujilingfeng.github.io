@@ -369,45 +369,25 @@
     <li><a href="#2-雅可比矩阵">2. 雅可比矩阵</a>
       <ol>
         <li><a href="#21-带符号角度-leftphiright-的梯度">2.1 带符号角度 $\left(\phi\right)$ 的梯度</a></li>
-      </ol>
-    </li>
-  </ol>
-
-  <ol>
-    <li>
-      <ol>
         <li><a href="#22-三个单位向量的雅可比">2.2 三个单位向量的雅可比</a></li>
-      </ol>
-    </li>
-  </ol>
-
-  <ol>
-    <li>
-      <ol>
         <li><a href="#23-lefts_sigmaright-的雅可比">2.3 $\left(S_\sigma\right)$ 的雅可比</a></li>
       </ol>
     </li>
-  </ol>
-
-  <ol>
-    <li><a href="#sigmafracp_eell">\sigma\frac{P_e}{\ell}</a></li>
-  </ol>
-
-  <ol>
-    <li>
+    <li><a href="#j_sesigmafracpartial-s_sigmapartial-esigmafracp_eell">$$
+\boxed{
+J_{S,e}^{(\sigma)}:=\frac{\partial S_\sigma}{\partial e}=\sigma\frac{P_e}{\ell}</a>
       <ol>
         <li><a href="#24-新半边向量-leftn_sigmaphi-s_sigmaright-的雅可比">2.4 新半边向量 $\left(N_\sigma=\phi S_\sigma\right)$ 的雅可比</a></li>
       </ol>
     </li>
-  </ol>
-
-  <ol>
-    <li><a href="#sigmafracp_eell-1">S_\sigma g_e^T
+    <li><a href="#sigmafracp_eell">$$
+\boxed{
+J_e^{(\sigma)}:=\frac{\partial N_\sigma}{\partial e}=S_\sigma g_e^T
 +
 \phi
 \left(
 \sigma\frac{P_e}{\ell}</a></li>
-    <li><a href="#sigmafracp_eell-2">$$
+    <li><a href="#sigmafracp_eell-1">$$
 \boxed{
 \begin{aligned}
 J_e^{(\sigma)}
@@ -429,10 +409,9 @@ S_\sigma
 
   <ol>
     <li><a href="#s_sigma-g_bt">S_\sigma g_b^T</a></li>
-  </ol>
-
-  <ol>
-    <li><a href="#-ell-s_sigmafracytbeta2">-\ell S_\sigma\frac{y^T}{\beta^2}</a>
+    <li><a href="#j_bsigma-ell-s_sigmafracytbeta2">$$
+\boxed{
+J_b^{(\sigma)}=-\ell S_\sigma\frac{y^T}{\beta^2}</a>
       <ol>
         <li><a href="#25-对四个顶点的雅可比">2.5 对四个顶点的雅可比</a></li>
         <li><a href="#26-能量中直接使用的-leftjtrright">2.6 能量中直接使用的 $\left(J^Tr\right)$</a></li>
@@ -450,41 +429,20 @@ g_e,(S_\sigma\cdot r)
 \sigma\frac{P_er}{\ell}
 +
 \frac{a\times(P_ar)}{\alpha}</a></li>
-  </ol>
-
-  <ol>
-    <li><a href="#g_as_sigmacdot-r">g_a,(S_\sigma\cdot r)</a></li>
-  </ol>
-
-  <ol>
-    <li><a href="#3-三角网格中的能量梯度">3. 三角网格中的能量梯度</a></li>
-  </ol>
-
-  <ol>
-    <li>
+    <li><a href="#leftj_asigmarighttrg_as_sigmacdot-r">$$
+\boxed{
+\left(J_a^{(\sigma)}\right)^Tr=g_a,(S_\sigma\cdot r)</a></li>
+    <li><a href="#3-三角网格中的能量梯度">3. 三角网格中的能量梯度</a>
       <ol>
         <li><a href="#31-邻接半边贡献-lefte_1right">3.1 邻接半边贡献 $\left(E_1\right)$</a></li>
       </ol>
     </li>
-  </ol>
-
-  <ol>
     <li><a href="#4-环状边贡献">4. 环状边贡献</a>
       <ol>
         <li><a href="#41-当前顶点-leftvp_2right">4.1 当前顶点 $\left(v=p_2\right)$</a></li>
-      </ol>
-    </li>
-  </ol>
-
-  <ol>
-    <li>
-      <ol>
         <li><a href="#42-当前顶点-leftvp_3right">4.2 当前顶点 $\left(v=p_3\right)$</a></li>
       </ol>
     </li>
-  </ol>
-
-  <ol>
     <li><a href="#5-退化情况与边界处理">5. 退化情况与边界处理</a>
       <ol>
         <li><a href="#51-零长度边">5.1 零长度边</a></li>
@@ -693,43 +651,30 @@ P_a
 }
 $$$$
 \boxed{
-P_b
-=I-n_bn_b^T
+P_b=I-n_bn_b^T
 =I-\frac{yy^T}{\beta^2}.
 }
 $$<h3 id="21-带符号角度-leftphiright-的梯度">2.1 带符号角度 $\left(\phi\right)$ 的梯度
 </h3><p>对 $\left(e\right)$ 的梯度：</p>
-<h1 id="fracpartialphipartial-e">$$
+$$
 \boxed{
-g_e
-:=
-\frac{\partial\phi}{\partial e}
-</h1><p>\frac{a\cdot e}{\ell}
+g_e:=\frac{\partial\phi}{\partial e}=\frac{a\cdot e}{\ell}
 \frac{x}{\alpha^2}
 +
 \frac{b\cdot e}{\ell}
 \frac{y}{\beta^2}.
 }
-$$</p>
-<p>对 $\left(a\right)$ 的梯度：</p>
-<h1 id="fracpartialphipartial-a">$$
+$$<p>对 $\left(a\right)$ 的梯度：</p>
+$$
 \boxed{
-g_a
-:=
-\frac{\partial\phi}{\partial a}
-</h1><p>-\ell\frac{x}{\alpha^2}.
+g_a:=\frac{\partial\phi}{\partial a}=-\ell\frac{x}{\alpha^2}.
 }
-$$</p>
-<p>对 $\left(b\right)$ 的梯度：</p>
-<h1 id="fracpartialphipartial-b">$$
+$$<p>对 $\left(b\right)$ 的梯度：</p>
+$$
 \boxed{
-g_b
-:=
-\frac{\partial\phi}{\partial b}
-</h1><p>-\ell\frac{y}{\beta^2}.
+g_b:=\frac{\partial\phi}{\partial b}=-\ell\frac{y}{\beta^2}.
 }
-$$</p>
-<p>因此对四个原始顶点：</p>
+$$<p>因此对四个原始顶点：</p>
 $$
 \boxed{
 \frac{\partial\phi}{\partial p_1}=g_e,
@@ -740,18 +685,15 @@ $$
 }
 $$$$
 \boxed{
-\frac{\partial\phi}{\partial p_0}
-=-(g_e+g_a+g_b).
+\frac{\partial\phi}{\partial p_0}=-(g_e+g_a+g_b).
 }
 $$<h3 id="22-三个单位向量的雅可比">2.2 三个单位向量的雅可比
 </h3><p>对于边方向：</p>
-<h1 id="fracpartial-upartial-e">$$
+$$
 \boxed{
-\frac{\partial u}{\partial e}
-</h1><p>\frac{P_e}{\ell}.
+\frac{\partial u}{\partial e}=\frac{P_e}{\ell}.
 }
-$$</p>
-<p>由于：</p>
+$$<p>由于：</p>
 $$
 dx=d(e\times a)
 =-[a]_\times de+[e]_\times da,
@@ -786,58 +728,42 @@ $$<p>其余交叉偏导均为零。</p>
 </h3><p>为了同时表示正向和反向半边，令：</p>
 $$
 \sigma\in\{+1,-1\},
-$$<h1 id="s_sigma">$$
+$$$$
 \boxed{
-S_\sigma
-</h1><p>\sigma u+n_a+n_b.
+S_\sigma=\sigma u+n_a+n_b.
 }
-$$</p>
-<p>其中：</p>
+$$<p>其中：</p>
 $$
 S_{+1}=S_+,
 \qquad
 S_{-1}=S_-.
 $$<p>则：</p>
-<h1 id="fracpartial-s_sigmapartial-e">$$
+<h2 id="j_sesigmafracpartial-s_sigmapartial-esigmafracp_eell">$$
 \boxed{
-J_{S,e}^{(\sigma)}
-:=
-\frac{\partial S_\sigma}{\partial e}
-</h1><h2 id="sigmafracp_eell">\sigma\frac{P_e}{\ell}
+J_{S,e}^{(\sigma)}:=\frac{\partial S_\sigma}{\partial e}=\sigma\frac{P_e}{\ell}
 </h2><p>\frac{P_a[a]<em>\times}{\alpha}
 +
 \frac{P_b[b]</em>\times}{\beta}.
 }
 $$</p>
-<h1 id="fracpartial-s_sigmapartial-a">$$
+$$
 \boxed{
-J_{S,a}^{(\sigma)}
-:=
-\frac{\partial S_\sigma}{\partial a}
-</h1><p>\frac{P_a[e]_\times}{\alpha}.
+J_{S,a}^{(\sigma)}:=\frac{\partial S_\sigma}{\partial a}=\frac{P_a[e]_\times}{\alpha}.
 }
-$$</p>
-<h1 id="fracpartial-s_sigmapartial-b">$$
+$$$$
 \boxed{
-J_{S,b}^{(\sigma)}
-:=
-\frac{\partial S_\sigma}{\partial b}
-</h1><p>-\frac{P_b[e]_\times}{\beta}.
+J_{S,b}^{(\sigma)}:=\frac{\partial S_\sigma}{\partial b}=-\frac{P_b[e]_\times}{\beta}.
 }
-$$</p>
-<p>注意 $\left(J_{S,a}^{(\sigma)}\right)$ 和 $\left(J_{S,b}^{(\sigma)}\right)$ 与 $\left(\sigma\right)$ 无关。</p>
+$$<p>注意 $\left(J_{S,a}^{(\sigma)}\right)$ 和 $\left(J_{S,b}^{(\sigma)}\right)$ 与 $\left(\sigma\right)$ 无关。</p>
 <h3 id="24-新半边向量-leftn_sigmaphi-s_sigmaright-的雅可比">2.4 新半边向量 $\left(N_\sigma=\phi S_\sigma\right)$ 的雅可比
 </h3><p>由乘积法则：</p>
 $$
 dN_\sigma
 =S_\sigma\,d\phi+\phi\,dS_\sigma.
 $$<p>因此对 $\left(e\right)$：</p>
-<h1 id="fracpartial-n_sigmapartial-e">$$
+<h2 id="sigmafracp_eell">$$
 \boxed{
-J_e^{(\sigma)}
-:=
-\frac{\partial N_\sigma}{\partial e}
-</h1><h2 id="sigmafracp_eell-1">S_\sigma g_e^T
+J_e^{(\sigma)}:=\frac{\partial N_\sigma}{\partial e}=S_\sigma g_e^T
 +
 \phi
 \left(
@@ -849,7 +775,7 @@ J_e^{(\sigma)}
 }
 $$</p>
 <p>完全展开为：</p>
-<h2 id="sigmafracp_eell-2">$$
+<h2 id="sigmafracp_eell-1">$$
 \boxed{
 \begin{aligned}
 J_e^{(\sigma)}
@@ -875,40 +801,31 @@ S_\sigma
 }
 $$</p>
 <p>对 $\left(a\right)$：</p>
-<h1 id="fracpartial-n_sigmapartial-a">$$
+$$
 \boxed{
-J_a^{(\sigma)}
-:=
-\frac{\partial N_\sigma}{\partial a}
-</h1><p>S_\sigma g_a^T
+J_a^{(\sigma)}:=\frac{\partial N_\sigma}{\partial a}=S_\sigma g_a^T
 +
 \phi\frac{P_a[e]_\times}{\alpha}.
 }
-$$</p>
-<p>即：</p>
-<h1 id="j_asigma">$$
+$$<p>即：</p>
+$$
 \boxed{
-J_a^{(\sigma)}
-</h1><p>-\ell S_\sigma\frac{x^T}{\alpha^2}
+J_a^{(\sigma)}=-\ell S_\sigma\frac{x^T}{\alpha^2}
 +
 \phi\frac{P_a[e]_\times}{\alpha}.
 }
-$$</p>
-<p>对 $\left(b\right)$：</p>
-<h1 id="fracpartial-n_sigmapartial-b">$$
+$$<p>对 $\left(b\right)$：</p>
+<h1 id="j_bsigmafracpartial-n_sigmapartial-b">$$
 \boxed{
-J_b^{(\sigma)}
-:=
-\frac{\partial N_\sigma}{\partial b}
+J_b^{(\sigma)}:=\frac{\partial N_\sigma}{\partial b}
 </h1><h2 id="s_sigma-g_bt">S_\sigma g_b^T
 </h2><p>\phi\frac{P_b[e]_\times}{\beta}.
 }
 $$</p>
 <p>即：</p>
-<h1 id="j_bsigma">$$
+<h2 id="j_bsigma-ell-s_sigmafracytbeta2">$$
 \boxed{
-J_b^{(\sigma)}
-</h1><h2 id="-ell-s_sigmafracytbeta2">-\ell S_\sigma\frac{y^T}{\beta^2}
+J_b^{(\sigma)}=-\ell S_\sigma\frac{y^T}{\beta^2}
 </h2><p>\phi\frac{P_b[e]_\times}{\beta}.
 }
 $$</p>
@@ -987,77 +904,64 @@ g_e,(S_\sigma\cdot r)
 \end{aligned}
 }
 $$</p>
-<h1 id="leftj_asigmarighttr">$$
+<h2 id="leftj_asigmarighttrg_as_sigmacdot-r">$$
 \boxed{
-\left(J_a^{(\sigma)}\right)^Tr
-</h1><h2 id="g_as_sigmacdot-r">g_a,(S_\sigma\cdot r)
+\left(J_a^{(\sigma)}\right)^Tr=g_a,(S_\sigma\cdot r)
 </h2><p>\phi\frac{e\times(P_ar)}{\alpha}.
 }
 $$</p>
-<h1 id="leftj_bsigmarighttr">$$
+$$
 \boxed{
-\left(J_b^{(\sigma)}\right)^Tr
-</h1><p>g_b,(S_\sigma\cdot r)
+\left(J_b^{(\sigma)}\right)^Tr=g_b\,(S_\sigma\cdot r)
 +
 \phi\frac{e\times(P_br)}{\beta}.
 }
-$$</p>
-<p>这三式可以直接用于能量梯度计算，不需要显式构造 $\left(3\times3\right)$ 矩阵。</p>
+$$<p>这三式可以直接用于能量梯度计算，不需要显式构造 $\left(3\times3\right)$ 矩阵。</p>
 <hr>
 <h2 id="3-三角网格中的能量梯度">3. 三角网格中的能量梯度
 </h2><p>设所有指向顶点 $\left(v\right)$ 的有向半边集合为：</p>
 $$
 \mathcal H(v)=\{h=(v_i,v)\}.
 $$<p>定义：</p>
-<h1 id="bar-nv">$$
+$$
 \boxed{
-\bar N(v)
-</h1><p>\sum_{h\in\mathcal H(v)}N(h).
+\bar N(v)=\sum_{h\in\mathcal H(v)}N(h).
 }
-$$</p>
-<p>顶点能量为：</p>
+$$<p>顶点能量为：</p>
 $$
 \boxed{
 E(v)=\|\bar N(v)\|^2.
 }
 $$<p>整个网格总能量为：</p>
-<h1 id="mathcal-e">$$
+$$
 \boxed{
-\mathcal E
-</h1><p>\sum_v|\bar N(v)|^2.
+\mathcal E=\sum_v\|\bar N(v)\|^2.
 }
-$$</p>
-<p>对任意顶点 $\left(p_v\right)$，总梯度的一般形式为：</p>
-<h1 id="nabla_p_vmathcal-e">$$
+$$<p>对任意顶点 $\left(p_v\right)$，总梯度的一般形式为：</p>
+$$
 \boxed{
-\nabla_{p_v}\mathcal E
-</h1><p>2\sum_q
+\nabla_{p_v}\mathcal E=2\sum_q
 \left(
 \frac{\partial\bar N(q)}{\partial p_v}
 \right)^T
 \bar N(q).
 }
-$$</p>
-<p>等价地，对所有局部四点结构中包含 $\left(v\right)$ 的有向半边求和：</p>
-<h1 id="nabla_p_vmathcal-e-1">$$
+$$<p>等价地，对所有局部四点结构中包含 $\left(v\right)$ 的有向半边求和：</p>
+$$
 \boxed{
-\nabla_{p_v}\mathcal E
-</h1><p>2\sum_{h:,v\in Q(h)}
-J_{h,v}^T,
+\nabla_{p_v}\mathcal E=2\sum_{h:\,v\in Q(h)}
+J_{h,v}^T\,
 \bar N(\operatorname{head}(h)).
 }
-$$</p>
-<p>其中 $\left(Q(h)\right)$ 表示该半边对应的四个局部顶点。</p>
+$$<p>其中 $\left(Q(h)\right)$ 表示该半边对应的四个局部顶点。</p>
 <p>完整梯度仍分为：</p>
-<h1 id="nabla_p_vmathcal-e-2">$$
+$$
 \boxed{
-\nabla_{p_v}\mathcal E
-</h1><p>\nabla_pE_1(v)
+\nabla_{p_v}\mathcal E=\nabla_pE_1(v)
 +
 \nabla_pE_2(v).
 }
-$$</p>
-<p>其中：</p>
+$$<p>其中：</p>
 <ul>
 <li>$\left(E_1\right)$：$\left(v\right)$ 作为边端点时的贡献；</li>
 <li>$\left(E_2\right)$：$\left(v\right)$ 作为相邻三角形第三个顶点时的贡献。</li>
@@ -1075,26 +979,23 @@ $$<p>正向半边 $\left(N_+\right)$ 进入 $\left(\bar N(v)\right)$，反向半
 <p>由于移动 $\left(v=p_1\right)$ 时，在正向局部变量中只改变 $\left(e\right)$，所以单条邻接边对梯度的贡献为：</p>
 $$
 \boxed{
-2
-\left[
+2\left[
 (J_e^+)^T\bar N(v)
 +
 (J_e^-)^T\bar N(v_i)
 \right].
 }
 $$<p>因此：</p>
-<h1 id="nabla_pe_1v">$$
+$$
 \boxed{
-\nabla_pE_1(v)
-</h1><p>2\sum_{h=(v_i,v)}
+\nabla_pE_1(v)=2\sum_{h=(v_i,v)}
 \left[
 (J_e^+)^T\bar N(v)
 +
 (J_e^-)^T\bar N(v_i)
 \right].
 }
-$$</p>
-<p>展开后得到：</p>
+$$<p>展开后得到：</p>
 $$
 \boxed{
 \begin{aligned}
@@ -1152,26 +1053,23 @@ $$<p>移动 $\left(v\right)$ 只改变局部变量 $\left(a\right)$。</p>
 <p>单条环状边的贡献为：</p>
 $$
 \boxed{
-2
-\left[
+2\left[
 (J_a^+)^T\bar N_i
 +
 (J_a^-)^T\bar N_j
 \right].
 }
 $$<p>因此：</p>
-<h1 id="nabla_pe_2av">$$
+$$
 \boxed{
-\nabla_pE_{2,a}(v)
-</h1><p>2\sum_{h=(v_j,v_i),,v=p_2}
+\nabla_pE_{2,a}(v)=2\sum_{h=(v_j,v_i),\,v=p_2}
 \left[
 (J_a^+)^T\bar N_i
 +
 (J_a^-)^T\bar N_j
 \right].
 }
-$$</p>
-<p>展开为：</p>
+$$<p>展开为：</p>
 $$
 \boxed{
 \begin{aligned}
@@ -1205,26 +1103,23 @@ $$<p>移动 $\left(v\right)$ 只改变局部变量 $\left(b\right)$。</p>
 <p>单条环状边的贡献为：</p>
 $$
 \boxed{
-2
-\left[
+2\left[
 (J_b^+)^T\bar N_i
 +
 (J_b^-)^T\bar N_j
 \right].
 }
 $$<p>因此：</p>
-<h1 id="nabla_pe_2bv">$$
+$$
 \boxed{
-\nabla_pE_{2,b}(v)
-</h1><p>2\sum_{h=(v_j,v_i),,v=p_3}
+\nabla_pE_{2,b}(v)=2\sum_{h=(v_j,v_i),\,v=p_3}
 \left[
 (J_b^+)^T\bar N_i
 +
 (J_b^-)^T\bar N_j
 \right].
 }
-$$</p>
-<p>展开为：</p>
+$$<p>展开为：</p>
 $$
 \boxed{
 \begin{aligned}
@@ -1251,26 +1146,22 @@ $$
 \boxed{
 g_b=-\ell\frac{y}{\beta^2}.}
 $$<p>因此：</p>
-<h1 id="nabla_pe_2v">$$
+$$
 \boxed{
-\nabla_pE_2(v)
-</h1><p>\nabla_pE_{2,a}(v)
+\nabla_pE_2(v)=\nabla_pE_{2,a}(v)
 +
 \nabla_pE_{2,b}(v),
 }
-$$</p>
-<p>最终顶点总梯度为：</p>
-<h1 id="nabla_p_vmathcal-e-3">$$
+$$<p>最终顶点总梯度为：</p>
+$$
 \boxed{
-\nabla_{p_v}\mathcal E
-</h1><p>\nabla_pE_1(v)
+\nabla_{p_v}\mathcal E=\nabla_pE_1(v)
 +
 \nabla_pE_{2,a}(v)
 +
 \nabla_pE_{2,b}(v).
 }
-$$</p>
-<p>如果拓扑遍历可以统一选择半边方向，使待求顶点始终位于 $\left(p_2\right)$，则实现中只需要保留 $\left(E_{2,a}\right)$ 分支。</p>
+$$<p>如果拓扑遍历可以统一选择半边方向，使待求顶点始终位于 $\left(p_2\right)$，则实现中只需要保留 $\left(E_{2,a}\right)$ 分支。</p>
 <hr>
 <h2 id="5-退化情况与边界处理">5. 退化情况与边界处理
 </h2><h3 id="51-零长度边">5.1 零长度边
