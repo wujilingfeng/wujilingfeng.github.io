@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://wujilingfeng.github.io/</loc>
-    <lastmod>2026-08-19T00:00:00+08:00</lastmod>
+    <lastmod>2026-05-12T23:35:57+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -21,7 +21,7 @@
                 />
   </url><url>
     <loc>https://wujilingfeng.github.io/post/</loc>
-    <lastmod>2026-08-19T00:00:00+08:00</lastmod>
+    <lastmod>2026-05-12T23:35:57+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -37,9 +37,6 @@
                 hreflang="ar"
                 href="https://wujilingfeng.github.io/ar/post/"
                 />
-  </url><url>
-    <loc>https://wujilingfeng.github.io/p/%E6%96%B0%E7%9A%84%E6%9B%B2%E9%9D%A2%E5%B9%B3%E6%BB%91%E7%AE%97%E6%B3%95%E6%96%B0-ne-%E5%AE%9A%E4%B9%89/</loc>
-    <lastmod>2026-08-19T00:00:00+08:00</lastmod>
   </url><url>
     <loc>https://wujilingfeng.github.io/p/qem%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2026-05-12T23:35:57+08:00</lastmod>
@@ -259,6 +256,8 @@
                 hreflang="en"
                 href="https://wujilingfeng.github.io/en/p/emoji-support/"
                 />
+  </url><url>
+    <loc>https://wujilingfeng.github.io/p/</loc>
   </url><url>
     <loc>https://wujilingfeng.github.io/%E5%85%B3%E4%BA%8E/</loc>
     <xhtml:link
