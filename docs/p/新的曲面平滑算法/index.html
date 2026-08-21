@@ -15,18 +15,18 @@
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
  <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="新的曲面平滑算法\r本文沿用带符号精确二面角 $\\left(\\phi\\right)$ 的定义，只把半边向量修改为：\n$$\r\\boxed{\rN(e) =\\phi\\left(\r\\frac{e}{\\|e\\|}\r+\r\\frac{e\\times a}{\\|e\\times a\\|}\r+\r\\frac{b\\times e}{\\|b\\times e\\|}\r\\right).\r}\r$$下文中三维楔积 $\\left(\\wedge\\right)$ 统一写成叉积 $\\left(\\times\\right)$。\n1. 半边法向量定义\r设内部半边周围四个顶点为 $\\left(p_0,p_1,p_2,p_3\\right)$，定义：\n$$\r\\boxed{\re=p_1-p_0,\\qquad\ra=p_2-p_0,\\qquad\rb=p_3-p_0.\r}\r$$记：\n$$\r\\ell=\\|e\\|,\r\\qquad\rx=e\\times a,\r\\qquad\r\\alpha=\\|x\\|,\r$$$$\ry=b\\times e,\r\\qquad\r\\beta=\\|y\\|.\r$$三个单位向量为：\n$$\ru=\\frac{e}{\\ell},\r\\qquad\rn_a=\\frac{x}{\\alpha},\r\\qquad\rn_b=\\frac{y}{\\beta}.\r$$带符号精确二面角仍定义为：\n$$\r\\boxed{\r\\phi=\\operatorname{atan2}\r\\left(\r-\\ell\\,[e\\cdot(a\\times b)],\r(e\\times a)\\cdot(b\\times e)\r\\right).\r}\r$$因此新的有向半边向量为：\n$$\r\\boxed{\rN_+(e)=\\phi S_+,\r\\qquad\rS_+=u+n_a+n_b.\r}\r$$1.1 反向半边\r当前半边为：\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="新的曲面平滑算法\r本文沿用带符号精确二面角 $\\left(\\phi\\right)$ 的定义，只把半边向量修改为：\n$$\r\\boxed{\rN(e) =\\phi\\left(\r\\frac{e}{\\|e\\|}\r+\r\\lambda\\left(\\frac{e\\times a}{\\|e\\times a\\|}\r+\r\\frac{b\\times e}{\\|b\\times e\\|}\\right)\r\\right).\r}\r$$下文中三维楔积 $\\left(\\wedge\\right)$ 统一写成叉积 $\\left(\\times\\right)$，$\\lambda$ 为 $[0,0.5]$ 区间内的固定参数，不是变量。\n$\\lambda$调节向量补偿的方向，越低$\\sum N(e)$的模长在低能量下增长缓慢，低识别。$\\lambda$越高，$\\sum N(e)$的模长在低能量下增长迅速，高识别，但在高能量处增长缓慢，低识别。\n1. 半边法向量定义\r设内部半边周围四个顶点为 $\\left(p_0,p_1,p_2,p_3\\right)$，定义：\n$$\r\\boxed{\re=p_1-p_0,\\qquad\ra=p_2-p_0,\\qquad\rb=p_3-p_0.\r}\r$$三个单位向量为：边方向向量与两个相邻三角形的面法向量\n$$\r\\boxed{\ru=\\frac{e}{\\|e\\|},\r\\qquad\rn_a=\\frac{e\\times a}{\\|e\\times a\\|},\r\\qquad\rn_b=\\frac{b\\times e}{\\|b\\times e\\|}.\r}\r$$带符号精确二面角仍定义为：\n$$\r\\boxed{\r\\phi=\\operatorname{atan2}\r\\left(\r-\\|e\\|\\,[e\\cdot(a\\times b)],\r(e\\times a)\\cdot(b\\times e)\r\\right).\r}\r$$因此新的有向半边向量为：\n$$\r\\boxed{\rN_+(e)=\\phi S_+,\r\\qquad\rS_+=u+\\lambda\\left(n_a+n_b\\right).\r}\r$$1.1 反向半边\r反向半边 $\\left(p_1,p_0,p_3,p_2\\right)$ 的局部向量满足：\n">
 <title>新的曲面平滑算法 </title>
 
 <link rel='canonical' href='https://wujilingfeng.github.io/p/%E6%96%B0%E7%9A%84%E6%9B%B2%E9%9D%A2%E5%B9%B3%E6%BB%91%E7%AE%97%E6%B3%95/'>
 
 <link rel="stylesheet" href="../../scss/style.min.b1a5b48e9268da293f0e82d09fd1299e5ecbd5ea47ba1f408b3687d520ce0c2b.css"><meta property='og:title' content="新的曲面平滑算法 ">
-<meta property='og:description' content="新的曲面平滑算法\r本文沿用带符号精确二面角 $\\left(\\phi\\right)$ 的定义，只把半边向量修改为：\n$$\r\\boxed{\rN(e) =\\phi\\left(\r\\frac{e}{\\|e\\|}\r+\r\\frac{e\\times a}{\\|e\\times a\\|}\r+\r\\frac{b\\times e}{\\|b\\times e\\|}\r\\right).\r}\r$$下文中三维楔积 $\\left(\\wedge\\right)$ 统一写成叉积 $\\left(\\times\\right)$。\n1. 半边法向量定义\r设内部半边周围四个顶点为 $\\left(p_0,p_1,p_2,p_3\\right)$，定义：\n$$\r\\boxed{\re=p_1-p_0,\\qquad\ra=p_2-p_0,\\qquad\rb=p_3-p_0.\r}\r$$记：\n$$\r\\ell=\\|e\\|,\r\\qquad\rx=e\\times a,\r\\qquad\r\\alpha=\\|x\\|,\r$$$$\ry=b\\times e,\r\\qquad\r\\beta=\\|y\\|.\r$$三个单位向量为：\n$$\ru=\\frac{e}{\\ell},\r\\qquad\rn_a=\\frac{x}{\\alpha},\r\\qquad\rn_b=\\frac{y}{\\beta}.\r$$带符号精确二面角仍定义为：\n$$\r\\boxed{\r\\phi=\\operatorname{atan2}\r\\left(\r-\\ell\\,[e\\cdot(a\\times b)],\r(e\\times a)\\cdot(b\\times e)\r\\right).\r}\r$$因此新的有向半边向量为：\n$$\r\\boxed{\rN_+(e)=\\phi S_+,\r\\qquad\rS_+=u+n_a+n_b.\r}\r$$1.1 反向半边\r当前半边为：\n">
+<meta property='og:description' content="新的曲面平滑算法\r本文沿用带符号精确二面角 $\\left(\\phi\\right)$ 的定义，只把半边向量修改为：\n$$\r\\boxed{\rN(e) =\\phi\\left(\r\\frac{e}{\\|e\\|}\r+\r\\lambda\\left(\\frac{e\\times a}{\\|e\\times a\\|}\r+\r\\frac{b\\times e}{\\|b\\times e\\|}\\right)\r\\right).\r}\r$$下文中三维楔积 $\\left(\\wedge\\right)$ 统一写成叉积 $\\left(\\times\\right)$，$\\lambda$ 为 $[0,0.5]$ 区间内的固定参数，不是变量。\n$\\lambda$调节向量补偿的方向，越低$\\sum N(e)$的模长在低能量下增长缓慢，低识别。$\\lambda$越高，$\\sum N(e)$的模长在低能量下增长迅速，高识别，但在高能量处增长缓慢，低识别。\n1. 半边法向量定义\r设内部半边周围四个顶点为 $\\left(p_0,p_1,p_2,p_3\\right)$，定义：\n$$\r\\boxed{\re=p_1-p_0,\\qquad\ra=p_2-p_0,\\qquad\rb=p_3-p_0.\r}\r$$三个单位向量为：边方向向量与两个相邻三角形的面法向量\n$$\r\\boxed{\ru=\\frac{e}{\\|e\\|},\r\\qquad\rn_a=\\frac{e\\times a}{\\|e\\times a\\|},\r\\qquad\rn_b=\\frac{b\\times e}{\\|b\\times e\\|}.\r}\r$$带符号精确二面角仍定义为：\n$$\r\\boxed{\r\\phi=\\operatorname{atan2}\r\\left(\r-\\|e\\|\\,[e\\cdot(a\\times b)],\r(e\\times a)\\cdot(b\\times e)\r\\right).\r}\r$$因此新的有向半边向量为：\n$$\r\\boxed{\rN_+(e)=\\phi S_+,\r\\qquad\rS_+=u+\\lambda\\left(n_a+n_b\\right).\r}\r$$1.1 反向半边\r反向半边 $\\left(p_1,p_0,p_3,p_2\\right)$ 的局部向量满足：\n">
 <meta property='og:url' content='https://wujilingfeng.github.io/p/%E6%96%B0%E7%9A%84%E6%9B%B2%E9%9D%A2%E5%B9%B3%E6%BB%91%E7%AE%97%E6%B3%95/'>
 <meta property='og:site_name' content='五级灵风'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-08-19T00:00:00&#43;08:00'/><meta property='article:modified_time' content='2026-08-19T00:00:00&#43;08:00'/><meta property='og:image' content='https://wujilingfeng.github.io/p/%E6%96%B0%E7%9A%84%E6%9B%B2%E9%9D%A2%E5%B9%B3%E6%BB%91%E7%AE%97%E6%B3%95/image.png' />
 <meta name="twitter:title" content="新的曲面平滑算法 ">
-<meta name="twitter:description" content="新的曲面平滑算法\r本文沿用带符号精确二面角 $\\left(\\phi\\right)$ 的定义，只把半边向量修改为：\n$$\r\\boxed{\rN(e) =\\phi\\left(\r\\frac{e}{\\|e\\|}\r+\r\\frac{e\\times a}{\\|e\\times a\\|}\r+\r\\frac{b\\times e}{\\|b\\times e\\|}\r\\right).\r}\r$$下文中三维楔积 $\\left(\\wedge\\right)$ 统一写成叉积 $\\left(\\times\\right)$。\n1. 半边法向量定义\r设内部半边周围四个顶点为 $\\left(p_0,p_1,p_2,p_3\\right)$，定义：\n$$\r\\boxed{\re=p_1-p_0,\\qquad\ra=p_2-p_0,\\qquad\rb=p_3-p_0.\r}\r$$记：\n$$\r\\ell=\\|e\\|,\r\\qquad\rx=e\\times a,\r\\qquad\r\\alpha=\\|x\\|,\r$$$$\ry=b\\times e,\r\\qquad\r\\beta=\\|y\\|.\r$$三个单位向量为：\n$$\ru=\\frac{e}{\\ell},\r\\qquad\rn_a=\\frac{x}{\\alpha},\r\\qquad\rn_b=\\frac{y}{\\beta}.\r$$带符号精确二面角仍定义为：\n$$\r\\boxed{\r\\phi=\\operatorname{atan2}\r\\left(\r-\\ell\\,[e\\cdot(a\\times b)],\r(e\\times a)\\cdot(b\\times e)\r\\right).\r}\r$$因此新的有向半边向量为：\n$$\r\\boxed{\rN_+(e)=\\phi S_+,\r\\qquad\rS_+=u+n_a+n_b.\r}\r$$1.1 反向半边\r当前半边为：\n"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="新的曲面平滑算法\r本文沿用带符号精确二面角 $\\left(\\phi\\right)$ 的定义，只把半边向量修改为：\n$$\r\\boxed{\rN(e) =\\phi\\left(\r\\frac{e}{\\|e\\|}\r+\r\\lambda\\left(\\frac{e\\times a}{\\|e\\times a\\|}\r+\r\\frac{b\\times e}{\\|b\\times e\\|}\\right)\r\\right).\r}\r$$下文中三维楔积 $\\left(\\wedge\\right)$ 统一写成叉积 $\\left(\\times\\right)$，$\\lambda$ 为 $[0,0.5]$ 区间内的固定参数，不是变量。\n$\\lambda$调节向量补偿的方向，越低$\\sum N(e)$的模长在低能量下增长缓慢，低识别。$\\lambda$越高，$\\sum N(e)$的模长在低能量下增长迅速，高识别，但在高能量处增长缓慢，低识别。\n1. 半边法向量定义\r设内部半边周围四个顶点为 $\\left(p_0,p_1,p_2,p_3\\right)$，定义：\n$$\r\\boxed{\re=p_1-p_0,\\qquad\ra=p_2-p_0,\\qquad\rb=p_3-p_0.\r}\r$$三个单位向量为：边方向向量与两个相邻三角形的面法向量\n$$\r\\boxed{\ru=\\frac{e}{\\|e\\|},\r\\qquad\rn_a=\\frac{e\\times a}{\\|e\\times a\\|},\r\\qquad\rn_b=\\frac{b\\times e}{\\|b\\times e\\|}.\r}\r$$带符号精确二面角仍定义为：\n$$\r\\boxed{\r\\phi=\\operatorname{atan2}\r\\left(\r-\\|e\\|\\,[e\\cdot(a\\times b)],\r(e\\times a)\\cdot(b\\times e)\r\\right).\r}\r$$因此新的有向半边向量为：\n$$\r\\boxed{\rN_+(e)=\\phi S_+,\r\\qquad\rS_+=u+\\lambda\\left(n_a+n_b\\right).\r}\r$$1.1 反向半边\r反向半边 $\\left(p_1,p_0,p_3,p_2\\right)$ 的局部向量满足：\n"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://wujilingfeng.github.io/p/%E6%96%B0%E7%9A%84%E6%9B%B2%E9%9D%A2%E5%B9%B3%E6%BB%91%E7%AE%97%E6%B3%95/image.png' />
     <link rel="shortcut icon" href="../../favicon.ico" />
 
@@ -370,10 +370,9 @@
       <ol>
         <li><a href="#21-带符号角度-leftphiright-的梯度">2.1 带符号角度 $\left(\phi\right)$ 的梯度</a></li>
         <li><a href="#22-三个单位向量的雅可比">2.2 三个单位向量的雅可比</a></li>
-        <li><a href="#23-lefts_sigmaright-的雅可比">2.3 $\left(S_\sigma\right)$ 的雅可比</a></li>
-        <li><a href="#24-新半边向量-leftn_sigmaphi-s_sigmaright-的雅可比">2.4 新半边向量 $\left(N_\sigma=\phi S_\sigma\right)$ 的雅可比</a></li>
-        <li><a href="#25-对四个顶点的雅可比">2.5 对四个顶点的雅可比</a></li>
-        <li><a href="#26-能量中直接使用的-leftjtrright">2.6 能量中直接使用的 $\left(J^Tr\right)$</a></li>
+        <li><a href="#23-半边向量-leftn_sigmaphi-s_sigmaright-的雅可比">2.3 半边向量 $\left(N_\sigma=\phi S_\sigma\right)$ 的雅可比</a></li>
+        <li><a href="#24-对四个顶点的雅可比">2.4 对四个顶点的雅可比</a></li>
+        <li><a href="#25-能量中直接使用的-leftjtrright">2.5 能量中直接使用的 $\left(J^Tr\right)$</a></li>
       </ol>
     </li>
     <li><a href="#3-三角网格中的能量梯度">3. 三角网格中的能量梯度</a>
@@ -464,7 +463,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 5 分钟
+                    阅读时长: 4 分钟
                 </time>
             </div>
         
@@ -486,12 +485,13 @@ $$
 N(e) =\phi\left(
 \frac{e}{\|e\|}
 +
-\frac{e\times a}{\|e\times a\|}
+\lambda\left(\frac{e\times a}{\|e\times a\|}
 +
-\frac{b\times e}{\|b\times e\|}
+\frac{b\times e}{\|b\times e\|}\right)
 \right).
 }
-$$<p>下文中三维楔积 $\left(\wedge\right)$ 统一写成叉积 $\left(\times\right)$。</p>
+$$<p>下文中三维楔积 $\left(\wedge\right)$ 统一写成叉积 $\left(\times\right)$，$\lambda$ 为 $[0,0.5]$ 区间内的固定参数，不是变量。</p>
+<p>$\lambda$调节向量补偿的方向，越低$\sum N(e)$的模长在低能量下增长缓慢，低识别。$\lambda$越高，$\sum N(e)$的模长在低能量下增长迅速，高识别，但在高能量处增长缓慢，低识别。</p>
 <hr>
 <h2 id="1-半边法向量定义">1. 半边法向量定义
 </h2><p>设内部半边周围四个顶点为 $\left(p_0,p_1,p_2,p_3\right)$，定义：</p>
@@ -501,30 +501,21 @@ e=p_1-p_0,\qquad
 a=p_2-p_0,\qquad
 b=p_3-p_0.
 }
-$$<p>记：</p>
+$$<p>三个单位向量为：边方向向量与两个相邻三角形的面法向量</p>
 $$
-\ell=\|e\|,
+\boxed{
+u=\frac{e}{\|e\|},
 \qquad
-x=e\times a,
+n_a=\frac{e\times a}{\|e\times a\|},
 \qquad
-\alpha=\|x\|,
-$$$$
-y=b\times e,
-\qquad
-\beta=\|y\|.
-$$<p>三个单位向量为：</p>
-$$
-u=\frac{e}{\ell},
-\qquad
-n_a=\frac{x}{\alpha},
-\qquad
-n_b=\frac{y}{\beta}.
+n_b=\frac{b\times e}{\|b\times e\|}.
+}
 $$<p>带符号精确二面角仍定义为：</p>
 $$
 \boxed{
 \phi=\operatorname{atan2}
 \left(
--\ell\,[e\cdot(a\times b)],
+-\|e\|\,[e\cdot(a\times b)],
 (e\times a)\cdot(b\times e)
 \right).
 }
@@ -533,241 +524,157 @@ $$
 \boxed{
 N_+(e)=\phi S_+,
 \qquad
-S_+=u+n_a+n_b.
+S_+=u+\lambda\left(n_a+n_b\right).
 }
 $$<h3 id="11-反向半边">1.1 反向半边
-</h3><p>当前半边为：</p>
-$$
-(p_0,p_1,p_2,p_3).
-$$<p>反向半边为：</p>
-$$
-(p_1,p_0,p_3,p_2).
-$$<p>其局部向量满足：</p>
+</h3><p>反向半边 $\left(p_1,p_0,p_3,p_2\right)$ 的局部向量满足：</p>
 $$
 e^-=-e,
 \qquad
 a^-=b-e,
 \qquad
 b^-=a-e.
-$$<p>并且：</p>
+$$<p>直接计算可得：</p>
 $$
-e^-\times a^-=b\times e=y,
-$$$$
-b^-\times e^-=e\times a=x,
-$$$$
+e^-\times a^-=b\times e,
+\qquad
+b^-\times e^-=e\times a,
+\qquad
 \phi^-=\phi.
-$$<p>所以反向半边向量可以直接用正向半边的 $\left(e,a,b\right)$ 写成：</p>
+$$<p>即反向半边的两个面法向量恰好互换，而 $\left(n_a+n_b\right)$ 在互换下不变，所以反向半边向量可以直接用正向半边的 $\left(e,a,b\right)$ 写成：</p>
 $$
 \boxed{
 N_-(e)=\phi S_-,
 \qquad
-S_-=-u+n_a+n_b.
+S_-=-u+\lambda\left(n_a+n_b\right).
 }
 $$<p>因此：</p>
 $$
 \boxed{
-N_-(e)\neq -N_+(e).
-}
-$$<p>更具体地：</p>
-$$
-\boxed{
-N_-(e)=N_+(e)-2\phi\frac{e}{\|e\|}.
+N_-(e)\neq -N_+(e),
+\qquad
+N_-(e)=N_+(e)-2\phi u.
 }
 $$<p>这一点与旧定义不同。因此后面的能量梯度不能再把正反半边贡献简单合并成
 $\left(\bar N(v)-\bar N(v_i)\right)$。</p>
 <hr>
 <h2 id="2-雅可比矩阵">2. 雅可比矩阵
-</h2><p>定义叉乘矩阵 $\left([q]_\times\right)$：</p>
+</h2><p>定义叉乘矩阵（反对称矩阵）$\left([q]_\times\right)$：</p>
 $$
 [q]_\times r=q\times r.
-$$<p>定义三个单位向量的正交投影矩阵：</p>
+$$<p>定义三个正交投影矩阵（分别投影到与 $\left(e,n_a,n_b\right)$ 垂直的平面上）：</p>
 $$
 \boxed{
-P_e
-=I-uu^T
-=I-\frac{ee^T}{\ell^2},
-}
-$$$$
-\boxed{
-P_a
-=I-n_an_a^T
-=I-\frac{xx^T}{\alpha^2},
-}
-$$$$
-\boxed{
-P_b=I-n_bn_b^T
-=I-\frac{yy^T}{\beta^2}.
+P_e=I-uu^T,
+\qquad
+P_a=I-n_an_a^T,
+\qquad
+P_b=I-n_bn_b^T.
 }
 $$<h3 id="21-带符号角度-leftphiright-的梯度">2.1 带符号角度 $\left(\phi\right)$ 的梯度
 </h3><p>对 $\left(e\right)$ 的梯度：</p>
 $$
 \boxed{
-g_e:=\frac{\partial\phi}{\partial e}=\frac{a\cdot e}{\ell}
-\frac{x}{\alpha^2}
-+
-\frac{b\cdot e}{\ell}
-\frac{y}{\beta^2}.
+g_e:=\frac{\partial\phi}{\partial e}
+=\frac{a\cdot e}{\|e\|\,\|e\times a\|}\,n_a
++\frac{b\cdot e}{\|e\|\,\|b\times e\|}\,n_b.
 }
 $$<p>对 $\left(a\right)$ 的梯度：</p>
 $$
 \boxed{
-g_a:=\frac{\partial\phi}{\partial a}=-\ell\frac{x}{\alpha^2}.
+g_a:=\frac{\partial\phi}{\partial a}
+=-\frac{\|e\|}{\|e\times a\|}\,n_a.
 }
 $$<p>对 $\left(b\right)$ 的梯度：</p>
 $$
 \boxed{
-g_b:=\frac{\partial\phi}{\partial b}=-\ell\frac{y}{\beta^2}.
+g_b:=\frac{\partial\phi}{\partial b}
+=-\frac{\|e\|}{\|b\times e\|}\,n_b.
 }
 $$<p>因此对四个原始顶点：</p>
 $$
-\boxed{
 \frac{\partial\phi}{\partial p_1}=g_e,
 \qquad
 \frac{\partial\phi}{\partial p_2}=g_a,
 \qquad
 \frac{\partial\phi}{\partial p_3}=g_b,
-}
-$$$$
-\boxed{
+\qquad
 \frac{\partial\phi}{\partial p_0}=-(g_e+g_a+g_b).
-}
 $$<h3 id="22-三个单位向量的雅可比">2.2 三个单位向量的雅可比
 </h3><p>对于边方向：</p>
 $$
 \boxed{
-\frac{\partial u}{\partial e}=\frac{P_e}{\ell}.
+\frac{\partial u}{\partial e}=\frac{P_e}{\|e\|}.
 }
 $$<p>由于：</p>
 $$
-dx=d(e\times a)
-=-[a]_\times de+[e]_\times da,
+d(e\times a)=-[a]_\times\,de+[e]_\times\,da,
 $$<p>所以：</p>
 $$
 \boxed{
 \frac{\partial n_a}{\partial e}
-=-\frac{P_a[a]_\times}{\alpha},
-}
-$$$$
-\boxed{
+=-\frac{P_a[a]_\times}{\|e\times a\|},
+\qquad
 \frac{\partial n_a}{\partial a}
-=\frac{P_a[e]_\times}{\alpha}.
+=\frac{P_a[e]_\times}{\|e\times a\|}.
 }
 $$<p>由于：</p>
 $$
-dy=d(b\times e)
-=[b]_\times de-[e]_\times db,
+d(b\times e)=[b]_\times\,de-[e]_\times\,db,
 $$<p>所以：</p>
 $$
 \boxed{
 \frac{\partial n_b}{\partial e}
-=\frac{P_b[b]_\times}{\beta},
-}
-$$$$
-\boxed{
+=\frac{P_b[b]_\times}{\|b\times e\|},
+\qquad
 \frac{\partial n_b}{\partial b}
-=-\frac{P_b[e]_\times}{\beta}.
+=-\frac{P_b[e]_\times}{\|b\times e\|}.
 }
 $$<p>其余交叉偏导均为零。</p>
-<h3 id="23-lefts_sigmaright-的雅可比">2.3 $\left(S_\sigma\right)$ 的雅可比
-</h3><p>为了同时表示正向和反向半边，令：</p>
+<h3 id="23-半边向量-leftn_sigmaphi-s_sigmaright-的雅可比">2.3 半边向量 $\left(N_\sigma=\phi S_\sigma\right)$ 的雅可比
+</h3><p>为了同时表示正向和反向半边，令 $\left(\sigma\in{+1,-1}\right)$：</p>
 $$
-\sigma\in\{+1,-1\},
-$$$$
 \boxed{
-S_\sigma=\sigma u+n_a+n_b.
-}
-$$<p>其中：</p>
-$$
-S_{+1}=S_+,
+S_\sigma=\sigma u+\lambda\left(n_a+n_b\right),
 \qquad
-S_{-1}=S_-.
-$$<p>则：</p>
-$$
-\boxed{
-J_{S,e}^{(\sigma)}:=\frac{\partial S_\sigma}{\partial e}=\sigma\frac{P_e}{\ell}
--\frac{P_a[a]_\times}{\alpha}+\frac{P_b[b]_\times}{\beta}.
+N_\sigma=\phi S_\sigma,
 }
-$$$$
-\boxed{
-J_{S,a}^{(\sigma)}:=\frac{\partial S_\sigma}{\partial a}=\frac{P_a[e]_\times}{\alpha}.
-}
-$$$$
-\boxed{
-J_{S,b}^{(\sigma)}:=\frac{\partial S_\sigma}{\partial b}=-\frac{P_b[e]_\times}{\beta}.
-}
-$$<p>注意 $\left(J_{S,a}^{(\sigma)}\right)$ 和 $\left(J_{S,b}^{(\sigma)}\right)$ 与 $\left(\sigma\right)$ 无关。</p>
-<h3 id="24-新半边向量-leftn_sigmaphi-s_sigmaright-的雅可比">2.4 新半边向量 $\left(N_\sigma=\phi S_\sigma\right)$ 的雅可比
-</h3><p>由乘积法则：</p>
+$$<p>其中 $\left(S_{+1}=S_+\right)$，$\left(S_{-1}=S_-\right)$。由乘积法则：</p>
 $$
 dN_\sigma
 =S_\sigma\,d\phi+\phi\,dS_\sigma.
-$$<p>因此对 $\left(e\right)$：</p>
+$$<p>结合 2.1 与 2.2 的结果，对 $\left(e\right)$：</p>
 $$
 \boxed{
-J_e^{(\sigma)}:=\frac{\partial N_\sigma}{\partial e}=S_\sigma g_e^T+\phi\left(
-\sigma\frac{P_e}{\ell}-\frac{P_a[a]_\times}{\alpha}+\frac{P_b[b]_\times}{\beta}
+J_e^{(\sigma)}:=\frac{\partial N_\sigma}{\partial e}
+=S_\sigma g_e^T
++\phi\left(
+\sigma\frac{P_e}{\|e\|}
+-\lambda\frac{P_a[a]_\times}{\|e\times a\|}
++\lambda\frac{P_b[b]_\times}{\|b\times e\|}
 \right).
-}
-$$<p>完全展开为：</p>
-$$
-\boxed{
-\begin{aligned}
-J_e^{(\sigma)}={}&
-S_\sigma
-\left[
-\frac{a\cdot e}{\ell}
-\frac{x}{\alpha^2}+\frac{b\cdot e}{\ell}
-\frac{y}{\beta^2}
-\right]^T
-\\[4pt]
-&+
-\phi
-\left(
-\sigma\frac{P_e}{\ell}-\frac{P_a[a]_\times}{\alpha}+\frac{P_b[b]_\times}{\beta}
-\right).
-\end{aligned}
 }
 $$<p>对 $\left(a\right)$：</p>
 $$
 \boxed{
-J_a^{(\sigma)}:=\frac{\partial N_\sigma}{\partial a}=S_\sigma g_a^T
-+
-\phi\frac{P_a[e]_\times}{\alpha}.
-}
-$$<p>即：</p>
-$$
-\boxed{
-J_a^{(\sigma)}=-\ell S_\sigma\frac{x^T}{\alpha^2}+\phi\frac{P_a[e]_\times}{\alpha}.
+J_a^{(\sigma)}:=\frac{\partial N_\sigma}{\partial a}
+=S_\sigma g_a^T
++\lambda\phi\,\frac{P_a[e]_\times}{\|e\times a\|}.
 }
 $$<p>对 $\left(b\right)$：</p>
 $$
 \boxed{
-J_b^{(\sigma)}:=\frac{\partial N_\sigma}{\partial b}=S_\sigma g_b^T-\phi\frac{P_b[e]_\times}{\beta}.
+J_b^{(\sigma)}:=\frac{\partial N_\sigma}{\partial b}
+=S_\sigma g_b^T
+-\lambda\phi\,\frac{P_b[e]_\times}{\|b\times e\|}.
 }
-$$<p>即：</p>
-$$
-\boxed{
-J_b^{(\sigma)}=-\ell S_\sigma\frac{y^T}{\beta^2}-\phi\frac{P_b[e]_\times}{\beta}.
-}
-$$<p>正向半边直接取 $\left(\sigma=+1\right)$：</p>
-$$
-\boxed{
-J_e^+=J_e^{(+1)},
-\qquad
-J_a^+=J_a^{(+1)},
-\qquad
-J_b^+=J_b^{(+1)}.
-}
-$$<p>反向半边用同一组正向局部变量 $\left(e,a,b\right)$ 表示时取 $\left(\sigma=-1\right)$：</p>
-$$
-\boxed{
-J_e^-=J_e^{(-1)},
-\qquad
-J_a^-=J_a^{(-1)},
-\qquad
-J_b^-=J_b^{(-1)}.
-}
-$$<h3 id="25-对四个顶点的雅可比">2.5 对四个顶点的雅可比
+$$<p>注意：</p>
+<ul>
+<li>$\left(J_a^{(\sigma)}\right)$、$\left(J_b^{(\sigma)}\right)$第二项 与 $\left(\sigma\right)$ 无关，但第一项仍随正反半边变化；</li>
+<li>$\left(\lambda\right)$ 只通过 $\left(S_\sigma\right)$ 和各面法向项进入雅可比，令 $\left(\lambda=0\right)$（即 $\left(S_\sigma=\sigma u\right)$）时以上各式退化为旧定义的雅可比；</li>
+<li>正向半边取 $\left(\sigma=+1\right)$，反向半边取 $\left(\sigma=-1\right)$。</li>
+</ul>
+<h3 id="24-对四个顶点的雅可比">2.4 对四个顶点的雅可比
 </h3><p>对于 $\left(N_\sigma\right)$，由于：</p>
 $$
 de=dp_1-dp_0,
@@ -782,7 +689,7 @@ $$
 \qquad
 \frac{\partial N_\sigma}{\partial p_2}=J_a^{(\sigma)},
 \qquad
-\frac{\partial N_\sigma}{\partial p_3}=J_b^{(\sigma)}.
+\frac{\partial N_\sigma}{\partial p_3}=J_b^{(\sigma)},
 }
 $$$$
 \boxed{
@@ -795,39 +702,34 @@ J_e^{(\sigma)}
 }
 $$<p>因此自动满足平移不变性：</p>
 $$
-\boxed{
 \frac{\partial N_\sigma}{\partial p_0}
-+
-\frac{\partial N_\sigma}{\partial p_1}
-+
-\frac{\partial N_\sigma}{\partial p_2}
-+
-\frac{\partial N_\sigma}{\partial p_3}
++\frac{\partial N_\sigma}{\partial p_1}
++\frac{\partial N_\sigma}{\partial p_2}
++\frac{\partial N_\sigma}{\partial p_3}
 =0.
-}
-$$<h3 id="26-能量中直接使用的-leftjtrright">2.6 能量中直接使用的 $\left(J^Tr\right)$
+$$<h3 id="25-能量中直接使用的-leftjtrright">2.5 能量中直接使用的 $\left(J^Tr\right)$
 </h3><p>对于任意三维向量 $\left(r\right)$，有：</p>
 $$
 \boxed{
-\begin{aligned}
-\left(J_e^{(\sigma)}\right)^Tr={}&
- g_e\,(S_\sigma\cdot r)
-\\[2pt]
-&+
-\phi\left[
-\sigma\frac{P_er}{\ell}+\frac{a\times(P_ar)}{\alpha}-\frac{b\times(P_br)}{\beta}
+\left(J_e^{(\sigma)}\right)^Tr
+=g_e\,(S_\sigma\cdot r)
++\phi\left[
+\sigma\frac{P_er}{\|e\|}
++\lambda\frac{a\times(P_ar)}{\|e\times a\|}
+-\lambda\frac{b\times(P_br)}{\|b\times e\|}
 \right].
-\end{aligned}
 }
 $$$$
 \boxed{
-\left(J_a^{(\sigma)}\right)^Tr=g_a\,(S_\sigma\cdot r)-\phi\frac{e\times(P_ar)}{\alpha}.
+\left(J_a^{(\sigma)}\right)^Tr
+=g_a\,(S_\sigma\cdot r)
+-\lambda\phi\,\frac{e\times(P_ar)}{\|e\times a\|}.
 }
 $$$$
 \boxed{
-\left(J_b^{(\sigma)}\right)^Tr=g_b\,(S_\sigma\cdot r)
-+
-\phi\frac{e\times(P_br)}{\beta}.
+\left(J_b^{(\sigma)}\right)^Tr
+=g_b\,(S_\sigma\cdot r)
++\lambda\phi\,\frac{e\times(P_br)}{\|b\times e\|}.
 }
 $$<p>这三式可以直接用于能量梯度计算，不需要显式构造 $\left(3\times3\right)$ 矩阵。</p>
 <hr>
@@ -880,25 +782,8 @@ $$<p>其中：</p>
 <li>$\left(E_2\right)$：$\left(v\right)$ 作为相邻三角形第三个顶点时的贡献。</li>
 </ul>
 <h3 id="31-邻接半边贡献-lefte_1right">3.1 邻接半边贡献 $\left(E_1\right)$
-</h3><p>对每个邻接顶点 $\left(v_i\right)$，统一取正向半边：</p>
-$$
-h=(v_i,v),
-$$<p>因此：</p>
-$$
-p_0=v_i,
-\qquad
-p_1=v.
-$$<p>正向半边 $\left(N_+\right)$ 进入 $\left(\bar N(v)\right)$，反向半边 $\left(N_-\right)$ 进入 $\left(\bar N(v_i)\right)$。</p>
-<p>由于移动 $\left(v=p_1\right)$ 时，在正向局部变量中只改变 $\left(e\right)$，所以单条邻接边对梯度的贡献为：</p>
-$$
-\boxed{
-2\left[
-(J_e^+)^T\bar N(v)
-+
-(J_e^-)^T\bar N(v_i)
-\right].
-}
-$$<p>因此：</p>
+</h3><p>对每个邻接顶点 $\left(v_i\right)$，统一取正向半边 $\left(h=(v_i,v)\right)$，即 $\left(p_0=v_i,\ p_1=v\right)$。正向半边 $\left(N_+\right)$ 进入 $\left(\bar N(v)\right)$，反向半边 $\left(N_-\right)$ 进入 $\left(\bar N(v_i)\right)$。</p>
+<p>由于移动 $\left(v=p_1\right)$ 时，在正向局部变量中只改变 $\left(e\right)$，单条邻接边的贡献为 $\left(2[(J_e^+)^T\bar N(v)+(J_e^-)^T\bar N(v_i)]\right)$，对所有邻接边求和：</p>
 $$
 \boxed{
 \nabla_pE_1(v)=2\sum_{h=(v_i,v)}
@@ -922,57 +807,38 @@ S_-\cdot\bar N(v_i)
 \Big]
 \\[3pt]
 &+
-\phi\frac{P_e[\bar N(v)-\bar N(v_i)]}{\ell}
+\phi\frac{P_e[\bar N(v)-\bar N(v_i)]}{\|e\|}
 \\[3pt]
 &+
-\phi\frac{
+\lambda\phi\frac{
 a\times P_a[\bar N(v)+\bar N(v_i)]
-}{\alpha}
+}{\|e\times a\|}
 \\[3pt]
 &-
-\phi\frac{
+\lambda\phi\frac{
 b\times P_b[\bar N(v)+\bar N(v_i)]
-}{\beta}
+}{\|b\times e\|}
 \Bigg\}.
 \end{aligned}
 }
 $$<p>这里每条半边的 $\left(e,a,b,\phi,S_\pm,P_e,P_a,P_b,g_e\right)$ 都使用该半边自己的局部几何量。</p>
 <p>与旧公式相比，只有边方向项出现
-$\left(\bar N(v)-\bar N(v_i)\right)$，两个面法向方向项对应的是
-$\left(\bar N(v)+\bar N(v_i)\right)$。</p>
+$\left(\bar N(v)-\bar N(v_i)\right)$；两个面法向项对应的都是
+$\left(\bar N(v)+\bar N(v_i)\right)$，并且都带因子 $\left(\lambda\right)$。</p>
 <hr>
 <h2 id="4-环状边贡献">4. 环状边贡献
 </h2><p>考虑二环邻域中的一条边：</p>
 $$
 h=(v_j,v_i),
 \qquad
-e=v_i-v_j.
-$$<p>取：</p>
-$$
-p_0=v_j,
-\qquad
-p_1=v_i.
-$$<p>正向半边 $\left(N_+\right)$ 进入 $\left(\bar N(v_i)\right)$，反向半边 $\left(N_-\right)$ 进入 $\left(\bar N(v_j)\right)$。</p>
-<p>记：</p>
+e=v_i-v_j,
+$$<p>取 $\left(p_0=v_j,\ p_1=v_i\right)$。正向半边 $\left(N_+\right)$ 进入 $\left(\bar N(v_i)\right)$，反向半边 $\left(N_-\right)$ 进入 $\left(\bar N(v_j)\right)$。记：</p>
 $$
 \bar N_i=\bar N(v_i),
 \qquad
 \bar N_j=\bar N(v_j).
 $$<h3 id="41-当前顶点-leftvp_2right">4.1 当前顶点 $\left(v=p_2\right)$
-</h3><p>此时：</p>
-$$
-a=v-v_j.
-$$<p>移动 $\left(v\right)$ 只改变局部变量 $\left(a\right)$。</p>
-<p>单条环状边的贡献为：</p>
-$$
-\boxed{
-2\left[
-(J_a^+)^T\bar N_i
-+
-(J_a^-)^T\bar N_j
-\right].
-}
-$$<p>因此：</p>
+</h3><p>此时 $\left(a=v-v_j\right)$，移动 $\left(v\right)$ 只改变局部变量 $\left(a\right)$。单条环状边的贡献为 $\left(2[(J_a^+)^T\bar N_i+(J_a^-)^T\bar N_j]\right)$，对所有满足 $\left(v=p_2\right)$ 的环状边求和：</p>
 $$
 \boxed{
 \nabla_pE_{2,a}(v)=2\sum_{h=(v_j,v_i),\,v=p_2}
@@ -997,32 +863,15 @@ S_-\cdot\bar N_j
 \Big]
 \\[3pt]
 &-
-\phi
+\lambda\phi
 \frac{
 e\times P_a(\bar N_i+\bar N_j)
-}{\alpha}
+}{\|e\times a\|}
 \Bigg\}.
 \end{aligned}
 }
-$$<p>其中：</p>
-$$
-\boxed{
-g_a=-\ell\frac{x}{\alpha^2}.}
 $$<h3 id="42-当前顶点-leftvp_3right">4.2 当前顶点 $\left(v=p_3\right)$
-</h3><p>此时：</p>
-$$
-b=v-v_j.
-$$<p>移动 $\left(v\right)$ 只改变局部变量 $\left(b\right)$。</p>
-<p>单条环状边的贡献为：</p>
-$$
-\boxed{
-2\left[
-(J_b^+)^T\bar N_i
-+
-(J_b^-)^T\bar N_j
-\right].
-}
-$$<p>因此：</p>
+</h3><p>此时 $\left(b=v-v_j\right)$，移动 $\left(v\right)$ 只改变局部变量 $\left(b\right)$。单条环状边的贡献为 $\left(2[(J_b^+)^T\bar N_i+(J_b^-)^T\bar N_j]\right)$，对所有满足 $\left(v=p_3\right)$ 的环状边求和：</p>
 $$
 \boxed{
 \nabla_pE_{2,b}(v)=2\sum_{h=(v_j,v_i),\,v=p_3}
@@ -1047,24 +896,18 @@ S_-\cdot\bar N_j
 \Big]
 \\[3pt]
 &+
-\phi
+\lambda\phi
 \frac{
 e\times P_b(\bar N_i+\bar N_j)
-}{\beta}
+}{\|b\times e\|}
 \Bigg\}.
 \end{aligned}
 }
-$$<p>其中：</p>
-$$
-\boxed{
-g_b=-\ell\frac{y}{\beta^2}.}
 $$<p>因此：</p>
 $$
-\boxed{
 \nabla_pE_2(v)=\nabla_pE_{2,a}(v)
 +
 \nabla_pE_{2,b}(v),
-}
 $$<p>最终顶点总梯度为：</p>
 $$
 \boxed{
@@ -1078,39 +921,20 @@ $$<p>如果拓扑遍历可以统一选择半边方向，使待求顶点始终位
 <hr>
 <h2 id="5-退化情况与边界处理">5. 退化情况与边界处理
 </h2><h3 id="51-零长度边">5.1 零长度边
-</h3><p>当：</p>
-$$
-\boxed{
-\ell=\|e\|=0,
-}
-$$<p>则 $\left(e/|e|\right)$ 和对应雅可比无法定义，应跳过该半边。</p>
+</h3><p>当 $\left(|e|=0\right)$ 时，$\left(u\right)$ 和对应雅可比无法定义，应跳过该半边。</p>
 <h3 id="52-退化三角形">5.2 退化三角形
-</h3><p>当：</p>
-$$
-\boxed{
-\alpha=\|e\times a\|=0
-}
-$$<p>或：</p>
-$$
-\boxed{
-\beta=\|b\times e\|=0,
-}
-$$<p>对应三角形退化，$\left(n_a,n_b\right)$、角度梯度和雅可比均无法定义，应跳过该半边或先修复网格。</p>
+</h3><p>当 $\left(|e\times a|=0\right)$ 或 $\left(|b\times e|=0\right)$ 时，对应三角形退化，$\left(n_a,n_b\right)$、角度梯度和雅可比均无法定义，应跳过该半边或先修复网格。</p>
 <p>实际计算建议使用阈值：</p>
 $$
 \|e\times a\|^2
 \le
 \varepsilon_{area}^2\|e\|^2\|a\|^2,
-$$$$
+\qquad
 \|b\times e\|^2
 \le
 \varepsilon_{area}^2\|b\|^2\|e\|^2.
 $$<h3 id="53-leftphi0right">5.3 $\left(\phi=0\right)$
-</h3><p>平面状态 $\left(\phi=0\right)$ 不是退化情况。</p>
-<p>此时：</p>
-$$
-N_+=N_-=0,
-$$<p>但是 $\left(J_e,J_a,J_b\right)$ 中的 $\left(S_\sigma g^T\right)$ 项一般仍然存在，因此不能因为 $\left(\phi=0\right)$ 就直接把雅可比设为零。</p>
+</h3><p>平面状态 $\left(\phi=0\right)$ 不是退化情况。此时 $\left(N_+=N_-=0\right)$，但是 $\left(J_e,J_a,J_b\right)$ 中的 $\left(S_\sigma g^T\right)$ 项一般仍然存在，因此不能因为 $\left(\phi=0\right)$ 就直接把雅可比设为零。</p>
 <h3 id="54-接近-left180circright-翻折">5.4 接近 $\left(180^\circ\right)$ 翻折
 </h3><p>当：</p>
 $$

@@ -16,14 +16,16 @@ $$
 N(e) =\phi\left(
 \frac{e}{\|e\|}
 +
-\frac{e\times a}{\|e\times a\|}
+\lambda\left(\frac{e\times a}{\|e\times a\|}
 +
-\frac{b\times e}{\|b\times e\|}
+\frac{b\times e}{\|b\times e\|}\right)
 \right).
 }
 $$
 
-下文中三维楔积 $\left(\wedge\right)$ 统一写成叉积 $\left(\times\right)$。
+下文中三维楔积 $\left(\wedge\right)$ 统一写成叉积 $\left(\times\right)$，$\lambda$ 为 $[0,0.5]$ 区间内的固定参数，不是变量。
+
+$\lambda$调节向量补偿的方向，越低$\sum N(e)$的模长在低能量下增长缓慢，低识别。$\lambda$越高，$\sum N(e)$的模长在低能量下增长迅速，高识别，但在高能量处增长缓慢，低识别。
 
 ---
 
@@ -39,30 +41,16 @@ b=p_3-p_0.
 }
 $$
 
-记：
+三个单位向量为：边方向向量与两个相邻三角形的面法向量
 
 $$
-\ell=\|e\|,
+\boxed{
+u=\frac{e}{\|e\|},
 \qquad
-x=e\times a,
+n_a=\frac{e\times a}{\|e\times a\|},
 \qquad
-\alpha=\|x\|,
-$$
-
-$$
-y=b\times e,
-\qquad
-\beta=\|y\|.
-$$
-
-三个单位向量为：
-
-$$
-u=\frac{e}{\ell},
-\qquad
-n_a=\frac{x}{\alpha},
-\qquad
-n_b=\frac{y}{\beta}.
+n_b=\frac{b\times e}{\|b\times e\|}.
+}
 $$
 
 带符号精确二面角仍定义为：
@@ -71,7 +59,7 @@ $$
 \boxed{
 \phi=\operatorname{atan2}
 \left(
--\ell\,[e\cdot(a\times b)],
+-\|e\|\,[e\cdot(a\times b)],
 (e\times a)\cdot(b\times e)
 \right).
 }
@@ -83,25 +71,13 @@ $$
 \boxed{
 N_+(e)=\phi S_+,
 \qquad
-S_+=u+n_a+n_b.
+S_+=u+\lambda\left(n_a+n_b\right).
 }
 $$
 
 ### 1.1 反向半边
 
-当前半边为：
-
-$$
-(p_0,p_1,p_2,p_3).
-$$
-
-反向半边为：
-
-$$
-(p_1,p_0,p_3,p_2).
-$$
-
-其局部向量满足：
+反向半边 $\left(p_1,p_0,p_3,p_2\right)$ 的局部向量满足：
 
 $$
 e^-=-e,
@@ -111,27 +87,23 @@ a^-=b-e,
 b^-=a-e.
 $$
 
-并且：
+直接计算可得：
 
 $$
-e^-\times a^-=b\times e=y,
-$$
-
-$$
-b^-\times e^-=e\times a=x,
-$$
-
-$$
+e^-\times a^-=b\times e,
+\qquad
+b^-\times e^-=e\times a,
+\qquad
 \phi^-=\phi.
 $$
 
-所以反向半边向量可以直接用正向半边的 $\left(e,a,b\right)$ 写成：
+即反向半边的两个面法向量恰好互换，而 $\left(n_a+n_b\right)$ 在互换下不变，所以反向半边向量可以直接用正向半边的 $\left(e,a,b\right)$ 写成：
 
 $$
 \boxed{
 N_-(e)=\phi S_-,
 \qquad
-S_-=-u+n_a+n_b.
+S_-=-u+\lambda\left(n_a+n_b\right).
 }
 $$
 
@@ -139,15 +111,9 @@ $$
 
 $$
 \boxed{
-N_-(e)\neq -N_+(e).
-}
-$$
-
-更具体地：
-
-$$
-\boxed{
-N_-(e)=N_+(e)-2\phi\frac{e}{\|e\|}.
+N_-(e)\neq -N_+(e),
+\qquad
+N_-(e)=N_+(e)-2\phi u.
 }
 $$
 
@@ -158,34 +124,21 @@ $\left(\bar N(v)-\bar N(v_i)\right)$。
 
 ## 2. 雅可比矩阵
 
-定义叉乘矩阵 $\left([q]_\times\right)$：
+定义叉乘矩阵（反对称矩阵）$\left([q]_\times\right)$：
 
 $$
 [q]_\times r=q\times r.
 $$
 
-定义三个单位向量的正交投影矩阵：
+定义三个正交投影矩阵（分别投影到与 $\left(e,n_a,n_b\right)$ 垂直的平面上）：
 
 $$
 \boxed{
-P_e
-=I-uu^T
-=I-\frac{ee^T}{\ell^2},
-}
-$$
-
-$$
-\boxed{
-P_a
-=I-n_an_a^T
-=I-\frac{xx^T}{\alpha^2},
-}
-$$
-
-$$
-\boxed{
-P_b=I-n_bn_b^T
-=I-\frac{yy^T}{\beta^2}.
+P_e=I-uu^T,
+\qquad
+P_a=I-n_an_a^T,
+\qquad
+P_b=I-n_bn_b^T.
 }
 $$
 
@@ -195,11 +148,9 @@ $$
 
 $$
 \boxed{
-g_e:=\frac{\partial\phi}{\partial e}=\frac{a\cdot e}{\ell}
-\frac{x}{\alpha^2}
-+
-\frac{b\cdot e}{\ell}
-\frac{y}{\beta^2}.
+g_e:=\frac{\partial\phi}{\partial e}
+=\frac{a\cdot e}{\|e\|\,\|e\times a\|}\,n_a
++\frac{b\cdot e}{\|e\|\,\|b\times e\|}\,n_b.
 }
 $$
 
@@ -207,7 +158,8 @@ $$
 
 $$
 \boxed{
-g_a:=\frac{\partial\phi}{\partial a}=-\ell\frac{x}{\alpha^2}.
+g_a:=\frac{\partial\phi}{\partial a}
+=-\frac{\|e\|}{\|e\times a\|}\,n_a.
 }
 $$
 
@@ -215,26 +167,21 @@ $$
 
 $$
 \boxed{
-g_b:=\frac{\partial\phi}{\partial b}=-\ell\frac{y}{\beta^2}.
+g_b:=\frac{\partial\phi}{\partial b}
+=-\frac{\|e\|}{\|b\times e\|}\,n_b.
 }
 $$
 
 因此对四个原始顶点：
 
 $$
-\boxed{
 \frac{\partial\phi}{\partial p_1}=g_e,
 \qquad
 \frac{\partial\phi}{\partial p_2}=g_a,
 \qquad
 \frac{\partial\phi}{\partial p_3}=g_b,
-}
-$$
-
-$$
-\boxed{
+\qquad
 \frac{\partial\phi}{\partial p_0}=-(g_e+g_a+g_b).
-}
 $$
 
 ### 2.2 三个单位向量的雅可比
@@ -243,15 +190,14 @@ $$
 
 $$
 \boxed{
-\frac{\partial u}{\partial e}=\frac{P_e}{\ell}.
+\frac{\partial u}{\partial e}=\frac{P_e}{\|e\|}.
 }
 $$
 
 由于：
 
 $$
-dx=d(e\times a)
-=-[a]_\times de+[e]_\times da,
+d(e\times a)=-[a]_\times\,de+[e]_\times\,da,
 $$
 
 所以：
@@ -259,22 +205,17 @@ $$
 $$
 \boxed{
 \frac{\partial n_a}{\partial e}
-=-\frac{P_a[a]_\times}{\alpha},
-}
-$$
-
-$$
-\boxed{
+=-\frac{P_a[a]_\times}{\|e\times a\|},
+\qquad
 \frac{\partial n_a}{\partial a}
-=\frac{P_a[e]_\times}{\alpha}.
+=\frac{P_a[e]_\times}{\|e\times a\|}.
 }
 $$
 
 由于：
 
 $$
-dy=d(b\times e)
-=[b]_\times de-[e]_\times db,
+d(b\times e)=[b]_\times\,de-[e]_\times\,db,
 $$
 
 所以：
@@ -282,102 +223,45 @@ $$
 $$
 \boxed{
 \frac{\partial n_b}{\partial e}
-=\frac{P_b[b]_\times}{\beta},
-}
-$$
-
-$$
-\boxed{
+=\frac{P_b[b]_\times}{\|b\times e\|},
+\qquad
 \frac{\partial n_b}{\partial b}
-=-\frac{P_b[e]_\times}{\beta}.
+=-\frac{P_b[e]_\times}{\|b\times e\|}.
 }
 $$
 
 其余交叉偏导均为零。
 
-### 2.3 $\left(S_\sigma\right)$ 的雅可比
+### 2.3 半边向量 $\left(N_\sigma=\phi S_\sigma\right)$ 的雅可比
 
-为了同时表示正向和反向半边，令：
-
-$$
-\sigma\in\{+1,-1\},
-$$
+为了同时表示正向和反向半边，令 $\left(\sigma\in\{+1,-1\}\right)$：
 
 $$
 \boxed{
-S_\sigma=\sigma u+n_a+n_b.
-}
-$$
-
-其中：
-
-$$
-S_{+1}=S_+,
+S_\sigma=\sigma u+\lambda\left(n_a+n_b\right),
 \qquad
-S_{-1}=S_-.
-$$
-
-则：
-
-$$
-\boxed{
-J_{S,e}^{(\sigma)}:=\frac{\partial S_\sigma}{\partial e}=\sigma\frac{P_e}{\ell}
--\frac{P_a[a]_\times}{\alpha}+\frac{P_b[b]_\times}{\beta}.
+N_\sigma=\phi S_\sigma,
 }
 $$
 
-$$
-\boxed{
-J_{S,a}^{(\sigma)}:=\frac{\partial S_\sigma}{\partial a}=\frac{P_a[e]_\times}{\alpha}.
-}
-$$
-
-$$
-\boxed{
-J_{S,b}^{(\sigma)}:=\frac{\partial S_\sigma}{\partial b}=-\frac{P_b[e]_\times}{\beta}.
-}
-$$
-
-注意 $\left(J_{S,a}^{(\sigma)}\right)$ 和 $\left(J_{S,b}^{(\sigma)}\right)$ 与 $\left(\sigma\right)$ 无关。
-
-### 2.4 新半边向量 $\left(N_\sigma=\phi S_\sigma\right)$ 的雅可比
-
-由乘积法则：
+其中 $\left(S_{+1}=S_+\right)$，$\left(S_{-1}=S_-\right)$。由乘积法则：
 
 $$
 dN_\sigma
 =S_\sigma\,d\phi+\phi\,dS_\sigma.
 $$
 
-因此对 $\left(e\right)$：
+结合 2.1 与 2.2 的结果，对 $\left(e\right)$：
 
 $$
 \boxed{
-J_e^{(\sigma)}:=\frac{\partial N_\sigma}{\partial e}=S_\sigma g_e^T+\phi\left(
-\sigma\frac{P_e}{\ell}-\frac{P_a[a]_\times}{\alpha}+\frac{P_b[b]_\times}{\beta}
+J_e^{(\sigma)}:=\frac{\partial N_\sigma}{\partial e}
+=S_\sigma g_e^T
++\phi\left(
+\sigma\frac{P_e}{\|e\|}
+-\lambda\frac{P_a[a]_\times}{\|e\times a\|}
++\lambda\frac{P_b[b]_\times}{\|b\times e\|}
 \right).
-}
-$$
-
-完全展开为：
-
-$$
-\boxed{
-\begin{aligned}
-J_e^{(\sigma)}={}&
-S_\sigma
-\left[
-\frac{a\cdot e}{\ell}
-\frac{x}{\alpha^2}+\frac{b\cdot e}{\ell}
-\frac{y}{\beta^2}
-\right]^T
-\\[4pt]
-&+
-\phi
-\left(
-\sigma\frac{P_e}{\ell}-\frac{P_a[a]_\times}{\alpha}+\frac{P_b[b]_\times}{\beta}
-\right).
-\end{aligned}
 }
 $$
 
@@ -385,17 +269,9 @@ $$
 
 $$
 \boxed{
-J_a^{(\sigma)}:=\frac{\partial N_\sigma}{\partial a}=S_\sigma g_a^T
-+
-\phi\frac{P_a[e]_\times}{\alpha}.
-}
-$$
-
-即：
-
-$$
-\boxed{
-J_a^{(\sigma)}=-\ell S_\sigma\frac{x^T}{\alpha^2}+\phi\frac{P_a[e]_\times}{\alpha}.
+J_a^{(\sigma)}:=\frac{\partial N_\sigma}{\partial a}
+=S_\sigma g_a^T
++\lambda\phi\,\frac{P_a[e]_\times}{\|e\times a\|}.
 }
 $$
 
@@ -403,43 +279,19 @@ $$
 
 $$
 \boxed{
-J_b^{(\sigma)}:=\frac{\partial N_\sigma}{\partial b}=S_\sigma g_b^T-\phi\frac{P_b[e]_\times}{\beta}.
+J_b^{(\sigma)}:=\frac{\partial N_\sigma}{\partial b}
+=S_\sigma g_b^T
+-\lambda\phi\,\frac{P_b[e]_\times}{\|b\times e\|}.
 }
 $$
 
-即：
+注意：
 
-$$
-\boxed{
-J_b^{(\sigma)}=-\ell S_\sigma\frac{y^T}{\beta^2}-\phi\frac{P_b[e]_\times}{\beta}.
-}
-$$
+- $\left(J_a^{(\sigma)}\right)$、$\left(J_b^{(\sigma)}\right)$第二项 与 $\left(\sigma\right)$ 无关，但第一项仍随正反半边变化；
+- $\left(\lambda\right)$ 只通过 $\left(S_\sigma\right)$ 和各面法向项进入雅可比，令 $\left(\lambda=0\right)$（即 $\left(S_\sigma=\sigma u\right)$）时以上各式退化为旧定义的雅可比；
+- 正向半边取 $\left(\sigma=+1\right)$，反向半边取 $\left(\sigma=-1\right)$。
 
-正向半边直接取 $\left(\sigma=+1\right)$：
-
-$$
-\boxed{
-J_e^+=J_e^{(+1)},
-\qquad
-J_a^+=J_a^{(+1)},
-\qquad
-J_b^+=J_b^{(+1)}.
-}
-$$
-
-反向半边用同一组正向局部变量 $\left(e,a,b\right)$ 表示时取 $\left(\sigma=-1\right)$：
-
-$$
-\boxed{
-J_e^-=J_e^{(-1)},
-\qquad
-J_a^-=J_a^{(-1)},
-\qquad
-J_b^-=J_b^{(-1)}.
-}
-$$
-
-### 2.5 对四个顶点的雅可比
+### 2.4 对四个顶点的雅可比
 
 对于 $\left(N_\sigma\right)$，由于：
 
@@ -459,7 +311,7 @@ $$
 \qquad
 \frac{\partial N_\sigma}{\partial p_2}=J_a^{(\sigma)},
 \qquad
-\frac{\partial N_\sigma}{\partial p_3}=J_b^{(\sigma)}.
+\frac{\partial N_\sigma}{\partial p_3}=J_b^{(\sigma)},
 }
 $$
 
@@ -477,47 +329,42 @@ $$
 因此自动满足平移不变性：
 
 $$
-\boxed{
 \frac{\partial N_\sigma}{\partial p_0}
-+
-\frac{\partial N_\sigma}{\partial p_1}
-+
-\frac{\partial N_\sigma}{\partial p_2}
-+
-\frac{\partial N_\sigma}{\partial p_3}
++\frac{\partial N_\sigma}{\partial p_1}
++\frac{\partial N_\sigma}{\partial p_2}
++\frac{\partial N_\sigma}{\partial p_3}
 =0.
-}
 $$
 
-### 2.6 能量中直接使用的 $\left(J^Tr\right)$
+### 2.5 能量中直接使用的 $\left(J^Tr\right)$
 
 对于任意三维向量 $\left(r\right)$，有：
 
 $$
 \boxed{
-\begin{aligned}
-\left(J_e^{(\sigma)}\right)^Tr={}&
- g_e\,(S_\sigma\cdot r)
-\\[2pt]
-&+
-\phi\left[
-\sigma\frac{P_er}{\ell}+\frac{a\times(P_ar)}{\alpha}-\frac{b\times(P_br)}{\beta}
+\left(J_e^{(\sigma)}\right)^Tr
+=g_e\,(S_\sigma\cdot r)
++\phi\left[
+\sigma\frac{P_er}{\|e\|}
++\lambda\frac{a\times(P_ar)}{\|e\times a\|}
+-\lambda\frac{b\times(P_br)}{\|b\times e\|}
 \right].
-\end{aligned}
 }
 $$
 
 $$
 \boxed{
-\left(J_a^{(\sigma)}\right)^Tr=g_a\,(S_\sigma\cdot r)-\phi\frac{e\times(P_ar)}{\alpha}.
+\left(J_a^{(\sigma)}\right)^Tr
+=g_a\,(S_\sigma\cdot r)
+-\lambda\phi\,\frac{e\times(P_ar)}{\|e\times a\|}.
 }
 $$
 
 $$
 \boxed{
-\left(J_b^{(\sigma)}\right)^Tr=g_b\,(S_\sigma\cdot r)
-+
-\phi\frac{e\times(P_br)}{\beta}.
+\left(J_b^{(\sigma)}\right)^Tr
+=g_b\,(S_\sigma\cdot r)
++\lambda\phi\,\frac{e\times(P_br)}{\|b\times e\|}.
 }
 $$
 
@@ -598,35 +445,9 @@ $$
 
 ### 3.1 邻接半边贡献 $\left(E_1\right)$
 
-对每个邻接顶点 $\left(v_i\right)$，统一取正向半边：
+对每个邻接顶点 $\left(v_i\right)$，统一取正向半边 $\left(h=(v_i,v)\right)$，即 $\left(p_0=v_i,\ p_1=v\right)$。正向半边 $\left(N_+\right)$ 进入 $\left(\bar N(v)\right)$，反向半边 $\left(N_-\right)$ 进入 $\left(\bar N(v_i)\right)$。
 
-$$
-h=(v_i,v),
-$$
-
-因此：
-
-$$
-p_0=v_i,
-\qquad
-p_1=v.
-$$
-
-正向半边 $\left(N_+\right)$ 进入 $\left(\bar N(v)\right)$，反向半边 $\left(N_-\right)$ 进入 $\left(\bar N(v_i)\right)$。
-
-由于移动 $\left(v=p_1\right)$ 时，在正向局部变量中只改变 $\left(e\right)$，所以单条邻接边对梯度的贡献为：
-
-$$
-\boxed{
-2\left[
-(J_e^+)^T\bar N(v)
-+
-(J_e^-)^T\bar N(v_i)
-\right].
-}
-$$
-
-因此：
+由于移动 $\left(v=p_1\right)$ 时，在正向局部变量中只改变 $\left(e\right)$，单条邻接边的贡献为 $\left(2[(J_e^+)^T\bar N(v)+(J_e^-)^T\bar N(v_i)]\right)$，对所有邻接边求和：
 
 $$
 \boxed{
@@ -654,17 +475,17 @@ S_-\cdot\bar N(v_i)
 \Big]
 \\[3pt]
 &+
-\phi\frac{P_e[\bar N(v)-\bar N(v_i)]}{\ell}
+\phi\frac{P_e[\bar N(v)-\bar N(v_i)]}{\|e\|}
 \\[3pt]
 &+
-\phi\frac{
+\lambda\phi\frac{
 a\times P_a[\bar N(v)+\bar N(v_i)]
-}{\alpha}
+}{\|e\times a\|}
 \\[3pt]
 &-
-\phi\frac{
+\lambda\phi\frac{
 b\times P_b[\bar N(v)+\bar N(v_i)]
-}{\beta}
+}{\|b\times e\|}
 \Bigg\}.
 \end{aligned}
 }
@@ -673,8 +494,8 @@ $$
 这里每条半边的 $\left(e,a,b,\phi,S_\pm,P_e,P_a,P_b,g_e\right)$ 都使用该半边自己的局部几何量。
 
 与旧公式相比，只有边方向项出现
-$\left(\bar N(v)-\bar N(v_i)\right)$，两个面法向方向项对应的是
-$\left(\bar N(v)+\bar N(v_i)\right)$。
+$\left(\bar N(v)-\bar N(v_i)\right)$；两个面法向项对应的都是
+$\left(\bar N(v)+\bar N(v_i)\right)$，并且都带因子 $\left(\lambda\right)$。
 
 ---
 
@@ -685,20 +506,10 @@ $\left(\bar N(v)+\bar N(v_i)\right)$。
 $$
 h=(v_j,v_i),
 \qquad
-e=v_i-v_j.
+e=v_i-v_j,
 $$
 
-取：
-
-$$
-p_0=v_j,
-\qquad
-p_1=v_i.
-$$
-
-正向半边 $\left(N_+\right)$ 进入 $\left(\bar N(v_i)\right)$，反向半边 $\left(N_-\right)$ 进入 $\left(\bar N(v_j)\right)$。
-
-记：
+取 $\left(p_0=v_j,\ p_1=v_i\right)$。正向半边 $\left(N_+\right)$ 进入 $\left(\bar N(v_i)\right)$，反向半边 $\left(N_-\right)$ 进入 $\left(\bar N(v_j)\right)$。记：
 
 $$
 \bar N_i=\bar N(v_i),
@@ -708,27 +519,7 @@ $$
 
 ### 4.1 当前顶点 $\left(v=p_2\right)$
 
-此时：
-
-$$
-a=v-v_j.
-$$
-
-移动 $\left(v\right)$ 只改变局部变量 $\left(a\right)$。
-
-单条环状边的贡献为：
-
-$$
-\boxed{
-2\left[
-(J_a^+)^T\bar N_i
-+
-(J_a^-)^T\bar N_j
-\right].
-}
-$$
-
-因此：
+此时 $\left(a=v-v_j\right)$，移动 $\left(v\right)$ 只改变局部变量 $\left(a\right)$。单条环状边的贡献为 $\left(2[(J_a^+)^T\bar N_i+(J_a^-)^T\bar N_j]\right)$，对所有满足 $\left(v=p_2\right)$ 的环状边求和：
 
 $$
 \boxed{
@@ -757,45 +548,18 @@ S_-\cdot\bar N_j
 \Big]
 \\[3pt]
 &-
-\phi
+\lambda\phi
 \frac{
 e\times P_a(\bar N_i+\bar N_j)
-}{\alpha}
+}{\|e\times a\|}
 \Bigg\}.
 \end{aligned}
 }
 $$
 
-其中：
-
-$$
-\boxed{
-g_a=-\ell\frac{x}{\alpha^2}.}
-$$
-
 ### 4.2 当前顶点 $\left(v=p_3\right)$
 
-此时：
-
-$$
-b=v-v_j.
-$$
-
-移动 $\left(v\right)$ 只改变局部变量 $\left(b\right)$。
-
-单条环状边的贡献为：
-
-$$
-\boxed{
-2\left[
-(J_b^+)^T\bar N_i
-+
-(J_b^-)^T\bar N_j
-\right].
-}
-$$
-
-因此：
+此时 $\left(b=v-v_j\right)$，移动 $\left(v\right)$ 只改变局部变量 $\left(b\right)$。单条环状边的贡献为 $\left(2[(J_b^+)^T\bar N_i+(J_b^-)^T\bar N_j]\right)$，对所有满足 $\left(v=p_3\right)$ 的环状边求和：
 
 $$
 \boxed{
@@ -824,30 +588,21 @@ S_-\cdot\bar N_j
 \Big]
 \\[3pt]
 &+
-\phi
+\lambda\phi
 \frac{
 e\times P_b(\bar N_i+\bar N_j)
-}{\beta}
+}{\|b\times e\|}
 \Bigg\}.
 \end{aligned}
 }
 $$
 
-其中：
-
-$$
-\boxed{
-g_b=-\ell\frac{y}{\beta^2}.}
-$$
-
 因此：
 
 $$
-\boxed{
 \nabla_pE_2(v)=\nabla_pE_{2,a}(v)
 +
 \nabla_pE_{2,b}(v),
-}
 $$
 
 最终顶点总梯度为：
@@ -870,35 +625,11 @@ $$
 
 ### 5.1 零长度边
 
-当：
-
-$$
-\boxed{
-\ell=\|e\|=0,
-}
-$$
-
-则 $\left(e/\|e\|\right)$ 和对应雅可比无法定义，应跳过该半边。
+当 $\left(\|e\|=0\right)$ 时，$\left(u\right)$ 和对应雅可比无法定义，应跳过该半边。
 
 ### 5.2 退化三角形
 
-当：
-
-$$
-\boxed{
-\alpha=\|e\times a\|=0
-}
-$$
-
-或：
-
-$$
-\boxed{
-\beta=\|b\times e\|=0,
-}
-$$
-
-对应三角形退化，$\left(n_a,n_b\right)$、角度梯度和雅可比均无法定义，应跳过该半边或先修复网格。
+当 $\left(\|e\times a\|=0\right)$ 或 $\left(\|b\times e\|=0\right)$ 时，对应三角形退化，$\left(n_a,n_b\right)$、角度梯度和雅可比均无法定义，应跳过该半边或先修复网格。
 
 实际计算建议使用阈值：
 
@@ -906,9 +637,7 @@ $$
 \|e\times a\|^2
 \le
 \varepsilon_{area}^2\|e\|^2\|a\|^2,
-$$
-
-$$
+\qquad
 \|b\times e\|^2
 \le
 \varepsilon_{area}^2\|b\|^2\|e\|^2.
@@ -916,15 +645,7 @@ $$
 
 ### 5.3 $\left(\phi=0\right)$
 
-平面状态 $\left(\phi=0\right)$ 不是退化情况。
-
-此时：
-
-$$
-N_+=N_-=0,
-$$
-
-但是 $\left(J_e,J_a,J_b\right)$ 中的 $\left(S_\sigma g^T\right)$ 项一般仍然存在，因此不能因为 $\left(\phi=0\right)$ 就直接把雅可比设为零。
+平面状态 $\left(\phi=0\right)$ 不是退化情况。此时 $\left(N_+=N_-=0\right)$，但是 $\left(J_e,J_a,J_b\right)$ 中的 $\left(S_\sigma g^T\right)$ 项一般仍然存在，因此不能因为 $\left(\phi=0\right)$ 就直接把雅可比设为零。
 
 ### 5.4 接近 $\left(180^\circ\right)$ 翻折
 
