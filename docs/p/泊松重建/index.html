@@ -3,7 +3,7 @@
     lang="zh-cn"
     dir="ltr"
 >
-    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <head>
          <script>
   MathJax = {
     tex: {
@@ -18,11 +18,11 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 注意泊松重建构造的方程$Ax=b$中的A是奇异矩阵，因为含有特征值为0的特征向量(1,1,1&hellip;.1)，要保证这个特性要限制定义域完全落在基函数单位分解的区域。dirichlet边界条件不用加$x_0=0$或$\\sigma x=0$这种约束。\n下面给出一套从连续理论到八叉树有限元离散的统一框架。为了避免概念混淆，先明确两个完全不同的&quot;边界&quot;：\n待重建物体的表面 $\\partial M$：未知，是最终要提取的等值面； 计算域的外边界 $\\Gamma=\\partial\\Omega$：通常是包围点云的立方体或八叉树根节点边界，Dirichlet、Neumann 条件施加在这里。 原始 Poisson 重建利用广义 Stokes/散度定理把 $\\partial M$ 上的法向信息转化成指示函数的梯度；有限元弱形式则再次利用分部积分，在 $\\partial\\Omega$ 上产生边界项。这两次出现的&quot;边界&quot;不是同一个边界。原始论文也是先从指示函数与表面法向的积分关系出发，再构造向量场并求解空间 Poisson 方程。([Hugues Hoppe][1]) 一、Poisson 重建到底在求什么\r设未知实体为 $$\rM\\subset\\mathbb R^3,\r$$ 定义其指示函数 $$\r\\chi_M(x)=\r\\begin{cases}\r1,&x\\in M,\\\\\r0,&x\\notin M.\r\\end{cases}\r$$ 如果能够恢复 $\\chi_M$，那么物体表面就是它的跳变位置。实际计算得到的是平滑近似 $\\chi$，最后提取某个等值面： $$\rS=\\{x\\in\\Omega:\\chi(x)=\\gamma\\}.\r$$ Screened Poisson 常把点云位置约束到 $$\r\\chi(p_i)\\approx \\frac12,\r$$ 因此通常取 $\\gamma=0.5$。原始非 screened 方法则常用所有输入点上的平均函数值作为等值面值： $$\r\\gamma=\\frac{1}{N}\\sum_{i=1}^{N}\\chi(p_i).\r$$ 这样，即使 $\\chi$ 存在整体缩放或平移，等值面仍可以保持一致。原始论文明确采用输入点函数值的平均值确定等值面。([Hugues Hoppe][1])\r二、广义 Stokes 公式如何把法向变成指示函数梯度\r这是 Poisson 重建最核心的理论起点。\n2.1 指示函数的梯度不是普通函数\r$\\chi_M$ 在内部和外部都是常数，所以普通意义下 $$\r\\nabla\\chi_M=0\r$$ 几乎处处成立。 但它在表面 $\\partial M$ 发生跳变，因此从分布意义看，梯度集中在表面上。 设 $\\varphi$ 是光滑测试函数，取外法向为 $n_{\\mathrm{out}}$。分布导数定义为 $$\r\\langle \\partial_j\\chi_M,\\varphi\\rangle\r= -\\langle\\chi_M,\\partial_j\\varphi\\rangle\r= -\\int_M\\partial_j\\varphi\\,dx.\r$$ 利用散度定理： $$\r\\int_M\\partial_j\\varphi\\,dx\r= \\int_{\\partial M}\\varphi n_{\\mathrm{out},j}\\,dS.\r$$ 所以 $$\r\\langle \\partial_j\\chi_M,\\varphi\\rangle\r= -\\int_{\\partial M}\\varphi n_{\\mathrm{out},j}\\,dS.\r$$ 若使用内法向 $$\rn_{\\mathrm{in}}=-n_{\\mathrm{out}},\r$$ 则 $$\r\\langle \\partial_j\\chi_M,\\varphi\\rangle\r= \\int_{\\partial M}\\varphi n_{\\mathrm{in},j}\\,dS.\r$$ 因此可以形式化地写成 $$\r\\boxed{\r\\nabla\\chi_M=n_{\\mathrm{in}}\\delta_{\\partial M}\r}\r$$ 其中 $\\delta_{\\partial M}$ 是集中在物体表面上的面 Dirac 分布。 这就是&quot;指示函数梯度等于表面法向场&quot;的严格含义。\r2.2 为什么需要平滑核\r直接使用 $\\nabla\\chi_M$ 会得到表面上的奇异分布，因此引入平滑核 $F$： $$\r\\widetilde\\chi=\\chi_M*F.\r$$ 利用微分与卷积可交换： $$\r\\nabla\\widetilde\\chi\r= \\nabla(\\chi_M*F)\r= (\\nabla\\chi_M)*F.\r$$ 代入表面分布： $$\r\\boxed{\r\\nabla\\widetilde\\chi(q)\r= \\int_{\\partial M}\rF(q-p)n_{\\mathrm{in}}(p)\\,dS(p)\r}\r$$ 这就是原始 Poisson 重建论文中的核心积分关系。论文利用散度定理证明，平滑指示函数的梯度等于经过相同平滑核处理的表面法向场。([Hugues Hoppe][1])\r2.3 用离散有向点近似积分\r输入点云为 $$\rP=\\{(p_s,n_s)\\}_{s=1}^{N},\r$$ 其中 $n_s$ 是一致定向的法向。 将表面分成每个采样点对应的小面片 $P_s$，可近似为 $$\r\\nabla\\widetilde\\chi(q)\r\\approx\r\\sum_s |P_s|F(q-p_s)n_s.\r$$ 定义向量场 $$\r\\boxed{\rV(q)=\\sum_s w_s F(q-p_s)n_s\r}\r$$ 其中 $w_s\\approx |P_s|$ 是局部面积或密度补偿权重。 于是目标变成： $$\r\\nabla\\chi\\approx V.\r$$ 原始论文也是将表面积分用有向点和面片面积的加权和近似，再把结果记作向量场 $V$。([Hugues Hoppe][1])\r三、为什么得到的是 Poisson 方程\r由于点云噪声、法向误差、离散误差以及采样不均匀，构造出的 $V$ 通常不是严格可积场： $$\r\\nabla\\times V\\neq 0.\r$$ 因此一般不存在一个函数 $\\chi$ 能够处处满足 $$\r\\nabla\\chi=V.\r$$ 于是改为求最小二乘意义下最接近的梯度场： $$\r\\boxed{\rE_0(\\chi)\r= \\frac12\\int_\\Omega\r|\\nabla\\chi-V|^2\\,dx\r}\r$$ 这比直接写 $$\r\\Delta\\chi=\\nabla\\cdot V\r$$ 更基础，因为 Poisson 方程实际上是这个能量的 Euler–Lagrange 方程。 原始 Poisson 重建将问题描述为寻找梯度最接近 $V$ 的指示函数，并由此得到 $$\r\\Delta\\chi=\\nabla\\cdot V.\r$$ ([Hugues Hoppe][1])\r四、从能量到带边界条件的 Poisson 方程\r取任意扰动函数 $\\phi$，令 ">
 <title>泊松重建</title>
 
-<link rel='canonical' href='http://localhost:1313/p/%E6%B3%8A%E6%9D%BE%E9%87%8D%E5%BB%BA/'>
+<link rel='canonical' href='https://wujilingfeng.github.io/p/%E6%B3%8A%E6%9D%BE%E9%87%8D%E5%BB%BA/'>
 
 <link rel="stylesheet" href="../../scss/style.min.b1a5b48e9268da293f0e82d09fd1299e5ecbd5ea47ba1f408b3687d520ce0c2b.css"><meta property='og:title' content="泊松重建">
 <meta property='og:description' content=" 注意泊松重建构造的方程$Ax=b$中的A是奇异矩阵，因为含有特征值为0的特征向量(1,1,1&hellip;.1)，要保证这个特性要限制定义域完全落在基函数单位分解的区域。dirichlet边界条件不用加$x_0=0$或$\\sigma x=0$这种约束。\n下面给出一套从连续理论到八叉树有限元离散的统一框架。为了避免概念混淆，先明确两个完全不同的&quot;边界&quot;：\n待重建物体的表面 $\\partial M$：未知，是最终要提取的等值面； 计算域的外边界 $\\Gamma=\\partial\\Omega$：通常是包围点云的立方体或八叉树根节点边界，Dirichlet、Neumann 条件施加在这里。 原始 Poisson 重建利用广义 Stokes/散度定理把 $\\partial M$ 上的法向信息转化成指示函数的梯度；有限元弱形式则再次利用分部积分，在 $\\partial\\Omega$ 上产生边界项。这两次出现的&quot;边界&quot;不是同一个边界。原始论文也是先从指示函数与表面法向的积分关系出发，再构造向量场并求解空间 Poisson 方程。([Hugues Hoppe][1]) 一、Poisson 重建到底在求什么\r设未知实体为 $$\rM\\subset\\mathbb R^3,\r$$ 定义其指示函数 $$\r\\chi_M(x)=\r\\begin{cases}\r1,&x\\in M,\\\\\r0,&x\\notin M.\r\\end{cases}\r$$ 如果能够恢复 $\\chi_M$，那么物体表面就是它的跳变位置。实际计算得到的是平滑近似 $\\chi$，最后提取某个等值面： $$\rS=\\{x\\in\\Omega:\\chi(x)=\\gamma\\}.\r$$ Screened Poisson 常把点云位置约束到 $$\r\\chi(p_i)\\approx \\frac12,\r$$ 因此通常取 $\\gamma=0.5$。原始非 screened 方法则常用所有输入点上的平均函数值作为等值面值： $$\r\\gamma=\\frac{1}{N}\\sum_{i=1}^{N}\\chi(p_i).\r$$ 这样，即使 $\\chi$ 存在整体缩放或平移，等值面仍可以保持一致。原始论文明确采用输入点函数值的平均值确定等值面。([Hugues Hoppe][1])\r二、广义 Stokes 公式如何把法向变成指示函数梯度\r这是 Poisson 重建最核心的理论起点。\n2.1 指示函数的梯度不是普通函数\r$\\chi_M$ 在内部和外部都是常数，所以普通意义下 $$\r\\nabla\\chi_M=0\r$$ 几乎处处成立。 但它在表面 $\\partial M$ 发生跳变，因此从分布意义看，梯度集中在表面上。 设 $\\varphi$ 是光滑测试函数，取外法向为 $n_{\\mathrm{out}}$。分布导数定义为 $$\r\\langle \\partial_j\\chi_M,\\varphi\\rangle\r= -\\langle\\chi_M,\\partial_j\\varphi\\rangle\r= -\\int_M\\partial_j\\varphi\\,dx.\r$$ 利用散度定理： $$\r\\int_M\\partial_j\\varphi\\,dx\r= \\int_{\\partial M}\\varphi n_{\\mathrm{out},j}\\,dS.\r$$ 所以 $$\r\\langle \\partial_j\\chi_M,\\varphi\\rangle\r= -\\int_{\\partial M}\\varphi n_{\\mathrm{out},j}\\,dS.\r$$ 若使用内法向 $$\rn_{\\mathrm{in}}=-n_{\\mathrm{out}},\r$$ 则 $$\r\\langle \\partial_j\\chi_M,\\varphi\\rangle\r= \\int_{\\partial M}\\varphi n_{\\mathrm{in},j}\\,dS.\r$$ 因此可以形式化地写成 $$\r\\boxed{\r\\nabla\\chi_M=n_{\\mathrm{in}}\\delta_{\\partial M}\r}\r$$ 其中 $\\delta_{\\partial M}$ 是集中在物体表面上的面 Dirac 分布。 这就是&quot;指示函数梯度等于表面法向场&quot;的严格含义。\r2.2 为什么需要平滑核\r直接使用 $\\nabla\\chi_M$ 会得到表面上的奇异分布，因此引入平滑核 $F$： $$\r\\widetilde\\chi=\\chi_M*F.\r$$ 利用微分与卷积可交换： $$\r\\nabla\\widetilde\\chi\r= \\nabla(\\chi_M*F)\r= (\\nabla\\chi_M)*F.\r$$ 代入表面分布： $$\r\\boxed{\r\\nabla\\widetilde\\chi(q)\r= \\int_{\\partial M}\rF(q-p)n_{\\mathrm{in}}(p)\\,dS(p)\r}\r$$ 这就是原始 Poisson 重建论文中的核心积分关系。论文利用散度定理证明，平滑指示函数的梯度等于经过相同平滑核处理的表面法向场。([Hugues Hoppe][1])\r2.3 用离散有向点近似积分\r输入点云为 $$\rP=\\{(p_s,n_s)\\}_{s=1}^{N},\r$$ 其中 $n_s$ 是一致定向的法向。 将表面分成每个采样点对应的小面片 $P_s$，可近似为 $$\r\\nabla\\widetilde\\chi(q)\r\\approx\r\\sum_s |P_s|F(q-p_s)n_s.\r$$ 定义向量场 $$\r\\boxed{\rV(q)=\\sum_s w_s F(q-p_s)n_s\r}\r$$ 其中 $w_s\\approx |P_s|$ 是局部面积或密度补偿权重。 于是目标变成： $$\r\\nabla\\chi\\approx V.\r$$ 原始论文也是将表面积分用有向点和面片面积的加权和近似，再把结果记作向量场 $V$。([Hugues Hoppe][1])\r三、为什么得到的是 Poisson 方程\r由于点云噪声、法向误差、离散误差以及采样不均匀，构造出的 $V$ 通常不是严格可积场： $$\r\\nabla\\times V\\neq 0.\r$$ 因此一般不存在一个函数 $\\chi$ 能够处处满足 $$\r\\nabla\\chi=V.\r$$ 于是改为求最小二乘意义下最接近的梯度场： $$\r\\boxed{\rE_0(\\chi)\r= \\frac12\\int_\\Omega\r|\\nabla\\chi-V|^2\\,dx\r}\r$$ 这比直接写 $$\r\\Delta\\chi=\\nabla\\cdot V\r$$ 更基础，因为 Poisson 方程实际上是这个能量的 Euler–Lagrange 方程。 原始 Poisson 重建将问题描述为寻找梯度最接近 $V$ 的指示函数，并由此得到 $$\r\\Delta\\chi=\\nabla\\cdot V.\r$$ ([Hugues Hoppe][1])\r四、从能量到带边界条件的 Poisson 方程\r取任意扰动函数 $\\phi$，令 ">
-<meta property='og:url' content='http://localhost:1313/p/%E6%B3%8A%E6%9D%BE%E9%87%8D%E5%BB%BA/'>
+<meta property='og:url' content='https://wujilingfeng.github.io/p/%E6%B3%8A%E6%9D%BE%E9%87%8D%E5%BB%BA/'>
 <meta property='og:site_name' content='五级灵风'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-04-12T10:50:58&#43;08:00'/><meta property='article:modified_time' content='2026-04-12T10:50:58&#43;08:00'/>
 <meta name="twitter:title" content="泊松重建">
@@ -301,11 +301,11 @@
 
                             <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
                                 
-                                    <option value="http://localhost:1313/" selected>中文</option>
+                                    <option value="https://wujilingfeng.github.io/" selected>中文</option>
                                 
-                                    <option value="http://localhost:1313/en/" >English</option>
+                                    <option value="https://wujilingfeng.github.io/en/" >English</option>
                                 
-                                    <option value="http://localhost:1313/ar/" >عربي</option>
+                                    <option value="https://wujilingfeng.github.io/ar/" >عربي</option>
                                 
                             </select>
                         </li>
@@ -3282,7 +3282,7 @@ $$
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
                 
                 >
-            </script><script type="text/javascript" src="../../ts/main.cb5b68b346c3bac1ed407f60fd684c610278f2a74b2e42a30e5cdef4d916b36e.js" defer></script>
+            </script><script type="text/javascript" src="../../ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
 <script>
     (function () {
         const customFont = document.createElement('link');

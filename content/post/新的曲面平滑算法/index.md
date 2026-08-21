@@ -322,10 +322,7 @@ $$
 $$
 \boxed{
 J_{S,e}^{(\sigma)}:=\frac{\partial S_\sigma}{\partial e}=\sigma\frac{P_e}{\ell}
--
-\frac{P_a[a]_\times}{\alpha}
-+
-\frac{P_b[b]_\times}{\beta}.
+-\frac{P_a[a]_\times}{\alpha}+\frac{P_b[b]_\times}{\beta}.
 }
 $$
 
@@ -356,15 +353,8 @@ $$
 
 $$
 \boxed{
-J_e^{(\sigma)}:=\frac{\partial N_\sigma}{\partial e}=S_\sigma g_e^T
-+
-\phi
-\left(
-\sigma\frac{P_e}{\ell}
--
-\frac{P_a[a]_\times}{\alpha}
-+
-\frac{P_b[b]_\times}{\beta}
+J_e^{(\sigma)}:=\frac{\partial N_\sigma}{\partial e}=S_\sigma g_e^T+\phi\left(
+\sigma\frac{P_e}{\ell}-\frac{P_a[a]_\times}{\alpha}+\frac{P_b[b]_\times}{\beta}
 \right).
 }
 $$
@@ -374,25 +364,18 @@ $$
 $$
 \boxed{
 \begin{aligned}
-J_e^{(\sigma)}
-={}&
+J_e^{(\sigma)}={}&
 S_\sigma
 \left[
 \frac{a\cdot e}{\ell}
-\frac{x}{\alpha^2}
-+
-\frac{b\cdot e}{\ell}
+\frac{x}{\alpha^2}+\frac{b\cdot e}{\ell}
 \frac{y}{\beta^2}
 \right]^T
 \\[4pt]
 &+
 \phi
 \left(
-\sigma\frac{P_e}{\ell}
--
-\frac{P_a[a]_\times}{\alpha}
-+
-\frac{P_b[b]_\times}{\beta}
+\sigma\frac{P_e}{\ell}-\frac{P_a[a]_\times}{\alpha}+\frac{P_b[b]_\times}{\beta}
 \right).
 \end{aligned}
 }
@@ -412,9 +395,7 @@ $$
 
 $$
 \boxed{
-J_a^{(\sigma)}=-\ell S_\sigma\frac{x^T}{\alpha^2}
-+
-\phi\frac{P_a[e]_\times}{\alpha}.
+J_a^{(\sigma)}=-\ell S_\sigma\frac{x^T}{\alpha^2}+\phi\frac{P_a[e]_\times}{\alpha}.
 }
 $$
 
@@ -422,11 +403,7 @@ $$
 
 $$
 \boxed{
-J_b^{(\sigma)}:=\frac{\partial N_\sigma}{\partial b}
-=
-S_\sigma g_b^T
--
-\phi\frac{P_b[e]_\times}{\beta}.
+J_b^{(\sigma)}:=\frac{\partial N_\sigma}{\partial b}=S_\sigma g_b^T-\phi\frac{P_b[e]_\times}{\beta}.
 }
 $$
 
@@ -434,9 +411,7 @@ $$
 
 $$
 \boxed{
-J_b^{(\sigma)}=-\ell S_\sigma\frac{y^T}{\beta^2}
--
-\phi\frac{P_b[e]_\times}{\beta}.
+J_b^{(\sigma)}=-\ell S_\sigma\frac{y^T}{\beta^2}-\phi\frac{P_b[e]_\times}{\beta}.
 }
 $$
 
@@ -521,17 +496,12 @@ $$
 $$
 \boxed{
 \begin{aligned}
-\left(J_e^{(\sigma)}\right)^Tr
-={}&
+\left(J_e^{(\sigma)}\right)^Tr={}&
  g_e\,(S_\sigma\cdot r)
 \\[2pt]
 &+
 \phi\left[
-\sigma\frac{P_er}{\ell}
-+
-\frac{a\times(P_ar)}{\alpha}
--
-\frac{b\times(P_br)}{\beta}
+\sigma\frac{P_er}{\ell}+\frac{a\times(P_ar)}{\alpha}-\frac{b\times(P_br)}{\beta}
 \right].
 \end{aligned}
 }
@@ -539,9 +509,7 @@ $$
 
 $$
 \boxed{
-\left(J_a^{(\sigma)}\right)^Tr=g_a\,(S_\sigma\cdot r)
--
-\phi\frac{e\times(P_ar)}{\alpha}.
+\left(J_a^{(\sigma)}\right)^Tr=g_a\,(S_\sigma\cdot r)-\phi\frac{e\times(P_ar)}{\alpha}.
 }
 $$
 
