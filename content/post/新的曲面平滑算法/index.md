@@ -9,23 +9,26 @@ image = "image.png"
 
 # 新的曲面平滑算法
 
-本文沿用带符号精确二面角 $\left(\phi\right)$ 的定义，只把半边向量修改为：
+本文沿用带符号精确二面角 $\left(\phi\right)$ 的定义，并引入无符号精确二面角 $\left(\theta\right)$，半边向量修改为：
 
 $$
 \boxed{
-N(e) =\phi\left(
-\frac{e}{\|e\|}
+N(e)
+=
+\phi\frac{e}{\|e\|}
 +
-\lambda\left(\frac{e\times a}{\|e\times a\|}
+\lambda\theta
+\left(
+\frac{e\times a}{\|e\times a\|}
 +
-\frac{b\times e}{\|b\times e\|}\right)
+\frac{b\times e}{\|b\times e\|}
 \right).
 }
 $$
 
 下文中三维楔积 $\left(\wedge\right)$ 统一写成叉积 $\left(\times\right)$，$\lambda$ 为 $[0,0.5]$ 区间内的固定参数，不是变量。
 
-$\lambda$调节向量补偿的方向，越低$\sum N(e)$的模长在低能量下增长缓慢，低识别。$\lambda$越高，$\sum N(e)$的模长在低能量下增长迅速，高识别，但在高能量处增长缓慢，低识别。
+$\lambda$ 调节向量补偿的方向，越低 $\sum N(e)$ 的模长在低能量下增长缓慢，低识别。$\lambda$ 越高，$\sum N(e)$ 的模长在低能量下增长迅速，高识别，但在高能量处增长缓慢，低识别。
 
 ---
 
@@ -53,7 +56,15 @@ n_b=\frac{b\times e}{\|b\times e\|}.
 }
 $$
 
-带符号精确二面角仍定义为：
+记两个面法向量的和为：
+
+$$
+\boxed{
+m=n_a+n_b.
+}
+$$
+
+带符号精确二面角定义为：
 
 $$
 \boxed{
@@ -65,13 +76,43 @@ $$
 }
 $$
 
-因此新的有向半边向量为：
+无符号精确二面角定义为：
 
 $$
 \boxed{
-N_+(e)=\phi S_+,
+\theta
+=
+\operatorname{atan2}
+\left(
+\|n_a\times n_b\|,
+n_a\cdot n_b
+\right),
 \qquad
-S_+=u+\lambda\left(n_a+n_b\right).
+0\le\theta\le\pi.
+}
+$$
+
+等价地，也可以直接使用未单位化面法向量：
+
+$$
+\boxed{
+\theta
+=
+\operatorname{atan2}
+\left(
+\|(e\times a)\times(b\times e)\|,
+(e\times a)\cdot(b\times e)
+\right).
+}
+$$
+
+因此新的正向半边向量为：
+
+$$
+\boxed{
+N_+(e)
+=
+\phi u+\lambda\theta m.
 }
 $$
 
@@ -93,17 +134,21 @@ $$
 e^-\times a^-=b\times e,
 \qquad
 b^-\times e^-=e\times a,
+$$
+
+$$
+\phi^-=\phi,
 \qquad
-\phi^-=\phi.
+\theta^-=\theta.
 $$
 
 即反向半边的两个面法向量恰好互换，而 $\left(n_a+n_b\right)$ 在互换下不变，所以反向半边向量可以直接用正向半边的 $\left(e,a,b\right)$ 写成：
 
 $$
 \boxed{
-N_-(e)=\phi S_-,
-\qquad
-S_-=-u+\lambda\left(n_a+n_b\right).
+N_-(e)
+=
+-\phi u+\lambda\theta m.
 }
 $$
 
@@ -114,6 +159,16 @@ $$
 N_-(e)\neq -N_+(e),
 \qquad
 N_-(e)=N_+(e)-2\phi u.
+}
+$$
+
+并且：
+
+$$
+\boxed{
+N_+(e)+N_-(e)=2\lambda\theta m,
+\qquad
+N_+(e)-N_-(e)=2\phi u.
 }
 $$
 
@@ -142,9 +197,9 @@ P_b=I-n_bn_b^T.
 }
 $$
 
-### 2.1 带符号角度 $\left(\phi\right)$ 的梯度
+### 2.1 带符号角 $\left(\phi\right)$ 与无符号角 $\left(\theta\right)$ 的梯度
 
-对 $\left(e\right)$ 的梯度：
+带符号角 $\left(\phi\right)$ 对 $\left(e\right)$ 的梯度：
 
 $$
 \boxed{
@@ -182,6 +237,61 @@ $$
 \frac{\partial\phi}{\partial p_3}=g_b,
 \qquad
 \frac{\partial\phi}{\partial p_0}=-(g_e+g_a+g_b).
+$$
+
+对于 $\left(0<\theta<\pi\right)$，定义两个面法向量张成的单位转轴：
+
+$$
+\boxed{
+c=
+\frac{n_a\times n_b}{\|n_a\times n_b\|}.
+}
+$$
+
+由于两个三角形共用边 $\left(e\right)$，所以 $\left(c\right)$ 与 $\left(e\right)$ 平行或反平行，并且：
+
+$$
+\boxed{
+\frac{e\cdot c}{\|e\|}\in\{-1,+1\}.
+}
+$$
+
+定义无符号角 $\left(\theta\right)$ 的梯度：
+
+$$
+\boxed{
+h_e:=\frac{\partial\theta}{\partial e}
+=
+\frac{e\cdot c}{\|e\|}\,g_e.
+}
+$$
+
+$$
+\boxed{
+h_a:=\frac{\partial\theta}{\partial a}
+=
+-\frac{e\cdot c}{\|e\times a\|}\,n_a.
+}
+$$
+
+$$
+\boxed{
+h_b:=\frac{\partial\theta}{\partial b}
+=
+-\frac{e\cdot c}{\|b\times e\|}\,n_b.
+}
+$$
+
+因此：
+
+$$
+\frac{\partial\theta}{\partial p_1}=h_e,
+\qquad
+\frac{\partial\theta}{\partial p_2}=h_a,
+\qquad
+\frac{\partial\theta}{\partial p_3}=h_b,
+\qquad
+\frac{\partial\theta}{\partial p_0}=-(h_e+h_a+h_b).
 $$
 
 ### 2.2 三个单位向量的雅可比
@@ -232,36 +342,66 @@ $$
 
 其余交叉偏导均为零。
 
-### 2.3 半边向量 $\left(N_\sigma=\phi S_\sigma\right)$ 的雅可比
+### 2.3 半边向量 $\left(N_\sigma\right)$ 的雅可比
 
 为了同时表示正向和反向半边，令 $\left(\sigma\in\{+1,-1\}\right)$：
 
 $$
 \boxed{
-S_\sigma=\sigma u+\lambda\left(n_a+n_b\right),
+N_\sigma
+=
+\sigma\phi u+\lambda\theta m,
 \qquad
-N_\sigma=\phi S_\sigma,
+m=n_a+n_b.
 }
 $$
 
-其中 $\left(S_{+1}=S_+\right)$，$\left(S_{-1}=S_-\right)$。由乘积法则：
+其中：
 
 $$
+N_{+1}=N_+,
+\qquad
+N_{-1}=N_-.
+$$
+
+由乘积法则：
+
+$$
+\boxed{
 dN_\sigma
-=S_\sigma\,d\phi+\phi\,dS_\sigma.
+=
+\sigma u\,d\phi
++
+\sigma\phi\,du
++
+\lambda m\,d\theta
++
+\lambda\theta\,dm.
+}
 $$
 
 结合 2.1 与 2.2 的结果，对 $\left(e\right)$：
 
 $$
 \boxed{
-J_e^{(\sigma)}:=\frac{\partial N_\sigma}{\partial e}
-=S_\sigma g_e^T
-+\phi\left(
-\sigma\frac{P_e}{\|e\|}
--\lambda\frac{P_a[a]_\times}{\|e\times a\|}
-+\lambda\frac{P_b[b]_\times}{\|b\times e\|}
+\begin{aligned}
+J_e^{(\sigma)}
+:=
+\frac{\partial N_\sigma}{\partial e}
+={}&
+\sigma u g_e^T
++\lambda m h_e^T
+\\[3pt]
+&+
+\sigma\phi\frac{P_e}{\|e\|}
+\\[3pt]
+&+
+\lambda\theta
+\left(
+-\frac{P_a[a]_\times}{\|e\times a\|}
++\frac{P_b[b]_\times}{\|b\times e\|}
 \right).
+\end{aligned}
 }
 $$
 
@@ -269,9 +409,13 @@ $$
 
 $$
 \boxed{
-J_a^{(\sigma)}:=\frac{\partial N_\sigma}{\partial a}
-=S_\sigma g_a^T
-+\lambda\phi\,\frac{P_a[e]_\times}{\|e\times a\|}.
+J_a^{(\sigma)}
+:=
+\frac{\partial N_\sigma}{\partial a}
+=
+\sigma u g_a^T
++\lambda m h_a^T
++\lambda\theta\frac{P_a[e]_\times}{\|e\times a\|}.
 }
 $$
 
@@ -279,16 +423,21 @@ $$
 
 $$
 \boxed{
-J_b^{(\sigma)}:=\frac{\partial N_\sigma}{\partial b}
-=S_\sigma g_b^T
--\lambda\phi\,\frac{P_b[e]_\times}{\|b\times e\|}.
+J_b^{(\sigma)}
+:=
+\frac{\partial N_\sigma}{\partial b}
+=
+\sigma u g_b^T
++\lambda m h_b^T
+-\lambda\theta\frac{P_b[e]_\times}{\|b\times e\|}.
 }
 $$
 
 注意：
 
-- $\left(J_a^{(\sigma)}\right)$、$\left(J_b^{(\sigma)}\right)$第二项 与 $\left(\sigma\right)$ 无关，但第一项仍随正反半边变化；
-- $\left(\lambda\right)$ 只通过 $\left(S_\sigma\right)$ 和各面法向项进入雅可比，令 $\left(\lambda=0\right)$（即 $\left(S_\sigma=\sigma u\right)$）时以上各式退化为旧定义的雅可比；
+- 所有与带符号边方向项 $\left(\phi u\right)$ 有关的项都带 $\left(\sigma\right)$；
+- 所有与无符号补偿项 $\left(\lambda\theta m\right)$ 有关的项都与 $\left(\sigma\right)$ 无关；
+- 令 $\left(\lambda=0\right)$ 时，以上各式退化为 $\left(N_\sigma=\sigma\phi u\right)$ 的雅可比；
 - 正向半边取 $\left(\sigma=+1\right)$，反向半边取 $\left(\sigma=-1\right)$。
 
 ### 2.4 对四个顶点的雅可比
@@ -342,29 +491,43 @@ $$
 
 $$
 \boxed{
+\begin{aligned}
 \left(J_e^{(\sigma)}\right)^Tr
-=g_e\,(S_\sigma\cdot r)
-+\phi\left[
-\sigma\frac{P_er}{\|e\|}
-+\lambda\frac{a\times(P_ar)}{\|e\times a\|}
--\lambda\frac{b\times(P_br)}{\|b\times e\|}
+={}&
+\sigma g_e\,(u\cdot r)
++\lambda h_e\,(m\cdot r)
+\\[3pt]
+&+
+\sigma\phi\frac{P_er}{\|e\|}
+\\[3pt]
+&+
+\lambda\theta
+\left[
+\frac{a\times(P_ar)}{\|e\times a\|}
+-
+\frac{b\times(P_br)}{\|b\times e\|}
 \right].
+\end{aligned}
 }
 $$
 
 $$
 \boxed{
 \left(J_a^{(\sigma)}\right)^Tr
-=g_a\,(S_\sigma\cdot r)
--\lambda\phi\,\frac{e\times(P_ar)}{\|e\times a\|}.
+=
+\sigma g_a\,(u\cdot r)
++\lambda h_a\,(m\cdot r)
+-\lambda\theta\frac{e\times(P_ar)}{\|e\times a\|}.
 }
 $$
 
 $$
 \boxed{
 \left(J_b^{(\sigma)}\right)^Tr
-=g_b\,(S_\sigma\cdot r)
-+\lambda\phi\,\frac{e\times(P_br)}{\|b\times e\|}.
+=
+\sigma g_b\,(u\cdot r)
++\lambda h_b\,(m\cdot r)
++\lambda\theta\frac{e\times(P_br)}{\|b\times e\|}.
 }
 $$
 
@@ -468,22 +631,30 @@ $$
 \nabla_pE_1(v)
 =2\sum_{h=(v_i,v)}
 \Bigg\{
-&g_e\Big[
-S_+\cdot\bar N(v)
-+
-S_-\cdot\bar N(v_i)
-\Big]
+&
+g_e
+\left[
+u\cdot\left(\bar N(v)-\bar N(v_i)\right)
+\right]
 \\[3pt]
 &+
-\phi\frac{P_e[\bar N(v)-\bar N(v_i)]}{\|e\|}
+\lambda h_e
+\left[
+m\cdot\left(\bar N(v)+\bar N(v_i)\right)
+\right]
 \\[3pt]
 &+
-\lambda\phi\frac{
+\phi\frac{
+P_e[\bar N(v)-\bar N(v_i)]
+}{\|e\|}
+\\[3pt]
+&+
+\lambda\theta\frac{
 a\times P_a[\bar N(v)+\bar N(v_i)]
 }{\|e\times a\|}
 \\[3pt]
 &-
-\lambda\phi\frac{
+\lambda\theta\frac{
 b\times P_b[\bar N(v)+\bar N(v_i)]
 }{\|b\times e\|}
 \Bigg\}.
@@ -491,11 +662,12 @@ b\times P_b[\bar N(v)+\bar N(v_i)]
 }
 $$
 
-这里每条半边的 $\left(e,a,b,\phi,S_\pm,P_e,P_a,P_b,g_e\right)$ 都使用该半边自己的局部几何量。
+这里每条半边的 $\left(e,a,b,\phi,\theta,u,m,P_e,P_a,P_b,g_e,h_e\right)$ 都使用该半边自己的局部几何量。
 
-与旧公式相比，只有边方向项出现
-$\left(\bar N(v)-\bar N(v_i)\right)$；两个面法向项对应的都是
-$\left(\bar N(v)+\bar N(v_i)\right)$，并且都带因子 $\left(\lambda\right)$。
+其中：
+
+- 与带符号边方向项有关的部分对应 $\left(\bar N(v)-\bar N(v_i)\right)$；
+- 与无符号补偿项有关的部分对应 $\left(\bar N(v)+\bar N(v_i)\right)$。
 
 ---
 
@@ -540,15 +712,20 @@ $$
 \nabla_pE_{2,a}(v)
 =2\sum_{h=(v_j,v_i),\,v=p_2}
 \Bigg\{
-&g_a
-\Big[
-S_+\cdot\bar N_i
-+
-S_-\cdot\bar N_j
-\Big]
+&
+g_a
+\left[
+u\cdot(\bar N_i-\bar N_j)
+\right]
+\\[3pt]
+&+
+\lambda h_a
+\left[
+m\cdot(\bar N_i+\bar N_j)
+\right]
 \\[3pt]
 &-
-\lambda\phi
+\lambda\theta
 \frac{
 e\times P_a(\bar N_i+\bar N_j)
 }{\|e\times a\|}
@@ -580,15 +757,20 @@ $$
 \nabla_pE_{2,b}(v)
 =2\sum_{h=(v_j,v_i),\,v=p_3}
 \Bigg\{
-&g_b
-\Big[
-S_+\cdot\bar N_i
-+
-S_-\cdot\bar N_j
-\Big]
+&
+g_b
+\left[
+u\cdot(\bar N_i-\bar N_j)
+\right]
 \\[3pt]
 &+
-\lambda\phi
+\lambda h_b
+\left[
+m\cdot(\bar N_i+\bar N_j)
+\right]
+\\[3pt]
+&+
+\lambda\theta
 \frac{
 e\times P_b(\bar N_i+\bar N_j)
 }{\|b\times e\|}
@@ -643,9 +825,31 @@ $$
 \varepsilon_{area}^2\|b\|^2\|e\|^2.
 $$
 
-### 5.3 $\left(\phi=0\right)$
+### 5.3 平面状态 $\left(\phi=0,\theta=0\right)$
 
-平面状态 $\left(\phi=0\right)$ 不是退化情况。此时 $\left(N_+=N_-=0\right)$，但是 $\left(J_e,J_a,J_b\right)$ 中的 $\left(S_\sigma g^T\right)$ 项一般仍然存在，因此不能因为 $\left(\phi=0\right)$ 就直接把雅可比设为零。
+平面状态不是退化情况，此时：
+
+$$
+\boxed{
+N_+=N_-=0.
+}
+$$
+
+带符号角 $\left(\phi\right)$ 在平面状态附近仍具有确定的一阶变化，因此 $\left(g_e,g_a,g_b\right)$ 可以继续使用。
+
+但无符号角 $\left(\theta\right)$ 在 $\left(\theta=0\right)$ 处具有尖点，$\left(c,h_e,h_a,h_b\right)$ 不存在唯一经典导数。
+
+如果实现需要在精确平面状态给出确定梯度，可以选取零次梯度作为一个合法的次梯度：
+
+$$
+\boxed{
+h_e=h_a=h_b=0
+\qquad
+(\theta=0).
+}
+$$
+
+此时补偿项 $\left(\lambda\theta m\right)$ 对几何位置的梯度取零，而带符号边方向项 $\left(\sigma\phi u\right)$ 的梯度仍然保留。
 
 ### 5.4 接近 $\left(180^\circ\right)$ 翻折
 
@@ -655,9 +859,23 @@ $$
 (e\times a)\cdot(b\times e)<0
 $$
 
-且 `atan2` 的第一个参数接近零时，$\left(|\phi|\approx\pi\right)$。
+且 `atan2` 的第一个参数接近零时：
 
-此时 $\left(\phi\right)$ 位于 $\left(+\pi/-\pi\right)$ 分支附近，角度本身不连续。建议检测并跳过完全翻折状态，或者对 $\left(\phi\right)$ 做跨迭代连续展开。
+$$
+|\phi|\approx\pi,
+\qquad
+\theta\approx\pi.
+$$
+
+此时 $\left(\phi\right)$ 位于 $\left(+\pi/-\pi\right)$ 分支附近，同时：
+
+$$
+\|n_a\times n_b\|\approx0,
+$$
+
+因此用于 $\left(\theta\right)$ 梯度的单位转轴 $\left(c\right)$ 也变得不稳定。
+
+建议检测并跳过完全翻折状态，或者对 $\left(\phi\right)$ 做跨迭代连续展开。
 
 ### 5.5 边界半边
 
@@ -668,7 +886,9 @@ $$
 \qquad
 \frac{b\times e}{\|b\times e\|},
 \qquad
-\phi.
+\phi,
+\qquad
+\theta.
 $$
 
 可以采用：
