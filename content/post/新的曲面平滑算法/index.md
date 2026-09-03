@@ -11,20 +11,11 @@ image = "image.png"
 
 本文沿用带符号精确二面角 $\left(\phi\right)$ 的定义，并引入无符号精确二面角 $\left(\theta\right)$，半边向量修改为：
 
-$$
-\boxed{
-N(e)
-=
-\phi\frac{e}{\|e\|}
-+
-\lambda\theta
+$\boxed{N(e)=\phi\frac{e}{\|e\|}+\lambda\theta
 \left(
-\frac{e\times a}{\|e\times a\|}
-+
+\frac{e\times a}{\|e\times a\|}+
 \frac{b\times e}{\|b\times e\|}
-\right).
-}
-$$
+\right).}$
 
 下文中三维楔积 $\left(\wedge\right)$ 统一写成叉积 $\left(\times\right)$，$\lambda$ 为 $[0,0.5]$ 区间内的固定参数，不是变量。
 

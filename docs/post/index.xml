@@ -15,19 +15,11 @@
         <guid>https://wujilingfeng.github.io/p/%E6%96%B0%E7%9A%84%E6%9B%B2%E9%9D%A2%E5%B9%B3%E6%BB%91%E7%AE%97%E6%B3%95/</guid>
         <description>&lt;img src="https://wujilingfeng.github.io/p/%E6%96%B0%E7%9A%84%E6%9B%B2%E9%9D%A2%E5%B9%B3%E6%BB%91%E7%AE%97%E6%B3%95/image.png" alt="Featured image of post 新的曲面平滑算法 " /&gt;&lt;h1 id=&#34;新的曲面平滑算法&#34;&gt;新的曲面平滑算法
 &lt;/h1&gt;&lt;p&gt;本文沿用带符号精确二面角 $\left(\phi\right)$ 的定义，并引入无符号精确二面角 $\left(\theta\right)$，半边向量修改为：&lt;/p&gt;
-&lt;h1 id=&#34;ne&#34;&gt;$$
-\boxed{
-N(e)
-&lt;/h1&gt;&lt;p&gt;\phi\frac{e}{|e|}
-+
-\lambda\theta
+&lt;p&gt;$\boxed{N(e)=\phi\frac{e}{|e|}+\lambda\theta
 \left(
-\frac{e\times a}{|e\times a|}
-+
+\frac{e\times a}{|e\times a|}+
 \frac{b\times e}{|b\times e|}
-\right).
-}
-$$&lt;/p&gt;
+\right).}$&lt;/p&gt;
 &lt;p&gt;下文中三维楔积 $\left(\wedge\right)$ 统一写成叉积 $\left(\times\right)$，$\lambda$ 为 $[0,0.5]$ 区间内的固定参数，不是变量。&lt;/p&gt;
 &lt;p&gt;$\lambda$ 调节向量补偿的方向，越低 $\sum N(e)$ 的模长在低能量下增长缓慢，低识别。$\lambda$ 越高，$\sum N(e)$ 的模长在低能量下增长迅速，高识别，但在高能量处增长缓慢，低识别。&lt;/p&gt;
 &lt;hr&gt;
