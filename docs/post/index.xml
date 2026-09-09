@@ -42,50 +42,36 @@ n_b=\frac{b\times e}{\|b\times e\|}.
 }
 $$&lt;p&gt;记两个面法向量的和为：&lt;/p&gt;
 $$
-\boxed{
-m=n_a+n_b.
-}
+\boxed{m=n_a+n_b.}
 $$&lt;p&gt;带符号精确二面角定义为：&lt;/p&gt;
 $$
-\boxed{
-\phi=\operatorname{atan2}
-\left(
--\|e\|\,[e\cdot(a\times b)],
+\boxed{\phi=\operatorname{atan2}\left(-\|e\|\,[e\cdot(a\times b)],
 (e\times a)\cdot(b\times e)
 \right).
 }
 $$&lt;p&gt;无符号精确二面角定义为：&lt;/p&gt;
-&lt;h1 id=&#34;theta&#34;&gt;$$
-\boxed{
-\theta
-&lt;/h1&gt;&lt;p&gt;\operatorname{atan2}
+$$
+\boxed{\theta=\operatorname{atan2}
 \left(
-|n_a\times n_b|,
+\|n_a\times n_b\|,
 n_a\cdot n_b
 \right),
 \qquad
 0\le\theta\le\pi.
 }
-$$&lt;/p&gt;
-&lt;p&gt;等价地，也可以直接使用未单位化面法向量：&lt;/p&gt;
-&lt;h1 id=&#34;theta-1&#34;&gt;$$
-\boxed{
-\theta
-&lt;/h1&gt;&lt;p&gt;\operatorname{atan2}
+$$&lt;p&gt;等价地，也可以直接使用未单位化面法向量：&lt;/p&gt;
+$$
+\boxed{\theta=\operatorname{atan2}
 \left(
-|(e\times a)\times(b\times e)|,
+\|(e\times a)\times(b\times e)\|,
 (e\times a)\cdot(b\times e)
 \right).
 }
-$$&lt;/p&gt;
-&lt;p&gt;因此新的正向半边向量为：&lt;/p&gt;
-&lt;h1 id=&#34;n_e&#34;&gt;$$
-\boxed{
-N_+(e)
-&lt;/h1&gt;&lt;p&gt;\phi u+\lambda\theta m.
+$$&lt;p&gt;因此新的正向半边向量为：&lt;/p&gt;
+$$
+\boxed{N_+(e)=\phi u+\lambda\theta m.
 }
-$$&lt;/p&gt;
-&lt;h3 id=&#34;11-反向半边&#34;&gt;1.1 反向半边
+$$&lt;h3 id=&#34;11-反向半边&#34;&gt;1.1 反向半边
 &lt;/h3&gt;&lt;p&gt;反向半边 $\left(p_1,p_0,p_3,p_2\right)$ 的局部向量满足：&lt;/p&gt;
 $$
 e^-=-e,

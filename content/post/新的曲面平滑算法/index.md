@@ -50,18 +50,13 @@ $$
 记两个面法向量的和为：
 
 $$
-\boxed{
-m=n_a+n_b.
-}
+\boxed{m=n_a+n_b.}
 $$
 
 带符号精确二面角定义为：
 
 $$
-\boxed{
-\phi=\operatorname{atan2}
-\left(
--\|e\|\,[e\cdot(a\times b)],
+\boxed{\phi=\operatorname{atan2}\left(-\|e\|\,[e\cdot(a\times b)],
 (e\times a)\cdot(b\times e)
 \right).
 }
@@ -70,10 +65,7 @@ $$
 无符号精确二面角定义为：
 
 $$
-\boxed{
-\theta
-=
-\operatorname{atan2}
+\boxed{\theta=\operatorname{atan2}
 \left(
 \|n_a\times n_b\|,
 n_a\cdot n_b
@@ -86,10 +78,7 @@ $$
 等价地，也可以直接使用未单位化面法向量：
 
 $$
-\boxed{
-\theta
-=
-\operatorname{atan2}
+\boxed{\theta=\operatorname{atan2}
 \left(
 \|(e\times a)\times(b\times e)\|,
 (e\times a)\cdot(b\times e)
@@ -100,10 +89,7 @@ $$
 因此新的正向半边向量为：
 
 $$
-\boxed{
-N_+(e)
-=
-\phi u+\lambda\theta m.
+\boxed{N_+(e)=\phi u+\lambda\theta m.
 }
 $$
 

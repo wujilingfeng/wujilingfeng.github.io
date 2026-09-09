@@ -15,18 +15,18 @@
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
  <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="新的曲面平滑算法\r本文沿用带符号精确二面角 $\\left(\\phi\\right)$ 的定义，并引入无符号精确二面角 $\\left(\\theta\\right)$，半边向量修改为：\n$\\boxed{N(e)=\\phi\\frac{e}{|e|}+\\lambda\\theta \\left( \\frac{e\\times a}{|e\\times a|}+ \\frac{b\\times e}{|b\\times e|} \\right).}$\n下文中三维楔积 $\\left(\\wedge\\right)$ 统一写成叉积 $\\left(\\times\\right)$，$\\lambda$ 为 $[0,0.5]$ 区间内的固定参数，不是变量。\n$\\lambda$ 调节向量补偿的方向，越低 $\\sum N(e)$ 的模长在低能量下增长缓慢，低识别。$\\lambda$ 越高，$\\sum N(e)$ 的模长在低能量下增长迅速，高识别，但在高能量处增长缓慢，低识别。\n1. 半边法向量定义\r设内部半边周围四个顶点为 $\\left(p_0,p_1,p_2,p_3\\right)$，定义：\n$$ \\boxed{ e=p_1-p_0,\\qquad a=p_2-p_0,\\qquad b=p_3-p_0. } $$三个单位向量为：边方向向量与两个相邻三角形的面法向量\n$$ \\boxed{ u=\\frac{e}{\\|e\\|}, \\qquad n_a=\\frac{e\\times a}{\\|e\\times a\\|}, \\qquad n_b=\\frac{b\\times e}{\\|b\\times e\\|}. } $$记两个面法向量的和为：\n$$ \\boxed{ m=n_a+n_b. } $$带符号精确二面角定义为：\n$$ \\boxed{ \\phi=\\operatorname{atan2} \\left( -\\|e\\|\\,[e\\cdot(a\\times b)], (e\\times a)\\cdot(b\\times e) \\right). } $$无符号精确二面角定义为：\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="新的曲面平滑算法\r本文沿用带符号精确二面角 $\\left(\\phi\\right)$ 的定义，并引入无符号精确二面角 $\\left(\\theta\\right)$，半边向量修改为：\n$\\boxed{N(e)=\\phi\\frac{e}{|e|}+\\lambda\\theta \\left( \\frac{e\\times a}{|e\\times a|}+ \\frac{b\\times e}{|b\\times e|} \\right).}$\n下文中三维楔积 $\\left(\\wedge\\right)$ 统一写成叉积 $\\left(\\times\\right)$，$\\lambda$ 为 $[0,0.5]$ 区间内的固定参数，不是变量。\n$\\lambda$ 调节向量补偿的方向，越低 $\\sum N(e)$ 的模长在低能量下增长缓慢，低识别。$\\lambda$ 越高，$\\sum N(e)$ 的模长在低能量下增长迅速，高识别，但在高能量处增长缓慢，低识别。\n1. 半边法向量定义\r设内部半边周围四个顶点为 $\\left(p_0,p_1,p_2,p_3\\right)$，定义：\n$$ \\boxed{ e=p_1-p_0,\\qquad a=p_2-p_0,\\qquad b=p_3-p_0. } $$三个单位向量为：边方向向量与两个相邻三角形的面法向量\n$$ \\boxed{ u=\\frac{e}{\\|e\\|}, \\qquad n_a=\\frac{e\\times a}{\\|e\\times a\\|}, \\qquad n_b=\\frac{b\\times e}{\\|b\\times e\\|}. } $$记两个面法向量的和为：\n$$ \\boxed{m=n_a+n_b.} $$带符号精确二面角定义为：\n$$ \\boxed{\\phi=\\operatorname{atan2}\\left(-\\|e\\|\\,[e\\cdot(a\\times b)], (e\\times a)\\cdot(b\\times e) \\right). } $$无符号精确二面角定义为：\n$$ \\boxed{\\theta=\\operatorname{atan2} \\left( \\|n_a\\times n_b\\|, n_a\\cdot n_b \\right), \\qquad 0\\le\\theta\\le\\pi. } $$等价地，也可以直接使用未单位化面法向量：\n">
 <title>新的曲面平滑算法 </title>
 
 <link rel='canonical' href='https://wujilingfeng.github.io/p/%E6%96%B0%E7%9A%84%E6%9B%B2%E9%9D%A2%E5%B9%B3%E6%BB%91%E7%AE%97%E6%B3%95/'>
 
 <link rel="stylesheet" href="../../scss/style.min.b1a5b48e9268da293f0e82d09fd1299e5ecbd5ea47ba1f408b3687d520ce0c2b.css"><meta property='og:title' content="新的曲面平滑算法 ">
-<meta property='og:description' content="新的曲面平滑算法\r本文沿用带符号精确二面角 $\\left(\\phi\\right)$ 的定义，并引入无符号精确二面角 $\\left(\\theta\\right)$，半边向量修改为：\n$\\boxed{N(e)=\\phi\\frac{e}{|e|}+\\lambda\\theta \\left( \\frac{e\\times a}{|e\\times a|}+ \\frac{b\\times e}{|b\\times e|} \\right).}$\n下文中三维楔积 $\\left(\\wedge\\right)$ 统一写成叉积 $\\left(\\times\\right)$，$\\lambda$ 为 $[0,0.5]$ 区间内的固定参数，不是变量。\n$\\lambda$ 调节向量补偿的方向，越低 $\\sum N(e)$ 的模长在低能量下增长缓慢，低识别。$\\lambda$ 越高，$\\sum N(e)$ 的模长在低能量下增长迅速，高识别，但在高能量处增长缓慢，低识别。\n1. 半边法向量定义\r设内部半边周围四个顶点为 $\\left(p_0,p_1,p_2,p_3\\right)$，定义：\n$$ \\boxed{ e=p_1-p_0,\\qquad a=p_2-p_0,\\qquad b=p_3-p_0. } $$三个单位向量为：边方向向量与两个相邻三角形的面法向量\n$$ \\boxed{ u=\\frac{e}{\\|e\\|}, \\qquad n_a=\\frac{e\\times a}{\\|e\\times a\\|}, \\qquad n_b=\\frac{b\\times e}{\\|b\\times e\\|}. } $$记两个面法向量的和为：\n$$ \\boxed{ m=n_a+n_b. } $$带符号精确二面角定义为：\n$$ \\boxed{ \\phi=\\operatorname{atan2} \\left( -\\|e\\|\\,[e\\cdot(a\\times b)], (e\\times a)\\cdot(b\\times e) \\right). } $$无符号精确二面角定义为：\n">
+<meta property='og:description' content="新的曲面平滑算法\r本文沿用带符号精确二面角 $\\left(\\phi\\right)$ 的定义，并引入无符号精确二面角 $\\left(\\theta\\right)$，半边向量修改为：\n$\\boxed{N(e)=\\phi\\frac{e}{|e|}+\\lambda\\theta \\left( \\frac{e\\times a}{|e\\times a|}+ \\frac{b\\times e}{|b\\times e|} \\right).}$\n下文中三维楔积 $\\left(\\wedge\\right)$ 统一写成叉积 $\\left(\\times\\right)$，$\\lambda$ 为 $[0,0.5]$ 区间内的固定参数，不是变量。\n$\\lambda$ 调节向量补偿的方向，越低 $\\sum N(e)$ 的模长在低能量下增长缓慢，低识别。$\\lambda$ 越高，$\\sum N(e)$ 的模长在低能量下增长迅速，高识别，但在高能量处增长缓慢，低识别。\n1. 半边法向量定义\r设内部半边周围四个顶点为 $\\left(p_0,p_1,p_2,p_3\\right)$，定义：\n$$ \\boxed{ e=p_1-p_0,\\qquad a=p_2-p_0,\\qquad b=p_3-p_0. } $$三个单位向量为：边方向向量与两个相邻三角形的面法向量\n$$ \\boxed{ u=\\frac{e}{\\|e\\|}, \\qquad n_a=\\frac{e\\times a}{\\|e\\times a\\|}, \\qquad n_b=\\frac{b\\times e}{\\|b\\times e\\|}. } $$记两个面法向量的和为：\n$$ \\boxed{m=n_a+n_b.} $$带符号精确二面角定义为：\n$$ \\boxed{\\phi=\\operatorname{atan2}\\left(-\\|e\\|\\,[e\\cdot(a\\times b)], (e\\times a)\\cdot(b\\times e) \\right). } $$无符号精确二面角定义为：\n$$ \\boxed{\\theta=\\operatorname{atan2} \\left( \\|n_a\\times n_b\\|, n_a\\cdot n_b \\right), \\qquad 0\\le\\theta\\le\\pi. } $$等价地，也可以直接使用未单位化面法向量：\n">
 <meta property='og:url' content='https://wujilingfeng.github.io/p/%E6%96%B0%E7%9A%84%E6%9B%B2%E9%9D%A2%E5%B9%B3%E6%BB%91%E7%AE%97%E6%B3%95/'>
 <meta property='og:site_name' content='五级灵风'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-08-19T00:00:00&#43;08:00'/><meta property='article:modified_time' content='2026-08-19T00:00:00&#43;08:00'/><meta property='og:image' content='https://wujilingfeng.github.io/p/%E6%96%B0%E7%9A%84%E6%9B%B2%E9%9D%A2%E5%B9%B3%E6%BB%91%E7%AE%97%E6%B3%95/image.png' />
 <meta name="twitter:title" content="新的曲面平滑算法 ">
-<meta name="twitter:description" content="新的曲面平滑算法\r本文沿用带符号精确二面角 $\\left(\\phi\\right)$ 的定义，并引入无符号精确二面角 $\\left(\\theta\\right)$，半边向量修改为：\n$\\boxed{N(e)=\\phi\\frac{e}{|e|}+\\lambda\\theta \\left( \\frac{e\\times a}{|e\\times a|}+ \\frac{b\\times e}{|b\\times e|} \\right).}$\n下文中三维楔积 $\\left(\\wedge\\right)$ 统一写成叉积 $\\left(\\times\\right)$，$\\lambda$ 为 $[0,0.5]$ 区间内的固定参数，不是变量。\n$\\lambda$ 调节向量补偿的方向，越低 $\\sum N(e)$ 的模长在低能量下增长缓慢，低识别。$\\lambda$ 越高，$\\sum N(e)$ 的模长在低能量下增长迅速，高识别，但在高能量处增长缓慢，低识别。\n1. 半边法向量定义\r设内部半边周围四个顶点为 $\\left(p_0,p_1,p_2,p_3\\right)$，定义：\n$$ \\boxed{ e=p_1-p_0,\\qquad a=p_2-p_0,\\qquad b=p_3-p_0. } $$三个单位向量为：边方向向量与两个相邻三角形的面法向量\n$$ \\boxed{ u=\\frac{e}{\\|e\\|}, \\qquad n_a=\\frac{e\\times a}{\\|e\\times a\\|}, \\qquad n_b=\\frac{b\\times e}{\\|b\\times e\\|}. } $$记两个面法向量的和为：\n$$ \\boxed{ m=n_a+n_b. } $$带符号精确二面角定义为：\n$$ \\boxed{ \\phi=\\operatorname{atan2} \\left( -\\|e\\|\\,[e\\cdot(a\\times b)], (e\\times a)\\cdot(b\\times e) \\right). } $$无符号精确二面角定义为：\n"><meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="新的曲面平滑算法\r本文沿用带符号精确二面角 $\\left(\\phi\\right)$ 的定义，并引入无符号精确二面角 $\\left(\\theta\\right)$，半边向量修改为：\n$\\boxed{N(e)=\\phi\\frac{e}{|e|}+\\lambda\\theta \\left( \\frac{e\\times a}{|e\\times a|}+ \\frac{b\\times e}{|b\\times e|} \\right).}$\n下文中三维楔积 $\\left(\\wedge\\right)$ 统一写成叉积 $\\left(\\times\\right)$，$\\lambda$ 为 $[0,0.5]$ 区间内的固定参数，不是变量。\n$\\lambda$ 调节向量补偿的方向，越低 $\\sum N(e)$ 的模长在低能量下增长缓慢，低识别。$\\lambda$ 越高，$\\sum N(e)$ 的模长在低能量下增长迅速，高识别，但在高能量处增长缓慢，低识别。\n1. 半边法向量定义\r设内部半边周围四个顶点为 $\\left(p_0,p_1,p_2,p_3\\right)$，定义：\n$$ \\boxed{ e=p_1-p_0,\\qquad a=p_2-p_0,\\qquad b=p_3-p_0. } $$三个单位向量为：边方向向量与两个相邻三角形的面法向量\n$$ \\boxed{ u=\\frac{e}{\\|e\\|}, \\qquad n_a=\\frac{e\\times a}{\\|e\\times a\\|}, \\qquad n_b=\\frac{b\\times e}{\\|b\\times e\\|}. } $$记两个面法向量的和为：\n$$ \\boxed{m=n_a+n_b.} $$带符号精确二面角定义为：\n$$ \\boxed{\\phi=\\operatorname{atan2}\\left(-\\|e\\|\\,[e\\cdot(a\\times b)], (e\\times a)\\cdot(b\\times e) \\right). } $$无符号精确二面角定义为：\n$$ \\boxed{\\theta=\\operatorname{atan2} \\left( \\|n_a\\times n_b\\|, n_a\\cdot n_b \\right), \\qquad 0\\le\\theta\\le\\pi. } $$等价地，也可以直接使用未单位化面法向量：\n"><meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content='https://wujilingfeng.github.io/p/%E6%96%B0%E7%9A%84%E6%9B%B2%E9%9D%A2%E5%B9%B3%E6%BB%91%E7%AE%97%E6%B3%95/image.png' />
     <link rel="shortcut icon" href="../../favicon.ico" />
 
@@ -361,11 +361,7 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#1-半边法向量定义">1. 半边法向量定义</a></li>
-  </ol>
-
-  <ol>
-    <li>
+    <li><a href="#1-半边法向量定义">1. 半边法向量定义</a>
       <ol>
         <li><a href="#11-反向半边">1.1 反向半边</a></li>
       </ol>
@@ -546,50 +542,36 @@ n_b=\frac{b\times e}{\|b\times e\|}.
 }
 $$<p>记两个面法向量的和为：</p>
 $$
-\boxed{
-m=n_a+n_b.
-}
+\boxed{m=n_a+n_b.}
 $$<p>带符号精确二面角定义为：</p>
 $$
-\boxed{
-\phi=\operatorname{atan2}
-\left(
--\|e\|\,[e\cdot(a\times b)],
+\boxed{\phi=\operatorname{atan2}\left(-\|e\|\,[e\cdot(a\times b)],
 (e\times a)\cdot(b\times e)
 \right).
 }
 $$<p>无符号精确二面角定义为：</p>
-<h1 id="theta">$$
-\boxed{
-\theta
-</h1><p>\operatorname{atan2}
+$$
+\boxed{\theta=\operatorname{atan2}
 \left(
-|n_a\times n_b|,
+\|n_a\times n_b\|,
 n_a\cdot n_b
 \right),
 \qquad
 0\le\theta\le\pi.
 }
-$$</p>
-<p>等价地，也可以直接使用未单位化面法向量：</p>
-<h1 id="theta-1">$$
-\boxed{
-\theta
-</h1><p>\operatorname{atan2}
+$$<p>等价地，也可以直接使用未单位化面法向量：</p>
+$$
+\boxed{\theta=\operatorname{atan2}
 \left(
-|(e\times a)\times(b\times e)|,
+\|(e\times a)\times(b\times e)\|,
 (e\times a)\cdot(b\times e)
 \right).
 }
-$$</p>
-<p>因此新的正向半边向量为：</p>
-<h1 id="n_e">$$
-\boxed{
-N_+(e)
-</h1><p>\phi u+\lambda\theta m.
+$$<p>因此新的正向半边向量为：</p>
+$$
+\boxed{N_+(e)=\phi u+\lambda\theta m.
 }
-$$</p>
-<h3 id="11-反向半边">1.1 反向半边
+$$<h3 id="11-反向半边">1.1 反向半边
 </h3><p>反向半边 $\left(p_1,p_0,p_3,p_2\right)$ 的局部向量满足：</p>
 $$
 e^-=-e,
