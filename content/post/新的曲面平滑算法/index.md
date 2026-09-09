@@ -122,10 +122,7 @@ $$
 即反向半边的两个面法向量恰好互换，而 $\left(n_a+n_b\right)$ 在互换下不变，所以反向半边向量可以直接用正向半边的 $\left(e,a,b\right)$ 写成：
 
 $$
-\boxed{
-N_-(e)
-=
--\phi u+\lambda\theta m.
+\boxed{N_-(e)=-\phi u+\lambda\theta m.
 }
 $$
 
@@ -219,9 +216,7 @@ $$
 对于 $\left(0<\theta<\pi\right)$，定义两个面法向量张成的单位转轴：
 
 $$
-\boxed{
-c=
-\frac{n_a\times n_b}{\|n_a\times n_b\|}.
+\boxed{c=\frac{n_a\times n_b}{\|n_a\times n_b\|}.
 }
 $$
 
@@ -236,26 +231,17 @@ $$
 定义无符号角 $\left(\theta\right)$ 的梯度：
 
 $$
-\boxed{
-h_e:=\frac{\partial\theta}{\partial e}
-=
-\frac{e\cdot c}{\|e\|}\,g_e.
+\boxed{h_e:=\frac{\partial\theta}{\partial e}=\frac{e\cdot c}{\|e\|}\,g_e.
 }
 $$
 
 $$
-\boxed{
-h_a:=\frac{\partial\theta}{\partial a}
-=
--\frac{e\cdot c}{\|e\times a\|}\,n_a.
+\boxed{h_a:=\frac{\partial\theta}{\partial a}=-\frac{e\cdot c}{\|e\times a\|}\,n_a.
 }
 $$
 
 $$
-\boxed{
-h_b:=\frac{\partial\theta}{\partial b}
-=
--\frac{e\cdot c}{\|b\times e\|}\,n_b.
+\boxed{h_b:=\frac{\partial\theta}{\partial b}=-\frac{e\cdot c}{\|b\times e\|}\,n_b.
 }
 $$
 
@@ -325,9 +311,7 @@ $$
 
 $$
 \boxed{
-N_\sigma
-=
-\sigma\phi u+\lambda\theta m,
+N_\sigma=\sigma\phi u+\lambda\theta m,
 \qquad
 m=n_a+n_b.
 }
@@ -345,15 +329,9 @@ $$
 
 $$
 \boxed{
-dN_\sigma
-=
-\sigma u\,d\phi
-+
-\sigma\phi\,du
-+
-\lambda m\,d\theta
-+
-\lambda\theta\,dm.
+dN_\sigma=\sigma u\,d\phi+\sigma\phi\,du
++\lambda m\,d\theta
++\lambda\theta\,dm.
 }
 $$
 
@@ -362,9 +340,7 @@ $$
 $$
 \boxed{
 \begin{aligned}
-J_e^{(\sigma)}
-:=
-\frac{\partial N_\sigma}{\partial e}
+J_e^{(\sigma)}:=\frac{\partial N_\sigma}{\partial e}
 ={}&
 \sigma u g_e^T
 +\lambda m h_e^T
@@ -386,11 +362,7 @@ $$
 
 $$
 \boxed{
-J_a^{(\sigma)}
-:=
-\frac{\partial N_\sigma}{\partial a}
-=
-\sigma u g_a^T
+J_a^{(\sigma)}:=\frac{\partial N_\sigma}{\partial a}=\sigma u g_a^T
 +\lambda m h_a^T
 +\lambda\theta\frac{P_a[e]_\times}{\|e\times a\|}.
 }
@@ -400,11 +372,7 @@ $$
 
 $$
 \boxed{
-J_b^{(\sigma)}
-:=
-\frac{\partial N_\sigma}{\partial b}
-=
-\sigma u g_b^T
+J_b^{(\sigma)}:=\frac{\partial N_\sigma}{\partial b}=\sigma u g_b^T
 +\lambda m h_b^T
 -\lambda\theta\frac{P_b[e]_\times}{\|b\times e\|}.
 }
@@ -480,9 +448,7 @@ $$
 &+
 \lambda\theta
 \left[
-\frac{a\times(P_ar)}{\|e\times a\|}
--
-\frac{b\times(P_br)}{\|b\times e\|}
+\frac{a\times(P_ar)}{\|e\times a\|}-\frac{b\times(P_br)}{\|b\times e\|}
 \right].
 \end{aligned}
 }
@@ -490,9 +456,7 @@ $$
 
 $$
 \boxed{
-\left(J_a^{(\sigma)}\right)^Tr
-=
-\sigma g_a\,(u\cdot r)
+\left(J_a^{(\sigma)}\right)^Tr=\sigma g_a\,(u\cdot r)
 +\lambda h_a\,(m\cdot r)
 -\lambda\theta\frac{e\times(P_ar)}{\|e\times a\|}.
 }
@@ -500,9 +464,7 @@ $$
 
 $$
 \boxed{
-\left(J_b^{(\sigma)}\right)^Tr
-=
-\sigma g_b\,(u\cdot r)
+\left(J_b^{(\sigma)}\right)^Tr=\sigma g_b\,(u\cdot r)
 +\lambda h_b\,(m\cdot r)
 +\lambda\theta\frac{e\times(P_br)}{\|b\times e\|}.
 }
